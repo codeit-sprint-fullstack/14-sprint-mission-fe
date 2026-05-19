@@ -51,6 +51,7 @@ align-items: center; width: 357px; padding: 40px 0 100px; font-family: Pretendar
 
 /* sign */
 .sign_container { width: 640px; height: fit-content; margin: 231px auto 284px; }
+.sign_container.sign_up { margin: 60px auto 178px; }
 #sign_header { margin-bottom: 40px; }
 #sign_header .logo { display: flex; align-items: end; width: fit-content; color: #3692FF; font-family: "ROKAF Sans"; font-size: 66.344px; font-style: normal; font-weight: 700; line-height: normal; gap: 22px; margin: 0 auto; }
 #sign_header .logo img { display: block; width: 104px; }
