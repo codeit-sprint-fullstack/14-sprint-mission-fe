@@ -1,0 +1,254 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'ROKAF Sans';
+  src: url('./fonts/ROKAF Sans Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  padding-top: 4.375rem;
+}
+
+.topbar {
+  position: fixed;
+  width: 100%;
+  height: 4.375rem;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  border-bottom: 1px solid #DFDFDF;
+  padding-top: 0.56rem;
+  padding-right: 12.5rem;
+  padding-bottom: 0.56rem;
+  padding-left: 12.5rem;
+  gap: 0.625rem;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.panda-letters {
+  font-family: 'ROKAF Sans';
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: normal;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  margin-top: 4px;
+  color: #3692FF;
+  text-decoration: none;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8rem;
+  height: 3rem;
+  font-size: 1rem;
+  background-color: #3692FF;
+  color: #F3F4F6;
+  border-radius: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 33.75rem;
+  background-color: #CFE5FF;
+}
+
+.heroInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 69.375rem;
+  height: 21.25rem;
+}
+
+.heroTextBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heroTitle {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 140%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #374151;
+}
+
+.moreButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 22.31rem;
+  height: 3.5rem;
+  text-align: center;
+  border-radius: 2.5rem;
+  background-color: #3692FF;
+  color: #F9FAFB;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.heroInner img {
+  display: block;
+  width: 46.625rem;
+  height: 21.25rem;
+}
+
+.overallBody {
+  background-color: #FFFFFF;
+}
+
+.bodySection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 45rem;
+}
+
+.bodyInner {
+  width: 61.75rem;
+  height: 27.75rem;
+  display: flex;
+  flex-direction: row;
+  background-color: #FCFCFC;
+
+}
+
+.home01 img {
+  width: 36.75rem;
+  height: 27.75rem;
+  padding-left: 1.937rem;
+}
+
+.home02 img {
+  width: 36.75rem;
+  height: 27.75rem;
+}
+
+.bodyTextBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 6.437rem 1.937rem 6.437rem 4rem;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.title2 {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 140%;
+  letter-spacing: 2%;
+  vertical-align: middle;
+  color: #374151;
+}
+
+.title3 {
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #374151;
+}
+
+.title4 {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #3692FF;
+}
+
+.heroBottom {
+  margin-top: 8.625rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 100%;
+  height: 33.75rem;
+  background-color: #CFE5FF;
+}
+
+.footer {
+  width: 100%;
+  height: 10rem;
+  padding: 0 12.5rem;
+
+  font-family: Pretendard;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 1rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111827;
+  color: #9CA3AF
+;
+}
+
+.footer a {
+  color: #E5E7EB;
+  text-decoration: none;
+}
+
+.footerLeft {
+  display: flex;
+}
+
+.footerCenter{
+  color: #E5E7EB;
+  display: flex;
+  gap: 1.875rem;
+  cursor: pointer;
+}
+
+.footerRight {
+  display: flex;
+  gap: 0.208rem;
+  cursor: pointer;
+}
