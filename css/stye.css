@@ -1,0 +1,50 @@
+body { background-color: #FCFCFC; }
+.inner { max-width: 1520px; width: calc(100% - 400px); margin: 0 auto; }
+
+#header { position: fixed; top:0; left:0; width: 100%; height: 70px; padding: 9px 0; border-bottom: 1px solid #DFDFDF; background-color: #fff; } 
+#header .inner { display: flex; justify-content: space-between; flex-direction: row; height: 54px; }
+#header .logo { display: flex; align-items: end; padding: 5px 0; font-family: 'ROKAF Sans'; font-size: 25.633px; font-style: normal; font-weight: 700; line-height: 40px; color: #3692FF; }
+#header .logo img { display: inline-block; height: 42px; margin: 9px 9px 0 0; }
+
+.btn { display: block; width: 128px; height: fit-content; padding: 12px 0; border: none; background-color: #3692FF; font-size: 16px; font-weight: 600; line-height: 24px; color: #F3F4F6; text-align: center; cursor: pointer; border-radius: 8px; }
+.btn.login { background-color: #3692FF; color: #F3F4F6; }
+
+#main { width: 100%; height: fit-content; margin-top: 70px; }
+
+#visual { width: 100%; height: 540px; background-color: #CFE5FF; }
+#visual .inner { display: flex; justify-content: space-between; flex-direction: row; width: 1110px; height: 100%; padding-top: 200px; }
+#visual .text_wrap { width: 357px; padding: 40px 0 100px; font-family: Pretendard; font-size: 40px; font-style: normal; font-weight: 700; line-height: 56px; color: #374151; }
+#visual .img_wrap { width: 746px; }
+#visual .img_wrap img { display: block; width: 100%; }
+.btn.go_buy_page { width: 100%; margin-top: 32px; border-radius: 40px; }
+
+#con { width: 100%; height: fit-content; background-color: #fff; padding-bottom: 138px; }
+#con .inner { width: 988px; height: fit-content; }
+#con .box { display: flex; gap: 64px; flex-direction: row; width: 988px; height: 444px; margin: 138px auto 276px; background-color: #FCFCFC; }
+#con .box:last-of-type { margin-bottom: 0; }
+#con .box .img_wrap { overflow: hidden; width: 588px; height: 100%; border-radius: 12px; }
+#con .box .img_wrap img { display: block; width: 100%; }
+#con .box .text_wrap { display: flex; 
+display: flex; align-items: flex-start; justify-content: center; flex-direction: column; flex-direction: column; width: calc(100% - 588px - 64px); }
+#con .box .text_wrap.left { display: flex; align-items: flex-end; flex-direction: column; text-align: right; }
+#con .box .text_wrap .dec_title { font-family: Pretendard; font-size: 18px; font-style: normal; font-weight: 700; line-height: 26px; color: #3692FF; }
+#con .box .text_wrap .box_title { margin: 12px 0 24px; font-family: Pretendard; font-size: 40px; font-style: normal; font-weight: 700; line-height: 56px; color: #374151; letter-spacing: 0.8px; }
+#con .box .text_wrap .box_text { font-family: Pretendard; font-size: 24px; font-style: normal; font-weight: 500; line-height: 32px; color: #374151; }
+
+#bottom_banner { width: 100%; height: 540px; margin-top: 138px; background-color: #CFE5FF; }
+#bottom_banner .inner { display: flex; justify-content: space-between; flex-direction: row; width: 1110px; height: 100%; padding-top: 143px; }
+#bottom_banner .text_wrap { display: inline-flex;
+align-items: center; width: 357px; padding: 40px 0 100px; font-family: Pretendard; font-size: 40px; font-style: normal; font-weight: 700; line-height: 56px; color: #374151; }
+#bottom_banner .img_wrap { overflow: hidden; width: 746px; }
+#bottom_banner .img_wrap img { display: block; width: 100%; }
+
+#footer { width: 100%; height: fit-content; padding: 32px 0; background-color: #111827; }
+#footer .inner { display: flex; justify-content: space-between; flex-direction: row; height: 96px; color: #9CA3AF; }
+#footer .copyright { font-family: Pretendard; font-size: 16px; font-style: normal; font-weight: 400; line-height: normal; color: #9CA3AF; text-align: center; }
+
+#footer_menu { display: flex; gap: 30px; justify-content: center; flex-direction: row; }
+#footer_menu li { font-family: Pretendard; font-size: 16px; font-style: normal; font-weight: 400; line-height: normal; color: #E5E7EB; text-align: center; }
+
+.comm_wrap { display: flex; gap: 12px; justify-content: right; flex-direction: row; height: 20px; }
+.comm_btn { display: flex; justify-content: center; flex-direction: column; width: 19px; height: 100%; cursor: pointer; }
+.comm_btn img { display: block; width: 100%; }
