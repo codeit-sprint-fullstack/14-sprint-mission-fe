@@ -1,8 +1,27 @@
 body {
-  font-family: 'ROKAF Sans', sans-serif;
+  font-family: 'BarunAirForce_Bold', 'BarunAirForce_Medium', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100vw;
+}
+
+button {
+  border-width: 0;
+}
+
+@font-face {
+    font-family: 'BarunAirForce_Bold';
+    font-style: normal;
+    src: url('../fonts/ROKAF_Sans_Bold.ttf') format('woff2'),
+         url('../fonts/ROKAF_Sans_Bold.ttf') format('woff');
+}
+
+@font-face {
+    font-family: 'BarunAirForce_Medium';
+    font-style: normal;
+    src: url('../fonts/ROKAF_Sans_Medium.ttf') format('woff2'),
+         url('../fonts/ROKAF_Sans_Medium.ttf') format('woff');
 }
 
 footer {
@@ -64,7 +83,7 @@ header {
 
 #Web_title {
   color: #3692FF;
-  font-family: 'ROKAF Sans';
+  font-family: 'BarunAirForce_Bold';
   font-size: 1.6021rem;
   font-style: normal;
   font-weight: 700;

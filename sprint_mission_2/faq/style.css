@@ -9,15 +9,15 @@ body {
 @font-face {
     font-family: 'BarunAirForce_Bold';
     font-style: normal;
-    src: url('/fonts/ROKAF Sans Bold.ttf') format('woff2'),
-         url('/fonts/ROKAF Sans Bold.ttf') format('woff');
+    src: url('../fonts/ROKAF_Sans_Bold.ttf') format('woff2'),
+         url('../fonts/ROKAF_Sans_Bold.ttf') format('woff');
 }
 
 @font-face {
     font-family: 'BarunAirForce_Medium';
     font-style: normal;
-    src: url('/fonts/ROKAF_Sans_Medium.ttf') format('woff2'),
-         url('/fonts/ROKAF_Sans_Medium.ttf') format('woff');
+    src: url('../fonts/ROKAF_Sans_Medium.ttf') format('woff2'),
+         url('../fonts/ROKAF_Sans_Medium.ttf') format('woff');
 }
 
 footer {
