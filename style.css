@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'ROKAF Sans';
+  src: url('fonts/ROKAF\ Sans\ Bold.ttf') format('woff2');
+  font-display: swap;
+}
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root {
+  --primary-100: #3692ff;
+  --primary-200: #1967D6;
+  --primary-300: #1251AA;
+
+  --error: #f74747;
+
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-300: #e5e7eb;
+  --gray-200: #f3f4f6;
+  --gray-100: #f9fafb;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Pretendard';
+  background-color: #fcfcfc;
+}
