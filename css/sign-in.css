@@ -1,0 +1,84 @@
+.form-frame{
+  margin: 0;
+  min-height: 100vh;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+box-sizing: border-box;
+  background-color: #f3f8ff;
+  gap: 40px;
+  
+
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#form-gap {
+ display: flex;
+ flex-direction: column;
+ gap: 24px;
+}
+
+main {
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+input {
+  width: 100%;
+  height: 56px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+  box-sizing: border-box;
+}
+
+
+.logo{display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  
+}
+
+  .logo-frame{display: flex;
+  justify-content: center;}
+
+
+.logo-img{width: 103.529px;
+height: 103.88px;}
+
+.logo-text{
+  color: var(--brand-blue, #3692FF);
+font-family: "ROKAF Sans";
+font-size: 66.344px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.password-box img {
+  position: absolute;
+
+  right: 20px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+}
+
+.social-login {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 23px;
+}
+
