@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>판다마켓</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+
+        .inner { max-width: 120rem; margin: 0 auto; padding: 0 12.5rem; }
+
+        /* 헤더 */
+        .header { background-color: white; border-bottom: 1px solid #dddddd; position: sticky; top: 0; z-index: 100; }
+        .header .inner { display: flex; justify-content: space-between; align-items: center; padding: 0.94rem 12.5rem; }
+        .logoLink { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; cursor: pointer; }
+        .logoLink img { height: 2.5rem; }
+        .logoLink span { font-size: 1.25rem; font-weight: bold; color: #3692FF; }
+        .loginButton { background-color: #3692FF; color: white; border: none; border-radius: 0.5rem; padding: 0.625rem 1.5rem; font-size: 0.94rem; cursor: pointer; }
+
+        /* 히어로 */
+        .hero { background-color: #CFE0FD; overflow: hidden; }
+        .hero .inner { display: flex; justify-content: center; align-items: flex-end; gap: 3.125rem; min-height: 21.25rem; padding: 3.75rem 12.5rem 0; }
+        .heroText { padding-bottom: 3.75rem; }
+        .heroText h1 { font-size: 2.5rem; font-weight: bold; line-height: 1.4; margin-bottom: 1.75rem; }
+        .shopButton { background-color: #3692FF; color: white; border: none; border-radius: 1.875rem; padding: 0.875rem 2.25rem; font-size: 1rem; font-weight: bold; cursor: pointer; }
+        .heroImage { height: 20rem; }
+
+        /* 피처 섹션 */
+        .featuresWrap { border: 2px dashed #B2D0FB; }
+        .featureRow { border-bottom: 2px dashed #B2D0FB; }
+        .featureRow:last-child { border-bottom: none; }
+        .featureRow .inner { display: flex; align-items: center; gap: 5rem; padding: 5rem 21.875rem; }
+        .featureRow.reverse .inner { flex-direction: row-reverse; }
+        .featureImage { width: 25rem; }
+        .featureLabel { font-size: 0.8125rem; font-weight: bold; color: #3692FF; margin-bottom: 0.875rem; }
+        .featureText h2 { font-size: 2.25rem; font-weight: bold; line-height: 1.4; margin-bottom: 1rem; }
+        .featureText p { font-size: 1.125rem; color: #555555; line-height: 1.7; }
+
+        /* 하단 신뢰 섹션 */
+        .trust { background-color: #CFE0FD; overflow: hidden; }
+        .trust .inner { display: flex; justify-content: center; align-items: flex-end; gap: 3.75rem; min-height: 17.5rem; padding: 3.75rem 12.5rem 0; }
+        .trust h2 { font-size: 2.25rem; font-weight: bold; line-height: 1.4; padding-bottom: 3.75rem; }
+        .trustImage { height: 16.25rem; }
+
+        /* 푸터 */
+        .footer { background-color: #F9FAFB; border-top: 1px solid #dddddd; }
+        .footer .inner { display: flex; justify-content: space-between; align-items: center; padding: 1.875rem 12.5rem; }
+        .footerLeft { flex: 1; font-size: 0.875rem; color: #888888; }
+        .footerCenter { flex: 1; display: flex; justify-content: center; gap: 1.875rem; }
+        .footerLink { font-size: 0.875rem; color: #555555; text-decoration: none; cursor: pointer; }
+        .footerRight { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 1rem; }
+        .snsLink { display: flex; align-items: center; cursor: pointer; }
+        .snsLink svg { width: 1.5rem; height: 1.5rem; }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- 헤더 -->
+    <div class="header">
+        <div class="inner">
+            <a class="logoLink" href="/">
+                <img src="img/panda_logo.png" alt="판다마켓 로고">
+                <span>판다마켓</span>
+            </a>
+            <button class="loginButton" onclick="location.href='/login'">로그인</button>
+        </div>
+    </div>
+
+    <!-- 히어로 배너 -->
+    <div class="hero">
+        <div class="inner">
+            <div class="heroText">
+                <h1>일상의 모든 물건을<br>거래해 보세요</h1>
+                <button class="shopButton" onclick="location.href='/items'">구경해보러 가기</button>
+            </div>
+            <img class="heroImage" src="img/panda_home.png" alt="판다 홈 이미지">
+        </div>
+    </div>
+
+    <!-- 피처 섹션 -->
+    <div class="featuresWrap">
+
+        <!-- 인기 상품 -->
+        <div class="featureRow">
+            <div class="inner">
+                <img class="featureImage" src="img/panda_body1.png" alt="인기 상품">
+                <div class="featureText">
+                    <p class="featureLabel">Hot Item</p>
+                    <h2>인기 상품을<br>확인해 보세요</h2>
+                    <p>가장 HOT한 중고거래 물품을<br>판다 마켓에서 확인해 보세요</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 상품 검색 (이미지 오른쪽) -->
+        <div class="featureRow reverse">
+            <div class="inner">
+                <img class="featureImage" src="img/panda_body2.png" alt="상품 검색">
+                <div class="featureText">
+                    <p class="featureLabel">Search</p>
+                    <h2>구매를 원하는<br>상품을 검색하세요</h2>
+                    <p>구매하고 싶은 물품은 검색해서<br>쉽게 찾아보세요</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 상품 등록 -->
+        <div class="featureRow">
+            <div class="inner">
+                <img class="featureImage" src="img/panda_body3.png" alt="상품 등록">
+                <div class="featureText">
+                    <p class="featureLabel">Register</p>
+                    <h2>판매를 원하는<br>상품을 등록하세요</h2>
+                    <p>어떤 물건이든 판매하고 싶은 상품을<br>쉽게 등록하세요</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 하단 신뢰 섹션 -->
+    <div class="trust">
+        <div class="inner">
+            <h2>믿을 수 있는<br>판다마켓 중고 거래</h2>
+            <img class="trustImage" src="img/panda_footer.png" alt="판다마켓 중고 거래">
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <div class="footer">
+        <div class="inner">
+
+            <div class="footerLeft">codeit-2024</div>
+
+            <div class="footerCenter">
+                <a class="footerLink" href="/privacy">Privacy Policy</a>
+                <a class="footerLink" href="/faq">FAQ</a>
+            </div>
+
+            <div class="footerRight">
+                <!-- 페이스북 -->
+                <a class="snsLink" href="https://www.facebook.com" target="_blank">
+                    <img src="img/ic_facebook.png" alt="페이스북">
+                </a>
+                <!-- 트위터 -->
+                <a class="snsLink" href="https://www.twitter.com" target="_blank">
+                    <img src="img/ic_twitter.png" alt="트위터">
+                </a>
+                <!-- 유튜브 -->
+                <a class="snsLink" href="https://www.youtube.com" target="_blank">
+                    <img src="img/ic_youtube.png" alt="유튜브">
+                </a>
+                <!-- 인스타그램 -->
+                <a class="snsLink" href="https://www.instagram.com" target="_blank">
+                    <img src="img/ic_instagram.png" alt="인스타그램">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
