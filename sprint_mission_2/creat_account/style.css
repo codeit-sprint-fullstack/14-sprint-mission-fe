@@ -87,13 +87,13 @@ main {
   gap: 16px;
 }
 
-#Password {
+.Password {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-#Email h2, #Password h2, #Nicname h2 {
+#Email h2, .Password h2, #Nicname h2 {
   color: var(--Secondary-800);
   /* pretendard/2lg-18px-bold */
   font-family: Pretendard;
@@ -103,7 +103,7 @@ main {
   line-height: 26px;
 }
 
-#show_word {
+.show_word {
     display: flex;
     width: 640px;
     height: 56px;
@@ -116,23 +116,23 @@ main {
     background: var(--Cool-Gray-100, #F3F4F6);
 }
 
-#Password_text {
+.Password_text {
   width: 60%;
   border-width: 0;
   background: var(--Cool-Gray-100, #F3F4F6);
 }
 
-#show_word img {
+.show_word img {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
 }
 
-#show_word:focus-within {
+.show_word:focus-within {
   border-color: var(--brand-blue);
 }
 
-#show_word input:focus {
+.show_word input:focus {
   outline:none;
 }
 

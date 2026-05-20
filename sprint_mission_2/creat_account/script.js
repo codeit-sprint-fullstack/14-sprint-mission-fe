@@ -1,16 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const passwordInput = document.getElementById("Password_text");
-  const toggleIcon = document.querySelector("#show_word img");
+  const passwordInputs = document.querySelectorAll(".Password_text");
+  const toggleIcons = document.querySelectorAll(".show_word img");
 
-  // 아이콘 hover 시 비밀번호 표시
-  toggleIcon.addEventListener("mouseenter", () => {
-    passwordInput.type = "text";
-    console.log("비밀번호 표시됨");
-  });
+  // forEach를 통해 class로 잡힌 각각의 img에 event 적용
+  toggleIcons.forEach((icon, index) => {
+    const input = passwordInputs[index];
 
-  // 아이콘에서 마우스를 떼면 다시 숨김
-  toggleIcon.addEventListener("mouseleave", () => {
-    passwordInput.type = "password";
-    console.log("비밀번호 숨김");
+    // 아이콘 hover 시 비밀번호 표시
+    icon.addEventListener("mouseenter", () => {
+      input.type = "text";
+      console.log("비밀번호 표시됨");
+    });
+
+    // 아이콘에서 마우스를 떼면 다시 숨김
+    icon.addEventListener("mouseleave", () => {
+      input.type = "password";
+      console.log("비밀번호 숨김");
+    });
   });
 });
