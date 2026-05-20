@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>판다마켓 로그인</title>
+    <title>판다마켓 회원가입</title>
     <link rel="stylesheet" href="./font/font.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrap">
-        <form action="" method="post" class="form_body">
+        <form action="" method="get" class="form_body signup">
             <div class="form_wrap">
 
                 <a href="/" class="logo_wrap flex">
@@ -32,6 +32,13 @@
                     </div>
 
                     <div class="form_item">
+                        <label for="" class="input_title">닉네임</label>
+                        <div class="input_wrap">
+                            <input type="text" id="u_nm" name="u_nickNm" placeholder="닉네임을 입력해주세요">
+                        </div>
+                    </div>
+
+                    <div class="form_item">
                         <label for="" class="input_title">비밀번호</label>
                         <div class="input_wrap pw">
                             <input type="password" id="u_pw" name="u_pw" placeholder="비밀번호를 입력해주세요">
@@ -39,29 +46,33 @@
                         </div>
                     </div>
 
-                    <input type="button" value="로그인" class="btn_basic btn_submit">
+                    <div class="form_item">
+                        <label for="" class="input_title">비밀번호 확인</label>
+                        <div class="input_wrap pw">
+                            <input type="password" id="u_pwChk" name="u_pwChk" placeholder="비밀번호를 다시 한 번 입력해주세요">
+                            <button type="button" class="hs hide_pw no_text">비밀번호 표시</button>
+                        </div>
+                    </div>
+
+                    <a href="/login.html" class="btn_basic">회원가입</a>
 
                     <div class="easy_login flex">
                         <span class="text">간편 로그인하기</span>
                         <div class="icon_wrap flex">
-                            <a href="https://www.google.com/" class="btn_icon google">
+                            <button class="btn_icon google">
                                 <span class="no_text">구글 계정으로 간편로그인 하기</span>
-                            </a>
-                            <a href="https://www.kakaocorp.com/page/" class="btn_icon kakao">
+                            </button>
+                            <button class="btn_icon kakao">
                                 <span class="no_text">카카오 계정으로 간편로그인 하기</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
 
                     <div class="check_question flex">
-                        <span class="text">판다마켓이 처음이신가요?</span>
-                        <a href="signup.html" class="text btn_border">회원가입</a>
+                        <span class="text">이미 회원이신가요?</span>
+                        <a href="login.html" class="text btn_border">로그인</a>
                     </div>
-
-
                 </div>
-
-
             </div>
         </form>
     </div>
@@ -107,7 +118,6 @@
             })
         }) ();
     </script>
-    
     
 </body>
 </html>
