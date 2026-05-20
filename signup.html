@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reset.css" class="css">
     <link rel="stylesheet" href="auth.css" class="css">
-
-    <title>login</title>
+    <title>signup</title>
 </head>
 <div class="content-container">
-<body class="login_body">
+<body class="signup_body">
     <header>
         <a href="index.html">
         <img id="pandaface" src="photo/판다 얼굴.svg" >
@@ -21,6 +20,10 @@
     <label for="e-mail">이메일</label>
     <input id="e-mail" type="email" placeholder="이메일을 입력해주세요">
     </div>
+       <div class="input_zone">
+    <label for="nickname">닉네임</label>
+    <input id="nickname" type="text" placeholder="닉네임을 입력해주세요">
+    </div>
     <div class="input_zone">
     <label for="password">비밀번호</label>
     <input id="password" type="password" placeholder="비밀번호를 입력해주세요">
@@ -28,8 +31,15 @@
         <img src="photo/눈 버튼.svg">
     </button>
     </div>
+    <div class="input_zone">
+    <label for="password_check">비밀번호 확인</label>
+    <input id="password_check" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요">
+    <button class="eye_button"  type="button">
+        <img src="photo/눈 버튼.svg">
+    </button>
+    </div>
 
-    <button>로그인</button>
+    <button>회원가입</button>
 
     <div class="simple_login_tab">
         <p id="simple_login">간편 로그인하기</p>
@@ -43,8 +53,8 @@
         </p>
     </div>
     <div class="login_bottom">
-     판다마켓이 처음이신가요?
-     <a href="signup.html" >회원가입 </a>
+     이미 회원이신가요?
+     <a href="login.html" >로그인</a>
     </div>
 </body>
 </div>
