@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'ROKAF Sans';
-  src: url('./fonts/ROKAF\ Sans\ Medium.otf')
+  src: url('./fonts/ROKAF\ Sans\ bold.otf')
   format('opentype');
   font-weight: normal;
   font-style: normal;
@@ -159,12 +159,11 @@ main {
 .section1-container {
   display: flex;
   width: 100%;
-  max-width: 1920px;
-  padding: 138px 344px;
-  flex-direction: row;
+  max-width: 120rem;
+  padding: 8.625rem 21.5rem;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   background-color: #FFF;
   margin: 0 auto;
 }
@@ -172,10 +171,10 @@ main {
 .section1-outline {
   display: flex;
   width: 100%;
-  max-width: 988px;
+  max-width: 61.75rem;
   justify-content: center;
   align-items: center;
-  gap: 64px;
+  gap: 4rem;
   background-color: #FCFCFC;
   flex-direction: row;
 }
@@ -185,7 +184,6 @@ main {
   width: 100%;
   max-width: 1920px;
   padding: 138px 360px;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -209,7 +207,6 @@ main {
   width: 100%;
   max-width: 1920px;
   padding: 138px 360px;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -231,30 +228,27 @@ main {
 
 .item-keyword {
   color: #3692FF;
-  font-family: 'Pretendard regular';
+  font-family: 'Pretendard regular', sans-serif;
   font-size: 1.125rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: 26px;
+  line-height: 1.625rem;
 }
 
 .item-big-text {
   color: #374151;
-  font-family: 'Pretendard';
+  font-family: 'Pretendard', sans-serif;
   font-size: 2.5rem;
-  font-style: normal;
   font-weight: 700;
   line-height: 140%;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.05rem;
 }
 
 .item-text {
   color: #374151;
-  font-family: 'Pretendard';
+  font-family: 'Pretendard', sans-serif;
   font-size: 1.5rem;
-  font-style: normal;
   font-weight: 500;
-  line-height: 32px;
+  line-height: 2rem;
 }
 
 .section4-container {
