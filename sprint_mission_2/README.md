@@ -37,7 +37,7 @@
 
     - [x] SNS 아이콘들은 클릭 시 각각 “https://www.google.com/”, “https://www.kakaocorp.com/page/” 으로 이동합니다.
 
-    - [x] input 요소에 focus in 일 때, 테두리 색상은 ##3692FF입니다.
+    - [x] input 요소에 focus in 일 때, 테두리 색상은 #3692FF입니다.
 
     - [x] input 요소에 focus out 일 때, 테두리는 없습니다.
 
@@ -64,7 +64,7 @@
 
 - [x] SNS 아이콘들은 클릭 시 각각 "https://www.google.com/", "https://www.kakaocorp.com/page/" 으로 이동합니다.
 
-- [x] input 요소에 focus in 일 때, 테두리 색상은 ##3692FF입니다.
+- [x] input 요소에 focus in 일 때, 테두리 색상은 #3692FF입니다.
 
 - [x] input 요소에 focus out 일 때, 테두리는 없습니다.
 
