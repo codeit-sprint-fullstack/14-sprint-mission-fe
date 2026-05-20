@@ -125,6 +125,13 @@ input::placeholder {
   line-height: 26px;
 }
 
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .password-input {
   display: flex;
   width: 100%;
@@ -135,8 +142,10 @@ input::placeholder {
   gap: 10px;
   border-radius: 12px;
   background: #F3F4F6;
-  padding: 16px 24px;
   border: none;
+  background-image: url(images/btn_visibility_off_24px.png);
+  background-repeat: no-repeat;
+  background-position: right 24px center;
 }
 
 .login-button {
