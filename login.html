@@ -10,28 +10,87 @@
   </head>
 
   <body>
-    <nav class="nav-container">
-      <a href="index.html">
-        <div class="logo-group">
-          <img src="images/판다 얼굴.png" alt="판다 얼굴">
-          <span class="logo-text">
+    <div class="login-box">
+      <div class="logo-box">
+        <a class="logo-link" href="index.html">
+          <img src="images/판다 얼굴.svg" alt="판다 로고">
+          <div class="logo-text">
             판다마켓
-          </span>
-        </div>
-      </a>
-      <div class="button-group">
-        <a href="login.html">
-          <button class="login-button">
-            로그인
-          </button>
+          </div>
         </a>
       </div>
-    </nav>
-    
-    <div class="success-box">
-      <h1>
-        로그인에 성공하셨습니다!
-      </h1>
+
+      <div class="form-box">
+        <form action="" class="email-box">
+          <label for="email" class="email-text">
+            이메일
+          </label>
+          <input
+          type="email"
+          class="email-input"
+          placeholder="이메일을 입력해주세요"
+          required>
+        </form>
+
+        <form action="" class="password-box">
+          <label for="password" class="password-text">
+            비밀번호
+          </label>
+          <input
+          type="password"
+          class="password-input"
+          placeholder="비밀번호를 입력해주세요"
+          required>
+        </form>
+      </div>
+
+      <a href="">
+       <div class="login-button">
+          <div class="login-text">
+            로그인
+          </div>
+       </div>
+      </a>
+
+      <div class="easy-box">
+        <div class="easy-content">
+          <div class="easy-text">
+            간편 로그인하기
+          </div>
+
+          <div class="easy-link">
+            <a href="https://www.google.com/">
+              <div class="google">
+                <img
+                src="images/icon/google-logo.png"
+                alt="구글 로고"
+                class="google-logo">
+              </div>
+            </a>
+
+            <a href="https://www.kakaocorp.com/page/">
+              <div class="kakao">
+                <img
+                src="images/icon/kakao-logo.svg"
+                alt="카카오 로고"
+                class="kakao-logo">
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="signup-box">
+        <div class="signup-text">
+          판다마켓이 처음이신가요?
+        </div>
+        
+        <a href="signup.html">
+          <div class="signup-link">
+            회원가입
+          </div>
+        </a>
+      </div>
     </div>
   </body>
 </html>
