@@ -9,8 +9,20 @@
             src: url('ROKAF%20Sans%20Bold.ttf') format('truetype');
         }
 
+        /* 컬러 팔레트 */
+        :root {
+            --primary-blue: #3692FF;
+            --page-bg: #f9fafb;
+            --input-bg: #f3f4f6;
+            --border-gray: #e5e7eb;
+            --text-mute: #6b7280;
+            --google-blue: #4285F4;
+            --kakao-yellow: #FEE500;
+            --kakao-text: #3C1E1E;
+        }
+
         body {
-            background-color: #f9fafb;
+            background-color: var(--page-bg);
             margin: 0;
         }
 
@@ -35,7 +47,7 @@
         .logo span {
             font-size: 60px;
             font-weight: bold;
-            color: #3692FF;
+            color: var(--primary-blue);
             margin-left: 12px;
             vertical-align: middle;
             font-family: 'ROKAF Sans', sans-serif;
@@ -51,18 +63,23 @@
         .input {
             width: 100%;
             padding: 16px;
-            border: 1px solid #e5e7eb;
+            border: none;
             border-radius: 12px;
-            background-color: #f3f4f6;
+            background-color: var(--input-bg);
             box-sizing: border-box;
             font-size: 14px;
+        }
+
+        .input:focus {
+            border: 1px solid var(--primary-blue);
+            outline: none;
         }
 
         .signup-btn {
             width: 100%;
             padding: 16px;
             margin-top: 24px;
-            background-color: #3692FF;
+            background-color: var(--primary-blue);
             color: white;
             border: none;
             border-radius: 12px;
@@ -74,7 +91,7 @@
         .sns-box {
             margin-top: 16px;
             padding: 16px 24px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--border-gray);
             border-radius: 12px;
             background-color: white;
             overflow: hidden;
@@ -103,25 +120,25 @@
 
         .google {
             background-color: white;
-            border: 1px solid #e5e7eb;
-            color: #4285F4;
+            border: 1px solid var(--border-gray);
+            color: var(--google-blue);
             font-size: 20px;
         }
 
         .kakao {
-            background-color: #FEE500;
-            color: #3C1E1E;
+            background-color: var(--kakao-yellow);
+            color: var(--kakao-text);
             font-size: 18px;
         }
 
         .login-text {
             text-align: center;
             margin-top: 24px;
-            color: #6b7280;
+            color: var(--text-mute);
         }
 
         .login-text a {
-            color: #3692FF;
+            color: var(--primary-blue);
             text-decoration: underline;
         }
     </style>
