@@ -59,8 +59,9 @@ align-items: center; width: 357px; padding: 40px 0 100px; font-family: Pretendar
 .sign_container .sign_inner { display: flex; flex-direction: column; gap: 24px; }
 .input_wrap { display: flex; flex-direction: column; justify-content: start; gap: 16px; width: 100%; }
 .input_wrap label { color: var(--Secondary-800, #1F2937); font-family: Pretendard; font-size: 18px; font-style: normal; font-weight: 700; line-height: 26px; /* 144.444% */ }
-.input_wrap input { width: 100%; height: fit-content; padding: 16px 24px; color: var(--Secondary-400, #9CA3AF); font-family: Pretendard; font-size: 16px; font-style: normal; font-weight: 400; line-height: 26px; /* 162.5% */ border: none; border-radius: 12px; background-color: #F3F4F6; border: 1px solid transparent; }
+.input_wrap input { width: 100%; height: fit-content; padding: 16px 24px; font-family: Pretendard; font-size: 16px; font-style: normal; font-weight: 400; line-height: 26px; /* 162.5% */ border: none; border-radius: 12px; background-color: #F3F4F6; border: 1px solid transparent; color: #111827; }
 .input_wrap input:focus { outline-color: #3692FF; }
+.input_wrap input::placeholder { color: #9CA3AF; } 
 .password_wrap { position: relative; width: 100%; height: fit-content; }
 .password_wrap img { position: absolute; right: 24px; top: 18px; display: block; z-index: 10;}
 
