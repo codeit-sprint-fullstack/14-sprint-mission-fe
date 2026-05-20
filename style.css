@@ -1,0 +1,346 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'ROKAF Sans';
+  src: url('./fonts/ROKAF\ Sans\ Medium.otf')
+  format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.whole-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FCFCFC;
+  margin: 0 auto;
+}
+
+.nav-container {
+  position: sticky;
+  z-index: 1;
+  background-color: #FFFFFF;
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  padding: 9px 200px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text {
+  text-decoration-line: none;
+  color: #3692FF;
+  font-family: 'ROKAF Sans';
+  font-size: 25.63px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.logo-group {
+  height: 40px;
+  width: auto;
+}
+
+.login-button {
+  font-family: 'Pretendard Regular';
+  font-size: 1rem;
+  font-weight: 600;
+  width: 128px;
+  height: 48px;
+  background-color: #3692FF;
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 23px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.header-container {
+  background-color: #CFE5FF;
+  width: 100%;
+  max-width: 1920px;
+  height: 540px;
+  padding: 0 200px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0 auto
+}
+
+.header-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 1920px;
+}
+
+.header-text-group {
+  display: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 200px;
+  margin-right: 7px;
+}
+
+.header-text {
+  color: #374151;
+  font-family: 'Pretendard Bold', sans-serif;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 32px;
+}
+
+.watch-button {
+  display: flex;
+  height: 56px;
+  padding: 16px 124px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 40px;
+  background-color: #3692FF;
+  color: #F9FAFB;
+  text-align: center;
+  font-family: 'Pretendard regular';
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  border: none;
+  white-space: nowrap;
+  cursor: pointer;
+  margin-bottom: 60px;
+}
+
+.header-picture {
+  display: flex;
+  align-self: flex-end;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.section1-container {
+  display: flex;
+  width: 100%;
+  max-width: 1920px;
+  padding: 138px 344px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFF;
+  margin: 0 auto;
+}
+
+.section1-outline {
+  display: flex;
+  width: 100%;
+  max-width: 988px;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  background-color: #FCFCFC;
+  flex-direction: row;
+}
+
+.section2-container {
+  display: flex;
+  width: 100%;
+  max-width: 1920px;
+  padding: 138px 360px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFF;
+  margin: 0 auto;
+}
+
+.section2-outline {
+  display: flex;
+  width: 100%;
+  max-width: 988px;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  background-color: #FCFCFC;
+  flex-direction: row-reverse;
+}
+
+.section3-container {
+  display: flex;
+  width: 100%;
+  max-width: 1920px;
+  padding: 138px 360px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFF;
+  margin: 0 auto;
+  margin-bottom: 138px;
+}
+
+.section3-outline {
+  display: flex;
+  width: 100%;
+  max-width: 988px;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  background-color: #FCFCFC;
+  flex-direction: row;
+}
+
+.item-keyword {
+  color: #3692FF;
+  font-family: 'Pretendard regular';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.item-big-text {
+  color: #374151;
+  font-family: 'Pretendard';
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 0.8px;
+}
+
+.item-text {
+  color: #374151;
+  font-family: 'Pretendard';
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.section4-container {
+  background-color: #CFE5FF;
+  width: 100%;
+  max-width: 1920px;
+  height: 540px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
+  margin: 0 auto;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.section4-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 69px;
+}
+
+.section4-group img {
+  display: block
+}
+
+.section4-text {
+  color: #374151;
+  font-family: 'Pretendard Bold', sans-serif;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  margin-bottom: 20px;
+  align-self: center;
+}
+
+.footer-container {
+  display: flex;
+  width: 100%;
+  max-width: 1920px;
+  min-height: 160px;
+  padding: 32px 200px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  background: #111827;
+  margin: 0 auto;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+}
+
+.footer-text1 {
+  color: #9CA3AF;
+  text-align: center;
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer-text2 {
+  color: #E5E7EB;
+  text-align: center;
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer-text3 {
+  color: #E5E7EB;
+  text-align: center;
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer-logo {
+  display: flex;
+  gap: 0px 12px;
+}
+
+a {
+  text-decoration-line: none;
+}

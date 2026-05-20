@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.whole-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FCFCFC;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration-line: none;
+}
+
+.nav-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #FFFFFF;
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  padding: 9px 200px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text {
+  color: #3692FF;
+  font-family: 'ROKAF Sans';
+  font-size: 25.63px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.logo-group {
+  height: 40px;
+  width: auto;
+}
+
+.login-button {
+  font-family: 'Pretendard Regular';
+  font-size: 1rem;
+  font-weight: 600;
+  width: 128px;
+  height: 48px;
+  background-color: #3692FF;
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 23px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button.login-button:hover {
+  background-color: #73b3ff;
+}
+
+.success-box {
+  background-color: #000000;
+  width: 400px;
+  height: 100px;
+  position: relative;
+  text-align: center;
+  margin: 100px auto
+}
+
+h1 {
+  background-color: #ffffff;
+  position: absolute;
+  inset: 10px;
+}
