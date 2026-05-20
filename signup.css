@@ -38,12 +38,13 @@ body {
   margin: 0 auto;
 }
 
-.login-box {
+.signup-box {
   width: 640px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 230px auto;
+  margin: 60px auto 178px;
+  gap: 24px;
 }
 
 .logo-box {
@@ -114,8 +115,25 @@ input::placeholder {
   line-height: 26px;
 }
 
-.password-box {
-  margin: 24px auto;
+.nickname-text {
+  color: #1F2937;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.nickname-input {
+  display: flex;
+  width: 100%;
+  min-width: 640px;
+  height: 56px;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background: #F3F4F6;
+  padding: 16px 24px;
+  border: none;
 }
 
 .password-text {
@@ -148,7 +166,37 @@ input::placeholder {
   background-position: right 24px center;
 }
 
-.login-button {
+.again-text {
+  color: #1F2937;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.again-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.again-input {
+  display: flex;
+  width: 100%;
+  min-width: 640px;
+  height: 56px;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background: #F3F4F6;
+  border: none;
+  background-image: url(images/btn_visibility_off_24px.png);
+  background-repeat: no-repeat;
+  background-position: right 24px center;
+}
+
+.signup-button {
   width: 100%;
   min-width: 640px;
   height: 56px;
@@ -161,7 +209,7 @@ input::placeholder {
   margin: 24px auto;
 }
 
-.login-text {
+.signup-text {
   color: #F3F4F6;
   text-align: center;
   font-family: 'Pretendard';
@@ -179,7 +227,6 @@ input::placeholder {
   background-color: #E6F2FF;
   display: flex;
   flex-direction: column;
-  margin: 24px auto;
 }
 
 .easy-content {
@@ -236,14 +283,15 @@ input::placeholder {
   display: block;
 }
 
-.signup-box {
+.already-box {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 4px;
 }
 
-.signup-text {
+.already-text {
   color: #1F2937;
   font-family: 'Pretendard';
   font-size: 14px;
@@ -251,7 +299,7 @@ input::placeholder {
   line-height: 24px;
 }
 
-.signup-link {
+.already-link {
 color: #3692FF;
 font-family: 'Pretendard';
 font-size: 14px;
