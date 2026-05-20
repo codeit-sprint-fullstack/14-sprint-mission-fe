@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header>
         <div class="header-contents">
             <h1 class="header-logo">
                 <a href="/">
@@ -22,8 +22,138 @@
                 <div class="login-btn">로그인</div>
             </a>
         </div>
-    </header>
-    <h1>f로그인</h1>
+    </header> -->
+
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 640px;
+            margin: 230px auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 2.5rem;
+        }
+
+        label {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .form-input {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        input {
+            width: 100%;
+            display: flex;
+            padding: 16px 24px;
+            box-sizing: border-box;
+            align-items: center;
+            gap: 10px;
+            border-radius: 12px;
+            background: var(--Cool-Gray-100, #F3F4F6);
+            border: 0;
+        }
+
+        input:focus {
+            outline: #3692FF 1px solid;
+        }
+
+        button {
+            display: flex;
+            height: 56px;
+            padding: 16px 124px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 40px;
+            background: var(--Secondary-400, #9CA3AF);
+            border: 0;
+            color: #F3F4F6;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .social-login-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-radius: 8px;
+            background: #E6F2FF;
+            margin: 24px 0;
+            padding: 16px 23px;
+            box-sizing: border-box;
+        }
+
+        .sign-up-contanier>p {
+            font-size: .875rem;
+            color: #1F2937;
+            font-weight: 500;
+        }
+
+        .sign-up-contanier>a {
+            color: #3692FF;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration-line: underline;
+            text-decoration-style: solid;
+        }
+
+        .social-login-container>p {
+            font-size: 1rem;
+            color: #1F2937;
+            font-weight: 500;
+        }
+
+        .social-login-icon {
+            display: flex;
+            gap: 16px;
+        }
+
+        .sign-up-contanier {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+
+    <main>
+        <a href="/"><img src="./img/logo.svg" alt="판다마켓 로고"></a>
+        <form action="/" method="GET"> <!-- 로그인의 경우 POST방식, form 태그를 권장. -->
+            <div class="form-input"> <!-- css 재활용, input css 통일 -->
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요.">
+            </div>
+            <div class="form-input">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요.">
+            </div>
+            <button type="submit">로그인</button>
+        </form>
+        <div class="social-login-container">
+            <p>간편 로그인하기</p>
+            <div class="social-login-icon">
+                <a href="https://www.google.com/"><img src="./img/google.svg" /></a>
+                <a href="https://www.kakaocorp.com/page/"><img src="./img/kakao.svg" /></a>
+            </div>
+        </div>
+        <div class="sign-up-contanier">
+            <p>판다마켓이 처음이신가요?</p> <a href="./signup.html">회원가입하기</a>
+        </div>
+    </main>
 </body>
 
 </html>
