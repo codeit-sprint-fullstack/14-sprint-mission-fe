@@ -1,3 +1,15 @@
+:root {
+
+  --brand-blue: #3692FF;
+  --Secondary-400: #9CA3AF;
+  --Cool-Gray-100: #F3F4F6;
+  --Secondary-800: #1F2937;
+  --Primary-100: #3692FF;
+  --button: #E6F2FF;
+  --Cool-Gray-400: #9CA3AF;
+
+}
+
 body {
   font-family: 'BarunAirForce_Bold', 'BarunAirForce_Medium', sans-serif;
   display: flex;
@@ -57,7 +69,7 @@ main {
 }
 
 #Main_Page {
-  color: var(--brand-blue, #3692FF);
+  color: var(--brand-blue);
   display: flex;
   align-items: center;
   font-family: "BarunAirForce_Bold";
@@ -82,7 +94,7 @@ main {
 }
 
 #Email h2, #Password h2 {
-  color: var(--Secondary-800, #1F2937);
+  color: var(--Secondary-800);
   /* pretendard/2lg-18px-bold */
   font-family: Pretendard;
   font-size: 18px;
@@ -101,13 +113,13 @@ main {
     align-items: center;
     border-radius: 14px;
     border: 2px solid transparent;
-    background: var(--Cool-Gray-100, #F3F4F6);
+    background: var(--Cool-Gray-100);
 }
 
 #Password_text {
   width: 60%;
   border-width: 0;
-  background: var(--Cool-Gray-100, #F3F4F6);
+  background: var(--Cool-Gray-100);
 }
 
 #show_word img {
@@ -117,7 +129,7 @@ main {
 }
 
 #show_word:focus-within {
-  border-color: #3692FF;
+  border-color: var(--brand-blue);
 }
 
 #show_word input:focus {
@@ -133,16 +145,16 @@ main {
   align-items: center;
   gap: 10px;
   border-radius: 14px;
-  background: var(--Cool-Gray-100, #F3F4F6);
+  background: var(--Cool-Gray-100);
   border: 3px solid transparent;
 }
 
 .text_section:focus {
-  outline:2px solid #3692FF;
+  outline:2px solid var(--brand-blue);
 }
 
 input::placeholder {
-  color: var(--Secondary-400, #9CA3AF);
+  color: var(--Secondary-400);
   /* pretendard/lg-16px-regular */
   font-family: Pretendard;
   font-size: 16px;
@@ -162,8 +174,8 @@ input::placeholder {
   align-items: center;
   gap: 10px;
   border-radius: 40px;
-  background: var(--Primary-100, #3692FF);
-  color: var(--Cool-Gray-100, #F3F4F6);
+  background: var(--Cool-Gray-400);
+  color: var(--Cool-Gray-100);
   text-align: center;
   /* pretendard/xl-20px-semibold */
   font-family: Pretendard;
@@ -175,7 +187,7 @@ input::placeholder {
 }
 
 .container_length button:hover {
-  background: var(--Primary-100, #3692FF);
+  background: var(--Primary-100);
 }
 
 #easy_login {
@@ -197,7 +209,7 @@ input::placeholder {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  color: var(--Secondary-800, #1F2937);
+  color: var(--Secondary-800);
   /* pretendard/lg-16px-medium */
   font-family: Pretendard;
   font-size: 16px;
@@ -222,7 +234,7 @@ input::placeholder {
 
 #first_login {
   gap: 4px;
-  color: var(--Secondary-800, #1F2937);
+  color: var(--Secondary-800);
   /* pretendard/md-14px-medium */
   font-family: Pretendard;
   font-size: 14px;
@@ -232,7 +244,7 @@ input::placeholder {
 }
 
 #first_login a {
-  color: var(--Primary-100, #3692FF);
+  color: var(--Primary-100);
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-skip-ink: none;
