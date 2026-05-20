@@ -91,6 +91,39 @@ main {
   line-height: 26px;
 }
 
+#show_word {
+    display: flex;
+    width: 640px;
+    height: 56px;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 14px;
+    border: 2px solid transparent;
+    background: var(--Cool-Gray-100, #F3F4F6);
+}
+
+#Password_text {
+  width: 60%;
+  border-width: 0;
+  background: var(--Cool-Gray-100, #F3F4F6);
+}
+
+#show_word img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+#show_word:focus-within {
+  border-color: #3692FF;
+}
+
+#show_word input:focus {
+  outline:none;
+}
+
 .text_section {
   display: flex;
   width: 640px;
@@ -100,9 +133,12 @@ main {
   align-items: center;
   gap: 10px;
   border-radius: 14px;
-  border-width: 0;
   background: var(--Cool-Gray-100, #F3F4F6);
-  
+  border: 3px solid transparent;
+}
+
+.text_section:focus {
+  outline:2px solid #3692FF;
 }
 
 input::placeholder {
@@ -126,7 +162,7 @@ input::placeholder {
   align-items: center;
   gap: 10px;
   border-radius: 40px;
-  background: var(--Secondary-400, #9CA3AF);
+  background: var(--Primary-100, #3692FF);
   color: var(--Cool-Gray-100, #F3F4F6);
   text-align: center;
   /* pretendard/xl-20px-semibold */

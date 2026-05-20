@@ -12,8 +12,8 @@
 <body>
   <main>
     <div class="container_width">
-      <a href="/" id="Main_Page">
-        <img href="/" src="../img/판다 얼굴.svg" alt="Logo" id="Logo">
+      <a href="../index.html" id="Main_Page">
+        <img src="../img/판다 얼굴.svg" alt="Logo" id="Logo">
         <h1>판다마켓</h1>
       </a>
     </div>
@@ -28,9 +28,12 @@
         </div>
         <div id="Password">
           <h2>
-            패스워드
+            비밀번호
           </h2>
-          <input type="text" class="text_section" id="Password_text" placeholder="비밀번호를 입력해주세요">
+          <div id="show_word">
+            <input type="password" id="Password_text" placeholder="비밀번호를 입력해주세요">
+            <img src="img/btn_visibility_on_24px.png">
+          </div>
         </div>
         <button>
           로그인
@@ -41,8 +44,12 @@
               간편 로그인하기
             </p>
             <div id="component">
-              <img src="img/Google.png" alt="Google">
-              <img src="img/Kakao.png" alt="Kakao">
+              <a href="https://google.com">
+                <img src="img/Google.png" alt="Google">
+              </a>
+              <a href="https://kakao.com">
+                <img src="img/Kakao.png" alt="Kakao">
+              </a>
             </div>
           </div>
         </div>
@@ -50,7 +57,7 @@
           <p>
             판다마켓이 처음이신가요?
           </p>
-          <a href="">
+          <a href="../creat_account/index.html">
             회원가입
           </a>
         </div>
@@ -59,11 +66,5 @@
     </div>
 
   </main>
-</body>
-
-<footer>
-
-</footer>
-  
 </body>
 </html>
