@@ -7,50 +7,50 @@
     <link rel="stylesheet" href="reset.css">
     <style>
 
-        .inner { max-width: 120rem; margin: 0 auto; padding: 0 12.5rem; }
+        .inner { max-width: 1920px; margin: 0 auto; padding: 0 200px; }
 
         /* 헤더 */
         .header { background-color: white; border-bottom: 1px solid #dddddd; position: sticky; top: 0; z-index: 100; }
-        .header .inner { display: flex; justify-content: space-between; align-items: center; padding: 0.94rem 12.5rem; }
-        .logoLink { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; cursor: pointer; }
-        .logoLink img { height: 2.5rem; }
-        .logoLink span { font-size: 1.25rem; font-weight: bold; color: #3692FF; }
-        .loginButton { background-color: #3692FF; color: white; border: none; border-radius: 0.5rem; padding: 0.625rem 1.5rem; font-size: 0.94rem; cursor: pointer; }
+        .header .inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 200px; }
+        .logoLink { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
+        .logoLink img { height: 40px; }
+        .logoLink span { font-size: 20px; font-weight: bold; color: #3692FF; }
+        .loginButton { background-color: #3692FF; color: white; border: none; border-radius: 8px; padding: 10px 24px; font-size: 15px; cursor: pointer; }
 
         /* 히어로 */
         .hero { background-color: #CFE0FD; overflow: hidden; }
-        .hero .inner { display: flex; justify-content: center; align-items: flex-end; gap: 3.125rem; min-height: 21.25rem; padding: 3.75rem 12.5rem 0; }
-        .heroText { padding-bottom: 3.75rem; }
-        .heroText h1 { font-size: 2.5rem; font-weight: bold; line-height: 1.4; margin-bottom: 1.75rem; }
-        .shopButton { background-color: #3692FF; color: white; border: none; border-radius: 1.875rem; padding: 0.875rem 2.25rem; font-size: 1rem; font-weight: bold; cursor: pointer; }
-        .heroImage { height: 20rem; }
+        .hero .inner { display: flex; justify-content: center; align-items: flex-end; gap: 50px; min-height: 340px; padding: 60px 200px 0; }
+        .heroText { padding-bottom: 60px; }
+        .heroText h1 { font-size: 40px; font-weight: bold; line-height: 1.4; margin-bottom: 28px; color: #374151; }
+        .shopButton { background-color: #3692FF; color: white; border: none; border-radius: 30px; padding: 14px 36px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .heroImage { height: 224px; }
 
         /* 피처 섹션 */
         .featuresWrap { border: 2px dashed #B2D0FB; }
         .featureRow { border-bottom: 2px dashed #B2D0FB; }
         .featureRow:last-child { border-bottom: none; }
-        .featureRow .inner { display: flex; align-items: center; gap: 5rem; padding: 5rem 21.875rem; }
+        .featureRow .inner { display: flex; align-items: center; gap: 80px; padding: 80px 350px; }
         .featureRow.reverse .inner { flex-direction: row-reverse; }
-        .featureImage { width: 25rem; }
-        .featureLabel { font-size: 0.8125rem; font-weight: bold; color: #3692FF; margin-bottom: 0.875rem; }
-        .featureText h2 { font-size: 2.25rem; font-weight: bold; line-height: 1.4; margin-bottom: 1rem; }
-        .featureText p { font-size: 1.125rem; color: #555555; line-height: 1.7; }
+        .featureImage { width: 400px; }
+        .featureLabel { font-size: 13px; font-weight: bold; color: #3692FF; margin-bottom: 14px; }
+        .featureText h2 { font-size: 36px; font-weight: bold; line-height: 1.4; margin-bottom: 16px; color: #374151; }
+        .featureText p { font-size: 18px; color: #555555; line-height: 1.7; color: #374151; }
 
         /* 하단 신뢰 섹션 */
         .trust { background-color: #CFE0FD; overflow: hidden; }
-        .trust .inner { display: flex; justify-content: center; align-items: flex-end; gap: 3.75rem; min-height: 17.5rem; padding: 3.75rem 12.5rem 0; }
-        .trust h2 { font-size: 2.25rem; font-weight: bold; line-height: 1.4; padding-bottom: 3.75rem; }
-        .trustImage { height: 16.25rem; }
+        .trust .inner { display: flex; justify-content: center; align-items: flex-end; gap: 60px; min-height: 280px; padding: 60px 200px 0; }
+        .trust h2 { font-size: 36px; font-weight: bold; line-height: 1.4; padding-bottom: 60px; color: #374151; }
+        .trustImage { height: 260px; }
 
         /* 푸터 */
         .footer { background-color: #111827; border-top: 1px solid #dddddd; }
-        .footer .inner { display: flex; justify-content: space-between; align-items: center; padding: 1.875rem 12.5rem; }
-        .footerLeft { flex: 1; font-size: 0.875rem; color: #888888; }
-        .footerCenter { flex: 1; display: flex; justify-content: center; gap: 1.875rem; }
-        .footerLink { font-size: 0.875rem; color: #555555; text-decoration: none; cursor: pointer; }
-        .footerRight { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 1rem; }
+        .footer .inner { display: flex; justify-content: space-between; align-items: center; padding: 30px 200px; }
+        .footerLeft { flex: 1; font-size: 14px; color: #888888; }
+        .footerCenter { flex: 1; display: flex; justify-content: center; gap: 30px; }
+        .footerLink { font-size: 14px; color: #555555; text-decoration: none; cursor: pointer; }
+        .footerRight { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 16px; }
         .snsLink { display: flex; align-items: center; cursor: pointer; }
-        .snsLink svg { width: 1.5rem; height: 1.5rem; }
+        .snsLink svg { width: 24px; height: 24px; }
 
     </style>
 </head>
