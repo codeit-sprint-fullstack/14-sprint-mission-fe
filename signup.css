@@ -13,7 +13,7 @@
 --Light-blue: #E6F2FF;
 --Secondary-400: #9CA3AF;}
 
-.login
+.signup_page
 {display: flex;
 flex-direction: column;
 justify-content: center;
@@ -30,8 +30,7 @@ align-items: center;}
 .pandaFace
 {width: 103.529px;
 height: 103.88px;
-border-radius: 28.932px;
-background: var(--brand-blue);}
+border-radius: 28.932px;}
 
 .pandaText
 {color: var(--brand-blue);
@@ -63,10 +62,42 @@ line-height: 26px; /* 144.444% */;}
     border: 1px solid var(--Cool-Gray-100);}
 
 .email_group input:focus{
-    border-color: var(--brand-blue);
+    border-color:var(--brand-blue);
     outline: none;}
 
 #email_input
+{display: flex;
+width: 600px;
+padding: 16px 24px;
+align-items: center;
+gap: 10px;
+border-radius: 12px;
+background: var(--Cool-Gray-100);}
+
+/*****닉네임*****/
+.Nickname_group
+{display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+padding: 24px 0px 0px 0px;
+color: var(--Secondary-800);
+/* pretendard/2lg-18px-bold */
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px; /* 144.444% */;}
+
+.Nickname_group input {
+    outline: none; 
+    border: 1px solid var(--Cool-Gray-100);}
+
+.Nickname_group input:focus{
+    border-color: var(--brand-blue);
+    outline: none;}
+
+#Nickname_input
 {display: flex;
 width: 600px;
 padding: 16px 24px;
@@ -125,8 +156,56 @@ line-height: 26px; /* 144.444% */}
 {width: 24px;
   height: 24px;}
 
-/*****로그인 버튼*****/
-.login_btn
+/*****패스워드 확인*****/
+  .password_check_group
+  {display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+padding: 0px;
+
+color: var(--Secondary-800);
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px;}
+
+.password_check_set
+{position: relative;
+width: 648px;}
+
+#password_check_input
+{display: flex;
+width: 648px;
+padding: 16px 60px 16px 24px;
+border-radius: 12px;
+background: var(--Cool-Gray-100);
+border: 1px solid #F3F4F6;
+outline: none;
+box-sizing: border-box;}
+
+#password_check_input:focus
+{border: 1px solid var(--brand-blue);
+outline: none;}
+
+.password_check_toggle
+{position: absolute;
+right: 20px;
+top: 50%;
+transform: translateY(-50%);
+
+border: none;
+background: none;
+padding: 0;
+cursor: pointer;}
+
+.password_check_toggle img 
+{width: 24px;
+height: 24px;}
+
+/*****회원가입 버튼*****/
+.signup_btn
 {display: flex;
 width: 600px;
 padding: 16px 24px;
@@ -145,7 +224,7 @@ font-style: normal;
 font-weight: 600;
 line-height: 32px; /* 160% */}
 
-.login_btn.active
+.signup_btn.active
 {background: var(--brand-blue);}
 
 .Easy_login_group

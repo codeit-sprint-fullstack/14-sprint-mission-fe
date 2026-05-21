@@ -1,4 +1,10 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@font-face {
+  font-family: 'ROKAF_M';
+  src: url('./fonts/ROKAF_M.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;}
+
 /* 1번(상단바) */
 .top_bar
 {display: flex; 
@@ -14,17 +20,17 @@
 .panda-logo
 {display: flex;
 flex-direction: row;
+align-items: center;
 padding: 9.5px 0px 9.5px 0px;}
 
 .panda_face
 {width: 40px;
 height: 40.135px;
-flex-shrink: 0;
 margin-right: 8.59px}
 
 .logo-text
 {color: #3692FF;
-font-family: "ROKAF Sans Bold";
+font-family: "ROKAF_M";
 font-size: 25.633px;
 font-style: normal;
 font-weight: 1000;
@@ -37,15 +43,6 @@ align-items: center;
 justify-content: center;
 gap: 8px;
 padding: 11px 0px 11px 0px;}
-
-.login-text
-{position: relative;
-color: var(--Cool-Gray-100, #F3F4F6);
-font-family: Pretendard;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: 26px;}
 
 .login-btn {
   display: flex;
@@ -98,17 +95,6 @@ gap: 8px;
 }
 
 /* 구경 버튼 */
-.gugyeong_text2
-{position: relative;
-  color: var(--Cool-Gray-100, #F3F4F6);
-font-family: Pretendard;
-font-size: 20px;
-font-style: normal;
-font-weight: 600;
-line-height: 32px;
-gap:8px;
-cursor: pointer}
-
 .gugyeong_button {
   display: flex;
   width: 357px;

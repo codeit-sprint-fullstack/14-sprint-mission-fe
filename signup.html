@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인</title>
+  <title>회원가입</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="signup.css">
 
   <link rel="icon" type="image/png" href="image/판다얼굴.png">
-  
- <!-- Google tag (gtag.js) -->
+
+   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8C11VMVQ7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -21,9 +21,8 @@
   </script>
 </head>
 
-
 <body style="width: 100%;">
-  <div class="login">
+  <div class="signup_page">
 
     <a href="index.html" style="text-decoration-line: none;">
     <div class="pandaLogo">
@@ -35,6 +34,11 @@
     <div class="email_group">
       <label for="email">이메일</label>
       <input id="email_input" name="email" type="email" placeholder="이메일을 입력해주세요">
+    </div>
+
+    <div class="Nickname_group">
+      <label for="text">닉네임</label>
+      <input id="Nickname_input" name="text" type="text" placeholder="닉네임을 입력해주세요">
     </div>
 
 <div class="password_group">
@@ -55,9 +59,29 @@
         alt="비밀번호 보기">
     </button>
   </div>
+
+ <div class="password_check_group">
+  <label for="password_check_input">비밀번호 확인</label>
+
+  <div class="password_check_set">
+    <input
+      id="password_check_input"
+      name="password_check"
+      type="password"
+      placeholder="비밀번호를 다시 한 번 입력해주세요"
+    >
+
+    <button type="button" id="password_check_toggle" class="password_check_toggle">
+      <img
+        id="password_check_icon"
+        src="image/eye.png"
+        alt="비밀번호 확인 보기">
+    </button>
+  </div>
+</div>
   
   <div>
-    <a href="-" class="login_btn" style="color: #f3f4f6;">로그인</a>
+    <a href="-" class="signup_btn" style="color: #f3f4f6;">회원가입</a>
   </div>
 
 <div class="Easy_login_group">
@@ -75,18 +99,23 @@
   </div>
 
   <div class="First">
-    <p class="text1">판다마켓이 처음이신가요?</p>
-    <a href="signup.html" class="signup">회원가입</a>
+    <p class="text1">이미 회원이신가요?</p>
+    <a href="login.html" class="signup">로그인</a>
   </div>
 </div>
 
-<!-- 아이디 비밀번호 입력시 로그인 버튼 활성화 + 비밀번호 보이기 숨기기 -->
 <script>
   const emailInput = document.querySelector("#email_input");
+  const nicknameInput = document.querySelector("#Nickname_input");
   const passwordInput = document.querySelector("#password_input");
+  const passwordCheckInput = document.querySelector("#password_check_input");
+  const signupButton = document.querySelector(".signup_btn");
+
   const passwordToggle = document.querySelector("#password_toggle");
   const passwordIcon = document.querySelector("#password_icon");
-  const loginButton = document.querySelector(".login_btn");
+
+  const passwordCheckToggle = document.querySelector("#password_check_toggle");
+  const passwordCheckIcon = document.querySelector("#password_check_icon");
 
   passwordToggle.addEventListener("click", function () {
     if (passwordInput.type === "password") {
@@ -100,19 +129,40 @@
     }
   });
 
-  function checkLoginInputs() {
-    const emailValue = emailInput.value.trim();
-    const passwordValue = passwordInput.value.trim();
-
-    if (emailValue !== "" && passwordValue !== "") {
-      loginButton.classList.add("active");
+  passwordCheckToggle.addEventListener("click", function () {
+    if (passwordCheckInput.type === "password") {
+      passwordCheckInput.type = "text";
+      passwordCheckIcon.src = "image/eye_hidden.png";
+      passwordCheckIcon.alt = "비밀번호 확인 숨기기";
     } else {
-      loginButton.classList.remove("active");
+      passwordCheckInput.type = "password";
+      passwordCheckIcon.src = "image/eye.png";
+      passwordCheckIcon.alt = "비밀번호 확인 보기";
+    }
+  });
+
+  function checkSignupInputs() {
+    const emailValue = emailInput.value.trim();
+    const nicknameValue = nicknameInput.value.trim();
+    const passwordValue = passwordInput.value.trim();
+    const passwordCheckValue = passwordCheckInput.value.trim();
+
+    if (
+      emailValue !== "" &&
+      nicknameValue !== "" &&
+      passwordValue !== "" &&
+      passwordCheckValue !== ""
+    ) {
+      signupButton.classList.add("active");
+    } else {
+      signupButton.classList.remove("active");
     }
   }
 
-  emailInput.addEventListener("input", checkLoginInputs);
-  passwordInput.addEventListener("input", checkLoginInputs);
+  emailInput.addEventListener("input", checkSignupInputs);
+  nicknameInput.addEventListener("input", checkSignupInputs);
+  passwordInput.addEventListener("input", checkSignupInputs);
+  passwordCheckInput.addEventListener("input", checkSignupInputs);
 </script>
 
 </body>
