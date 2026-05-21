@@ -160,7 +160,7 @@ main {
   display: flex;
   width: 100%;
   max-width: 120rem;
-  padding: 8.625rem 21.5rem;
+  padding: 8.625rem 2rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
@@ -183,7 +183,7 @@ main {
   display: flex;
   width: 100%;
   max-width: 1920px;
-  padding: 138px 360px;
+  padding: 138px 20px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -206,7 +206,7 @@ main {
   display: flex;
   width: 100%;
   max-width: 1920px;
-  padding: 138px 360px;
+  padding: 138px 20px;
   justify-content: center;
   align-items: center;
   gap: 10px;
