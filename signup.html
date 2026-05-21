@@ -16,15 +16,6 @@
     })(window,document,'script','dataLayer','GTM-TJPD3GMV');</script>
     <!-- End Google Tag Manager -->
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DH9W2B7EGS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DH9W2B7EGS');
-</script>
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript>
@@ -100,6 +91,8 @@
     <script>
         (function () {
 
+            
+
             $("button.hs").on('click', function(i){
                 const this_btn = $(this);
                 const is_password = this_btn.siblings('input').attr("type") === "password";
@@ -117,10 +110,27 @@
                 this_btn.siblings('input').attr('type', 'password');
 
             })
+
+            $(document).on('input', '#u_pwChk', function(){
+                
+                let u_pw = $("#u_pw").val();
+                let u_pwChk = $("#u_pwChk").val();
+
+                $(this).parent().next('.not_match').remove();
+                
+                if (u_pwChk !== '' && u_pw !== u_pwChk) {
+                    let not_match = '<span class="text not_match">새 비밀번호와 일치하지 않습니다</span>';
+                    
+                    $(this).parent().after(not_match);
+
+                    return false;
+                }
+            })
             
             $(document).on('click', '.btn_submit', function(e){
                 let u_email = $("#u_email").val();
                 let u_pw = $("#u_pw").val();
+                let u_pwChk = $("#u_pwChk").val();
 
                 if (u_email == "") {
                     alert("이메일을 적어주세요")
@@ -130,6 +140,14 @@
 
                 if (u_pw == "") {
                     alert("비밀번호를 적어주세요")
+
+                    return false;
+                }
+
+                if (u_pw !== u_pwChk) {
+                    alert("")
+
+                    
 
                     return false;
                 }
