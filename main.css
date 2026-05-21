@@ -37,7 +37,7 @@ h1 a {
 }
 
 /* section area */
-h2 {
+#main h2 {
     line-height: 56px;
     color: #374151;
     font-size: 2.5rem;

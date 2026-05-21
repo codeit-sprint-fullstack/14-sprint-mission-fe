@@ -40,6 +40,10 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 }
+button {
+	border: 0;
+	cursor: pointer;
+}
 blockquote, q {
 	quotes: none;
 }
