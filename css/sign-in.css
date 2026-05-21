@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
 box-sizing: border-box;
-  background-color: #f3f8ff;
+  background-color:var(--all-backgraound, #fcfcfc);
   gap: 2.5rem;
   
 
@@ -16,6 +16,7 @@ box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 16px;
+ 
   
 }
 
@@ -52,7 +53,8 @@ input {
 }
 
   .logo-frame{display: flex;
-  justify-content: center;}
+  justify-content: center;
+  align-items: center;}
 
 
 .logo-img{width: 103.529px;
@@ -105,7 +107,7 @@ line-height: 32px; /* 160% */
   padding: 1rem 23px;
   align-items: center;
 border-radius: 8px;
-background: #E6F2FF;
+background: var(--sns-background, #E6F2FF);
 height: 42px;
 }
 
@@ -128,6 +130,7 @@ gap: 16px;
   justify-content: center;
   gap: 0.5rem;
   color: var(--Secondary-800, #1F2937);
+ 
 
 /* pretendard/md-14px-medium */
 font-family: Pretendard;
@@ -137,4 +140,11 @@ font-weight: 500;
 line-height: 24px; /* 171.429% */
 }
 
+#sign-up a {
+  text-decoration: none;
+}
 
+.form-group > input{
+   outline: none;
+  border: none;
+}

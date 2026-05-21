@@ -1,3 +1,6 @@
+@import url(../css/var.css);
+
+
 .header {
   position: fixed;
   top: 0;
@@ -12,14 +15,14 @@
 .gnb {
   max-width: 120rem;
   margin: 0 auto;
-  display: flex;
+  display: flex;  
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   padding: 0 12.5rem;
-  color: #3692FF;
+  color: var(--brand-blue);
   font-family: "ROKAF Sans";
   font-size: 1.602rem;
   font-style: normal;
@@ -63,6 +66,10 @@
   align-items: flex-end;
   gap: 0.537rem;
   text-decoration: none;
+
+
+  align-items: center;
+
 }
 
 main {
@@ -75,7 +82,7 @@ main {
 }
 
 .logo-text {
-  color: #3692FF;
+  color: var(--brand-blue);
   font-family: "ROKAF Sans";
   font-size: 1.602rem;
   font-style: normal;
@@ -293,6 +300,7 @@ main {
 .privacy,
 .faq {
   font-size: 1rem;
+  color: #E5E7EB;
 }
 
 .middle {
@@ -300,7 +308,10 @@ main {
   align-items: flex-start;
   gap: 1.875rem;
 }
-
+.middle a{
+  color: #E5E7EB;
+  text-decoration: none;
+}
 .bottom-section {
   display: flex;
   width: 100%;

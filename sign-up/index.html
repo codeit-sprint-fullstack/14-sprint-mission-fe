@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="kor">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
-
+    <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="../css/sign-up.css" />
   </head>
   <body class="form-frame">
@@ -45,31 +45,33 @@
 
         <div class="form-group">
           <label for="confirm-password">비밀번호 확인</label>
-
-          <input
-            type="password"
-            id="confirm-password"
-            placeholder="비밀번호를 다시 입력하세요."
-          />
-        </div>
-        <div>
-          <button class="btn-sign-up">회원가입</button>
-        </div>
-
-        <div class="social-login">
-          간편 로그인하기
-          <div class="g-k">
-            <a href="https://www.google.com" target="_blank"
-              ><img src="../images/google.png" alt="구글 로그인"
-            /></a>
-            <a href="https://www.kakao.com" target="_blank"
-              ><img src="../images/kakao.png" alt="카카오 로그인"
-            /></a>
+          <div class="password-confirm">
+            <input
+              type="password"
+              id="confirm-password"
+              placeholder="비밀번호를 다시 입력하세요."
+            />
+            <img src="../images/eyes.svg" alt="비밀번호 보기" class="eyes" />
           </div>
-        </div>
-        <div id="sign-up">
-          <span>이미 회원이신가요?</span>
-          <a href="../sign-in/index.html" style="color: #3692ff">로그인</a>
+          <div>
+            <button class="btn-sign-up">회원가입</button>
+          </div>
+
+          <div class="social-login">
+            간편 로그인하기
+            <div class="g-k">
+              <a href="https://www.google.com" target="_blank"
+                ><img src="../images/google.svg" alt="구글 로그인"
+              /></a>
+              <a href="https://www.kakao.com" target="_blank"
+                ><img src="../images/kakao.svg" alt="카카오 로그인"
+              /></a>
+            </div>
+          </div>
+          <div id="sign-up">
+            <span>이미 회원이신가요?</span>
+            <a href="../sign-in/index.html" style="color: #3692ff">로그인</a>
+          </div>
         </div>
       </div>
     </main>
