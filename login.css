@@ -1,3 +1,12 @@
+:root {
+  --color-bg-main: #FCFCFC;
+  --color-primary: #3692FF;
+  --color-primary-light: #E6F2FF;
+  --color-text-dark: #1F2937;
+  --color-gray-light: #F3F4F6;
+  --color-gray-muted: #9CA3AF;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +43,7 @@ body {
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  background-color: #FCFCFC;
+  background-color: var(--color-bg-main);
   margin: 0 auto;
 }
 
@@ -61,7 +70,7 @@ body {
 }
 
 .logo-text {
-  color: #3692FF;
+  color: var(--color-primary);
   font-family: 'ROKAF Sans', sans-serif;
   font-size: 4.2rem;
   font-weight: 700;
@@ -97,17 +106,17 @@ form {
   align-items: center;
   gap: 10px;
   border-radius: 12px;
-  background: #F3F4F6;
+  background: var(--color-gray-light);
   padding: 16px 24px;
   border: none;
 }
 
 input:focus {
-  outline-color: #3692FF;
+  outline-color: var(--color-primary);
 }
 
 input::placeholder {
-  color: #9CA3AF;
+  color: var(--color-gray-muted);
   font-family: 'Pretendard';
   font-size: 1rem;
   font-weight: 400;
@@ -119,7 +128,7 @@ input::placeholder {
 }
 
 .password-text {
-  color: #1F2937;
+  color: var(--color-text-dark);
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
@@ -141,7 +150,7 @@ input::placeholder {
   align-items: center;
   gap: 10px;
   border-radius: 12px;
-  background: #F3F4F6;
+  background: var(--color-gray-light);
   border: none;
   background-image: url(images/btn_visibility_off_24px.png);
   background-repeat: no-repeat;
@@ -154,7 +163,7 @@ input::placeholder {
   height: 56px;
   padding: 16px 124px;
   border-radius: 40px;
-  background-color: #9CA3AF;
+  background-color: var(--color-gray-muted);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -162,7 +171,7 @@ input::placeholder {
 }
 
 .login-text {
-  color: #F3F4F6;
+  color: var(--color-gray-light);
   text-align: center;
   font-family: 'Pretendard';
   font-size: 20px;
@@ -176,7 +185,7 @@ input::placeholder {
   height: 74px;
   padding: 16px 23px;
   border-radius: 8px;
-  background-color: #E6F2FF;
+  background-color: var(--color-primary-light);
   display: flex;
   flex-direction: column;
   margin: 24px auto;
@@ -190,7 +199,7 @@ input::placeholder {
 }
 
 .easy-text {
-  color: #1F2937;
+  color: var(--color-text-dark);
   font-family: 'Pretendard';
   font-size: 16px;
   font-weight: 500;
@@ -244,7 +253,7 @@ input::placeholder {
 }
 
 .signup-text {
-  color: #1F2937;
+  color: var(--color-text-dark);
   font-family: 'Pretendard';
   font-size: 14px;
   font-weight: 500;
@@ -252,7 +261,7 @@ input::placeholder {
 }
 
 .signup-link {
-color: #3692FF;
+color: var(--color-primary);
 font-family: 'Pretendard';
 font-size: 14px;
 font-weight: 500;
