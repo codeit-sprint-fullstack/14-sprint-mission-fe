@@ -28,6 +28,7 @@
         <img src="images/판다 얼굴.png" alt="로고">
         <span class="panda-letters">판다마켓</span>
       </a>
+
       <form>
         <label for="email" class="input-title">이메일</label>
         <input class="input-field" id="email" type="email"
@@ -38,17 +39,26 @@
         <input class="input-field" id="nickname" type="text"
           placeholder="닉네임을 입력해주세요"
           required>          
-
+        
         <label for="password" class="input-title">비밀번호</label>
-        <input class="input-field" id="password" type="password" 
-          placeholder="비밀번호를 입력해주세요"
-          required>
-
+          <div class="password-visible">
+            <input class="input-field" id="password" type="password" 
+              placeholder="비밀번호를 입력해주세요"
+              required>
+              <button type="button" class="eye-button">
+                <img src="images/btn_visibility_on_24px.png" alt="비밀번호 보기">
+              </button>
+          </div>
         <label for="password-check" class="input-title">비밀번호 확인</label>
-        <input class="input-field" id="password-check" type="password" 
-          placeholder="비밀번호를 다시 한 번 입력해주세요"
-          required>
- 
+          <div class="password-visible">
+            <input class="input-field" id="password-check" type="password" 
+              placeholder="비밀번호를 다시 한 번 입력해주세요"
+              required>
+            <button type="button" class="eye-button">
+              <img src="images/btn_visibility_on_24px.png" alt="비밀번호 보기">
+            </button>
+          </div>
+
         <button type="submit" class="loginButton">로그인</button>
       </form>
             

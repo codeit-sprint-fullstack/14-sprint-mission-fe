@@ -98,6 +98,25 @@ form {
   border: 1px solid var(--primary-blue)
 }
 
+.password-visible {
+  position: relative;
+}
+
+.eye-button {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  background: none;
+  border: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-button img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .loginButton {
   width: 40rem;
   height: 3.5rem;
