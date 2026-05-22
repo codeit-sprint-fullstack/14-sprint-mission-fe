@@ -1,3 +1,5 @@
+@import url(../css/var.css);
+
 .form-frame{
   margin: 0;
   min-height: 100vh;
@@ -6,7 +8,7 @@
   justify-content: center;
   align-items: center;
 box-sizing: border-box;
-  background-color:var(--all-backgraound, #fcfcfc);
+  background-color: var(--all-backgraound, #fcfcfc);
   gap: 2.5rem;
   
 
@@ -16,8 +18,6 @@ box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 16px;
- 
-  
 }
 
 #form-gap {
@@ -33,15 +33,19 @@ main {
 
 }
 
-
 input {
   width: 100%;
   height: 56px;
   padding: 1rem 24px;
-  border: none;
+  border: 1px solid transparent;
+  outline: none;
   border-radius: 0.75rem;
   background-color: #f3f4f6;
   box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #3692ff;
 }
 
 
@@ -53,8 +57,7 @@ input {
 }
 
   .logo-frame{display: flex;
-  justify-content: center;
-  align-items: center;}
+  justify-content: center;}
 
 
 .logo-img{width: 103.529px;
@@ -87,8 +90,8 @@ justify-content: center;
 align-items: center;
 gap: 10px;
 border-radius: 40px;
-background: var(--Secondary-400, #9CA3AF);
-color: var(--Cool-Gray-100, #F3F4F6);
+background: var(--login-input-gray, #9CA3AF);
+color: var(--button-text, #F3F4F6);
 border : none;
 appearance: none;
 
@@ -99,7 +102,6 @@ font-style: normal;
 font-weight: 600;
 line-height: 32px; /* 160% */
 }
-
 
 .social-login {
   display: flex;
@@ -130,7 +132,7 @@ gap: 16px;
   justify-content: center;
   gap: 0.5rem;
   color: var(--Secondary-800, #1F2937);
- 
+
 
 /* pretendard/md-14px-medium */
 font-family: Pretendard;
@@ -144,7 +146,20 @@ line-height: 24px; /* 171.429% */
   text-decoration: none;
 }
 
-.form-group > input{
-   outline: none;
-  border: none;
+.password-confirm {
+  display: flex;
+  align-items: center;
+  background-color: var(--button-text, #9ca3af);
+  border-radius: 0.75rem;
 }
+
+.password-confirm input {
+
+  background: transparent;
+  }
+
+  .eyes{
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
     <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="../css/var.css" />
     <link rel="stylesheet" href="../css/sign-up.css" />
   </head>
   <body class="form-frame">
@@ -34,14 +35,15 @@
           <input type="text" id="nickname" placeholder="닉네임을 입력하세요" />
         </div>
         <div class="form-group">
-          <label for="password">비밀번호</label>
-
-          <input
-            type="password"
-            id="password"
-            placeholder="비밀번호를 입력하세요."
-          />
-        </div>
+          <label for="confirm-password">비밀번호</label>
+          <div class="password-confirm">
+            <input
+              type="password"
+              id="password"
+              placeholder="비밀번호를 입력하세요."
+            />
+            <img src="../images/eyes.svg" alt="비밀번호 보기" class="eyes" />
+          </div>
 
         <div class="form-group">
           <label for="confirm-password">비밀번호 확인</label>
