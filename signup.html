@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인</title>
+  <title>회원가입</title>
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="sign-login-wrap login">
+  <div class="sign-login-wrap signup">
     <div class="logo">
       <a href="/">
         <div class="logo-cont">
@@ -23,6 +23,10 @@
         <input type="text" id="user-email" name="user-email" placeholder="이메일을 입력해주세요">
       </div>
       <div class="form">
+        <label for="user-nickname">닉네임</label>
+        <input type="text" id="user-nickname" name="user-nickname" placeholder="닉네임을 입력해주세요">
+      </div>
+      <div class="form">
         <label for="user-password">비밀번호</label>
       <div class="form-password">
         <input type="password" id="user-password" name="user-password" class="input-password" placeholder="비밀번호를 입력해주세요">
@@ -31,8 +35,17 @@
         </button>
       </div>
       </div>
+      <div class="form">
+        <label for="user-password-check">비밀번호 확인</label>
+      <div class="form-password">
+        <input type="password" id="user-password-check" name="user-password-check" class="input-password" placeholder="비밀번호를 다시 한 번 입력해주세요 ">
+        <button class="btn btn-visibilly">
+          <img src="/img/btn-visibility.png" alt="비밀번호 보기">
+        </button>
+      </div>
+      </div>
     </div>
-		<button class="btn btn-login">로그인</button>
+		<button class="btn btn-login">회원가입</button>
 		<div class="sign-up-wrap">
 			<div class="easy-signup">
 				<p>간편 로그인하기</p>

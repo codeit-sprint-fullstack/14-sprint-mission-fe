@@ -1,6 +1,10 @@
 @charset "utf-8";
 body{ font-family: Pretendard; color: #374151; }
-.btn {  background-color: #3692FF; color: #fff; }
+button {  padding: 0;  border: 0;  background: transparent;  }
+button img {
+  display: block;
+}
+.btn.bg {  background-color: #3692FF; color: #fff; }
 
 /* banner  공통 */
 .banner { position: relative; width: 100%; height: 520px; background-color:#CFE5FF ; }
@@ -46,3 +50,37 @@ footer { height: 160px;  max-width: 1920px; margin: 0 auto; padding: 32px 200px;
 .sns-wrap a{ float: left; margin-right: 12px; }
 .sns-wrap a:last-child { margin-right: 0; }
 .sns-wrap a img { width: 20px; }
+
+
+/* 로그인 */
+.sign-login-wrap { width: 100%; max-width: 640px; margin: 0 auto; padding: 80px 0; }
+.sign-login-wrap .logo { text-align: center; padding: 15px 0; }
+.sign-login-wrap .logo a { display: inline-block; }
+.sign-login-wrap .logo-cont { cursor: pointer; display: flex; align-items: center;  }
+.sign-login-wrap .logo img { width: 100px; }
+.sign-login-wrap .logo .title { margin-left: 22px; font-family: ROKAF; font-size: 66px; font-weight: 600; color: #3692FF;}
+.sign-login-wrap .login a { padding: 12px 23px; box-sizing: border-box; font-size: 16px; border-radius: 8px; cursor: pointer; }
+
+.form-wrap { margin-top: 40px;  }
+.form-wrap label { display: block; font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+.form-wrap input {   width: 100%; height: 56px;
+ background-color:#F3F4F6; border: none; padding:0 24px; box-sizing: border-box; border-radius: 12px; font-size: 16px; }
+.form-wrap input:focus { outline: 1px solid #3692FF;  }
+.form-wrap:focus-within + .btn-login {  background: #3692ff; }
+
+.form-wrap .form { margin-top: 24px; }
+.form-wrap .form:first-child { margin-top: 0; }
+.form-wrap .form .form-password { position: relative; }
+.form-wrap .form .btn-visibilly { width: 24px; position: absolute; top: 50%; right: 24px; transform: translateY(-50%); }
+.form-wrap .form .btn-visibilly img { width: 100%; }
+
+.sign-login-wrap .btn-login { width: 100%; 
+height: 56px;  background-color:#9CA3AF; border-radius: 30px; font-size: 20px; margin-top: 24px; color: #fff;  }
+ 
+.easy-signup { display: flex; background-color: #E6F2FF; padding: 16px 23px; align-items: center; justify-content: space-between; border-radius: 8px; margin-top: 24px;  font-weight: 500; }
+.easy-signup .icon-wrap { display: flex; }
+.easy-signup .icon-wrap a { width: 42px; }
+.easy-signup .icon-wrap a.kakao { margin-left: 16px; }
+.easy-signup .icon-wrap a img { width: 100%; }
+.sign-up-info { display: flex; justify-content: center; font-weight: 500; margin-top: 24px; }
+.sign-up-info a { margin-left: 4px; color: #3692FF; text-decoration: underline;  }
