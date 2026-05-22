@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판다마켓-로그인</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="메인판다로고">
+        <a href="index.html" class="logo"><img src="images/메인판다.png" alt="판다마켓"></a>
+        </div>
+        <form>
+            <div class="input-group">
+                <label for="email">이메일:</label>
+                <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요">
+                <div class="error-message">이메일 형식이 올바르지 않습니다.</div>
+            </div>
+            <div class="input-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" placeholder="비밀번호를 입력해주세요">
+                <div class="error-message">비밀번호는 8자 이상이여야합니다 </div>
+            </div>
+            <button type="submit" class="btn-submit">로그인</button>
+        </form>
+        <div class="social-box">
+            <span class="social-text">간편 로그인하기</span>
+            <div class="social-icons">
+                <a href="https://google.com" target="_blank"><i class="fab fa-google"></i></a>
+                <a href="https://kakao.com" target="_blank"><i class="fab fa-kakao"></i></a>
+            </div>
+        </div>
+        <div class="link-box">
+            판다마켓이 처음이신가요? <a href="회원가입.html">회원가입하기</a>
+        </div>
+    </div>
+</body>
+</html>
