@@ -12,7 +12,7 @@
   <body>
     <div class="login-box">
       <div class="logo-box">
-        <a class="logo-link" href="index.html">
+        <a class="logo-link" href="/">
           <img src="images/판다 얼굴.svg" alt="판다 로고">
           <div class="logo-text">
             판다마켓
@@ -20,8 +20,8 @@
         </a>
       </div>
 
-      <div class="form-box">
-        <form action="" class="email-box">
+      <form class="form-box">
+        <div action="" class="email-box">
           <label for="email" class="email-text">
             이메일
           </label>
@@ -30,9 +30,9 @@
           class="email-input"
           placeholder="이메일을 입력해주세요"
           required>
-        </form>
+        </div>
 
-        <form action="" class="password-box">
+        <div action="" class="password-box">
           <label for="password" class="password-text">
             비밀번호
           </label>
@@ -44,16 +44,14 @@
             placeholder="비밀번호를 입력해주세요"
             required>
           </div>
-        </form>
-      </div>
-
-      <a href="">
-       <div class="login-button">
+        </div>
+      
+        <button type="submit" class="login-button">
           <div class="login-text">
             로그인
           </div>
-       </div>
-      </a>
+        </button>
+      </form>
 
       <div class="easy-box">
         <div class="easy-content">
