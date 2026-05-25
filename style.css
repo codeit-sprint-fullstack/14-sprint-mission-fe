@@ -46,7 +46,7 @@ img {
   z-index: 1;
   background-color: var(--color-bg-white);
   width: 100%;
-  min-height: 52px;
+  min-height: 3.25rem;
   box-sizing: border-box;
   border-bottom: 1px solid var(--color-border-light);
 }
@@ -54,8 +54,8 @@ img {
 .logo-wrapper {
   display: flex;
   width: 100%;
-  max-width: 1920px;
-  padding: 9px 200px;
+  max-width: 120rem;
+  padding: 0.625rem 12.5rem;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -66,21 +66,21 @@ img {
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .logo-text {
   text-decoration-line: none;
   color: var(--color-primary);
   font-family: 'ROKAF Sans';
-  font-size: 25.63px;
+  font-size: 1.625rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
 .logo-group {
-  height: 40px;
+  height: 2.5rem;
   width: auto;
 }
 
@@ -88,21 +88,21 @@ img {
   font-family: 'Pretendard Regular';
   font-size: 1rem;
   font-weight: 600;
-  width: 128px;
-  height: 48px;
+  width: 8rem;
+  height: 3rem;
   background-color: var(--color-primary);
   color: var(--color-bg-white);
   border: none;
-  padding: 12px 23px;
-  border-radius: 8px;
+  padding: 0.75rem 1.45rem;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 
 .header-container {
   background-color: var(--color-bg-brand-light);
   width: 100%;
-  height: 540px;
-  padding: 0 200px;
+  height: 33.75rem;
+  padding: 0 12.5rem;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -115,15 +115,15 @@ img {
   align-items: center;
   width: 100%;
   height: 100%;
-  max-width: 1920px;
+  max-width: 120rem;
 }
 
 .header-text-group {
-  display: flex-end;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 200px;
-  margin-right: 7px;
+  margin-top: 12.5rem;
+  margin-right: 0.45rem;
 }
 
 .header-text {
@@ -133,17 +133,17 @@ img {
   font-style: normal;
   font-weight: 700;
   line-height: 1.4;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
 }
 
 .watch-button {
   display: flex;
-  height: 56px;
-  padding: 16px 124px;
+  height: 3.5rem;
+  padding: 1rem 7.75rem;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  border-radius: 40px;
+  gap: 0.625rem;
+  border-radius: 2.5rem;
   background-color: var(--color-primary);
   color: var(--color-btn-hover);
   text-align: center;
@@ -151,11 +151,11 @@ img {
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 2rem;
   border: none;
   white-space: nowrap;
   cursor: pointer;
-  margin-bottom: 60px;
+  margin-bottom: 3.75rem;
 }
 
 .header-picture {
@@ -173,7 +173,7 @@ main {
   display: flex;
   width: 100%;
   max-width: 120rem;
-  padding: 8.625rem 2rem;
+  padding: 8.625rem 1.25rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
@@ -195,11 +195,11 @@ main {
 .section2-container {
   display: flex;
   width: 100%;
-  max-width: 1920px;
-  padding: 138px 20px;
+  max-width: 120rem;
+  padding: 8.625rem 1.25rem;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   background-color: var(--color-bg-white);
   margin: 0 auto;
 }
@@ -207,10 +207,10 @@ main {
 .section2-outline {
   display: flex;
   width: 100%;
-  max-width: 988px;
+  max-width: 61.75rem;
   justify-content: center;
   align-items: center;
-  gap: 64px;
+  gap: 4rem;
   background-color: var(--color-bg-main);
   flex-direction: row-reverse;
 }
@@ -218,23 +218,23 @@ main {
 .section3-container {
   display: flex;
   width: 100%;
-  max-width: 1920px;
-  padding: 138px 20px;
+  max-width: 120rem;
+  padding: 8.625rem 1.25rem;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   background-color: var(--color-bg-white);
   margin: 0 auto;
-  margin-bottom: 138px;
+  margin-bottom: 8.625rem;
 }
 
 .section3-outline {
   display: flex;
   width: 100%;
-  max-width: 988px;
+  max-width: 61.75rem;
   justify-content: center;
   align-items: center;
-  gap: 64px;
+  gap: 4rem;
   background-color: var(--color-bg-main);
   flex-direction: row;
 }
@@ -267,7 +267,7 @@ main {
 .section4-container {
   background-color: var(--color-bg-brand-light);
   width: 100%;
-  height: 540px;
+  height: 33.75rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -280,7 +280,7 @@ main {
 .section4-group {
   display: inline-flex;
   align-items: center;
-  gap: 69px;
+  gap: 4.375rem;
 }
 
 .section4-group img {
@@ -294,17 +294,17 @@ main {
   font-style: normal;
   font-weight: 700;
   line-height: 140%;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   align-self: center;
 }
 
 .footer-container {
   display: flex;
   width: 100%;
-  min-height: 160px;
-  padding: 32px 0;
+  min-height: 10rem;
+  padding: 2rem 0;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.625rem;
   background: var(--color-bg-footer);
   margin: 0 auto;
 }
@@ -312,8 +312,8 @@ main {
 .footer-contents {
   display: flex;
   width: 100%;
-  max-width: 1920px;
-  padding: 9px 200px;
+  max-width: 120rem;
+  padding: 0.625rem 12.5rem;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -325,7 +325,7 @@ main {
 .footer-links {
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  gap: 1.875rem;
   align-items: center;
 }
 
@@ -361,7 +361,7 @@ main {
 
 .footer-logo {
   display: flex;
-  gap: 0px 12px;
+  gap: 0px 0.75rem;
 }
 
 a {
