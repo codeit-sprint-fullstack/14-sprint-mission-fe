@@ -1,0 +1,273 @@
+:root {
+  --color-bg-main: #FCFCFC;
+  --color-primary: #3692FF;
+  --color-primary-light: #E6F2FF;
+  --color-text-dark: #1F2937;
+  --color-gray-light: #F3F4F6;
+  --color-gray-muted: #9CA3AF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'ROKAF Sans';
+  src: url('./fonts/ROKAF Sans bold.otf')
+  format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('./fonts/Pretendard-Regular.otf')
+  format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  text-decoration-line: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-bg-main);
+  margin: 0 auto;
+}
+
+.login-box {
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 14.375rem auto;
+}
+
+.logo-box {
+  width: 25rem;
+  height: 8.25rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 1.375rem;
+}
+
+.logo-text {
+  color: var(--color-primary);
+  font-family: 'ROKAF Sans', sans-serif;
+  font-size: 4.2rem;
+  font-weight: 700;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  font-family: 'Pretendard';
+}
+
+.email-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.email-text {
+  color: #1F2937;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.email-input {
+  display: flex;
+  width: 100%;
+  min-width: 40rem;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: var(--color-gray-light);
+  border: none;
+}
+
+input:focus {
+  outline-color: var(--color-primary);
+}
+
+input::placeholder {
+  color: var(--color-gray-muted);
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+}
+
+.password-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.password-text {
+  color: var(--color-text-dark);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.password-input {
+  display: flex;
+  width: 100%;
+  min-width: 40rem;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: var(--color-gray-light);
+  border: none;
+  background-image: url(images/btn_visibility_off_24px.png);
+  background-repeat: no-repeat;
+  background-position: right 1.5rem center;
+}
+
+.login-button {
+  width: 100%;
+  min-width: 40rem;
+  height: 3.5rem;
+  padding: 1rem 7.75rem;
+  border-radius: 2.5rem;
+  background-color: var(--color-gray-muted);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto;
+  border: none;
+  cursor: pointer;
+}
+
+.login-text {
+  color: var(--color-gray-light);
+  text-align: center;
+  font-family: 'Pretendard';
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.easy-box {
+  width: 100%;
+  min-width: 40rem;
+  height: 4.625rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-primary-light);
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem auto;
+}
+
+.easy-content {
+  width: 37.125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.easy-text {
+  color: var(--color-text-dark);
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.625rem;
+}
+
+.easy-link {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.google {
+  background-image: url('images/icon/google-bg.svg');
+  background-size: cover;
+  background-position: center;
+  width: 2.625rem;
+  height: 2.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.google-logo {
+  width: 1.375rem;
+  height: 1.375rem;
+  display: block;
+}
+
+.kakao {
+  background-image: url('images/icon/kakao-bg.svg');
+  background-size: cover;
+  background-position: center;
+  width: 2.625rem;
+  height: 2.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kakao-logo {
+  width: 1.375rem;
+  height: 1.375rem;
+  display: block;
+}
+
+.signup-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.signup-text {
+  color: var(--color-text-dark);
+  font-family: 'Pretendard';
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.signup-link {
+color: var(--color-primary);
+font-family: 'Pretendard';
+font-size: 0.875rem;
+font-weight: 500;
+text-decoration-line: underline;
+text-decoration-style: solid;
+}
