@@ -1,0 +1,392 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@font-face {
+  font-family: 'ROKAF_M';
+  src: url('./fonts/ROKAF_M.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;}
+
+/* 1번(상단바) */
+.top_bar
+{display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 0 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;}
+
+.panda-logo
+{display: flex;
+flex-direction: row;
+align-items: center;
+padding: 9.5px 0px 9.5px 0px;}
+
+.panda_face
+{width: 40px;
+height: 40.135px;
+margin-right: 8.59px}
+
+.logo-text
+{color: #3692FF;
+font-family: "ROKAF_M";
+font-size: 25.633px;
+font-style: normal;
+font-weight: 1000;
+line-height: normal;}
+
+.login
+{display: flex;
+flex-direction: row;
+align-items: center;  
+justify-content: center;
+gap: 8px;
+padding: 11px 0px 11px 0px;}
+
+.login-btn {
+  display: flex;
+  width: 128px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  background: #3692FF;
+
+  color: #F3F4F6;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer}
+
+/* *********2번********* */
+.hot_sangpum
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;}
+
+.gugyeong
+{display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+padding: 110px 0px 0px 0px;}
+
+/* 상품 구경 텍스트 */
+.gugyeong_text1
+{color: var(--Secondary-700, #374151);
+font-family: Pretendard;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: 140%;
+margin-bottom: 32px;}
+
+  /* 상품 구경 그룹 */
+.gugyeong_button_group
+{display: flex;
+flex-direction: row;
+align-items: flex-start;  
+justify-content: flex-start;
+gap: 8px;
+}
+
+/* 구경 버튼 */
+.gugyeong_button {
+  display: flex;
+  width: 357px;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  border-radius: 40px;
+  background: #3692FF;
+
+  color: #F3F4F6;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  text-decoration: none;
+}
+
+/* 판다 바구니 들고 있는거 */
+.panda_shopping
+{display: flex;
+width: 746px;
+height: 340px;
+padding-right: 0;
+justify-content: center;
+align-items: center;
+margin: 200px 0px 0px 0px;
+}
+
+
+/* *********3번********* */
+.hot_item
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;}
+
+.gray_box
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+border-style: solid;
+border-width: 0px 31px 0px 31px;
+border-color: #fcfcfc;}
+
+/* 의류 이미지 */
+.clothes
+{display: flex;
+width: 588px;
+height: 444px;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;;
+margin-right: 60px;}
+
+
+/* 인기 상품 텍스트 그룹 */
+.panda5
+{display: flex;
+flex-direction: column;
+justify-content: space-between;}
+
+.hot_item_text1
+{color: var(--Primary-100, #3692FF);
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px;}
+
+.hot_item_text2
+{color: var(--Secondary-700, #374151);
+font-family: Pretendard;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: 140%;
+letter-spacing: 0.8px;
+margin: 12px 0px 24px 0px;}
+
+.hot_item_text3
+{color: var(--Secondary-700, #374151);
+
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: 32px;}
+
+
+/* *********4번********* */
+.panda6
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+
+.gray_box2
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+border-style: solid;
+border-width: 0px 31px 0px 31px;
+border-color: #fcfcfc;}
+
+/* 검색 텍스트 그룹 */
+.search_text_group
+{display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+text-align: right;}
+
+.search_text1
+{color: var(--Primary-100, #3692FF);
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px;}
+
+.search_text2
+{color: var(--Secondary-700, #374151);
+font-family: Pretendard;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: 140%;
+letter-spacing: 0.8px;
+margin: 12px 0px 24px 0px;}
+
+.search_text3
+{color: var(--Secondary-700, #374151);
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: 32px; }
+
+.Magnifier
+{width: 588px;
+height: 444px;
+flex-shrink: 0;
+margin-left: 60px;}
+
+/* *********5번********* */
+/* 판매 등록 */
+.panda7
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;}
+
+.gray_box3
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+border-style: solid;
+border-width: 0px 31px 0px 31px;
+border-color: #fcfcfc;}
+
+.Sales
+{display: flex;
+width: 588px;
+height: 444px;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;
+margin-right: 60px;}
+
+.sales1
+{color: var(--Primary-Primary-brand, #3692FF);
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px;}
+
+.sales2
+{color: var(--Secondary-700, #374151);
+font-family: Pretendard;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: 140%;
+letter-spacing: 0.8px;
+margin: 12px 0px 24px 0px;}
+
+.sales3
+{color: var(--Secondary-700, #374151);
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: 32px;}
+
+/* *********6번********* */
+.panda_last_group
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;}
+
+/* 판다 말풍선 */
+.pandatalk
+{display: flex;
+width: 746px;
+height: 397px;
+justify-content: center;
+align-items: center;
+padding: 143px 0px 0px 0px;}
+
+.panda_last_text
+{color: var(--Secondary-700, #374151);
+font-family: Pretendard;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: 140%;}
+
+/* *********7번********* */
+/* 라스트 */
+.last
+{display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: space-around;
+flex-direction: row;
+padding: 32px 0px 0px 0px;}
+
+.codeit
+{color: var(--Secondary-400, #9CA3AF);
+text-align: center;
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;}
+
+.text2_group
+{display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+gap: 30px;}
+
+.privacy
+{color: var(--Secondary-200, #E5E7EB);
+text-align: center;
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;}
+
+.faq
+{color: var(--Secondary-200, #E5E7EB);
+text-align: center;
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;}
+
+.sns
+{display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: space-around;
+flex-direction: row;
+gap:12px;}
+
+.facebook
+{width: 20px;
+height: 20px;
+flex-shrink: 0;}
+
+.twiter
+{width: 20px;
+height: 20px;
+flex-shrink: 0;}
+
+.youtube
+{width: 20px;
+height: 20px;
+flex-shrink: 0;}
+
+.insta
+{width: 20px;
+height: 20px;
+flex-shrink: 0;}

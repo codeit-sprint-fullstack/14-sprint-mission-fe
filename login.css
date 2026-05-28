@@ -1,0 +1,212 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@font-face {
+  font-family: 'ROKAF_M';
+  src: url('./fonts/ROKAF_M.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;}
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root
+{--brand-blue: #3692FF;
+--Secondary-800: #1F2937;
+--Cool-Gray-100: #F3F4F6;
+--Light-blue: #E6F2FF;
+--Secondary-400: #9CA3AF;}
+
+.login
+{display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 130px auto}
+
+/* 판다로고 */
+.pandaLogo
+{display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;}
+
+.pandaFace
+{width: 103.529px;
+height: 103.88px;
+border-radius: 28.932px;
+background: var(--brand-blue);}
+
+.pandaText
+{color: var(--brand-blue);
+font-family: "ROKAF_M";
+font-size: 66.344px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-align: center;
+margin-left: 22.24px;}
+
+/*****이메일*****/
+.email_group
+{display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+padding: 40px 0px 0px 0px;
+color: var(--Secondary-800);
+/* pretendard/2lg-18px-bold */
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px; /* 144.444% */;}
+
+.email_group input {
+    outline: none; 
+    border: 1px solid var(--Cool-Gray-100);}
+
+.email_group input:focus{
+    border-color: var(--brand-blue);
+    outline: none;}
+
+#email_input
+{display: flex;
+width: 600px;
+padding: 16px 24px;
+align-items: center;
+gap: 10px;
+border-radius: 12px;
+background: var(--Cool-Gray-100);}
+
+/*****패스워드*****/
+.password_group
+{display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+padding: 24px 0px;
+color: var(--Secondary-800);
+/* pretendard/2lg-18px-bold */
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px; /* 144.444% */}
+
+.password_set
+{position: relative;
+  width: 648px;}
+
+#password_input {
+  display: flex;
+  width: 648px;
+  padding: 16px 60px 16px 24px;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+  border: 1px solid var(--Cool-Gray-100);
+  outline: none;
+  box-sizing: border-box;
+}
+
+#password_input:focus {
+  border: 1px solid var(--brand-blue);
+  outline: none;
+}
+
+.password_toggle
+{position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;}
+
+.password_toggle img
+{width: 24px;
+  height: 24px;}
+
+/*****로그인 버튼*****/
+.login_btn
+{display: flex;
+width: 600px;
+padding: 16px 24px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 40px;
+background: var(--Secondary-400);
+text-decoration: none;
+
+text-align: center;
+/* pretendard/xl-20px-semibold */
+font-family: Pretendard;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 32px; /* 160% */}
+
+.login_btn.active
+{background: var(--brand-blue);}
+
+.Easy_login_group
+{display: flex;
+width: 600px;
+height: 74px;
+padding: 0px 23px;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+background: var(--Light-blue);
+gap: 10px;}
+
+.Easy_login2
+{color: var(--Secondary-800);
+
+/* pretendard/lg-16px-medium */
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 26px; /* 162.5% */}
+
+.google_logo
+{width: 42px;
+height: 42px;
+margin-right: 16px;}
+
+.kakao_logo
+{width: 42px;
+height: 42px;}
+
+.First
+{display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+width: 648px;
+gap: 4px;}
+
+.text1
+{color: var(--Secondary-800);
+
+/* pretendard/md-14px-medium */
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 171.429% */
+margin-right: 4px;}
+
+.signup
+{color: var(--brand-blue);
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+text-decoration-line: underline;
+text-decoration-style: solid;
+text-decoration-skip-ink: none;
+text-decoration-thickness: auto;
+text-underline-offset: auto;
+text-underline-position: from-font;}
