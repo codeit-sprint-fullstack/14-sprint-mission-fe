@@ -1,0 +1,574 @@
+
+a {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'RokafSans';
+  src: url('./fonts/ROKAF Sans Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#header {
+  width: auto;
+  height: 4.375rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F3F4F6;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 120rem;
+  height: 4.375rem;
+  padding: 0 12.5rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F3F4F6;
+  position: fixed;
+  width: 100%;
+}
+
+.headerContainer {
+  width: 9.5625rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem .5369rem;
+  cursor: pointer;
+}
+
+.logo-index {
+  width: 2.5rem;
+  height: 2.5088rem;
+}
+
+.PandaMarket {
+  width: 6.4375rem;
+  height: 2.1875rem;
+  margin-top: .61rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: 'RokafSans';
+  font-size: 1.6019rem;
+  font-weight: 700;
+  font-style: bold;
+  text-align: center;
+  color: #3692ff;
+}
+
+.login {
+  width: 5.125rem;
+  height: 1.5rem;
+  border-radius: .5rem;
+  padding: .75rem 1.4375rem;
+  background-color: #3692ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: 'pretendard/lg-1rem-semibold';
+  font-size: 1rem;
+  font-weight: 600;
+  font-style: semibold;
+  line-height: 1.625rem;
+  color:#F3F4F6;
+  cursor: pointer;
+}
+
+#main-banner-top {
+  width: auto;
+  height: 33.75rem;
+  margin-top: 4.375rem;
+  background-color: #CFE5FF;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.banner-top {
+  width: 69.375rem;
+  height: 21.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: .4375rem;
+}
+
+.banner-img-top {
+  width: 46.625rem;
+  height: 21.25rem;
+}
+
+.banner-container {
+  width: 22.3125rem;
+  height: 16.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.banner-slogan-top {
+  font-family: 'Pretendard';
+  font-size: 2.5rem;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #374151;
+}
+
+.banner-button {
+  width: 6.875rem;
+  height: 1.5rem;
+  border-radius: 2.5rem;
+  padding: 1rem 7.75rem;
+  background-color: #3692ff;
+  font-family: 'Pretendard';
+  font-size: 1.25rem;
+  font-style: SemiBold;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  color: #F9FAFB;
+  cursor: pointer;
+}
+
+#main-text {
+  width: auto;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-rows: 45rem 45rem 45rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid01 {
+  width: 61.75rem;
+  height: 27.75rem;
+  padding: 0 1.9375rem;
+  box-sizing: border-box;
+  background-color: #FCFCFC;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4rem;
+}
+
+.grid01-textbox {
+  width: 17.125rem;
+  height: 14.875rem;
+}
+
+.grid02 {
+  width: 61.75rem;
+  height: 27.75rem;
+  padding: 0 .5938rem;
+  background-color: #FCFCFC;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row-reverse;
+  align-items: center;
+  text-align: right;
+  gap: 4rem;
+}
+
+.grid02-textbox {
+  width: 19.8125rem;
+  height: 14.875rem;
+}
+
+.grid03 {
+  width: 61.75rem;
+  height: 27.75rem;
+  padding: 0 .0313rem;
+  box-sizing: border-box;
+  background-color: #FCFCFC;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4rem;
+}
+
+.grid03-textbox {
+  width: 22.1875rem;
+  height: 14.875rem;
+}
+
+.grid-keyword {
+  font-family: 'Pretendard';
+  font-style: Bold;
+  font-size: 1.125rem;
+  font-weight: 700; 
+  letter-spacing: 0%;
+  line-height: 1.625rem;
+  vertical-align: middle;
+  color: #3692ff;
+
+}
+
+.grid-slogan {
+  margin-top: .75rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 2.5rem;
+  line-height: 140%;
+  letter-spacing: 2%;
+  vertical-align: middle;
+  color: #374151;
+}
+
+.grid-explane {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #374151;
+}
+
+.grid-img {
+  width: 36.75rem;
+  height: 27.75rem;
+}
+
+#main-banner-bottom {
+  width: auto;
+  height: 33.75rem;
+  background-color: #CFE5FF;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.box {
+  width: auto;
+  height: 8.625rem;
+  background-color: #fcfcfc;
+  content: " ";
+}
+
+.banner-bottom {
+  width: 69.375rem;
+  height: 24.8125rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4.3125rem;
+}
+
+.banner-slogan-bottom {
+  padding-bottom: 3.75rem;
+  font-family: 'Pretendard';
+  font-size: 2.5rem;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.banner-img-bottom {
+  width: 46.625rem;
+  height: 24.8125rem;
+}
+
+#footer {
+  width: auto;
+  height: 11.25rem;
+  background-color: #111827;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-inner {
+  width: 95rem;
+  height: 1.25rem;
+  margin-top: 2rem;
+  padding: 0 12.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.copy{
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 1rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #9CA3AF;
+}
+
+.help-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.875rem;
+}
+
+.help {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 1rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #E5E7EB;
+  cursor: pointer;
+}
+
+.sns-container {
+  display: flex;
+  flex-direction: row;
+  gap: .75rem;
+}
+
+.sns {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+/*------------- 로그인 / 회원가입 페이지 --------------*/
+
+#login-header {
+  margin-top: 14.4375rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo {
+  width: 24.75rem;
+  height: 8.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem 1.39rem;
+  cursor: pointer;
+}
+
+.login-img {
+  width: 6.4706rem;
+  height: 6.4925rem;
+}
+
+.login-PandaMarket {
+  width: 16.625rem;
+  height: 5.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'RokafSans';
+  font-size: 4.1463rem;
+  font-weight: 700;
+  font-style: bold;
+  color: #3692ff;
+}
+
+#login-box {
+  display: grid;
+  grid-template-rows: 19.25rem 4.625rem 1.5rem;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-text {
+  font-family: 'Pretendard';
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.login-grid01 {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-grid02 {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  width: 40rem;
+  height: 3.5rem;
+  padding: 1rem 4rem 1rem 1.5rem;
+  border-radius: .75rem;
+  background-color: #F3F4F6;
+  box-sizing: border-box;     
+  border: none;
+  border: .125rem solid #F3F4F6;
+  outline: none;
+}
+
+.login-form input:focus {
+  border: .125rem solid #3692FF;
+}
+
+.login-grid03 {
+  
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-btn {
+  width: 40rem;
+  height: 3.5rem;
+  padding: 1rem 7.75rem;
+  border-radius: 2.5rem;
+  box-sizing: border-box;
+  background-color: #9CA3AF;
+  border: none;
+  font-family: 'pretendard';
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: #F3F4F6;
+  cursor: not-allowed;
+}
+
+form:has(#user-id:valid, #user-passward:valid) .login-btn {
+  background-color: #3692FF;
+  cursor: pointer;
+}
+
+.login-passward {
+  position: relative;
+  width: 40rem;
+}
+
+.visibility-button {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.visibility-button img {
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 1;
+}
+
+.login-grid04 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid04-container {
+  width: 37.125rem;
+  height: 2.625rem;
+  padding: 1rem 1.4375rem;
+  border-radius: .5rem;
+  background-color: #E6F2FF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  line-height: 1.625rem;
+  color: #1F2937;
+}
+
+.login-sns {
+  width: 6.25rem;
+  height: 2.625rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.login-sns img {
+  width: 2.625rem;
+  height: 2.625rem;
+}
+
+.login-grid05 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-signup {
+  font-family: 'Pretendard';
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  color: #1F2937;
+}
+
+.login-signup a {
+  color: #3692FF;
+}
+
+#signup-box {
+  display: grid;
+  grid-template-rows: 32.6875rem 4.625rem 1.5rem;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form {
+  height: 32.75rem;
+  display: grid;
+  grid-template-columns: 5.8125rem 5.8125rem 5.8125rem 5.8125rem 3.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-login {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#singup-header {
+  margin-top: 3.75rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
