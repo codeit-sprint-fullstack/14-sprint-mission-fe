@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판다마켓 로그인</title>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJPD3GMV');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="./font/font.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJPD3GMV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+        <form action="" method="post" class="form_body">
+            <div class="form_wrap">
+
+                <a href="/" class="logo_wrap flex">
+                    <div class="logo_img">
+                        <img src="./images/logo_panda_large.svg" alt="판다마켓 로고 이미지">
+                    </div>
+                    <h1 class="logo_title">판다마켓</h1>
+                </a>
+
+                <div class="form_container">
+
+                    <div class="form_item">
+                        <label for="" class="input_title">이메일</label>
+                        <div class="input_wrap">
+                            <input type="text" id="u_email" name="u_email" placeholder="이메일을 입력해주세요">
+                        </div>
+                    </div>
+
+                    <div class="form_item">
+                        <label for="" class="input_title">비밀번호</label>
+                        <div class="input_wrap pw">
+                            <input type="password" id="u_pw" name="u_pw" placeholder="비밀번호를 입력해주세요">
+                            <button type="button" class="hs hide_pw no_text">비밀번호 표시</button>
+                        </div>
+                    </div>
+
+                    <input type="button" value="로그인" class="btn_basic btn_submit">
+
+                    <div class="easy_login flex">
+                        <span class="text">간편 로그인하기</span>
+                        <div class="icon_wrap flex">
+                            <a href="https://www.google.com/" class="btn_icon google">
+                                <span class="no_text">구글 계정으로 간편로그인 하기</span>
+                            </a>
+                            <a href="https://www.kakaocorp.com/page/" class="btn_icon kakao">
+                                <span class="no_text">카카오 계정으로 간편로그인 하기</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="check_question flex">
+                        <span class="text">판다마켓이 처음이신가요?</span>
+                        <a href="signup.html" class="text btn_border">회원가입</a>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        (function () {
+
+            $("button.hs").on('click', function(i){
+                const this_btn = $(this);
+                const is_password = this_btn.siblings('input').attr("type") === "password";
+
+                if (is_password) {
+                    this_btn.toggleClass('hide_pw show_pw');
+
+                    this_btn.siblings('input').attr('type', 'text');
+
+                    return false;
+                }
+
+                this_btn.toggleClass('hide_pw show_pw');
+                
+                this_btn.siblings('input').attr('type', 'password');
+
+            })
+            
+            $(document).on('click', '.btn_submit', function(e){
+                let u_email = $("#u_email").val();
+                let u_pw = $("#u_pw").val();
+
+                if (u_email == "") {
+                    alert("이메일을 적어주세요")
+
+                    return false;
+                }
+
+                if (u_pw == "") {
+                    alert("비밀번호를 적어주세요")
+
+                    return false;
+                }
+
+                location.href = './index.html';
+            })
+        }) ();
+    </script>
+    
+    
+</body>
+</html>

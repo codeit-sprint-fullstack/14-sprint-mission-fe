@@ -1,0 +1,136 @@
+.wrap .form_wrap{
+    padding: 120px 0;
+    width: 640px;
+    text-align: center;
+}
+
+.wrap .logo_wrap{
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0 15px;
+}
+
+.wrap .logo_title {
+    padding-left: 22px;
+    font-family: 'ROKAF Sans', sans-serif;
+    font-size: 66.344px;
+    font-weight: 700;
+    color: var(--main_color);
+}
+
+.form_container{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 40px;
+}
+
+.btn_basic{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form_body{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.form_body.signup{
+    align-items: flex-start;
+    height: auto;
+}
+
+.form_body.signup .form_wrap{
+    padding-top: 60px;
+}
+
+.form_container .btn_basic{
+    background-color: var(--Secondary-400);
+}
+
+.form_container .btn_basic:hover{
+    background-color: var(--main_color);
+}
+
+.check_question{
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.check_question .text{
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--Secondary-800);
+}
+
+.check_question .text.btn_border{
+    color: var(--main_color);
+}
+
+.check_question .text.btn_border:after{
+    content: '';
+    position: absolute;
+    left: 0.5px;
+    bottom: 2.6px;
+    width: 100%;
+    height: 0px;
+    width: calc(100% - 1px);
+    box-shadow: 0 0 0 0.5px var(--main_color);
+    background-color: #fff;
+}
+
+
+.easy_login{
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 23px;
+    background-color: var(--main_color_ml);
+    border-radius: 8px;
+}
+
+.easy_login .text{
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--Secondary-800);
+}
+
+.easy_login .icon_wrap{
+    gap: 16px;
+}
+
+.easy_login .icon_wrap .btn_icon{
+    position: relative;
+    display: block;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.easy_login .icon_wrap .btn_icon.google{
+    background: #fff;
+    border: 1px solid #F9FAFB;
+}
+
+.easy_login .icon_wrap .btn_icon.google:after{
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: calc(50% - 11px);
+    left: calc(50% - 11px);
+    background: url('../images/logo_google.png') center / 100% no-repeat;
+    
+}
+
+.easy_login .icon_wrap .btn_icon.kakao{
+    background: url('../images/ic_kakao.svg') no-repeat center;
+}

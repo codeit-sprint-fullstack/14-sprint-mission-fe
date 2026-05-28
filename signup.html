@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판다마켓 회원가입</title>
+    <link rel="stylesheet" href="./font/font.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJPD3GMV');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJPD3GMV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+        <form action="" method="get" class="form_body signup">
+            <div class="form_wrap">
+
+                <a href="/" class="logo_wrap flex">
+                    <div class="logo_img">
+                        <img src="./images/logo_panda_large.svg" alt="판다마켓 로고 이미지">
+                    </div>
+                    <h1 class="logo_title">판다마켓</h1>
+                </a>
+
+                <div class="form_container">
+
+                    <div class="form_item">
+                        <label for="" class="input_title">이메일</label>
+                        <div class="input_wrap">
+                            <input type="text" id="u_email" name="u_email" placeholder="이메일을 입력해주세요">
+                        </div>
+                    </div>
+
+                    <div class="form_item">
+                        <label for="" class="input_title">닉네임</label>
+                        <div class="input_wrap">
+                            <input type="text" id="u_nm" name="u_nickNm" placeholder="닉네임을 입력해주세요">
+                        </div>
+                    </div>
+
+                    <div class="form_item">
+                        <label for="" class="input_title">비밀번호</label>
+                        <div class="input_wrap pw">
+                            <input type="password" id="u_pw" name="u_pw" placeholder="비밀번호를 입력해주세요">
+                            <button type="button" class="hs hide_pw no_text">비밀번호 표시</button>
+                        </div>
+                    </div>
+
+                    <div class="form_item">
+                        <label for="" class="input_title">비밀번호 확인</label>
+                        <div class="input_wrap pw">
+                            <input type="password" id="u_pwChk" name="u_pwChk" placeholder="비밀번호를 다시 한 번 입력해주세요">
+                            <button type="button" class="hs hide_pw no_text">비밀번호 표시</button>
+                        </div>
+                    </div>
+
+                    <a href="/login.html" class="btn_basic">회원가입</a>
+
+                    <div class="easy_login flex">
+                        <span class="text">간편 로그인하기</span>
+                        <div class="icon_wrap flex">
+                            <button class="btn_icon google">
+                                <span class="no_text">구글 계정으로 간편로그인 하기</span>
+                            </button>
+                            <button class="btn_icon kakao">
+                                <span class="no_text">카카오 계정으로 간편로그인 하기</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="check_question flex">
+                        <span class="text">이미 회원이신가요?</span>
+                        <a href="login.html" class="text btn_border">로그인</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        (function () {
+
+            
+
+            $("button.hs").on('click', function(i){
+                const this_btn = $(this);
+                const is_password = this_btn.siblings('input').attr("type") === "password";
+
+                if (is_password) {
+                    this_btn.toggleClass('hide_pw show_pw');
+
+                    this_btn.siblings('input').attr('type', 'text');
+
+                    return false;
+                }
+
+                this_btn.toggleClass('hide_pw show_pw');
+                
+                this_btn.siblings('input').attr('type', 'password');
+
+            })
+
+            $(document).on('input', '#u_pwChk', function(){
+                
+                let u_pw = $("#u_pw").val();
+                let u_pwChk = $("#u_pwChk").val();
+
+                $(this).parent().next('.not_match').remove();
+                
+                if (u_pwChk !== '' && u_pw !== u_pwChk) {
+                    let not_match = '<span class="text not_match">새 비밀번호와 일치하지 않습니다</span>';
+                    
+                    $(this).parent().after(not_match);
+
+                    return false;
+                }
+            })
+            
+            $(document).on('click', '.btn_submit', function(e){
+                let u_email = $("#u_email").val();
+                let u_pw = $("#u_pw").val();
+                let u_pwChk = $("#u_pwChk").val();
+
+                if (u_email == "") {
+                    alert("이메일을 적어주세요")
+
+                    return false;
+                }
+
+                if (u_pw == "") {
+                    alert("비밀번호를 적어주세요")
+
+                    return false;
+                }
+
+                if (u_pw !== u_pwChk) {
+                    alert("")
+
+                    
+
+                    return false;
+                }
+
+                location.href = './index.html';
+            })
+        }) ();
+    </script>
+    
+</body>
+</html>
