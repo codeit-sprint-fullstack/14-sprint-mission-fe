@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>판다마켓 회원가입</title>
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/loginstyle.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPJD221X26"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+
+      gtag('config', 'G-EPJD221X26')
+    </script>
+  </head>
+  <body>
+    <main class="login-container">
+      <!-- 로고 -->
+      <a href="/" class="logo">
+        <img src="./images/logo.svg" alt="판다마켓 로고" />
+        <span>판다마켓</span></a
+      >
+
+      <!-- 이메일 -->
+      <div class="input-group">
+        <label for="email">이메일</label>
+
+        <input type="email" id="email" placeholder="이메일을 입력해주세요" />
+      </div>
+
+      <div class="input-group">
+        <label for="nickname">닉네임</label>
+
+        <input type="text" id="nickname" placeholder="닉네임을 입력해주세요" />
+      </div>
+
+      <div class="input-group">
+        <label for="password">비밀번호</label>
+
+        <div class="password-wrapper">
+          <input
+            type="password"
+            id="password"
+            placeholder="비밀번호를 입력해주세요"
+          />
+          <!-- 비밀번호 눈알 버튼 -->
+          <button type="button" class="toggle-password">
+            <img src="./images/eye_off.png" alt="eye_off" />
+          </button>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="passwordConfirm">비밀번호 확인</label>
+
+        <div class="password-wrapper">
+          <input
+            type="password"
+            id="passwordConfirm"
+            placeholder="비밀번호를 다시 한 번 입력해주세요"
+          />
+          <!-- 비밀번호 눈알 버튼 -->
+          <button type="button" class="toggle-password">
+            <img src="./images/eye_off.png" alt="eye_off" />
+          </button>
+        </div>
+      </div>
+
+      <!-- 로그인 버튼 -->
+      <button class="login-button">회원가입</button>
+
+      <!-- 간편 로그인 -->
+      <section class="sns-box">
+        <p>간편 로그인하기</p>
+
+        <div class="sns-icons">
+          <a href="https://www.google.com/" target="_blank">
+            <img src="./images/Component 2.png" alt="구글 로그인" />
+          </a>
+
+          <a href="https://www.kakaocorp.com/page/" target="_blank">
+            <img src="./images/Component 3.png" alt="카카오 로그인" />
+          </a>
+        </div>
+      </section>
+
+      <!-- 회원가입 -->
+      <p class="signup-text">
+        이미 회원이신가요?
+        <a href="/login">로그인</a>
+      </p>
+    </main>
+  </body>
+</html>
