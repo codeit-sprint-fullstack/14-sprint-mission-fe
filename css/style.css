@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background: #FFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    padding: 9px 200px;
+    border-bottom: 1px solid #DFDFDF;
+    }
+
+@media (max-width: 1920px) {
+  .header {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+
+.pandeface {
+    display: flex;
+    width: 153px;
+    height: 60px;
+    padding: 5.017px 0 5.848px 0;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 8.592px;
+}
+
+header button {
+    background: #3692FF;  
+    color: #F3F4F6;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+    display: flex;
+    width: 128px;
+    height: 48px;
+    padding: 12px 23px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+h1 {
+    color: #374151;
+    font-family: Pretendard;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+
+}
+
+h2 {
+    color: #3692FF;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px;
+    margin-bottom: 0;
+}
+
+h3 {
+    color: #374151;
+    font-family: Pretendard;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+h4 {
+    color: #374151;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    margin-top: 24px;
+}
+
+h5 {
+    color: #9CA3AF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer_button {
+    color: #E5E7EB;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    text-decoration-line: none;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.detail {
+    letter-spacing: 0.8px;
+}
+
+.plan-card-top {
+    background: #CFE5FF;
+    width: 100%;
+    height: 540px;
+    display: flex;
+    justify-content: center;;
+    align-items: flex-end;
+    gap: 7px;
+    padding-top: 120px;
+    overflow: hidden;
+}
+
+.card-01-right {
+    width: 375px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.searching {
+    color: #F9FAFB;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; 
+    background: #3692FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 375px;
+    height: 56px;
+    padding: 16px 124px;
+    gap: 10px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.point {
+    color: #3692FF;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px;
+}
+
+.image-home-top {
+    display: flex;
+    width: 746px;
+    height: 340px;
+}
+
+.main_01 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    padding: 138px 344px;
+}
+
+.main_01_right {
+    background: #FCFCFC;
+    padding-top: 120px;
+    height: 444px;
+}
+
+.hotitem {
+    width: 588px;
+    height: 444px;
+}
+
+.main_02 {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    padding: 138px 344px;
+    text-align: right;
+}
+
+.main_02_left {
+    background: #FCFCFC;
+    padding-top: 120px;
+    height: 444px;
+}
+
+.main_03 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    padding: 138px 344px;
+}
+
+.main_03_right {
+    background: #FCFCFC;
+    padding-top: 120px;
+    height: 444px;
+}
+
+.plan-card-bottom {
+    width: 100%;
+    background: #CFE5FF;
+    display: flex;
+    justify-content: center;;
+    align-items: center;
+    gap: 7px;
+    padding-top: 120px;
+}
+
+.image-home-top{
+    display: flex;
+    width: 746px;
+    height: auto;
+}
+
+footer {
+    height: 160px;
+    background: #111827;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 32px 200px;
+    }
+
+footer div {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    }
