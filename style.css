@@ -1,0 +1,646 @@
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Pretendard', sans-serif;
+}
+
+button {
+  text-decoration: none;
+  color: #F3F4F6;
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}
+
+
+
+/* header 시작 */
+.header {
+  width: 100%;
+  display: flex;
+  height: 70px;
+  padding: 9px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #DFDFDF;
+  background: #FFF;
+  position: sticky;
+  top: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 400px);
+  max-width: 1520px;
+  margin: 0 auto;
+}
+
+
+.header_title {
+  display: flex;
+  width: 153px;
+  height: 51px;
+  padding: 6px 0 6px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  align-content: center;
+  
+}
+
+.header_title_text {
+  color: #3692FF;
+  font-family: "ROKAF Sans";
+  font-size: 25.633px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.header_login_button {
+  display: flex;
+  width: 128px;
+  height: 48px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  background: var(--Primary-100, #3692FF);
+
+
+  color: var(--Cool-Gray-100, #F3F4F6);
+
+  /* pretendard/lg-16px-semibold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px; /* 162.5% */
+
+  border: none;
+}
+
+.header_login_button a {
+  text-decoration: none;
+  color: #F3F4F6;
+}
+
+.header_title, .header_login_button {
+  cursor: pointer;
+}
+
+/* header 끝 */
+
+
+
+/* hero 시작 */
+.hero {
+  width: 100%;
+  height: 540px;
+  background: #CFE5FF;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  box-sizing: border-box;
+}
+
+.hero_div {
+  display: flex;
+  gap: 7px;
+  width: calc(100% - 400px);
+  max-width: 1236px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
+
+.hero_texts {
+  display: flex;
+  padding-bottom: 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.hero_title {
+  color: var(--Secondary-700, #374151);
+  font-family: Pretendard;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 56px */
+}
+
+.hero_button {
+  display: flex;
+  height: 56px;
+  padding: 16px 124px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 40px;
+  background: var(--brand-blue, #3692FF);
+  color: var(--Secondary-50, #F9FAFB);
+  text-align: center;
+
+  /* pretendard/xl-20px-semibold */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px; /* 160% */
+
+  border: none;
+}
+
+.hero_button a {
+  text-decoration: none;
+  color: #F9FAFB;
+}
+
+.hero_button {
+  cursor: pointer;
+}
+
+.hero_image {
+  display: flex;
+  width: 746px;
+  height: 340px;
+  padding-right: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+/* hero 끝 */
+
+
+
+/* section-1 시작 */
+
+.section-1 {
+  display: flex;
+  padding: 138px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFF;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.section-1_div {
+  display: flex;
+  width: calc(100% - 400px);
+  max-width: 988px;
+  height: 444px;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  background-color: #FCFCFC;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+
+
+.section-1_title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.section-1_sub-title {
+  color: var(--Primary-100, #3692FF);
+
+  /* pretendard/2lg-18px-bold */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+}
+
+.section-1_title {
+  color: var(--Secondary-700, #374151);
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 56px */
+  letter-spacing: 0.8px;
+}
+
+.section-1_description {
+  color: var(--Secondary-700, #374151);
+  text-align: right;
+
+  /* pretendard/2xl-24px-medium */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 133.333% */
+}
+
+.section-1_image {
+  display: block;
+  width: 588px;
+  height: 444px;
+  flex-shrink: 0;
+}
+
+/* section-1 끝 */
+
+
+
+/* section-2 시작 */
+.section-2 {
+  display: flex;
+  padding: 138px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFF;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.section-2_div {
+  display: flex;
+  width: calc(100% - 400px);
+  max-width: 988px;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  background-color: #FCFCFC;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+.section-2_title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.section-2_sub-title {
+
+  color: var(--Primary-100, #3692FF);
+
+  /* pretendard/2lg-18px-bold */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+}
+
+.section-2_title {
+  color: var(--Secondary-700, #374151);
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 56px */
+  letter-spacing: 0.8px;
+}
+
+.section-2_discription {
+  color: var(--Secondary-700, #374151);
+  text-align: right;
+
+  /* pretendard/2xl-24px-medium */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 133.333% */
+}
+
+.section-2_image {
+  display: block;
+  width: 588px;
+  height: 444px;
+  flex-shrink: 0;
+}
+
+/* section-2 끝 */
+
+
+
+/* section-3 시작 */
+
+.section-3 {
+  display: flex;
+  padding: 138px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFF;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.section-3_div {
+  display: flex;
+  width: calc(100% - 400px);
+  max-width: 988px;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  background-color: #FCFCFC;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+.section-3_title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.section-3_sub-title {
+  color: var(--Primary-100, #3692FF);
+
+  /* pretendard/2lg-18px-bold */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+}
+
+.section-3_title {
+  color: var(--Secondary-700, #374151);
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 56px */
+  letter-spacing: 0.8px;
+}
+
+.section-3_description {
+  color: var(--Secondary-700, #374151);
+  text-align: right;
+
+  /* pretendard/2xl-24px-medium */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 133.333% */
+}
+
+.section-3_image {
+  display: block;
+  width: 588px;
+  height: 444px;
+  flex-shrink: 0;
+}
+
+/* section-3 끝 */
+
+
+/* margin section 시작 */
+
+.margin-section {
+  width: 100%;
+  height: 138px;
+  background-color: #FCFCFC;
+  box-sizing: border-box;
+}
+
+/* margin section 끝 */
+
+
+/* end content(section-4) 시작 */
+
+.section-4 {
+  width: 100%;
+  height: 540px;
+  background: #CFE5FF;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  box-sizing: border-box;
+}
+
+.section-4_div {
+  display: flex;
+  align-items: center;
+  gap: 69px;
+  width: calc(100% - 400px);
+  max-width: 1236px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.section-4_texts {
+  display: flex;
+  padding-bottom: 60px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-4_title {
+  color: var(--Secondary-700, #374151);
+  font-family: Pretendard;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 56px */
+}
+
+.section-4_image {
+  display: flex;
+  width: 746px;
+  height: 397px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* end content(section-4) 끝 */
+
+
+
+
+/* footer 시작 */
+
+.footer {
+  display: flex;
+  width: 100%;
+  height: 160px;
+  padding: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--Secondary-900, #111827);
+  box-sizing: border-box;
+}
+
+.footer_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 400px);
+  max-width: 1520px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.footer_copyright {
+  color: var(--Secondary-400, #9CA3AF);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer_wrapper_center{
+  display: flex;
+  
+  gap: 30px;
+
+  color: var(--Secondary-200, #E5E7EB);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer_wrapper_sns-icons {
+  display: flex;
+  width: 116px;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer_sns-icon {
+  cursor: pointer;
+}
+
+.footer_text {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--Secondary-200, #E5E7EB);
+}
+
+
+
+
+
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/font/Pretendard-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ROKAF Sans';
+    src: url('./assets/font/ROKAF Sans Medium.otf') format('opentype');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ROKAF Sans';
+    src: url('./assets/font/ROKAF Sans Bold.otf') format('opentype');
+    font-weight: 700;
+    font-display: swap;
+}
