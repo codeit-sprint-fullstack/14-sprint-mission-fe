@@ -1,0 +1,124 @@
+/* css 변수 선언 */
+:root {
+    --blue: #3692FF;
+    --lightblue: #E6F2FF;
+    --gray: #9CA3AF;
+    --lightgray: #F3F4F6;
+    --white: #ffffff;
+    --black: #1F2937;
+}
+
+/* login, signup common */
+#auth {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+.auth-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px 0;
+    width: 640px;
+}
+.auth-wrap h2 a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 22.24px;
+    width: 100%;
+    font-family: 'ROKAF Sans';
+    color: var(--blue);
+    font-size: 4.146rem;
+    font-weight: 700;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px 0;
+    margin-top: 16px;
+}
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 16px 0;
+    width: 100%;
+}
+label {
+    color: var(--black);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+.input-area {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 56px;
+    border-radius: 12px;
+    background-color: var(--lightgray);
+}
+.input-area button {
+    border-radius: 12px;
+    padding-right: 24px;
+}
+.input-area:focus-within {
+    border: 1px solid var(--blue);
+}
+input {
+    width: 100%;
+    height: 100%;
+    padding: 0 24px;
+    border: 0;
+    border-radius: 12px;
+    background-color: var(--lightgray);
+    outline: none;
+}
+input::placeholder {
+    color: var(--gray);
+    font-size: 1rem;
+}
+input:focus {
+    border: 0;
+}
+.auth-btn {
+    width: 100%;
+    height: 56px;
+    color: var(--lightgray);
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-radius: 40px;
+    background-color: var(--gray);
+}
+.easy-login {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 74px;
+    border-radius: 8px;
+    background-color: var(--lightblue);
+    padding: 0 16px;
+}
+.easy-login p {
+    color: var(--black);
+    font-weight: 500;
+}
+.easy-login ul {
+    display: flex;
+    gap: 0 16px;
+}
+.auth-link {
+    display: flex;
+    justify-content: center;
+    gap: 0 4px;
+}
+.auth-link p {
+    color: var(--black);
+    font-weight: 500;
+}
+.auth-link a {
+    color: var(--blue);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
