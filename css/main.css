@@ -1,0 +1,255 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-size: 100%; /* 16pt */
+}
+
+body {
+    margin: 0 auto;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #FCFCFC;
+}
+
+.header-contents {
+    max-width: 1920px;
+    display: flex;
+    margin: 0 auto;
+    padding: 0.75rem 12.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer {
+    padding: 2rem 12.5rem;
+    background-color: #111827;
+    height: 10rem;
+}
+
+footer span {
+    font-weight: 400;
+    color: #9CA3AF;
+}
+
+.footer-tag span {
+    font-weight: 400;
+    color: #E5E7EB;
+}
+
+.footer-tag {
+    display: flex;
+    gap: 1.875rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+span {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #3692FF;
+}
+
+/* 전체 html > 같은 컬러 */
+
+p {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #374151;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #374151;
+    font-weight: 700;
+    line-height: 140%;
+}
+
+a {
+    color: #F3F4F6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.header-logo a {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.login-btn {
+    padding: 0.75rem 2.75rem;
+    background-color: #3692FF;
+    border-radius: 0.5rem;
+}
+
+.hero-section {
+    background-color: #CFE5FF;
+    width: 100%;
+    height: 33.75rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-content {
+    display: flex;
+    position: absolute;
+    bottom: 0rem;
+}
+
+.hero-text {
+    width: 22.375rem;
+}
+
+.item-btn {
+    padding: 0.75rem 7.75rem;
+    margin-top: 2rem;
+    background-color: #3692FF;
+    border-radius: 40px;
+}
+
+.item-btn a {
+    font-size: 1.25rem;
+    line-height: 2rem;
+}
+
+.card-container {
+    box-sizing: border-box;
+    padding: 0 1.5rem;
+    margin: 8.625rem auto;
+    width: 62.5rem;
+    display: flex;
+    gap: 1.5rem;
+    background-color: #FCFCFC;
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: auto 0rem;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.card-container.reverse .card-text {
+    text-align: right;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 640px;
+    margin: auto;
+}
+
+.login-container {margin-top: 14rem;}
+.sign-up-contanier {margin-top: 3rem;}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2.5rem;
+}
+
+label {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+input {
+    width: 100%;
+    display: flex;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: var(--Cool-Gray-100, #F3F4F6);
+    border: 0;
+}
+
+input:focus {
+    outline: #3692FF 1px solid;
+}
+
+button {
+    display: flex;
+    height: 56px;
+    padding: 16px 124px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 40px;
+    background: var(--Secondary-400, #9CA3AF);
+    border: 0;
+    color: #F3F4F6;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.social-login-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-radius: 8px;
+    background: #E6F2FF;
+    margin: 24px 0;
+    padding: 16px 23px;
+    box-sizing: border-box;
+}
+
+.sign-up-text>p {
+    font-size: .875rem;
+    color: #1F2937;
+    font-weight: 500;
+}
+
+.sign-up-text>a {
+    color: #3692FF;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+}
+
+.social-login-container>p {
+    font-size: 1rem;
+    color: #1F2937;
+    font-weight: 500;
+}
+
+.social-login-icon {
+    display: flex;
+    gap: 16px;
+}
+
+.sign-up-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판다마켓</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <!-- <header>
+        <div class="header-contents">
+            <h1 class="header-logo">
+                <a href="/">
+                    <img src="/img/icon/main_logo.svg" alt="" />
+                    <img src="/img/icon/main_logo_text.svg" alt="판다마켓" />
+                </a>
+            </h1>
+            <a href="/login.html">
+                <div class="login-btn">로그인</div>
+            </a>
+        </div>
+    </header> -->
+
+    <main class="login-container">
+        <a href="/"><img src="./img/logo.svg" alt="판다마켓 로고"></a>
+        <form action="/" method="GET"> <!-- 로그인의 경우 POST방식, form 태그를 권장. -->
+            <div class="form-input"> <!-- css 재활용, input css 통일 -->
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요.">
+            </div>
+            <div class="form-input">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요.">
+            </div>
+            <button type="submit">로그인</button>
+        </form>
+        <div class="social-login-container">
+            <p>간편 로그인하기</p>
+            <div class="social-login-icon">
+                <a href="https://www.google.com/"><img src="./img/google.svg" /></a>
+                <a href="https://www.kakaocorp.com/page/"><img src="./img/kakao.svg" /></a>
+            </div>
+        </div>
+        <div class="sign-up-text">
+            <p>판다마켓이 처음이신가요?</p> <a href="./signup.html">회원가입하기</a>
+        </div>
+    </main>
+</body>
+
+</html>
