@@ -1,17 +1,16 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url("./color-palette.css");
+
 @font-face {
   font-family: 'ROKAF_M';
   src: url('./fonts/ROKAF_M.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;}
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
-:root
-{--brand-blue: #3692FF;
---Secondary-800: #1F2937;
---Cool-Gray-100: #F3F4F6;
---Light-blue: #E6F2FF;
---Secondary-400: #9CA3AF;}
+.body{
+  width: 100%;
+}
 
 .login
 {display: flex;
@@ -25,7 +24,8 @@ margin: 130px auto}
 {display: flex;
 flex-direction: row;
 justify-content: space-between;
-align-items: center;}
+align-items: center;
+text-decoration-line: none;}
 
 .pandaFace
 {width: 103.529px;
@@ -136,6 +136,7 @@ gap: 10px;
 border-radius: 40px;
 background: var(--Secondary-400);
 text-decoration: none;
+color: var(--Cool-Gray-100);
 
 text-align: center;
 /* pretendard/xl-20px-semibold */
@@ -168,6 +169,9 @@ font-size: 16px;
 font-style: normal;
 font-weight: 500;
 line-height: 26px; /* 162.5% */}
+
+.link_underline 
+{text-decoration: none;}
 
 .google_logo
 {width: 42px;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,10 +22,10 @@
 </head>
 
 
-<body style="width: 100%;">
+<body>
   <div class="login">
 
-    <a href="index.html" style="text-decoration-line: none;">
+    <a href="/" class="pandaLogo">
     <div class="pandaLogo">
       <img src="image/판다얼굴.png" alt="판다 얼굴" class="pandaFace">
       <h1 class="pandaText">판다마켓</h1>
@@ -33,7 +33,7 @@
     </a>
 
     <div class="email_group">
-      <label for="email">이메일</label>
+      <label for="email_input">이메일</label>
       <input id="email_input" name="email" type="email" placeholder="이메일을 입력해주세요">
     </div>
 
@@ -57,7 +57,7 @@
   </div>
   
   <div>
-    <a href="-" class="login_btn" style="color: #f3f4f6;">로그인</a>
+    <a href="-" class="login_btn">로그인</a>
   </div>
 
 <div class="Easy_login_group">
@@ -65,10 +65,10 @@
     <p class="Easy_login2">간편 로그인하기</p>
   </div>
   <div class="Easy_login_logo_group">
-    <a href="https://www.google.com/" style="text-decoration-line: none;">
+    <a href="https://www.google.com/" class="link_underline">
       <img src="image/google.png" alt="구글 로고" class="google_logo"> </a>
 
-    <a href="https://www.kakaocorp.com/page/" >
+    <a href="https://www.kakaocorp.com/page/" class="link_underline">
     <img src="image/kakao.png" alt="카카오톡 로고" class="kakao_logo">
     </a>
   </div>
@@ -81,39 +81,7 @@
 </div>
 
 <!-- 아이디 비밀번호 입력시 로그인 버튼 활성화 + 비밀번호 보이기 숨기기 -->
-<script>
-  const emailInput = document.querySelector("#email_input");
-  const passwordInput = document.querySelector("#password_input");
-  const passwordToggle = document.querySelector("#password_toggle");
-  const passwordIcon = document.querySelector("#password_icon");
-  const loginButton = document.querySelector(".login_btn");
-
-  passwordToggle.addEventListener("click", function () {
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      passwordIcon.src = "image/eye_hidden.png";
-      passwordIcon.alt = "비밀번호 숨기기";
-    } else {
-      passwordInput.type = "password";
-      passwordIcon.src = "image/eye.png";
-      passwordIcon.alt = "비밀번호 보기";
-    }
-  });
-
-  function checkLoginInputs() {
-    const emailValue = emailInput.value.trim();
-    const passwordValue = passwordInput.value.trim();
-
-    if (emailValue !== "" && passwordValue !== "") {
-      loginButton.classList.add("active");
-    } else {
-      loginButton.classList.remove("active");
-    }
-  }
-
-  emailInput.addEventListener("input", checkLoginInputs);
-  passwordInput.addEventListener("input", checkLoginInputs);
-</script>
+<script src="login.js"></script>
 
 </body>
 </html>

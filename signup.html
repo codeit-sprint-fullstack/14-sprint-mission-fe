@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,10 +21,10 @@
   </script>
 </head>
 
-<body style="width: 100%;">
+<body>
   <div class="signup_page">
 
-    <a href="index.html" style="text-decoration-line: none;">
+    <a href="/" class="pandaLogo">
     <div class="pandaLogo">
       <img src="image/판다얼굴.png" alt="판다 얼굴" class="pandaFace">
       <h1 class="pandaText">판다마켓</h1>
@@ -32,13 +32,13 @@
     </a>
 
     <div class="email_group">
-      <label for="email">이메일</label>
-      <input id="email_input" name="email" type="email" placeholder="이메일을 입력해주세요">
+      <label for="email_input">이메일</label>
+      <input id="email_input"  class="input_field" name="email" type="email" placeholder="이메일을 입력해주세요">
     </div>
 
     <div class="Nickname_group">
-      <label for="text">닉네임</label>
-      <input id="Nickname_input" name="text" type="text" placeholder="닉네임을 입력해주세요">
+      <label for="Nickname_input">닉네임</label>
+      <input id="Nickname_input"  class="input_field" name="nickname" type="text" placeholder="닉네임을 입력해주세요">
     </div>
 
 <div class="password_group">
@@ -81,7 +81,7 @@
 </div>
   
   <div>
-    <a href="-" class="signup_btn" style="color: #f3f4f6;">회원가입</a>
+    <a href="-" class="signup_btn">회원가입</a>
   </div>
 
 <div class="Easy_login_group">
@@ -89,10 +89,10 @@
     <p class="Easy_login2">간편 로그인하기</p>
   </div>
   <div class="Easy_login_logo_group">
-    <a href="https://www.google.com/" style="text-decoration-line: none;">
+    <a href="https://www.google.com/" class="link_underline">
       <img src="image/google.png" alt="구글 로고" class="google_logo"> </a>
 
-    <a href="https://www.kakaocorp.com/page/" >
+    <a href="https://www.kakaocorp.com/page/" class="link_underline">
     <img src="image/kakao.png" alt="카카오톡 로고" class="kakao_logo">
     </a>
   </div>
@@ -104,66 +104,7 @@
   </div>
 </div>
 
-<script>
-  const emailInput = document.querySelector("#email_input");
-  const nicknameInput = document.querySelector("#Nickname_input");
-  const passwordInput = document.querySelector("#password_input");
-  const passwordCheckInput = document.querySelector("#password_check_input");
-  const signupButton = document.querySelector(".signup_btn");
-
-  const passwordToggle = document.querySelector("#password_toggle");
-  const passwordIcon = document.querySelector("#password_icon");
-
-  const passwordCheckToggle = document.querySelector("#password_check_toggle");
-  const passwordCheckIcon = document.querySelector("#password_check_icon");
-
-  passwordToggle.addEventListener("click", function () {
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      passwordIcon.src = "image/eye_hidden.png";
-      passwordIcon.alt = "비밀번호 숨기기";
-    } else {
-      passwordInput.type = "password";
-      passwordIcon.src = "image/eye.png";
-      passwordIcon.alt = "비밀번호 보기";
-    }
-  });
-
-  passwordCheckToggle.addEventListener("click", function () {
-    if (passwordCheckInput.type === "password") {
-      passwordCheckInput.type = "text";
-      passwordCheckIcon.src = "image/eye_hidden.png";
-      passwordCheckIcon.alt = "비밀번호 확인 숨기기";
-    } else {
-      passwordCheckInput.type = "password";
-      passwordCheckIcon.src = "image/eye.png";
-      passwordCheckIcon.alt = "비밀번호 확인 보기";
-    }
-  });
-
-  function checkSignupInputs() {
-    const emailValue = emailInput.value.trim();
-    const nicknameValue = nicknameInput.value.trim();
-    const passwordValue = passwordInput.value.trim();
-    const passwordCheckValue = passwordCheckInput.value.trim();
-
-    if (
-      emailValue !== "" &&
-      nicknameValue !== "" &&
-      passwordValue !== "" &&
-      passwordCheckValue !== ""
-    ) {
-      signupButton.classList.add("active");
-    } else {
-      signupButton.classList.remove("active");
-    }
-  }
-
-  emailInput.addEventListener("input", checkSignupInputs);
-  nicknameInput.addEventListener("input", checkSignupInputs);
-  passwordInput.addEventListener("input", checkSignupInputs);
-  passwordCheckInput.addEventListener("input", checkSignupInputs);
-</script>
+<script src="signup.js"></script>
 
 </body>
 </html>
