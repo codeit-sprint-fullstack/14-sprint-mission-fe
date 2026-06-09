@@ -1,15 +1,3 @@
-:root {
-
-  --brand-blue: #3692FF;
-  --Secondary-400: #9CA3AF;
-  --Cool-Gray-100: #F3F4F6;
-  --Secondary-800: #1F2937;
-  --Primary-100: #3692FF;
-  --button: #E6F2FF;
-  --Cool-Gray-400: #9CA3AF;
-
-}
-
 body {
   font-family: 'BarunAirForce_Bold', 'BarunAirForce_Medium', sans-serif;
   display: flex;
@@ -200,7 +188,7 @@ input::placeholder {
   align-items: flex-start;
   gap: 10px;
   border-radius: 8px;
-  background: #E6F2FF;
+  background: var(--button);
   border-width: 0;
 }
 

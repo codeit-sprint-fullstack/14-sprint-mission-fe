@@ -46,3 +46,17 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:root {                                                                                                                                                                                                                                                                                             
+    --brand-blue: #3692FF;                                                                                                                                                                                                                                                                              
+    --Primary-100: #3692FF;                                                                                                                                                                                                                                                                           
+    --Secondary-50: #F9FAFB;                                                                                                                                                                                                                                                                            
+    --Secondary-200: #E5E7EB;                                                                                                                                                                                                                                                                         
+    --Secondary-400: #9CA3AF;                                                                                                                                                                                                                                                                           
+    --Secondary-700: #374151;                                                                                                                                                                                                                                                                         
+    --Secondary-800: #1F2937;           
+    --Secondary-900: #111827;                      
+    --Cool-Gray-100: #F3F4F6;            
+    --Cool-Gray-400: #9CA3AF;                                                                                                                                                                                                                                                                           
+    --button: #E6F2FF;                          
+}
