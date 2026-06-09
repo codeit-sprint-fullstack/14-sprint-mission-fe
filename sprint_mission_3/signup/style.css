@@ -50,6 +50,12 @@ main {
   gap: 24px;
 }
 
+#signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;       
+}
+
 #Logo {
   width: 103.529px;
   height: 103.88px;
@@ -69,7 +75,7 @@ main {
   gap: 22.24px;
 }
 
-#Email, #Nicname {
+#Email, #Nickname {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -81,7 +87,7 @@ main {
   gap: 16px;
 }
 
-#Email h2, .Password h2, #Nicname h2 {
+#Email h2, .Password h2, #Nickname h2 {
   color: var(--Secondary-800);
   /* pretendard/2lg-18px-bold */
   font-family: Pretendard;
