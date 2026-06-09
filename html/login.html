@@ -14,57 +14,9 @@
     </script>
 
     <link rel="stylesheet" href="../css/login.css">
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal.show {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-content p {
-            margin: 0 0 24px 0;
-            font-size: 16px;
-            color: #333;
-            line-height: 1.5;
-        }
-
-        .modal-btn {
-            background-color: #3692FF;
-            color: white;
-            padding: 12px 32px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .modal-btn:hover {
-            background-color: #2980ff;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/modal.css">
     <script src="../js/auth.js"></script>
+    <script src="../js/login.js"></script>
 </head>
 <body>
 
@@ -106,80 +58,5 @@
             <button class="modal-btn" onclick="closeModal()">확인</button>
         </div>
     </div>
-
-    <script>
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
-        const loginBtn = document.getElementById("login-btn");
-        const errorModal = document.getElementById("errorModal");
-        const modalMessage = document.getElementById("modalMessage");
-
-        function validateEmail(value) {
-            if (!value) return "이메일을 입력해주세요.";
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "잘못된 이메일 형식입니다.";
-            return "";
-        }
-
-        function validatePassword(value) {
-            if (!value) return "비밀번호를 입력해주세요.";
-            if (value.length < 8) return "비밀번호를 8자 이상 입력해주세요.";
-            return "";
-        }
-
-        function showError(inputEl, errorEl, message) {
-            if (message) {
-                inputEl.classList.add("error");
-                errorEl.textContent = message;
-                errorEl.classList.add("visible");
-            } else {
-                inputEl.classList.remove("error");
-                errorEl.textContent = "";
-                errorEl.classList.remove("visible");
-            }
-        }
-
-        function showModal(message) {
-            modalMessage.textContent = message;
-            errorModal.classList.add("show");
-        }
-
-        function closeModal() {
-            errorModal.classList.remove("show");
-        }
-
-        function updateLoginBtn() {
-            const isValid =
-                !validateEmail(emailInput.value) &&
-                !validatePassword(passwordInput.value);
-            loginBtn.disabled = !isValid;
-        }
-
-        loginBtn.addEventListener("click", () => {
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            if (loginUser(email, password)) {
-                window.location.href = "./items.html";
-            } else {
-                showModal("이메일 또는 비밀번호가 틀렸습니다.");
-            }
-        });
-
-        emailInput.addEventListener("blur", () => {
-            showError(emailInput, document.getElementById("email-error"), validateEmail(emailInput.value));
-            updateLoginBtn();
-        });
-
-        passwordInput.addEventListener("blur", () => {
-            showError(passwordInput, document.getElementById("password-error"), validatePassword(passwordInput.value));
-            updateLoginBtn();
-        });
-
-        errorModal.addEventListener("click", (e) => {
-            if (e.target === errorModal) {
-                closeModal();
-            }
-        });
-    </script>
 </body>
 </html>

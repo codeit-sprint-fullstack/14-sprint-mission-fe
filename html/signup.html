@@ -168,6 +168,7 @@
             display: block;
         }
     </style>
+    <link rel="stylesheet" href="../css/modal.css">
 </head>
 <body>
 
@@ -208,6 +209,14 @@
             이미 회원이신가요? <a href="./login.html">로그인</a>
         </p>
 
+    </div>
+
+    <!-- 팝업 모달 -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <p id="signupModalMessage"></p>
+            <button class="modal-btn" onclick="closeSignupModal()">확인</button>
+        </div>
     </div>
 
     <script src="../js/auth.js"></script>
@@ -262,14 +271,39 @@
             signupBtn.disabled = !isValid;
         }
 
+        function showSignupModal(message) {
+            document.getElementById("signupModalMessage").textContent = message;
+            document.getElementById("signupModal").classList.add("show");
+        }
+
+        function closeSignupModal() {
+            document.getElementById("signupModal").classList.remove("show");
+        }
+
+        function handleSignupSuccess() {
+            closeSignupModal();
+            showSignupModal("회원가입이 완료되었습니다!");
+            setTimeout(() => {
+                window.location.href = "./login.html";
+            }, 1000);
+        }
+
         signupBtn.addEventListener("click", () => {
             const email = emailInput.value;
             const password = passwordInput.value;
             const nickname = nicknameInput.value;
 
-            registerUser(email, password, nickname);
-            alert("회원가입이 완료되었습니다!");
-            window.location.href = "./login.html";
+            if (registerUser(email, password, nickname)) {
+                handleSignupSuccess();
+            } else {
+                showSignupModal("사용중인 이메일입니다");
+            }
+        });
+
+        document.getElementById("signupModal").addEventListener("click", (e) => {
+            if (e.target === document.getElementById("signupModal")) {
+                closeSignupModal();
+            }
         });
 
         emailInput.addEventListener("blur", () => {
