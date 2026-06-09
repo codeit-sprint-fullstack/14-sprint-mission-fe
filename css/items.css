@@ -12,9 +12,10 @@
 /* ===== PC 버전 (1200px 이상) ===== */
 
 .inner {
-    max-width: 1920px;
+    width: 1920px;
     margin: 0 auto;
     padding: 0 200px;
+    box-sizing: border-box;
 }
 
 /* 헤더 */
@@ -24,6 +25,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
 }
 
 .header .inner {
@@ -31,8 +33,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 200px;
-    max-width: 1920px;
+    width: 1920px;
     margin: 0 auto;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .logoLink {
@@ -67,8 +71,9 @@
 /* 히어로 섹션 */
 .hero {
     background-color: var(--primary-blue-light);
-    padding: 60px 200px 0;
+    padding: 60px 0 0;
     text-align: center;
+    width: 100%;
 }
 
 .hero .inner {
@@ -77,6 +82,10 @@
     align-items: flex-end;
     gap: 50px;
     min-height: 340px;
+    padding: 0 200px;
+    width: 1920px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .hero h1 {
@@ -110,6 +119,7 @@
 .main {
     padding: 60px 0;
     min-height: auto;
+    width: 100%;
 }
 
 .featureSection {
@@ -171,6 +181,7 @@
 .footer {
     background-color: var(--footer-bg);
     border-top: 1px solid var(--border-light);
+    width: 100%;
 }
 
 .footer .inner {
@@ -178,8 +189,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 200px;
-    max-width: 1920px;
+    width: 1920px;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .footerLeft {

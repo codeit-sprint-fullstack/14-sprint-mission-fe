@@ -10,7 +10,7 @@
     --footer-text: #888888;
 }
 
-.inner { max-width: 1920px; margin: 0 auto; padding: 0 200px; }
+.inner { max-width: 1200px; margin: 0 auto; padding: 0 200px; }
 
 /* 헤더 */
 .header { background-color: white; border-bottom: 1px solid var(--border-light); position: sticky; top: 0; z-index: 100; }
