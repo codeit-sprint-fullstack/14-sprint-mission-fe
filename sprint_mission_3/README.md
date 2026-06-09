@@ -1,79 +1,34 @@
-### Mission 2
-
+### 요구사항
 ## 기본 요구사항
-## 공통
+# 공통
 
-- [x]  README.md 파일을 작성해 주세요.
-
-- [x]  마크다운 언어를 숙지하여 작성해 주세요.
-
-- [x]  내용은 자유롭게 작성해 주세요.
-
-- [x]  본인 브랜치(ex)part1-홍길동)에 스프린트 미션을 업로드해 주세요.
-
-- [x]  적절한 커밋 메시지를 남겨 주세요.
-
-- [x]  1-Sprint-Mission 레포지토리를 fork 합니다.
-
-- [x]  GitHub에 PR(Pull Request)을 생성해 upstream의 본인 브랜치(ex)part1-홍길동)에 미션을 제출합니다.
-
-- [x]  PR 코멘트에 아래 내용들을 포함해 주세요.
-
-  - [x]  스프린트 미션 요구사항 체크리스트
-
-  - [x]  아래 예시 사진과 같이 완료한 만큼 체크 표시를 해 주세요. 참고
-
-  ## 요구사항
-
-  # 기본
-
-    - [x] “회원가입”버튼 클릭 시 “/signup” 페이지로 이동합니다.
-
-    - [x] PC사이즈만 고려해 주어진 디자인을 구현합니다.
-
-    - [x] HTML, CSS 파일을 Netlify로 배포해 주세요.
-
-    - [x] “판다마켓" 로고 클릭 시 루트 페이지(“/”)로 이동합니다.
-
-    - [x] SNS 아이콘들은 클릭 시 각각 “https://www.google.com/”, “https://www.kakaocorp.com/page/” 으로 이동합니다.
-
-    - [x] input 요소에 focus in 일 때, 테두리 색상은 #3692FF입니다.
-
-    - [x] input 요소에 focus out 일 때, 테두리는 없습니다.
-
-  # 심화
-
-    - [x] 비밀번호, 비밀번호 확인 input 요소 오른쪽에 비밀번호를 확인할 수 있는 눈 모양 아이콘을 추가합니다.
-
-    - [x] palette에 있는 color값들을 css 변수로 등록해서 사용합니다.
-
-    - [x] 구글 애널리틱스로 방문자 수 확인하기할 수 있도록 설정합니다.
-
-
-  - [x]  주요 변경사항
-
-  - [x]  멘토님에게 남길 메시지 / 개인 DM으로 드리겠습니다!
-
-- [x]  Git 활용 과정에서 유닉스 커맨드를 활용해 주세요.
-
-- [x]  HTML, CSS 파일을 Netlify로 배포합니다. (참고: https://www.codeit.kr/learn/5309)
-
-## 로그인 페이지, 회원가입 페이지 공통
-
-- [x] "판다마켓" 로고 클릭 시 루트 페이지("/")로 이동합니다.
-
-- [x] SNS 아이콘들은 클릭 시 각각 "https://www.google.com/", "https://www.kakaocorp.com/page/" 으로 이동합니다.
-
-- [x] input 요소에 focus in 일 때, 테두리 색상은 #3692FF입니다.
-
-- [x] input 요소에 focus out 일 때, 테두리는 없습니다.
-
-
-## 로그인 페이지
-
-- [x] "회원가입"버튼 클릭 시 "/signup" 페이지로 이동합니다.
-
-
-## 회원가입 페이지
-
-- [x] "로그인"버튼 클릭 시 "/login" 페이지로 이동합니다
+- [x]  Github에 스프린트 미션 PR을 만들어 주세요.
+- [x]  'https://panda-market-api-crud.vercel.app/docs/#/Article' API를 이용하여 아래 함수들을 구현해 주세요.
+- [x] getArticleList() : GET 메서드를 사용해 주세요.
+- [x] page, pageSize, keyword 쿼리 파라미터를 이용해 주세요.
+- [x] getArticle() : GET 메서드를 사용해 주세요.
+- [x] createArticle() : POST 메서드를 사용해 주세요.
+- [x] request body에 title, content, image 를 포함해 주세요.
+- [x] patchArticle() : PATCH 메서드를 사용해 주세요.
+- [x] deleteArticle() : DELETE 메서드를 사용해 주세요.
+- [x]  fetch 혹은 axios 를 이용해 주세요.
+- [x] 응답의 상태 코드가 2XX가 아닐 경우, 에러메시지를 콘솔에 출력해 주세요.
+- [x]  .then() 메서드를 이용하여 비동기 처리를 해주세요.
+- [x]  .catch() 를 이용하여 오류 처리를 해주세요.
+- [x]  'https://panda-market-api-crud.vercel.app/docs/#/Product' API를 이용하여 아래 함수들을 구현해 주세요.
+- [x] getProductList() : GET 메서드를 사용해 주세요.
+- [x] page, pageSize, keyword 쿼리 파라미터를 이용해 주세요.
+- [x] getProduct() : GET 메서드를 사용해 주세요.
+- [x] createProduct() : POST 메서드를 사용해 주세요.
+- [x] request body에 name, description, price, tags, images 를 포함해 주세요.
+- [x] patchProduct() : PATCH 메서드를 사용해 주세요.
+- [x] deleteProduct() : DELETE 메서드를 사용해 주세요.
+- [x]  async/await 을 이용하여 비동기 처리를 해주세요.
+- [x]  try/catch 를 이용하여 오류 처리를 해주세요.
+- [x]  구현한 함수들을 아래와 같이 파일을 분리해 주세요.
+- [x] export를 활용해 주세요.
+- [x] ProductService.js 파일 Product API 관련 함수들을 작성해 주세요.
+- [x] ArticleService.js 파일에 Article API 관련 함수들을 작성해 주세요.
+- [x]  이외의 코드들은 모두 main.js 파일에 작성해 주세요.
+- [x] import를 활용해 주세요.
+- [x] 각 함수를 실행하는 코드를 작성하고, 제대로 동작하는지 확인해 주세요.
