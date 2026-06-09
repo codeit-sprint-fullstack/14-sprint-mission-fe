@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상품 목록 - 판다마켓</title>
 
     <!-- Google tag (gtag.js) -->
@@ -12,7 +13,75 @@
         gtag('js', new Date());
         gtag('config', 'G-01VFKQS9WR');
     </script>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/items.css">
 </head>
 <body>
+
+    <!-- 헤더 -->
+    <div class="header">
+        <div class="inner">
+            <a class="logoLink" href="/">
+                <img src="../img/panda_logo.png" alt="판다마켓 로고">
+                <span>판다마켓</span>
+            </a>
+            <button class="loginButton" onclick="location.href='./login.html'">로그인</button>
+        </div>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="main">
+        <div class="inner">
+            <div class="itemsGrid">
+                <div class="itemCard">
+                    <img src="../img/panda_logo.png" alt="상품 이미지">
+                    <h3>상품 이름</h3>
+                    <p class="price">10,000원</p>
+                </div>
+                <div class="itemCard">
+                    <img src="../img/panda_logo.png" alt="상품 이미지">
+                    <h3>상품 이름</h3>
+                    <p class="price">10,000원</p>
+                </div>
+                <div class="itemCard">
+                    <img src="../img/panda_logo.png" alt="상품 이미지">
+                    <h3>상품 이름</h3>
+                    <p class="price">10,000원</p>
+                </div>
+                <div class="itemCard">
+                    <img src="../img/panda_logo.png" alt="상품 이미지">
+                    <h3>상품 이름</h3>
+                    <p class="price">10,000원</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <div class="footer">
+        <div class="inner">
+            <div class="footerLeft">codeit-2024</div>
+            <div class="footerCenter">
+                <a class="footerLink" href="/privacy">Privacy Policy</a>
+                <a class="footerLink" href="/faq">FAQ</a>
+            </div>
+            <div class="footerRight">
+                <a class="snsLink" href="https://www.facebook.com" target="_blank">
+                    <img src="../img/ic_facebook.png" alt="페이스북">
+                </a>
+                <a class="snsLink" href="https://www.twitter.com" target="_blank">
+                    <img src="../img/ic_twitter.png" alt="트위터">
+                </a>
+                <a class="snsLink" href="https://www.youtube.com" target="_blank">
+                    <img src="../img/ic_youtube.png" alt="유튜브">
+                </a>
+                <a class="snsLink" href="https://www.instagram.com" target="_blank">
+                    <img src="../img/ic_instagram.png" alt="인스타그램">
+                </a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
