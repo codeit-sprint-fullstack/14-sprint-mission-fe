@@ -1,0 +1,164 @@
+@font-face {
+    font-family: 'ROKAF Sans';
+    src: url('ROKAF%20Sans%20Bold.ttf') format('truetype');
+}
+
+/* 컬러 팔레트 */
+:root {
+    --primary-blue: #3692FF;
+    --page-bg: #f9fafb;
+    --input-bg: #f3f4f6;
+    --border-gray: #e5e7eb;
+    --text-mute: #6b7280;
+    --google-blue: #4285F4;
+    --kakao-yellow: #FEE500;
+    --kakao-text: #3C1E1E;
+}
+
+body {
+    background-color: var(--page-bg);
+    margin: 0;
+}
+
+.container {
+    width: 640px;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+/* 로고 */
+.logo {
+    display: block;
+    text-align: center;
+    margin-bottom: 40px;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 120px;
+    vertical-align: middle;
+}
+
+.logo span {
+    font-size: 60px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-left: 12px;
+    vertical-align: middle;
+    font-family: 'ROKAF Sans', sans-serif;
+}
+
+/* 입력 폼 */
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+.input {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--input-bg);
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.input:focus {
+    border: 1px solid var(--primary-blue);
+    outline: none;
+}
+
+/* 유효성 에러 상태 */
+.input.error {
+    border: 1px solid #f74747;
+    outline: none;
+}
+
+.error-msg {
+    display: none;
+    color: #f74747;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.error-msg.visible {
+    display: block;
+}
+
+/* 로그인 버튼 */
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 24px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-btn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* 간편 로그인 */
+.sns-box {
+    margin-top: 16px;
+    padding: 16px 24px;
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.sns-box span {
+    float: left;
+    line-height: 44px;
+}
+
+.sns-box .icons {
+    float: right;
+}
+
+.sns-icon {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 44px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.google {
+    background-color: white;
+    border: 1px solid var(--border-gray);
+    color: var(--google-blue);
+    font-size: 20px;
+}
+
+.kakao {
+    background-color: var(--kakao-yellow);
+    color: var(--kakao-text);
+    font-size: 18px;
+}
+
+/* 회원가입 안내 */
+.signup-text {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--text-mute);
+}
+
+.signup-text a {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}

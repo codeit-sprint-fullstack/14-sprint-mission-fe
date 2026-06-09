@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 - 판다마켓</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VFKQS9WR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-01VFKQS9WR');
+    </script>
+
+    <style>
+        @font-face {
+            font-family: 'ROKAF Sans';
+            src: url('../css/ROKAF%20Sans%20Bold.ttf') format('truetype');
+        }
+
+        /* 컬러 팔레트 */
+        :root {
+            --primary-blue: #3692FF;
+            --page-bg: #f9fafb;
+            --input-bg: #f3f4f6;
+            --border-gray: #e5e7eb;
+            --text-mute: #6b7280;
+            --google-blue: #4285F4;
+            --kakao-yellow: #FEE500;
+            --kakao-text: #3C1E1E;
+        }
+
+        body {
+            background-color: var(--page-bg);
+            margin: 0;
+        }
+
+        .container {
+            width: 640px;
+            margin: 0 auto;
+            padding-top: 60px;
+        }
+
+        .logo {
+            display: block;
+            text-align: center;
+            margin-bottom: 40px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 120px;
+            vertical-align: middle;
+        }
+
+        .logo span {
+            font-size: 60px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-left: 12px;
+            vertical-align: middle;
+            font-family: 'ROKAF Sans', sans-serif;
+        }
+
+        .label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            margin-top: 16px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background-color: var(--input-bg);
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .input:focus {
+            border: 1px solid var(--primary-blue);
+            outline: none;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 24px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .sns-box {
+            margin-top: 16px;
+            padding: 16px 24px;
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .sns-box span {
+            float: left;
+            line-height: 44px;
+        }
+
+        .sns-box .icons {
+            float: right;
+        }
+
+        .sns-icon {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 44px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 8px;
+        }
+
+        .google {
+            background-color: white;
+            border: 1px solid var(--border-gray);
+            color: var(--google-blue);
+            font-size: 20px;
+        }
+
+        .kakao {
+            background-color: var(--kakao-yellow);
+            color: var(--kakao-text);
+            font-size: 18px;
+        }
+
+        .login-text {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-mute);
+        }
+
+        .login-text a {
+            color: var(--primary-blue);
+            text-decoration: underline;
+        }
+
+        .input.error {
+            border: 1px solid #f74747;
+            outline: none;
+        }
+
+        .error-msg {
+            display: none;
+            color: #f74747;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .error-msg.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <a class="logo" href="./index.html">
+            <img src="../img/panda_logo.png" alt="판다마켓 로고">
+            <span>판다마켓</span>
+        </a>
+
+        <label class="label" for="email">이메일</label>
+        <input class="input" type="email" id="email" placeholder="이메일을 입력해주세요">
+        <span class="error-msg" id="email-error"></span>
+
+        <label class="label" for="nickname">닉네임</label>
+        <input class="input" type="text" id="nickname" placeholder="닉네임을 입력해주세요">
+        <span class="error-msg" id="nickname-error"></span>
+
+        <label class="label" for="password">비밀번호</label>
+        <input class="input" type="password" id="password" placeholder="비밀번호를 입력해주세요">
+        <span class="error-msg" id="password-error"></span>
+
+        <label class="label" for="password-confirm">비밀번호 확인</label>
+        <input class="input" type="password" id="password-confirm" placeholder="비밀번호를 다시 한 번 입력해주세요">
+        <span class="error-msg" id="password-confirm-error"></span>
+
+        <button class="signup-btn" id="signup-btn" disabled>회원가입</button>
+
+        <div class="sns-box">
+            <span>간편 로그인하기</span>
+            <div class="icons">
+                <a class="sns-icon google" href="https://www.google.com/" target="_blank"><img src="../img/google_logo.png" alt="구글" style="width: 44px; height: 44px; border-radius: 50%;"></a>
+                <a class="sns-icon kakao" href="https://www.kakaocorp.com/page/" target="_blank"><img src="../img/kakaotalk_logo.png" alt="카카오" style="width: 44px; height: 44px; border-radius: 50%;"></a>
+            </div>
+        </div>
+
+        <p class="login-text">
+            이미 회원이신가요? <a href="./login.html">로그인</a>
+        </p>
+
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        const emailInput = document.getElementById("email");
+        const nicknameInput = document.getElementById("nickname");
+        const passwordInput = document.getElementById("password");
+        const passwordConfirmInput = document.getElementById("password-confirm");
+        const signupBtn = document.getElementById("signup-btn");
+
+        function validateEmail(value) {
+            if (!value) return "이메일을 입력해주세요.";
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "잘못된 이메일 형식입니다.";
+            return "";
+        }
+
+        function validateNickname(value) {
+            if (!value) return "닉네임을 입력해주세요.";
+            return "";
+        }
+
+        function validatePassword(value) {
+            if (!value) return "비밀번호를 입력해주세요.";
+            if (value.length < 8) return "비밀번호를 8자 이상 입력해주세요.";
+            return "";
+        }
+
+        function validatePasswordConfirm(value) {
+            if (!value) return "비밀번호 확인을 입력해주세요.";
+            if (value !== passwordInput.value) return "비밀번호가 일치하지 않습니다.";
+            return "";
+        }
+
+        function showError(inputEl, errorEl, message) {
+            if (message) {
+                inputEl.classList.add("error");
+                errorEl.textContent = message;
+                errorEl.classList.add("visible");
+            } else {
+                inputEl.classList.remove("error");
+                errorEl.textContent = "";
+                errorEl.classList.remove("visible");
+            }
+        }
+
+        function updateSignupBtn() {
+            const isValid =
+                !validateEmail(emailInput.value) &&
+                !validateNickname(nicknameInput.value) &&
+                !validatePassword(passwordInput.value) &&
+                !validatePasswordConfirm(passwordConfirmInput.value);
+            signupBtn.disabled = !isValid;
+        }
+
+        signupBtn.addEventListener("click", () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const nickname = nicknameInput.value;
+
+            registerUser(email, password, nickname);
+            alert("회원가입이 완료되었습니다!");
+            window.location.href = "./login.html";
+        });
+
+        emailInput.addEventListener("blur", () => {
+            showError(emailInput, document.getElementById("email-error"), validateEmail(emailInput.value));
+            updateSignupBtn();
+        });
+
+        nicknameInput.addEventListener("blur", () => {
+            showError(nicknameInput, document.getElementById("nickname-error"), validateNickname(nicknameInput.value));
+            updateSignupBtn();
+        });
+
+        passwordInput.addEventListener("blur", () => {
+            showError(passwordInput, document.getElementById("password-error"), validatePassword(passwordInput.value));
+            if (passwordConfirmInput.value) {
+                showError(passwordConfirmInput, document.getElementById("password-confirm-error"), validatePasswordConfirm(passwordConfirmInput.value));
+            }
+            updateSignupBtn();
+        });
+
+        passwordConfirmInput.addEventListener("blur", () => {
+            showError(passwordConfirmInput, document.getElementById("password-confirm-error"), validatePasswordConfirm(passwordConfirmInput.value));
+            updateSignupBtn();
+        });
+    </script>
+</body>
+</html>
