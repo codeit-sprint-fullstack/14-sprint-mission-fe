@@ -130,8 +130,6 @@ section.container.dangun {
 }
 
 section.container.dangun .flex{
-    height: 100%;
-    height: 100%;
     max-width: 100%;
     height: 33.75rem;
     background-color: #CFE5FF;
@@ -183,7 +181,7 @@ section.container.dangun .text_wrap:after{
 
 #footer .text{
     text-align: center;
-    font-weight: 16px;
+    font-size: 16px;
     font-weight: 400;
     line-height: normal;
     color: var(--Secondary-400);
@@ -208,32 +206,16 @@ section.container.dangun .text_wrap:after{
     background-repeat: no-repeat;
 }
 
-#footer .sns_wrap a.faceboox{
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    background-repeat: no-repeat;
+#footer .sns_wrap a.facebook{
     background-image: url("../images/ic_facebook.png");
 }
 #footer .sns_wrap a.twitter{
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    background-repeat: no-repeat;
     background-image: url("../images/ic_twitter.png");
 }
 #footer .sns_wrap a.youtube{
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    background-repeat: no-repeat;
     background-image: url("../images/ic_youtube.png");
 }
-#footer .sns_wrap a.instargram{
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    background-repeat: no-repeat;
+#footer .sns_wrap a.instagram{
     background-image: url("../images/ic_instagram.png");
 }
 /* footer end */
