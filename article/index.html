@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="../css/font.css">
+	<link rel="stylesheet" href="../css/reset.css">
+	<link rel="stylesheet" href="../css/stye.css">
+</head>
+<style>
+	.search_wrap { display: flex; flex-direction: row; justify-content: space-between; width: 400px; margin: 20px auto; }
+	.search_wrap label { width: 120px; line-height: 30px; text-align: right; color: #444; }
+	.search_wrap input { padding: 6px 10px; font-size: 11pt; border: 1px solid #a0a0a0; border-radius: 6px; }
+	.search_wrap button { padding: 0 20px; background-color: #3692FF; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+</style>
+<body>
+    <header id="header">
+		<div class="inner">
+			<a href="/" class="logo">
+				<img src="../img/Group 22.png" alt="">
+				판다마켓
+			</a>
+			<a class="login btn" href="/login/index.html">로그인</a>
+		</div>
+	</header>
+	<main id="main" style="width: 100%; margin-top: 100px;">
+		<section id="con">
+				<div class="search_wrap">
+					<label for="keyword">게시글 검색</label>
+					<input type="text" class="article_input" id="keyword">
+					<button id="search_article_btn">조회</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">게시글 단건 조회</label>
+					<button id="search_article_by_id_btn">조회</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">게시글 등록</label>
+					<button id="create_article_btn">등록</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">게시글 수정</label>
+					<button id="update_article_btn">수정</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">게시글 삭제</label>
+					<button id="delete_article_btn">삭제</button>
+				</div>
+		</section>
+		<section id="con">
+				<div class="search_wrap">
+					<label for="keyword">상품 검색</label>
+					<input type="text" class="article_input" id="keyword">
+					<button id="search_product_btn">조회</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">상품 단건 조회</label>
+					<button id="search_product_by_id_btn">조회</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">상품 등록</label>
+					<button id="create_product_btn">등록</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">상품 수정</label>
+					<button id="update_product_btn">수정</button>
+				</div>
+				<div class="search_wrap">
+					<label for="article_id">상품 삭제</label>
+					<button id="delete_product_btn">삭제</button>
+				</div>
+		</section>
+	</main>
+	<script type="module" src="../js//main.js"></script>
+</body>
+</html>
