@@ -52,7 +52,7 @@ export function createArticle(name, description, price, tags, images) {
 }
 
 // 게시글 수정
-export function createArticle(articleId,data) {
+export function patchArticle(articleId,data) {
     return fetch (`${ARTICLE_URL}/${articleId}`, {
         method: "PATCH",
         body: JSON.stringify(data),
