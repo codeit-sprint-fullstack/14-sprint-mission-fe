@@ -6,18 +6,22 @@ body {
   width: 100vw;
 }
 
+button {
+  border-width: 0;
+}
+
 @font-face {
     font-family: 'BarunAirForce_Bold';
     font-style: normal;
-    src: url('../fonts/ROKAF_Sans_Bold.ttf') format('woff2'),
-         url('../fonts/ROKAF_Sans_Bold.ttf') format('woff');
+    src: url('/fonts/ROKAF_Sans_Bold.ttf') format('woff2'),
+         url('/fonts/ROKAF_Sans_Bold.ttf') format('woff');
 }
 
 @font-face {
     font-family: 'BarunAirForce_Medium';
     font-style: normal;
-    src: url('../fonts/ROKAF_Sans_Medium.ttf') format('woff2'),
-         url('../fonts/ROKAF_Sans_Medium.ttf') format('woff');
+    src: url('/fonts/ROKAF_Sans_Medium.ttf') format('woff2'),
+         url('/fonts/ROKAF_Sans_Medium.ttf') format('woff');
 }
 
 footer {
@@ -27,7 +31,7 @@ footer {
   width: 100%;
   background: var(--Secondary-900, #111827);
   height: 160px;
-  padding: 32px 200px;
+  padding: 32px 0px;
 }
 
 main {
@@ -63,8 +67,10 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1520px;
+  max-width: 1920px;
   margin: 0 auto;    /* 좌우 마진 자동 계산 (가운데 정렬) */
+  padding: 0 200px;
+  box-sizing: border-box;
 }
 
 .Logo {
@@ -74,7 +80,6 @@ header {
   height: 50px;
   padding: 5px 0 5px;
   gap: 9px;
-  margin-left: 200px;
 }
 
 #Web_title {
@@ -98,7 +103,6 @@ header {
   border-radius: 8px;
   background: var(--Primary-100, #3692FF);
   cursor: pointer;
-  margin-right: 200px;
 }
 
 #Login {
@@ -111,8 +115,6 @@ header {
   white-space: nowrap;
 }
 
-/* MAIN 영역*/
-
 .container_1 {
   display: flex;
   width: 100vw;
@@ -124,32 +126,58 @@ header {
 
 .main_section {
   margin: 200px auto 0;
-  padding: 0 200px;
-  width: 100%;
-  max-width: 1520px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 7px;
 }
 
+.discription_section {
+  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 32px;
+
+}
 
 .discription {
-  width: 50%;
   color: var(--Secondary-700, #374151);
   font-family: Pretendard;
-  font-size: clamp(1.5rem, 5cqi, 2.5rem);
+  font-size: 2.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 3.5rem */
   white-space: nowrap;
-  padding-right: 5px;
 }
 
+#Watch {
+  display: flex;
+  height: 56px;
+  padding: 16px 124px;
+  justify-content: center;
+  align-items: center;
+  background: var(--Primary-100, #3692FF);
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+#Watch_items {
+  color: var(--Secondary-50, #F9FAFB);
+  text-align: center;
+  /* pretendard/xl-1.25rem-semibold */
+  font-family: Pretendard;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px; /* 160% */
+  white-space: nowrap;
+}
 
 #Main_section_Logo {
   display: flex;
-  width: 30%;
-  aspect-ratio: 746 / 570;
+  width: 440px;
+  height: 340px;
   padding-right: 0;
   justify-content: center;
   align-items: center;
@@ -256,15 +284,15 @@ header {
   height: 397px;
 }
 
-/* FOOTER 영역 */
-
-.footer_info {
-  margin: 0 auto;    /* 좌우 마진 자동 계산 (가운데 정렬) */
+.footer_info { 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1920px;
+  justify-content: space-between;                                                                                                                                                                                                                                                                     
+  align-items: center;                 
+  width: 100%;                                                                                                                                                                                                                                                                                        
+  max-width: 1920px;                                                                                                                                                                                                                                                                                
+  margin: 0 auto;                     
+  padding: 0 200px;                              
+  box-sizing: border-box;
 }
 
 .credit {
@@ -275,7 +303,6 @@ header {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-left: 200px;
   white-space: nowrap;
 }
 
@@ -304,7 +331,6 @@ header {
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  margin-right: 200px;
 }
 
 .footer_icon {

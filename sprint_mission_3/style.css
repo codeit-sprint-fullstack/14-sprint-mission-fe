@@ -31,7 +31,7 @@ footer {
   width: 100%;
   background: var(--Secondary-900, #111827);
   height: 160px;
-  padding: 32px 200px;
+  padding: 32px 0px;
 }
 
 main {
@@ -67,8 +67,10 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1520px;
+  max-width: 1920px;
   margin: 0 auto;    /* 좌우 마진 자동 계산 (가운데 정렬) */
+  padding: 0 200px;
+  box-sizing: border-box;
 }
 
 .Logo {
@@ -78,7 +80,6 @@ header {
   height: 50px;
   padding: 5px 0 5px;
   gap: 9px;
-  margin-left: 200px;
 }
 
 #Web_title {
@@ -102,7 +103,6 @@ header {
   border-radius: 8px;
   background: var(--Primary-100, #3692FF);
   cursor: pointer;
-  margin-right: 200px;
 }
 
 #Login {
@@ -284,13 +284,15 @@ header {
   height: 397px;
 }
 
-.footer_info {
-  margin: 0 auto;    /* 좌우 마진 자동 계산 (가운데 정렬) */
+.footer_info { 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1920px;
+  justify-content: space-between;                                                                                                                                                                                                                                                                     
+  align-items: center;                 
+  width: 100%;                                                                                                                                                                                                                                                                                        
+  max-width: 1920px;                                                                                                                                                                                                                                                                                
+  margin: 0 auto;                     
+  padding: 0 200px;                              
+  box-sizing: border-box;
 }
 
 .credit {
@@ -301,7 +303,6 @@ header {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-left: 200px;
   white-space: nowrap;
 }
 
@@ -330,7 +331,6 @@ header {
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  margin-right: 200px;
 }
 
 .footer_icon {
