@@ -1,5 +1,5 @@
 /* Navbar */
-nav {
+body > nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@ nav {
   display: flex;
 }
 
-nav ul {
+body > nav ul {
   display: flex;
   width: 100%;
   justify-content: space-between;
