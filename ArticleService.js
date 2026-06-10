@@ -21,7 +21,7 @@ export function getArticleList(page, pageSize, keyword) {
   })
 }
 
-export  function getArticle(articleId) {
+export function getArticle(articleId) {
   
   return instance.get(`/articles/${articleId}`)
   

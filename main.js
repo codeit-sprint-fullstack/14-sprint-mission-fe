@@ -2,45 +2,19 @@ import {getArticleList, getArticle, createArticle, patchArticle, deleteArticle} 
 import {getProductList, getProduct, createProduct, patchProduct, deleteProduct} from './ProductService.js';
 
 
-const emailInput = document.querySelector('#e-mail');
-const emailError = document.querySelector('#email-error');
-
-const passwordInput = document.querySelector('#password');
-const passwordError = document.querySelector('#password-error');
-
-emailInput.addEventListener('focusout', function() {
-    const emailValue = emailInput.value.trim();
-
-    if (emailValue === '') {
-        emailInput.classList.add('is-invalid');
-        emailError.textContent = '값을 입력하십시오.';
-    }else {
-        emailInput.classList.remove('is-invalid');
-        emailError.textContent = '';
-    }
-});
-
-passwordInput.addEventListener('focusout', function() {
-    const passwordValue = passwordInput.value.trim();
-
-    if (passwordValue === '') {
-        passwordInput.classList.add('is-invalid');
-        passwordError.textContent = '값을 입력하십시오.';
-    }else {
-        passwordInput.classList.remove('is-invalid');
-        passwordError.textContent = '';
-    }
-});
-
-    
 
 // createArticle({
 //   image: 'https://codeit.com/...',
 //   content: '게시글 내용입니다.',
 //   title: '게시글 제목입니다.'
 // })
-//   .then(data => console.log('createArticle 결과:', data))
-//   .catch(error => console.error('오류:', error));
+//   .then((data) => {
+//     console.log('createArticle 결과:', data);
+//   })
+//   .catch((error) => {
+//     console.error('오류:', error)
+// });
+
 
 //   getArticleList(10, 6, '')
 //   .then((data) => {
@@ -72,7 +46,7 @@ passwordInput.addEventListener('focusout', function() {
 //     console.error(error);
 // });
 
-// deleteArticle(6617)
+// deleteArticle(6663)
 // .then((data) => {
 //     console.log('no data');
 // })
