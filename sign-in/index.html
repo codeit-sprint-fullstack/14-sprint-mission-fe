@@ -28,8 +28,8 @@
 
           <input type="email" id="email" placeholder="이메일을 입력하세요" />
         </div>
-
-        <label for="confirm-password">비밀번호</label>
+        <p id="email-error">잘못된 이메일 형식입니다.</p>
+        <label for="password">비밀번호</label>
         <div class="password-confirm">
           <input
             type="password"
@@ -38,6 +38,7 @@
           />
           <img src="../images/eyes.svg" alt="비밀번호 보기" class="eyes" />
         </div>
+        <p id="password-error">비밀번호를 8자 이상 입력해주세요.</p>
         <div>
           <button class="btn-login">로그인</button>
         </div>
@@ -59,5 +60,7 @@
         </div>
       </div>
     </main>
+
+    <script src="../js/main.js"></script>
   </body>
 </html>

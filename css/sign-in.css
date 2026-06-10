@@ -163,3 +163,16 @@ line-height: 24px; /* 171.429% */
     cursor: pointer;
   }
 
+#email-error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+#password-error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: none;
+}

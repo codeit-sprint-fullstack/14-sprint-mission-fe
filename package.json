@@ -1,0 +1,23 @@
+{
+  "name": "14-sprint-mission-fe",
+  "version": "1.0.0",
+  "description": "- [x] \"로그인\" 버튼 클릭 시 로그인 페이지(/login)로 이동합니다.\r - [x] \"구경하러가기\" 버튼 클릭 시 /items로 이동합니다.\r - [x] 아래로 스크롤해도 \"판다 마켓\" 로고와 \"로그인\" 버튼이 있는 상단 네비게이션 바가 최상단에 고정되게 합니다.\r - [x] 화면 너비가 1920px 보다 작아질 때:\r   - [x] \"판다마켓\" 로고의 왼쪽 여백 200px 유지\r   - [x] \"로그인\" 버튼의 오른쪽 여백 200px 유지\r   - [x] 화면 너비가 작아질수록 두 요소 간 거리가 가까워지도록 설정\r - [x] 화면 너비가 1920px 이상이면:\r   - [x] 하늘색 배경색은 너비를 꽉 채우도록 설정\r   - [x] 내부 요소들의 위치는 고정\r   - [x] 여백만 커지도록 설정\r - [x] 화면 너비가 1920px 이상이면:\r   - [x] 내부 요소 간 동일한 간격 유지\r   - [x] 가운데 정렬\r - [x] 클릭으로 기능이 동작해야 하는 경우 사용자가 클릭 가능한 요소임을 알 수 있도록 CSS 속성 cursor: pointer 설정",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goeulho/14-sprint-mission-fe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/goeulho/14-sprint-mission-fe/issues"
+  },
+  "homepage": "https://github.com/goeulho/14-sprint-mission-fe#readme"
+
+  
+}
