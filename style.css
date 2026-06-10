@@ -263,11 +263,13 @@ footer{
 }
 .faq{
     font-family: "Pretendard";
-    color: #E5E7EB;
     font-size: 1rem;
     gap:1.875rem;
     font-weight: 400;
     display: flex;
+}
+.faq-link{
+    color: #E5E7EB; 
     text-decoration: none;
     cursor: pointer;
 }
