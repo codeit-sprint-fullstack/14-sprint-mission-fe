@@ -98,7 +98,8 @@ input {
   align-items: center;
   gap: 10px;
   border-radius: 12px;
-  border: none;
+  border: 1px solid transparent;
+  outline: none;
 }
 
 input:focus {
@@ -135,7 +136,7 @@ input:focus {
   background: var(--Cool-Gray-100);
 }
 
-button {
+#login-btn {
   color: var(--pure-white);
   background: var(--brand-blue);
   text-align: center;
@@ -157,7 +158,7 @@ button {
   cursor: pointer;
 }
 
-button:disabled {
+#login-btn:disabled {
   background: var(--Secondary-400);    
   cursor: not-allowed;              
 }
@@ -207,4 +208,44 @@ button:disabled {
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 640px;
+}
+
+.password-wrapper input {
+  width: 100%;
+}
+
+.password-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  width: 24px;
+  height: 24px;
+  z-index: 10;
+}
+
+.password-toggle-btn img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.password-wrapper input {
+  display: block;
+}
+
+.password-wrapper input:focus {
+  border: 1px solid var(--brand-blue);
 }

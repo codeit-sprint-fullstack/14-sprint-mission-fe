@@ -23,17 +23,27 @@
           <div id="signup-email-error" class="input-error"></div>
         </div>
         <div class="label-input">
-            <label for="signup-nickname">닉네임</label>
-            <input id="signup-nickname" name="nickname" type="text" placeholder="닉네임을 입력해주세요">
+          <label for="signup-nickname">닉네임</label>
+          <input id="signup-nickname" name="nickname" type="text" placeholder="닉네임을 입력해주세요">
         </div>
         <div class="label-input">
           <label for="signup-password">비밀번호</label>
-          <input id="signup-password" name="password" type="password" placeholder="비밀번호를 입력해주세요">
+          <div class="password-wrapper">
+            <input id="signup-password" name="password" type="password" placeholder="비밀번호를 입력해주세요">
+            <button type="button" id="signup-password-toggle" class="password-toggle-btn">
+              <img src="images/btn_visibility_off_24px.svg" alt="비밀번호 표시">
+            </button>
+          </div>
           <div id="signup-password-error" class="input-error"></div>
         </div>
         <div class="label-input">
           <label for="signup-password-confirm">비밀번호 확인</label>
-          <input id="signup-password-confirm" name="password_confirm" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요">
+          <div class="password-wrapper">
+            <input id="signup-password-confirm" name="password_confirm" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요">
+            <button type="button" id="signup-password-confirm-toggle" class="password-toggle-btn">
+              <img src="images/btn_visibility_off_24px.svg" alt="비밀번호 표시">
+            </button>
+          </div>
           <div id="signup-password-confirm-error" class="input-error"></div>
         </div>
         <button id="signup-btn" disabled>회원가입</button>

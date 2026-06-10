@@ -4,6 +4,7 @@ const emailInput = document.getElementById("login-email");
 const emailError = document.getElementById("login-email-error");
 const passwordInput = document.getElementById("login-password");
 const passwordError = document.getElementById("login-password-error");
+const passwordToggleBtn = document.querySelector(".password-toggle-btn");
 const loginBtn = document.getElementById("login-btn");
 const loginForm = document.querySelector("form");
 
@@ -29,6 +30,22 @@ function toggleLoginButton() {
   } else {
     loginBtn.disabled = true;
   }
+}
+
+
+if (passwordToggleBtn && passwordInput) {
+  passwordToggleBtn.addEventListener("click", function () {
+    const isPassword = passwordInput.type === "password";
+    
+    passwordInput.type = isPassword ? "text" : "password";
+    
+    const toggleImg = passwordToggleBtn.querySelector("img");
+    if (toggleImg) {
+      toggleImg.src = isPassword 
+        ? "images/btn_visibility_on_24px.svg"
+        : "images/btn_visibility_off_24px.svg";
+    }
+  });
 }
 
 

@@ -7,6 +7,8 @@ const passwordInput = document.getElementById("signup-password");
 const passwordError = document.getElementById("signup-password-error");
 const confirmPasswordInput = document.getElementById("signup-password-confirm");
 const confirmPasswordError = document.getElementById("signup-password-confirm-error");
+const signupPasswordToggleBtn = document.getElementById("signup-password-toggle");
+const confirmPasswordToggleBtn = document.getElementById("signup-password-confirm-toggle");
 const signupBtn = document.getElementById("signup-btn");
 const signupForm = document.querySelector("form");
 
@@ -38,6 +40,37 @@ function toggleSignupButton() {
   }
 }
 
+
+if (signupPasswordToggleBtn && passwordInput) {
+  signupPasswordToggleBtn.addEventListener("click", function () {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    
+    const toggleImg = this.querySelector("img");
+    if (toggleImg) {
+      toggleImg.src = isPassword 
+        ? "images/btn_visibility_on_24px.svg"
+        : "images/btn_visibility_off_24px.svg";
+    }
+  });
+}
+
+
+if (confirmPasswordToggleBtn && confirmPasswordInput) {
+  confirmPasswordToggleBtn.addEventListener("click", function () {
+    const isPassword = confirmPasswordInput.type === "password";
+    confirmPasswordInput.type = isPassword ? "text" : "password";
+    
+    const toggleImg = this.querySelector("img");
+    if (toggleImg) {
+      toggleImg.src = isPassword 
+        ? "images/btn_visibility_on_24px.svg"
+        : "images/btn_visibility_off_24px.svg";
+    }
+  });
+}
+
+
 emailInput.addEventListener("focusout", function () {
   const emailValue = emailInput.value.trim();
   const { isValid, message } = validateEmail(emailValue);
@@ -54,33 +87,42 @@ emailInput.addEventListener("focusout", function () {
   toggleSignupButton();
 });
 
+
 passwordInput.addEventListener("focusout", function () {
   const { isValid, message } = validatePassword(passwordInput.value.trim());
+  
+  const passwordWrapper = passwordInput.parentElement;
+
   if (!isValid) {
-    passwordInput.classList.add("input-invalid");
+    passwordWrapper.classList.add("input-invalid");
     passwordError.textContent = message;
     passwordError.classList.add("active");
   } else {
-    passwordInput.classList.remove("input-invalid");
+    passwordWrapper.classList.remove("input-invalid");
     passwordError.textContent = "";
     passwordError.classList.remove("active");
   }
   toggleSignupButton();
 });
 
+
 confirmPasswordInput.addEventListener("focusout", function () {
   const { isValid, message } = validatePasswordConfirm(passwordInput.value.trim(), confirmPasswordInput.value.trim());
+  
+  const confirmWrapper = confirmPasswordInput.parentElement;
+
   if (!isValid) {
-    confirmPasswordInput.classList.add("input-invalid");
+    confirmWrapper.classList.add("input-invalid");
     confirmPasswordError.textContent = message;
     confirmPasswordError.classList.add("active");
   } else {
-    confirmPasswordInput.classList.remove("input-invalid");
+    confirmWrapper.classList.remove("input-invalid");
     confirmPasswordError.textContent = "";
     confirmPasswordError.classList.remove("active");
   }
   toggleSignupButton();
 });
+
 
 signupForm.addEventListener("submit", function (event) {
   event.preventDefault();
