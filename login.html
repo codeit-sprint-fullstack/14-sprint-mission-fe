@@ -19,11 +19,13 @@
 
     <div class="input_zone">
     <label for="e-mail">이메일</label>
-    <input id="e-mail" type="email" placeholder="이메일을 입력해주세요">
+    <input  type="email" id="e-mail" placeholder="이메일을 입력해주세요">
+    <p class= "error-message" id="email-error"></p>
     </div>
     <div class="input_zone">
     <label for="password">비밀번호</label>
-    <input id="password" type="password" placeholder="비밀번호를 입력해주세요">
+    <input  type="password" id="password" placeholder="비밀번호를 입력해주세요">
+    <p class="error-message" id="password-error"></p>
     <button class="eye_button"  type="button">
         <img src="photo/눈 버튼.svg">
     </button>
@@ -46,6 +48,7 @@
      판다마켓이 처음이신가요?
      <a href="signup.html" >회원가입 </a>
     </div>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </div>
 </html>

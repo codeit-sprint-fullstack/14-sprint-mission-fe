@@ -7,27 +7,26 @@ box-sizing: border-box;
 }
 
 @font-face {
-	font-family: 'Pretendard';
-	font-weight: 700;
-	font-display: swap;
-	src: local('Pretendard Bold'), url(./woff2/Pretendard-Bold.woff2) format('woff2'), url(./woff/Pretendard-Bold.woff) format('woff');
+    font-family: 'Pretendard';
+    src: url('./font.woff2/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
 }
 @font-face {
-    font-family: 'ROKAF sans';
-    src: url('font/bold.ttf');
-    font-weight: 700;
-    
+    font-family: 'ROKAF Sans';
+    src: url('./font.woff2/ROKAFSans-Bold.otf') format('opentype');
+    font-weight: 700; 
+
 }
+
 @font-face {
     font-family: 'Pretendard';
-    src: url('font/reg.otf');
+    src: url('./font.woff2/Pretendard-SemiBold.woff2') format('woff2');
     font-weight: 600;
 }
 @font-face {
-	font-family: 'Pretendard';
-	font-weight: 500;
-	font-display: swap;
-	src: local('Pretendard Medium'), url(./woff2/Pretendard-Medium.woff2) format('woff2'), url(./woff/Pretendard-Medium.woff) format('woff');
+    font-family: 'Pretendard';
+    src: url('./font.woff2/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 500;
 }
 /* .content-container{
     width: 100%;

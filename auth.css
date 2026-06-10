@@ -12,27 +12,25 @@ box-sizing: border-box;
 }
 
 @font-face {
-	font-family: 'Pretendard';
-	font-weight: 700;
-	font-display: swap;
-	src: local('Pretendard Bold'), url(./woff2/Pretendard-Bold.woff2) format('woff2'), url(./woff/Pretendard-Bold.woff) format('woff');
+    font-family: 'Pretendard';
+    src: url('./font.woff2/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
 }
 @font-face {
-    font-family: 'ROKAF sans';
-    src: url('font/bold.ttf');
+    font-family: 'ROKAF Sans';
+    src: url('./font.woff2/ROKAFSans-Bold.woff2') format('woff2');
     font-weight: 700;
-    
 }
+
 @font-face {
     font-family: 'Pretendard';
-    src: url('font/reg.otf');
+    src: url('./font.woff2/Pretendard-SemiBold.woff2') format('woff2');
     font-weight: 600;
 }
 @font-face {
-	font-family: 'Pretendard';
-	font-weight: 500;
-	font-display: swap;
-	src: local('Pretendard Medium'), url(./woff2/Pretendard-Medium.woff2) format('woff2'), url(./woff/Pretendard-Medium.woff) format('woff');
+    font-family: 'Pretendard';
+    src: url('./font.woff2/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 500;
 }
 
 .login_body{
@@ -49,7 +47,7 @@ header{
     display: flex;
     width: 640px;
     height: 132px;
-    font-family: 'ROKAF sans';
+    font-family: 'ROKAF Sans';
     color: #3692FF;
     font-size: 66.344px;
     font-weight: 700;
@@ -70,9 +68,18 @@ header{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
     position: relative;
 }
+
+.input_zone input:focus{
+    border-color: #3692ff;
+}
+
+.input_zone input.is-invalid{
+    border-color: #F74747 !important;
+    outline: none;
+}
+
 
 label{
     color: #1F2937;
@@ -82,7 +89,7 @@ label{
     font-weight: 700;
     line-height: 26px;
 }
-#e-mail{
+.input_zone input {
     display: flex;
     width: 640px;
     height: 56px;
@@ -90,8 +97,21 @@ label{
     align-items: center;
     background-color: #F3F4F6;
     border-radius: 12px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+    border: 1px solid transparent; /* 기본 테두리를 투명하게 만들어 둠 */
+    box-sizing: border-box;
+}
+.error-message{
+    display: flex;
+    color: red;
+    font-family: 'Pretendard';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
     margin-bottom: 24px;
-    border: 0;
+    margin-left: 16px;
 }
 
 #password{
@@ -102,22 +122,21 @@ label{
     align-items: center;
     background-color: #F3F4F6;
     border-radius: 12px;
-    margin-bottom: 24px;
+    margin-top: 16px;
+    margin-bottom: 10px;
     border: 0;
 }
 .eye_button{
     display: inline-block;
     position: absolute;
-    right: 24px;
-    bottom: 45px;
-    width: 20.473px;
-    height: 18.065px;
+    right: 4%;
+    bottom: 44%;
+    width: 3%;
+    height: 12%;
     background: none;
     padding: 0;
 }
-input:focus{
-    outline-color: #3692ff;
-}
+
 button{
     color: #F3F4F6;
     font-family: Pretendard;
