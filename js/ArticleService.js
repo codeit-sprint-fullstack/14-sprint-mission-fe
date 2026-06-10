@@ -34,11 +34,11 @@ export const articleService = {
 	},
 
 	//생성 POST
-	createArticle: async () => {
-		const exampleArticle = {
-			"image": "https://example.com/...",
-			"content": "게시글 내용입니다.",
-			"title": "게시글 제목입니다."
+	createArticle: async (image, content, title) => {
+		const newArticle = {
+			"image": image,
+			"content": content,
+			"title": title
 		};
 
 		fetch(API_URL, {
@@ -46,7 +46,7 @@ export const articleService = {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(exampleArticle),
+			body: JSON.stringify(newArticle),
 		}).then(response => {
 			if (!response.ok) {
 				throw new Error('등록 실패');
@@ -63,11 +63,11 @@ export const articleService = {
 	},
 
 	//수정 PATCH
-	patchArticle: (articleId) => {
-		const exampleArticle = {
-			"image": "https://example.com/...",
-			"content": "게시글 내용 수정입니다.",
-			"title": "게시글 제목 수정입니다."
+	patchArticle: (articleId, image, content, title) => {
+		const updateArticle = {
+			"image": image,
+			"content": content,
+			"title": title
 		};
 
 		fetch(`${API_URL}/${articleId}`, {
@@ -75,7 +75,7 @@ export const articleService = {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(exampleArticle),
+			body: JSON.stringify(updateArticle),
 		}).then(response => {
 			if (!response.ok) {
 				throw new Error('수정 실패');

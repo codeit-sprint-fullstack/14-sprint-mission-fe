@@ -18,19 +18,19 @@ search_article_btn.addEventListener('click', function () {
 });
 
 search_article_by_id_btn.addEventListener('click', function () {
-	articleService.getArticle(6615);
+	articleService.getArticle(6691);
 });
 
 create_article_btn.addEventListener('click', function () {
-	articleService.createArticle();
+	articleService.createArticle("https://www.utoimage.com/?m=goods.free&mode=view&idx=22250682", "게시글입니다.", "게시글 제목입니다.");
 });
 
 update_article_btn.addEventListener('click', function () {
-	articleService.patchArticle(6615);
+	articleService.patchArticle(6691, "https://www.utoimage.com/?m=goods.free&mode=view&idx=22250682", "게시글입니다.", "게시글 제목입니다.");
 });
 
 delete_article_btn.addEventListener('click', function () {
-	articleService.deleteArticle(6615);
+	articleService.deleteArticle(6692);
 });
 
 //상품
@@ -39,17 +39,17 @@ search_product_btn.addEventListener('click', function () {
 });
 
 search_product_by_id_btn.addEventListener('click', function () {
-	productService.getProduct(3987);
+	productService.getProduct(4045);
 });
 
 create_product_btn.addEventListener('click', function () {
-	productService.createProduct();
+	productService.createProduct(["https://www.utoimage.com/?m=goods.free&mode=view&idx=22250682"], ['강아지'], 3000, '설명입니다.', '강아지');
 });
 
 update_product_btn.addEventListener('click', function () {
-	productService.patchProduct(3989);
+	productService.patchProduct(4045, ["https://www.utoimage.com/?m=goods.free&mode=view&idx=22250682"], ['강아지'], 3000, '설명입니다.', '강아지');
 });
 
 delete_product_btn.addEventListener('click', function () {
-	productService.deleteProduct(3989);
+	productService.deleteProduct(4046);
 });
