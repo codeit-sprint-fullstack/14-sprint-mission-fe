@@ -38,7 +38,7 @@ const products_change = {
 }
 
 
-// // Article 테스트
+// Article 테스트
 try{
   await ArticleService.getArticle();  // 전체 호출
 

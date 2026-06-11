@@ -104,6 +104,22 @@ main {
     background: var(--Cool-Gray-100);
 }
 
+
+.hidden {
+  display: none;
+}
+
+.failure-message {
+  color: var(--error);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-left: 16px;
+  margin-top: -6px;
+}
+
 #Password_text {
   width: 60%;
   border-width: 0;
@@ -122,6 +138,10 @@ main {
 
 #show_word input:focus {
   outline:none;
+}
+
+.errorfocus {
+  outline:2px solid var(--error);
 }
 
 .text_section {
@@ -174,8 +194,12 @@ input::placeholder {
   border-width: 0;
 }
 
-.container_length button:hover {
+button.active {
   background: var(--Primary-100);
+}
+
+button.active:hover, button.active:focus {
+  background: #462679;
 }
 
 #easy_login {

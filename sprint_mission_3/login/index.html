@@ -12,10 +12,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-FL58603PL3');
   </script>
-  <script src="script.js"></script>
 </head>
 <body>
   <main>
@@ -29,21 +27,34 @@
     <div class="container_length">
       <div class="container_length">
         <div id="Email">
-          <h2 id="email_adress">
+          <h2>
             이메일
           </h2>
-          <input type="text" class="text_section" placeholder="이메일을 입력해주세요">
+          <input type="text" class="text_section default" id="email_adress" placeholder="이메일을 입력해주세요">
+
+          <div class="failure-message hidden" id="none_email">
+            이메일을 입력해주세요.
+          </div>
+          <div class="failure-message hidden" id="wrong_rule">
+            잘못된 이메일 형식입니다.
+          </div>
         </div>
         <div id="Password">
           <h2>
             비밀번호
           </h2>
           <div id="show_word">
-            <input type="password" id="Password_text" placeholder="비밀번호를 입력해주세요">
+            <input type="password" id="Password_text" class="default" placeholder="비밀번호를 입력해주세요">
             <img src="img/btn_visibility_on_24px.png">
           </div>
+          <div class="failure-message hidden" id="none_password">
+              비밀번호를 입력해주세요.
+          </div>
+          <div class="failure-message hidden" id="wrong_rule_password">
+              비밀번호를 8자 이상 입력해주세요.
+          </div>
         </div>
-        <button>
+        <button id="loginButton">
           로그인
         </button>
         <div class="container_width" id="easy_login">
@@ -74,7 +85,7 @@
     </div>
 
   </main>
-  <script src="script.js"></script>
-  <script src="../api.js"></script>
+  <script type="module" src="script.js"></script>
+  <!-- <script src="../api.js"></script> -->
 </body>
 </html>
