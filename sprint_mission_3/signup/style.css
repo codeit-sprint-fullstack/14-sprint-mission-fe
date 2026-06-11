@@ -87,6 +87,25 @@ main {
   gap: 16px;
 }
 
+.hidden {
+  display: none;
+}
+
+.failure-message {
+  color: var(--error);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-left: 16px;
+  margin-top: -6px;
+}
+
+.errorfocus {
+  outline:2px solid var(--error);
+}
+
 #Email h2, .Password h2, #Nickname h2 {
   color: var(--Secondary-800);
   /* pretendard/2lg-18px-bold */
@@ -97,7 +116,7 @@ main {
   line-height: 26px;
 }
 
-.show_word {
+#show_word, #show_word2 {
     display: flex;
     width: 640px;
     height: 56px;
@@ -116,17 +135,17 @@ main {
   background: var(--Cool-Gray-100, #F3F4F6);
 }
 
-.show_word img {
+#show_word img, #show_word2 img {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
 }
 
-.show_word:focus-within {
+#show_word:focus-within, #show_word2:focus-within {
   border-color: var(--brand-blue);
 }
 
-.show_word input:focus {
+#show_word input:focus, #show_word2 input:focus {
   outline:none;
 }
 
@@ -180,8 +199,12 @@ input::placeholder {
   border-width: 0;
 }
 
-.container_length button:hover {
+button.active {
   background: var(--Primary-100);
+}
+
+button.active:hover, button.active:focus {
+  background: #462679;
 }
 
 #easy_login {

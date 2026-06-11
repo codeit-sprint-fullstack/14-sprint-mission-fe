@@ -16,7 +16,6 @@
 
     gtag('config', 'G-FL58603PL3');
   </script>
-  <script src="script.js"></script>
 </head>
 <body>
   <main>
@@ -34,34 +33,55 @@
             <h2>
               이메일
             </h2>
-            <input type="text" class="text_section" placeholder="이메일을 입력해주세요">
+            <input type="text" class="text_section default" id="userEmail" placeholder="이메일을 입력해주세요">
+            <div class="failure-message hidden" id="none_email">
+              이메일을 입력해주세요.
+            </div>
+            <div class="failure-message hidden" id="wrong_rule">
+              잘못된 이메일 형식입니다.
+            </div>
           </div>
           <div id="Nickname">
             <h2>
               닉네임
             </h2>
-            <input type="text" class="text_section" placeholder="닉네임을 입력해주세요">
+            <input type="text" class="text_section default" id="userNickname" placeholder="닉네임을 입력해주세요">
+            <div class="failure-message hidden" id="none_nickname">
+              닉네임을 입력해주세요.
+            </div>
           </div>
           <div class="Password">
             <h2>
               비밀번호
             </h2>
-            <div class="show_word">
-              <input type="password" class="Password_text" placeholder="비밀번호를 입력해주세요">
+            <div id="show_word">
+              <input type="password" class="Password_text default" id="userPassword" placeholder="비밀번호를 입력해주세요">
               <img src="img/btn_visibility_on_24px.png">
+            </div>
+            <div class="failure-message hidden" id="none_password">
+              비밀번호를 입력해주세요.
+            </div>
+            <div class="failure-message hidden" id="wrong_rule_password">
+              비밀번호를 8자 이상 입력해주세요.
             </div>
           </div>
           <div class="Password">
             <h2>
               비밀번호 확인
             </h2>
-            <div class="show_word">
-              <input type="password" class="Password_text" placeholder="비밀번호를 다시 한 번 입력해주세요">
+            <div id="show_word2">
+              <input type="password" class="Password_text default" id="userPasswordCheck" placeholder="비밀번호를 다시 한 번 입력해주세요">
               <img src="img/btn_visibility_on_24px.png">
+            </div>
+            <div class="failure-message hidden" id="none_passwordcheck">
+              비밀번호를 입력해주세요.
+            </div>
+            <div class="failure-message hidden" id="wrong_passwordcheck">
+              비밀번호가 다릅니다.
             </div>
           </div>
         </form>        
-        <button>
+        <button id="signup">
           회원가입
         </button>
         <div class="container_width" id="easy_login">
@@ -92,5 +112,6 @@
     </div>
 
   </main>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
