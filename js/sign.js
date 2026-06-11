@@ -6,12 +6,12 @@ const loginBtn = document.getElementById('login_btn');
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const USER_DATA = [
-           { email: 'codeit1@codeit.com', password: "codeit101!" },
-	           { email: 'codeit2@codeit.com', password: "codeit202!" },
-           	{ email: 'codeit3@codeit.com', password: "codeit303!" },
-	           { email: 'codeit4@codeit.com', password: "codeit404!" },
-	           { email: 'codeit5@codeit.com', password: "codeit505!" },
-	           { email: 'codeit6@codeit.com', password: "codeit606!" },
+    { email: 'codeit1@codeit.com', password: "codeit101!" },
+	{ email: 'codeit2@codeit.com', password: "codeit202!" },
+    { email: 'codeit3@codeit.com', password: "codeit303!" },
+	{ email: 'codeit4@codeit.com', password: "codeit404!" },
+	{ email: 'codeit5@codeit.com', password: "codeit505!" },
+	{ email: 'codeit6@codeit.com', password: "codeit606!" },
 ];
 
 function showValidation(input, message) {
@@ -123,4 +123,29 @@ passwordToggleBtn.addEventListener('click', function () {
 
 	pwInput.type = isPassword ? 'text' : 'password';
 	pwInput.classList.toggle('text', isPassword);
+});
+
+loginBtn.addEventListener('click', function () {
+	const email = emailInput.value;
+	const userEmails = USER_DATA.map( e => e.email )
+	
+	if (loginBtn.classList.contains('sign_up')) {
+		if (userEmails.includes(email)) {
+			alert('사용 중인 이메일입니다.');
+		} else {
+			location.href = "/items";
+		}
+	} else {
+		const password = pwInput.value;
+		const user = USER_DATA.find(
+			user => user.email === email && user.password === password
+		);
+
+		if (user) {
+			alert('로그인 성공');
+			location.href = '/items';
+		} else {
+			alert('이메일 또는 비밀번호가 일치하지 않습니다.');
+		}
+	}
 });
