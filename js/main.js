@@ -65,13 +65,13 @@ deleteArticle()
 const pdList = await getProductList(1, 10, '');
 console.log(pdList);
 
-const pd = await getProduct(4079);
+const pd = await getProduct(4072);
 console.log(pd);
 
 // const createPd = await createProduct('삭제 테스트', '삭제 테스트..', 1000000, ['화장품', '스킨/케어'], ['https://example.com/image.jpg', 'https://example.com/image2.jpg']);
 // console.log(createPd);
 
-const patchPd = await patchProduct(4075);
+const patchPd = await patchProduct();
 console.log(patchPd);
 
 const deletePd = await deleteProduct();

@@ -1,3 +1,6 @@
+// 이건 실 서버 구축하면 쓸 수 있음 라이브서버로는 경로 설정 불가능해서 임시 주석처리
+// import axios from 'axios';
+
 const baseUrl = 'https://panda-market-api-crud.vercel.app/products';
 
 // Product
@@ -6,35 +9,29 @@ const baseUrl = 'https://panda-market-api-crud.vercel.app/products';
 
 // 상품 리스트 조회
 async function getProductList(page, pageSize, keyword) {
-    let url = baseUrl;
-
-    url += '?';
-    url += 'page=' + page;
-    url += '&pageSize=' + pageSize;
-    url += '&keyword=' + encodeURIComponent(keyword);
 
     try {
-        const response = await fetch(url);
-    
-        if (!response.ok) {
-            switch (response.status) {
-                case 404:
-                    throw new Error("존재하지 않는 데이터입니다.");
-                case 403:
-                    throw new Error("데이터를 조회할 권한이 없습니다.");
-                default:
-                    throw new Error("요청하신 데이터를 찾을 수 없습니다.");
+        const response = await axios.get(baseUrl, {
+            params: {
+                page,
+                pageSize,
+                keyword: encodeURIComponent(keyword)
             }
-        }
-        const data = await response.json();
+        });
     
-        const arrData = data.list;
+        const arrData = response.data.list;
 
         return arrData;
 
     } catch (error) {
         console.log('error');
-        console.log(error.message);
+        
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.message);
+        }
     }
 
 
@@ -50,30 +47,22 @@ async function getProduct(id) {
         if (id === undefined || id === null) {
             throw new Error("조회할 상품 id가 없습니다.");
         }
+    
+        const response = await axios.get(`${baseUrl}/${id}`)
 
-
-        let url = baseUrl + '/' + id;
-    
-    
-        const response = await fetch(url);
-    
-        if (!response.ok) {
-            switch (response.status) {
-                case 404:
-                    throw new Error("존재하지 않는 데이터입니다.");
-                case 403:
-                    throw new Error("데이터를 조회할 권한이 없습니다.");
-                default:
-                    throw new Error("요청하신 데이터를 찾을 수 없습니다.");
-            }
-        }
-        const data = await response.json();
+        const data = response.data;
 
         return data;
 
     } catch (error) {
         console.log('error');
-        console.log(error.message);
+
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.message);
+        }
     }
 }
 
@@ -100,26 +89,21 @@ async function createProduct(name, description, price, tags, images) {
             images,
         }
 
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(bodyContent),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-    
-        if (!response.ok) {
-            throw new Error("데이터를 생성하는데 실패했습니다..");
-        }
-    
-    
-        const data = await response.json();
-    
+        const response = await axios.post(baseUrl, bodyContent);
+
+        const data = response.data;
+
         return data;
 
     } catch (error) {
         console.log('error');
-        console.log(error.message);
+        
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.message);
+        }
     }
 
 }
@@ -157,32 +141,23 @@ async function patchProduct(id, name=null, description=null, price=null, tags=nu
 
     
 
+
+        const response = await axios.patch(`${baseUrl}/${id}`, bodyContent);
+
+        const data = response.data;
     
-        const response = await fetch(url, {
-            method: 'PATCH',
-            body: JSON.stringify(bodyContent),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-    
-        if (!response.ok) {
-            switch (response.status) {
-                case 404:
-                    throw new Error("존재하지 않는 데이터입니다.");
-                case 403:
-                    throw new Error("데이터를 조회할 권한이 없습니다.");
-                default:
-                    throw new Error("요청하신 데이터를 찾을 수 없습니다.");
-            }
-        }
-        const data = await response.json();
 
         return data;
 
     } catch (error) {
         console.log('error');
-        console.log(error.message);
+        
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.message);
+        }
     }
 }
 
@@ -194,33 +169,23 @@ async function deleteProduct(id) {
             throw new Error("삭제할 상품 id가 없습니다.");
         }
 
-        let url = baseUrl + '/' + id;
 
+        const response = await axios.delete(`${baseUrl}/${id}`);
+        
     
-
-        const response = await fetch(url, {
-            method: 'DELETE',
-        })
-    
-        if (!response.ok) {
-            switch (response.status) {
-                case 404:
-                    throw new Error("존재하지 않는 데이터입니다.");
-                case 403:
-                    throw new Error("데이터를 조회할 권한이 없습니다.");
-                default:
-                    throw new Error("요청하신 데이터를 찾을 수 없습니다.");
-            }
-        }
-    
-        const data = await response.json();
+        const data = response.data;
     
         return data;
-        console.log(data);
 
     } catch (error) {
         console.log('error');
-        console.log(error.message);
+        
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.message);
+        }
     }
 }
 
