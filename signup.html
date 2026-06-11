@@ -6,7 +6,7 @@
     <title>판다마켓 회원가입</title>
 
     <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/loginstyle.css" />
+    <link rel="stylesheet" href="./css/signupstyle.css" />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -24,60 +24,72 @@
     </script>
   </head>
   <body>
-    <main class="login-container">
+    <main class="signup-container">
       <!-- 로고 -->
       <a href="/" class="logo">
-        <img src="./images/logo.svg" alt="판다마켓 로고" />
-        <span>판다마켓</span></a
-      >
+        <img src="./images/logo.svg" alt="판다마켓 홈으로 이동" />
+      </a>
 
       <!-- 이메일 -->
-      <div class="input-group">
-        <label for="email">이메일</label>
+      <form>
+        <div class="input-group">
+          <label for="email">이메일</label>
 
-        <input type="email" id="email" placeholder="이메일을 입력해주세요" />
-      </div>
-
-      <div class="input-group">
-        <label for="nickname">닉네임</label>
-
-        <input type="text" id="nickname" placeholder="닉네임을 입력해주세요" />
-      </div>
-
-      <div class="input-group">
-        <label for="password">비밀번호</label>
-
-        <div class="password-wrapper">
-          <input
-            type="password"
-            id="password"
-            placeholder="비밀번호를 입력해주세요"
-          />
-          <!-- 비밀번호 눈알 버튼 -->
-          <button type="button" class="toggle-password">
-            <img src="./images/eye_off.png" alt="eye_off" />
-          </button>
+          <input type="email" id="email" placeholder="이메일을 입력해주세요" />
+          <!-- 에러 메시지 -->
+          <p class="error-message" id="email-error"></p>
         </div>
-      </div>
 
-      <div class="input-group">
-        <label for="passwordConfirm">비밀번호 확인</label>
+        <div class="input-group">
+          <label for="nickname">닉네임</label>
 
-        <div class="password-wrapper">
           <input
-            type="password"
-            id="passwordConfirm"
-            placeholder="비밀번호를 다시 한 번 입력해주세요"
+            type="text"
+            id="nickname"
+            placeholder="닉네임을 입력해주세요"
           />
-          <!-- 비밀번호 눈알 버튼 -->
-          <button type="button" class="toggle-password">
-            <img src="./images/eye_off.png" alt="eye_off" />
-          </button>
+          <p class="error-message" id="nickname-error"></p>
         </div>
-      </div>
 
-      <!-- 로그인 버튼 -->
-      <button class="login-button">회원가입</button>
+        <div class="input-group">
+          <label for="password">비밀번호</label>
+
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              placeholder="비밀번호를 입력해주세요"
+            />
+            <!-- 비밀번호 눈알 버튼 -->
+            <button type="button" class="toggle-password">
+              <img src="./images/eye_off.png" alt="eye_off" />
+            </button>
+          </div>
+          <!-- 에러 메시지 -->
+          <p class="error-message" id="password-error"></p>
+        </div>
+
+        <div class="input-group">
+          <label for="passwordConfirm">비밀번호 확인</label>
+
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="passwordConfirm"
+              placeholder="비밀번호를 다시 한 번 입력해주세요"
+            />
+            <!-- 비밀번호 눈알 버튼 -->
+            <button type="button" class="toggle-passwordConfirm">
+              <img src="./images/eye_off.png" alt="eye_off" />
+            </button>
+          </div>
+          <!-- 에러 메시지 -->
+          <p class="error-message" id="passwordConfirm-error"></p>
+        </div>
+
+        <!-- 로그인 버튼 -->
+        <button type="button" class="signup-button" disabled>회원가입</button>
+      </form>
 
       <!-- 간편 로그인 -->
       <section class="sns-box">
@@ -100,5 +112,15 @@
         <a href="/login">로그인</a>
       </p>
     </main>
+
+    <!-- 모달 (alert창을 커스텀 하는 팝업창)-->
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal">
+        <p id="modal-message"></p>
+
+        <button id="modal-confirm">확인</button>
+      </div>
+    </div>
+    <script type="module" src="./js/signup.js" defer></script>
   </body>
 </html>

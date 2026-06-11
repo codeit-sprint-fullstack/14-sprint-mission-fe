@@ -23,6 +23,15 @@
 
       gtag('config', 'G-EPJD221X26')
     </script>
+
+    <meta property="og:title" content="판다마켓" />
+    <meta
+      property="og:description"
+      content="일상에서 모든 물건을 거래해보세요"
+    />
+    <meta property="og:image" content="./images/panda-market-preview.png" />
+    <meta property="og:url" content="https://sprint-mission-01.netlify.app/" />
+    <meta property="og:type" content="website" />
   </head>
 
   <body>
@@ -33,9 +42,7 @@
           <span>판다마켓</span></a
         >
 
-        <button class="login-button" onclick="location.href='/login'">
-          로그인
-        </button>
+        <a href="/login" class="login-button"> 로그인 </a>
       </div>
     </header>
 
@@ -48,9 +55,7 @@
               거래해 보세요
             </h1>
 
-            <button class="primary-button" onclick="location.href='/items'">
-              구경하러 가기
-            </button>
+            <a href="/items" class="primary-button"> 구경하러 가기 </a>
           </div>
 
           <img
@@ -118,13 +123,16 @@
     </main>
 
     <footer class="footer">
-      <div class="footer-inner">
-        <p>@codeit - 2024</p>
+      <div class="footer-inner content-wrapper">
+        <div class="footer-left-group">
+          <p>@codeit - 2024</p>
 
-        <div class="footer-links">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/faq">FAQ</a>
+          <div class="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/faq">FAQ</a>
+          </div>
         </div>
+
         <div class="sns-links">
           <a
             href="https://www.facebook.com"
