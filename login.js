@@ -27,3 +27,16 @@ passwordInput.addEventListener('focusout', function() {
         passwordError.textContent = '';
     }
 });
+
+// const passwordInput = document.getElementById('#password');
+const eyeButton = document.querySelector('.eye_button');
+
+function passwordShow () {
+    passwordInput.type = 'text';
+}
+function passwordHide () {
+    passwordInput.type = 'password';
+}
+eyeButton.addEventListener('mousedown', passwordShow);
+eyeButton.addEventListener('mouseup', passwordHide);
+eyeButton.addEventListener('mouseleave', passwordHide);
