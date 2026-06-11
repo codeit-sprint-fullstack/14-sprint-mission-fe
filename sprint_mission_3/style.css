@@ -24,6 +24,7 @@ button {
          url('/fonts/ROKAF_Sans_Medium.ttf') format('woff');
 }
 
+
 footer {
   display: flex;
   flex-direction: column;
@@ -148,7 +149,6 @@ header {
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 3.5rem */
-  white-space: nowrap;
 }
 
 #Watch {
@@ -176,8 +176,8 @@ header {
 
 #Main_section_Logo {
   display: flex;
-  width: 746px;
-  height: 340px;
+  width: 522px;
+  height: 257px;
   padding-right: 0;
   justify-content: center;
   align-items: center;
@@ -337,4 +337,126 @@ header {
   display: flex;
   width: 20px;
   align-items: flex-start;
+}
+
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px) {
+
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px) {
+  .logo_login {
+  padding: 0 24px;
+  }
+
+  .discription {
+    white-space: nowrap; 
+  }
+
+  .discription br {
+    display: none;
+  }
+
+  .main_section {
+    display: block;
+    margin: 84px 32px 0 32px;
+  }
+
+  .main_content {
+    padding: 50px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    gap: 1rem;
+  }
+  #reverse {
+    padding: 10px 32px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100vw;
+    gap: 1rem;
+  }
+  .content_discription {
+    width: 80%;
+  }
+  .Img_content {
+    width: 80vw;
+    height: 60vw;
+  }
+
+  .under_content_1{
+    flex-direction: column;
+    margin: 0 32px;
+  }
+
+  .under_image {
+    width: 522px;
+    height: 257px;
+    margin-top: -20px;
+  }
+  .footer_info {
+    padding: 0 24px;
+}
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px) {
+  .logo_login {
+  padding: 0 16px;
+  }
+
+  .discription {
+    white-space: nowrap; 
+  }
+
+  .discription br {
+    display: none;
+  }
+
+  .main_section {
+    display: block;
+    margin: 84px 32px 0 32px;
+  }
+
+  .main_content {
+    padding: 50px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    gap: 1rem;
+  }
+  #reverse {
+    padding: 10px 32px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100vw;
+    gap: 1rem;
+  }
+  .content_discription {
+    width: 80%;
+  }
+  .Img_content {
+    width: 80vw;
+    height: 60vw;
+  }
+
+  .under_content_1{
+    flex-direction: column;
+    margin: 0 32px;
+  }
+
+  .under_image {
+    width: 522px;
+    height: 257px;
+    margin-top: -20px;
+  }
+  .footer_info {
+    padding: 0 16px;
+}
 }
