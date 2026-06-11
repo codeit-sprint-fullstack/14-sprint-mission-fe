@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="signup.css">
 
-  <link rel="icon" type="image/png" href="image/판다얼굴.png">
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="signup.css">
+
+    <link rel="icon" type="image/png" href="/image/판다얼굴.png">
 
    <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8C11VMVQ7"></script>
@@ -22,26 +22,43 @@
 </head>
 
 <body>
+
+<!-- ====================================================================== -->
+<!-- 1번 판다 로고 -->
+<!-- ====================================================================== -->
   <div class="signup_page">
 
     <a href="/" class="pandaLogo">
     <div class="pandaLogo">
-      <img src="image/판다얼굴.png" alt="판다 얼굴" class="pandaFace">
+      <img src="/image/판다얼굴.png" alt="판다 얼굴" class="pandaFace">
       <h1 class="pandaText">판다마켓</h1>
     </div>
     </a>
 
+
+<!-- ====================================================================== -->
+<!-- 2번 이메일 -->
+<!-- ====================================================================== -->
     <div class="email_group">
       <label for="email_input">이메일</label>
       <input id="email_input"  class="input_field" name="email" type="email" placeholder="이메일을 입력해주세요">
+      <p id="email_error" class="error_message"></p>
     </div>
 
-    <div class="Nickname_group">
-      <label for="Nickname_input">닉네임</label>
-      <input id="Nickname_input"  class="input_field" name="nickname" type="text" placeholder="닉네임을 입력해주세요">
+
+<!-- ====================================================================== -->
+<!-- 3번 닉네임 -->
+<!-- ====================================================================== -->
+    <div class="nickname_group">
+      <label for="nickname_input">닉네임</label>
+      <input id="nickname_input"  class="input_field" name="nickname" type="text" placeholder="닉네임을 입력해주세요">
     </div>
 
-<div class="password_group">
+
+<!-- ====================================================================== -->
+<!-- 5번 패스워드 -->
+<!-- ====================================================================== -->
+  <div class="password_group">
   <label for="password_input">비밀번호</label>
 
   <div class="password_set">
@@ -49,17 +66,22 @@
       id="password_input"
       name="password"
       type="password"
-      placeholder="비밀번호를 입력해주세요"
-    >
+      placeholder="비밀번호를 입력해주세요">
 
     <button type="button" id="password_toggle" class="password_toggle">
       <img
         id="password_icon"
-        src="image/eye.png"
+        src="/image/eye.png"
         alt="비밀번호 보기">
     </button>
   </div>
+        <p id="password_error" class="error_message"></p>
+  </div>
 
+
+<!-- ====================================================================== -->
+<!-- 6번 패스워드 확인 -->
+<!-- ====================================================================== -->
  <div class="password_check_group">
   <label for="password_check_input">비밀번호 확인</label>
 
@@ -74,37 +96,73 @@
     <button type="button" id="password_check_toggle" class="password_check_toggle">
       <img
         id="password_check_icon"
-        src="image/eye.png"
+        src="/image/eye.png"
         alt="비밀번호 확인 보기">
     </button>
   </div>
+    <p id="password_check_error" class="error_message"></p>
 </div>
-  
+
+
+<!-- ====================================================================== -->
+<!-- 7번 회원가입 버튼 -->
+<!-- ====================================================================== -->
   <div>
-    <a href="-" class="signup_btn">회원가입</a>
+<button type="button" class="signup_btn" disabled>회원가입</button>
   </div>
 
+
+<!-- ====================================================================== -->
+<!-- 8번 간편 로그인 -->
+<!-- ====================================================================== -->
 <div class="Easy_login_group">
   <div class="Easy_login1">
     <p class="Easy_login2">간편 로그인하기</p>
   </div>
   <div class="Easy_login_logo_group">
     <a href="https://www.google.com/" class="link_underline">
-      <img src="image/google.png" alt="구글 로고" class="google_logo"> </a>
+      <img src="/image/google.png" alt="구글 로고" class="google_logo"> </a>
 
     <a href="https://www.kakaocorp.com/page/" class="link_underline">
-    <img src="image/kakao.png" alt="카카오톡 로고" class="kakao_logo">
+    <img src="/image/kakao.png" alt="카카오톡 로고" class="kakao_logo">
     </a>
   </div>
   </div>
 
+  
+<!-- ====================================================================== -->
+<!-- 9번 로그인으로 이동 -->
+<!-- ====================================================================== -->
   <div class="First">
     <p class="text1">이미 회원이신가요?</p>
     <a href="login.html" class="signup">로그인</a>
+</div>
+
+
+<!-- ====================================================================== -->
+<!-- 10번 회원가입 오류 모달 -->
+<!-- ====================================================================== -->
+<div id="error_modal" class="error_modal" hidden>
+  <div
+    class="error_modal_content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="error_modal_message"
+  >
+    <p id="error_modal_message"></p>
+
+    <button
+      type="button"
+      id="error_modal_close"
+      class="error_modal_close"
+    >
+      확인
+    </button>
   </div>
 </div>
 
-<script src="signup.js"></script>
+
+<script type="module" src="/signup.js"></script>
 
 </body>
 </html>
