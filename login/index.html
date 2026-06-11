@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFHZEPBKBH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KFHZEPBKBH");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/global.css" />
+  </head>
+
+  <body>
+    <main>
+      <a href="/"><img src="/assets/logo.svg" alt="판다마켓 로고" class="logo" /></a>
+      <form class="login-modal">
+        <div class="input-group">
+          <div class="input-set"> <label for="email">이메일</label> <input type="email" id="email" placeholder="이메일을 입력해주세요" /></div>
+          <div class="input-set">
+            <label for="password">비밀번호</label>
+            <div class="password-wrapper">
+              <input class="password" type="password" id="password" placeholder="비밀번호를 입력해주세요" />
+              <button type="button" id="togglePassword" class="visibility-btn" aria-label="비밀번호 보기"><img src="/assets/btn_visibility_off.svg" alt="" class="visibility" /></button>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="login-btn">로그인</button>
+        <div class="social-group">
+          간편 로그인하기
+          <div class="social-btn">
+            <a href="https://www.google.com"><img src="/assets/ic_google.svg" alt="구글 아이콘" /></a>
+            <a href="https://www.kakaocorp.com/page/"><img src="/assets/ic_kakao.svg" alt="카카오 아이콘" /></a>
+          </div>
+        </div>
+        <span class="signup">판다마켓이 처음이신가요? <a href="/signup">회원가입</a></span>
+      </form>
+    </main>
+  </body>
+</html>
