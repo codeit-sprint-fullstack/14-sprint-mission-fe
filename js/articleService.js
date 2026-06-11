@@ -1,13 +1,17 @@
-export const getArticleList = (page, pageSize, keyword) => {
+import axios from "axios";
+
+const getArticleList = (page, pageSize, keyword) => {
+    
+      const response = fetch(`https://panda-market-api-crud.vercel.app/articles?page=${page}&pageSize=${pageSize}&keyword=${keyword}`)
     console.log('함수시작');
-    const response = fetch(`https://panda-market-api-crud.vercel.app/Articles?page=${page}&pageSize=${pageSize}&keyword=${keyword}`)
+    await response
     .then((res) => {
         if(!res.ok){
             throw new Error('상태코드 : ' + res.status)
         }
         console.log('res받아오기 : ',res)
         return res.json();
-        console.log('자손상태보기 : ',res.json())
+
     })
     .then((data) =>{
         console.log('data상태봐볼까 : ',data)
@@ -22,21 +26,21 @@ export const getArticleList = (page, pageSize, keyword) => {
    
 }
 
+const instance = axios.create({
+    baseURL: 'https://panda-market-api-crud.vercel.app'
+})
 
- export const getArticle = (id) =>{
+const getArticle = (id) =>{
     console.log('시작')
-    const response = fetch(`https://panda-market-api-crud.vercel.app/articles/${id}`)
+    return instance
+    .get(`/article/${id}`)
      .then((res) => {
         if(!res.ok){
             throw new Error('상태코드 : ' + res.status)
         }
         console.log('res받아오기 : ',res)
-        return res.json();
-        console.log('자손상태보기 : ',res.json())
+        return res.json(); 
     })
-    .then((data) =>{
-        console.log('data상태봐볼까 : ',data)
-    } ) 
 
     .catch((error) => {
         console.log('에러발생')
@@ -45,8 +49,9 @@ export const getArticleList = (page, pageSize, keyword) => {
     
  };
 
+getArticle(6690);
 
-export const createArticle = (title, content, image) => {
+const createArticle = (title, content, image) => {
     console.log('시작' )
     const response = fetch(`https://panda-market-api-crud.vercel.app/articles`, {
         method : 'POST',
@@ -59,22 +64,24 @@ export const createArticle = (title, content, image) => {
             'content-Type' : 'application/json',
         },
     })
-    .then((res) => {
-        if(!res.ok){
-            throw new Error('상태코드 : ' + res.status)
+    .then( (res) => {
+        console.log('상태코드 : ' , res.status);
+        return res.json().then((data)=> {
+            if(!res.ok){
+            throw new Error('상태코드 : ' + data.message);
         }
-        console.log('res받아오기 : ',res)
-        return res.json();
-        console.log('자손상태보기 : ',res.json())
-    })
+         return data; })
+                   })
     .then((data) =>{
         console.log('data상태봐볼까 : ',data)
     } ) 
 
+
+
     .catch((error) => {
         console.log('에러발생')
         console.log('-----------------')
-        console.log(error)
+       
         console.log('------------------')
         console.log(error.message);
         console.log('-------------------');
@@ -84,7 +91,7 @@ export const createArticle = (title, content, image) => {
 
 
 
-export const patchArticle =(id, title, content, image) => {
+const patchArticle =(id, title, content, image) => {
     fetch(`https://panda-market-api-crud.vercel.app/articles/${id}`, {
         method : 'PATCH',
         headers: {
@@ -120,7 +127,7 @@ export const patchArticle =(id, title, content, image) => {
 };
 
 
-export const deleteArticle = (id) => {
+const deleteArticle = (id) => {
     fetch(`https://panda-market-api-crud.vercel.app/articles/${id}`, {
         method : 'DELETE',
     })
@@ -144,3 +151,11 @@ export const deleteArticle = (id) => {
     
 };
 
+const article = {
+  getArticleList,
+  getArticle,
+  createArticle,
+  patchArticle,
+  deleteArticle,
+};
+export default article;

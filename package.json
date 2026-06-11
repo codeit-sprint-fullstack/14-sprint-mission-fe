@@ -17,7 +17,8 @@
   "bugs": {
     "url": "https://github.com/goeulho/14-sprint-mission-fe/issues"
   },
-  "homepage": "https://github.com/goeulho/14-sprint-mission-fe#readme"
-
-  
+  "homepage": "https://github.com/goeulho/14-sprint-mission-fe#readme",
+  "dependencies": {
+    "axios": "^1.17.0"
+  }
 }
