@@ -16,7 +16,7 @@ import {
     deleteProduct
 } from './ProductService.js';
 
-getArticleList(1,20,'타이틀')
+getArticleList(1,10,'타이틀')
     .then((data) => {
         console.log(data);
     })
@@ -25,7 +25,7 @@ getArticleList(1,20,'타이틀')
         console.log(error.message);
     });
 
-getArticle(6714)
+getArticle(6716)
     .then((data) => {
         console.log(data);
     })
@@ -34,16 +34,16 @@ getArticle(6714)
         console.log(error.message);
     });
 
-// createArticle('내가만든타이틀', '내가만든설명글', 'https://example.com/')
-//     .then((data) => {
-//         console.log(data);
-//     })
-//     .catch((error) => {
-//         console.log('error');
-//         console.log(error.message);
-//     });
+createArticle()
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.log('error');
+        console.log(error.message);
+    });
 
-patchArticle(6712)
+patchArticle(6714)
     .then((data) => {
         console.log(data);
     })

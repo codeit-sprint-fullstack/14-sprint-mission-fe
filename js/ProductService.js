@@ -16,7 +16,7 @@ async function getProductList(page, pageSize, keyword) {
     // url.searchParames.append('page', page);
     // url.searchParames.append('pageSize', pageSize);
     // url.searchParames.append('keyword', keyword);
-    
+
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -33,11 +33,15 @@ async function getProductList(page, pageSize, keyword) {
     const data = await response.json();
 
     const arrData = data.list;
+
+    return arrData;
 }
 
 
 // 상품 리스트 상세
 async function getProduct(id) {
+
+
     let url = baseUrl + '/' + id;
     
     const response = await fetch(url);
