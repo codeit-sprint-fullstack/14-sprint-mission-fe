@@ -31,12 +31,12 @@ export async function getProduct(productId) {
 };
 
 // 상품 생성
-export async function createProduct(name, description, price, tags, images) {
+export async function createProduct( name, description, price, tags, images ) {
     try {
         const response = await fetch (
             `${PRODUCT_URL}`, {
                 method: "POST",
-                body: JSON.stringify(name, description, price, tags, images),
+                body: JSON.stringify( name, description, price, tags, images ),
                 headers: {
                     'Content-Type': 'application/json',
                 },

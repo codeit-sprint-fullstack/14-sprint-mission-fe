@@ -20,7 +20,7 @@ export function getArticle(articleId) {
     return fetch (`${ARTICLE_URL}/${articleId}`)
     .then((response) => {
         if (!response.ok) {
-        throw new Error("게시글 목록 조회 실패");
+        throw new Error("게시글 조회 실패");
       }
 
       return response.json();
@@ -31,10 +31,10 @@ export function getArticle(articleId) {
 }
 
 // 게시글 생성
-export function createArticle(name, description, price, tags, images) {
+export function createArticle( title, content, image ) {
     return fetch (`${ARTICLE_URL}`, {
         method: "POST",
-        body: JSON.stringify(name, description, price, tags, images),
+        body: JSON.stringify( title, content, image ),
         headers: {
             'Content-Type': 'application/json',
         },
@@ -52,7 +52,7 @@ export function createArticle(name, description, price, tags, images) {
 }
 
 // 게시글 수정
-export function patchArticle(articleId,data) {
+export function patchArticle(articleId, data) {
     return fetch (`${ARTICLE_URL}/${articleId}`, {
         method: "PATCH",
         body: JSON.stringify(data),
