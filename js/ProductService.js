@@ -17,6 +17,12 @@ export async function getProductList(page, pageSize, keyword) {
 
 export async function getProduct(id) {
   try {
+    const response = await fetch(`${BASE_URL}/products/${id}`);
+    if (!response.ok) {
+      console.error("에러 발생:", response.status);
+      return;
+    }
+    const data = await response.json();
     console.log(data);
     return data;
   } catch (error) {
