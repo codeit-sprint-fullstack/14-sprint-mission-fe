@@ -14,45 +14,18 @@ function emailCheck(email){ // 유효성 검사
 	return email_regex.test(email);
 }
 
-
-function checkClasses() {
-  console.log(
-    !inputEmail.classList.contains('errorfocus') &&
-    !inputPassword.classList.contains('errorfocus') &&
-    !inputEmail.classList.contains('default') &&
-    !inputPassword.classList.contains('default')
-  );
-  setTimeout(checkClasses, 1000);
-}
-
-checkClasses();
-
-// function buttonCheck(){
-//   if (!inputEmail.classList.contains(`errorfocus`) && !inputPassword.classList.contains(`errorfocus`) && !inputEmail.classList.contains(`default`) && !inputPassword.classList.contains(`default`)) {
-//     loginButton.classList.add(`active`);
-//     loginButton.removeAttribute(`disabled`);
-//   }
-//   else {
-//     loginButton.classList.remove(`active`);
-//     loginButton.setAttribute(`disabled`, true);
-//   }
-// }
-
 function accountCheck(email, password){ // 계정 체크
-  USER_DATA.forEach(user => {
-    if (user.email === email && user.password === password){
+  for (const user of USER_DATA) {
+    if (user.email === email && user.password === password) {
       return true;
     }
-    else return false;
-  })
+  }
+  return false;
 }
 
 function buttonCheck() { // 로그인 버튼 활성화 검사
   if (!inputEmail.classList.contains(`errorfocus`) && !inputPassword.classList.contains(`errorfocus`) && !inputEmail.classList.contains(`default`) && !inputPassword.classList.contains(`default`)) {
     loginButton.classList.add(`active`);
-    loginButton.onclick = () => {
-      location.href = "../items/";
-    };
   }
   else {
     loginButton.classList.remove(`active`);
@@ -61,6 +34,29 @@ function buttonCheck() { // 로그인 버튼 활성화 검사
 }
 
 buttonCheck(); // 새로고침 로그인 버튼 검사
+
+loginButton.addEventListener("mousedown", e => { // 클릭 시 email, password 확인
+  if (loginButton.classList.contains(`active`)) {
+    if (accountCheck(inputEmail.value, inputPassword.value)){
+      loginButton.onclick = () => {
+        location.href = "../items/";
+      };
+    }
+    else {
+      alert(`비밀번호가 일치하지 않습니다.`);
+    }
+  }
+})
+
+loginButton.addEventListener("keydown", e => { // 엔터 시 email, password 확인
+  if (e.key === "Enter" && loginButton.classList.contains("active")) {
+    if (accountCheck(inputEmail.value, inputPassword.value)) {
+      location.href = "../items/";
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
+    }
+  }
+});
 
 inputEmail.addEventListener("focusout", e => { // 포커스 땐 후에
   inputEmail.classList.remove(`default`);
