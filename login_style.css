@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-blue: #3692FF;
+  --gray-100: #F3F4F6;
+  --gray-400: #9CA3AF;
+}
+
+@font-face {
+  font-family: 'ROKAF Sans';
+  src: url('./fonts/ROKAF Sans Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+}
+
+.login_area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 40rem;
+  height: auto;
+  border: none;
+  outline: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 6.47rem;
+  height: 6.47rem;
+}
+
+.panda-letters {
+  font-family: 'ROKAF Sans';
+  font-weight: 700;
+  font-size: 4.14rem;
+  line-height: normal;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  
+  margin-top: 4px;
+  margin-left: 22.24px;
+
+  color: var(--primary-blue);
+}
+
+form {
+  margin-top: 2.5rem;
+}
+
+.input-title {
+  display: block;
+  color: #1F2937;
+  font-size: 1.125rem;
+  justify-content: left;
+}
+
+.input-field {
+  width: 100%;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  outline: none;
+
+  background-color: var(--gray-100);
+  color: var(--gray-400);
+}
+
+.input-field:focus {
+  border: 1px solid var(--primary-blue)
+}
+
+.password-visible {
+  position: relative;
+}
+
+.eye-button {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  background: none;
+  border: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-button img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.loginButton {
+  width: 40rem;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 9999px;
+  
+  margin-bottom: 1.5rem;
+  border: none;
+  outline: none;
+
+  background-color: var(--gray-400);
+  color: var(--gray-100);
+  font-size: 1.25rem;
+}
+
+.simple_login {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 40rem;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  
+  margin-bottom: 1.5rem;
+  border: none;
+  outline: none;
+
+  background-color: #E6F2FF;
+  color: #1F2937;
+  font-size: 1rem;
+}
+
+.rightSimpleLogin {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rightSimpleLogin img{
+  width: 2.625rem;
+  height: 2.625rem;
+  display: block;
+}
+
+.signup {
+  justify-content: center;
+  align-self: center;
+}
