@@ -1,0 +1,104 @@
+:root {
+  --input-bg: #f3f4f6;
+  --input-placeholder: #9ca3af;
+  --social-login-bg: #e6f2ff;
+  --link-blue: #3692ff;
+}
+
+.auth-container {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.logo-home-button-wrapper {
+  display: block;
+  text-align: center;
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+}
+
+.input-item {
+  margin-bottom: 2.4rem;
+}
+
+.input-item label {
+  display: block;
+  margin-bottom: 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.input-item input {
+  padding: 1.6rem 2.4rem;
+  background-color: var(--input-bg);
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  width: 100%;
+}
+
+.input-item input::placeholder {
+  color: var(--input-placeholder);
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.input-item input:focus {
+  outline-color: var(--blue);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle-button {
+  position: absolute;
+  right: 2.4rem;
+}
+
+.social-login-container {
+  background-color: var(--social-login-bg);
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 2.3rem;
+  margin: 2.4rem 0;
+}
+
+.social-login-container h3 {
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.social-login-buttons-container {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.auth-switch {
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.auth-switch a {
+  color: var(--link-blue);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.full-width {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.auth-container .pill-button {
+  font-size: 1.6rem;
+  padding: 1.6rem 2.4rem;
+}

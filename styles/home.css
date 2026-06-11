@@ -1,6 +1,6 @@
 .banner {
   background-color: #cfe5ff;
-  height: 540px;
+  height: 54rem;
   display: flex;
   align-items: center;
   background-repeat: no-repeat;
@@ -13,7 +13,7 @@
 }
 
 #features {
-  padding-bottom: 138px;
+  padding-bottom: 13.8rem;
 }
 
 #bottomBanner {
@@ -22,23 +22,26 @@
 
 /* 버튼 등의 요소에 고정된 width나 height을 부여하는 것보다 내부 콘텐츠에 padding을 적용해서 요소의 전체 크기를 유동적으로 조정하는 방법이 반응형 웹 디자인과 접근성(accessibility) 측면에서 더 적합합니다. */
 #loginLinkButton {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 600;
-  border-radius: 8px;
-  padding: 11.5px 23px;
+  border-radius: 0.8rem;
+  padding: 1.15rem 2.3rem;
 }
 
 /* banner 요소 내의 pill-button을 선택해 스타일 적용. ID 선택자 대신 이렇게 캐스캐이딩을 활용하는 방법은 특정 컨텍스트 내에서만 스타일을 적용하고자 할 때 유용해요. */
 .banner .pill-button {
-  margin-top: 32px;
+  margin-top: 3.2rem;
 }
 
 /* flex 요소에서는 gap 속성을 사용해 자식 요소 사이의 간격을 조정할 수 있어요. */
 .feature {
-  padding: 138px 0;
+  padding: 13.8rem 0;
   display: flex;
   align-items: center;
   gap: 5%;
+
+  background-color: var(--white);
+  border-radius: 1.6rem;
 }
 
 /* pseudo-selector인 nth-child(2)를 통해 feature 클래스를 가진 요소 중 두 번째 아이템에만 다른 스타일을 적용했어요. */
@@ -53,16 +56,16 @@
 
 .feature-tag {
   color: #3692ff;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 1.2rem;
 }
 
 .feature-description {
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 500;
   line-height: 120%;
   letter-spacing: 0.08em;
-  margin-top: 24px;
+  margin-top: 2.4rem;
 }
