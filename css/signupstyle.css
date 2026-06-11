@@ -386,9 +386,14 @@ body {
 }
 
 @media (max-width: 743px) {
+  body {
+    align-items: center;
+  }
+
   .login-container {
-    max-width: 640px;
-    padding: 0 24px;
+    max-width: 400px;
+    padding: 0 16px;
+    margin: 0 auto;
   }
 
   .logo {
@@ -396,10 +401,27 @@ body {
   }
 
   .logo img {
-    max-width: 196px;
+    max-width: 230px;
   }
-}
 
+  .modal {
+    width: calc(100vw - 32px);
+    max-width: 327px;
+    height: auto;
+    min-height: 220px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #modal-confirm {
+    position: static;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 200px;
+  }
+
+}
 form {
   width: 100%;
 }

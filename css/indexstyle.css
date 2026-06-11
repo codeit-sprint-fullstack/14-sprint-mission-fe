@@ -181,188 +181,6 @@ a {
   text-decoration: none;
 }
 
-  /* style.css */
-
-:root {
-  font-size: 16px;
-
-  --sky-blue: #cfe5ff;
-  --primary-blue: #3692ff;
-  --dark: #111827;
-  --gray: #6b7280;
-  --footer: #111827;
-  --Secondary-50 : #F9FAFB;
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('../fonts/Pretendard.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'ROKAF Sans';
-  src: url('../fonts/ROKAF-Sans-Bold.woff') format('woff');
-}
-
-body {
-  font-family: Pretendard, sans-serif;
-  color: var(--dark);
-}
-
-button,
-a {
-  cursor: pointer;
-}
-/* 공통 너비 */
-.content-wrapper {
-  width: min(100%, 120rem);
-  margin: 0 auto;
-}
-
-/* GNB */
-.gnb {
-  position: sticky; /*상단 네비게이션 바 고정*/
-  top: 0;
-  z-index: 100; /*어느 위치에 고정할건지를 나타냄*/
-
-  border-bottom: 1px solid #DFDFDF;
-  background: #FFF;
-}
-
-.gnb-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /*왼쪽오른쪽 요소 양 끝으로 배치*/
-
-  height: 4rem;
-  padding: 0 12.5rem; /*양쪽 고정 여백 200px*/
-
-}
-
-/* 로고 + 글자 전체 */
-.logo {
-  display: flex;
-
-  width: 9.5rem;
-  /* 153px */
-  height: 3rem;
-  /* 51px */
-
-  padding: 0.3rem 0 0.3rem 0;
-
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-
-  text-decoration: none;
-}
-/* 판다마켓 글자 */
-.logo span {
-  color: #3692ff;
-
-  font-family: "ROKAF Sans", sans-serif;
-  font-size: 1.5rem;
-  /* 25.633px */
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-/* 로고 이미지 */
-.logo img {
-  width: 2.5rem;
-  height: 2.5rem;
-
-  flex-shrink: 0;
-  display: block;
-}
-/* 로그인 버튼 */
-.login-button {
-  /* display: flex; */
-  width: 8rem;
-  height: 3rem;
-  padding: 0.75rem 1.437rem; /*12px 23px*/
-
-  justify-content: center;
-  align-items: center;
-
-  border: none;
-
-  border-radius: 0.5rem;
-  background-color: var(--primary-blue);
-
-  color: #f3f4f6;
-  font-family: Pretendard, sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.625rem;
-  cursor: pointer;
-
-}
-
-/* 첫 번째 섹선*/
-.home-top {
-  width: 100%;
-  height : 33.75rem;
-  background-color: var(--sky-blue);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.home-top-inner {
-  display: flex;
-  /* width: 100%; */
-  height: 21.25rem;
-  /* padding: 15rem 25.3125rem 0; */
-
-  padding: 15rem 0 0;
-
-  align-items: center;
-  justify-content: center;
-  gap: 4.3125rem;
-}
-.home-top-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  /* 제목과 버튼 사이 간격 (Figma 측정값) */
-}
-
-.home-top-text h1 {
-  font-size: 2.5rem;
-  color: var(--Secondary-700, #374151);
-  font-family: Pretendard;
-  font-size: 2.5rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%;
-}
-
-.primary-button {
-  width: 22.3125rem;
-  height: 3.5rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 2.5rem;
-  background-color: var(--primary-blue);
-
-  border: none;
-
-  color: var(--Secondary-50);
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-align: center;
-  line-height: 2rem;
-  
-  font-family: Pretendard;
-  font-style: normal;
-
-  cursor: pointer;
-}
-
 .home-top-image {
   display: flex;
   padding-right: 0;
@@ -678,7 +496,7 @@ a {
     justify-content: center;
   }
 }
-}
+
 
 .home-top-image {
   display: flex;
@@ -1004,5 +822,152 @@ a {
   .info-card,
   .banner-inner {
     justify-content: center;
+  }
+}
+
+
+/* Tablet */
+@media (min-width: 744px) and (max-width: 1199px) {
+
+  .gnb-inner {
+    padding: 0 24px;
+  }
+
+  .footer-inner {
+    padding: 32px 24px;
+  }
+
+  .info-section,
+  .second-info-section,
+  .third-info-section {
+    padding: 64px 24px;
+  }
+
+  .info-card,
+  .second-info-card,
+  .third-info-card {
+    gap: 32px;
+  }
+
+  .info-card img,
+  .second-info-card img,
+  .third-info-card img {
+    width: 344px;
+    height: auto;
+  }
+
+  .home-top-image {
+    width: 344px;
+    height: auto;
+  }
+
+  .banner-inner img {
+    width: 344px;
+    height: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 743px) {
+
+  .gnb-inner {
+    padding: 0 16px;
+  }
+
+  .home-top {
+    height: auto;
+  }
+
+  .home-top-inner {
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 16px 0;
+    height: auto;
+    gap: 24px;
+  }
+
+  .home-top-text {
+    text-align: center;
+  }
+
+  .home-top-text h1 {
+    font-size: 2rem;
+  }
+
+  .primary-button {
+    width: 100%;
+    max-width: 357px;
+  }
+
+  .home-top-image {
+    width: calc(100vw - 32px);
+    height: auto;
+  }
+
+  .info-section,
+  .second-info-section,
+  .third-info-section {
+    padding: 64px 16px;
+  }
+
+  .info-card,
+  .third-info-card {
+    flex-direction: column;
+    width: 100%;
+    gap: 24px;
+  }
+
+  .second-info-card {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 24px;
+  }
+
+  .info-card img,
+  .second-info-card img,
+  .third-info-card img {
+    width: calc(100vw - 32px);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .info-text,
+  .second-info-text,
+  .third-info-text {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .second-info-text {
+    align-items: flex-end;
+  }
+
+  .second-info-text h2,
+  .second-info-text p {
+    text-align: right;
+  }
+
+  .bottom-banner {
+    height: auto;
+  }
+
+  .banner-inner {
+    flex-direction: column;
+    padding: 48px 16px 0;
+    gap: 24px;
+  }
+
+  .banner-inner img {
+    width: calc(100vw - 32px);
+    height: auto;
+  }
+
+  .banner-text {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .footer-inner {
+    padding: 32px 16px;
   }
 }
