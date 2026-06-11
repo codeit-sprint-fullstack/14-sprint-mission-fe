@@ -1,0 +1,43 @@
+html{
+	font-size: 62.5%;
+  font-family: Pretendard, sans-serif;
+  scrollbar-gutter: stable;
+}
+body{
+  color: var(--color-text-base);
+  font-size: 1.6rem;
+}
+header{
+  position: fixed;
+  top:0;
+  width:100%;
+  background-color: var(--color-bg-sub);
+  z-index: 999;
+}
+header nav{
+  display: flex;
+  max-width: 1920px;
+  height: 70px;
+  padding: 9px 200px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+}
+header nav img{
+  height:50px;
+}
+header nav a.bt_login{
+  display: flex;
+  padding: 12px 23px;
+  width:128px;
+  height:48px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-primary);
+  border-radius: 8px;
+  color: #F3F4F6;
+  line-height: 26px;
+  font-weight: 600;
+}
