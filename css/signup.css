@@ -180,17 +180,17 @@ input:focus {
 
 .password-toggle-btn {
   background: transparent;
-  border: none;
-  cursor: pointer;
   display: flex;
+  width: 24px;
+  height: 24px;
   align-items: center;
+  z-index: 10;
   position: absolute;
   right: 24px;
   top: 50%;
   transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  z-index: 10;
+  border: none;
+  cursor: pointer;
 }
 
 .password-toggle-btn img {

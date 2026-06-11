@@ -1,4 +1,5 @@
-import { validateEmail, validatePassword } from "./validate.js";
+import { validateEmail, validatePassword, handleValidationError, setupPasswordToggle } from "./validate.js";
+import { USER_DATA } from "./auth-data.js";
 
 const emailInput = document.getElementById("login-email");
 const emailError = document.getElementById("login-email-error");
@@ -8,89 +9,60 @@ const passwordToggleBtn = document.querySelector(".password-toggle-btn");
 const loginBtn = document.getElementById("login-btn");
 const loginForm = document.querySelector("form");
 
-const USER_DATA = [
-  { email: 'codeit1@codeit.com', password: "codeit101!" },
-  { email: 'codeit2@codeit.com', password: "codeit202!" },
-  { email: 'codeit3@codeit.com', password: "codeit303!" },
-  { email: 'codeit4@codeit.com', password: "codeit404!" },
-  { email: 'codeit5@codeit.com', password: "codeit505!" },
-  { email: 'codeit6@codeit.com', password: "codeit606!" },
-];
-
 function toggleLoginButton() {
   const emailValue = emailInput.value.trim();
   const passwordValue = passwordInput.value.trim();
 
+  // isNotEmpty 해석: 이메일과 비밀번호 둘 다 입력값이 있다
   const isNotEmpty = emailValue !== "" && passwordValue !== "";
-  
-  const hasNoErrors = !emailError.classList.contains("active") && !passwordError.classList.contains("active");
 
-  if (isNotEmpty && hasNoErrors) {
-    loginBtn.disabled = false;
-  } else {
-    loginBtn.disabled = true;
-  }
+  // hasNoErrors 해석: 이메일 에러와 비밀번호 에러 클래스에 active 클래스가 없다 = 둘 다 에러 없음
+  const hasNoErrors = 
+    !emailError.classList.contains("active") &&
+    !passwordError.classList.contains("active");
+
+  // 두 조건 전부 만족해야 로그인 가능
+  const canLogin = isNotEmpty && hasNoErrors;
+
+  // 로그인 불가능하면 버튼 비활성화
+  loginBtn.disabled = !canLogin;
 }
 
-
-if (passwordToggleBtn && passwordInput) {
-  passwordToggleBtn.addEventListener("click", function () {
-    const isPassword = passwordInput.type === "password";
-    
-    passwordInput.type = isPassword ? "text" : "password";
-    
-    const toggleImg = passwordToggleBtn.querySelector("img");
-    if (toggleImg) {
-      toggleImg.src = isPassword 
-        ? "images/btn_visibility_on_24px.svg"
-        : "images/btn_visibility_off_24px.svg";
-    }
-  });
-}
-
+setupPasswordToggle(passwordToggleBtn, passwordInput);
 
 emailInput.addEventListener("focusout", function () {
+  /* 객체 구조 분해 할당
+
+  const result = validateEmail(emailInput.value.trim());
+
+  const isValid = result.isValid;
+  const message = result.message;
+
+  */
+  // 위 3줄을 아래 1줄로 축약
   const { isValid, message } = validateEmail(emailInput.value.trim());
-  if (!isValid) {
-    emailInput.classList.add("input-invalid");
-    emailError.textContent = message;
-    emailError.classList.add("active");
-  } else {
-    emailInput.classList.remove("input-invalid");
-    emailError.textContent = "";
-    emailError.classList.remove("active");
-  }
+  handleValidationError(isValid, message, emailInput, emailError);
   toggleLoginButton();
 });
 
 passwordInput.addEventListener("focusout", function () {
   const { isValid, message } = validatePassword(passwordInput.value.trim());
-  if (!isValid) {
-    passwordInput.classList.add("input-invalid");
-    passwordError.textContent = message;
-    passwordError.classList.add("active");
-  } else {
-    passwordInput.classList.remove("input-invalid");
-    passwordError.textContent = "";
-    passwordError.classList.remove("active");
-  }
+  handleValidationError(isValid, message, passwordInput, passwordError);
   toggleLoginButton();
 });
 
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  
   if (loginBtn.disabled) return;
-
   const inputEmail = emailInput.value.trim();
   const inputPassword = passwordInput.value.trim();
-
+  // 사용자 정보 찾기 .find()
+  /* 배열.find(요소 => 조건) = 배열 안에 조건을 만족하는 첫 번째 요소는 무엇인가? (반환값: 요소(USER_DATA에서는 객체)/undefined)
+   USER_DATA.find(user => user.email === inputEmail) 배열 요소 중 입력한 이메일과 일치하는 사용자(객체)는 누구인가? */
   const matchedUser = USER_DATA.find(user => user.email === inputEmail);
-
   if (!matchedUser || matchedUser.password !== inputPassword) {
     alert("비밀번호가 일치하지 않습니다.");
-  } 
-  else {
+  } else {
     window.location.href = "./items.html";
   }
 });

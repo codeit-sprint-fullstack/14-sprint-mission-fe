@@ -163,6 +163,41 @@ input:focus {
   cursor: not-allowed;              
 }
 
+.password-wrapper {
+  position: relative;
+  width: 640px;
+}
+
+.password-wrapper input {
+  width: 100%;
+  display: block;
+}
+
+.password-wrapper input:focus {
+  border: 1px solid var(--brand-blue);
+}
+
+.password-toggle-btn {
+  background: transparent;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  z-index: 10;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+}
+
+.password-toggle-btn img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 .easy-login {
   color: var(--Secondary-800);
   background: var(--warm-skyblue);
@@ -208,44 +243,4 @@ input:focus {
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
-}
-
-.password-wrapper {
-  position: relative;
-  width: 640px;
-}
-
-.password-wrapper input {
-  width: 100%;
-}
-
-.password-toggle-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  
-  width: 24px;
-  height: 24px;
-  z-index: 10;
-}
-
-.password-toggle-btn img {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
-.password-wrapper input {
-  display: block;
-}
-
-.password-wrapper input:focus {
-  border: 1px solid var(--brand-blue);
 }

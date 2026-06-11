@@ -1,11 +1,14 @@
 function getArticleList({ page = 1, pageSize = 10, keyword = ''}) {
   const url = new URL('https://panda-market-api-crud.vercel.app/articles');
+  // URL 파라미터는 문자열 형태로 전달
   url.searchParams.append('page', String(page));
   url.searchParams.append('pageSize', String(pageSize));
   url.searchParams.append('keyword', keyword);
 
   return fetch(url)
     .then((res) => {
+      // res.ok = 응답 성공 여부 (true / false)
+      // res.status = 상태 코드 (200, 404, 500...)
       if (!res.ok) {
         throw new Error(`오류 발생: ${res.status}`);
       }
