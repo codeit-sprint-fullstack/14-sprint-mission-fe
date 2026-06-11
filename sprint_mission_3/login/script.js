@@ -8,6 +8,12 @@ const emailFailureMessage2 = document.querySelector('#wrong_rule'); // 이메일
 const passwordFailureMessage = document.querySelector(`#none_password`); // 비밀번호가 적혀있지 않을 경우
 const passwordFailureMessage2 = document.querySelector(`#wrong_rule_password`); // 비밀번호가 8자 미만일 경우
 const loginButton = document.querySelector(`#loginButton`); //로그인 버튼 활성화
+const modal = document.querySelector(`#infoModal`);
+const close = document.querySelector(`#ok`);
+
+close.onclick = () => {
+  modal.style.display = "none";
+};
 
 function emailCheck(email){ // 유효성 검사
 	const email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9._-]{2,4}$/i; // mail 주소 [a-zA-Z0-9._-] , @ 필수, 도메인 주소 [a-zA-Z0-9.-], . 필수, com, net, co.kr 부분[a-zA-Z0-9.-]
@@ -43,6 +49,7 @@ loginButton.addEventListener("mousedown", e => { // 클릭 시 email, password �
       };
     }
     else {
+      modal.style.display = "block";
       alert(`비밀번호가 일치하지 않습니다.`);
     }
   }

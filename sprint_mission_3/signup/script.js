@@ -15,6 +15,12 @@ const passwordFailureMessage2 = document.querySelector(`#wrong_rule_password`); 
 const passwordFailureMessage3 = document.querySelector(`#none_passwordcheck`); // 비밀번호 확인 칸에 적혀있지 않을 경우
 const passwordFailureMessage4 = document.querySelector(`#wrong_passwordcheck`); // 비밀번호가 다를 경우
 const signupButton = document.querySelector(`#signup`); //회원가입 버튼
+const modal = document.querySelector(`#infoModal`);
+const close = document.querySelector(`#ok`);
+
+close.onclick = () => {
+  modal.style.display = "none";
+};
 
 
 function emailCheck(email){ // 유효성 검사
@@ -23,28 +29,34 @@ function emailCheck(email){ // 유효성 검사
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const passwordInputs = document.querySelectorAll(".Password_text");
-  const toggleIcons = document.querySelectorAll(".show_word img");
+  const toggleIcons = document.querySelector("#show_word img");
+  const toggleIcons2 = document.querySelector("#show_word2 img");
 
-  // forEach를 통해 class로 잡힌 각각의 img에 event 적용
-  toggleIcons.forEach((icon, index) => {
-    const input = passwordInputs[index];
+  // 아이콘 hover 시 비밀번호 표시
+  toggleIcons.addEventListener("mousedown", () => {
+    inputPassword.type = "text";
+    console.log("비밀번호 표시됨");
+  });
 
+  // 아이콘에서 마우스를 떼면 다시 숨김
+  toggleIcons.addEventListener("mouseup", () => {
+    inputPassword.type = "password";
+    console.log("비밀번호 숨김");
+  });
     // 아이콘 hover 시 비밀번호 표시
-    icon.addEventListener("mouseenter", () => {
-      input.type = "text";
-      console.log("비밀번호 표시됨");
-    });
+  toggleIcons2.addEventListener("mousedown", () => {
+    inputPasswordCheck.type = "text";
+    console.log("비밀번호 표시됨");
+  });
 
-    // 아이콘에서 마우스를 떼면 다시 숨김
-    icon.addEventListener("mouseleave", () => {
-      input.type = "password";
-      console.log("비밀번호 숨김");
-    });
+  // 아이콘에서 마우스를 떼면 다시 숨김
+  toggleIcons2.addEventListener("mouseup", () => {
+    inputPasswordCheck.type = "password";
+    console.log("비밀번호 숨김");
   });
 });
 
-function accountCheck(email, password){ // 계정 체크
+function accountCheck(email){ // 계정 체크
   for (const user of USER_DATA) {
     if (user.email === email) {
       return true;
@@ -75,14 +87,30 @@ buttonCheck(); // 새로고침 로그인 버튼 검사
 
 signupButton.addEventListener("mousedown", e => { // 클릭 시 email 확인 후 없으면 계정 생성
   if (signupButton.classList.contains(`active`)) {
-    if (accountCheck(inputEmail.value, inputPassword.value)){
-      alert(`이미 가입된 이메일 입니다.`);
+    if (accountCheck(inputEmail.value)){
+      modal.style.display = "block";
     }
     else {
       alert(`회원가입이 완료되었습니다.`);
-      loginButton.onclick = () => {
+      signupButton.onclick = () => {
         location.href = "../items/";
       };
+    }
+  }
+})
+
+signupButton.addEventListener("keydown", e => { // 엔터 시 email 확인 후 없으면 계정 생성
+  if(e.key === "Enter"){
+    if (signupButton.classList.contains(`active`)) {
+      if (accountCheck(inputEmail.value)){
+        modal.style.display = "block";
+      }
+      else {
+        alert(`회원가입이 완료되었습니다.`);
+        signupButton.onclick = () => {
+          location.href = "../items/";
+        };
+      }
     }
   }
 })
