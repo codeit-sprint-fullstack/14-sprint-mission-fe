@@ -1,0 +1,57 @@
+.header-wrapper {
+  width: 100%;
+  height: 70px;
+  padding: 0 200px;
+  border-bottom: 1px solid #dfdfdf;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-container {
+  width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  height: 40px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.header-logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.header-logo span {
+  height: 35px;
+  line-height: 35px;
+  white-space: nowrap;
+  font-family: 'ROKAF Sans';
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--primary-100)
+}
+
+.header-login {
+  width: 128px;
+  padding: 12px 0;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px; 
+  color: var(--gray-200);
+  background: var(--primary-100);
+}
