@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,29 +36,29 @@
                 <div class="form_container">
 
                     <div class="form_item">
-                        <label for="" class="input_title">이메일</label>
+                        <label for="u_email" class="input_title">이메일</label>
                         <div class="input_wrap">
-                            <input type="text" id="u_email" name="u_email" placeholder="이메일을 입력해주세요">
+                            <input type="email" id="u_email" name="u_email" placeholder="이메일을 입력해주세요" required>
                         </div>
                     </div>
 
                     <div class="form_item">
-                        <label for="" class="input_title">비밀번호</label>
+                        <label for="u_pw" class="input_title">비밀번호</label>
                         <div class="input_wrap pw">
-                            <input type="password" id="u_pw" name="u_pw" placeholder="비밀번호를 입력해주세요">
+                            <input type="password" id="u_pw" name="u_pw" placeholder="비밀번호를 입력해주세요" required>
                             <button type="button" class="hs hide_pw no_text">비밀번호 표시</button>
                         </div>
                     </div>
 
-                    <input type="button" value="로그인" class="btn_basic btn_submit">
+                    <button type="submit" class="btn_basic btn_submit">로그인</button>
 
                     <div class="easy_login flex">
                         <span class="text">간편 로그인하기</span>
                         <div class="icon_wrap flex">
-                            <a href="https://www.google.com/" class="btn_icon google">
+                            <a href="https://www.google.com/" class="btn_icon google" target="_blank" rel="noopener noreferrer">
                                 <span class="no_text">구글 계정으로 간편로그인 하기</span>
                             </a>
-                            <a href="https://www.kakaocorp.com/page/" class="btn_icon kakao">
+                            <a href="https://www.kakaocorp.com/page/" class="btn_icon kakao" target="_blank" rel="noopener noreferrer">
                                 <span class="no_text">카카오 계정으로 간편로그인 하기</span>
                             </a>
                         </div>
@@ -98,7 +98,7 @@
 
             })
             
-            $(document).on('click', '.btn_submit', function(e){
+            $('form.form_body').on('submit', function(e){
                 let u_email = $("#u_email").val();
                 let u_pw = $("#u_pw").val();
 

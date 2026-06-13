@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,9 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TJPD3GMV');</script>
     <!-- End Google Tag Manager -->
-    <link rel="stylesheet" href="./normalize.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./font/font.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -24,12 +25,64 @@
         <header id="header">
             <div class="inner_box flex">
                 <div class="logo_wrap">
-
                 </div>
-                <a href="  "></a>
+                <a href=""></a>
             </div>
         </header>
     </div>
-    
+    <main>
+
+        <div class="top_area">
+            <div class="title_wrap">
+                <h2 class="title">상품페이지</h2>
+            </div>
+        </div>
+
+        <div class="main_area">
+
+
+            <div class="area product flex">
+
+                <div class="flex_wrap flex">
+                    <div class="product">
+                        <input type="hidden" class="prduct_id" name="id">
+                        <!-- 상세페이지 버튼 -->
+                        <button type="button">
+                            <div class="img_area">
+                                <div class="img_wrap">
+                                    <img src="./images/Img_home_01.png" alt="">
+                                </div>
+                                <div class="img_wrap">
+                                    <img src="./images/Img_home_02.png" alt="">
+                                </div>
+                                <div class="img_wrap">
+                                    <img src="./images/Img_home_03.png" alt="">
+                                </div>
+                            </div>
+
+                            <div class="text_area">
+                                <div class="title_wrap">
+                                    <p class="pd_title name">titledeeeee</p>
+                                    <span class="description">descriptionnnnnn</span>
+                                </div>
+
+                                <span class="price">5000</span>
+                                <div class="tag_wrap">
+                                    <span class="tag"></span>
+                                </div>
+                            </div>
+
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+    <footer>
+
+    </footer>
+    <script type="module" src="./js/product.js"></script>    
 </body>
 </html>
