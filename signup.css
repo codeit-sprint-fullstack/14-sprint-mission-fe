@@ -1,18 +1,16 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@import url("./reset.css");
+@import url("./color-palette.css");
+
 @font-face {
   font-family: 'ROKAF_M';
   src: url('./fonts/ROKAF_M.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;}
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
-:root
-{--brand-blue: #3692FF;
---Secondary-800: #1F2937;
---Cool-Gray-100: #F3F4F6;
---Light-blue: #E6F2FF;
---Secondary-400: #9CA3AF;}
+/* .body
+{width: 100%;} */
 
+/* 판다로고 */
 .signup_page
 {display: flex;
 flex-direction: column;
@@ -20,12 +18,12 @@ justify-content: center;
 align-items: center;
 margin: 130px auto}
 
-/* 판다로고 */
 .pandaLogo
 {display: flex;
 flex-direction: row;
 justify-content: space-between;
-align-items: center;}
+align-items: center;
+text-decoration-line: none;}
 
 .pandaFace
 {width: 103.529px;
@@ -47,6 +45,7 @@ margin-left: 22.24px;}
 {display: flex;
 flex-direction: column;
 align-items: flex-start;
+flex-wrap: wrap;
 gap: 16px;
 padding: 40px 0px 0px 0px;
 color: var(--Secondary-800);
@@ -65,17 +64,7 @@ line-height: 26px; /* 144.444% */;}
     border-color:var(--brand-blue);
     outline: none;}
 
-#email_input
-{display: flex;
-width: 600px;
-padding: 16px 24px;
-align-items: center;
-gap: 10px;
-border-radius: 12px;
-background: var(--Cool-Gray-100);}
-
-/*****닉네임*****/
-.Nickname_group
+.nickname_group
 {display: flex;
 flex-direction: column;
 align-items: flex-start;
@@ -89,22 +78,30 @@ font-style: normal;
 font-weight: 700;
 line-height: 26px; /* 144.444% */;}
 
-.Nickname_group input {
+.nickname_group input {
     outline: none; 
     border: 1px solid var(--Cool-Gray-100);}
 
-.Nickname_group input:focus{
+.nickname_group input:focus{
     border-color: var(--brand-blue);
     outline: none;}
 
-#Nickname_input
-{display: flex;
-width: 600px;
-padding: 16px 24px;
-align-items: center;
-gap: 10px;
-border-radius: 12px;
-background: var(--Cool-Gray-100);}
+/* 이메일, 닉네임 input */
+.input_field {
+  width: 648px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+
+  border: 1px solid var(--Cool-Gray-100);
+  border-radius: 12px;
+  outline: none;
+
+  background: var(--Cool-Gray-100);
+}
+
+.input_field:focus {
+  border-color: var(--brand-blue);
+}
 
 /*****패스워드*****/
 .password_group
@@ -181,7 +178,7 @@ width: 648px;
 padding: 16px 60px 16px 24px;
 border-radius: 12px;
 background: var(--Cool-Gray-100);
-border: 1px solid #F3F4F6;
+border: 1px solid var(--Cool-Gray-100);
 outline: none;
 box-sizing: border-box;}
 
@@ -207,14 +204,16 @@ height: 24px;}
 /*****회원가입 버튼*****/
 .signup_btn
 {display: flex;
-width: 600px;
+width: 648px;
 padding: 16px 24px;
+margin: 24px 0px;
 justify-content: center;
 align-items: center;
 gap: 10px;
 border-radius: 40px;
 background: var(--Secondary-400);
 text-decoration: none;
+color: var(--Cool-Gray-100);
 
 text-align: center;
 /* pretendard/xl-20px-semibold */
@@ -227,11 +226,35 @@ line-height: 32px; /* 160% */}
 .signup_btn.active
 {background: var(--brand-blue);}
 
+.error_message {
+  color: var(--error-red);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.error_message:empty
+{display: none;}
+
+#email_input.input_error,
+#password_input.input_error,
+#password_check_input.input_error
+{border-color: var(--error-red);}
+
+.signup_btn
+{border: none;
+cursor: pointer;}
+
+.signup_btn:disabled
+{cursor: not-allowed;}
+
 .Easy_login_group
 {display: flex;
 width: 600px;
 height: 74px;
 padding: 0px 23px;
+margin-bottom: 24px;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
@@ -247,6 +270,9 @@ font-size: 16px;
 font-style: normal;
 font-weight: 500;
 line-height: 26px; /* 162.5% */}
+
+.link_underline 
+{text-decoration: none;}
 
 .google_logo
 {width: 42px;
@@ -289,3 +315,65 @@ text-decoration-skip-ink: none;
 text-decoration-thickness: auto;
 text-underline-offset: auto;
 text-underline-position: from-font;}
+
+
+/* 모달 배경 */
+.error_modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* hidden 속성이 있으면 숨기기 */
+.error_modal[hidden] {
+  display: none;
+}
+
+/* 모달 흰색 상자 */
+.error_modal_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 400px;
+  padding: 48px 24px 24px;
+  box-sizing: border-box;
+
+  border-radius: 8px;
+  background: var(--White-color);
+}
+
+/* 모달 문구 */
+#error_modal_message {
+  color: var(--Secondary-800);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 확인 버튼 */
+.error_modal_close {
+  width: 56px;
+  height: 40px;
+
+  margin-top: 32px;
+  margin-left: auto;
+
+  border: none;
+  border-radius: 8px;
+
+  background: var(--brand-blue);
+  color: var(--White-color);
+
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}

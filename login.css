@@ -1,17 +1,15 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@import url("./reset.css");
+@import url("./color-palette.css");
+
 @font-face {
   font-family: 'ROKAF_M';
   src: url('./fonts/ROKAF_M.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;}
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
-:root
-{--brand-blue: #3692FF;
---Secondary-800: #1F2937;
---Cool-Gray-100: #F3F4F6;
---Light-blue: #E6F2FF;
---Secondary-400: #9CA3AF;}
+.body{
+  width: 100%;
+}
 
 .login
 {display: flex;
@@ -25,7 +23,8 @@ margin: 130px auto}
 {display: flex;
 flex-direction: row;
 justify-content: space-between;
-align-items: center;}
+align-items: center;
+text-decoration-line: none;}
 
 .pandaFace
 {width: 103.529px;
@@ -125,10 +124,29 @@ line-height: 26px; /* 144.444% */}
 {width: 24px;
   height: 24px;}
 
+.error_message 
+{color: var(--error-red);
+font-family: Pretendard;
+font-size: 15px;
+font-weight: 600;
+line-height: normal;}
+
+.error_message:empty 
+{display: none;}
+
+#email_input.input_error,
+#password_input.input_error
+{border-color: var(--error-red);}
+
+#email_input.input_error:focus,
+#password_input.input_error:focus {
+  border-color: var(--brand-blue);
+}
+
 /*****로그인 버튼*****/
 .login_btn
 {display: flex;
-width: 600px;
+width: 648px;
 padding: 16px 24px;
 justify-content: center;
 align-items: center;
@@ -136,6 +154,11 @@ gap: 10px;
 border-radius: 40px;
 background: var(--Secondary-400);
 text-decoration: none;
+color: var(--Cool-Gray-100);
+margin-bottom: 24px;
+
+border: none;
+cursor: pointer;
 
 text-align: center;
 /* pretendard/xl-20px-semibold */
@@ -148,11 +171,15 @@ line-height: 32px; /* 160% */}
 .login_btn.active
 {background: var(--brand-blue);}
 
+.login_btn:disabled 
+{cursor: not-allowed;}
+
 .Easy_login_group
 {display: flex;
 width: 600px;
 height: 74px;
 padding: 0px 23px;
+margin-bottom: 24px;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
@@ -168,6 +195,9 @@ font-size: 16px;
 font-style: normal;
 font-weight: 500;
 line-height: 26px; /* 162.5% */}
+
+.link_underline 
+{text-decoration: none;}
 
 .google_logo
 {width: 42px;
@@ -210,3 +240,64 @@ text-decoration-skip-ink: none;
 text-decoration-thickness: auto;
 text-underline-offset: auto;
 text-underline-position: from-font;}
+
+
+
+/* 모달 전체 배경 */
+.error_modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* hidden 속성이 있으면 숨김 */
+.error_modal[hidden] {
+  display: none;
+}
+
+/* 모달의 흰색 상자 */
+.error_modal_content {
+  display: flex;
+  width: 400px;
+  padding: 48px 24px 24px;
+  box-sizing: border-box;
+
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 8px;
+  background: var(--White-color);
+}
+
+/* 모달 문구 */
+#error_modal_message {
+  color: var(--Secondary-800);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 확인 버튼 */
+.error_modal_close {
+  width: 56px;
+  height: 40px;
+  margin-top: 32px;
+  margin-left: auto;
+
+  border: none;
+  border-radius: 8px;
+  background: var(--brand-blue);
+
+  color: var(--White-color);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}

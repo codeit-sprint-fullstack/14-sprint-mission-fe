@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>로그인</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="/reset.css">
   <link rel="stylesheet" href="login.css">
 
-  <link rel="icon" type="image/png" href="image/판다얼굴.png">
+  <link rel="icon" type="image/png" href="/image/판다얼굴.png">
   
  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8C11VMVQ7"></script>
@@ -19,24 +19,38 @@
 
     gtag('config', 'G-M8C11VMVQ7');
   </script>
+
 </head>
 
 
-<body style="width: 100%;">
+<body>
+<!-- ====================================================================== -->
+<!-- 1번 판다마켓 로고 -->
+<!-- ====================================================================== -->
   <div class="login">
 
-    <a href="index.html" style="text-decoration-line: none;">
+    <a href="/" class="pandaLogo">
     <div class="pandaLogo">
-      <img src="image/판다얼굴.png" alt="판다 얼굴" class="pandaFace">
+      <img src="/image/판다얼굴.png" alt="판다 얼굴" class="pandaFace">
       <h1 class="pandaText">판다마켓</h1>
     </div>
     </a>
 
+
+<!-- ====================================================================== -->
+<!-- 2번 이메일 -->
+<!-- ====================================================================== -->
     <div class="email_group">
-      <label for="email">이메일</label>
+      <label for="email_input">이메일</label>
       <input id="email_input" name="email" type="email" placeholder="이메일을 입력해주세요">
+
+      <p id="email_error" class="error_message"></p>
     </div>
 
+
+<!-- ====================================================================== -->
+<!-- 3번 패스워드 -->
+<!-- ====================================================================== -->
 <div class="password_group">
   <label for="password_input">비밀번호</label>
 
@@ -49,71 +63,73 @@
     >
 
     <button type="button" id="password_toggle" class="password_toggle">
-      <img
-        id="password_icon"
-        src="image/eye.png"
-        alt="비밀번호 보기">
+      <img id="password_icon" src="/image/eye.png" alt="비밀번호 보기"
+      >
     </button>
   </div>
-  
+
+  <p id="password_error" class="error_message"></p>
+</div>
+
+
+<!-- ====================================================================== -->
+<!-- 4번 로그인 버튼 -->
+<!-- ====================================================================== -->
   <div>
-    <a href="-" class="login_btn" style="color: #f3f4f6;">로그인</a>
+    <button type="button" class="login_btn" disabled>로그인</button>
   </div>
 
+
+<!-- ====================================================================== -->
+<!-- 5번 간편 로그인 -->
+<!-- ====================================================================== -->
 <div class="Easy_login_group">
   <div class="Easy_login1">
     <p class="Easy_login2">간편 로그인하기</p>
   </div>
   <div class="Easy_login_logo_group">
-    <a href="https://www.google.com/" style="text-decoration-line: none;">
-      <img src="image/google.png" alt="구글 로고" class="google_logo"> </a>
+    <a href="https://www.google.com/" class="link_underline">
+      <img src="/image/google.png" alt="구글 로고" class="google_logo"> </a>
 
-    <a href="https://www.kakaocorp.com/page/" >
-    <img src="image/kakao.png" alt="카카오톡 로고" class="kakao_logo">
+    <a href="https://www.kakaocorp.com/page/" class="link_underline">
+    <img src="/image/kakao.png" alt="카카오톡 로고" class="kakao_logo">
     </a>
   </div>
   </div>
 
+<!-- ====================================================================== -->
+<!-- 6번 회원가입으로 이동 -->
+<!-- ====================================================================== -->
   <div class="First">
     <p class="text1">판다마켓이 처음이신가요?</p>
     <a href="signup.html" class="signup">회원가입</a>
   </div>
 </div>
 
-<!-- 아이디 비밀번호 입력시 로그인 버튼 활성화 + 비밀번호 보이기 숨기기 -->
-<script>
-  const emailInput = document.querySelector("#email_input");
-  const passwordInput = document.querySelector("#password_input");
-  const passwordToggle = document.querySelector("#password_toggle");
-  const passwordIcon = document.querySelector("#password_icon");
-  const loginButton = document.querySelector(".login_btn");
 
-  passwordToggle.addEventListener("click", function () {
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      passwordIcon.src = "image/eye_hidden.png";
-      passwordIcon.alt = "비밀번호 숨기기";
-    } else {
-      passwordInput.type = "password";
-      passwordIcon.src = "image/eye.png";
-      passwordIcon.alt = "비밀번호 보기";
-    }
-  });
+<!-- ====================================================================== -->
+<!-- 로그인 오류 모달 -->
+<!-- ====================================================================== -->
+<div id="error_modal" class="error_modal" hidden>
+  <div
+    class="error_modal_content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="error_modal_message"
+  >
+    <p id="error_modal_message"></p>
 
-  function checkLoginInputs() {
-    const emailValue = emailInput.value.trim();
-    const passwordValue = passwordInput.value.trim();
+    <button
+      type="button"
+      id="error_modal_close"
+      class="error_modal_close"
+    >
+      확인
+    </button>
+  </div>
+</div>
 
-    if (emailValue !== "" && passwordValue !== "") {
-      loginButton.classList.add("active");
-    } else {
-      loginButton.classList.remove("active");
-    }
-  }
-
-  emailInput.addEventListener("input", checkLoginInputs);
-  passwordInput.addEventListener("input", checkLoginInputs);
-</script>
+<script type="module" src="./login.js"></script>
 
 </body>
 </html>
