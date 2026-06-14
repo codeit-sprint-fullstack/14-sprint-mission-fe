@@ -1,184 +1,247 @@
 @font-face {
-    font-family: "ROKAF Sans";
-    src: url('../fonts/ROKAF Sans Bold.ttf');
+  font-family: "ROKAF Sans";
+  src: url('../fonts/ROKAF Sans Bold.ttf');
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --soft-gray: #FCFCFC;
-    --brand-blue: #3692FF;
-    --Secondary-800: #1F2937;
-    --Secondary-400: #9CA3AF;
-    --Cool-Gray-100: #F3F4F6;
-    --warm-skyblue: #E6F2FF;
+  --pure-white: #FFF;
+  --soft-gray: #FCFCFC;
+  --brand-blue: #3692FF;
+  --Secondary-800: #1F2937;
+  --Secondary-400: #9CA3AF;
+  --Cool-Gray-100: #F3F4F6;
+  --warm-skyblue: #E6F2FF;
+  --error-red: #F74747;
 }
 
-html {
-    display: flex;
-    max-width: 1920px;
-    padding: 231px 640px 284px 640px;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
+html, body {                                                                                                                                                                                                                                                                                          
+  min-height: 100vh;                                                                                                                                                                                                                                                                                
 }
 
 body {
-    background: var(--soft-gray);
+  background: var(--soft-gray);
+  display: flex;                                                                                                                                                                                                                                                                                      
+  justify-content: center;                                                                                                                                                                                                                                                                            
+  align-items: center;            
+  padding: 60px 0; 
 }
 
 .container {
-    display: flex;
-    width: 640px;
-    height: 842px;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+  display: flex;
+  width: 640px;
+  height: 842px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 header {
-    text-align: center;
-    display: flex;
-    width: 396px;
-    height: 132px;
-    align-items: center;
-    justify-content: center;
+  text-align: center;
+  display: flex;
+  width: 396px;
+  height: 132px;
+  align-items: center;
+  justify-content: center;
 }
 
 .pandeface {
-    display: flex;
-    align-items: center;
-    width: 103.529px;
-    height: 103.88px;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: 103.529px;
+  height: 103.88px;
+  text-decoration: none;
 }
 
 .pandeface-logo {
-    color: var(--brand-blue);
-    font-family: "ROKAF Sans";
-    font-size: 66.344px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-decoration: none;
+  color: var(--brand-blue);
+  font-family: "ROKAF Sans";
+  font-size: 66.344px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 label {
-    color: var(--Secondary-800);
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 26px;
+  color: var(--Secondary-800);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
 }
 
 input {
-    color: var(--Secondary-400);
-    background: var(--Cool-Gray-100);
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px;
-    display: flex;
-    width: 640px;
-    height: 56px;
-    padding: 16px 24px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 12px;
-    border: none;
+  color: var(--Secondary-400);
+  background: var(--Cool-Gray-100);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  display: flex;
+  width: 640px;
+  height: 56px;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  outline: none;
 }
 
-input:hover {
-    border: 1px solid var(--brand-blue);
+input:focus {
+  border: 1px solid var(--brand-blue);
 }
 
 .label-input {
-    display: flex;
-    width: 640px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 24px;
+  display: flex;
+  width: 640px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-button {
-    color: var(--Cool-Gray-100);
-    background: var(--Secondary-400);
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 32px;
-    display: flex;
-    width: 640px;
-    height: 56px;
-    padding: 16px 124px;
-    margin-bottom: 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 40px;
-    border: none;
-    cursor: pointer;
+.input-error {
+  display: none;
+  color: var(--error-red);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 4px;
+}
+
+.input-error.active {
+  display: block;
+}
+
+.input-invalid {
+  border-radius: 12px;
+  border: 1px solid var(--error-red);
+  background: var(--Cool-Gray-100);
+}
+
+#signup-btn {
+  color: var(--pure-white);
+  background: var(--brand-blue);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  display: flex;
+  width: 640px;
+  height: 56px;
+  padding: 16px 124px;
+  margin-bottom: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+#signup-btn:disabled {
+  background: var(--Secondary-400);    
+  cursor: not-allowed;              
+}
+
+.password-wrapper {
+  position: relative;
+  width: 640px;
+}
+
+.password-wrapper input {
+  display: block;
+  width: 100%;
+  padding-right: 60px;
+}
+
+.password-wrapper input:focus {
+  border: 1px solid var(--brand-blue);
+}
+
+.password-toggle-btn {
+  background: transparent;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  z-index: 10;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+}
+
+.password-toggle-btn img {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .easy-login {
-    color: var(--Secondary-800);
-    background: var(--warm-skyblue);
-    display: flex;
-    width: 640px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px;
-    padding: 16px 23px;
-    margin-bottom: 24px;
+  color: var(--Secondary-800);
+  background: var(--warm-skyblue);
+  display: flex;
+  width: 640px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 16px 23px;
+  margin-bottom: 24px;
 }
 
 .social-login {
-    display: flex;
-    gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 
 .login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .check-membership {
-    color: var(--Secondary-800);
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    
+  color: var(--Secondary-800);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; 
 }
 
 .login-link {
-    color: var(--brand-blue);
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: none;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
+  color: var(--brand-blue);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
