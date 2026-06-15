@@ -5,6 +5,7 @@
   --color-text-dark: #1F2937;
   --color-gray-light: #F3F4F6;
   --color-gray-muted: #9CA3AF;
+  --color-error-red: #F74747;
 }
 
 * {
@@ -52,7 +53,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 14.375rem auto;
+  margin: 3.75rem auto;
 }
 
 .logo-box {
@@ -122,6 +123,20 @@ input::placeholder {
   line-height: 1.625rem;
 }
 
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .password-box {
   display: flex;
   flex-direction: column;
@@ -135,13 +150,6 @@ input::placeholder {
   line-height: 1.625rem;
 }
 
-.input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .password-input {
   display: flex;
   width: 100%;
@@ -153,9 +161,6 @@ input::placeholder {
   border-radius: 0.75rem;
   background: var(--color-gray-light);
   border: none;
-  background-image: url(images/btn_visibility_off_24px.png);
-  background-repeat: no-repeat;
-  background-position: right 1.5rem center;
 }
 
 .login-button {
@@ -170,6 +175,10 @@ input::placeholder {
   align-items: center;
   margin: 1.5rem auto;
   border: none;
+}
+
+.active-button {
+  background-color: var(--color-primary);
   cursor: pointer;
 }
 
@@ -270,4 +279,78 @@ font-size: 0.875rem;
 font-weight: 500;
 text-decoration-line: underline;
 text-decoration-style: solid;
+}
+
+.email-error {
+  color: var(--color-error-red);
+  font-family: 'Pretendard';
+  font-size: .9375rem;
+  font-weight: 600;
+  margin-left: 16px;
+}
+
+.error {
+  border: 1px solid var(--color-error-red);
+}
+
+.password-error {
+  color: var(--color-error-red);
+  font-family: 'Pretendard';
+  font-size: .9375rem;
+  font-weight: 600;
+  margin-left: 16px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  width: 33.75rem;
+  height: 15rem;
+  border-radius: .5rem;
+}
+
+.modal-text {
+  color: var(--color-text-dark);
+  text-align: center;
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.modal-close {
+  position: absolute;
+  right: 1.75rem;
+  bottom: 1.75rem;
+  width: 7.5rem;
+  height: 3rem;
+  padding: .75rem 1.4375rem;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: .5rem;
+  color: #FFFFFF;
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
 }
