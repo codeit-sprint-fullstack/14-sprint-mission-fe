@@ -1,0 +1,144 @@
+:root {
+  --color-bg-main: #FCFCFC;
+  --color-bg-white: #FFFFFF;
+  --color-bg-brand-light: #CFE5FF;
+  --color-bg-footer: #111827;
+  --color-primary: #3692FF;
+  --color-btn-hover: #F9FAFB;
+  --color-text-dark: #374151;
+  --color-text-muted: #9CA3AF;
+  --color-text-light: #E5E7EB;
+  --color-border-light: #DFDFDF;
+  --color-secondary-600: #4B5563;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration-line: none;
+}
+
+@font-face {
+  font-family: 'ROKAF Sans';
+  src: url('./assets/ROKAF\ Sans\ Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('./assets/Pretendard-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.nav-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: var(--color-bg-white);
+  width: 100%;
+  min-height: 3.25rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.nav-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 120rem;
+  padding: 0 12.5rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+}
+
+.logo-text {
+  text-decoration-line: none;
+  color: var(--color-primary);
+  font-family: 'ROKAF Sans';
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.nav-texts {
+  display: flex;
+  align-items: center;
+}
+
+.nav-text {
+  padding: 1.3125rem .9375rem;
+  color: var(--color-secondary-600);
+  font-family: 'Pretendard';
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.login-button {
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-weight: 600;
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--color-primary);
+  color: var(--color-bg-white);
+  border: none;
+  padding: 0.75rem 1.45rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-wrapper {
+    padding: 0 1.5rem;
+  }
+
+  .logo-wrapper {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-wrapper {
+    padding: 0 1rem;
+  }
+
+  .logo-wrapper {
+    gap: 0.5rem;
+  }
+
+  .logo-group img {
+    display: none;
+  }
+
+  .nav-texts {
+    gap: .5rem;
+  }
+
+  .nav-text {
+    padding: 1.5625rem 0;
+  }
+}
