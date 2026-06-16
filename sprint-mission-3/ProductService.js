@@ -13,7 +13,7 @@ export async function getProductList(page = 1, pageSize = 10, keyword = '') {
 
     const data = await res.json();
     return data;
-  } catch(error) {
+  } catch (error) {
     console.log('함수 정의부에서 에러: ', error.message);
     throw error;
   }
@@ -22,14 +22,14 @@ export async function getProductList(page = 1, pageSize = 10, keyword = '') {
 export async function getProduct(id) {
   try {
     const res = await fetch(`https://panda-market-api-crud.vercel.app/products/${id}`);
-    
+
     if (!res.ok) {
       throw new Error(`HTTP Error: ${res.status}`);
     }
 
     const data = await res.json();
     return data
-  } catch(error) {
+  } catch (error) {
     console.log('함수 정의부에서 에러: ', error.message);
     throw error;
   }
@@ -59,7 +59,7 @@ export async function createProduct(name, description, price, tags, images) {
 
     const data = await res.json();
     return data;
-  } catch(error) {
+  } catch (error) {
     console.log('함수 정의부에서 에러: ', error.message);
     throw error;
   }
@@ -89,7 +89,7 @@ export async function patchProduct(id, name, description, price, tags, images) {
 
     const data = await res.json();
     return data;
-  } catch(error) {
+  } catch (error) {
     console.log('함수 정의부에서 에러: ', error.message);
     throw error;
   }
@@ -105,9 +105,9 @@ export async function deleteProduct(id) {
       throw new Error(`HTTP Error: ${res.status}`);
     }
 
-    const data = await res.json();
+    const data = await res.text();
     return data;
-  } catch(error) {
+  } catch (error) {
     console.log('함수 정의부에서 에러: ', error.message);
     throw error;
   }
