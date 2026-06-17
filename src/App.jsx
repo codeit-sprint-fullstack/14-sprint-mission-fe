@@ -1,15 +1,15 @@
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
-import Product from './components/Product/Product';
-import BastProduct from './components/BastProduct/BastProduct';
+import ProductList from './components/ProductList/ProductList';
+import BestProductList from './components/BestProductList/BestProductList';
 
 function App() {
 
   return (
     <div>
       <Header/>
-      <Product/>
-      <BastProduct/>
+      <BestProductList/>
+      <ProductList/>
       <Footer/>
     </div>
   )
