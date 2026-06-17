@@ -3,13 +3,7 @@ import MarketPage from "./pages/MarketPage";
 function App() {
   return(
   <>
-
-
     <MarketPage />
-
-
-
-
   </>
   );
 }
