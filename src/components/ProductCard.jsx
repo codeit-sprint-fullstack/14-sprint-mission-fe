@@ -1,3 +1,6 @@
+import heartIcon from '../assets/ic_heart.svg';
+import './ProductCard.css';
+
 function ProductCard({ product }) {
   const {
     name,
@@ -7,11 +10,16 @@ function ProductCard({ product }) {
   } = product;
 
   return (
-    <div>
-      <img src={images[0]} alt={name} />
-      <p>{name}</p>
-      <p>{price}</p>
-      <p>{favoriteCount}</p>
+    <div className='product-card'>
+      <div className='product-info'>
+      <img className='product-image' src={images?.[0]} alt={name} />
+        <p className='product-name'>{name}</p>
+        <p className='product-price'>{price.toLocaleString()}원</p>
+        <p className='product-favorite'>
+          <img className='favorite-icon' src={heartIcon} alt='' />
+          {favoriteCount}
+        </p>
+      </div>
     </div>
   );
 }

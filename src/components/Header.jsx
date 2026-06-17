@@ -1,17 +1,20 @@
 import logo from '../assets/panda-face.png';
+import './Header.css';
 
 function Header() {
   return (
-    <header>
-      <div>
-        <img src={logo} />
-        <p>판다마켓</p>
+    <header className='header'>
+      <div className='header-left'>
+        <div className='header-logo'>
+          <img className='panda-face' src={logo} />
+          <span className='brand-logo'>판다마켓</span>
+        </div>
+        <div className='header-menu'>
+          <span>자유게시판</span>
+          <span>중고마켓</span>
+        </div>
       </div>
-      <div>
-        <p>자유게시판</p>
-        <p>중고마켓</p>
-      </div>
-      <button>로그인</button>
+      <button className='login-button'>로그인</button>
     </header>)
 }
 

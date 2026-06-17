@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard'
+import searchIcon from '../assets/ic_search.svg';
+import dropdownIcon from '../assets/ic_arrow_down.svg';
+import './MarketPage.css'
 
 // const mockProducts = [
 //   {
@@ -102,87 +105,99 @@ function MarketPage() {
   }, [orderBy, keyword, page]);
 
   return (
-    <>
-      <section>
-        <h2>베스트 상품</h2>
-        <div>
-          {
-            bestProducts.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))
-          }
-        </div>
-      </section>
-      <section>
-        <div>
-          <h2>판매 중인 상품</h2>
-          <input
-            value={searchInput}
-            placeholder="검색할 상품을 입력해주세요"
-            onChange={(e) => {
-              setSearchInput(e.target.value);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                // 입력 중인 값(searchInput)을 실제 검색어(keyword)로 확정
-                setKeyword(searchInput)
-                // 검색 후 페이지 초기화
-                setPage(1);
-              }
-            }}
-          ></input>
-          <button>상품 등록하기</button>
-          <select
-            value={orderBy}
-            onChange={(e) => {
-              setOrderBy(e.target.value)
-              // 정렬 후 페이지 초기화
-              setPage(1);
-            }}
-          >
-            <option value="recent">최신순</option>
-            <option value="favorite">좋아요순</option>
-          </select>
-        </div>
-        <div>
-          {
-            products.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))
-          }
-        </div>
-        <div>
-          <button
-            disabled={page <= 1}
-            onClick={() => setPage(page - 1)}
-          >
-            &lt;
-          </button>
-
-          {pageNumbers.map(pagenumber => (
+    <main className='market-background'>
+      <div className='market-page'>
+        <section className='best-products'>
+          <h2>베스트 상품</h2>
+          <div className='best-products-cards'>
+            {
+              bestProducts.map(product => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
+              ))
+            }
+          </div>
+        </section>
+        <section className='products'>
+          <div className='products-function'>
+            <h2>판매 중인 상품</h2>
+            <div className='products-function-right'>
+              <div className='search-box'>
+                <img src={searchIcon} alt='' className='search-icon' />
+                <input
+                  className='search-input'
+                  value={searchInput}
+                  placeholder='검색할 상품을 입력해주세요'
+                  onChange={(e) => {
+                    setSearchInput(e.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      // 입력 중인 값(searchInput)을 실제 검색어(keyword)로 확정
+                      setKeyword(searchInput)
+                      // 검색 후 페이지 초기화
+                      setPage(1);
+                    }
+                  }}
+                />
+              </div>
+              <button className='btn-register'>상품 등록하기</button>
+              <div className='order-by-box'>
+                <select className='order-by'
+                  value={orderBy}
+                  onChange={(e) => {
+                    setOrderBy(e.target.value)
+                    // 정렬 후 페이지 초기화
+                    setPage(1);
+                  }}
+                >
+                  <option value="recent">최신순</option>
+                  <option value="favorite">좋아요순</option>
+                </select>
+                <img className='order-by-icon' src={dropdownIcon} alt='' />
+              </div>
+            </div>
+          </div>
+          <div className='products-cards'>
+            {
+              products.map(product => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
+              ))
+            }
+          </div>
+          <div className='pagination'>
             <button
-              key={pagenumber}
-              onClick={() => setPage(pagenumber)}
+              disabled={page <= 1}
+              onClick={() => setPage(page - 1)}
             >
-              {pagenumber}
+              &lt;
             </button>
-          ))}
 
-          <button
-            disabled={page >= totalPages}
-            onClick={() => setPage(page + 1)}
-          >
-            &gt;
-          </button>
-        </div>
-      </section >
-    </>)
+            {pageNumbers.map(pageNumber => (
+              <button
+                key={pageNumber}
+                className={page === pageNumber ? 'active' : ''}
+                onClick={() => setPage(pageNumber)}
+              >
+                {pageNumber}
+              </button>
+            ))}
+
+            <button
+              disabled={page >= totalPages}
+              onClick={() => setPage(page + 1)}
+            >
+              &gt;
+            </button>
+          </div>
+        </section >
+      </div>
+    </main>)
 }
 
 export default MarketPage;

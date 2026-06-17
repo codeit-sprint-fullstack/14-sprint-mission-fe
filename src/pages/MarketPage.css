@@ -1,0 +1,181 @@
+.market-background {
+  background-color: var(--soft-gray);
+}
+
+.market-page {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0 auto;
+  padding: 40px 0 120px;
+}
+
+.best-products {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.best-products-cards {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/*product-card 중에서 best-products-cards 안에 들어있는 것만*/
+.best-products-cards .product-card {
+  flex: 1;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.products-function {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.products-function-right {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.search-box {
+  background: var(--Cool-Gray-100);
+  width: 325px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 20px 9px 16px;
+  border-radius: 12px;
+}
+
+.search-input {
+  color: var(--Secondary-400);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  width: 100%;
+  height: 24px;
+  border: none;
+  background: transparent; /* 배경색 없애고 투명 패널로 만들기 */
+  outline: none;
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.btn-register {
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+
+  /* pretendard/lg-16px-semibold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  /* 162.5% */
+  height: 42px;
+  padding: 0 23px;
+  border-radius: 8px;
+  border: none;
+}
+
+.order-by-box {
+  width: 130px;
+  height: 42px;
+  position: relative;
+}
+
+.order-by {
+  background: var(--pure-white);
+  color: var(--Secondary-800);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  width: 100%;
+  height: 100%;
+  padding: 0 44px 0 20px;
+  border-radius: 12px;
+  border: 1px solid var(--Cool-Gray-200);
+  appearance: none;
+  cursor: pointer;
+}
+
+.order-by-icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;  /* 마우스/터치 이벤트 무시 */
+}
+
+.products-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 40px 24px;
+}
+
+h2 {
+  color: var(--Secondary-900);
+
+  /* pretendard/xl-20px-bold */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  /* 160% */
+}
+
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: 4px;
+}
+
+.pagination button {
+  color: var(--Cool-Gray-600);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--Cool-Gray-200);
+  background: var(--pure-white);
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: var(--brand-blue);
+  color: var(--pure-white);
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
