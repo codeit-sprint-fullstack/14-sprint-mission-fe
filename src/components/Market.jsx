@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BestItem from "./BestItem.jsx";
 import MarketItems from "./MarketItems.jsx";
 import axios from '../utils/axios.js';
+import Pagination from "./Pagination.jsx";
 
 function Market() {
     const [bestItems, setBestItems] = useState([]);
@@ -23,6 +24,7 @@ function Market() {
             <div className="inner">
                 <BestItem bestItems={bestItems}/>
                 <MarketItems marketItems={marketItems}/>
+                <Pagination/>
             </div>
         </main>
     );
