@@ -16,29 +16,33 @@
         </a>
         <p>판다마켓</p>
     </header>
-
-    <div class="input_zone">
-    <label for="e-mail">이메일</label>
-    <input id="e-mail" type="email" placeholder="이메일을 입력해주세요">
-    </div>
-    <div class="input_zone">
-    <label for="password">비밀번호</label>
-    <input id="password" type="password" placeholder="비밀번호를 입력해주세요">
-    <button class="eye_button"  type="button">
-        <img src="photo/눈 버튼.svg">
-    </button>
-    </div>
-
-    <button>로그인</button>
+    <main>
+        <div class="input_zone">
+        <label for="e-mail">이메일</label>
+        <input  type="email" id="e-mail" placeholder="이메일을 입력해주세요.">
+        <p class= "error-message" id="email-error"></p>
+        </div>
+        <div class="input_zone">
+        <label for="password">비밀번호</label>
+        <div class="password_wrapper">
+        <input  type="password" id="password" placeholder="비밀번호를 입력해주세요.">
+            <button class="eye_button"  type="button">
+            <img src="photo/눈 버튼.svg">
+        </button>
+        </div>
+        <p class="error-message" id="password-error"></p>
+        </div>
+    </main>
+    <button id="login-button">로그인</button>
 
     <div class="simple_login_tab">
         <p id="simple_login">간편 로그인하기</p>
         <p class="login-link"> 
             <a href="https://www.google.com/">
-            <img id= "google-icon" src="photo/ic-google.png">
+            <img id= "google-icon" src="photo/ic_google.png">
             </a>
             <a href="https://www.kakaocorp.com/page/">
-            <img id= "kakao-icon" src="photo/ic-kakao.svg">
+            <img id= "kakao-icon" src="photo/ic_kakao.svg">
             </a>
         </p>
     </div>
@@ -46,6 +50,7 @@
      판다마켓이 처음이신가요?
      <a href="signup.html" >회원가입 </a>
     </div>
+    <script type="module" src="login.js"></script>
 </body>
 </div>
 </html>

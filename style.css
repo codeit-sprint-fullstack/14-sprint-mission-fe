@@ -7,27 +7,26 @@ box-sizing: border-box;
 }
 
 @font-face {
-	font-family: 'Pretendard';
-	font-weight: 700;
-	font-display: swap;
-	src: local('Pretendard Bold'), url(./woff2/Pretendard-Bold.woff2) format('woff2'), url(./woff/Pretendard-Bold.woff) format('woff');
+    font-family: 'Pretendard';
+    src: url('./font.woff2/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
 }
 @font-face {
-    font-family: 'ROKAF sans';
-    src: url('font/bold.ttf');
-    font-weight: 700;
-    
+    font-family: 'ROKAF Sans';
+    src: url('./font.woff2/ROKAFSans-Bold.woff2') format('woff2');
+    font-weight: 700; 
+
 }
+
 @font-face {
     font-family: 'Pretendard';
-    src: url('font/reg.otf');
+    src: url('./font.woff2/Pretendard-SemiBold.woff2') format('woff2');
     font-weight: 600;
 }
 @font-face {
-	font-family: 'Pretendard';
-	font-weight: 500;
-	font-display: swap;
-	src: local('Pretendard Medium'), url(./woff2/Pretendard-Medium.woff2) format('woff2'), url(./woff/Pretendard-Medium.woff) format('woff');
+    font-family: 'Pretendard';
+    src: url('./font.woff2/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 500;
 }
 /* .content-container{
     width: 100%;
@@ -121,7 +120,7 @@ font-family: 'ROKAF sans';
     font-weight: 500;
     line-height: 2rem;
 }
-.body1{
+.watch-section{
     background-color: #CFE5FF;
     width: 100%;
     margin: 0 auto;
@@ -130,14 +129,14 @@ font-family: 'ROKAF sans';
     align-items: flex-end;
     justify-content: center;
 }
-.sec1{
+.watch-content{
     width: 100%;
     height: 21.25rem;
     margin: 0 auto;
     display: flex;
     justify-content: center;
 }
-.sec1-1{
+.watch-text{
     display: flex;
     flex-direction: column;
     padding: 1.875rem;
@@ -157,14 +156,14 @@ font-family: 'ROKAF sans';
     align-items: center;
     text-decoration: none;
 }
-.body2{
+.hot-item-section{
     width: 100%;
     height: 45rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.sec2{
+.hot-item-content{
     background-color: #FCFCFC;
     width: 61.75rem;
     height:27.75rem;
@@ -173,19 +172,19 @@ font-family: 'ROKAF sans';
     align-items: center;
     gap: 4rem;
 }
-.sec2-1{
+.hot-item-text{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-.body3{
+.search-section{
     width: 100%;
     height: 45rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.sec3{
+.search-content{
     background-color: #FCFCFC;
     width: 61.75rem;
     height:27.75rem;
@@ -194,19 +193,19 @@ font-family: 'ROKAF sans';
     align-items: center;
     gap: 4rem;
 }
-.sec3-1{
+.search-text{
     display: flex;
     flex-direction: column;
     text-align: right;
 }
-.body4{
+.register-section{
     width: 100%;
     height: 45rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.sec4{
+.register-content{
     background-color: #FCFCFC;
     width: 61.75rem;
     height:27.75rem;
@@ -215,12 +214,12 @@ font-family: 'ROKAF sans';
     align-items: center;
     gap: 4rem;
 }
-.sec4-1{
+.register-text{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-.body5{
+.trust-section{
     background-color: #CFE5FF;
     width: 100%;
     height: 33.75rem;
@@ -229,7 +228,7 @@ font-family: 'ROKAF sans';
     align-items: flex-end;
     gap: 4.3125rem;
 }
-.sec5{
+.trust-text{
     min-width: 295px;
     height: 24.8125rem;
     display: flex;
@@ -264,11 +263,13 @@ footer{
 }
 .faq{
     font-family: "Pretendard";
-    color: #E5E7EB;
     font-size: 1rem;
     gap:1.875rem;
     font-weight: 400;
     display: flex;
+}
+.faq-link{
+    color: #E5E7EB; 
     text-decoration: none;
     cursor: pointer;
 }
