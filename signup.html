@@ -19,64 +19,69 @@
   <title>판다마켓 회원가입</title>
 </head>
 <body>
-  <header id="singup-header">
+  <header id="signup-header">
     <a href="./index.html">
       <div class="login-logo">
-        <img src="./images/판다 얼굴.png" alt="Logo" class="login-img"></img>
+        <img src="./images/판다 얼굴.png" alt="Logo" class="login-img">
         <div class="login-PandaMarket">판다마켓</div>
       </div>
     </a>
   </header>
-    <form class="login-form">
-      <div class="signup-box">
-        <form class="signup-form">
-          <div class="login-grid01">
-            <div class="login-text">이메일</div>
-            <input type="email" id="user-id" placeholder="이메일을 입력하세요" required>
-          </div>
-          <div class="login-grid02">
-            <div class="login-text">닉네임</div>
-            <input type="text" id="user-nickname" placeholder="닉네임을 입력해주세요" required>
-          </div>
-          <div class="login-grid02">
-            <div class="login-text">비밀번호</div>
-            <div class="login-passward">
-            <input type="password" id="user-passward" placeholder="비밀번호를 입력해주세요" required>
-            <button type="button" class="visibility-button">
-                  <img src="./images/btn_visibility_on_24px.png" alt="비밀번호 보기">
-                </button>
-            </div>
-          </div>
-          <div class="login-grid02">
-            <div class="login-text">비밀번호 확인</div>
-            <div class="login-passward">
-            <input type="password" placeholder="비밀번호를 다시 한번 입력해주세요" required>
+    <form class="login-form signup-box" data-auth-form="signup" novalidate>
+      <div class="signup-form">
+        <div class="login-grid01">
+          <div class="login-text">이메일</div>
+          <input type="email" id="user-id" placeholder="이메일을 입력하세요" autocomplete="email" data-auth-field="email" required>
+          <p class="input-error-message" data-error-for="email"></p>
+        </div>
+        <div class="login-grid02">
+          <div class="login-text">닉네임</div>
+          <input type="text" id="user-nickname" placeholder="닉네임을 입력해주세요" autocomplete="nickname" data-auth-field="nickname" required>
+        </div>
+        <div class="login-grid02">
+          <div class="login-text">비밀번호</div>
+          <div class="login-passward">
+            <input type="password" id="user-passward" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" data-auth-field="password" required>
             <button type="button" class="visibility-button">
               <img src="./images/btn_visibility_on_24px.png" alt="비밀번호 보기">
             </button>
-            </div>
           </div>
-        </form>
-          <div class="login-grid02">
-            <button type="submit" class="login-btn">로그인</button>
-          </div>
+          <ul class="password-checklist" data-password-checklist>
+            <li data-password-rule="length">10자 이상</li>
+            <li data-password-rule="letters">영문 대문자와 소문자 포함</li>
+            <li data-password-rule="number">숫자 포함</li>
+            <li data-password-rule="special">특수문자 포함<span class="password-rule-message" data-password-rule-message="special"></span></li>
+          </ul>
+          <p class="input-error-message" data-error-for="password"></p>
         </div>
-    
-
-        <div class="simple-login">
-          <div class="login-grid04">
-            <div class="grid04-container">
-              <div class="simple-login">간편 로그인하기</div>
-              <div class="login-sns">
-                <a href="https://www.google.com/" target="_blank"> <img src="./images/Component 2@3x.png" alt="구글"></a>
-                <a href="https://www.kakao.com/" target="_blank"><img src="./images/Component 3@3x.png" alt="카카오"></a>
-              </div>
-            </div>
+        <div class="login-grid02">
+          <div class="login-text">비밀번호 확인</div>
+          <div class="login-passward">
+            <input type="password" id="user-password-confirm" placeholder="비밀번호를 다시 한번 입력해주세요" autocomplete="new-password" data-auth-field="passwordConfirm" required>
+            <button type="button" class="visibility-button">
+              <img src="./images/btn_visibility_on_24px.png" alt="비밀번호 보기">
+            </button>
           </div>
+          <p class="input-error-message" data-error-for="passwordConfirm"></p>
         </div>
       </div>
-      <div class="signup-login">
-          <div class="login-signup">이미 회원이신가요? <a href="./login.html">로그인</a></div>
+      <div class="login-grid02">
+        <button type="submit" class="login-btn" disabled>회원가입</button>
+      </div>
+    </form>
+
+    <div class="login-grid04">
+      <div class="grid04-container">
+        <div class="simple-login">간편 회원가입</div>
+        <div class="login-sns">
+          <a href="https://www.google.com/" target="_blank"> <img src="./images/Component 2@3x.png" alt="구글"></a>
+          <a href="https://www.kakao.com/" target="_blank"><img src="./images/Component 3@3x.png" alt="카카오"></a>
         </div>
+      </div>
+    </div>
+    <div class="signup-login">
+      <div class="login-signup">이미 회원이신가요? <a href="./login.html">로그인</a></div>
+    </div>
+    <script type="module" src="./signup.js"></script>
 </body>
 </html>
