@@ -7,22 +7,24 @@ import { useState, useEffect } from "react";
 function MarketItems() {
     const [marketItems, setMarketItems] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
-    const [sortType, setSortType] = useState("최신순");
+    const [sortType, setSortType] = useState("recent");
+    const [searchKeyword, setSearchKeyword] = useState('');
 
-    const handleLoad = async (orderType = 'recent') => {
-        const marketItemsResponse = await axios.get('?pageSize=10&orderBy=' + orderType);
+    const handleLoad = async (keyword = searchKeyword, orderType = sortType) => {
+        const marketItemsResponse = await axios.get('?pageSize=10&orderBy=' + orderType + '&keyword=' + keyword);
+        
         setMarketItems(marketItemsResponse.data.list);
     }
 
     const handleSelect = (value) => {
         setSortType(value);
-        if (value === "최신순") {
-            handleLoad();
-        } else {
-            handleLoad('favorite');
-        }
+        handleLoad(searchKeyword, value);
 
         setIsOpen(false);
+    };
+
+    const handleSearch = () => {
+        handleLoad(searchKeyword, sortType);
     };
 
     useEffect(() => {
@@ -34,22 +36,27 @@ function MarketItems() {
             <div className="section_title">판매 중인 상품
                 <div className="search_wrap">
                     <div className="input_wrap">
-                        <input type="text" placeholder="검색할 상품을 입력해주세요"/>
+                        <input type="text" placeholder="검색할 상품을 입력해주세요" onChange={(e) => setSearchKeyword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                handleSearch();
+                            }
+                        }}/>
                         <img src={searchIcon} alt="검색 아이콘"/>
                     </div>
                     <button type="button">상품 등록하기</button>
                     <div className="select_wrap">
                         <div className="select_display" onClick={() => setIsOpen((prev) => !prev)}>
-                            {sortType}
+                            {sortType == 'recent' ? '최신순' : '좋아요순'}
                             <img src={arrowDownImg} alt="필터 목록 버튼" />
                         </div>
                         {isOpen && (
                             <div className="select_btn_wrap">
-                                <div className="select_btn" onClick={() => handleSelect("최신순")}>
+                                <div className="select_btn" onClick={() => handleSelect("recent")}>
                                     최신순
                                 </div>
 
-                                <div className="select_btn" onClick={() => handleSelect("좋아요순")}>
+                                <div className="select_btn" onClick={() => handleSelect("favorite")}>
                                     좋아요순
                                 </div>
                             </div>

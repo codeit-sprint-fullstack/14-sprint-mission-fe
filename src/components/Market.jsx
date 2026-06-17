@@ -6,13 +6,10 @@ import Pagination from "./Pagination.jsx";
 
 function Market() {
     const [bestItems, setBestItems] = useState([]);
-    const [marketItems, setMarketItems] = useState([]);
     
     const handleLoad = async () => {
         const bestItemsResponse = await axios.get('?pageSize=4&orderBy=favorite');
-        const marketItemsResponse = await axios.get('?pageSize=10');
         setBestItems(bestItemsResponse.data.list);
-        setMarketItems(marketItemsResponse.data.list);
     }
 
     useEffect(() => {
@@ -23,7 +20,7 @@ function Market() {
         <main id="main" style={{ padding: '24px 0'}}>
             <div className="inner">
                 <BestItem bestItems={bestItems}/>
-                <MarketItems marketItems={marketItems}/>
+                <MarketItems/>
                 <Pagination/>
             </div>
         </main>
