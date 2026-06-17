@@ -28,8 +28,8 @@
           <input
           type="email"
           class="email-input"
-          placeholder="이메일을 입력해주세요"
-          required>
+          placeholder="이메일을 입력해주세요">
+          <div class="email-error"></div>
         </div>
 
         <div action="" class="password-box">
@@ -37,16 +37,25 @@
             비밀번호
           </label>
 
-          <div class="input-container">
+          <div class="password-container">
             <input
             type="password"
             class="password-input"
-            placeholder="비밀번호를 입력해주세요"
-            required>
+            placeholder="비밀번호를 입력해주세요">
+
+            <img
+              src="images/btn_eye_off.png"
+              class="toggle-password"
+              alt="비밀번호 보기">
           </div>
+
+          <div class="password-error"></div>
         </div>
       
-        <button type="submit" class="login-button">
+        <button
+          type="submit"
+          class="login-button"
+          disabled>
           <div class="login-text">
             로그인
           </div>
@@ -93,5 +102,14 @@
         </a>
       </div>
     </div>
+
+    <div class="modal hidden">
+      <div class="modal-box">
+        <p class="modal-text"></p>
+          <button class="modal-close">확인</button>
+      </div>
+    </div>
+
+    <script type="module" src="login.js"></script>
   </body>
 </html>
