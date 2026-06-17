@@ -1,0 +1,28 @@
+/* footer */
+footer{
+  width: 100%;
+  background-color: var(--color-bg-dark);
+}
+.foot-info{
+  max-width:1920px;
+  color: var(--color-text-inactive);
+  padding: 32px 200px;
+  display: flex;
+  justify-content: space-between;
+  height: 160px;
+  margin:0 auto;
+}
+footer p:nth-child(2){
+  color: var(--color-text-footer);
+  display: flex;
+  gap: 30px;
+}
+footer p:nth-child(2) a{
+  color: var(--color-bg-sub);
+  cursor: pointer;
+}
+footer p:last-child{
+  display: flex;
+  gap: 12px;
+}
+

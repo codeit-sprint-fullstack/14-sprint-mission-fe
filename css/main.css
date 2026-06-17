@@ -1,0 +1,124 @@
+/* main-hero */
+.hero-bg{
+  position: relative;
+  background-color: var(--color-secondary);
+  height:540px;
+  margin-top:70px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.hero-content{
+  width: 1110px;
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.hero-copy{
+  width:357px;
+}
+.hero-copy h1{
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 140%;
+  margin-bottom: 32px;
+}
+.hero-copy a{
+  display: flex;
+  padding: 16px 120px;
+  height:56px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-primary);
+  border-radius: 40px;
+  color: var(--color-text-button);
+  font-size:2rem;
+  font-weight: 600;
+  line-height: 32px;
+}
+.hero-content img{
+  height:340px;
+}
+
+
+.features article{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 138px 0;
+}
+.features article .features-box{
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  width:988px; 
+}
+.features article img{
+  width:588px;
+}
+.features article:nth-child(2) .features-box{
+  flex-direction: row-reverse;
+}
+
+.features article .features-copy h2{
+  color: var(--color-text-point);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 26px;
+  margin-bottom: 12px;
+}
+.features article .features-copy h3{
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 140%; 
+  letter-spacing: 0.8px;
+  margin-bottom: 24px;
+}
+.features article .features-copy p{
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 32px;
+}
+.features article:nth-child(2) .features-copy{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+/* bot */
+.bot-bg{
+  padding-top: 138px;
+  background-color: var(--color-bg-grey);
+}
+.bot{
+  position: relative;
+  background-color: var(--color-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 143px;
+}
+.bot-banner{
+  width: 1110px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+}
+.bot-banner-copy{
+  width: 300px;
+  margin-bottom: 60px;
+  flex-shrink :0;
+}
+.bot-banner-copy h2{
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 140%;
+}
+.bot-banner img{
+  height: 400px;
+  flex-grow: 1;
+}

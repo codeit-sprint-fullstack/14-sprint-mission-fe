@@ -1,12 +1,3 @@
-html{
-	font-size: 62.5%;
-  font-family: Pretendard, sans-serif;
-  scrollbar-gutter: stable;
-}
-body{
-  color: var(--color-text-base);
-  font-size: 1.6rem;
-}
 header{
   position: fixed;
   top:0;
@@ -27,7 +18,7 @@ header nav{
 header nav img{
   height:50px;
 }
-header nav a.bt_login{
+header nav a.bt-login{
   display: flex;
   padding: 12px 23px;
   width:128px;

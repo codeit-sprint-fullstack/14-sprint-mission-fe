@@ -1,0 +1,102 @@
+/* login.html */
+.main-login{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.main-join{
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: 70px 0;
+}
+.login, .join{
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+.login h1 img, .join h1 img{
+  width: 396px;
+}
+.login-form, .join-form{
+  width: 100%;
+  
+}
+.login-form form div, button#login, .join-form form div, button#join{
+  margin-bottom: 24px;
+}
+.login-form div label, .join-form div label{
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.6rem;
+  margin-bottom: 16px;
+  color: var(--color-text-dark);
+}
+.login-form div input, .join-form div input{
+  width: 100%;
+  padding: 16px 24px;
+  line-height: 2.6rem;
+  border-radius: 12px;
+  background-color: var(--color-text-button);
+  border: 1px solid transparent;
+}
+.login-form div input::placeholder, .join-form div input::placeholder{
+  font-size: 1.6rem;
+  color: var(--color-text-inactive);
+  line-height: 2.6rem;
+}
+.login-form div input:focus, .join-form div input:focus{
+  outline: none;
+  border: 1px solid var(--color-primary);
+}
+.login-form .input-password, .join-form .input-password{
+  position: relative;
+}
+.login-form .btn-password-toggle, .join-form .btn-password-toggle{
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.login-form .bt-login, .join-form .bt-join{
+  width: 100%;
+  padding: 16px 124px;
+  border-radius: 40px;
+  background-color: var(--color-text-inactive);
+  color: var(--color-text-button);
+  font-size: 2rem;
+}
+.social-login{
+  padding: 16px 23px;
+  background-color: var(--color-tertiary);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.social-login h2{
+  color: var(--color-text-dark);
+  font-size: 1.6rem;
+}
+.social-login-group li{
+  display: inline-block;
+  width: 42px;
+}
+.social-login-group li:first-child{
+  margin-right: 16px;
+}
+.social-login-group li img{
+  width: 100%;
+}
+.signup-footer p, .login-footer p{
+  color: var(--color-text-dark);
+  font-size: 1.4rem;
+}
+.signup-footer a, .login-footer a{
+  color: var(--color-primary);
+  text-decoration: underline;
+}

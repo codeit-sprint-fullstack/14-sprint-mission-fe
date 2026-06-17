@@ -4,21 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>판다마켓</title>
-  <link rel="stylesheet" href="/css/reset.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/footer.css">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 </head>
 <body>
   <header>
     <nav>
-      <a href="/index.html"><img src="/images/Property 1=lg@2x.png" alt="판다마켓 로고"></a>
-      <a class="bt_login" href="/login.html">로그인</a>
+      <a href="../index.html"><img src="../images/Property 1=lg@2x.png" alt="판다마켓 로고"></a>
+      <a class="bt-login" href="./login.html">로그인</a>
     </nav>
   </header>
-  <main class="main_join">
+  <main class="main-join">
     <section class="join">
-      <h1><a href="/index.html"><img src="/images/Property 1=lg@2x.png" alt="판다마켓 로고"></a></h1>
+      <h1><a href="../index.html"><img src="../images/Property 1=lg@2x.png" alt="판다마켓 로고"></a></h1>
       <div class="join-form">
         <form method="post">
           <div>
@@ -34,7 +36,7 @@
             <div class="input-password">
               <input id="signup-password" name="password" placeholder="비밀번호를 입력해주세요" type="password" >
               <button type="button" id="togglePassword" class="btn-password-toggle" aria-label="비밀번호 보기">
-                <img src="images/btn_visibility_off.svg" alt="비밀번호 보기 아이콘">
+                <img src="../images/btn_visibility_off.svg" alt="비밀번호 보기 아이콘">
               </button>
             </div>
           </div>
@@ -43,22 +45,22 @@
             <div class="input-password">
               <input id="signup-password-verify" name="password" placeholder="비밀번호를 다시 한 번 입력해주세요" type="password" >
               <button type="button" id="togglePassword" class="btn-password-toggle" aria-label="비밀번호 보기">
-                <img src="images/btn_visibility_off.svg" alt="비밀번호 보기 아이콘">
+                <img src="../images/btn_visibility_off.svg" alt="비밀번호 보기 아이콘">
               </button>
             </div>
           </div>
-          <button type="button" id="join" class="bt_join" aria-label="회원가입하기">회원가입</button>
+          <button type="button" id="join" class="bt-join" aria-label="회원가입하기">회원가입</button>
         </form>
         <div class="social-login">
-          <p>간편 로그인하기</p>
-          <ul class="social-login__group">
-            <li><a href="https://www.google.com/" target="_blank"><img src="images/ic_google.png" alt="구글로그인"></a></li>
-            <li><a href="https://www.kakaocorp.com/page/" target="_blank"><img src="images/ic_kakaotalk.png" alt="카카오톡로그인"></a></li>
+          <h2>간편 로그인하기</h2>
+          <ul class="social-login-group">
+            <li><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer"><img src="../images/ic_google.png" alt="구글로그인"></a></li>
+            <li><a href="https://www.kakaocorp.com/page/" target="_blank" rel="noopener noreferrer"><img src="../images/ic_kakaotalk.png" alt="카카오톡로그인"></a></li>
           </ul>
         </div>
       </div>
       <div class="login-footer">
-        <p>이미 회원이신가요? <a href="login.html">로그인</a></p>
+        <p>이미 회원이신가요? <a href="./login.html">로그인</a></p>
       </div>
     </section>
   </main>
