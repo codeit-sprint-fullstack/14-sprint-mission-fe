@@ -15,6 +15,13 @@ function ProductList () {
     }
     getProducts();
     },[]);
+    const [searchText, setSearchText] = useState('');
+    const filteredProducts = products.filter((product) => {
+        return product.name.toLowerCase().includes(
+            searchText.toLowerCase()
+        );
+    });
+
     return(
     <>
     
@@ -23,7 +30,10 @@ function ProductList () {
         
     <div className="product-list-controls">
         <img className="maginifier-img" src={searchImg} alt='돋보기 이미지'/>
-        <input className= "search-input" placeholder="검색할 상품을 입력해주세요" />
+        <input className= "search-input" placeholder="검색할 상품을 입력해주세요" 
+        onChange={(e) => {
+        setSearchText(e.target.value);
+         }}/>
         <button className="register-button">상품 등록하기</button>
     <select className="order-select">
         <option>최신순</option>
@@ -33,7 +43,7 @@ function ProductList () {
   </div>
 
     <div className="items">
-      {products.map((product) => {
+      {filteredProducts.map((product) => {
         return (
             <ProductCard key={product.id} product={product} />
         );
