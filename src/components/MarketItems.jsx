@@ -1,4 +1,5 @@
 import arrowDownImg from "../assets/img/arrow_down.svg";
+import mobileSortImg from "../assets/img/ic_sort.svg";
 import MarketItem from "./MarketItem.jsx";
 import searchIcon from "../assets/img/ic_search.svg";
 import Pagination from "./Pagination.jsx";
@@ -11,7 +12,7 @@ function MarketItems() {
     if (window.innerWidth < 745) return 6;
     return 10;
   };
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 343);
   const [marketItems, setMarketItems] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [sortType, setSortType] = useState("recent");
@@ -52,6 +53,7 @@ function MarketItems() {
 
   useEffect(() => {
     const handleResize = () => {
+      setIsMobile(window.innerWidth <= 343);
       setPageSize(getPageSize());
       setPage(1);
     };
@@ -68,49 +70,56 @@ function MarketItems() {
   return (
     <>
       <section className="item_section">
-        <div className="section_title">
-          판매 중인 상품
-          <div className="search_wrap">
-            <div className="input_wrap">
-              <input
-                type="text"
-                placeholder="검색할 상품을 입력해주세요"
-                onChange={(e) => setSearchKeyword(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch();
-                  }
-                }}
-              />
-              <img src={searchIcon} alt="검색 아이콘" />
-            </div>
-            <button type="button">상품 등록하기</button>
-            <div className="select_wrap">
-              <div
-                className="select_display"
-                onClick={() => setIsOpen((prev) => !prev)}
-              >
-                {sortType == "recent" ? "최신순" : "좋아요순"}
-                <img src={arrowDownImg} alt="필터 목록 버튼" />
-              </div>
-              {isOpen && (
-                <div className="select_btn_wrap">
-                  <div
-                    className="select_btn"
-                    onClick={() => handleSelect("recent")}
-                  >
-                    최신순
-                  </div>
+        <div className="market_controls">
+          <p className="section_title">판매 중인 상품</p>
 
-                  <div
-                    className="select_btn"
-                    onClick={() => handleSelect("favorite")}
-                  >
-                    좋아요순
-                  </div>
-                </div>
-              )}
+          <div className="input_wrap">
+            <input
+              type="text"
+              placeholder="검색할 상품을 입력해주세요"
+              onChange={(e) => setSearchKeyword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+            />
+            <img src={searchIcon} alt="검색 아이콘" />
+          </div>
+
+          <button type="button" className="register_btn">
+            상품 등록하기
+          </button>
+
+          <div className="select_wrap">
+            <div
+              className="select_display"
+              onClick={() => setIsOpen((prev) => !prev)}
+            >
+              <p>{sortType === "recent" ? "최신순" : "좋아요순"}</p>
+              <img
+                src={isMobile ? mobileSortImg : arrowDownImg}
+                alt="필터 목록 버튼"
+              />
             </div>
+
+            {isOpen && (
+              <div className="select_btn_wrap">
+                <div
+                  className="select_btn"
+                  onClick={() => handleSelect("recent")}
+                >
+                  최신순
+                </div>
+
+                <div
+                  className="select_btn"
+                  onClick={() => handleSelect("favorite")}
+                >
+                  좋아요순
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="item_wrap market">
