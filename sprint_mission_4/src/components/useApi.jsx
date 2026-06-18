@@ -3,7 +3,7 @@ import axios from "axios";
 import Products from "../JavaScript/ProductService.js"
 
 
-function GetApi (page, size){
+function useApi (page, size, option){
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ function GetApi (page, size){
       try {
         setLoading(true);
         const res = await axios.get(
-          `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${size}&orderBy=recent`
+          `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${size}&orderBy=${option}`
         );
         setProducts(res.data.list);
         console.log(res.data.list);
@@ -25,9 +25,9 @@ function GetApi (page, size){
     }
 
     fetchData();
-  }, [page, size]);
+  }, [page, size, option]);
 
   return {products, loading, error};
 }
 
-export default GetApi;
+export default useApi;

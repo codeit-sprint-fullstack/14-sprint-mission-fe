@@ -12,14 +12,14 @@
 - [x]  상단 네비게이션 바, 푸터는 랜딩 페이지와 동일한 스타일과 규칙으로 만들어주세요.
 - [x]  상품 데이터는 https://panda-market-api.vercel.app/docs/에 명세된 GET 메소드 "/products" 를 활용해주세요.
 - [] 상품 목록 페이지네이션 기능을 구현합니다.
-- [] 드롭 다운으로 "최신 순" 또는 "좋아요 순"을 선택해서 정렬을 구현하세요.
+- [x] 드롭 다운으로 "최신 순" 또는 "좋아요 순"을 선택해서 정렬을 구현하세요.
 - [] 상품 목록 검색 기능을 구현합니다.
-- []  베스트 상품 데이터는 https://panda-market-api.vercel.app/docs/에 명세된 GET 메소드 "/products"의 정렬 기준 favorite을 사용해주세요.
+- [x]  베스트 상품 데이터는 https://panda-market-api.vercel.app/docs/에 명세된 GET 메소드 "/products"의 정렬 기준 favorite을 사용해주세요.
 
 ## 심화 요구사항
 ## 공통
 
-- [] 커스텀 hook을 만들어 필요한 곳에 활용해 보세요.
+- [x] 커스텀 hook을 만들어 필요한 곳에 활용해 보세요. (useApi.jsx)
 
 ## 중고마켓 페이지
 

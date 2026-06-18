@@ -5,9 +5,11 @@ import style from "./Items_Content.module.css";
 import ic_search from "../assets/ic_search.svg";
 import btn_right from "../assets/btn_right.png";
 import btn_left from "../assets/btn_left.png";
+import { useState } from "react";
 
 function Items_Content () {
   const navigate = useNavigate(); // 링크 이동 시 새로고침이 아닌 상태로 컴포넌트 호출
+  const [sortRule, setSortRule] = useState('recent');
 
   return (
     <>
@@ -16,7 +18,7 @@ function Items_Content () {
           <div className={style.bestItem}>
             <h2>베스트 상품</h2>
             <div className={style.bestItemList}>
-              <Items_Card page={1} size={4} index={true}/>
+              <Items_Card page={1} size={4} option={'favorite'} index={true}/>
             </div>
           </div>
           <div className={style.sellItem}>
@@ -27,14 +29,15 @@ function Items_Content () {
                 <button onClick={() => navigate('/')}>
                   <span>상품 등록하기</span>
                 </button>
-                <select id={style.dropdown} name="category">
+                <select id={style.dropdown} name="category" value={sortRule} onChange={(e) => setSortRule(e.target.value)
+                }>
                   <option value="recent">최신순</option>
-                  <option value="like">좋아요순</option>
+                  <option value="favorite">좋아요순</option>
                 </select>
               </div>
             </div>
             <div className={style.sellItemList}>
-              <Items_Card page={1} size={10} index={false}/>
+              <Items_Card page={1} size={10} option={sortRule} index={false}/>
             </div>
           </div>
 

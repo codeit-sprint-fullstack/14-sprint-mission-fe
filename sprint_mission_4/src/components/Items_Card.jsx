@@ -4,10 +4,10 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import defaultImg from "../assets/placeholder.png";
-import GetApi from "./GetApi";
+import useApi from "./useApi";
 
-function Items_Card({ page, size, index }){
-  const { products, loading, error } = GetApi(page, size);
+function Items_Card({ page, size, option, index }){
+  const { products, loading, error } = useApi(page, size, option);
 
   if (loading)
     return console.log('로딩중...');

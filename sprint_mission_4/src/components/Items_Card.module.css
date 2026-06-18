@@ -10,6 +10,12 @@
   line-height: 24px;
 }
 
+.product_card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .mainlist img{
   width: 282px;
   height: 282px;
