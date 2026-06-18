@@ -59,33 +59,48 @@ function Items() {
           )}
 
           <div className="pagination">
-            <button
-              className="pageBtn"
-              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              &lt;
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                className={`pageBtn${currentPage === page ? ' active' : ''}`}
-                onClick={() => setCurrentPage(page)}
-              >
-                {page}
-              </button>
-            ))}
-            <button
-              className="pageBtn"
-              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              &gt;
-            </button>
-          </div>
-
-        </div>
-      </div>
+  <button
+    className="pageBtn"
+    onClick={() => setCurrentPage((p) => Math.max(p - 5, 1))}
+    disabled={currentPage === 1}
+  >
+    &laquo;
+  </button>
+  <button
+    className="pageBtn"
+    onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+    disabled={currentPage === 1}
+  >
+    &lt;
+  </button>
+  {Array.from({ length: totalPages }, (_, i) => i + 1)
+    .filter((page) => page >= currentPage - 0 && page <= currentPage + 4)
+    .map((page) => (
+      <button
+        key={page}
+        className={`pageBtn${currentPage === page ? ' active' : ''}`}
+        onClick={() => setCurrentPage(page)}
+      >
+        {page}
+      </button>
+    ))}
+  <button
+    className="pageBtn"
+    onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+    disabled={currentPage === totalPages}
+  >
+    &gt;
+  </button>
+  <button
+    className="pageBtn"
+    onClick={() => setCurrentPage((p) => Math.min(p + 5, totalPages))}
+    disabled={currentPage === totalPages}
+  >
+    &raquo;
+  </button>
+</div>
+</div>
+</div>
 
       <div className="footer">
         <div className="inner">

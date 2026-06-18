@@ -18,7 +18,7 @@
 .logoLink { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
 .logoLink img { height: 40px; }
 .logoLink span { font-size: 20px; font-weight: bold; color: var(--primary-blue); }
-.loginButton { background-color: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 10px 24px; font-size: 15px; cursor: pointer; }
+.loginButton { background-color: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 10px 24px; font-size: 15px; cursor: pointer; text-decoration: none;}
 
 /* 히어로 */
 .hero { background-color: var(--primary-blue-light); overflow: hidden; }
