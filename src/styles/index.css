@@ -54,3 +54,23 @@
 .footerRight { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 16px; }
 .snsLink { display: flex; align-items: center; cursor: pointer; }
 .snsLink svg { width: 24px; height: 24px; }
+
+/* 태블릿 (744px ~ 1199px) */
+@media (max-width: 1199px) {
+    .inner { padding: 0 40px; }
+    .header .inner { padding: 15px 40px; }
+    .hero .inner { padding: 60px 40px 0; }
+    .footer .inner { padding: 30px 40px; }
+}
+
+/* 모바일 (~ 743px) */
+@media (max-width: 743px) {
+    .inner { padding: 0 16px; }
+    .header .inner { padding: 12px 16px; }
+    .hero .inner { padding: 30px 16px 0; flex-direction: column; align-items: center; min-height: auto; }
+    .hero .heroText { padding-bottom: 20px; }
+    .heroText h1 { font-size: 24px; }
+    .heroImage { height: 160px; }
+    .footer .inner { padding: 20px 16px; flex-direction: column; gap: 12px; }
+    .footerLeft, .footerCenter, .footerRight { flex: none; width: 100%; justify-content: center; }
+}
