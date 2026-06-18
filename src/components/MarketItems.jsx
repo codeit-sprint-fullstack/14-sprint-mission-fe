@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 
 function MarketItems() {
   const getPageSize = () => {
-    if (window.innerWidth < 768) return 4;
-    if (window.innerWidth < 1200) return 6;
+    if (window.innerWidth < 344) return 4;
+    if (window.innerWidth < 745) return 6;
     return 10;
   };
 

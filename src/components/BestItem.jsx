@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 function BestItem() {
   const getPageSize = () => {
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1200) return 2;
+    if (window.innerWidth < 344) return 1;
+    if (window.innerWidth < 745) return 2;
     return 4;
   };
 
