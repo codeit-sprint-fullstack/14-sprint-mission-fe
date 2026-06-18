@@ -14,17 +14,17 @@ function App() {
     setItems(response.data.list)
   };
   const [bestItems, setBestItems] = useState([]);
-const handleLoadBest = async () => {
-  const response = await axios.get('/products', {
-    params: {
-      page: 1,
-      pageSize: 4,
-      orderBy: 'favorite'
-    }
-  });
+  const handleLoadBest = async () => {
+    const response = await axios.get('/products', {
+      params: {
+        page: 1,
+        pageSize: 4,
+        orderBy: 'favorite'
+      }
+    });
 
-  setBestItems(response.data.list);
-}
+    setBestItems(response.data.list);
+  }
 
   useEffect(() => {
     handleLoad();
@@ -36,14 +36,14 @@ const handleLoadBest = async () => {
   return (
     <>
       <Header />
-        <div className="productContents">
-          <div className="inner">
-            <div className="prodcutBest">
-              <p className="sectionTitle">베스트 상품</p>
-              <BestProductList items={items} />
-            </div>
+      <div className="productContents">
+        <div className="inner">
+          <div className="prodcutBest">
+            <p className="sectionTitle">베스트 상품</p>
+            <BestProductList items={bestItems} />
           </div>
         </div>
+      </div>
       <Footer />
     </>
   );
