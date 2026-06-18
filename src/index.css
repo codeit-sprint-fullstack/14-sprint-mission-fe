@@ -3,3 +3,24 @@
   padding: 0;
   box-sizing: border-box;
 }
+@font-face {
+  font-family: 'Pretendard';
+  src: url('./assets/fonts.woff2/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('./assets/fonts.woff2/Pretendard-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+    font-family: 'ROKAF-Sans';
+    src: url('./assets/fonts.woff2/ROKAFSans-Bold.woff2') format('woff2');
+    font-weight: 700; 
+
+}
+body{
+  font-family: 'Pretendard';
+}

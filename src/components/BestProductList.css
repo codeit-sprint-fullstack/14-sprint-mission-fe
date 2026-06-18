@@ -1,4 +1,4 @@
-.items{
+.best-items{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,4 +6,20 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 24px;
     row-gap: 40px;
+}
+
+.best-items .product-image{
+    width: 282px;
+    height: 378px;
+}
+.best-items .no-image{
+    background-color: #ababab;
+    border-radius: 20px;
+    width: 282px;
+    height: 378px;
+    margin-bottom: 16px;
+}
+
+.best-list-title{
+margin-bottom: 16px;
 }

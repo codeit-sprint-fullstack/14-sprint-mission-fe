@@ -8,7 +8,7 @@ function BestProductList () {
 
 useEffect(() => {
   async function getProducts() {
-    const response = await axios.get('https://panda-market-api.vercel.app/products');
+    const response = await axios.get('https://panda-market-api.vercel.app/products?page=1&pageSize=4&orderBy=favorite');
 
     setProducts(response.data.list);
   }
@@ -21,8 +21,8 @@ const bestProducts = [...products]
 .slice(0, 4);
     return(
     <>
-    <h3>베스트 상품</h3>
-    <div className="items">
+    <h3 className="best-list-title">베스트 상품</h3>
+    <div className="best-items">
   {bestProducts.map((product) => {
     return (
       <ProductCard

@@ -7,48 +7,63 @@ import searchImg from '../assets/searchImg.svg'
 
 function ProductList () {
     const [products, setProducts] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [orderBy, setOrderBy]= useState('recent');
+    
     useEffect(() => {
     async function getProducts() {
-        const response = await axios.get('https://panda-market-api.vercel.app/products');
+        const response = await axios.get(`https://panda-market-api.vercel.app/products?page=1&pageSize=10&orderBy=${orderBy}`);
 
         setProducts(response.data.list);
     }
     getProducts();
-    },[]);
-    const [searchText, setSearchText] = useState('');
+    },[orderBy]);
+
     const filteredProducts = products.filter((product) => {
         return product.name.toLowerCase().includes(
             searchText.toLowerCase()
         );
     });
 
+    const sortedProducts = [...filteredProducts].sort((a,b) => {
+        if(orderBy === 'favorite') {
+            return (b.favoriteCount - a.favoriteCount)
+        }else {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+        }
+    });
+
     return(
     <>
-    
-  <div className="product-list-header">
-        <h3 className="list-title">판매중인 상품</h3>
-        
-    <div className="product-list-controls">
-        <img className="maginifier-img" src={searchImg} alt='돋보기 이미지'/>
-        <input className= "search-input" placeholder="검색할 상품을 입력해주세요" 
-        onChange={(e) => {
-        setSearchText(e.target.value);
-         }}/>
-        <button className="register-button">상품 등록하기</button>
-    <select className="order-select">
-        <option>최신순</option>
-        <option>좋아요순</option>
-    </select>
-    </div>
-  </div>
+        <div className="product-list-header">
+            <h3 className="list-title">판매중인 상품</h3>
+            
+            <div className="product-list-controls">
+                <img className="maginifier-img" src={searchImg} alt='돋보기 이미지'/>
+                <input className= "search-input" placeholder="검색할 상품을 입력해주세요" 
+                    value = {searchText}
+                    onChange={(e) => {
+                    setSearchText(e.target.value);
+                }}/>
+                <button className="register-button">상품 등록하기</button>
+                <select className="order-select"
+                    value={orderBy}
+                    onChange={(e) => {
+                    setOrderBy(e.target.value)}}
+                >
+                    <option value="recent">최신순</option>
+                    <option value="favorite">좋아요순</option>
+                </select>
+            </div>
+        </div>
 
-    <div className="items">
-      {filteredProducts.map((product) => {
-        return (
-            <ProductCard key={product.id} product={product} />
-        );
-      })}
-      </div>
+        <div className="items">
+            {sortedProducts.map((product) => {
+                return (
+                    <ProductCard key={product.id} product={product} />
+                );
+            })}
+        </div>
     </>
     );
 }

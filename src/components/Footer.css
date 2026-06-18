@@ -1,0 +1,44 @@
+footer {
+  background-color: #111827;
+  display: flex;
+  width: 100%;
+  height: 10rem;
+  padding: 2rem 12.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+
+.lastpart {
+  display: flex;
+  width: 95rem;
+  height: 1.25rem;
+  justify-content: space-between;
+}
+
+.since {
+  font-family: 'Pretendard', sans-serif;
+  color: #9ca3af;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.faq {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1rem;
+  gap: 1.875rem;
+  font-weight: 400;
+  display: flex;
+}
+
+.faq-link {
+  color: #e5e7eb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.adress {
+  display: flex;
+  gap: 0.75rem;
+  cursor: pointer;
+}
