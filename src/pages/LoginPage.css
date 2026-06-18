@@ -1,0 +1,402 @@
+/* ====================================================================== */
+/* 로그인 페이지 전체 */
+/* ====================================================================== */
+
+.login_page {
+  min-height: 100vh;
+  padding: 1px 16px;
+
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.login_page .login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 648px;
+  max-width: 100%;
+  margin: 130px auto;
+}
+
+/* ====================================================================== */
+/* 판다마켓 로고 */
+/* ====================================================================== */
+
+.login_page .pandaLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  text-decoration: none;
+}
+
+.login_page .pandaFace {
+  width: 103.529px;
+  height: 103.88px;
+
+  border-radius: 28.932px;
+  background: #3692ff;
+}
+
+.login_page .pandaText {
+  margin: 0 0 0 22.24px;
+
+  color: #3692ff;
+  text-align: center;
+
+  font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
+  font-size: 66.344px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* ====================================================================== */
+/* 이메일 입력 영역 */
+/* ====================================================================== */
+
+.login_page .email_group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  padding-top: 40px;
+  gap: 16px;
+
+  color: #1f2937;
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.login_page #email_input {
+  width: 100%;
+  height: 58px;
+  padding: 16px 24px;
+
+  border: 1px solid #f3f4f6;
+  border-radius: 12px;
+  outline: none;
+
+  color: #1f2937;
+  background: #f3f4f6;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.login_page #email_input:focus {
+  border-color: #3692ff;
+}
+
+/* ====================================================================== */
+/* 비밀번호 입력 영역 */
+/* ====================================================================== */
+
+.login_page .password_group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  padding: 24px 0;
+  gap: 16px;
+
+  color: #1f2937;
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.login_page .password_set {
+  position: relative;
+  width: 100%;
+}
+
+.login_page #password_input {
+  width: 100%;
+  height: 58px;
+  padding: 16px 60px 16px 24px;
+
+  border: 1px solid #f3f4f6;
+  border-radius: 12px;
+  outline: none;
+
+  color: #1f2937;
+  background: #f3f4f6;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.login_page #password_input:focus {
+  border-color: #3692ff;
+}
+
+.login_page .password_toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+
+  padding: 0;
+  border: none;
+
+  background: none;
+  cursor: pointer;
+
+  transform: translateY(-50%);
+}
+
+.login_page .password_toggle img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* ====================================================================== */
+/* 오류 메시지 */
+/* ====================================================================== */
+
+.login_page .error_message {
+  margin: 0;
+
+  color: #f74747;
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.login_page .error_message:empty {
+  display: none;
+}
+
+/* ====================================================================== */
+/* 로그인 버튼 */
+/* ====================================================================== */
+
+.login_page .login_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+
+  border: none;
+  border-radius: 40px;
+
+  color: #f3f4f6;
+  background: #9ca3af;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+
+  cursor: pointer;
+}
+
+.login_page .login_btn.active {
+  background: #3692ff;
+}
+
+.login_page .login_btn:disabled {
+  cursor: not-allowed;
+}
+
+/* ====================================================================== */
+/* 로그인 폼 */
+/* ====================================================================== */
+
+.login_page .login_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+.login_page .login_button_group {
+  width: 100%;
+}
+
+
+/* ====================================================================== */
+/* 간편 로그인 */
+/* ====================================================================== */
+
+.login_page .Easy_login_group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 74px;
+  padding: 0 23px;
+  margin-bottom: 24px;
+
+  background: #e6f2ff;
+  box-sizing: border-box;
+}
+
+.login_page .Easy_login2 {
+  margin: 0;
+
+  color: #1f2937;
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.login_page .Easy_login_logo_group {
+  display: flex;
+  align-items: center;
+}
+
+.login_page .link_underline {
+  text-decoration: none;
+}
+
+.login_page .google_logo {
+  width: 42px;
+  height: 42px;
+  margin-right: 16px;
+}
+
+.login_page .kakao_logo {
+  width: 42px;
+  height: 42px;
+}
+
+/* ====================================================================== */
+/* 회원가입 이동 */
+/* ====================================================================== */
+
+.login_page .First {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  gap: 4px;
+}
+
+.login_page .text1 {
+  margin: 0 4px 0 0;
+
+  color: #1f2937;
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.login_page .signup {
+  color: #3692ff;
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* ====================================================================== */
+/* 로그인 오류 모달 */
+/* ====================================================================== */
+
+.login_page .error_modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.login_page .error_modal_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  padding: 48px 24px 24px;
+
+  border-radius: 8px;
+  background: #ffffff;
+
+  box-sizing: border-box;
+}
+
+.login_page #error_modal_message {
+  margin: 0;
+
+  color: #1f2937;
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.login_page .error_modal_close {
+  width: 56px;
+  height: 40px;
+
+  margin-top: 32px;
+  margin-left: auto;
+
+  border: none;
+  border-radius: 8px;
+
+  color: #ffffff;
+  background: #3692ff;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+/* ====================================================================== */
+/* 반응형 */
+/* ====================================================================== */
+
+@media (max-width: 1199px) {
+  .login_page .login {
+    width: calc(100vw - 32px);
+    max-width: 648px;
+    margin: 80px auto;
+  }
+}
+
+@media (max-width: 743px) {
+  .login_page .login {
+    width: calc(100vw - 32px);
+    max-width: 400px;
+    margin: 48px auto;
+  }
+
+  .login_page .pandaFace {
+    width: 80px;
+    height: 80px;
+  }
+
+  .login_page .pandaText {
+    margin-left: 16px;
+    font-size: 48px;
+  }
+}

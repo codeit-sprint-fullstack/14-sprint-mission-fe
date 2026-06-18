@@ -1,0 +1,596 @@
+/* ====================================================================== */
+/* Header */
+/* ====================================================================== */
+
+.top_bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 0 200px;
+
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.panda-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 9.5px 0;
+
+  text-decoration: none;
+}
+
+.panda_face {
+  width: 40px;
+  height: 40.135px;
+  margin-right: 8.59px;
+}
+
+.logo-text {
+  color: #3692ff;
+
+  font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
+  font-size: 25.633px;
+  font-style: normal;
+  font-weight: 1000;
+  line-height: normal;
+}
+
+.top_bar .login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+  padding: 11px 0;
+}
+
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 128px;
+  height: 48px;
+
+  border-radius: 8px;
+
+  color: #f3f4f6;
+  background-color: #3692ff;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+
+/* ====================================================================== */
+/* 중고마켓 전체 영역 */
+/* ====================================================================== */
+
+.flea-market {
+  width: 100%;
+  min-height: calc(100vh - 160px);
+
+  padding: 120px 24px 140px;
+
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.flea-market-container {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+
+/* ====================================================================== */
+/* 상품 영역 공통 */
+/* ====================================================================== */
+
+.product-section {
+  width: 100%;
+}
+
+.all-product-section {
+  margin-top: 80px;
+}
+
+.product-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+}
+
+.product-section-title {
+  margin: 0;
+
+  color: #111827;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+
+/* ====================================================================== */
+/* 상품 등록 버튼 */
+/* ====================================================================== */
+
+.product-register-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;
+  padding: 0 24px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: #ffffff;
+  background-color: #3692ff;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.product-register-button:hover {
+  background-color: #1967d6;
+}
+
+
+/* ====================================================================== */
+/* 검색창 및 정렬 드롭다운 */
+/* ====================================================================== */
+
+.product-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.product-search-input {
+  flex: 1;
+
+  height: 42px;
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 12px;
+  outline: none;
+
+  color: #1f2937;
+  background-color: #f3f4f6;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+
+  box-sizing: border-box;
+}
+
+.product-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.product-search-input:focus {
+  box-shadow: 0 0 0 2px #3692ff;
+}
+
+.product-order-select {
+  width: 130px;
+  height: 42px;
+  padding: 0 12px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  outline: none;
+
+  color: #374151;
+  background-color: #ffffff;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.product-order-select:focus {
+  border-color: #3692ff;
+}
+
+
+/* ====================================================================== */
+/* 상품 목록 */
+/* ====================================================================== */
+
+.best-product-list,
+.all-product-list {
+  display: grid;
+
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* 베스트 상품: PC 4열 */
+.best-product-list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+/* 전체 상품: PC 5열 */
+.all-product-list {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  gap: 40px 24px;
+}
+
+
+/* ====================================================================== */
+/* 페이지네이션 */
+/* ====================================================================== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 40px;
+  margin-top: 48px;
+
+  gap: 8px;
+}
+
+/* ====================================================================== */
+/* 상품 로딩 및 오류 */
+/* ====================================================================== */
+
+.product-status-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 200px;
+  margin: 24px 0 0;
+
+  color: #6b7280;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.product-error-message {
+  color: #ef4444;
+}
+
+
+/* ====================================================================== */
+/* 상품이 없을 때 */
+/* ====================================================================== */
+
+.product-list-empty {
+  width: 100%;
+  margin: 40px 0;
+
+  color: #6b7280;
+
+  font-size: 15px;
+  text-align: center;
+}
+
+
+/* ====================================================================== */
+/* 상품 카드 */
+/* ====================================================================== */
+
+.product-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.product-card-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  border-radius: 16px;
+  background-color: #f3f4f6;
+}
+
+.product-card-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.product-card-image-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: #9ca3af;
+  background-color: #f3f4f6;
+
+  font-size: 14px;
+}
+
+.product-card-information {
+  margin-top: 16px;
+}
+
+.product-card-name {
+  overflow: hidden;
+
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card-price {
+  margin: 6px 0 0;
+
+  color: #1f2937;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.product-card-favorite {
+  display: flex;
+  align-items: center;
+
+  margin-top: 6px;
+  gap: 4px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.product-card-heart {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+
+/* ====================================================================== */
+/* Footer */
+/* ====================================================================== */
+
+.last {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 160px;
+  padding: 32px 200px 0;
+
+  background-color: #111827;
+
+  box-sizing: border-box;
+}
+
+.codeit {
+  margin: 0;
+
+  color: #9ca3af;
+
+  text-align: center;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.text2_group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.privacy,
+.faq {
+  color: #e5e7eb;
+
+  text-align: center;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.sns {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+
+  gap: 12px;
+}
+
+.facebook,
+.twiter,
+.youtube,
+.insta {
+  flex-shrink: 0;
+
+  width: 20px;
+  height: 20px;
+}
+
+
+/* ====================================================================== */
+/* Tablet: 744px 이상 1199px 이하 */
+/* ====================================================================== */
+
+@media (min-width: 744px) and (max-width: 1199px) {
+  /* Header */
+
+  .top_bar {
+    padding: 0 24px;
+  }
+
+  /* 중고마켓 */
+
+  .flea-market {
+    padding: 110px 24px 120px;
+  }
+
+  /* 베스트 상품: 태블릿 2열 */
+
+  .best-product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* 전체 상품: 태블릿 3열 */
+
+  .all-product-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Footer */
+
+  .last {
+    padding: 32px 24px 0;
+  }
+}
+
+
+/* ====================================================================== */
+/* Mobile: 375px 이상 743px 이하 */
+/* ====================================================================== */
+
+@media (max-width: 743px) {
+  /* Header */
+
+  .top_bar {
+    padding: 0 16px;
+  }
+
+  .login-btn {
+    width: 100px;
+  }
+
+  /* 중고마켓 */
+
+  .flea-market {
+    padding: 100px 16px 80px;
+  }
+
+  .all-product-section {
+    margin-top: 56px;
+  }
+
+  .product-section-heading {
+    align-items: flex-start;
+  }
+
+  .product-register-button {
+    height: 42px;
+    padding: 0 16px;
+
+    font-size: 14px;
+  }
+
+  /* 검색창과 정렬 */
+
+  .product-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .product-search-input {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .product-order-select {
+    margin-left: auto;
+  }
+
+  /* 베스트 상품: 모바일 1열 */
+
+  .best-product-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* 전체 상품: 모바일 2열 */
+
+  .all-product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 32px 16px;
+  }
+
+  /* Footer */
+
+  .last {
+    position: relative;
+
+    height: 160px;
+    padding: 32px 16px;
+  }
+
+  .text1_group {
+    position: absolute;
+    bottom: 32px;
+    left: 16px;
+  }
+
+  .text2_group {
+    gap: 16px;
+  }
+}
