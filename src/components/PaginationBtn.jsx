@@ -1,8 +1,12 @@
-function PaginationBtn({ number, isActive }) {
+function PaginationBtn({ number, isActive, onClick }) {
     return (
-        <div className={isActive ? 'pagination_btn active' : 'pagination_btn'}>
+        <button
+            type="button"
+            className={`pagination_btn ${isActive ? "active" : ""}`}
+            onClick={onClick}
+        >
             {number}
-        </div>
+        </button>
     );
 }
 
