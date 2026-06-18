@@ -1,0 +1,153 @@
+.container {
+  background: #FFF;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.content {
+  background: #FcFcFc;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.content.right {
+  flex-direction: row-reverse;
+}
+
+
+.discription.right {
+  text-align: right;
+}
+
+.discription.left {
+  text-align: left;
+}
+
+.discription h4 {
+  color: var(--Primary-100);
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+  margin-bottom: 12px;
+}
+
+.discription h2 {
+  color: var(--Secondary-700, #374151);
+  font-family: Pretendard;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  margin-bottom: 12px;
+}
+
+.discription h3 {
+  color: var(--Secondary-700, #374151);
+  font-family: Pretendard;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;  
+}
+
+
+
+
+/* PC: 1200px ~ */
+@media screen and (min-width: 1200px)  {
+  .content {
+    padding: 50px 32px;
+    width: 100%;
+    gap: 5rem;
+  }
+
+  .content img {
+    width: 588px;
+    height: 444px;
+  }
+
+  .discription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px){
+  .discription h2 {
+    white-space: nowrap;
+  }
+
+  .discription h2 br {
+    display: none;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 32px;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .content.right {
+    flex-direction: column;
+  }
+
+  .content.left {
+    flex-direction: column;
+  }
+
+  .discription {
+    width: 80%;
+  }
+
+  .content img {
+    width: 80%;
+    height: 60%;
+  }
+
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px){
+  .discription h2 {
+    white-space: nowrap;
+  }
+
+  .discription h2 br {
+    display: none;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 32px;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .content.right {
+    flex-direction: column;
+  }
+
+  .content.left {
+    flex-direction: column;
+  }
+
+  .discription {
+    width: 80%;
+  }
+
+  .content img {
+    width: 80%;
+    height: 60%;
+  }
+}
