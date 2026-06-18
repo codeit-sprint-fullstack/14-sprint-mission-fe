@@ -2,53 +2,88 @@ import { useState, useEffect } from 'react';
 import { getProductList } from '../../services/ProductService.js';
 
 function Items() {
+  const [bestProducts, setBestProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getProductList(1, 10, '')
-      .then((data) => {
-        setProducts(data.list);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+    getProductList(1, 4, 'favorite', '')
+      .then((data) => setBestProducts(data.list))
+      .catch((err) => console.error(err));
   }, []);
 
-  if (loading) return <div>로딩 중...</div>;
-  if (error) return <div>에러: {error}</div>;
+  useEffect(() => {
+    setLoading(true);
+    getProductList(currentPage, 10, 'recent', '')
+      .then((data) => {
+        setProducts(data.list);
+        setTotalPages(Math.ceil(data.totalCount / 10));
+        setLoading(false);
+      })
+      .catch((err) => console.error(err));
+  }, [currentPage]);
 
   return (
     <>
-      <div className="hero">
-        <div className="inner">
-          <div>
-            <h1>일상의 모든 물건을<br />거래해 보세요</h1>
-            <button className="shopButton">구경해보러 가기</button>
-          </div>
-          <img className="heroImage" src="/img/panda_home.png" alt="판다 홈 이미지" />
-        </div>
-      </div>
-
       <div className="main">
         <div className="inner">
-          <div className="featureSection">
-            <h2>Hot Item</h2>
-            <p>인기 상품을 확인해 보세요</p>
-          </div>
 
-          <div className="itemsGrid">
-            {products.map((product) => (
+          <h2 className="sectionTitle">베스트 상품</h2>
+          <div className="bestGrid">
+            {bestProducts.map((product) => (
               <div className="itemCard" key={product.id}>
                 <img src={product.images?.[0] ?? '/img/panda_logo.png'} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p className="price">{product.price.toLocaleString()}원</p>
+                <p className="itemName">{product.name}</p>
+                <p className="itemPrice">{product.price.toLocaleString()}원</p>
+                <p className="itemFavorite">♡ {product.favoriteCount}</p>
               </div>
             ))}
           </div>
+
+          <h2 className="sectionTitle">판매 중인 상품</h2>
+          {loading ? (
+            <div>로딩 중...</div>
+          ) : (
+            <div className="itemsGrid">
+              {products.map((product) => (
+                <div className="itemCard" key={product.id}>
+                  <img src={product.images?.[0] ?? '/img/panda_logo.png'} alt={product.name} />
+                  <p className="itemName">{product.name}</p>
+                  <p className="itemPrice">{product.price.toLocaleString()}원</p>
+                  <p className="itemFavorite">♡ {product.favoriteCount}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="pagination">
+            <button
+              className="pageBtn"
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              &lt;
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={`pageBtn${currentPage === page ? ' active' : ''}`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              className="pageBtn"
+              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              &gt;
+            </button>
+          </div>
+
         </div>
       </div>
 

@@ -17,4 +17,4 @@
  * 
  * ex) 민감한 시크릿 키는 인프라 레벨의 환경변수로 설정하고, API 주소와 같은 공개 정보는 프로젝트 내 환경변수 파일로 설정
  */
-export const API_HOST = 'https://sprint-mission-api.vercel.app';
+export const API_HOST = 'https://panda-market-api.vercel.app';

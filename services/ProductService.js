@@ -2,24 +2,18 @@ import axios from 'axios';
 
 import { API_HOST } from '../constant/constant.js';
 
-export async function getProductList(page, pageSize, keyword) {
+export async function getProductList(page, pageSize, orderBy, keyword) {
   try {
     const response = await axios.get(`${API_HOST}/products`, {
-      params: { page, pageSize, keyword },
+      params: { page, pageSize, orderBy, keyword },
     });
-
     return response.data;
   } catch (error) {
-    // error.response가 있다면, 서버 측에서 에러응답을 반환한 경우입니다.
     if (error.response) {
       const errorMessage = `[StatusCode ${error.response.status}] ${error.response.data.message}`;
-
       console.error(errorMessage);
-
-      throw new Error(`[StatusCode ${error.response.status}] ${error.response.data.message}`);
+      throw new Error(errorMessage);
     }
-
-    // error.response가 없다면, 네트워크 오류 등으로 서버가 응답하지 않은 경우입니다.
     throw error;
   }
 }
