@@ -7,6 +7,10 @@ function Items() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [keyword, setKeyword] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [orderBy, setOrderBy] = useState('recent');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     getProductList(1, 4, 'favorite', '')
@@ -16,14 +20,14 @@ function Items() {
 
   useEffect(() => {
     setLoading(true);
-    getProductList(currentPage, 10, 'recent', '')
+    getProductList(currentPage, 10, orderBy, keyword)
       .then((data) => {
         setProducts(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
       })
       .catch((err) => console.error(err));
-  }, [currentPage]);
+  }, [currentPage, keyword, orderBy]);
 
   return (
     <>
@@ -42,7 +46,36 @@ function Items() {
             ))}
           </div>
 
-          <h2 className="sectionTitle">판매 중인 상품</h2>
+          <div className="sectionHeader">
+            <h2 className="sectionTitle">판매 중인 상품</h2>
+            <input
+              className="searchInput"
+              type="text"
+              placeholder="검색할 상품을 입력하세요"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setCurrentPage(1);
+                  setKeyword(searchInput);
+                }
+              }}
+            />
+            <button className="addItemBtn">상품 등록하기</button>
+
+            <div className="dropdown">
+  <button className="dropdownBtn" onClick={() => setIsDropdownOpen((prev) => !prev)}>
+    {orderBy === 'recent' ? '최신순' : '좋아요순'} ▼
+  </button>
+  {isDropdownOpen && (
+    <ul className="dropdownMenu">
+      <li onClick={() => { setOrderBy('recent'); setCurrentPage(1); setIsDropdownOpen(false); }}>최신순</li>
+      <li onClick={() => { setOrderBy('favorite'); setCurrentPage(1); setIsDropdownOpen(false); }}>좋아요순</li>
+    </ul>
+  )}
+</div>
+          </div>
+
           {loading ? (
             <div>로딩 중...</div>
           ) : (
@@ -59,48 +92,49 @@ function Items() {
           )}
 
           <div className="pagination">
-  <button
-    className="pageBtn"
-    onClick={() => setCurrentPage((p) => Math.max(p - 5, 1))}
-    disabled={currentPage === 1}
-  >
-    &laquo;
-  </button>
-  <button
-    className="pageBtn"
-    onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-    disabled={currentPage === 1}
-  >
-    &lt;
-  </button>
-  {Array.from({ length: totalPages }, (_, i) => i + 1)
-    .filter((page) => page >= currentPage - 0 && page <= currentPage + 4)
-    .map((page) => (
-      <button
-        key={page}
-        className={`pageBtn${currentPage === page ? ' active' : ''}`}
-        onClick={() => setCurrentPage(page)}
-      >
-        {page}
-      </button>
-    ))}
-  <button
-    className="pageBtn"
-    onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-    disabled={currentPage === totalPages}
-  >
-    &gt;
-  </button>
-  <button
-    className="pageBtn"
-    onClick={() => setCurrentPage((p) => Math.min(p + 5, totalPages))}
-    disabled={currentPage === totalPages}
-  >
-    &raquo;
-  </button>
-</div>
-</div>
-</div>
+            <button
+              className="pageBtn"
+              onClick={() => setCurrentPage((p) => Math.max(p - 5, 1))}
+              disabled={currentPage === 1}
+            >
+              &laquo;
+            </button>
+            <button
+              className="pageBtn"
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              &lt;
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((page) => page >= currentPage - 0 && page <= currentPage + 4)
+              .map((page) => (
+                <button
+                  key={page}
+                  className={`pageBtn${currentPage === page ? ' active' : ''}`}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+            <button
+              className="pageBtn"
+              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              &gt;
+            </button>
+            <button
+              className="pageBtn"
+              onClick={() => setCurrentPage((p) => Math.min(p + 5, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              &raquo;
+            </button>
+          </div>
+
+        </div>
+      </div>
 
       <div className="footer">
         <div className="inner">
