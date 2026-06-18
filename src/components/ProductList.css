@@ -83,3 +83,27 @@ gap: 10px;
 border-radius: 12px;
 border: 1px solid #E5E7EB;
 }
+
+.pagination{
+    margin-top: 83px;
+    display: flex;
+    height: 40px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12.5px;
+}
+
+.pagination button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #E5E7EB;
+    background: #FFF;
+}
+
+
+.pagination .button.active {
+  background-color: #2F80ED;
+  color: #F9FAFB;
+}
