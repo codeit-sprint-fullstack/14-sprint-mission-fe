@@ -28,6 +28,10 @@
 }
 
 .logo_link a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
   text-decoration: none;
 }
 
@@ -51,6 +55,10 @@
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
+}
+
+.link_text a.active {
+  color: var(--brand-blue);
 }
 
 .logo {
@@ -94,6 +102,7 @@
   font-weight: 500;
   white-space: nowrap;
 }
+
 
 /* PC: 1200px 이상 */
 @media screen and (min-width: 1200px)  {

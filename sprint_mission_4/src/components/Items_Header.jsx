@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Web 캐시를 유지하기위한 Navigate 반영
+import { useLocation } from "react-router-dom";
 import Logo from "../assets/판다 얼굴.svg";
 import "../reset.css";
 import style from "./Items_Header.module.css";
 
 function Items_Header() {
   const navigate = useNavigate(); // 링크 이동 시 새로고침이 아닌 상태로 컴포넌트 호출
+  const location = useLocation(); // 주소를 통한 조건 설정용
 
   return (
     <header className={style.header}>
@@ -14,15 +16,15 @@ function Items_Header() {
           <div className={style.logo}>
             <a href="/">
               <img src={Logo} alt="Logo"/>
+              <h1 className={style.text}>판다마켓</h1>
             </a>
-            <h1 className={style.text}>판다마켓</h1>
           </div>
           <div className={style.link}>
             <div className={style.link_text}>
-              <a href="">자유게시판</a>
+              <a href="/notice" className={location.pathname === "/notice" ? style.active : ""}>자유게시판</a>
             </div>
             <div className={style.link_text}>
-              <a href="">중고마켓</a>
+              <a href="/items" className={location.pathname === "/items" ? style.active : ""}>중고마켓</a>
             </div>
           </div>
         </div>
