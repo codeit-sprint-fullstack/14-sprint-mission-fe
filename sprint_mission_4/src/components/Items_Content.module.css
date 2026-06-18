@@ -41,6 +41,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  gap: 24px;
 }
 
 .sellHeader {
@@ -149,6 +150,12 @@ input {
   border: 0;
   background: url("../assets/btn_left.png") no-repeat center;
   background-size: contain;
+}
+
+.sellItemList {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
 }
 
 

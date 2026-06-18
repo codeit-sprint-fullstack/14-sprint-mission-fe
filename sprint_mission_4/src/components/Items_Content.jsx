@@ -16,8 +16,7 @@ function Items_Content () {
           <div className={style.bestItem}>
             <h2>베스트 상품</h2>
             <div className={style.bestItemList}>
-              <Items_Card />
-              <Items_Card />
+              <Items_Card page={1} size={4} index={true}/>
             </div>
           </div>
           <div className={style.sellItem}>
@@ -35,8 +34,7 @@ function Items_Content () {
               </div>
             </div>
             <div className={style.sellItemList}>
-              <Items_Card />
-              <Items_Card />
+              <Items_Card page={1} size={10} index={false}/>
             </div>
           </div>
 
