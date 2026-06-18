@@ -9,15 +9,15 @@ import './MarketPage.css';
 function MarketPage () {
    return( 
    <>
-    
     <Header />
-    <main>
-    <BestProductList />
-    <ProductList />
+    
+    <main className="market-page">
+      <BestProductList />
+      <ProductList />
     </main>
-    <Footer />
 
-    </>
+    <Footer />
+   </>
    );
 }
 
