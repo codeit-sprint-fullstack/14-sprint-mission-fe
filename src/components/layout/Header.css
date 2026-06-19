@@ -12,7 +12,7 @@
   height: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 200px;
+  padding: 9px clamp(16px, 10vw, 200px);
 }
 
 .site-header__logo {
@@ -47,4 +47,13 @@
   font-weight: 700;
   line-height: 26px;
   text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .site-header__links a {
+    font-size: 16px;
+  }
+  .site-header__nav {
+    padding-inline: 16px;
+  }
 }
