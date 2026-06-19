@@ -1,5 +1,5 @@
 .feature-section {
-  padding: 138px 342px;
+  padding: 138px clamp(16px, 8vw, 342px);
 }
 
 .feature-section__content {
@@ -7,12 +7,14 @@
   width: 100%;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   gap: 64px;
   align-items: center;
   padding: 0 2rem;
 }
 
 .feature-section__image {
+  flex: 1 1 360px;
   max-width: 100%;
   height: auto;
 }
@@ -39,6 +41,7 @@
 
 .feature-section__text {
   display: flex;
+  flex: 1 1 360px;
   flex-direction: column;
   gap: 12px;
 }

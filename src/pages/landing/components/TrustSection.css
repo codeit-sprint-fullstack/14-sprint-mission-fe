@@ -9,9 +9,11 @@
 
 .trust-section__content {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
   align-items: center;
+  padding-inline: 16px;
 }
 
 .trust-section__title {

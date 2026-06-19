@@ -16,11 +16,14 @@
 
 .hero-section__wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   height: 100%;
   font-weight: 700;
   font-size: 2.5rem;
+  padding-inline: 16px;
+  padding-top: 24px;
 }
 
 .hero-section__button {
