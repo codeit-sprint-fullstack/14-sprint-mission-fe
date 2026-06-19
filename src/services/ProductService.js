@@ -1,6 +1,6 @@
 import { PRODUCT_ORDER_BY } from '../constants/product'
 
-const BASE_URL = 'https://panda-market-api-crud.vercel.app'
+const BASE_URL = 'https://panda-market-api.vercel.app'
 
 const createQueryString = (params) => {
   const searchParams = new URLSearchParams()
