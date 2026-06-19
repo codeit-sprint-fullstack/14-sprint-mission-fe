@@ -1,5 +1,7 @@
+import MainLayout from '../../components/layout/MainLayout'
+
 const ItemsPage = () => {
-  return <div>ItemsPage</div>
+  return <MainLayout>ItemsPage</MainLayout>
 }
 
 export default ItemsPage
