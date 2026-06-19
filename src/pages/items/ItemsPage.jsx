@@ -34,6 +34,8 @@ const ItemsPage = () => {
   const [pageSize, setPageSize] = useState(getProductPageSize)
   const [bestProducts, setBestProducts] = useState([])
   const [products, setProducts] = useState([])
+  const [keyword, setKeyword] = useState('')
+  const [orderBy, setOrderBy] = useState(PRODUCT_ORDER_BY.RECENT)
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,15 +61,15 @@ const ItemsPage = () => {
     const fetchProducts = async () => {
       const [bestData, productData] = await Promise.all([
         getProductList(1, pageSize.best, '', PRODUCT_ORDER_BY.FAVORITE),
-        getProductList(1, pageSize.all, '', PRODUCT_ORDER_BY.RECENT),
+        getProductList(1, pageSize.all, keyword, orderBy),
       ])
-
+      console.log(productData.list)
       setBestProducts(bestData.list)
       setProducts(productData.list)
     }
 
     fetchProducts()
-  }, [pageSize])
+  }, [pageSize, keyword, orderBy])
 
   return (
     <MainLayout>
@@ -84,7 +86,12 @@ const ItemsPage = () => {
         <section className="items-section">
           <div className="items-section-header">
             <h2 className="items-section-title">판매 중인 상품</h2>
-            <ProductToolbar />
+            <ProductToolbar
+              keyword={keyword}
+              orderBy={orderBy}
+              onKeywordChange={setKeyword}
+              onOrderByChange={setOrderBy}
+            />
           </div>
           <div className="all-products-grid">
             {products.map((product) => (
