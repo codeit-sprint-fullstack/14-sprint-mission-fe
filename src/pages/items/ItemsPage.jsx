@@ -4,6 +4,7 @@ import { PRODUCT_ORDER_BY } from '../../constants/product'
 import { getProductList } from '../../services/ProductService'
 import ProductCard from './components/ProductCard'
 import ProductToolbar from './components/ProductToolbar'
+import Pagination from './components/Pagination'
 import './ItemsPage.css'
 
 const getProductPageSize = () => {
@@ -36,18 +37,29 @@ const ItemsPage = () => {
   const [products, setProducts] = useState([])
   const [keyword, setKeyword] = useState('')
   const [orderBy, setOrderBy] = useState(PRODUCT_ORDER_BY.RECENT)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+
+  const handleKeywordChange = (nextKeyword) => {
+    setKeyword(nextKeyword)
+    setPage(1)
+  }
+
+  const handleOrderByChange = (nextOrderBy) => {
+    setOrderBy(nextOrderBy)
+    setPage(1)
+  }
 
   useEffect(() => {
     const handleResize = () => {
       const nextPageSize = getProductPageSize()
 
-      setPageSize((prevPageSize) => {
-        if (prevPageSize.type === nextPageSize.type) {
-          return prevPageSize
-        }
+      if (pageSize.type === nextPageSize.type) {
+        return
+      }
 
-        return nextPageSize
-      })
+      setPageSize(nextPageSize)
+      setPage(1)
     }
 
     window.addEventListener('resize', handleResize)
@@ -55,21 +67,22 @@ const ItemsPage = () => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [pageSize.type])
 
   useEffect(() => {
     const fetchProducts = async () => {
       const [bestData, productData] = await Promise.all([
         getProductList(1, pageSize.best, '', PRODUCT_ORDER_BY.FAVORITE),
-        getProductList(1, pageSize.all, keyword, orderBy),
+        getProductList(page, pageSize.all, keyword, orderBy),
       ])
-      console.log(productData.list)
+
+      setTotalPages(Math.ceil(productData.totalCount / pageSize.all))
       setBestProducts(bestData.list)
       setProducts(productData.list)
     }
 
     fetchProducts()
-  }, [pageSize, keyword, orderBy])
+  }, [page, pageSize, keyword, orderBy])
 
   return (
     <MainLayout>
@@ -89,8 +102,8 @@ const ItemsPage = () => {
             <ProductToolbar
               keyword={keyword}
               orderBy={orderBy}
-              onKeywordChange={setKeyword}
-              onOrderByChange={setOrderBy}
+              onKeywordChange={handleKeywordChange}
+              onOrderByChange={handleOrderByChange}
             />
           </div>
           <div className="all-products-grid">
@@ -98,6 +111,11 @@ const ItemsPage = () => {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
+          />
         </section>
       </div>
     </MainLayout>
