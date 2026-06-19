@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../../assets/logos/logo.svg'
 import './Header.css'
 
@@ -5,13 +6,13 @@ const Header = () => {
   return (
     <header className="site-header">
       <nav className="site-header__nav" aria-label="주요 메뉴">
-        <a href="/">
+        <Link to="/">
           <img src={logo} alt="판다마켓 로고" className="site-header__logo" />
-        </a>
+        </Link>
 
-        <a href="/login" className="site-header__login-link">
+        <Link to="/login" className="site-header__login-link">
           로그인
-        </a>
+        </Link>
       </nav>
     </header>
   )
