@@ -16,3 +16,9 @@
   font-size: 16px;
   font-weight: 700;
 }
+
+.product-card__favorite {
+  margin-top: 6px;
+  color: var(--color-gray-600);
+  font-size: 12px;
+}

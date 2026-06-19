@@ -19,6 +19,7 @@ const ProductCard = ({ product }) => {
 
       <h3 className="product-card__name">{product.name}</h3>
       <p className="product-card__price">{product.price.toLocaleString()}원</p>
+      <p className="product-card__favorite">♡ {product.favoriteCount}</p>
     </article>
   )
 }
