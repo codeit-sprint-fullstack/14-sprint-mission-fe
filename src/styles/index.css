@@ -20,6 +20,24 @@
 .logoLink span { font-size: 20px; font-weight: bold; color: var(--primary-blue); }
 .loginButton { background-color: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 10px 24px; font-size: 15px; cursor: pointer; text-decoration: none;}
 
+.headerNav {
+  display: flex;
+  gap: 24px;
+  margin-right: auto;
+  margin-left: 24px;
+}
+
+.navLink {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  color: #3692FF;
+}
+
 /* 히어로 */
 .hero { background-color: var(--primary-blue-light); overflow: hidden; }
 .hero .inner { display: flex; justify-content: center; align-items: flex-end; gap: 50px; min-height: 340px; padding: 60px 200px 0; }
