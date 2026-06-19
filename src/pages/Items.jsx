@@ -1,33 +1,22 @@
 import { useState, useEffect } from 'react';
 import { getProductList } from '../../services/ProductService.js';
+import useProductList from '../../models/useProductList.js';
 
 function Items() {
   const [bestProducts, setBestProducts] = useState([]);
-  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [orderBy, setOrderBy] = useState('recent');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const { products, loading, totalPages } = useProductList(currentPage, keyword, orderBy);
 
   useEffect(() => {
     getProductList(1, 4, 'favorite', '')
       .then((data) => setBestProducts(data.list))
       .catch((err) => console.error(err));
   }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    getProductList(currentPage, 10, orderBy, keyword)
-      .then((data) => {
-        setProducts(data.list);
-        setTotalPages(Math.ceil(data.totalCount / 10));
-        setLoading(false);
-      })
-      .catch((err) => console.error(err));
-  }, [currentPage, keyword, orderBy]);
 
   return (
     <>

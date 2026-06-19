@@ -84,12 +84,14 @@
 .sectionHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
 .sectionHeader .sectionTitle {
   margin: 0;
+  margin-right: auto;
 }
 
 .searchInput {
