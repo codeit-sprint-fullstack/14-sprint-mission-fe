@@ -7,12 +7,12 @@
   gap: 40px;
 }
 
-.logo {
+.auth-page__logo {
   width: 266px;
   height: 90px;
 }
 
-.auth-form {
+.auth-page__form {
   display: flex;
   flex-direction: column;
   max-width: 640px;
@@ -20,13 +20,13 @@
   gap: 40px;
 }
 
-.input-set {
+.auth-page__input-set {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.input-group {
+.auth-page__input-group {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -60,7 +60,7 @@
   color: var(--color-gray-400);
 }
 
-.social-group {
+.auth-page__social-group {
   background-color: #e6f2ff;
   padding: 16px 23px;
   border-radius: 8px;
@@ -72,17 +72,17 @@
   color: var(--color-gray-800);
 }
 
-.social-btn {
+.auth-page__social-button {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.social-btn img {
+.auth-page__social-button img {
   display: block;
 }
 
-.signup {
+.auth-page__signup-prompt {
   font-weight: 500;
   font-size: 14px;
   display: flex;
@@ -93,23 +93,23 @@
   align-items: center;
 }
 
-.signup a {
+.auth-page__signup-prompt a {
   color: var(--color-primary-100);
   font-size: 14px;
   font-weight: 500;
   line-height: 100%;
 }
 
-.password-wrapper {
+.auth-page__password-wrapper {
   position: relative;
   width: 100%;
 }
 
-.password-wrapper input {
+.auth-page__password-wrapper input {
   width: 100%;
 }
 
-.visibility-btn {
+.auth-page__visibility-button {
   position: absolute;
   right: 24px;
   top: 16px;
@@ -118,10 +118,9 @@
   cursor: pointer;
 }
 
-
 /* SIGNUP */
 
-.signup-btn {
+.auth-page__signup-button {
   background-color: var(--color-gray-400);
   border: none;
   padding: 16px 124px;
@@ -132,11 +131,9 @@
   line-height: 32px;
 }
 
-
-
 /* LOGIN */
 
-.login-btn {
+.auth-page__login-button {
   background-color: var(--color-gray-400);
   border: none;
   padding: 16px 124px;
