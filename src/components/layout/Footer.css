@@ -1,0 +1,32 @@
+.site-footer {
+  background-color: var(--color-gray-900);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 32px 200px;
+  gap: 10px;
+  height: 160px;
+  align-items: flex-start;
+}
+
+.site-footer__brand {
+  font-weight: 400;
+  color: var(--color-gray-400);
+  font-size: 1rem;
+}
+
+.site-footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.site-footer__socials {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.site-footer__links {
+  display: flex;
+  gap: 30px;
+}

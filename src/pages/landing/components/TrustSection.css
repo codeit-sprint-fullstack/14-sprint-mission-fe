@@ -1,0 +1,26 @@
+.trust-section {
+  background-color: #cfe5ff;
+  width: 100%;
+  min-height: 540px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.trust-section__content {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.trust-section__title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 140%;
+  color: var(--color-gray-700);
+}
+
+.trust-section__image {
+  max-width: 100%;
+}
