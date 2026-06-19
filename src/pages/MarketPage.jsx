@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getProducts, getBestProducts } from '../api/productApi';
 import ProductCard from '../components/ProductCard'
+import Dropdown from '../components/Dropdown';
+import Pagination from '../components/Pagination';
 import searchIcon from '../assets/ic_search.svg';
-import dropdownIcon from '../assets/ic_arrow_down.svg';
 import './MarketPage.css'
 
 // const mockProducts = [
@@ -45,64 +46,92 @@ import './MarketPage.css'
 // ];
 
 function MarketPage() {
-  const url = 'https://panda-market-api.vercel.app/products';
-
   // state
   const [products, setProducts] = useState([]);
   const [bestProducts, setBestProducts] = useState([]);
   const [orderBy, setOrderBy] = useState('recent');
-  const [searchInput, setSearchInput] = useState('');
-  const [keyword, setKeyword] = useState('');
-  const [page, setPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
+  const [searchInput, setSearchInput] = useState('');  // 입력중인 값
+  const [keyword, setKeyword] = useState('');          // API 요청 보낼 확정된 검색어
+  const [CurrentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);     // 검색/정렬 조건에 맞는 전체 상품 개수
+  const [pageSize, setPageSize] = useState(10);
+  const [bestPageSize, setBestPageSize] = useState(4);
 
   // pagination
-  const pageSize = 10;
   const pageGroupSize = 5;
   const totalPages = Math.ceil(totalCount / pageSize);
 
-  const currentGroup = Math.ceil(page / pageGroupSize);
+  const currentGroup = Math.ceil(CurrentPage / pageGroupSize);
   const startPage = (currentGroup - 1) * pageGroupSize + 1;
   const endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
-  const pageNumbers = [];
+  const pageNumbers = [];  //
 
   for (let i = startPage; i <= endPage; i++) {
     pageNumbers.push(i);
   }
 
+  const updatePageSize = () => {
+    // 브라우저의 현재 뷰포트 너비
+    const width = window.innerWidth;
+
+    if (width >= 1200) {
+      setPageSize(10);
+      setBestPageSize(4);
+    } else if (width >= 768) {
+      setPageSize(6);
+      setBestPageSize(2);
+    } else {
+      setPageSize(4);
+      setBestPageSize(1);
+    }
+
+    setCurrentPage(1);
+  };
+
   const fetchProducts = async () => {
-    const res = await axios.get(url, {
-      params: {
-        orderBy: orderBy,
-        pageSize: pageSize,  // PC 기준
-        keyword: keyword,
-        page: page,
-      }
+    const data = await getProducts({
+      // 객체 프로퍼티 축약 문법
+      orderBy,
+      pageSize,
+      keyword,
+      page: CurrentPage,
     });
 
-    setProducts(res.data.list);
-    setTotalCount(res.data.totalCount);
+    setProducts(data.list);
+    setTotalCount(data.totalCount);
   };
 
   const fetchBestProducts = async () => {
-    const res = await axios.get(url, {
-      params: {
-        orderBy: 'favorite',
-        pageSize: 4,
-      }
-    })
+    const data = await getBestProducts({
+      pageSize: bestPageSize,
+    });
 
-    setBestProducts(res.data.list);
+    setBestProducts(data.list);
   };
 
+  // 컴포넌트가 처음 생성되면 (페이지가 처음 열릴 때)
   useEffect(() => {
-    fetchBestProducts();
+    // 현재 화면 크기에 맞게 pageSize를 계산
+    updatePageSize();
+
+    // 브라우저 크기가 바뀔 때마다 다시 계산
+    window.addEventListener('resize', updatePageSize);
+
+    // 컴포넌트가 사라질 때는 resize 감시 제거
+    return () => {
+      window.removeEventListener('resize', updatePageSize);
+    };
+    // 이 설정 자체는 처음 한 번만 수행할 것 
   }, []);
 
   useEffect(() => {
+    fetchBestProducts();
+  }, [bestPageSize]);
+
+  useEffect(() => {
     fetchProducts();
-  }, [orderBy, keyword, page]);
+  }, [orderBy, keyword, CurrentPage, pageSize]);
 
   return (
     <main className='market-background'>
@@ -138,26 +167,20 @@ function MarketPage() {
                       // 입력 중인 값(searchInput)을 실제 검색어(keyword)로 확정
                       setKeyword(searchInput)
                       // 검색 후 페이지 초기화
-                      setPage(1);
+                      setCurrentPage(1);
                     }
                   }}
                 />
               </div>
               <button className='btn-register'>상품 등록하기</button>
-              <div className='order-by-box'>
-                <select className='order-by'
-                  value={orderBy}
-                  onChange={(e) => {
-                    setOrderBy(e.target.value)
-                    // 정렬 후 페이지 초기화
-                    setPage(1);
-                  }}
-                >
-                  <option value="recent">최신순</option>
-                  <option value="favorite">좋아요순</option>
-                </select>
-                <img className='order-by-icon' src={dropdownIcon} alt='' />
-              </div>
+              <Dropdown
+                orderBy={orderBy}
+                onChangeOrderBy={(nextOrderBy) => {
+                  setOrderBy(nextOrderBy);
+                  // 정렬 후 페이지 초기화
+                  setCurrentPage(1);
+                }}
+              />
             </div>
           </div>
           <div className='products-cards'>
@@ -170,31 +193,12 @@ function MarketPage() {
               ))
             }
           </div>
-          <div className='pagination'>
-            <button
-              disabled={page <= 1}
-              onClick={() => setPage(page - 1)}
-            >
-              &lt;
-            </button>
-
-            {pageNumbers.map(pageNumber => (
-              <button
-                key={pageNumber}
-                className={page === pageNumber ? 'active' : ''}
-                onClick={() => setPage(pageNumber)}
-              >
-                {pageNumber}
-              </button>
-            ))}
-
-            <button
-              disabled={page >= totalPages}
-              onClick={() => setPage(page + 1)}
-            >
-              &gt;
-            </button>
-          </div>
+          <Pagination
+            page={CurrentPage}
+            totalPages={totalPages}
+            pageNumbers={pageNumbers}
+            onChangePage={setCurrentPage}
+          />
         </section >
       </div>
     </main>)

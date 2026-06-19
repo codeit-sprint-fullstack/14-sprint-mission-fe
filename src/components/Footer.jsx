@@ -9,8 +9,8 @@ function Footer() {
     <footer>
       <p className='copyright'>@codeit - 2024</p>
       <div className='sitemap'>
-        <a href="Privacy Policy.html">Privacy Policy</a>
-        <a href="FAQ.html">FAQ</a>
+        <a href="/">Privacy Policy</a>
+        <a href="/">FAQ</a>
       </div>
       <div className='social-media-link'>
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">

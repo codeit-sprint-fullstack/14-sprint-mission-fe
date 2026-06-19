@@ -20,19 +20,14 @@
 
 .product-name {
   color: var(--Secondary-800);
-
-  /* pretendard/md-14px-medium */
-  font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  /* 171.429% */
 }
 
 .product-price {
   color: var(--Secondary-800);
-  font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -44,7 +39,6 @@
 
 .product-favorite {
   color: var(--Secondary-600);
-  font-family: Pretendard;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;

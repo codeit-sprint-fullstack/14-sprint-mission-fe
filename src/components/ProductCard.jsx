@@ -12,7 +12,8 @@ function ProductCard({ product }) {
   return (
     <div className='product-card'>
       <div className='product-info'>
-      <img className='product-image' src={images?.[0]} alt={name} />
+        {/* 이미지 예외 처리 */}
+        <img className='product-image' src={images?.[0]} alt={name} />
         <p className='product-name'>{name}</p>
         <p className='product-price'>{price.toLocaleString()}원</p>
         <p className='product-favorite'>
