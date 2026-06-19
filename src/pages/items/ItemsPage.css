@@ -6,15 +6,12 @@
 
 .items-section-title {
   margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .items-section + .items-section {
   margin-top: 56px;
-}
-
-.product-section__title {
-  font-size: 20px;
-  font-weight: 700;
 }
 
 .best-products-grid,
@@ -29,6 +26,14 @@
 
 .all-products-grid {
   grid-template-columns: repeat(5, 1fr);
+}
+
+.items-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 @media (max-width: 1199px) {
@@ -61,5 +66,10 @@
 
   .all-products-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .items-section-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

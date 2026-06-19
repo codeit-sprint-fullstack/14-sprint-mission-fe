@@ -3,6 +3,7 @@ import MainLayout from '../../components/layout/MainLayout'
 import { PRODUCT_ORDER_BY } from '../../constants/product'
 import { getProductList } from '../../services/ProductService'
 import ProductCard from './components/ProductCard'
+import ProductToolbar from './components/ProductToolbar'
 import './ItemsPage.css'
 
 const getProductPageSize = () => {
@@ -81,7 +82,10 @@ const ItemsPage = () => {
         </section>
 
         <section className="items-section">
-          <h2 className="items-section-title">판매 중인 상품</h2>
+          <div className="items-section-header">
+            <h2 className="items-section-title">판매 중인 상품</h2>
+            <ProductToolbar />
+          </div>
           <div className="all-products-grid">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />

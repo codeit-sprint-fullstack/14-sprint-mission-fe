@@ -1,0 +1,38 @@
+.product-toolbar {
+  display: flex;
+  gap: 12px;
+}
+
+.product-toolbar__search {
+  width: 320px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 12px;
+  background-color: var(--color-gray-100);
+}
+
+.product-toolbar__button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-primary-100);
+  color: white;
+  font-weight: 600;
+}
+
+.product-toolbar__select {
+  padding: 12px 16px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 12px;
+  background-color: white;
+}
+
+@media (max-width: 767px) {
+  .product-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .product-toolbar__search {
+    width: 100%;
+  }
+}
