@@ -1,279 +1,263 @@
+@import '../ColorPalette.css';
+
+@font-face {
+  font-family: "ROKAF_M";
+  src: url("../fonts/ROKAF_M.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 /* ====================================================================== */
 /* 로그인 페이지 전체 */
 /* ====================================================================== */
 
-.login_page {
-  min-height: 100vh;
-  padding: 1px 16px;
-
-  background-color: #ffffff;
+.login-page,
+.login-page * {
   box-sizing: border-box;
 }
 
-.login_page .login {
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 16px 80px;
+
+  background-color: var(--White-color);
+}
+
+.login-page__container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
-  width: 648px;
-  max-width: 100%;
-  margin: 130px auto;
+  width: 100%;
+  max-width: 640px;
 }
 
 /* ====================================================================== */
-/* 판다마켓 로고 */
+/* 로고 */
 /* ====================================================================== */
 
-.login_page .pandaLogo {
+.login-page__logo-link {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+
+  margin-bottom: 40px;
 
   text-decoration: none;
 }
 
-.login_page .pandaFace {
-  width: 103.529px;
-  height: 103.88px;
+.login-page__logo-image {
+  width: 104px;
+  height: 104px;
 
-  border-radius: 28.932px;
-  background: #3692ff;
+  border-radius: 29px;
 }
 
-.login_page .pandaText {
-  margin: 0 0 0 22.24px;
+.login-page__logo-text {
+  margin: 0 0 0 22px;
 
-  color: #3692ff;
-  text-align: center;
+  color: var(--brand-blue);
 
   font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
-  font-size: 66.344px;
-  font-style: normal;
+  font-size: 66px;
   font-weight: 700;
-  line-height: normal;
+  line-height: 1;
 }
 
 /* ====================================================================== */
-/* 이메일 입력 영역 */
+/* 폼 */
 /* ====================================================================== */
 
-.login_page .email_group {
+.login-page__form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 
   width: 100%;
-  padding-top: 40px;
-  gap: 16px;
+}
 
-  color: #1f2937;
+.login-page__field {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.login-page__label {
+  margin-bottom: 16px;
+
+  color: var(--Secondary-800);
+
   font-family: Pretendard, Arial, sans-serif;
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
 }
 
-.login_page #email_input {
+.login-page__input {
   width: 100%;
   height: 58px;
   padding: 16px 24px;
 
-  border: 1px solid #f3f4f6;
+  border: 1px solid var(--Cool-Gray-100);
   border-radius: 12px;
   outline: none;
 
-  color: #1f2937;
-  background: #f3f4f6;
+  color: var(--Secondary-800);
+  background-color: var(--Cool-Gray-100);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
+  font-weight: 400;
 }
 
-.login_page #email_input:focus {
-  border-color: #3692ff;
+.login-page__input::placeholder {
+  color: var(--Secondary-400);
+}
+
+.login-page__input:focus {
+  border-color: var(--brand-blue);
 }
 
 /* ====================================================================== */
-/* 비밀번호 입력 영역 */
+/* 비밀번호 */
 /* ====================================================================== */
 
-.login_page .password_group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  width: 100%;
-  padding: 24px 0;
-  gap: 16px;
-
-  color: #1f2937;
-  font-family: Pretendard, Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 26px;
-}
-
-.login_page .password_set {
+.login-page__password-box {
   position: relative;
+
   width: 100%;
 }
 
-.login_page #password_input {
-  width: 100%;
-  height: 58px;
-  padding: 16px 60px 16px 24px;
-
-  border: 1px solid #f3f4f6;
-  border-radius: 12px;
-  outline: none;
-
-  color: #1f2937;
-  background: #f3f4f6;
-
-  font-family: Pretendard, Arial, sans-serif;
-  font-size: 16px;
+.login-page__password-input {
+  padding-right: 60px;
 }
 
-.login_page #password_input:focus {
-  border-color: #3692ff;
-}
-
-.login_page .password_toggle {
+.login-page__password-toggle {
   position: absolute;
   top: 50%;
   right: 20px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
   padding: 0;
+
   border: none;
-
   background: none;
-  cursor: pointer;
 
+  cursor: pointer;
   transform: translateY(-50%);
 }
 
-.login_page .password_toggle img {
+.login-page__password-icon {
   display: block;
+
   width: 24px;
   height: 24px;
 }
 
 /* ====================================================================== */
-/* 오류 메시지 */
+/* 에러 메시지 */
 /* ====================================================================== */
 
-.login_page .error_message {
-  margin: 0;
+.login-page__error {
+  margin: 8px 0 0;
 
-  color: #f74747;
+  color: var(--error-red);
+
   font-family: Pretendard, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
-}
-
-.login_page .error_message:empty {
-  display: none;
+  line-height: 22px;
 }
 
 /* ====================================================================== */
 /* 로그인 버튼 */
 /* ====================================================================== */
 
-.login_page .login_btn {
+.login-page__submit-button {
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 100%;
-  padding: 16px 24px;
+  height: 56px;
   margin-bottom: 24px;
 
   border: none;
   border-radius: 40px;
 
-  color: #f3f4f6;
-  background: #9ca3af;
+  color: var(--Cool-Gray-100);
+  background-color: var(--Secondary-400);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 20px;
   font-weight: 600;
   line-height: 32px;
 
-  cursor: pointer;
-}
-
-.login_page .login_btn.active {
-  background: #3692ff;
-}
-
-.login_page .login_btn:disabled {
   cursor: not-allowed;
 }
 
-/* ====================================================================== */
-/* 로그인 폼 */
-/* ====================================================================== */
+.login-page__submit-button--active {
+  background-color: var(--brand-blue);
 
-.login_page .login_form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 100%;
+  cursor: pointer;
 }
-
-.login_page .login_button_group {
-  width: 100%;
-}
-
 
 /* ====================================================================== */
 /* 간편 로그인 */
 /* ====================================================================== */
 
-.login_page .Easy_login_group {
+.login-page__easy-login {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
   width: 100%;
   height: 74px;
-  padding: 0 23px;
+  padding: 0 24px;
   margin-bottom: 24px;
 
-  background: #e6f2ff;
-  box-sizing: border-box;
+  background-color: var(--Light-blue);
 }
 
-.login_page .Easy_login2 {
+.login-page__easy-login-text {
   margin: 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
+
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 26px;
 }
 
-.login_page .Easy_login_logo_group {
+.login-page__easy-login-icons {
   display: flex;
   align-items: center;
+
+  gap: 16px;
 }
 
-.login_page .link_underline {
+.login-page__easy-login-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   text-decoration: none;
 }
 
-.login_page .google_logo {
-  width: 42px;
-  height: 42px;
-  margin-right: 16px;
-}
+.login-page__easy-login-icon {
+  display: block;
 
-.login_page .kakao_logo {
   width: 42px;
   height: 42px;
 }
@@ -282,9 +266,8 @@
 /* 회원가입 이동 */
 /* ====================================================================== */
 
-.login_page .First {
+.login-page__signup-guide {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 
@@ -292,29 +275,32 @@
   gap: 4px;
 }
 
-.login_page .text1 {
-  margin: 0 4px 0 0;
+.login-page__signup-text {
+  margin: 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
+
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
 }
 
-.login_page .signup {
-  color: #3692ff;
+.login-page__signup-link {
+  color: var(--brand-blue);
+
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
+  line-height: 24px;
   text-decoration: underline;
 }
 
 /* ====================================================================== */
-/* 로그인 오류 모달 */
+/* 모달 */
 /* ====================================================================== */
 
-.login_page .error_modal {
+.login-page__modal {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -323,46 +309,46 @@
   align-items: center;
   justify-content: center;
 
-  background: rgba(0, 0, 0, 0.6);
+  padding: 16px;
+
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-.login_page .error_modal_content {
+.login-page__modal-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   width: 400px;
-  max-width: calc(100vw - 32px);
+  max-width: 100%;
   padding: 48px 24px 24px;
 
   border-radius: 8px;
-  background: #ffffff;
-
-  box-sizing: border-box;
+  background-color: var(--White-color);
 }
 
-.login_page #error_modal_message {
+.login-page__modal-message {
   margin: 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
+
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
 }
 
-.login_page .error_modal_close {
+.login-page__modal-close {
   width: 56px;
   height: 40px;
-
   margin-top: 32px;
   margin-left: auto;
 
   border: none;
   border-radius: 8px;
 
-  color: #ffffff;
-  background: #3692ff;
+  color: var(--White-color);
+  background-color: var(--brand-blue);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
@@ -372,31 +358,86 @@
 }
 
 /* ====================================================================== */
-/* 반응형 */
+/* Tablet */
 /* ====================================================================== */
 
-@media (max-width: 1199px) {
-  .login_page .login {
-    width: calc(100vw - 32px);
-    max-width: 648px;
-    margin: 80px auto;
+@media (min-width: 744px) and (max-width: 1199px) {
+  .login-page {
+    padding-top: 48px;
+  }
+
+  .login-page__container {
+    max-width: 640px;
   }
 }
 
+/* ====================================================================== */
+/* Mobile */
+/* ====================================================================== */
+
 @media (max-width: 743px) {
-  .login_page .login {
-    width: calc(100vw - 32px);
-    max-width: 400px;
-    margin: 48px auto;
+  .login-page {
+    padding: 32px 16px 64px;
   }
 
-  .login_page .pandaFace {
+  .login-page__container {
+    max-width: 400px;
+  }
+
+  .login-page__logo-link {
+    margin-bottom: 32px;
+  }
+
+  .login-page__logo-image {
     width: 80px;
     height: 80px;
+
+    border-radius: 22px;
   }
 
-  .login_page .pandaText {
+  .login-page__logo-text {
     margin-left: 16px;
+
     font-size: 48px;
+  }
+
+  .login-page__label {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .login-page__input {
+    height: 56px;
+
+    font-size: 15px;
+  }
+
+  .login-page__submit-button {
+    height: 54px;
+
+    font-size: 18px;
+  }
+
+  .login-page__easy-login {
+    height: 70px;
+    padding: 0 16px;
+  }
+
+  .login-page__easy-login-text {
+    font-size: 14px;
+  }
+
+  .login-page__easy-login-icons {
+    gap: 12px;
+  }
+
+  .login-page__easy-login-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .login-page__signup-text,
+  .login-page__signup-link {
+    font-size: 13px;
   }
 }

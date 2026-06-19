@@ -1,3 +1,12 @@
+@import '../ColorPalette.css';
+
+@font-face {
+  font-family: "ROKAF_M";
+  src: url("../fonts/ROKAF_M.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 /* ====================================================================== */
 /* Header */
 /* ====================================================================== */
@@ -16,8 +25,16 @@
   width: 100%;
   padding: 0 200px;
 
-  background-color: #ffffff;
+  background-color: var(--WhiteGray-color);
   box-sizing: border-box;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+
+  gap: 32px;
 }
 
 .panda-logo {
@@ -37,7 +54,7 @@
 }
 
 .logo-text {
-  color: #3692ff;
+  color: var(--brand-blue);
 
   font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
   font-size: 25.633px;
@@ -46,7 +63,23 @@
   line-height: normal;
 }
 
-.top_bar .login {
+.header-menu {
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+}
+
+.header-menu-link {
+  color: var(--Secondary-600);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.Header_Login {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -66,8 +99,8 @@
 
   border-radius: 8px;
 
-  color: #f3f4f6;
-  background-color: #3692ff;
+  color: var(--Cool-Gray-100);
+  background-color: var(--brand-blue);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
@@ -86,9 +119,9 @@
   width: 100%;
   min-height: calc(100vh - 160px);
 
-  padding: 120px 24px 140px;
+  padding: 95px 24px 140px;
 
-  background-color: #ffffff;
+  background-color: var(--WhiteGray-color);
   box-sizing: border-box;
 }
 
@@ -109,7 +142,7 @@
 }
 
 .all-product-section {
-  margin-top: 80px;
+  margin-top: 40px;
 }
 
 .product-section-heading {
@@ -123,12 +156,81 @@
 .product-section-title {
   margin: 0;
 
-  color: #111827;
+  color: var(--dark-blue);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 28px;
+}
+
+/* ====================================================================== */
+/* 검색창 및 정렬 드롭다운 */
+/* ====================================================================== */
+
+.product-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.product-search-input {
+  flex: 1;
+
+  width: 325px;
+  height: 42px;
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 12px;
+  outline: none;
+
+  color: var(--Secondary-800);
+  background-color: var(--Cool-Gray-100);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+
+  box-sizing: border-box;
+  background-image: url('../img/ic_search.svg');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 40px;
+}
+
+.product-search-input::placeholder {
+  color: var(--Secondary-400);
+}
+
+.product-search-input:focus {
+  box-shadow: 0 0 0 2px var(--brand-blue);
+}
+
+.product-order-select {
+  width: 130px;
+  height: 42px;
+  padding: 0 12px;
+
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 12px;
+  outline: none;
+
+  color: var(--Secondary-800);
+  background-color: var(--WhiteGray-color);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.product-order-select:focus {
+  border-color: var(--brand-blue);
 }
 
 
@@ -147,8 +249,8 @@
   border: none;
   border-radius: 8px;
 
-  color: #ffffff;
-  background-color: #3692ff;
+  color: var(--WhiteGray-color);
+  background-color: var(--brand-blue);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
@@ -158,72 +260,7 @@
 }
 
 .product-register-button:hover {
-  background-color: #1967d6;
-}
-
-
-/* ====================================================================== */
-/* 검색창 및 정렬 드롭다운 */
-/* ====================================================================== */
-
-.product-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  margin-top: 24px;
-  gap: 12px;
-}
-
-.product-search-input {
-  flex: 1;
-
-  height: 42px;
-  padding: 0 16px;
-
-  border: none;
-  border-radius: 12px;
-  outline: none;
-
-  color: #1f2937;
-  background-color: #f3f4f6;
-
-  font-family: Pretendard, Arial, sans-serif;
-  font-size: 16px;
-
-  box-sizing: border-box;
-}
-
-.product-search-input::placeholder {
-  color: #9ca3af;
-}
-
-.product-search-input:focus {
-  box-shadow: 0 0 0 2px #3692ff;
-}
-
-.product-order-select {
-  width: 130px;
-  height: 42px;
-  padding: 0 12px;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  outline: none;
-
-  color: #374151;
-  background-color: #ffffff;
-
-  font-family: Pretendard, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-.product-order-select:focus {
-  border-color: #3692ff;
+  background-color: var(--brand-blue);
 }
 
 
@@ -254,20 +291,6 @@
 }
 
 
-/* ====================================================================== */
-/* 페이지네이션 */
-/* ====================================================================== */
-
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 40px;
-  margin-top: 48px;
-
-  gap: 8px;
-}
 
 /* ====================================================================== */
 /* 상품 로딩 및 오류 */
@@ -282,14 +305,14 @@
   min-height: 200px;
   margin: 24px 0 0;
 
-  color: #6b7280;
+  color: var(--Secondary-400);
 
   font-size: 16px;
   font-weight: 500;
 }
 
 .product-error-message {
-  color: #ef4444;
+  color: var(--error-red);
 }
 
 
@@ -301,7 +324,7 @@
   width: 100%;
   margin: 40px 0;
 
-  color: #6b7280;
+  color: var(--Secondary-400);
 
   font-size: 15px;
   text-align: center;
@@ -324,7 +347,7 @@
   overflow: hidden;
 
   border-radius: 16px;
-  background-color: #f3f4f6;
+  background-color: var(--Cool-Gray-50);
 }
 
 .product-card-image {
@@ -344,8 +367,8 @@
   width: 100%;
   height: 100%;
 
-  color: #9ca3af;
-  background-color: #f3f4f6;
+  color: var(--Secondary-400);
+  background-color: var(--Cool-Gray-100);
 
   font-size: 14px;
 }
@@ -359,7 +382,7 @@
 
   margin: 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
 
   font-size: 14px;
   font-weight: 500;
@@ -372,7 +395,7 @@
 .product-card-price {
   margin: 6px 0 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
 
   font-size: 16px;
   font-weight: 700;
@@ -386,7 +409,7 @@
   margin-top: 6px;
   gap: 4px;
 
-  color: #6b7280;
+  color: var(--Secondary-600);
 
   font-size: 12px;
   line-height: 18px;
@@ -395,6 +418,7 @@
 .product-card-heart {
   font-size: 16px;
   line-height: 16px;
+  color: var(--Cool-Gray-600);
 }
 
 
@@ -411,7 +435,7 @@
   height: 160px;
   padding: 32px 200px 0;
 
-  background-color: #111827;
+  background-color: var(--Secondary-900);
 
   box-sizing: border-box;
 }
@@ -419,7 +443,7 @@
 .codeit {
   margin: 0;
 
-  color: #9ca3af;
+  color: var(--Secondary-400);
 
   text-align: center;
 
@@ -441,7 +465,7 @@
 
 .privacy,
 .faq {
-  color: #e5e7eb;
+  color: var(--Secondary-200);
 
   text-align: center;
 
@@ -484,6 +508,14 @@
     padding: 0 24px;
   }
 
+  .header-left {
+    gap: 24px;
+  }
+
+  .header-menu {
+    gap: 16px;
+  }
+
   /* 중고마켓 */
 
   .flea-market {
@@ -521,8 +553,32 @@
     padding: 0 16px;
   }
 
+  .header-left {
+    gap: 16px;
+  }
+
+  .header-menu {
+    gap: 12px;
+  }
+
+  .header-menu-link {
+    font-size: 13px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
+
+  .panda_face {
+    width: 32px;
+    height: 32px;
+  }
+
   .login-btn {
-    width: 100px;
+    width: 80px;
+    height: 40px;
+
+    font-size: 14px;
   }
 
   /* 중고마켓 */

@@ -1,6 +1,6 @@
 function ProductList({
   products,
-  listClassName,
+  list,
 }) {
   if (products.length === 0) {
     return (
@@ -11,22 +11,20 @@ function ProductList({
   }
 
   return (
-    <div className={listClassName}>
+    <div className={list}>
       {products.map((product) => {
         const imageUrl = product.images?.[0]
 
         return (
           <article
             className="product-card"
-            key={product.id}
-          >
+            key={product.id}>
             <div className="product-card-image-wrapper">
               {imageUrl ? (
                 <img
                   className="product-card-image"
                   src={imageUrl}
-                  alt={`${product.name} 상품 이미지`}
-                />
+                  alt={`${product.name} 상품 이미지`} />
               ) : (
                 <div className="product-card-image-empty">
                   이미지 없음

@@ -30,10 +30,15 @@ function FleaMarket() {
 
   return (
     <>
-      <Header />
+      <Header>
+        <a href="/-" className="header-menu-link">자유게시판</a>
+
+        <a href="/-" className="header-menu-link">중고마켓</a>
+      </Header>
 
       <main className="flea-market">
         <div className="flea-market-container">
+
           <section className="product-section">
             <h1 className="product-section-title">
               베스트 상품
@@ -54,7 +59,7 @@ function FleaMarket() {
             {!isBestLoading && !bestError && (
               <ProductList
                 products={bestProducts}
-                listClassName="best-product-list"
+                list="best-product-list"
               />
             )}
           </section>
@@ -65,35 +70,35 @@ function FleaMarket() {
                 판매 중인 상품
               </h2>
 
-              <button
-                type="button"
-                className="product-register-button"
-              >
-                상품 등록하기
-              </button>
-            </div>
+              <div className="product-toolbar">
+                <input
+                  type="search"
+                  className="product-search-input"
+                  placeholder="검색할 상품을 입력해주세요"
+                  aria-label="상품 검색"
+                />
 
-            <div className="product-toolbar">
-              <input
-                type="search"
-                className="product-search-input"
-                placeholder="검색할 상품을 입력해주세요"
-                aria-label="상품 검색"
-              />
+                <button
+                  type="button"
+                  className="product-register-button"
+                >
+                  상품 등록하기
+                </button>
 
-              <select
-                className="product-order-select"
-                defaultValue="recent"
-                aria-label="상품 정렬 방식"
-              >
-                <option value="recent">
-                  최신순
-                </option>
+                <select
+                  className="product-order-select"
+                  defaultValue="recent"
+                  aria-label="상품 정렬 방식"
+                >
+                  <option value="recent">
+                    최신순
+                  </option>
 
-                <option value="favorite">
-                  좋아요순
-                </option>
-              </select>
+                  <option value="favorite">
+                    좋아요순
+                  </option>
+                </select>
+              </div>
             </div>
 
             {isSaleLoading && (
@@ -111,13 +116,10 @@ function FleaMarket() {
             {!isSaleLoading && !saleError && (
               <ProductList
                 products={saleProducts}
-                listClassName="all-product-list"
+                list="all-product-list"
               />
             )}
 
-            <div className="pagination">
-              {/* 다음 챕터에서 페이지네이션 구현 */}
-            </div>
           </section>
         </div>
       </main>

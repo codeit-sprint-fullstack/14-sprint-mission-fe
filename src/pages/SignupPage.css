@@ -1,3 +1,12 @@
+@import '../ColorPalette.css';
+
+@font-face {
+  font-family: "ROKAF_M";
+  src: url("../fonts/ROKAF_M.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 /* ====================================================================== */
 /* 회원가입 페이지 전체 */
 /* ====================================================================== */
@@ -15,7 +24,7 @@
   margin: 0 auto;
   padding: 80px 0;
 
-  background-color: #ffffff;
+  background-color: var(--White-color);
   box-sizing: border-box;
 }
 
@@ -42,7 +51,7 @@
 .signup_page .pandaText {
   margin: 0 0 0 22.24px;
 
-  color: #3692ff;
+  color: var(--brand-blue);
   text-align: center;
 
   font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
@@ -65,7 +74,7 @@
   padding-top: 40px;
   gap: 16px;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -85,7 +94,7 @@
   padding-top: 24px;
   gap: 16px;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -99,12 +108,12 @@
   height: 58px;
   padding: 16px 24px;
 
-  border: 1px solid #f3f4f6;
+  border: 1px solid var(--Cool-Gray-100);
   border-radius: 12px;
   outline: none;
 
-  color: #1f2937;
-  background: #f3f4f6;
+  color: var(--Secondary-800);
+  background: var(--Cool-Gray-100);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
@@ -113,7 +122,7 @@
 }
 
 .signup_page .input_field:focus {
-  border-color: #3692ff;
+  border-color: var(--brand-blue);
 }
 
 /* ====================================================================== */
@@ -129,7 +138,7 @@
   padding: 24px 0;
   gap: 16px;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -146,12 +155,12 @@
   height: 58px;
   padding: 16px 60px 16px 24px;
 
-  border: 1px solid #f3f4f6;
+  border: 1px solid var(--Cool-Gray-100);
   border-radius: 12px;
   outline: none;
 
-  color: #1f2937;
-  background: #f3f4f6;
+  color: var(--Secondary-800);
+  background: var(--Cool-Gray-100);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
@@ -160,7 +169,7 @@
 }
 
 .signup_page #password_input:focus {
-  border-color: #3692ff;
+  border-color: var(--brand-blue);
 }
 
 .signup_page .password_toggle,
@@ -197,7 +206,7 @@
   width: 100%;
   gap: 16px;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -214,12 +223,12 @@
   height: 58px;
   padding: 16px 60px 16px 24px;
 
-  border: 1px solid #f3f4f6;
+  border: 1px solid var(--Cool-Gray-100);
   border-radius: 12px;
   outline: none;
 
-  color: #1f2937;
-  background: #f3f4f6;
+  color: var(--Secondary-800);
+  background: var(--Cool-Gray-100);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
@@ -228,7 +237,7 @@
 }
 
 .signup_page #password_check_input:focus {
-  border-color: #3692ff;
+  border-color: var(--brand-blue);
 }
 
 .signup_page .password_check_toggle {
@@ -258,7 +267,7 @@
 .signup_page .error_message {
   margin: 0;
 
-  color: #f74747;
+  color: var(--error-red);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -285,8 +294,8 @@
   border: none;
   border-radius: 40px;
 
-  color: #f3f4f6;
-  background: #9ca3af;
+  color: var(--Cool-Gray-100);
+  background: var(--Secondary-400);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 20px;
@@ -298,7 +307,7 @@
 }
 
 .signup_page .signup_btn.active {
-  background: #3692ff;
+  background: var(--brand-blue);
 }
 
 .signup_page .signup_btn:disabled {
@@ -322,14 +331,14 @@
   padding: 0 23px;
   margin-bottom: 24px;
 
-  background: #e6f2ff;
+  background: var(--Light-blue);
   box-sizing: border-box;
 }
 
 .signup_page .Easy_login2 {
   margin: 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -374,7 +383,7 @@
 .signup_page .text1 {
   margin: 0 4px 0 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -382,7 +391,7 @@
 }
 
 .signup_page .signup {
-  color: #3692ff;
+  color: var(--brand-blue);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -420,7 +429,7 @@
   align-items: center;
   justify-content: center;
 
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--modal-background);
 }
 
 .signup_page .error_modal_content {
@@ -433,7 +442,7 @@
   padding: 48px 24px 24px;
 
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--White-color);
 
   box-sizing: border-box;
 }
@@ -441,7 +450,7 @@
 .signup_page #error_modal_message {
   margin: 0;
 
-  color: #1f2937;
+  color: var(--Secondary-800);
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -458,8 +467,8 @@
   border: none;
   border-radius: 8px;
 
-  color: #ffffff;
-  background: #3692ff;
+  color: var(--White-color);
+  background: var(--brand-blue);
 
   font-family: Pretendard, Arial, sans-serif;
   font-size: 14px;
