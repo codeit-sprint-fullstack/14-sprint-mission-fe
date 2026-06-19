@@ -1,0 +1,50 @@
+.pagination {
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+}
+
+.pageButton,
+.arrowButton {
+  width: 40px;
+  height: 40px;
+  padding: 12.5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 40px;
+  background: #ffffff;
+
+  color: #6b7280;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+
+  cursor: pointer;
+}
+
+.active {
+  border: none;
+  background: #2f80ed;
+  color: #ffffff;
+}
+
+.pageButton:hover,
+.arrowButton:hover {
+  border-color: #3692ff;
+}
+
+.pageButton:disabled,
+.arrowButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
