@@ -16,6 +16,7 @@ h2 {
 .content {
   width: 1200px;
   display: flex;
+  gap: 40px;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
@@ -33,6 +34,7 @@ h2 {
   width: 100%;
   box-sizing: border-box;
   align-items: flex-start;
+  justify-content: center;
   gap: 24px;
 }
 
@@ -48,18 +50,18 @@ h2 {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 
 input {
   display: flex;
-  width: 325px;
-  height: 42px;
+  width: 289px;
+  height: 24px;
   padding: 9px 20px 9px 16px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  box-sizing: border-box;
 
   border-radius: 12px;
   background: var(--Secondary-100);
@@ -73,6 +75,8 @@ input {
 
 .search_Button {
   display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .search_Button button {
@@ -91,6 +95,7 @@ input {
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 #dropdown {
@@ -153,18 +158,17 @@ input {
   background-size: contain;
 }
 
-.sellItemList {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
-
 
 /* PC: 1200px 이상 */
 @media screen and (min-width: 1200px)  {
   .content {
     margin: 94px auto 223px;
-    gap: 40px;
+  }
+
+  .sellItemList {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
   }
 
   .search_Button {
@@ -180,6 +184,17 @@ input {
     margin: 94px auto 165px;
     width: 696px;
   }
+
+  input {
+    width: 206px;
+    height: 24px;
+  }
+
+  .sellItemList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
 }
 
 /* Mobile: 375px ~ 743px */
@@ -187,5 +202,21 @@ input {
   .content {
     margin: 94px auto 135px;
     width: 344px;
+    gap: 24px;
+  }
+  .sellItemList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .sellHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  input {
+    width: 180px;
   }
 }

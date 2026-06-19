@@ -6,11 +6,20 @@ import { useEffect } from "react";
 import defaultImg from "../assets/placeholder.png";
 import useApi from "./useApi";
 
-function Items_Card({ page, size, option, index }){
-  const { products, loading, error } = useApi(page, size, option);
+function Items_Card({ page, size, option, keyword, index, onMeta }){
+  const { products, count, totalPage, loading, error } = useApi(page, size, option, keyword);
+  // const [totalPage, setTotalPage] = useState(0); // 페이지 개수
+  // const [totalCount, setTotalCount] = useState(0); // 상품 개수
+
+  useEffect(() => {
+    if (count && onMeta) {
+      onMeta({ count, totalPage });
+    }
+  }, [count, size, onMeta]);
 
   if (loading)
     return console.log('로딩중...');
+
   if(error)
     return console.log(`에러 발생: ${error.message}`);
 

@@ -5,11 +5,58 @@ import style from "./Items_Content.module.css";
 import ic_search from "../assets/ic_search.svg";
 import btn_right from "../assets/btn_right.png";
 import btn_left from "../assets/btn_left.png";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 
 function Items_Content () {
   const navigate = useNavigate(); // 링크 이동 시 새로고침이 아닌 상태로 컴포넌트 호출
   const [sortRule, setSortRule] = useState('recent');
+  const [count, setCount] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(4);
+  const [favoritSize, setFavoritSize] = useState(0); // window용 베스트아이탬 개수 지정
+  const [keyword, setKeyword] = useState('');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1200) {
+        setFavoritSize(4);
+        setSize(10);
+      } else if (window.innerWidth >= 744) {
+        setFavoritSize(2);
+        setSize(6);
+      } else {
+        setFavoritSize(1);
+        setSize(4);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleMeta = ({ count, totalPage }) => {
+    console.log(count);
+    console.log(totalPage);
+    setCount(count);
+    setTotalPage(totalPage);
+  }
+
+  {/* 페이지네이션 구현 */}
+  const getPageNumbers = () => {
+    const maxButtons = 5;
+    let start = Math.max(page - Math.floor(maxButtons / 2), 1);
+    let end = start + maxButtons - 1;
+
+    if (end > totalPage) {
+      end = totalPage;
+      start = Math.max(end - maxButtons + 1, 1);
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  };
 
   return (
     <>
@@ -18,16 +65,24 @@ function Items_Content () {
           <div className={style.bestItem}>
             <h2>베스트 상품</h2>
             <div className={style.bestItemList}>
-              <Items_Card page={1} size={4} option={'favorite'} index={true}/>
+              <Items_Card page={1} size={favoritSize} option={'favorite'} keyword={null} index={true}/>
             </div>
           </div>
           <div className={style.sellItem}>
             <div className={style.sellHeader}>
               <h2>판매 중인 상품</h2>
               <div className={style.search_Button}>
-                <input type="text" id={style.searchItem} placeholder="검색할 상품을 입력해주세요"/>
+                <input
+                  type="text"
+                  id={style.searchItem}
+                  placeholder="검색할 상품을 입력해주세요"
+                  defaultValue={keyword}   // undefined/null 방지
+                  onBlur={(e) => {setKeyword(e.target.value)
+                    console.log(keyword);
+                  }}
+                />
                 <button onClick={() => navigate('/')}>
-                  <span>상품 등록하기</span>
+                  <span>상품 <br/>등록하기</span>
                 </button>
                 <select id={style.dropdown} name="category" value={sortRule} onChange={(e) => setSortRule(e.target.value)
                 }>
@@ -37,19 +92,35 @@ function Items_Content () {
               </div>
             </div>
             <div className={style.sellItemList}>
-              <Items_Card page={1} size={10} option={sortRule} index={false}/>
+              <Items_Card page={page} size={size} option={sortRule} index={false} keyword={keyword} onMeta={handleMeta}/>
             </div>
           </div>
-
+          
+          {/* 페이지네이션 구현 */}
           <div className={style.listButton}>
-            <button type="button" id={style.right} onClick={() => console.log("클릭됨")}/>
-            <button type="button" onClick={() => console.log("클릭됨")}><span>1</span></button>
-            <button type="button" onClick={() => console.log("클릭됨")}><span>2</span></button>           
-            <button type="button" onClick={() => console.log("클릭됨")}><span>3</span></button>
-            <button type="button" onClick={() => console.log("클릭됨")}><span>4</span></button>
-            <button type="button" onClick={() => console.log("클릭됨")}><span>5</span></button>                                  
-            <button type="button" id={style.left} alt="다음 페이지" onClick={() => console.log("클릭됨")}/>         
-          </div>         
+            <button
+              type="button"
+              id={style.right}
+              onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+            />
+
+            {getPageNumbers().map(num => (
+              <button
+                key={num}
+                type="button"
+                onClick={() => setPage(num)}
+                className={page === num ? style.active : ""}
+              >
+                {num}
+              </button>
+            ))}
+
+            <button
+              type="button"
+              id={style.left}
+              onClick={() => setPage(prev => Math.min(prev + 1, totalPage))}
+            />
+          </div>        
         </div>
       </div>
       <Footer />
