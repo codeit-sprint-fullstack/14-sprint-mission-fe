@@ -4,7 +4,7 @@ function Header() {
   return (
     <div className="header">
       <div className="inner">
-        <Link className="logoLink" to="/">
+        <Link className="logoLink" to="/home">
           <img src="/img/panda_logo.png" alt="판다마켓 로고" />
           <span>판다마켓</span>
         </Link>
