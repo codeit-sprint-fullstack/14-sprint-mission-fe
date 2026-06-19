@@ -1,45 +1,6 @@
-:root {
-  --color-bg-main: #FCFCFC;
-  --color-bg-white: #FFFFFF;
-  --color-bg-brand-light: #CFE5FF;
-  --color-bg-footer: #111827;
-  --color-primary: #3692FF;
-  --color-btn-hover: #F9FAFB;
-  --color-text-dark: #374151;
-  --color-text-muted: #9CA3AF;
-  --color-text-light: #E5E7EB;
-  --color-border-light: #DFDFDF;
-  --color-secondary-600: #4B5563;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration-line: none;
-}
-
-@font-face {
-  font-family: 'ROKAF Sans';
-  src: url('./assets/ROKAF\ Sans\ Bold.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('./assets/Pretendard-Regular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .footer-container {
   width: 100%;
   min-height: 10rem;
-  gap: 0.625rem;
   background: var(--color-bg-footer);
   margin: 0 auto;
 }

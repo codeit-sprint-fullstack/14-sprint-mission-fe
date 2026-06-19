@@ -1,4 +1,4 @@
-import pandaLogo from "./assets/판다 얼굴.png";
+import pandaLogo from "../../assets/판다 얼굴.png";
 import "./NavBar.css";
 
 function NavBar() {
