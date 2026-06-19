@@ -1,4 +1,4 @@
-import { PRODUCT_ORDER_BY } from "../constants/product"
+import { PRODUCT_ORDER_BY } from '../constants/product'
 
 const BASE_URL = 'https://panda-market-api-crud.vercel.app'
 
@@ -31,7 +31,12 @@ const requestProduct = async (path, options = {}) => {
   }
 }
 
-export const getProductList = async (page = 1, pageSize = 10, keyword = '', orderBy = PRODUCT_ORDER_BY.RECENT) => {
+export const getProductList = async (
+  page = 1,
+  pageSize = 10,
+  keyword = '',
+  orderBy = PRODUCT_ORDER_BY.RECENT,
+) => {
   const queryString = createQueryString({ page, pageSize, keyword, orderBy })
 
   return await requestProduct(`/products?${queryString}`)
