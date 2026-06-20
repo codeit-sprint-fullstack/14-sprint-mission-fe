@@ -30,3 +30,30 @@
 .social img {
   width: 20px;
 }
+
+@media (max-width: 768px) {
+ 
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 32px 16px;
+    display: grid;
+    grid-template-areas:
+      "links social"
+      "copyright social";
+    grid-template-columns: 1fr auto;
+  }
+
+   .copyright {
+    grid-area: copyright;
+  }
+
+  .links {
+    grid-area: links;
+  }
+
+  .social {
+    grid-area: social;
+  }
+}

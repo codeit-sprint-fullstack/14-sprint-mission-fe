@@ -50,11 +50,43 @@
 
 .loginBtn {
   height: 42px;
-  padding: 12px 32px;
+  padding: 12px 23px;
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
   color: var(--secondary-100);
   border-radius: 8px;
   background-color: var(--primary-100);
+}
+
+@media (max-width: 768px) {
+  .headerLeft {
+    gap: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 16px;
+  }
+
+  .headerLeft {
+    gap: 8px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+
+  .links {
+    gap: 8px;
+  }
+
+  .link {
+    font-size: 16px;
+  }
+
+  .icon {
+    display: none;
+  }
 }

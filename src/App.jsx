@@ -3,8 +3,11 @@ import BestItemList from './components/BestItemList.jsx'
 import ItemList from './components/ItemList.jsx'
 import Pagination from './components/Pagination.jsx'
 import Footer from './components/Footer.jsx'
+
 import searchIcon from './assets/ic_search.png'
 import caretIcon from './assets/ic_caret.png'
+import sortIcon from './assets/ic_sort.png'
+
 import axios from './utils/axios.js'
 import { useEffect, useState } from 'react'
 import styles from './App.module.css'
@@ -12,15 +15,20 @@ import styles from './App.module.css'
 function App() {
   const [bestItemList, setBestItemList] = useState([])
   const [itemList, setItemList] = useState([])
+
   const [isOpen, setIsOpen] = useState(false)
+
   const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const [bestPageSize, setBestPageSize] = useState(10)
+
   const [orderBy, setOrderBy] = useState('recent')
   const [keyword, setKeyword] = useState('')
 
   const getBestItemList = async () => {
     const res = await axios.get('/products', {
       params: {
-        pageSize: 4,
+        pageSize: bestPageSize,
         orderBy: 'favorite',
       }
     })
@@ -30,13 +38,13 @@ function App() {
 
   useEffect(() => {
       getBestItemList()
-    }, [])
+    }, [bestPageSize])
 
   const getItemList = async () => {
     const res = await axios.get('/products', {
       params: {
         page,
-        pageSize: 10,
+        pageSize,
         orderBy,
         keyword,
       }
@@ -47,7 +55,27 @@ function App() {
 
   useEffect(() => {
     getItemList()
-  },[page, orderBy, keyword])
+  },[page, pageSize, orderBy, keyword])
+
+  const handleResize = () => {
+    if (window.innerWidth <= 480) {
+      setPageSize(4)
+      setBestPageSize(1)
+    } else if (window.innerWidth > 480 && window.innerWidth <= 768) {
+      setPageSize(6)
+      setBestPageSize(2)
+    } else {
+      setPageSize(10)
+      setBestPageSize(4)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   const pages = [1, 2, 3, 4, 5]
 
@@ -56,12 +84,12 @@ function App() {
       <Header />
       <main className={styles.main}>
         <section className={styles.bestItemSection}>
-          <header>
+          <header className={styles.header}>
             <h2 className={styles.title}>베스트 상품</h2>
           </header>
           <BestItemList bestItems={bestItemList} />
         </section>
-        <section>
+        <section className={styles.itemSection}>
           <header className={styles.header}>
             <h2 className={styles.title}>판매 중인 상품</h2>
             <div className={styles.headerRight}>
@@ -77,8 +105,11 @@ function App() {
               <a className={styles.registerLink} href="/">상품 등록하기</a>
               <div className={styles.dropdownBox}>
                 <button className={styles.dropdownBtn} onClick={() => setIsOpen(!isOpen)}>
-                  {orderBy === 'recent' ? '최신순' : '좋아요순'}
-                  <img className={styles.caretIcon} src={caretIcon} alt="" />
+                  <p className={styles.dropdownText}>
+                    {orderBy === 'recent' ? '최신순' : '좋아요순'}
+                    <img className={styles.caretIcon} src={caretIcon} alt="" />
+                  </p>
+                  <img className={styles.sortIcon} src={sortIcon} alt="" />
                 </button>
                 {isOpen && 
                   <ul className={styles.dropdownMenu} >

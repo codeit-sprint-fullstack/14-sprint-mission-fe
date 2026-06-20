@@ -8,7 +8,6 @@
 }
 
 .title {
-  margin-bottom: 16px;
   font-size: 20px;
   font-weight: 700;
   color: var(--secondary-900);
@@ -60,7 +59,7 @@
 }
 
 .registerLink {
-  padding: 12px 32px;
+  padding: 12px 23px;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
@@ -92,6 +91,10 @@
 .caretIcon {
   width: 24px;
   height: 24px;
+}
+
+.sortIcon {
+  display: none;
 }
 
 .dropdownMenu {
@@ -129,4 +132,64 @@
   margin-top: 43px;
   display: flex;
   justify-content: center;
+}
+
+
+@media (max-width: 768px) {
+  .main {
+    width: 100%;
+    padding: 0 24px;
+  }
+
+  .searchInput {
+    width: 242px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 0 16px;
+  }
+
+  .itemSection .header {
+    display: grid;
+    grid-template-areas: 
+      "title register"
+      "search dropdown";
+    grid-template-columns: 1fr auto;
+    gap: 8px 14px;
+  }
+
+  .headerRight {
+    display: contents;
+  }
+
+  .itemSection .title {
+    grid-area: title;
+  }
+
+  .registerLink {
+    grid-area: register;
+  }
+
+  .searchBox {
+    grid-area: search;
+  }
+
+  .dropdownBox {
+    grid-area: dropdown;
+  }
+
+  .dropdownBtn {
+    width: 42px;
+  }
+
+  .dropdownText {
+    display: none;
+  }
+
+  .sortIcon {
+    width: 24px;
+    display: block;
+  }
 }
