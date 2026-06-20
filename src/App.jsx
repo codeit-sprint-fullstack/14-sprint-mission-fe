@@ -11,6 +11,8 @@ import styles from './App.module.css'
 function App() {
   const [bestItemList, setBestItemList] = useState([])
   const [itemList, setItemList] = useState([])
+  const [isOpen, setIsOpen] = useState(false)
+  const [orderBy, setOrderBy] = useState('recent')
   const [keyword, setKeyword] = useState('')
 
   const getBestItemList = async () => {
@@ -32,6 +34,7 @@ function App() {
     const res = await axios.get('/products', {
       params: {
         pageSize: 10,
+        orderBy,
         keyword,
       }
     })
@@ -41,7 +44,7 @@ function App() {
 
   useEffect(() => {
     getItemList()
-  },[keyword])
+  },[orderBy, keyword])
   
 
   return (
@@ -60,18 +63,40 @@ function App() {
             <div className={styles.headerRight}>
               <div className={styles.searchBox}>
                 <img className={styles.searchIcon} src={searchIcon} alt="" />
-                <input className={styles.searchInput} type="text" onChange={(e) => setKeyword(e.target.value)}placeholder="검색할 상품을 입력해주세요"/>
+                <input 
+                  className={styles.searchInput} 
+                  type="text" 
+                  onChange={(e) => setKeyword(e.target.value)}
+                  placeholder="검색할 상품을 입력해주세요"
+                />
               </div>
               <a className={styles.registerLink} href="/">상품 등록하기</a>
               <div className={styles.dropdownBox}>
-                <button className={styles.dropdownBtn} >
-                  최신순
+                <button className={styles.dropdownBtn} onClick={() => setIsOpen(!isOpen)}>
+                  {orderBy === 'recent' ? '최신순' : '좋아요순'}
                   <img className={styles.caretIcon} src={caretIcon} alt="" />
                 </button>
-                <ul className={styles.dropdownMenu} >
-                  <li><button>최신순</button></li>
-                  <li><button>좋아요순</button></li>
-                </ul>
+                {isOpen && 
+                  <ul className={styles.dropdownMenu} >
+                    <li>
+                      <button onClick={(e) => {
+                        setOrderBy('recent') 
+                        setIsOpen(false)
+                      }}>
+                        최신순
+                      </button>
+                    </li>
+                    <li>
+                      <button onClick={(e) => {
+                        setOrderBy('favorite')
+                        setIsOpen(false)
+                      }}>
+                        좋아요순
+                      </button>
+                    </li>
+                  </ul>
+                }
+                
               </div>
             </div>
           </header>
