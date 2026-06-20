@@ -20,7 +20,7 @@ function App() {
 
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
-  const [bestPageSize, setBestPageSize] = useState(10)
+  const [bestPageSize, setBestPageSize] = useState(4)
 
   const [orderBy, setOrderBy] = useState('recent')
   const [keyword, setKeyword] = useState('')

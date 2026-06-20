@@ -7,7 +7,7 @@ function ItemCard({ item }) {
       <img className={styles.image} src={item.images[0]} alt="" />
       <div className={styles.info}>
         <h3 className={styles.name}>{item.name}</h3>
-        <p className={styles.price}>{item.price}</p>
+        <p className={styles.price}>{item.price}원</p>
         <p className={styles.favCount}>
           <img src={heartIcon} alt="" />
           {item.favoriteCount}

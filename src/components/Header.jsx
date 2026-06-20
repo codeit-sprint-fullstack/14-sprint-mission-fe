@@ -11,7 +11,7 @@ function Header() {
         </a>
         <ul className={styles.links}>
           <li><a className={styles.link} href="/">자유게시판</a></li>
-          <li><a className={styles.link} href="/">중고게시판</a></li>
+          <li><a className={styles.link} href="/">중고마켓</a></li>
         </ul>
       </div>
       <a className={styles.loginBtn} href="/">로그인</a>
