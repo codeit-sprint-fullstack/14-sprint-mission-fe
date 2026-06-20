@@ -11,6 +11,7 @@ import styles from './App.module.css'
 function App() {
   const [bestItemList, setBestItemList] = useState([])
   const [itemList, setItemList] = useState([])
+  const [keyword, setKeyword] = useState('')
 
   const getBestItemList = async () => {
     const res = await axios.get('/products', {
@@ -23,10 +24,15 @@ function App() {
     setBestItemList(list)
   }
 
+  useEffect(() => {
+      getBestItemList()
+    }, [])
+
   const getItemList = async () => {
     const res = await axios.get('/products', {
       params: {
         pageSize: 10,
+        keyword,
       }
     })
     const { list } = res.data
@@ -34,9 +40,9 @@ function App() {
   }
 
   useEffect(() => {
-    getBestItemList()
     getItemList()
-  }, [])
+  },[keyword])
+  
 
   return (
     <>
@@ -54,7 +60,7 @@ function App() {
             <div className={styles.headerRight}>
               <div className={styles.searchBox}>
                 <img className={styles.searchIcon} src={searchIcon} alt="" />
-                <input className={styles.searchInput} type="text" placeholder="검색할 상품을 입력해주세요"/>
+                <input className={styles.searchInput} type="text" onChange={(e) => setKeyword(e.target.value)}placeholder="검색할 상품을 입력해주세요"/>
               </div>
               <a className={styles.registerLink} href="/">상품 등록하기</a>
               <div className={styles.dropdownBox}>
@@ -67,7 +73,6 @@ function App() {
                   <li><button>좋아요순</button></li>
                 </ul>
               </div>
-              
             </div>
           </header>
           <ItemList items={itemList}/>
