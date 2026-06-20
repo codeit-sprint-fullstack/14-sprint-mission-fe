@@ -1,0 +1,507 @@
+@import '../ColorPalette.css';
+
+@font-face {
+  font-family: "ROKAF_M";
+  src: url("../fonts/ROKAF_M.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ====================================================================== */
+/* 회원가입 페이지 전체 */
+/* ====================================================================== */
+
+.signup_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 648px;
+  max-width: calc(100vw - 32px);
+  min-height: 100vh;
+
+  margin: 0 auto;
+  padding: 80px 0;
+
+  background-color: var(--White-color);
+  box-sizing: border-box;
+}
+
+/* ====================================================================== */
+/* 판다마켓 로고 */
+/* ====================================================================== */
+
+.signup_page .pandaLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  text-decoration: none;
+}
+
+.signup_page .pandaFace {
+  width: 103.529px;
+  height: 103.88px;
+
+  border-radius: 28.932px;
+}
+
+.signup_page .pandaText {
+  margin: 0 0 0 22.24px;
+
+  color: var(--brand-blue);
+  text-align: center;
+
+  font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
+  font-size: 66.344px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* ====================================================================== */
+/* 이메일 */
+/* ====================================================================== */
+
+.signup_page .email_group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  padding-top: 40px;
+  gap: 16px;
+
+  color: var(--Secondary-800);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+/* ====================================================================== */
+/* 닉네임 */
+/* ====================================================================== */
+
+.signup_page .nickname_group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  padding-top: 24px;
+  gap: 16px;
+
+  color: var(--Secondary-800);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+/* 이메일과 닉네임 입력창 */
+
+.signup_page .input_field {
+  width: 100%;
+  height: 58px;
+  padding: 16px 24px;
+
+  border: 1px solid var(--Cool-Gray-100);
+  border-radius: 12px;
+  outline: none;
+
+  color: var(--Secondary-800);
+  background: var(--Cool-Gray-100);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+
+  box-sizing: border-box;
+}
+
+.signup_page .input_field:focus {
+  border-color: var(--brand-blue);
+}
+
+/* ====================================================================== */
+/* 비밀번호 */
+/* ====================================================================== */
+
+.signup_page .password_group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  padding: 24px 0;
+  gap: 16px;
+
+  color: var(--Secondary-800);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.signup_page .password_set {
+  position: relative;
+  width: 100%;
+}
+
+.signup_page #password_input {
+  width: 100%;
+  height: 58px;
+  padding: 16px 60px 16px 24px;
+
+  border: 1px solid var(--Cool-Gray-100);
+  border-radius: 12px;
+  outline: none;
+
+  color: var(--Secondary-800);
+  background: var(--Cool-Gray-100);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+
+  box-sizing: border-box;
+}
+
+.signup_page #password_input:focus {
+  border-color: var(--brand-blue);
+}
+
+.signup_page .password_toggle,
+.signup_page .password_check_toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+
+  padding: 0;
+  border: none;
+
+  background: none;
+  cursor: pointer;
+
+  transform: translateY(-50%);
+}
+
+.signup_page .password_toggle img,
+.signup_page .password_check_toggle img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* ====================================================================== */
+/* 비밀번호 확인 */
+/* ====================================================================== */
+
+.signup_page .password_check_group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  gap: 16px;
+
+  color: var(--Secondary-800);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.signup_page .password_check_set {
+  position: relative;
+  width: 100%;
+}
+
+.signup_page #password_check_input {
+  width: 100%;
+  height: 58px;
+  padding: 16px 60px 16px 24px;
+
+  border: 1px solid var(--Cool-Gray-100);
+  border-radius: 12px;
+  outline: none;
+
+  color: var(--Secondary-800);
+  background: var(--Cool-Gray-100);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+
+  box-sizing: border-box;
+}
+
+.signup_page #password_check_input:focus {
+  border-color: var(--brand-blue);
+}
+
+.signup_page .password_check_toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+
+  padding: 0;
+  border: none;
+
+  background: none;
+  cursor: pointer;
+
+  transform: translateY(-50%);
+}
+
+.signup_page .password_check_toggle img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* ====================================================================== */
+/* 오류 메시지 */
+/* ====================================================================== */
+
+.signup_page .error_message {
+  margin: 0;
+
+  color: var(--error-red);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.signup_page .error_message:empty {
+  display: none;
+}
+
+/* ====================================================================== */
+/* 회원가입 버튼 */
+/* ====================================================================== */
+
+.signup_page .signup_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  padding: 16px 24px;
+  margin: 24px 0;
+
+  border: none;
+  border-radius: 40px;
+
+  color: var(--Cool-Gray-100);
+  background: var(--Secondary-400);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.signup_page .signup_btn.active {
+  background: var(--brand-blue);
+}
+
+.signup_page .signup_btn:disabled {
+  cursor: not-allowed;
+}
+
+/* ====================================================================== */
+/* 간편 로그인 */
+/* ====================================================================== */
+
+.signup_page .Easy_login_group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 648px;
+  max-width: calc(100vw - 32px);
+  height: 74px;
+
+  padding: 0 23px;
+  margin-bottom: 24px;
+
+  background: var(--Light-blue);
+  box-sizing: border-box;
+}
+
+.signup_page .Easy_login2 {
+  margin: 0;
+
+  color: var(--Secondary-800);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.signup_page .Easy_login_logo_group {
+  display: flex;
+  align-items: center;
+}
+
+.signup_page .link_underline {
+  text-decoration: none;
+}
+
+.signup_page .google_logo {
+  width: 42px;
+  height: 42px;
+  margin-right: 16px;
+}
+
+.signup_page .kakao_logo {
+  width: 42px;
+  height: 42px;
+}
+
+/* ====================================================================== */
+/* 로그인 페이지 이동 */
+/* ====================================================================== */
+
+.signup_page .First {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 648px;
+  max-width: calc(100vw - 32px);
+  gap: 4px;
+}
+
+.signup_page .text1 {
+  margin: 0 4px 0 0;
+
+  color: var(--Secondary-800);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.signup_page .signup {
+  color: var(--brand-blue);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+
+/* ====================================================================== */
+/* 회원가입 폼 */
+/* ====================================================================== */
+
+.signup_page .signup_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+.signup_page .signup_button_group {
+  width: 100%;
+}
+
+
+/* ====================================================================== */
+/* 오류 모달 */
+/* ====================================================================== */
+
+.signup_page .error_modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--modal-background);
+}
+
+.signup_page .error_modal_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  padding: 48px 24px 24px;
+
+  border-radius: 8px;
+  background: var(--White-color);
+
+  box-sizing: border-box;
+}
+
+.signup_page #error_modal_message {
+  margin: 0;
+
+  color: var(--Secondary-800);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.signup_page .error_modal_close {
+  width: 56px;
+  height: 40px;
+
+  margin-top: 32px;
+  margin-left: auto;
+
+  border: none;
+  border-radius: 8px;
+
+  color: var(--White-color);
+  background: var(--brand-blue);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* ====================================================================== */
+/* 반응형 */
+/* ====================================================================== */
+
+@media (max-width: 1199px) {
+  .signup_page {
+    max-width: 648px;
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 743px) {
+  .signup_page {
+    max-width: 400px;
+    padding: 48px 0;
+  }
+
+  .signup_page .pandaFace {
+    width: 80px;
+    height: 80px;
+  }
+
+  .signup_page .pandaText {
+    margin-left: 16px;
+    font-size: 48px;
+  }
+}
