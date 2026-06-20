@@ -25,3 +25,8 @@
 .number {
   color: var(--secondary-500);
 }
+
+.active {
+  color: #FFFFFF;
+  background-color: #2F80ED;
+}

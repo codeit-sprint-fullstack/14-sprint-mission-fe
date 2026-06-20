@@ -13,7 +13,6 @@ function App() {
   const [bestItemList, setBestItemList] = useState([])
   const [itemList, setItemList] = useState([])
   const [isOpen, setIsOpen] = useState(false)
-  const [totalCount, setTotalCount] = useState(0)
   const [page, setPage] = useState(1)
   const [orderBy, setOrderBy] = useState('recent')
   const [keyword, setKeyword] = useState('')
@@ -42,9 +41,8 @@ function App() {
         keyword,
       }
     })
-    const { totalCount ,list } = res.data
+    const { list } = res.data
     setItemList(list)
-    setTotalCount(totalCount)
   }
 
   useEffect(() => {
@@ -107,7 +105,7 @@ function App() {
           </header>
           <ItemList items={itemList}/>
           <div className={styles.pagination}>
-            <Pagination pages={pages}/>
+            <Pagination pages={pages} page={page} setPage={setPage}/>
           </div>
         </section>
       </main>
