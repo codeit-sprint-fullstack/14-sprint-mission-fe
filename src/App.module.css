@@ -1,6 +1,6 @@
 .main {
   width: 1200px;
-  margin: 94px auto 40px;
+  margin: 94px auto 140px;
 }
 
 .bestItemSection {
@@ -123,4 +123,10 @@
 
 .dropdownMenu button:hover {
   background-color: var(--secondary-200);
+}
+
+.pagination {
+  margin-top: 43px;
+  display: flex;
+  justify-content: center;
 }

@@ -1,6 +1,7 @@
 import Header from './components/Header.jsx'
 import BestItemList from './components/BestItemList.jsx'
 import ItemList from './components/ItemList.jsx'
+import Pagination from './components/Pagination.jsx'
 import Footer from './components/Footer.jsx'
 import searchIcon from './assets/ic_search.png'
 import caretIcon from './assets/ic_caret.png'
@@ -12,6 +13,8 @@ function App() {
   const [bestItemList, setBestItemList] = useState([])
   const [itemList, setItemList] = useState([])
   const [isOpen, setIsOpen] = useState(false)
+  const [totalCount, setTotalCount] = useState(0)
+  const [page, setPage] = useState(1)
   const [orderBy, setOrderBy] = useState('recent')
   const [keyword, setKeyword] = useState('')
 
@@ -33,19 +36,22 @@ function App() {
   const getItemList = async () => {
     const res = await axios.get('/products', {
       params: {
+        page,
         pageSize: 10,
         orderBy,
         keyword,
       }
     })
-    const { list } = res.data
+    const { totalCount ,list } = res.data
     setItemList(list)
+    setTotalCount(totalCount)
   }
 
   useEffect(() => {
     getItemList()
-  },[orderBy, keyword])
-  
+  },[page, orderBy, keyword])
+
+  const pages = [1, 2, 3, 4, 5]
 
   return (
     <>
@@ -96,11 +102,13 @@ function App() {
                     </li>
                   </ul>
                 }
-                
               </div>
             </div>
           </header>
           <ItemList items={itemList}/>
+          <div className={styles.pagination}>
+            <Pagination pages={pages}/>
+          </div>
         </section>
       </main>
       <Footer />
