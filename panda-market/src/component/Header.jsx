@@ -1,5 +1,6 @@
 import '../css/Header.css'
 import pandaLogo from '../assets/logo.png'
+import pandaLogoM from '../assets/logoM.png'
 function Header (){
   return (
     <header>
@@ -7,7 +8,8 @@ function Header (){
         <div className="headerInner">
           <div className="headerLeft">
             <div className="logo">
-              <img src={pandaLogo} alt="판다마켓로고" />
+              <img className='logoPc' src={pandaLogo} alt="판다마켓로고" />
+              <img className='logoMo' src={pandaLogoM} alt="판다마켓로고" />
             </div>
             <div className="headerMenu">
               <div className="menu freeBoard">

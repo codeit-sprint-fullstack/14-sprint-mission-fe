@@ -1,0 +1,15 @@
+.button {
+  width: 130px;
+  outline: none;
+  border: none;
+  height: 42px;
+  line-height: 42px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.primary {
+  background: #3692ff;
+  color: white;
+}

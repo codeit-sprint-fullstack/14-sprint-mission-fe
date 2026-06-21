@@ -1,0 +1,42 @@
+.input {
+  border-radius: 8px;
+  font-size: 16px;
+  border: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+input:focus {
+  outline: none;
+}
+
+.product {
+  padding-left: 44px;
+  padding-right: 16px;
+  margin-right: 12px;
+  width: 325px;
+  height: 42px;
+  line-height: 42px;
+  background-color: #F3F4F6;
+  background-image: url(../assets/ic_search.svg);
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 16px center;
+  box-sizing: border-box;
+}
+
+.product::placeholder {
+  font-size: 16px;
+}
+
+@media (max-width:768px){
+  .product { 
+    width: 245px;
+   }
+}
+@media (max-width:480px){
+  .product { 
+  width: calc(100% - 196px);
+   }
+}
