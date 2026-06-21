@@ -1,0 +1,98 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
+}
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: #f3f4f6;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: cover;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #9ca3af;
+  font-size: 14px;
+  background-color: #f3f4f6;
+}
+
+.info {
+  margin-top: 16px;
+}
+
+.name {
+  margin: 0;
+  color: #1f2937;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.price {
+  margin: 6px 0;
+
+  color: #1f2937;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.favorite {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  color: #4b5563;
+
+
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.favoriteIcon{
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* 베스트 상품 카드 */
+.best .imageWrapper {
+  border-radius: 16px;
+}
+
+.best .name {
+  font-size: 16px;
+}
+
+.best .price {
+  font-size: 18px;
+}
+
+/* 판매 중인 상품 카드 */
+.default .imageWrapper {
+  border-radius: 16px;
+}

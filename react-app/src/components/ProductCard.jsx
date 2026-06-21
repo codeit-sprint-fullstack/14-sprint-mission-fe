@@ -1,0 +1,51 @@
+import styles from './ProductCard.module.css'
+
+//상품 카드를 하나씩 띄워주는 역할
+
+function ProductCard({ product, variant = 'default' }) {
+  // product(상품데이터)와 variant(일반 상품 카드 / 베스트 상품 카드)
+  // variant="best"면 베스트 상품 전용 스타일 적용
+  const imageUrl = product.images?.[0] //이미지 URL 추출
+  //product의 images 배열이 존재하면 첫 번째 이미지를 가져오고, 없으면 undefined를 반환한다
+  // ?가 undefined여도 에러를 발생시키지 않도록 함
+
+  return (
+    <article className={`${styles.card} ${styles[variant]}`}>
+      {/* class="card best" or class="card default" */}
+      <div className={styles.imageWrapper}>
+        {imageUrl ? (
+          <img src={imageUrl} alt={product.name} className={styles.image} />
+        ) : (
+          <div className={styles.placeholder}>이미지 없음</div>
+        )}
+        {/* 이미지가 있으면 이미지를 출력하고 : 없으면 이미지 없음 출력 */}
+      </div>
+
+      <div className={styles.info}>
+        {/* 제품명 / 가격 / 좋아요 수 */}
+        <h3 className={styles.name}>{product.name}</h3>
+        <p className={styles.price}>{product.price?.toLocaleString()}원</p>
+        <div className={styles.favorite}>
+          <svg
+            className={styles.favoriteIcon}
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <path
+              d="M10.5999 2.59961C12.5319 2.59961 14.0755 4.1317 14.1331 6.08398V6.2002C14.1331 7.24212 13.7295 8.14487 13.0609 8.75781L12.8665 8.93652V8.98047C12.7656 9.06604 12.6352 9.17783 12.4837 9.30957C12.1466 9.60273 11.695 10.0004 11.2034 10.4336C10.2216 11.2989 9.07959 12.3083 8.34894 12.9395C8.17252 13.0862 7.8985 13.0865 7.72101 12.9414C6.9888 12.309 5.82562 11.2963 4.83624 10.4316C4.34065 9.99852 3.8888 9.6028 3.55695 9.31152C3.40681 9.17974 3.28735 9.07349 3.19952 8.99609V8.95117L3.02472 8.77539C2.33096 8.08163 1.93298 7.16559 1.93292 6.2002V6.08496C1.98971 4.21111 3.58939 2.66699 5.4671 2.66699C5.74528 2.6671 6.11397 2.76392 6.48175 2.96191C6.83366 3.1514 7.14169 3.41108 7.34406 3.7002C7.64085 4.30642 8.51657 4.29878 8.79913 3.67773C8.9644 3.37509 9.264 3.10098 9.62531 2.89941C9.9929 2.69441 10.3596 2.59963 10.5999 2.59961Z"
+              stroke="#4B5563"
+              strokeWidth="1.2"
+            />
+          </svg>
+
+          <span>{product.favoriteCount}</span>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+export default ProductCard
