@@ -10,12 +10,12 @@ header {
 }
 .headerWrap {
     width: 100%;
-    max-width: 1920px;
+    max-width: 1520px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    padding: 0 200px;
+    padding: 0 24px;
 }
 .headerLeft {
     display: flex;
@@ -50,4 +50,27 @@ h1 a {
     font-size: 1rem;
     border-radius: 8px;
     background-color: var(--blue);
+}
+
+@media (max-width: 375px) {
+    .headerLeft {
+        gap: 0 8px;
+    }
+
+    h1 a {
+        font-size: 1.25rem;
+    }
+
+    h1 a img {
+        display: none;
+    }
+    .headerLeft ul {
+        gap: 0 8px;
+    }
+    .headerLeft ul li {
+        padding: 0;
+    }
+    .headerLeft ul li a {
+        font-size: 1rem;
+    }
 }

@@ -43,6 +43,7 @@ a {
 button {
 	border: 0;
 	cursor: pointer;
+	background: none;
 }
 blockquote, q {
 	quotes: none;

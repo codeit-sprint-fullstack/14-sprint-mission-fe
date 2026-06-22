@@ -1,11 +1,11 @@
-import HeartIcon from '../../assets/icon/ic_heart.png'
+import HeartIcon from '../../assets/icon/ic_heart.png';
 
 function ProductCard({ items }) {
   return (
-    <ul>
+    <ul className='productCard'>
       {items.map((item) => (
         <li key={item.id}>
-          <img src={item.images?.[0]} alt={item.name} />
+          <img src={item.images?.[0]} alt={item.name}/>
           <p>{item.name}</p>
           <p>{item.price.toLocaleString()}원</p>
           <div>

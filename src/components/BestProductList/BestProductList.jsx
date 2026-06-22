@@ -19,7 +19,7 @@ useEffect(() => {
 
 
   return (
-    <div>
+    <div className='bestProductList'>
       <h2>베스트 상품</h2>
       <ProductCard items={items}/>
     </div>
