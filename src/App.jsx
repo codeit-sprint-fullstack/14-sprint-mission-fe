@@ -8,77 +8,21 @@ import searchIcon from './assets/ic_search.png'
 import caretIcon from './assets/ic_caret.png'
 import sortIcon from './assets/ic_sort.png'
 
-import axios from './utils/axios.js'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './App.module.css'
 
+import UseProducts from './hooks/useProducts.jsx'
+import UseMediaQuery from './hooks/useMediaQuery.jsx'
+
 function App() {
-  const [bestItemList, setBestItemList] = useState([])
-  const [itemList, setItemList] = useState([])
-  const [totalCount, setTotalCount] = useState(0)
-
-  const [isOpen, setIsOpen] = useState(false)
-
   const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
-  const [bestPageSize, setBestPageSize] = useState(4)
-
   const [orderBy, setOrderBy] = useState('recent')
   const [keyword, setKeyword] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
 
-  const getBestItemList = async () => {
-    const res = await axios.get('/products', {
-      params: {
-        pageSize: bestPageSize,
-        orderBy: 'favorite',
-      }
-    })
-    const { list } = res.data
-    setBestItemList(list)
-  }
-
-  useEffect(() => {
-      getBestItemList()
-    }, [bestPageSize])
-
-  const getItemList = async () => {
-    const res = await axios.get('/products', {
-      params: {
-        page,
-        pageSize,
-        orderBy,
-        keyword,
-      }
-    })
-    const { totalCount, list } = res.data
-    setItemList(list)
-    setTotalCount(totalCount)
-  }
-
-  useEffect(() => {
-    getItemList()
-  },[page, pageSize, orderBy, keyword])
-
-  const handleResize = () => {
-    if (window.innerWidth <= 480) {
-      setPageSize(4)
-      setBestPageSize(1)
-    } else if (window.innerWidth > 480 && window.innerWidth <= 768) {
-      setPageSize(6)
-      setBestPageSize(2)
-    } else {
-      setPageSize(10)
-      setBestPageSize(4)
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize)
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
-
+  const { pageSize, bestPageSize } = UseMediaQuery()
+  const { itemList, bestItemList, totalCount } = UseProducts(page, pageSize, bestPageSize, orderBy, keyword)
+  
   const totalPages = Math.ceil( totalCount / pageSize )
   const pages = Array.from({length: totalPages}).map((_, index) => index + 1)
 
