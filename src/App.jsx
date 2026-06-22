@@ -11,8 +11,8 @@ import sortIcon from './assets/ic_sort.png'
 import { useState } from 'react'
 import styles from './App.module.css'
 
-import UseProducts from './hooks/useProducts.jsx'
-import UseMediaQuery from './hooks/useMediaQuery.jsx'
+import useProducts from './hooks/useProducts.jsx'
+import useMediaQuery from './hooks/useMediaQuery.jsx'
 
 function App() {
   const [page, setPage] = useState(1)
@@ -20,11 +20,25 @@ function App() {
   const [keyword, setKeyword] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
-  const { pageSize, bestPageSize } = UseMediaQuery()
-  const { itemList, bestItemList, totalCount } = UseProducts(page, pageSize, bestPageSize, orderBy, keyword)
+  const { pageSize, bestPageSize } = useMediaQuery()
+  const { 
+    itemList, 
+    bestItemList, 
+    totalCount,
+    isLoading,
+    error,
+   } = useProducts(page, pageSize, bestPageSize, orderBy, keyword)
   
   const totalPages = Math.ceil( totalCount / pageSize )
   const pages = Array.from({length: totalPages}).map((_, index) => index + 1)
+
+  if (isLoading) {
+    return <div>로딩중...</div>
+  }
+
+  if (error) {
+    return <div>{error}</div>
+  }
 
   return (
     <>

@@ -1,35 +1,52 @@
 import { useEffect, useState } from 'react'
 import axios from '../utils/axios.js'
 
-function UseProducts(page, pageSize, bestPageSize, orderBy, keyword) {
+function useProducts(page, pageSize, bestPageSize, orderBy, keyword) {
   const [itemList, setItemList] = useState([])
   const [bestItemList, setBestItemList] = useState([])
   const [totalCount, setTotalCount] = useState(0)
 
-  const getItemList = async () => {
-    const res = await axios.get('/products', {
-      params: {
-        page,
-        pageSize,
-        orderBy,
-        keyword,
-      }
-    })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-    const { list, totalCount } = res.data
-    setItemList(list)
-    setTotalCount(totalCount)
+  const getItemList = async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const res = await axios.get('/products', {
+        params: {
+          page,
+          pageSize,
+          orderBy,
+          keyword,
+        }
+      })
+
+      const {list, totalCount } = res.data
+
+      setItemList(list)
+      setTotalCount(totalCount)
+    } catch (err) {
+      setError('상품 데이터를 불러오지 못했습니다')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const getBestItemList = async () => {
-    const res = await axios.get('/products', {
-      params: {
-        pageSize: bestPageSize,
-        orderBy: 'favorite',
-      }
-    })
-    const { list } = res.data
-    setBestItemList(list)
+    try {
+      const res = await axios.get('/products', {
+        params: {
+          pageSize: bestPageSize,
+          orderBy: 'favorite',
+        }
+      })
+      const { list } = res.data
+      setBestItemList(list)
+    } catch (err) {
+      setError('베스트 상품을 불러오지 못했습니다')
+    }
   }
 
   useEffect(() => {
@@ -40,7 +57,13 @@ function UseProducts(page, pageSize, bestPageSize, orderBy, keyword) {
       getBestItemList()
     }, [bestPageSize])
 
-  return { itemList, bestItemList, totalCount }
+  return { 
+    itemList, 
+    bestItemList, 
+    totalCount, 
+    isLoading, 
+    error 
+  }
 }
 
-export default UseProducts
+export default useProducts
