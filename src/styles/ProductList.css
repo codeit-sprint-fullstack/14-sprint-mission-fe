@@ -1,0 +1,237 @@
+/* 판매중인 상품, 검색, 상품 등록하기, 최신순 줄 */
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/*  */
+.products-title {
+  color: var(--Secondary-900, #111827);
+
+  /* pretendard/xl-20px-bold */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 160% */
+}
+
+/*  */
+.products-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 검색, 상품 등록하기, 최신순 전체 */
+.search-register-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/*  */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  width: 325px;
+  height: 42px;
+  padding: 9px 20px 9px 16px;
+
+  border-radius: 12px;
+  background: #f3f4f6;
+}
+
+/* 검색 아이콘 */
+.search-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* 검색 텍스트 */
+input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+/* 상품 등록하기 버튼 */
+.register-button {
+  display: flex;
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  background: var(--Primary-100, #3692ff);
+}
+
+.sort-wrapper {
+  position: relative;
+}
+
+/* 최신순 ▼ 버튼 */
+.sort-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 130px;
+  height: 42px;
+  padding: 12px 20px;
+
+  border-radius: 12px;
+  border: 1px solid var(--Cool-Gray-200, #e5e7eb);
+  background: #fff;
+}
+
+.sort-button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* 펼쳐지는 목록 */
+.sort-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+
+  width: 130px;
+
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 최신순, 좋아요 순 글씨 */
+.sort-dropdown li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 130px;
+  height: 42px;
+
+  color: #1f2937;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+
+  cursor: pointer;
+}
+
+/* dropdown 마우스 올렸을 때 */
+.sort-dropdown li:hover {
+  background: #f3f4f6;
+}
+
+/* 최신순, 좋아요 순 사이 줄 */
+.sort-dropdown li:first-child {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/*  */
+.products-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 40px;
+  width: 100%;
+}
+
+/* 판매 중인 상품 카드들 전체 */
+.products-grid {
+  display: grid;
+  column-gap: 24px;
+  row-gap: 40px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* 베스트 상품 카드 1개 전체 */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+
+  background: #fcfcfc;
+}
+
+/* 상품 정보 영역 */
+.product-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 베스트 상품 사진 */
+.product-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* 상품명 텍스트 */
+.product-name {
+  color: var(--Secondary-800, #1f2937);
+
+  /* pretendard/md-14px-medium */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+}
+
+/* 상품 가격 */
+.product-price {
+  color: var(--Secondary-800, #1f2937);
+
+  /* pretendard/lg-16px-bold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 162.5% */
+}
+
+/* 하트 + 숫자를 감싸는 박스 */
+.product-favorite {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 하트 */
+.product-favorite img {
+  width: 16px;
+  height: 16px;
+}
+
+/* 좋아요 수 */
+.product-favorite span {
+  color: var(--Secondary-600, #4b5563);
+
+  /* pretendard/xs-12px-medium */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 150% */
+}

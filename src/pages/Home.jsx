@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <header>
-        <a href="/">
+        <a href="/home">
           <img src="/images/logo/logo.svg" alt="판다마켓 홈" width="153" />
         </a>
         <nav aria-label="주요 메뉴">

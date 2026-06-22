@@ -10,8 +10,8 @@ import Signup from "./pages/Signup";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/items" element={<Items />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Items />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/login" element={<Login />} />

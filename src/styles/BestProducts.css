@@ -1,0 +1,104 @@
+/* 전체 베스트 상품 섹션 컨테이너 */
+.best-products {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* 베스트 상품 제목 */
+.best-title {
+  color: var(--Secondary-900, #111827);
+
+  /* pretendard/xl-20px-bold */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 160% */
+}
+
+/* 베스트 상품 카드들을 담는 부모 박스 */
+.best-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* 베스트 상품 카드 1개 전체 */
+.best-product-card {
+  width: 282px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+
+  background: #fcfcfc;
+}
+
+/* 상품 정보 영역 */
+.best-product-info {
+  display: flex;
+  width: 217px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* 베스트 상품 사진 */
+.best-product-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* 상품명 텍스트 */
+.best-product-name {
+  color: var(--Secondary-800, #1f2937);
+
+  /* pretendard/md-14px-medium */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+}
+
+/* 상품 가격 */
+.best-product-price {
+  color: var(--Secondary-800, #1f2937);
+
+  /* pretendard/lg-16px-bold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 162.5% */
+}
+
+/* 하트 + 숫자를 감싸는 박스 */
+.best-product-favorite {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 하트 */
+.best-product-favorite img {
+  width: 16px;
+  height: 16px;
+}
+
+/* 좋아요 수 */
+.best-product-favorite span {
+  color: var(--Secondary-600, #4b5563);
+
+  /* pretendard/xs-12px-medium */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 150% */
+}

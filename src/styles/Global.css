@@ -76,6 +76,7 @@ header {
   z-index: 100;
 }
 
+
 footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
