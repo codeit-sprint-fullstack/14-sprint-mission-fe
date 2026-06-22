@@ -15,6 +15,7 @@ import styles from './App.module.css'
 function App() {
   const [bestItemList, setBestItemList] = useState([])
   const [itemList, setItemList] = useState([])
+  const [totalCount, setTotalCount] = useState(0)
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -49,8 +50,9 @@ function App() {
         keyword,
       }
     })
-    const { list } = res.data
+    const { totalCount, list } = res.data
     setItemList(list)
+    setTotalCount(totalCount)
   }
 
   useEffect(() => {
@@ -77,7 +79,8 @@ function App() {
     }
   }, [])
 
-  const pages = [1, 2, 3, 4, 5]
+  const totalPages = Math.ceil( totalCount / pageSize )
+  const pages = Array.from({length: totalPages}).map((_, index) => index + 1)
 
   return (
     <>

@@ -1,10 +1,31 @@
 import styles from './Pagination.module.css'
 
 function Pagination({ pages, page, setPage }) {
+  const currentGroup = Math.floor((page - 1) / 5)
+  const start = currentGroup * 5
+  const visiblePages = pages.slice(start, start + 5)
+
+  const handleNext = () => {
+    if (currentGroup < Math.floor((pages.length - 1) / 5)) {
+      setPage((currentGroup + 1) * 5 + 1)
+    }
+  }
+
+  const handlePrev = () => {
+    if (currentGroup > 0) {
+      setPage((currentGroup - 1) * 5 + 1)
+    }
+  }
+
   return (
     <div className={styles.container}>
-      <button className={`${styles.button} ${styles.arrow}`}>&lt;</button>
-      {pages.map((pageNum) => (
+      <button 
+      className={`${styles.button} ${styles.arrow}`}
+      onClick={handlePrev}
+      >
+        &lt;
+      </button>
+      {visiblePages.map((pageNum) => (
         <button 
           key={pageNum}
           onClick={() => setPage(pageNum)}
@@ -13,7 +34,12 @@ function Pagination({ pages, page, setPage }) {
           {pageNum}
         </button>
       ))}
-      <button className={`${styles.button} ${styles.arrow}`}>&gt;</button>
+      <button 
+        className={`${styles.button} ${styles.arrow}`}
+        onClick={handleNext}
+      >
+        &gt;
+      </button>
     </div>
   )
 }
