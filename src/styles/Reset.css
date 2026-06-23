@@ -1,0 +1,8 @@
+input, button, textarea, select {
+  font: inherit;
+}
+
+input {
+  -webkit-appearance: none;
+  appearance: none;
+}
