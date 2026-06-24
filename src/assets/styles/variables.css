@@ -1,0 +1,14 @@
+/* css 변수 선언 */
+:root {
+    --blue: #3692FF;
+    --lightblue100: #E6F2FF;
+    --darkBlue: #111827;
+    --gray: #9CA3AF;
+    --lightGray100: #F3F4F6;
+    --lightGray200: #DFDFDF;
+    --lightGray300: #E5E7EB;
+    --lightGray400: #6B7280;
+    --white: #ffffff;
+    --lightBlack100: #4B5563;
+    --black: #1F2937;
+}
