@@ -1,0 +1,14 @@
+.market-page {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 1500px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .market-page {
+    padding: 0 16px 96px;
+  }
+}

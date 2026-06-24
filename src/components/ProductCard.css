@@ -1,0 +1,45 @@
+.product-card{
+    text-align: left;
+    color: #1F2937;;
+}
+
+.product-image {
+  border-radius: 20px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.no-image {
+  background-color: #ababab;
+  border-radius: 20px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 16px;
+}
+.product-name{
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px;
+}
+.product-price{
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px;
+}
+.heart-icon{
+    width: 16px;
+    height: 16px;
+}
+.favorite-count{
+display: flex;
+gap: 4px;
+align-items: center;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 18px;
+}
