@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getProductList } from "../js/ProductService";
 import { useWindowWidth } from "../hooks/useWindowWidth";
 
@@ -18,6 +19,7 @@ export default function ProductList() {
   const [totalCount, SetTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const pageSize = windowWidth < 768 ? 4 : windowWidth < 1024 ? 6 : 10;
 
@@ -80,7 +82,7 @@ export default function ProductList() {
               />
             </div>
 
-            <button className="register-button">상품 등록하기</button>
+            <button className="register-button" onClick={() => navigate("/registration")}>상품 등록하기</button>
           </div>
 
           <div className="sort-wrapper">

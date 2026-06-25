@@ -163,13 +163,13 @@ input {
 }
 
 @media (max-width: 1023px) {
-  .best-product-grid {
+  .products-grid {
     grid-template-columns: repeat(3, 1fr); /* Tablet */
   }
 }
 
 @media (max-width: 767px) {
-  .best-product-grid {
+  .products-grid {
     grid-template-columns: repeat(2, 1fr); /* Mobile */
   }
 }

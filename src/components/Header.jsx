@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
+  const { pathname } = useLocation();
+
   return (
       <header>
         <div className="header-left">
@@ -14,7 +16,7 @@ export default function Header() {
                 <Link to="/articles">자유게시판</Link>
               </li>
               <li>
-                <Link to="/">중고마켓</Link>
+                <Link to="/items" style={pathname === "/items" ? {color: "#3692FF"} : undefined}>중고마켓</Link>
               </li>
             </ul>
           </nav>
