@@ -1,0 +1,3 @@
+GET http://localhost:3000/items
+###
+GET http://localhost:3000/items/6a3c9183d6b53ee9ab272e5a
