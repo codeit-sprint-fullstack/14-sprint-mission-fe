@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Web 캐시를 유지하기위한 Navigate 반영
+import { Link, useNavigate } from "react-router-dom"; // Web 캐시를 유지하기위한 Navigate 반영
 import { useLocation } from "react-router-dom";
 import Logo from "../assets/판다 얼굴.svg";
 import "../reset.css";
-import style from "./Items_Header.module.css";
+import style from "../style/Items_Header.module.css";
 
 function Items_Header() {
   const navigate = useNavigate(); // 링크 이동 시 새로고침이 아닌 상태로 컴포넌트 호출
@@ -14,10 +14,10 @@ function Items_Header() {
       <div className={style.logo_button}>
         <div className={style.logo_link}>
           <div className={style.logo}>
-            <a href="/">
+            <Link to = "/">
               <img src={Logo} alt="Logo"/>
               <h1 className={style.text}>판다마켓</h1>
-            </a>
+            </Link>
           </div>
           <div className={style.link}>
             <div className={style.link_text}>
@@ -32,7 +32,7 @@ function Items_Header() {
         <button
           type="button"
           className={style.loginButton}
-          onClick={() => navigate('login/')}> 
+          onClick={() => navigate('/login')}> 
           <span>로그인</span>
         </button>
 

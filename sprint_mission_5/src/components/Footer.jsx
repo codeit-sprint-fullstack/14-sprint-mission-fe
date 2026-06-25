@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Web 캐시를 유지하기위한 Navigate 반영
-import style from "./Footer.module.css";
+import style from "../style/Footer.module.css";
 import Instagram from "../assets/ic_instagram.png";
 import Facebook from "../assets/ic_facebook.png";
 import Twitter from "../assets/ic_twitter.png";
@@ -8,7 +8,7 @@ import Youtube from "../assets/ic_youtube.png";
 
 function Footer() {
   return (
-    <footer>
+    <footer className={style.footer}>
         <div className={style.info}>
           <div className={style.credit}>
             <p>©codeit - 2024</p>

@@ -15,7 +15,10 @@ function useApi (page, size, option, keyword){
       try {
         setLoading(true);
         const res = await axios.get(
-          `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`
+          `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`,
+          {
+            headers: { "Cache-Control": "no-cache" },
+          }
         );
         setProducts(res.data.list);
         setCount(res.data.totalCount);

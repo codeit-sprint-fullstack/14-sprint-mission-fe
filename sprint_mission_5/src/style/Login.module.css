@@ -9,7 +9,7 @@ main {
   background: #fff;
 }
 
-#Logo {
+.Logo {
     color: var(--brand-blue);
     display: flex;
     align-items: center;
@@ -21,7 +21,7 @@ main {
     text-decoration: none;
 }
 
-#Logo img {
+.Logo img {
   width: 103.529px;
   height: 103.88px;
   margin: 12.98px 0 15.14px 0;
@@ -194,7 +194,7 @@ main {
 
 /* PC: 1200px 이상 */
 @media screen and (min-width: 1200px)  {
-  #Logo {
+  .Logo {
     font-size: 66.344px;
     gap: 22.24px;
   }
@@ -202,7 +202,7 @@ main {
 
 /* Tablet: 744px ~ 1199px */
 @media screen and (min-width: 744px) and (max-width: 1199px){
-  #Logo {
+  .Logo {
     font-size: 66.344px;
     gap: 22.24px;
   }
@@ -220,13 +220,13 @@ main {
     font-size: 14px;
   }
 
-  #Logo {
+  .Logo {
     font-size: 33.172px;
     gap: 11.119px;
     margin-bottom: 10px;
   }
 
-  #Logo img {
+  .Logo img {
     width: 51.765px;
     height: 51.94px;
     flex-shrink: 0;

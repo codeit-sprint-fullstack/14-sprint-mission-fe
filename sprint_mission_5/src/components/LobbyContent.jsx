@@ -1,4 +1,4 @@
-import style from "./LobbyContent.module.css";
+import style from "../style/LobbyContent.module.css";
 import Img_content1 from "../assets/Frame 2608833.png";
 import Img_content2 from "../assets/Frame 2608833.png";
 import Img_content3 from "../assets/Frame 2608833.png";

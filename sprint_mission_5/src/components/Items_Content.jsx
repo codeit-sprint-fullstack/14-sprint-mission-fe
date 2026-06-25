@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer.jsx";
 import Items_Card from "./Items_Card.jsx";
-import style from "./Items_Content.module.css";
+import style from "../style/Items_Content.module.css";
 import ic_search from "../assets/ic_search.svg";
 import btn_right from "../assets/btn_right.png";
 import btn_left from "../assets/btn_left.png";
@@ -123,7 +123,6 @@ function Items_Content () {
           </div>        
         </div>
       </div>
-      <Footer />
     </>
   );
 

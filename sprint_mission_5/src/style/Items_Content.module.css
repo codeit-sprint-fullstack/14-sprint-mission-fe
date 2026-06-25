@@ -162,7 +162,7 @@ input {
 /* PC: 1200px 이상 */
 @media screen and (min-width: 1200px)  {
   .content {
-    margin: 94px auto 223px;
+    margin: 94px auto;
   }
 
   .sellItemList {
@@ -181,7 +181,7 @@ input {
 /* Tablet: 744px ~ 1199px */
 @media screen and (min-width: 744px) and (max-width: 1199px){
   .content {
-    margin: 94px auto 165px;
+    margin: 94px auto;
     width: 696px;
   }
 
@@ -200,7 +200,7 @@ input {
 /* Mobile: 375px ~ 743px */
 @media screen and (min-width: 375px) and (max-width: 743px){
   .content {
-    margin: 94px auto 135px;
+    margin: 94px auto;
     width: 344px;
     gap: 24px;
   }

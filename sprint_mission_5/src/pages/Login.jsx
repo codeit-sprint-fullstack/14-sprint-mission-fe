@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
-import Logo from '../assets/판다 얼굴.svg';
-import style from './Login.module.css';
+import { useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
+import Logo from '../components/Logo.jsx';
+import style from '../style/Login.module.css';
 import visuablity from '../assets/btn_visibility_on_24px.png';
 import google from '../assets/Google.png'
 import kakao from '../assets/kakao.png'
+import InputEmail from '../components/InputEmail.jsx';
 
 function Login() {
   const [disabled, setDisabled] = useState(true); // 버튼 비활성화
@@ -26,32 +28,14 @@ function Login() {
 
   return (
     <main>
-      <a href="../" id={style.Logo}>
-        <img src={Logo} alt="Logo"/>
-        <h1>판다마켓</h1>
-      </a>
+      <Logo className={style.Logo}/>
       
       <div className={style.container}>
         <div id={style.Email}>
           <h2>
             이메일
           </h2>
-          <input
-            onBlur={() => {
-              console.log("포커스아웃");
-
-            }}
-            type="text"
-            className={`${style.text_section} default`}
-            id="email_adress"
-            placeholder="이메일을 입력해주세요"
-          />
-          <div className={`${style.failure_message} ${style.hidden}`} id="none_email">
-            이메일을 입력해주세요.
-          </div>
-          <div className={`${style.failure_message} ${style.hidden}`} id="wrong_rule">
-            잘못된 이메일 형식입니다.
-          </div>
+          <InputEmail/>
         </div>
         <div id={style.Password}>
           <h2>
@@ -90,9 +74,9 @@ function Login() {
           <p>
             판다마켓이 처음이신가요?
           </p>
-          <a href="../signup/">
+          <Link to = "/signup">
             회원가입
-          </a>
+          </Link>
         </div>
       </div>
   </main>

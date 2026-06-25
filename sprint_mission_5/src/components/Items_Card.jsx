@@ -1,4 +1,4 @@
-import style from "./Items_Card.module.css";
+import style from "../style/Items_Card.module.css";
 import ic_heart from "../assets/ic_heart.png";
 import React from "react";
 import { useState } from "react";
@@ -18,7 +18,21 @@ function Items_Card({ page, size, option, keyword, index, onMeta }){
   }, [count, size, onMeta]);
 
   if (loading)
-    return console.log('로딩중...');
+    return (
+      <div className={style.ItemList}>
+        <div className={`${style.product_card} ${style.sublist}`}>
+          <img src={defaultImg} alt="기본 이미지" />
+          <div className={style.itemInfo}>
+            <h3>상품명 로딩중...</h3>
+            <p>가격 로딩중...</p>
+            <div id={style.likeCount}>
+              <img src={ic_heart}/>
+              <span>0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
   if(error)
     return console.log(`에러 발생: ${error.message}`);
