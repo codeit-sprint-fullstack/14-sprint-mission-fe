@@ -1,12 +1,19 @@
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import MarketPage from "./pages/MarketPage.jsx";
+import MarketPage from "./pages/MarketPage/MarketPage.jsx";
+import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 
 function App() {
   return (
     <>
       <NavBar />
-      <MarketPage />
+
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/items" element={<MarketPage />} />
+      </Routes>
+
       <Footer />
     </>
   );

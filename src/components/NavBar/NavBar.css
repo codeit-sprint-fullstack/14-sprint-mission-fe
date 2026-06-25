@@ -35,6 +35,11 @@
   height: 2.5rem;
 }
 
+.panda-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
 .logo-text {
   text-decoration-line: none;
   color: var(--color-primary);

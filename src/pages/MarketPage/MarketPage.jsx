@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard/ProductCard.jsx";
-import Pagination from "../components/Pagination/Pagination.jsx";
-import searchIcon from "../assets/ic_search.png";
-import arrowDownIcon from "../assets/ic_arrow_down.png";
-import sortIcon from "../assets/ic_sort.png";
+import ProductCard from "../../components/ProductCard/ProductCard.jsx";
+import Pagination from "../../components/Pagination/Pagination.jsx";
+import searchIcon from "../../assets/ic_search.png";
+import arrowDownIcon from "../../assets/ic_arrow_down.png";
+import sortIcon from "../../assets/ic_sort.png";
 import "./MarketPage.css";
 
 function MarketPage() {
