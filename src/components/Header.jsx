@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/panda-face.png';
 import './Header.css';
 
@@ -5,23 +6,34 @@ function Header() {
   return (
     <header className='header'>
       <div className='header-left'>
-        <a href='/' className='header-logo'>
+        <Link to='/' className='header-logo'>
           <img className='panda-face' src={logo} alt='판다마켓 로고' />
           <span className='brand-logo'>판다마켓</span>
-        </a>
+        </Link>
+
         <nav className='header-menu'>
-          <a href='/'>자유게시판</a>
-          <a href='/'>중고마켓</a>
+          <NavLink
+            to='/'
+            className={({ isActive }) =>
+              isActive ? 'header-menu-link active' : 'header-menu-link'
+            }
+          >
+            자유게시판
+          </NavLink>
+          <NavLink
+            to='/items'
+            className={({ isActive }) =>
+              isActive ? 'header-menu-link active' : 'header-menu-link'
+            }
+          >
+            중고마켓
+          </NavLink>
         </nav>
       </div>
-      <button
-        className='login-button'
-        onClick={() => {
-          window.location.href = '/';
-        }}
-      >
+
+      <Link to='/login' className='login-button'>
         로그인
-      </button>
+      </Link>
     </header>)
 }
 
