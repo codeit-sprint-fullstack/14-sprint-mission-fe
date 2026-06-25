@@ -1,39 +1,63 @@
 import { useState, useEffect } from "react";
 import { getProductList } from "../js/ProductService";
+import { useWindowWidth } from "../hooks/useWindowWidth";
 
 import "../styles/ProductList.css";
 
 export default function ProductList() {
   const [sort, setSort] = useState("최신순");
   const [orderBy, setOrderBy] = useState("recent");
+  const windowWidth = useWindowWidth();
 
   const [isOpen, setIsOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [debouncedKeyword, setDebouncedKeyword] = useState("");
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [page, setPage] = useState(1);
+  const [totalCount, SetTotalCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const pageSize = windowWidth < 768 ? 4 : windowWidth < 1024 ? 6 : 10;
 
+  const totalPages = Math.ceil(totalCount / pageSize);
+
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    const timer = setTimeout(() => {
+      setDebouncedKeyword(keyword);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [keyword]);
 
   useEffect(() => {
     async function loadProductLists() {
+      setIsLoading(true);
+      setError(null);
+      try {
       const data = await getProductList({
-        page: 1,
+        page,
         pageSize,
         orderBy,
-        keyword,
+        keyword: debouncedKeyword,
       });
       console.log(data.list);
 
       setProducts(data.list);
+      SetTotalCount(data.totalCount);
+    }catch (e) {
+      setError("상품을 불러오는데 실패했습니다.");
     }
+    finally {
+      setIsLoading(false);
+    }
+  }
     loadProductLists();
-  }, [orderBy, keyword, pageSize]);
+  }, [orderBy, debouncedKeyword, pageSize, page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [orderBy, debouncedKeyword, pageSize]);
 
   return (
     <section className="products-list">
@@ -92,6 +116,8 @@ export default function ProductList() {
         </div>
       </div>
 
+      {isLoading && <p>로딩중 ...</p>}
+      {error && <p>{error}</p>}
       <div className="products-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
@@ -115,6 +141,25 @@ export default function ProductList() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="pagenation">
+        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+          &lt;
+        </button>
+
+        {Array.from({ length: totalPages }, (_, i) => i + 1).filter((p) => {
+          const start = Math.floor((page - 1) / 5) * 5 + 1;
+          return p >= start && p < start + 5;
+        })
+        .map((p) => (
+          <button key={p} onClick={() => setPage(p)} className={p === page ? "active" : ""}>{p}</button>
+        ))}
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages}
+        >
+          &gt;
+        </button>
       </div>
     </section>
   );
