@@ -17,10 +17,9 @@ app.use(express.json());
 const port = 3000
 
 app.get('/items', async (req, res) => {
-    // page=${nextPage}&pageSize=${pageSize}&orderBy=${orderType}&keyword=${keyword}
     const page = req.query.page || 1;
     const pageSize = req.query.pageSize || 10;
-    const orderBy = req.query.orderBy;
+    const orderBy = req.query.orderBy || 'recent';
     const keyword = req.query.keyword || '';
 
     const filter = keyword
@@ -32,7 +31,18 @@ app.get('/items', async (req, res) => {
         }
       : {};
 
-    const items = await Product.find(filter).skip((page - 1) * pageSize).limit(pageSize);
+    const order = orderBy === "favorite"
+      ? {
+        favoriteCount: -1
+      }
+      : {
+        createdAt : -1
+      };
+
+    const items = await Product.find(filter)
+        .sort(order)
+        .skip((page - 1) * pageSize)
+        .limit(pageSize);
     const totalCount = (await Product.find(filter)).length;
     const itemResponse = {
         list : items,
