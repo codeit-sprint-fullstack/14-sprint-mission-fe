@@ -1,0 +1,83 @@
+.header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 9px 0;
+  width: 100%;
+  height: 70px;
+  background: #fff;
+}
+
+.logo_button {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  /* padding: media로 나눠야함 */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 5px 0;
+  height: 50px;
+  gap: 9px;
+}
+
+.logo .text {
+  /* 글자 */
+  color: #3692FF;
+  font-family: 'BarunAirForce_Bold';
+  font-size: 1.6021rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.loginButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 128px;
+  height: 48px;
+  padding: 12px 23px;
+  border-radius: 8px;
+  border-width: 0;
+  background: var(--Primary-100);
+  cursor: pointer;
+}
+
+.loginButton span {
+  color: var(--Cool-Gray-100);
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px)  {
+  .logo_button {
+    padding: 0 200px;
+  }
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px){
+  .logo_button {
+    padding: 0 24px;
+  }
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px){
+    .logo_button {
+    padding: 0 16px;
+  }
+}
