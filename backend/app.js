@@ -17,10 +17,26 @@ app.use(express.json());
 const port = 3000
 
 app.get('/items', async (req, res) => {
-    const items = await Product.find();
+    // page=${nextPage}&pageSize=${pageSize}&orderBy=${orderType}&keyword=${keyword}
+    const page = req.query.page || 1;
+    const pageSize = req.query.pageSize || 10;
+    const orderBy = req.query.orderBy;
+    const keyword = req.query.keyword || '';
+
+    const filter = keyword
+      ? {
+          $or: [
+            { name: { $regex: keyword, $options: 'i' } },
+            { description: { $regex: keyword, $options: 'i' } },
+          ],
+        }
+      : {};
+
+    const items = await Product.find(filter).skip((page - 1) * pageSize).limit(pageSize);
+    const totalCount = (await Product.find(filter)).length;
     const itemResponse = {
         list : items,
-        totalCount: items.length
+        totalCount: totalCount
     }
 
     res.send(itemResponse);

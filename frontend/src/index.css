@@ -405,6 +405,8 @@ body {
 	gap: 16px;
 	width: 100%;
 }
+form { margin: 24px 0; }
+form .input_wrap { margin-bottom: 30px; }
 
 .input_wrap label {
 	color: var(--Secondary-800, #1F2937);
@@ -416,7 +418,7 @@ body {
 	/* 144.444% */
 }
 
-.input_wrap input {
+.input_wrap input, .input_wrap textarea {
 	width: 100%;
 	height: fit-content;
 	padding: 16px 24px;
@@ -497,6 +499,21 @@ body {
 	cursor: default;
 }
 
+.regist_item_btn {
+	width: fit-content;
+	height: fit-content;
+	padding: 12px 23px;
+	border-radius: 8px;
+	background-color: #9CA3AF;
+	border: none;
+	color: var(--Cool-Gray-100, #F3F4F6);
+/* pretendard/lg-16px-semibold */
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 16px;
+}
 
 .social_login {
 	display: flex;
