@@ -54,7 +54,7 @@ h2 {
 }
 
 
-input {
+#searchItem {
   display: flex;
   width: 289px;
   height: 24px;
@@ -185,7 +185,7 @@ input {
     width: 696px;
   }
 
-  input {
+  #searchItem {
     width: 206px;
     height: 24px;
   }
@@ -216,7 +216,7 @@ input {
     align-items: flex-start;
   }
 
-  input {
+  #searchItem {
     width: 180px;
   }
 }

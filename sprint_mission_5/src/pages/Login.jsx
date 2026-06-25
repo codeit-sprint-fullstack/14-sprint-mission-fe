@@ -6,6 +6,7 @@ import visuablity from '../assets/btn_visibility_on_24px.png';
 import google from '../assets/Google.png'
 import kakao from '../assets/kakao.png'
 import InputEmail from '../components/InputEmail.jsx';
+import InputPwd from '../components/InputPwd.jsx';
 
 function Login() {
   const [disabled, setDisabled] = useState(true); // 버튼 비활성화
@@ -15,12 +16,6 @@ function Login() {
     console.log("로그인페이지");
     setDisabled(true);
   }, []);
-
-  function emailCheck(email){ // 유효성 검사
-    const email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9._-]{2,4}$/i; // mail 주소 [a-zA-Z0-9._-] , @ 필수, 도메인 주소 [a-zA-Z0-9.-], . 필수, com, net, co.kr 부분[a-zA-Z0-9.-]
-    return email_regex.test(email);
-  }
-
 
   const buttonClick = () => {
     alert("로그인");
@@ -41,16 +36,7 @@ function Login() {
           <h2>
             비밀번호
           </h2>
-          <div className={style.show_word}>
-            <input type="password" id={style.Password_text} className="default" placeholder="비밀번호를 입력해주세요"/>
-            <img src={visuablity}/>
-          </div>
-          <div className={`${style.failure_message} ${style.hidden}`} id="none_password">
-              비밀번호를 입력해주세요.
-          </div>
-          <div className={`${style.failure_message} ${style.hidden}`} id="wrong_rule_password">
-              비밀번호를 8자 이상 입력해주세요.
-          </div>
+          <InputPwd/>
         </div>
         <button disabled={disabled} id={style.loginButton} onClick={buttonClick}>
           로그인
