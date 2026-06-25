@@ -5,7 +5,7 @@ function Market() {
     return (
         <main id="main" style={{ padding: '24px 0'}}>
             <div className="inner">
-                <BestItem/>
+                {/* <BestItem/> */}
                 <MarketItems/>
             </div>
         </main>

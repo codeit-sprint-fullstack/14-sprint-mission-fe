@@ -11,9 +11,15 @@ const ProductSchema = new mongoose.Schema(
     price: {
       type: Number
     },
+    images: {
+        type: [String]
+    },
     tags: {
        type: [String]
     },
+    favoriteCount: {
+        type: Number
+    }
   },
   {
     timestamps: true,

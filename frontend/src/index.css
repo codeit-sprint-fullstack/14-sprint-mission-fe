@@ -706,7 +706,8 @@ body {
 	top: 50%;
 	transform: translate(-50%, -50%);
 	display: block;
-	height: 150%;
+	/* height: 150%; */
+	height: 100%;
 }
 
 .market_item .item_title {

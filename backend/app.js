@@ -18,8 +18,12 @@ const port = 3000
 
 app.get('/items', async (req, res) => {
     const items = await Product.find();
+    const itemResponse = {
+        list : items,
+        totalCount: items.length
+    }
 
-    res.send(items);
+    res.send(itemResponse);
 });
 
 app.get('/items/:id', async (req, res) => {
