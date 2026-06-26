@@ -455,6 +455,7 @@ form .input_wrap { margin-bottom: 30px; }
 	color: #F74747;
 }
 
+.validation_msg.item,
 .validation_msg.email {
 	margin-top: 0;
 }

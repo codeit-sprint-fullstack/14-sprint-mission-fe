@@ -12,13 +12,15 @@ const ProductSchema = new mongoose.Schema(
       type: Number
     },
     images: {
-        type: [String]
+        type: [String],
+        default: [],
     },
     tags: {
        type: [String]
     },
     favoriteCount: {
-        type: Number
+        type: Number,
+        default: 0,
     }
   },
   {

@@ -60,8 +60,17 @@ app.get('/items/:id', async (req, res) => {
 });
 
 app.post('/items', async (req, res) => {
-  const newItem = await Product.create(req.body);
-  res.status(201).send(newItem);
+  try {
+    const newItem = await Product.create(req.body);
+    res.status(201).send(newItem);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(400).send({
+      message: '상품 등록 실패',
+      error: error.message,
+    });
+  }
 });
 
 app.patch('/items/:id', async (req, res) => {
