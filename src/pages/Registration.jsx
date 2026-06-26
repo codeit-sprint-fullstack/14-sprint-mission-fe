@@ -20,7 +20,7 @@ export default function Registration() {
   return (
     <>
       <Header />
-      <main>
+      <main className="wrapper registration-main">
         <div className="registration-container">
           <div className="registration-header">
             <h2>상품 등록하기</h2>

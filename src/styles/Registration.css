@@ -1,6 +1,7 @@
 .registration-main {
   display: flex;
   justify-content: center;
+  flex: 1;
 }
 
 .registration-container {
@@ -8,8 +9,10 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  width: 120rem;
+  max-width: 120rem;
+  width: 100%;
   padding: 2.4rem 0;
+  margin: 0 auto;
 }
 
 /* 상품 등록하기 + 등록 버튼 박스 */
@@ -17,7 +20,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1017px;
   align-self: stretch;
   width: 100%;
 }
@@ -81,6 +83,7 @@
 
   border-radius: 12px;
   background: var(--Cool-Gray-100, #f3f4f6);
+  border: none;
 }
 
 /* 상품명, 판매가격, 태그 인풋 글씨 */
@@ -100,7 +103,7 @@
 /* 상품 소개 인풋 값 */
 .input-group textarea {
   display: flex;
-  width: 1200px;
+  width: 100%;
   height: 282px;
   padding: 16px 24px;
   align-items: flex-start;
@@ -137,6 +140,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .tag-chip {

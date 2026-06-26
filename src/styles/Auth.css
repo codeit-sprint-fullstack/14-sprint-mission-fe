@@ -8,6 +8,7 @@
 .auth-container {
   max-width: 64rem;
   margin: 0 auto;
+  width: 100%;
 }
 
 .logo-home-button-wrapper {
