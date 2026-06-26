@@ -56,7 +56,7 @@ function ItemRegistration() {
   if (!isValid) return;
 
   try {
-    const response = await axios.post('', {
+    const response = await axios.post('/items', {
       name: formData.name,
       description: formData.description,
       price: Number(formData.price),

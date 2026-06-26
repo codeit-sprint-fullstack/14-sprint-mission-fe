@@ -27,9 +27,7 @@ function MarketItems() {
     keyword = searchKeyword,
     orderType = sortType,
   ) => {
-    const response = await axios.get(
-      `?page=${nextPage}&pageSize=${pageSize}&orderBy=${orderType}&keyword=${keyword}`,
-    );
+    const response = await axios.get(`/items?page=${nextPage}&pageSize=${pageSize}&orderBy=${orderType}&keyword=${keyword}`);
 
     setMarketItems(response.data.list);
     setTotalCount(response.data.totalCount);

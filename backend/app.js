@@ -100,8 +100,10 @@ app.patch('/items/:id', async (req, res) => {
 });
 
 app.delete('/items/:id', async (req, res) => {
+  const targetId = req.params.id;
+
   try {
-    const deletedItem = await Product.findByIdAndDelete(req.params.id);
+    const deletedItem = await Product.findByIdAndDelete(targetId);
 
     if (!deletedItem) {
       return res.status(404).send({
@@ -119,4 +121,8 @@ app.delete('/items/:id', async (req, res) => {
       error: error.message,
     });
   }
+});
+
+app.listen(port, () => {
+  console.log(`server running on port ${port}`);
 });

@@ -119,6 +119,8 @@ body {
 	color: #F3F4F6;
 }
 
+.btn.delete { background-color: #F3F4F6; color: #444; }
+
 #main {
 	width: 100vw;
 	height: fit-content;
