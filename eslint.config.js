@@ -22,5 +22,11 @@ export default defineConfig([
       reportUnusedDisableDirectives: 'warn',
     },
   },
+  {
+    files: ['server/**/*.js'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
   eslintConfigPrettier,
 ])
