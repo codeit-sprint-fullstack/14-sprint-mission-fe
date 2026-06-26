@@ -167,3 +167,9 @@
   width: 22px;
   height: 24px;
 }
+
+@media (max-width: 743px) {
+  .registration-container {
+    padding: 2.4rem 1.6rem;
+  }
+}

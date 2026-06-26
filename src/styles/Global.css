@@ -160,3 +160,64 @@ h2 {
 ul {
   list-style: none;
 }
+
+/* Tablet: 744px 이상 ~ 1199px 이하 */
+@media (max-width: 1199px) {
+  header {
+    padding: 0 2.4rem;
+  }
+
+  footer {
+    padding: 3.2rem 2.4rem 10.8rem 2.4rem;
+  }
+
+  .wrapper {
+    padding: 0 2.4rem;
+  }
+}
+
+/* Mobile: 375px 이상 ~ 743px 이하 */
+@media (max-width: 743px) {
+  header {
+    padding: 0 1.6rem;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.2rem;
+    padding: 3.2rem 1.6rem 10.8rem 1.6rem;
+  }
+
+  .wrapper {
+    padding: 0 1.6rem;
+  }
+
+  /* 메뉴 + SNS 같은 줄 */
+  footer > div:first-child {
+    /* ©codeit을 아래로 */
+    order: 2;
+  }
+
+  #footerMenu {
+    order: 1;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  #socialMedia {
+    order: 1;
+  }
+
+  /* footerMenu와 socialMedia를 한 줄로 */
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  #footerMenu {
+    flex: 1;
+  }
+}

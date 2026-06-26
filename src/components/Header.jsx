@@ -7,7 +7,8 @@ export default function Header() {
       <header>
         <div className="header-left">
           <a href="/">
-            <img src="/images/logo/logo.svg" alt="판다마켓 홈" width="153" />
+            <img src="/images/logo/logo.svg" alt="판다마켓 홈" width="153"  className="logo-img"/>
+            <span className="logo-text">판다마켓</span>
           </a>
 
           <nav aria-label="주요 메뉴">

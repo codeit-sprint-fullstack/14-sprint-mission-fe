@@ -1,10 +1,14 @@
 /* 헤더 왼쪽 영역 */
 .header-left {
   display: flex;
-  width: 893px;
+  width: auto;
   align-items: center;
   gap: 24px;
   flex-shrink: 0;
+}
+
+.logo-text {
+  display: none;
 }
 
 /* 자유게시판 , 중고마켓 메뉴 */
@@ -58,4 +62,41 @@
   margin-top: 26px;
 }
 
+/* Tablet: 744px 이상 ~ 1199px 이하 */
+@media (max-width: 1199px) {
+  .item-page {
+    padding: 0 2.4rem;
+  }
+}
 
+/* Mobile: 375px 이상 ~ 743px 이하 */
+@media (max-width: 743px) {
+  .item-page {
+    padding: 0 1.6rem;
+  }
+
+  .header-left {
+    gap: 0.8rem;
+  }
+
+  .header-left a img {
+    width: 8.1rem;
+    padding: 0.6rem 0 0.7rem 0;
+  }
+
+  .gnb-menu a {
+    font-size: 16px;
+    gap: 1rem 0.8rem;
+  }
+  
+  .logo-img {
+    display: none;
+  }
+
+  .logo-text {
+    display: inline;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #3692ff;
+  }
+}

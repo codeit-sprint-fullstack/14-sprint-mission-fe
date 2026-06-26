@@ -69,3 +69,44 @@
   letter-spacing: 0.08em;
   margin-top: 2.4rem;
 }
+
+/* Mobile: 375px 이상 ~ 743px 이하 */
+@media (max-width: 743px) {
+
+  /* 히어로 배너 */
+  .banner {
+    height: auto;
+    min-height: 40rem;
+    padding: 4rem 1.6rem;
+    background-size: 60%;
+    background-position: right bottom;
+  }
+
+  /* 구경하러 가기 버튼 */
+  .banner .pill-button {
+    font-size: 1.6rem;
+    padding: 1.6rem 4rem;
+    white-space: nowrap;
+  }
+
+  .feature {
+    flex-direction: column;
+    padding: 6rem 1.6rem;
+  }
+
+  .feature:nth-child(2) {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .feature img {
+    width: calc(100% - 3.2rem);
+    align-self: auto;
+  }
+
+  .banner {
+    background-color: center bottom;
+    background-size: 100%;
+    padding: 0 1.6rem;
+  }
+}
