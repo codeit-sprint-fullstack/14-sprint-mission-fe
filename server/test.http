@@ -1,0 +1,36 @@
+### 상품 목록 조회
+GET http://localhost:3000/products
+
+
+### 상품 등록
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "테스트 상품",
+  "description": "CRUD 테스트용 상품입니다.",
+  "price": 10000,
+  "tags": ["test", "mongo"]
+}
+
+
+### 상품 상세 조회
+GET http://localhost:3000/products/6a3e39a5b7f1f0a2cbfbbb5f
+
+
+### 상품 수정
+PATCH http://localhost:3000/products/6a3e39a5b7f1f0a2cbfbbb5f
+Content-Type: application/json
+
+{
+  "name": "수정된 테스트 상품",
+  "price": 15000
+}
+
+
+### 상품 삭제
+DELETE http://localhost:3000/products/6a3e39107ef3f3dac3300595
+
+
+### 삭제 후 상세 조회 확인
+GET http://localhost:3000/products/6a3e39a5b7f1f0a2cbfbbb5f

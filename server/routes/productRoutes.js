@@ -20,13 +20,16 @@ productRoutes.get('/products', async (req, res) => {
 
   const sortOption = sort === 'recent' ? { createdAt: -1 } : { createdAt: 1 }
 
+  const totalCount = await Product.countDocuments(filter)
+
   const filteredProducts = await Product.find(filter)
     .select('name price createdAt')
     .sort(sortOption)
     .skip(offset)
     .limit(PAGE_SIZE)
 
-  res.send(filteredProducts)
+  const list = filteredProducts
+  res.send({ totalCount, list })
 })
 
 productRoutes.get('/products/:id', async (req, res) => {
