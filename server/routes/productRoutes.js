@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   const { offset, limit, keyword, sort } = req.query;
 
   const offsetNum = Number(offset) || 0;
-  const limitNum = Number(limit) || 11;
+  const limitNum = Number(limit) || 20;
 
   const filter = keyword
     ? {
