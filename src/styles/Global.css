@@ -79,6 +79,82 @@ header {
   z-index: 100;
 }
 
+.logo-link {
+  display: flex;
+  width: 153px;
+  height: 51px;
+  padding: 5.017px 0 5.848px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 8.592px;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40.135px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  color: #3692ff;
+  font-family: "ROKAF Sans";
+  font-size: 20.202px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* 헤더 왼쪽 영역 */
+.header-left {
+  display: flex;
+  width: auto;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+/* 자유게시판 , 중고마켓 메뉴 */
+.gnb-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 자유게시판, 중고마켓 각 메뉴 칸 */
+.gnb-menu a {
+  display: flex;
+  padding: 21px 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--Secondary-600, #4b5563);
+  text-align: center;
+
+  /* pretendard/2lg-18px-bold */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+}
+
+/* 자유게시판 + 중고마켓 메뉴 박스 */
+.gnb-menu li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 자유게시판, 중고마켓 글씨 */
+.gnb-menu a {
+  padding: 21px 15px;
+}
+
+.gnb-menu a:hover {
+  color: #111827;
+}
+
 footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
@@ -182,9 +258,39 @@ ul {
     padding: 0 1.6rem;
   }
 
+  .logo-link {
+    width: auto;
+  }
+
+  .logo-img {
+    display: none;
+  }
+
+  .logo-text {
+    display: inline;
+    font-size: 1.6rem;
+  }
+
+  .header-left {
+    gap: 0.8rem;
+  }
+
+  .header-left a img {
+    width: 8.1rem;
+    padding: 0.6rem 0 0.7rem 0;
+  }
+
+  .gnb-menu a {
+    font-size: 16px;
+    gap: 1rem 0.8rem;
+  }
+
   footer {
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 3.2rem;
     padding: 3.2rem 1.6rem 10.8rem 1.6rem;
   }
@@ -196,12 +302,12 @@ ul {
   /* 메뉴 + SNS 같은 줄 */
   footer > div:first-child {
     /* ©codeit을 아래로 */
+    width: 100%;
     order: 2;
   }
 
   #footerMenu {
     order: 1;
-    display: flex;
     align-items: center;
     gap: 3rem;
   }

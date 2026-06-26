@@ -162,18 +162,6 @@ input {
   grid-template-columns: repeat(5, 1fr); /* Desktop */
 }
 
-@media (max-width: 1023px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr); /* Tablet */
-  }
-}
-
-@media (max-width: 767px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr); /* Mobile */
-  }
-}
-
 /* 베스트 상품 카드 1개 전체 */
 .product-card {
   display: flex;
@@ -274,11 +262,6 @@ input {
 }
 
 /*  */
-/* .pagenation button:hover {
-
-} */
-
-/*  */
 .pagenation button.active {
   border-radius: 40px;
   background: #2f80ed;
@@ -301,6 +284,49 @@ input {
 .pagenation button:disabled:hover {
   background-color: #fff;
 }
-/*  */
 
-/*  */
+@media (max-width: 1199px) {
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .products-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .search-register-group {
+    width: 100%;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr); /* Tablet */
+  }
+}
+
+@media (max-width: 743px) {
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .products-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .search-register-group {
+    width: 100%;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr); /* Mobile */
+  }
+}

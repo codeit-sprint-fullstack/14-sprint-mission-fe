@@ -1,4 +1,4 @@
-import "../styles/home.css";
+import "../styles/Home.css";
 import "../styles/Global.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -29,7 +29,7 @@ export default function Home() {
             <img
               src="/images/home/feature1-image.png"
               alt="인기 상품"
-              width="50%"
+              className="feature-img"
             />
             <div className="feature-content">
               <p className="feature-tag">Hot item</p>
@@ -62,14 +62,14 @@ export default function Home() {
             <img
               src="/images/home/feature2-image.png"
               alt="검색 기능"
-              width="50%"
+              className="feature-img"
             />
           </div>
           <div className="feature">
             <img
               src="/images/home/feature3-image.png"
               alt="판매 상품 등록"
-              width="50%"
+              className="feature-img"
             />
             <div className="feature-content">
               <p className="feature-tag">Register</p>

@@ -21,7 +21,7 @@ export default function ProductList() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const pageSize = windowWidth < 768 ? 4 : windowWidth < 1024 ? 6 : 10;
+  const pageSize = windowWidth < 744 ? 4 : windowWidth < 1200 ? 6 : 10;
 
   const totalPages = Math.ceil(totalCount / pageSize);
 

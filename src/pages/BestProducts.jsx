@@ -8,7 +8,7 @@ function BestProducts() {
   const [products, setProducts] = useState([]);
 
   const windowWidth = useWindowWidth();
-  const pageSize = windowWidth < 768 ? 1 : windowWidth < 1024 ? 2 : 4;
+  const pageSize = windowWidth < 744 ? 1 : windowWidth < 1200 ? 2 : 4;
 
   useEffect(() => {
     async function loadProducts() {

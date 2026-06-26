@@ -6,8 +6,8 @@ export default function Header() {
   return (
       <header>
         <div className="header-left">
-          <a href="/">
-            <img src="/images/logo/logo.svg" alt="판다마켓 홈" width="153"  className="logo-img"/>
+          <a href="/" className="logo-link">
+            <img src="/images/logo/logo-icon.svg" alt="판다마켓 홈" width="153"  className="logo-img"/>
             <span className="logo-text">판다마켓</span>
           </a>
 

@@ -44,6 +44,13 @@
   border-radius: 1.6rem;
 }
 
+.feature-img {
+  width: 588px;
+  height: 540px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 /* pseudo-selector인 nth-child(2)를 통해 feature 클래스를 가진 요소 중 두 번째 아이템에만 다른 스타일을 적용했어요. */
 .feature:nth-child(2) {
   text-align: right;
@@ -72,7 +79,6 @@
 
 /* Mobile: 375px 이상 ~ 743px 이하 */
 @media (max-width: 743px) {
-
   /* 히어로 배너 */
   .banner {
     height: auto;
@@ -91,7 +97,7 @@
 
   .feature {
     flex-direction: column;
-    padding: 6rem 1.6rem;
+    padding: 6rem 0;
   }
 
   .feature:nth-child(2) {
@@ -100,12 +106,13 @@
   }
 
   .feature img {
-    width: calc(100% - 3.2rem);
-    align-self: auto;
+    width: calc(100vw - 64px);
+    height: auto;
+    align-self: stretch;
   }
 
   .banner {
-    background-color: center bottom;
+    background-position: center bottom;
     background-size: 100%;
     padding: 0 1.6rem;
   }
