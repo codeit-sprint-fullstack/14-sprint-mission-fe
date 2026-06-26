@@ -1,6 +1,5 @@
 header{
     border-bottom: 1px solid #DFDFDF;
-    margin-bottom: 20px;
 }
 
 .topic {
@@ -55,6 +54,12 @@ line-height: 26px;
 padding: 21px 15px;
 align-items: center;
 border: none;
+text-decoration: none;
+color: #000000;
+}
+
+.nav-link.active{
+color: #3692FF;
 }
 
 .top-button {
