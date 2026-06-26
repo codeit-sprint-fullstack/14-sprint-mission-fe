@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import "./ProductList.css";
@@ -139,7 +140,7 @@ function ProductList() {
             />
           </div>
 
-          <button className="register-button">상품 등록하기</button>
+          <Link to='/restration' className="register-button">상품 등록하기</Link>
 
           <select
             className="order-select"

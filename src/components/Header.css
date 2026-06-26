@@ -1,30 +1,31 @@
-header{
-    border-bottom: 1px solid #DFDFDF;
+header {
+  border-bottom: 1px solid #DFDFDF;
+  background-color: #FFFFFF;
 }
 
 .topic {
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  margin: 0.5938rem auto;
-  max-width: 95rem;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 24px;
+  max-width: 1200px;
   width: 100%;
-  height: 3.1875rem;
-  
+  height: 70px;
+  box-sizing: border-box;
 }
-.header-option{
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 24px;
+
+.header-option {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .icon {
-  width: 9.5625rem;
-  height: 3.1875rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 8px;
+  text-decoration: none;
 }
 
 .top-letter {
@@ -56,6 +57,7 @@ align-items: center;
 border: none;
 text-decoration: none;
 color: #000000;
+cursor: pointer;
 }
 
 .nav-link.active{
@@ -75,4 +77,42 @@ color: #3692FF;
   align-items: center;
   text-decoration: none;
   cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .topic {
+    padding: 0 24px;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .topic {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .panda-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .panda-image img {
+    width: 22px;
+    height: auto;
+  }
+
+  .top-letter {
+    font-size: 20px;
+  }
+
+  .top-button {
+    width: 72px;
+    height: 32px;
+    font-size: 12px;
+  }
 }
