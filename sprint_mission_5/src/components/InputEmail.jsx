@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import style from '../style/InputEmail.module.css'
+import { all } from "axios";
 
-function inputEmail() {
+function inputEmail({ emailPass }) {
 
   // 변수
-  const [inputData, setInputData] = useState('');
+  const [inputData, setInputData] = useState("");
   const [first, setFirst] = useState(true);
   const [allow, setAllow] = useState(true);
   const [error1, setError1] = useState(false);
   const [error2, setError2] = useState(false);
+  const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9._-]{2,4}$/i; // mail 주소 [a-zA-Z0-9._-] , @ 필수, 도메인 주소 [a-zA-Z0-9.-], . 필수, com, net, co.kr 부분[a-zA-Z0-9.-]
 
   useEffect(() => {
     if (first) return;
@@ -16,19 +18,21 @@ function inputEmail() {
       setError1(true);
       setError2(false);
       setAllow(false);
+      emailPass(false);
     } else {
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!regex.test(inputData)) {
         setError1(false);
         setError2(true);
         setAllow(false);
+        emailPass(false);
       } else {
         setError1(false);
         setError2(false);
         setAllow(true);
+        emailPass(true);
       }
     }
-  }, [inputData]);
+  }, [inputData, first]);
 
   return (
     <>
@@ -38,7 +42,7 @@ function inputEmail() {
         placeholder="이메일을 입력해주세요"
         value={inputData}
         onChange={(e) => setInputData(e.target.value)}
-        onBlur={() => setFirst(false)}
+        onBlur={() => {setFirst(false)}}
       />
       {error1 && !first && (
       <p className={style.failure_message}>

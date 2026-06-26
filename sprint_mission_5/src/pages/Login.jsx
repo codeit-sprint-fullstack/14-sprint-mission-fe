@@ -7,15 +7,23 @@ import google from '../assets/Google.png'
 import kakao from '../assets/kakao.png'
 import InputEmail from '../components/InputEmail.jsx';
 import InputPwd from '../components/InputPwd.jsx';
+import LoginSignupButton from '../components/LoginSignupButton.jsx';
+import EasyLogin from '../components/EasyLogin.jsx';
 
 function Login() {
+  const [emailPass, setEmailPass] = useState(false);
+  const [pwdPass, setPwdPass] = useState(false);
   const [disabled, setDisabled] = useState(true); // 버튼 비활성화
   const [inital, setInital] = useState(true);
 
   useEffect(() => {
-    console.log("로그인페이지");
-    setDisabled(true);
-  }, []);
+    if(emailPass && pwdPass) {
+      setDisabled(false);
+    }
+    else {
+      setDisabled(true);
+    }
+  }, [pwdPass, emailPass]);
 
   const buttonClick = () => {
     alert("로그인");
@@ -23,39 +31,22 @@ function Login() {
 
   return (
     <main>
-      <Logo className={style.Logo}/>
-      
+      <Logo />
       <div className={style.container}>
         <div id={style.Email}>
           <h2>
             이메일
           </h2>
-          <InputEmail/>
+          <InputEmail emailPass={setEmailPass}/>
         </div>
         <div id={style.Password}>
           <h2>
             비밀번호
           </h2>
-          <InputPwd/>
+          <InputPwd pwdPass={setPwdPass} />
         </div>
-        <button disabled={disabled} id={style.loginButton} onClick={buttonClick}>
-          로그인
-        </button>
-        <div id={style.easy_login}>
-          <div id={style.outside_box}>
-            <p>
-              간편 로그인하기
-            </p>
-            <div id={style.component}>
-              <a href="https://www.google.com/">
-                <img src={google} alt="Google"/>
-              </a>
-              <a href="https://www.kakaocorp.com/page/">
-                <img src={kakao} alt="Kakao"/>
-              </a>
-            </div>
-          </div>
-        </div>
+        <LoginSignupButton disabled={disabled}/>
+        <EasyLogin/>
         <div id={style.first_login}>
           <p>
             판다마켓이 처음이신가요?

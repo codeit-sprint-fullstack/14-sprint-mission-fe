@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import style from "../style/InputPwd.module.css";
 import visuablity from "../assets/btn_visibility_on_24px.png";
 
-function InputPwd() {
+function InputPwd({ pwdPass }) {
 
   // 변수
   const [inputData, setInputData] = useState('');
@@ -11,6 +11,7 @@ function InputPwd() {
   const [error1, setError1] = useState(false);
   const [error2, setError2] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
+  const [pass, setPass] = useState(false);
 
   useEffect(() => {
     if (first) return;
@@ -18,18 +19,24 @@ function InputPwd() {
       setError1(true);
       setError2(false);
       setAllow(false);
+      setPass(false);
+      pwdPass(false);
     } else {
       if (inputData.length < 8) {
         setError1(false);
         setError2(true);
         setAllow(false);
+        setPass(false);
+        pwdPass(false);
       } else {
         setError1(false);
         setError2(false);
         setAllow(true);
+        setPass(true);
+        pwdPass(true);
       }
     }
-  }, [inputData]);  
+  }, [inputData, first]);  
 
   return (
     <>
@@ -40,7 +47,7 @@ function InputPwd() {
           placeholder="비밀번호를 입력해주세요"
           value={inputData}
           onChange={(e) => setInputData(e.target.value)}
-          onBlur={() => setFirst(false)}
+          onBlur={() => {setFirst(false);}}
         />
         <img
           src={visuablity}

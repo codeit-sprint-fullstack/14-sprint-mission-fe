@@ -6,6 +6,7 @@ import visuablity from '../assets/btn_visibility_on_24px.png';
 import google from '../assets/Google.png'
 import kakao from '../assets/kakao.png'
 import InputEmail from '../components/InputEmail.jsx';
+import InputPwd from '../components/InputPwd.jsx';
 
 function Signup() {
   const [disabled, setDisabled] = useState(true); // 버튼 비활성화
@@ -37,20 +38,19 @@ function Signup() {
           </h2>
           <InputEmail />
         </div>
+        
+        <div id={style.Email}>
+          <h2>
+            이메일
+          </h2>
+          <InputEmail />
+        </div>
+
         <div id={style.Password}>
           <h2>
             비밀번호
           </h2>
-          <div className={style.show_word}>
-            <input type="password" id={style.Password_text} className="default" placeholder="비밀번호를 입력해주세요"/>
-            <img src={visuablity}/>
-          </div>
-          <div className={`${style.failure_message} ${style.hidden}`} id="none_password">
-              비밀번호를 입력해주세요.
-          </div>
-          <div className={`${style.failure_message} ${style.hidden}`} id="wrong_rule_password">
-              비밀번호를 8자 이상 입력해주세요.
-          </div>
+          <InputPwd />
         </div>
         <button disabled={disabled} id={style.loginButton} onClick={buttonClick}>
           로그인
