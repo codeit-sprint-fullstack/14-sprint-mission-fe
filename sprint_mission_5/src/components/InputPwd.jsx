@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import style from "../style/InputPwd.module.css";
 import visuablity from "../assets/btn_visibility_on_24px.png";
 
-function InputPwd({ pwdPass }) {
+function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd }) {
 
   // 변수
   const [inputData, setInputData] = useState('');
@@ -10,8 +10,7 @@ function InputPwd({ pwdPass }) {
   const [allow, setAllow] = useState(true);
   const [error1, setError1] = useState(false);
   const [error2, setError2] = useState(false);
-  const [showPwd, setShowPwd] = useState(false);
-  const [pass, setPass] = useState(false);
+  const [showPwd, setShowPwd] = useState(false);  
 
   useEffect(() => {
     if (first) return;
@@ -19,35 +18,47 @@ function InputPwd({ pwdPass }) {
       setError1(true);
       setError2(false);
       setAllow(false);
-      setPass(false);
       pwdPass(false);
     } else {
-      if (inputData.length < 8) {
-        setError1(false);
-        setError2(true);
-        setAllow(false);
-        setPass(false);
-        pwdPass(false);
-      } else {
-        setError1(false);
-        setError2(false);
-        setAllow(true);
-        setPass(true);
-        pwdPass(true);
+      if (type === "password") {
+        if (inputData.length < 8) {
+          setError1(false);
+          setError2(true);
+          setAllow(false);
+          pwdPass(false);
+        } else {
+          setError1(false);
+          setError2(false);
+          setAllow(true);
+          pwdPass(true);
+          setPWD(inputData); // 비밀번호 저장
+        }
+      } else if (type === "passwordCheck") {
+        if (inputData !== originalPwd) {
+          setError1(false);
+          setError2(true);
+          setAllow(false);
+          pwdPass(false);
+        } else {
+          setError1(false);
+          setError2(false);
+          setAllow(true);
+          pwdPass(true);
+        }
       }
     }
-  }, [inputData, first]);  
+  }, [inputData, first, originalPwd]);
 
   return (
     <>
       <div className={ allow ? style.show_word : `${style.show_word} ${style.notAllow}`}>
         <input
-          type={showPwd ? "txt" : "password"}
+          type={showPwd ? "text" : "password"}
           className={style.Password_text}
-          placeholder="비밀번호를 입력해주세요"
+          placeholder={placeholder}
           value={inputData}
           onChange={(e) => setInputData(e.target.value)}
-          onBlur={() => {setFirst(false);}}
+          onFocus={() => setFirst(false)}
         />
         <img
           src={visuablity}
@@ -58,17 +69,19 @@ function InputPwd({ pwdPass }) {
         />
       </div>
       {error1 && !first && (
-      <p className={style.failure_message}>
+        <p className={style.failure_message}>
           비밀번호를 입력해주세요.
-      </p>
+        </p>
       )}
       {error2 && !first && (
-      <div className={style.failure_message}>
-          비밀번호를 8자 이상 입력해주세요.
-      </div>
+        <p className={style.failure_message}>
+          {type === "password" 
+            ? "비밀번호를 8자 이상 입력해주세요." 
+            : "비밀번호가 일치하지 않습니다."}
+        </p>
       )}
     </>
   )
-}
+} 
 
 export default InputPwd;

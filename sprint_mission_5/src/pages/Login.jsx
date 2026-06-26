@@ -11,10 +11,10 @@ import LoginSignupButton from '../components/LoginSignupButton.jsx';
 import EasyLogin from '../components/EasyLogin.jsx';
 
 function Login() {
+  const [pwd, setPWD] = useState('');
   const [emailPass, setEmailPass] = useState(false);
   const [pwdPass, setPwdPass] = useState(false);
   const [disabled, setDisabled] = useState(true); // 버튼 비활성화
-  const [inital, setInital] = useState(true);
 
   useEffect(() => {
     if(emailPass && pwdPass) {
@@ -25,10 +25,6 @@ function Login() {
     }
   }, [pwdPass, emailPass]);
 
-  const buttonClick = () => {
-    alert("로그인");
-  }
-
   return (
     <main>
       <Logo />
@@ -37,13 +33,13 @@ function Login() {
           <h2>
             이메일
           </h2>
-          <InputEmail emailPass={setEmailPass}/>
+          <InputEmail emailPass={setEmailPass} placeholder={`이메일을 입력해주세요`} type={'email'}/>
         </div>
         <div id={style.Password}>
           <h2>
             비밀번호
           </h2>
-          <InputPwd pwdPass={setPwdPass} />
+          <InputPwd pwdPass={setPwdPass} placeholder={`비밀번호를 입력해주세요`} type={'password'} setPWD={setPWD}/>
         </div>
         <LoginSignupButton disabled={disabled}/>
         <EasyLogin/>
