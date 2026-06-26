@@ -1,6 +1,10 @@
 header {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
   border-bottom: 1px solid #DFDFDF;
   box-sizing: border-box;
+  z-index: 3;
 }
 
 .headerInner {

@@ -1,27 +1,32 @@
 import '../css/Header.css'
 import pandaLogo from '../assets/logo.png'
 import pandaLogoM from '../assets/logoM.png'
-function Header (){
+import { Link, useLocation } from 'react-router-dom'
+function Header() {
+  const landingPage = useLocation();
+  const isLanding = landingPage.pathname === '/';
   return (
     <header>
       <div className="headerCont">
         <div className="headerInner">
           <div className="headerLeft">
-            <div className="logo">
+            <Link to="/" className="logo">
               <img className='logoPc' src={pandaLogo} alt="판다마켓로고" />
               <img className='logoMo' src={pandaLogoM} alt="판다마켓로고" />
-            </div>
-            <div className="headerMenu">
-              <div className="menu freeBoard">
-                <a href="/">자유게시판</a>
+            </Link>
+            {!isLanding && (
+              <div className="headerMenu">
+                <div className="menu freeBoard">
+                  <Link>자유게시판</Link>
+                </div>
+                <div className="menu usedMarket">
+                  <Link to="/items">중고마켓</Link>
+                </div>
               </div>
-              <div className="menu usedMarket">
-                <a href="/">중고마켓</a>
-              </div>
-            </div>
+            )}
           </div>
           <div className="login">
-            <a href="/">로그인</a>
+            <Link>로그인</Link>
           </div>
         </div>
       </div>

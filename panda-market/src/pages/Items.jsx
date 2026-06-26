@@ -65,16 +65,18 @@ function Items() {
 
   return (
     <>
-      <BestProductList items={bestItems} />
-      <ProductList
-        items={items}
-        orderBy={orderBy}
-        setOrderBy={setOrderBy}
-        page={page}
-        setPage={setPage}
-        keyword={keyword}
-        setKeyword={setKeyword}
-      />
+      <section className='product'>
+        <BestProductList items={bestItems} />
+        <ProductList
+          items={items}
+          orderBy={orderBy}
+          setOrderBy={setOrderBy}
+          page={page}
+          setPage={setPage}
+          keyword={keyword}
+          setKeyword={setKeyword}
+        />
+      </section>
     </>
   )
 }

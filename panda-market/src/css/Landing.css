@@ -1,0 +1,27 @@
+main { padding-top: 68px; }
+/*-----------------------------------------------------
+ banner
+-----------------------------------------------------*/  
+.banner { background-color: #CFE5FF; }
+.bannerInner { padding: 200px 24px 0; box-sizing: border-box;}
+.bannerCont {display: flex; align-items: center; justify-content: center; }
+
+.bannerImg img { width: 100%; max-width: 746px; }
+.bannerText { margin-right: 7px; font-size: 40px; color: #374151; line-height: 1.4; font-weight: 700;}
+.banner .btn-view { display: inline-block; margin-top: 32px ; background-color:#3692FF; color: #fff; font-size: 20px; font-weight: 600; width: 100%; height: 52px; text-align: center; line-height: 52px; border-radius: 30px;}
+
+/*-----------------------------------------------------
+ contents
+-----------------------------------------------------*/  
+section.mainCont { padding: 140px 0; box-sizing: border-box; }
+section.mainCont .inner {  max-width: 1000px; padding: 0 24px; box-sizing: border-box; margin: 0 auto; }
+
+.contents { display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-sizing: border-box; background-color: #FCFCFC;}
+
+.contents .imgWrap { max-width: 590px; }
+.contents .imgWrap img { width: 100%; }
+.contents .textWrap .category { margin-bottom: 12px; color: #3692FF; font-size: 18px; font-weight: 700;  }
+.contents .textWrap .title { margin-bottom: 24px; font-size: 40px; font-weight: 700; line-height: 1.4; }
+.contents .textWrap .detail { font-size: 24px; line-height: 1.4; }
+.contents.searchItem { flex-direction: row-reverse; }
+footer { margin-top: 0; }
