@@ -12,7 +12,7 @@ function LandingPage () {
   return(
   <>
   <Header />
-  <main>
+  <main className="landing-main">
 <section className="watch-section">
     <div className="watch-content">
         <div className="watch-text">
@@ -20,13 +20,13 @@ function LandingPage () {
     거래해 보세요</h1>
     <Link className="visit" to="/items">구경하러가기</Link>
     </div>
-    <img src={homeTop} width="746" height="340" alt='판다마켓 첫번째 이미지'/>
+    <img className="watch-image" src={homeTop} width="746" height="340" alt='판다마켓 첫번째 이미지'/>
     </div>
 </section>
-<section className="hot-item-section">
-    <div className="hot-item-content">
-     <div>
-    <img src={home01} width="588" height="444" alt='판다마켓 두번째 이미지'/>
+<section className="feature-section hot-item-section">
+    <div className="feature-content hot-item-content">
+     <div className="feature-image-wrap">
+    <img className="feature-image" src={home01} width="588" height="444" alt='판다마켓 두번째 이미지'/>
     </div>
     <div className="hot-item-text">
     <h2 className="mintopic">Hot item</h2>
@@ -38,8 +38,8 @@ function LandingPage () {
     </div>
     </div>
 </section>
-<section className="search-section">
-    <div className="search-content">
+<section className="feature-section search-section">
+    <div className="feature-content search-content">
         <div className="search-text">
     <h2 className="mintopic">Search</h2>
     <h1 className="midtopic">구매를 원하는<br />
@@ -48,15 +48,15 @@ function LandingPage () {
         쉽게 찾아보세요
         </h3>
     </div>
-        <div>
-        <img src={home02} width="588" height="444" alt='판다마켓 세번째 이미지'/>
+        <div className="feature-image-wrap">
+        <img className="feature-image" src={home02} width="588" height="444" alt='판다마켓 세번째 이미지'/>
         </div>
     </div>
 </section>
-<section className="register-section">
-    <div className="register-content">
-         <div>
-    <img src={home03} width="588" height="444" alt='판다마켓 네번째 이미지'/>
+<section className="feature-section register-section">
+    <div className="feature-content register-content">
+         <div className="feature-image-wrap">
+    <img className="feature-image" src={home03} width="588" height="444" alt='판다마켓 네번째 이미지'/>
     </div>
     <div className="register-text">
     <h2 className="mintopic">Register</h2>
@@ -73,7 +73,7 @@ function LandingPage () {
     <h1 className="midtopic">믿을 수 있는<br />
     판다마켓 중고 거래</h1>
     </div>
-    <img src={homeBottom} width="746" height="397" alt='판다마켓 다섯번째 이미지'/>
+    <img className="trust-image" src={homeBottom} width="746" height="397" alt='판다마켓 다섯번째 이미지'/>
 </section>
   </main>
   <Footer />

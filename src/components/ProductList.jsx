@@ -140,7 +140,7 @@ function ProductList() {
             />
           </div>
 
-          <Link to='/restration' className="register-button">상품 등록하기</Link>
+          <Link to='/registration' className="register-button">상품 등록하기</Link>
 
           <select
             className="order-select"
