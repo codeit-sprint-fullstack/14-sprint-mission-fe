@@ -63,7 +63,7 @@ app.post('/items', async (req, res) => {
   try {
     const newItem = await Product.create(req.body);
     res.status(201).send(newItem);
-    
+
   } catch (error) {
     console.error(error);
     res.status(400).send({
@@ -74,27 +74,49 @@ app.post('/items', async (req, res) => {
 });
 
 app.patch('/items/:id', async (req, res) => {
-  const item = await Product.findById(req.params.id);
-  if (item) {
-    Object.keys(req.body).forEach((key) => {
-      item[key] = req.body[key];
+  try {
+    const updatedItem = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!updatedItem) {
+      return res.status(404).send({
+        message: '상품을 찾을 수 없습니다.',
+      });
+    }
+
+    res.send(updatedItem);
+  } catch (error) {
+    res.status(400).send({
+      message: '상품 수정 실패',
+      error: error.message,
     });
-    await item.save();
-    res.send(item);
-  } else {
-    res.status(404).send({ message: 'Cannot find given id.' });
   }
 });
 
 app.delete('/items/:id', async (req, res) => {
-  const item = await Product.findByIdAndDelete(req.params.id);
-  if (item) {
-    res.sendStatus(204);
-  } else {
-    res.status(404).send({ message: 'Cannot find given id.' });
-  }
-});
+  try {
+    const deletedItem = await Product.findByIdAndDelete(req.params.id);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    if (!deletedItem) {
+      return res.status(404).send({
+        message: '상품을 찾을 수 없습니다.',
+      });
+    }
+
+    res.send({
+      message: '상품이 삭제되었습니다.',
+      item: deletedItem,
+    });
+  } catch (error) {
+    res.status(400).send({
+      message: '상품 삭제 실패',
+      error: error.message,
+    });
+  }
 });
