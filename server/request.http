@@ -1,0 +1,36 @@
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "이미지 테스트 상품",
+  "description": "이미지 필드가 있는 상품입니다.",
+  "price": 2000,
+  "tags": ["테스트", "이미지"],
+  "image": "https://example.com/product-image.png"
+}
+
+###
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products?offset=2&limit=2
+
+###
+GET http://localhost:3000/products?keyword=강아지
+
+###
+GET http://localhost:3000/products/6a3dcb92a649140702ea6e80
+
+###
+PATCH http://localhost:3000/products/6a3dcb92a649140702ea6e80
+Content-Type: application/json
+
+{
+  "name": "돼지 인형",
+  "description": "작지만 용맹한 돼지 인형",
+  "price": 30000,
+  "tags": ["인형", "돼지", "수제", "핫템"]
+}
+
+###
+DELETE http://localhost:3000/products/6a3dd0ce1cebf75dc10b9202
