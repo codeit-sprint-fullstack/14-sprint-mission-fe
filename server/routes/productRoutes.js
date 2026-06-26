@@ -1,5 +1,6 @@
 import express from "express";
 import Product from "../models/Product.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -7,7 +8,7 @@ router.get("/", async (req, res) => {
   const { offset, limit, keyword, sort } = req.query;
 
   const offsetNum = Number(offset) || 0;
-  const limitNum = Number(limit) || 10;
+  const limitNum = Number(limit) || 11;
 
   const filter = keyword
     ? {
@@ -39,35 +40,92 @@ router.post("/", async (req, res) => {
     console.error(error);
 
     res.status(500).json({
-      messege: "상품 목록 조회에 실패했습니다.",
+      message: "상품 목록 등록에 실패했습니다.",
     });
   }
 });
 
 router.get("/:id", async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const product = await Product.findById(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "잘못된 상품 ID 입니다.",
+      });
+    }
 
-  res.json(product);
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "상품을 찾을 수 없습니다.",
+      });
+    }
+
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "상품 상세 조회에 실패했습니다.",
+    });
+  }
 });
 
 router.patch("/:id", async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const product = await Product.findByIdAndUpdate(id, req.body, {
-    new: true,
-  });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "잘못된 상품 ID 입니다.",
+      });
+    }
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
 
-  res.json(product);
+    if (!product) {
+      return res.status(404).json({
+        message: "상품을 찾을 수 없습니다.",
+      });
+    }
+
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "상품 수정에 실패했습니다.",
+    });
+  }
 });
 
 router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "잘못된 상품 ID 입니다.",
+      });
+    }
 
-  await Product.findByIdAndDelete(id);
+    await Product.findByIdAndDelete(id);
+    if (!product) {
+      return res.status(404).json({
+        message: "상품을 찾을 수 없습니다.",
+      });
+    }
 
-  res.sendStatus(204);
+    res.sendStatus(204);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "상품 삭제에 실패했습니다.",
+    });
+  }
 });
 
 export default router;
