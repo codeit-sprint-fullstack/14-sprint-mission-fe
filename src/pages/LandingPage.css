@@ -142,6 +142,10 @@
 }
 
 @media (max-width: 1024px) {
+  .midtopic br {
+    display: none;
+  }
+
   .midtopic {
     font-size: 32px;
   }
@@ -183,7 +187,7 @@
 
   .feature-section {
     min-height: auto;
-    padding: 80px 24px 40px;
+    padding: 40px 24px 24px;
   }
 
   .feature-content {
@@ -213,7 +217,7 @@
 
   .trust-section {
     min-height: 540px;
-    padding: 80px 24px 0;
+    padding: 64px 24px 0;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
@@ -271,7 +275,7 @@
   }
 
   .feature-section {
-    padding: 40px 16px;
+    padding: 40px 16px 32px;
   }
 
   .feature-content {

@@ -85,8 +85,8 @@
 }
 
 .pagination {
-  margin-top: 83px;
-  margin-bottom: 120px;
+  margin-top: 60px;
+  margin-bottom: 0;
   display: flex;
   height: 40px;
   justify-content: center;
@@ -139,11 +139,9 @@
     grid-column: 2 / 3;
     justify-self: end;
     display: grid;
-    grid-template-columns: minmax(180px, 242px) auto auto;
+    grid-template-columns: minmax(180px, 242px) auto 100px;
     gap: 12px;
     align-items: center;
-    /* width: 100%;
-    max-width: 560px; */
   }
 
   .search-box {
@@ -239,8 +237,7 @@
   }
 
   .pagination {
-    margin-top: 48px;
-    margin-bottom: 96px;
+    margin-top: 40px;
     gap: 8px;
   }
 

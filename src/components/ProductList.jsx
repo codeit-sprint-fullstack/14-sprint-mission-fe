@@ -57,8 +57,10 @@ function ProductList() {
 
   useEffect(() => {
     async function getProducts() {
+      const offset = (currentPage - 1) * pageSize;
+
       const response = await axios.get(
-        `https://panda-market-api.vercel.app/products?page=${currentPage}&pageSize=${pageSize}&orderBy=${orderBy}`
+        `http://localhost:3000/products?offset=${offset}&limit=${pageSize}&sort=${orderBy}`
       );
 
       setProducts(response.data.list);
@@ -155,7 +157,7 @@ function ProductList() {
 
       <div className="items">
         {sortedProducts.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
+          return <ProductCard key={product._id || product.id} product={product} />;
         })}
       </div>
 
