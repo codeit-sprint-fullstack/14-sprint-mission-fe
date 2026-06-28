@@ -10,7 +10,7 @@ function Header() {
         </Link>
         <nav className="headerNav">
           <Link className="navLink" to="/board">자유게시판</Link>
-          <Link className="navLink" to="/">중고마켓</Link>
+          <Link className="navLink" to="/items">중고마켓</Link>
         </nav>
         <Link className="loginButton" to="/login">로그인</Link>
       </div>
