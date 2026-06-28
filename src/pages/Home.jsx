@@ -6,7 +6,7 @@ function Home() {
         <div className="inner">
           <div className="heroText">
             <h1>일상의 모든 물건을<br />거래해 보세요</h1>
-            <button className="shopButton" onClick={() => location.href = '/items'}>구경해보러 가기</button>
+            <button className="shopButton" onClick={() => navigate('/items')}>구경해보러 가기</button>
           </div>
           <img className="heroImage" src="/img/panda_home.png" alt="판다 홈 이미지" />
         </div>
