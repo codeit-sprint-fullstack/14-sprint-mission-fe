@@ -5,6 +5,7 @@ import Items from './pages/Items';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Registration from './pages/Registration';
+import ItemDetail from './pages/ItemDetail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/registration" element={<Registration/>}/>
+        <Route path="/items/:id" element={<ItemDetail />} />
       </Routes>
     </BrowserRouter>
   );

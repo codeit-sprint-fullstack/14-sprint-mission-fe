@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/registration.css';
 
 function Registration() {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -27,7 +29,7 @@ function Registration() {
       <div className="inner">
         <div className="registrationHeader">
           <h1>상품 등록하기</h1>
-          <button className="submitBtn">등록</button>
+          <button className="submitBtn"onClick={() => navigate('/items/1')}>등록</button>
         </div>
 
         <div className="formGroup">
