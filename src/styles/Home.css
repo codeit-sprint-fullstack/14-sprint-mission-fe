@@ -44,6 +44,13 @@
   border-radius: 1.6rem;
 }
 
+.feature-img {
+  width: 588px;
+  height: 540px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 /* pseudo-selector인 nth-child(2)를 통해 feature 클래스를 가진 요소 중 두 번째 아이템에만 다른 스타일을 적용했어요. */
 .feature:nth-child(2) {
   text-align: right;
@@ -68,4 +75,45 @@
   line-height: 120%;
   letter-spacing: 0.08em;
   margin-top: 2.4rem;
+}
+
+/* Mobile: 375px 이상 ~ 743px 이하 */
+@media (max-width: 743px) {
+  /* 히어로 배너 */
+  .banner {
+    height: auto;
+    min-height: 40rem;
+    padding: 4rem 1.6rem;
+    background-size: 60%;
+    background-position: right bottom;
+  }
+
+  /* 구경하러 가기 버튼 */
+  .banner .pill-button {
+    font-size: 1.6rem;
+    padding: 1.6rem 4rem;
+    white-space: nowrap;
+  }
+
+  .feature {
+    flex-direction: column;
+    padding: 6rem 0;
+  }
+
+  .feature:nth-child(2) {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .feature img {
+    width: calc(100vw - 64px);
+    height: auto;
+    align-self: stretch;
+  }
+
+  .banner {
+    background-position: center bottom;
+    background-size: 100%;
+    padding: 0 1.6rem;
+  }
 }

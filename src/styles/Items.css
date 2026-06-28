@@ -1,53 +1,4 @@
-/* 헤더 왼쪽 영역 */
-.header-left {
-  display: flex;
-  width: 893px;
-  align-items: center;
-  gap: 24px;
-  flex-shrink: 0;
-}
 
-/* 자유게시판 , 중고마켓 메뉴 */
-.gnb-menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 자유게시판, 중고마켓 각 메뉴 칸 */
-.gnb-menu a {
-  display: flex;
-  padding: 21px 15px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  color: var(--Secondary-600, #4b5563);
-  text-align: center;
-
-  /* pretendard/2lg-18px-bold */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 26px; /* 144.444% */
-}
-
-/* 자유게시판 + 중고마켓 메뉴 박스 */
-.gnb-menu li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 자유게시판, 중고마켓 글씨 */
-.gnb-menu a {
-  padding: 21px 15px;
-}
-
-.gnb-menu a:hover {
-  color: #111827;
-}
 
 /* 상품 페이지 */
 .item-page {
@@ -58,4 +9,27 @@
   margin-top: 26px;
 }
 
+/* Tablet: 744px 이상 ~ 1199px 이하 */
+@media (max-width: 1199px) {
+  .item-page {
+    padding: 0 2.4rem;
+  }
+}
 
+/* Mobile: 375px 이상 ~ 743px 이하 */
+@media (max-width: 743px) {
+  .item-page {
+    padding: 0 1.6rem;
+  }
+
+  .logo-img {
+    display: none;
+  }
+
+  .logo-text {
+    display: inline;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #3692ff;
+  }
+}

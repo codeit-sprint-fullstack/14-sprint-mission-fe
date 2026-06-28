@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import { getProductList } from "../js/ProductService";
+import { useWindowWidth } from "../hooks/useWindowWidth";
 
 import "../styles/BestProducts.css";
 
 function BestProducts() {
   const [products, setProducts] = useState([]);
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const pageSize = windowWidth < 768 ? 1 : windowWidth < 1024 ? 2 : 4;
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const windowWidth = useWindowWidth();
+  const pageSize = windowWidth < 744 ? 1 : windowWidth < 1200 ? 2 : 4;
 
   useEffect(() => {
     async function loadProducts() {

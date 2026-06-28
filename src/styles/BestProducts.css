@@ -21,13 +21,13 @@
 /* 베스트 상품 카드들을 담는 부모 박스 */
 .best-product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* Desktop */
   gap: 24px;
 }
 
+
 /* 베스트 상품 카드 1개 전체 */
 .best-product-card {
-  width: 282px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -39,7 +39,7 @@
 /* 상품 정보 영역 */
 .best-product-info {
   display: flex;
-  width: 217px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
@@ -101,4 +101,16 @@
   font-style: normal;
   font-weight: 500;
   line-height: 18px; /* 150% */
+}
+
+@media (max-width: 1199px) {
+  .best-product-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet */
+  }
+}
+
+@media (max-width: 743px) {
+  .best-product-grid {
+    grid-template-columns: repeat(1, 1fr); /* Mobile */
+  }
 }
