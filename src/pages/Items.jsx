@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getProductList } from '../../services/ProductService.js';
 import useProductList from '../../models/useProductList.js';
 
 function Items() {
-  const [bestProducts, setBestProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState('');
   const [searchInput, setSearchInput] = useState('');
@@ -12,28 +10,11 @@ function Items() {
 
   const { products, loading, totalPages } = useProductList(currentPage, keyword, orderBy);
 
-  useEffect(() => {
-    getProductList(1, 4, 'favorite', '')
-      .then((data) => setBestProducts(data.list))
-      .catch((err) => console.error(err));
-  }, []);
 
   return (
     <>
       <div className="main">
         <div className="inner">
-
-          <h2 className="sectionTitle">베스트 상품</h2>
-          <div className="bestGrid">
-            {bestProducts.map((product) => (
-              <div className="itemCard" key={product.id}>
-                <img src={product.images?.[0] ?? '/img/panda_logo.png'} alt={product.name} />
-                <p className="itemName">{product.name}</p>
-                <p className="itemPrice">{product.price.toLocaleString()}원</p>
-                <p className="itemFavorite">♡ {product.favoriteCount}</p>
-              </div>
-            ))}
-          </div>
 
           <div className="sectionHeader">
             <h2 className="sectionTitle">판매 중인 상품</h2>
@@ -71,7 +52,7 @@ function Items() {
             <div className="itemsGrid">
               {products.map((product) => (
                 <div className="itemCard" key={product.id}>
-                  <img src={product.images?.[0] ?? '/img/panda_logo.png'} alt={product.name} />
+                  <img src="/img/default_items_img.png"/>
                   <p className="itemName">{product.name}</p>
                   <p className="itemPrice">{product.price.toLocaleString()}원</p>
                   <p className="itemFavorite">♡ {product.favoriteCount}</p>
