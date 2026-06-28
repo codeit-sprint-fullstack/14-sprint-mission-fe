@@ -9,7 +9,7 @@ function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKe
     <div className="productContents SellProductContents">
       <div className="inner">
         <div className="prodcutSell">
-          <div className='titleSection'>
+          <div className='titleWrap'>
             <p className="sectionTitle">판매 중인 상품</p>
             <div className="sectionTool">
               <Input variant="product" type="text" placeholder="검색할 상품을 입력해주세요" value={keyword}
@@ -70,8 +70,6 @@ function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKe
         </div>
       </div>
     </div>
-
-
   )
 }
 
