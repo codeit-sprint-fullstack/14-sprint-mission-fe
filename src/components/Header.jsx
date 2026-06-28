@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function Header() {
   return (
@@ -10,7 +10,13 @@ function Header() {
         </Link>
         <nav className="headerNav">
           <Link className="navLink" to="/board">자유게시판</Link>
-          <Link className="navLink" to="/items">중고마켓</Link>
+          <NavLink
+            style={({ isActive }) => ({ color: isActive ? '#3692FF' : '' })}
+            className="navLink"
+            to="/items"
+          >
+            중고마켓
+          </NavLink>
         </nav>
         <Link className="loginButton" to="/login">로그인</Link>
       </div>

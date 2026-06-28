@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useProductList from '../../models/useProductList.js';
 
 function Items() {
@@ -31,7 +32,7 @@ function Items() {
                 }
               }}
             />
-            <button className="addItemBtn">상품 등록하기</button>
+            <Link to="/registration" className="addItemBtn">상품 등록하기</Link>
 
             <div className="dropdown">
   <button className="dropdownBtn" onClick={() => setIsDropdownOpen((prev) => !prev)}>
