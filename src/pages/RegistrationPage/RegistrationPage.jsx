@@ -9,8 +9,19 @@ function RegistrationPage() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+
+  const isFormValid =
+    name.trim() !== "" &&
+    description.trim() !== "" &&
+    price.trim() !== "";
 
   async function handleSubmit() {
+    if (!isFormValid || isSubmitting) {
+      return;
+    }
+
     const cleanedTag = tags.trim().replace("#", "");
 
     const productData = {
@@ -21,20 +32,28 @@ function RegistrationPage() {
       image: "",
     };
 
-    const response = await fetch("http://localhost:3000/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(productData),
-    });
+    setIsSubmitting(true);
+    setError(null);
 
-    if (!response.ok) {
-      alert("상품 등록에 실패했습니다.");
-      return;
+    try {
+      const response = await fetch("http://localhost:3000/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(productData),
+      });
+
+      if (!response.ok) {
+        throw new Error("상품 등록에 실패했습니다.");
+      }
+
+      navigate("/items");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
-
-    navigate("/items")
   }
 
   return (
@@ -46,8 +65,9 @@ function RegistrationPage() {
           className="registration-button"
           type="button"
           onClick={handleSubmit}
+          disabled={!isFormValid || isSubmitting}
         >
-          등록
+          {isSubmitting ? "등록 중" : "등록"}
         </button>
       </div>
 
@@ -105,6 +125,11 @@ function RegistrationPage() {
           }}
         />
       </div>
+      {error && (
+        <p className="registration-error">
+          {error}
+        </p>
+      )}
     </main>
   );
 }
