@@ -9,9 +9,14 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: ["http://localhost:3003", "추후 프론트엔드 url"],
+  origin: [
+    "http://localhost:3003", 
+    "http://localhost:5173", 
+    "http://localhost:5174",
+    "https://<frontend>.onrender.com" // 실제 배포된 프론트엔드 주소
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization", "Cache-Control"], // ← 여기 추가
   credentials: true
 };
 
