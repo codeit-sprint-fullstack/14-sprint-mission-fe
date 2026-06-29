@@ -7,6 +7,7 @@ import Faq from "./pages/Faq";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Registration from "./pages/Registration";
+import ItemDetail from "./pages/ItemDetail";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/registration" element={<Registration />} />
+      <Route path="/itemdetail" element={<ItemDetail />}  />
     </Routes>
   );
 }
