@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard.jsx";
 import Pagination from "../../components/Pagination/Pagination.jsx";
 import searchIcon from "../../assets/ic_search.png";
@@ -7,16 +8,14 @@ import sortIcon from "../../assets/ic_sort.png";
 import "./MarketPage.css";
 
 function MarketPage() {
-  const [bestProducts, setBestProducts] = useState([]);
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [orderBy, setOrderBy] = useState("recent");
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [keyword, setKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [bestPageSize, setBestPageSize] = useState(4);
   const [productPageSize, setProductPageSize] = useState(10);
 
   useEffect(() => {
@@ -24,13 +23,10 @@ function MarketPage() {
       const width = window.innerWidth;
 
       if (width <= 480) {
-        setBestPageSize(1);
         setProductPageSize(4);
       } else if (width <= 768) {
-        setBestPageSize(2);
         setProductPageSize(6);
       } else {
-        setBestPageSize(4);
         setProductPageSize(10);
       }
 
@@ -47,24 +43,13 @@ function MarketPage() {
   }, []);
 
   useEffect(() => {
-    async function getBestProducts() {
-      const bestRes = await fetch(
-        `https://panda-market-api.vercel.app/products?page=1&pageSize=${bestPageSize}&orderBy=favorite`
-      );
-
-      const bestData = await bestRes.json();
-      setBestProducts(bestData.list);
-    }
-
-    getBestProducts();
-  }, [bestPageSize]);
-
-  useEffect(() => {
     async function getProducts() {
       setIsLoading(true);
       setError(null);
 
       try {
+        const offset = (page - 1) * productPageSize;
+
         let keywordQuery = "";
 
         if (keyword) {
@@ -72,7 +57,7 @@ function MarketPage() {
         }
 
         const productRes = await fetch(
-          `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${productPageSize}&orderBy=${orderBy}${keywordQuery}`
+          `http://localhost:3000/products?offset=${offset}&limit=${productPageSize}${keywordQuery}`
         );
 
         if (!productRes.ok) {
@@ -91,24 +76,11 @@ function MarketPage() {
     }
 
     getProducts();
-  }, [orderBy, page, keyword, productPageSize]);
+  }, [page, keyword, productPageSize]);
 
   return (
     <main className="market-page">
       <div className="market-content">
-        <section className="best-section">
-          <h2 className="section-title">베스트 상품</h2>
-
-          <div className="best-product-list">
-            {bestProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))}
-          </div>
-        </section>
-
         <section className="all-section">
           <div className="all-section-header">
             <h2 className="section-title">판매 중인 상품</h2>
@@ -135,21 +107,20 @@ function MarketPage() {
               />
             </div>
 
-            <button className="add-product-button">
+            <button
+              className="add-product-button"
+              onClick={() => navigate("/registration")}
+            >
               상품 등록하기
             </button>
 
             <div className="sort-select-box">
               <select
                 className="sort-select"
-                value={orderBy}
-                onChange={(e) => {
-                  setOrderBy(e.target.value);
-                  setPage(1);
-                }}
+                value="recent"
+                onChange={() => { }}
               >
                 <option value="recent">최신순</option>
-                <option value="favorite">좋아요순</option>
               </select>
 
               <img

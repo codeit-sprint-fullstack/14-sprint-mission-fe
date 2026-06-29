@@ -40,6 +40,8 @@ router.get("/", async (req, res) => {
       }
       : {};
 
+    const totalCount = await Product.countDocuments(filter);
+
     const products = await Product.find(filter)
       .sort({ createdAt: -1 })
       .skip(offset)
@@ -57,7 +59,10 @@ router.get("/", async (req, res) => {
       };
     });
 
-    res.status(200).json(formattedProducts);
+    res.status(200).json({
+      list: formattedProducts,
+      totalCount,
+    });
   } catch (error) {
     console.error("상품 목록 조회 실패:", error);
 

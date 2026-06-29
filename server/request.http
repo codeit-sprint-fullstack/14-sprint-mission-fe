@@ -2,10 +2,10 @@ POST http://localhost:3000/products
 Content-Type: application/json
 
 {
-  "name": "이미지 테스트 상품",
-  "description": "이미지 필드가 있는 상품입니다.",
-  "price": 2000,
-  "tags": ["테스트", "이미지"],
+  "name": "뉴질랜드 공기",
+  "description": "비닐봉지에 담아드립니다.",
+  "price": 300000,
+  "tags": ["공기", "포장", "해외직구"],
   "image": "https://example.com/product-image.png"
 }
 
@@ -13,7 +13,7 @@ Content-Type: application/json
 GET http://localhost:3000/products
 
 ###
-GET http://localhost:3000/products?offset=2&limit=2
+GET http://localhost:3000/products?offset=0&limit=5
 
 ###
 GET http://localhost:3000/products?keyword=강아지

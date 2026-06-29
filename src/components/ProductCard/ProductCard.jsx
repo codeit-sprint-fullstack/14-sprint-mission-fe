@@ -1,11 +1,16 @@
 import "./ProductCard.css";
 import heartIcon from "../../assets/ic_heart.png";
+import imgDefault from "../../assets/img_default.svg"
 
 function ProductCard({ product }) {
   return (
     <div className="product-card">
       <div className="product-image-box">
-        <img className="product-image" src={product.images[0]} alt={product.name} />
+        <img
+          className="product-image"
+          src={product.image || imgDefault}
+          alt={product.name}
+        />
       </div>
 
       <div className="product-info">
@@ -18,7 +23,7 @@ function ProductCard({ product }) {
         </p>
 
         <p className="product-favorite">
-          <img src={heartIcon} alt="좋아요" /> {product.favoriteCount}
+          <img src={heartIcon} alt="좋아요" /> {product.favoriteCount ?? 0}
         </p>
       </div>
     </div>
