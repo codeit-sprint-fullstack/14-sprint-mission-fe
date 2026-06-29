@@ -122,7 +122,7 @@ function ProductList() {
   }
 
   return (
-    <>
+    <div className="product-list">
       <div className="product-list-header">
         <h3 className="list-title">판매중인 상품</h3>
 
@@ -194,7 +194,7 @@ function ProductList() {
           &gt;
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
