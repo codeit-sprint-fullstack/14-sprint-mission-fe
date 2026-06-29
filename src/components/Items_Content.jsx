@@ -65,7 +65,7 @@ function Items_Content () {
           <div className={style.bestItem}>
             <h2>베스트 상품</h2>
             <div className={style.bestItemList}>
-              <Items_Card page={1} size={favoritSize} option={'favorite'} keyword={null} index={true}/>
+              <Items_Card page={1} size={favoritSize} option={'recent'} keyword={null} index={true}/>
             </div>
           </div>
           <div className={style.sellItem}>
