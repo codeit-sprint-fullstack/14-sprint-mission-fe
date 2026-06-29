@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api": "nodemon src/api/app.js"
+    "api": "nodemon src/api/app.js",
+    "seed": "node src/api/data/seed.js"
   },
   "dependencies": {
     "axios": "^1.18.0",
