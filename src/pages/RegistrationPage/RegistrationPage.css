@@ -1,9 +1,113 @@
 .registration-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 16px;
+  max-width: 75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin: 2rem auto 10rem;
+}
+
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.registration-title {
+  color: var(--color-Secondary-800);
+  font-family: "Pretendard";
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.registration-button {
+  display: flex;
+  height: 2.625rem;
+  padding: .75rem 1.4375rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: .5rem;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-Secondary-100);
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.625rem;
+  cursor: pointer;
+}
+
+.registration-button:disabled {
+  background-color: var(--color-text-muted);
+  cursor: default;
+}
+
+.registration-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 2rem;
+}
+
+.registration-name,
+.registration-description,
+.registration-price,
+.registration-tags {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.name-title,
+.description-title,
+.price-title,
+.tags-title {
+  color: var(--color-Secondary-800);
+  font-family: "Pretendard";
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.name-input,
+.description-input,
+.price-input,
+.tags-input {
+  width: 100%;
+  display: flex;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: .75rem;
+  background: var(--color-Secondary-100);
+  border: none;
+}
+
+.name-input:focus,
+.description-input:focus,
+.price-input:focus,
+.tags-input:focus {
+  outline-color: var(--color-primary);
+}
+
+.name-input::placeholder,
+.description-input::placeholder,
+.price-input::placeholder,
+.tags-input::placeholder {
+  color: var(--color-text-muted);
+  font-family: "Pretendard";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+
 }
 
 .description-input {
+  height: 17.625rem;
   resize: none;
 }

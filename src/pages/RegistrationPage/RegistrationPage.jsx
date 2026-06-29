@@ -58,7 +58,7 @@ function RegistrationPage() {
 
   return (
     <main className="registration-page">
-      <div className="registration-header">
+      <header className="registration-header">
         <h1 className="registration-title">상품 등록하기</h1>
 
         <button
@@ -69,62 +69,65 @@ function RegistrationPage() {
         >
           {isSubmitting ? "등록 중" : "등록"}
         </button>
-      </div>
+      </header>
 
-      <div className="registration-name">
-        <h2 className="name-title">상품명</h2>
+      <section className="registration-section">
+        <div className="registration-name">
+          <h2 className="name-title">상품명</h2>
 
-        <input
-          className="name-input"
-          type="text"
-          placeholder="상품명을 입력해주세요"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-      </div>
+          <input
+            className="name-input"
+            type="text"
+            placeholder="상품명을 입력해주세요"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+        </div>
 
-      <div className="registration-description">
-        <h2 className="description-title">상품 소개</h2>
+        <div className="registration-description">
+          <h2 className="description-title">상품 소개</h2>
 
-        <textarea
-          className="description-input"
-          placeholder="상품 소개를 입력해주세요"
-          value={description}
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-        />
-      </div>
+          <textarea
+            className="description-input"
+            placeholder="상품 소개를 입력해주세요"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+        </div>
 
-      <div className="registration-price">
-        <h2 className="price-title">판매가격</h2>
+        <div className="registration-price">
+          <h2 className="price-title">판매가격</h2>
 
-        <input
-          className="price-input"
-          type="number"
-          placeholder="판매 가격을 입력해주세요"
-          value={price}
-          onChange={(e) => {
-            setPrice(e.target.value);
-          }}
-        />
-      </div>
+          <input
+            className="price-input"
+            type="number"
+            placeholder="판매 가격을 입력해주세요"
+            value={price}
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+          />
+        </div>
 
-      <div className="registration-tags">
-        <h2 className="tags-title">태그</h2>
+        <div className="registration-tags">
+          <h2 className="tags-title">태그</h2>
 
-        <input
-          className="tags-input"
-          type="text"
-          placeholder="태그를 입력해주세요"
-          value={tags}
-          onChange={(e) => {
-            setTags(e.target.value);
-          }}
-        />
-      </div>
+          <input
+            className="tags-input"
+            type="text"
+            placeholder="태그를 입력해주세요"
+            value={tags}
+            onChange={(e) => {
+              setTags(e.target.value);
+            }}
+          />
+        </div>
+      </section>
+
       {error && (
         <p className="registration-error">
           {error}
