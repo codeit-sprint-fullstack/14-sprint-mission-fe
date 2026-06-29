@@ -63,7 +63,10 @@ app.get('/tasks', async (req, res) => {
       .skip(offset)
       .limit(limit);
 
-    res.send(tasks);
+    res.send({
+      list: tasks,
+      totalCount
+    });
   } catch (err) {
     res.status(500).send(err);
   }
@@ -72,7 +75,7 @@ app.get('/tasks', async (req, res) => {
 app.get('/tasks/:id', async (req, res) => {
   const task = await Task.findById(req.params.id);
   if (task) {
-    res.send(task);
+    res.send({ item: task });
   } else {
     res.status(404).send({ message: 'Cannot find given id.' });
   }
@@ -81,7 +84,7 @@ app.get('/tasks/:id', async (req, res) => {
 app.post('/tasks', async (req, res) => {
   console.log("받은 데이터:", req.body);
   const newTask = await Task.create(req.body);
-  res.status(201).send(newTask);
+  res.status(201).send({ item: newTask });
 });
 
 app.patch('/tasks/:id', async (req, res) => {
@@ -91,7 +94,7 @@ app.patch('/tasks/:id', async (req, res) => {
       task[key] = req.body[key];
     });
     await task.save();
-    res.send(task);
+    res.send({ item: task });
   } else {
     res.status(404).send({ message: 'Cannot find given id.' });
   }

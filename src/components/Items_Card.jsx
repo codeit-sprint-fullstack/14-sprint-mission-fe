@@ -54,7 +54,7 @@ function Items_Card({ page, size, option, keyword, index, onMeta }){
               <p>{item.price}원</p>
               <div id={style.likeCount}>
                 <img src={ic_heart}/>
-                <span>{item.favoriteCount}</span>
+                <span>{item.price}</span>
               </div>
             </div>
           </div>
