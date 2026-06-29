@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import Logo from '../components/Logo.jsx';
 import style from '../style/Login.module.css';
 import visuablity from '../assets/btn_visibility_on_24px.png';
-import google from '../assets/Google.png'
-import kakao from '../assets/kakao.png'
 import InputEmail from '../components/InputEmail.jsx';
 import InputPwd from '../components/InputPwd.jsx';
 import LoginSignupButton from '../components/LoginSignupButton.jsx';
