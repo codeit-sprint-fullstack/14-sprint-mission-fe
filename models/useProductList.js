@@ -14,10 +14,13 @@ function useProductList(page, keyword, orderBy) {
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
       })
-      .catch((err) => console.error(err));
-        }, [page, keyword, orderBy]);
+      .catch((err) => {
+  console.error(err);
+  setLoading(false);
+      });
+    }, [page, keyword, orderBy]);
 
   return { products, loading, totalPages };
-}
+      }
 
 export default useProductList;

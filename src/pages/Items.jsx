@@ -53,7 +53,7 @@ function Items() {
             <div className="itemsGrid">
               {products.map((product) => (
                 <div className="itemCard" key={product.id}>
-                  <img src="/img/default_items_img.png"/>
+                  <img src={product.images?.[0] ?? '/img/default_items_img.png'} />
                   <p className="itemName">{product.name}</p>
                   <p className="itemPrice">{product.price.toLocaleString()}원</p>
                   <p className="itemFavorite">♡ {product.favoriteCount}</p>
