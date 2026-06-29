@@ -637,11 +637,14 @@ line-height: 16px;
 .market_controls .input_wrap {
 	position: relative;
 	width: 100%;
+	max-width: 325px;
+	margin: 0 0 0 auto;
 	gap: unset;
 }
 
 .market_controls .input_wrap input {
 	width: 100%;
+	max-width: 325px;
 	height: 42px;
 	line-height: 22px;
 	padding: 10px 20px 10px 40px;
@@ -657,7 +660,7 @@ line-height: 16px;
 }
 
 .market_controls .register_btn {
-	width: 120px;
+	width: 130px;
 	height: 42px;
 	line-height: 42px;
 	padding: 0 23px;

@@ -69,12 +69,12 @@ function ItemDetailPage() {
             <p>{item.price}</p>
             <p>{item.description}</p>
             <p>
-              {item.tags.map((tag, index) => (
+              {item.tags? item.tags.map((tag, index) => (
                 <span key={tag}>
                   #{tag}
-                  {index !== item.tags.length - 1 && ", "}
+                  {index !== item.tags.length - 1 && " "}
                 </span>
-              ))}
+              )) : ``}
             </p>            
             <div
               className="btn_wrap"

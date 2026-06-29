@@ -53,24 +53,38 @@ function ItemRegistration() {
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
+    const name = formData.name.trim();
+    const description = formData.description.trim();
+    const price = formData.price.trim();
+
+    // 상품명: 1자 이상, 10자 이내
+    if (!name) {
       newErrors.name = "상품명을 입력해주세요.";
+    } else if (name.length > 10) {
+      newErrors.name = "상품명은 10자 이내로 입력해주세요.";
     }
 
-    if (!formData.description.trim()) {
+    // 상품 소개: 10자 이상, 100자 이내
+    if (!description) {
       newErrors.description = "상품 소개를 입력해주세요.";
+    } else if (description.length < 10) {
+      newErrors.description = "상품 소개는 10자 이상 입력해주세요.";
+    } else if (description.length > 100) {
+      newErrors.description = "상품 소개는 100자 이내로 입력해주세요.";
     }
 
-    if (!formData.price.trim()) {
+    // 판매 가격: 1자 이상, 숫자
+    if (!price) {
       newErrors.price = "판매 가격을 입력해주세요.";
-    } else if (isNaN(Number(formData.price))) {
+    } else if (isNaN(Number(price))) {
       newErrors.price = "가격은 숫자로 입력해주세요.";
     }
 
-    if (!tags) {
+    // 태그: 각 태그 5글자 이내
+    if (!tags || tags.length === 0) {
       newErrors.tags = "태그를 입력해주세요.";
-    } else {
-      formData.tags = tags;
+    } else if (tags.some((tag) => tag.trim().length > 5)) {
+      newErrors.tags = "태그는 5글자 이내로 입력해주세요.";
     }
 
     setErrors(newErrors);
@@ -79,27 +93,26 @@ function ItemRegistration() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const isValid = validate();
-  if (!isValid) return;
+    const isValid = validate();
+    if (!isValid) return;
 
-  try {
-    const response = await axios.post('/items', {
-      name: formData.name,
-      description: formData.description,
-      price: Number(formData.price),
-      tags: formData.tags,
-    });
+    try {
+      const response = await axios.post("/items", {
+        name: formData.name,
+        description: formData.description,
+        price: Number(formData.price),
+        tags: formData.tags,
+      });
 
-    alert("상품이 등록되었습니다.");
-    navigate(`/items/${response.data._id}`);
-    
-  } catch (error) {
-    console.error(error);
-    alert("상품 등록 중 오류가 발생했습니다.");
-  }
-};
+      alert("상품이 등록되었습니다.");
+      navigate(`/items/${response.data._id}`);
+    } catch (error) {
+      console.error(error);
+      alert("상품 등록 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <main id="main" style={{ padding: "24px 0" }}>
@@ -123,7 +136,9 @@ function ItemRegistration() {
                 value={formData.name}
                 onChange={handleChange}
               />
-              {errors.name && <p className="validation_msg item">{errors.name}</p>}
+              {errors.name && (
+                <p className="validation_msg item">{errors.name}</p>
+              )}
             </div>
 
             <div className="input_wrap">
@@ -151,7 +166,9 @@ function ItemRegistration() {
                 value={formData.price}
                 onChange={handleChange}
               />
-              {errors.price && <p className="validation_msg item">{errors.price}</p>}
+              {errors.price && (
+                <p className="validation_msg item">{errors.price}</p>
+              )}
             </div>
 
             <div className="input_wrap">
@@ -166,10 +183,16 @@ function ItemRegistration() {
                 onKeyDown={handleKeyDown}
               />
               <div className="tag_wrap">
-                <ItemTag tags={tags} onDelete={handleDeleteTag}/>
+                <ItemTag tags={tags} onDelete={handleDeleteTag} />
               </div>
-              {errors.tags && <p className="validation_msg item
-              _msg">{errors.tags}</p>}
+              {errors.tags && (
+                <p
+                  className="validation_msg item
+              _msg"
+                >
+                  {errors.tags}
+                </p>
+              )}
             </div>
           </form>
         </div>
