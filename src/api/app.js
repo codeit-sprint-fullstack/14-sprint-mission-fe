@@ -63,12 +63,14 @@ app.get('/tasks', async (req, res) => {
       .skip(offset)
       .limit(limit);
 
+    const totalCount = await Task.countDocuments(filter); 
     res.send({
       list: tasks,
       totalCount
     });
   } catch (err) {
-    res.status(500).send(err);
+    console.error("❌ /tasks 라우트 에러:", err.message);
+    res.status(500).send({ error: err.message });
   }
 });
 

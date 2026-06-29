@@ -44,10 +44,10 @@ function Items_Card({ page, size, option, keyword, index, onMeta }){
           <div key={item.id} className={ index === true
             ? `${style.product_card} ${style.mainlist}`
             : `${style.product_card} ${style.sublist}`}>
-            <img src={item.images[0]}
-              alt={item.images[0]}
-              onError={(e) => { e.target.src = defaultImg }
-            } 
+            <img  // DB에 이미지를 넣지 않아 임시로 defaultImg가 고정으로 나오게 수정
+              src={item.images?.[0] || defaultImg}
+              alt={item.images?.[0] || item.name}
+              onError={(e) => { e.target.src = defaultImg }}
             />
             <div className={style.itemInfo}>
               <h3>{item.name}</h3>
