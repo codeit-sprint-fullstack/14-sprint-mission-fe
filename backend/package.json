@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "seed": "node data/seed.js",
+    "build": "tsc",
     "start": "nodemon app.js"
   },
   "dependencies": {
