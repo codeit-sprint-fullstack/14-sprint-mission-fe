@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: ["http://localhost:3001", "추후 프론트엔드 url"],
+  origin: ["http://localhost:3003", "추후 프론트엔드 url"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
@@ -103,7 +103,7 @@ app.delete('/tasks/:id', async (req, res) => {
 
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`BackEnd Server running on port ${port}`);
 });~
 
 
