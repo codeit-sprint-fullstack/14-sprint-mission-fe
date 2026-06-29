@@ -39,9 +39,9 @@ function Items_Card({ page, size, option, keyword, index, onMeta }){
 
   return (
     <>
-        {products.map((item) => (
-        <div key={item.id} className={style.ItemList}>
-          <div key={item.id} className={ index === true
+      {products.map((item, idx) => (
+        <div key={`${item._id}-${index ? 'main' : 'sub'}`} className={style.ItemList}>
+          <div className={ index === true
             ? `${style.product_card} ${style.mainlist}`
             : `${style.product_card} ${style.sublist}`}>
             <img  // DB에 이미지를 넣지 않아 임시로 defaultImg가 고정으로 나오게 수정

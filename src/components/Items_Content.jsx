@@ -5,7 +5,7 @@ import style from "../style/Items_Content.module.css";
 import ic_search from "../assets/ic_search.svg";
 import btn_right from "../assets/btn_right.png";
 import btn_left from "../assets/btn_left.png";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, useLayoutEffect } from "react";
 
 function Items_Content () {
   const navigate = useNavigate(); // 링크 이동 시 새로고침이 아닌 상태로 컴포넌트 호출
@@ -13,10 +13,21 @@ function Items_Content () {
   const [count, setCount] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(4);
-  const [favoritSize, setFavoritSize] = useState(0); // window용 베스트아이탬 개수 지정
   const [keyword, setKeyword] = useState('');
 
+  const getSizes = () => {
+    if (window.innerWidth >= 1200) {
+      return { favoritSize: 4, size: 10 };
+    } else if (window.innerWidth >= 744) {
+      return { favoritSize: 2, size: 6 };
+    } else {
+      return { favoritSize: 1, size: 4 };
+    }
+  };
+
+  const [favoritSize, setFavoritSize] = useState(getSizes().favoritSize);
+  const [size, setSize] = useState(getSizes().size);
+  
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1200) {
@@ -65,7 +76,7 @@ function Items_Content () {
           <div className={style.bestItem}>
             <h2>베스트 상품</h2>
             <div className={style.bestItemList}>
-              <Items_Card page={1} size={favoritSize} option={'recent'} keyword={null} index={true}/>
+              <Items_Card key="main" page={1} size={favoritSize} option={'recent'} keyword={null} index={true}/>
             </div>
           </div>
           <div className={style.sellItem}>
@@ -92,7 +103,7 @@ function Items_Content () {
               </div>
             </div>
             <div className={style.sellItemList}>
-              <Items_Card page={page} size={size} option={sortRule} index={false} keyword={keyword} onMeta={handleMeta}/>
+              <Items_Card key="sub" page={page} size={size} option={sortRule} index={false} keyword={keyword} onMeta={handleMeta}/>
             </div>
           </div>
           
