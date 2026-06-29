@@ -23,6 +23,7 @@ const ProductSchema = new mongoose.Schema(
       type: [String],
       validate: [
         {
+          // 컴스텀 요구사항
           validator: function (array) {
             return array.length <= 3
           },

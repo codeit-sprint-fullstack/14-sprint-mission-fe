@@ -1,29 +1,36 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const PRODUCT_API_URL = 'https://panda-market-api.vercel.app/products';
+const PRODUCT_API_URL = 'http://localhost:3000/products'
 
-async function getProducts({ orderBy, pageSize, keyword, page }) {
-  const response = await axios.get(PRODUCT_API_URL, {
+async function getProducts({ keyword, sort, offset, pageSize }) {
+  const res = await axios.get(PRODUCT_API_URL, {
     params: {
-      orderBy,
-      pageSize,
       keyword,
-      page,
+      sort,
+      offset,
+      pageSize,
     },
-  });
+  })
 
-  return response.data;
+  return res.data
 }
-
+// 다음 미션에서 베스트 상품 API 연결 시 다시 사용
 async function getBestProducts({ pageSize }) {
-  const response = await axios.get(PRODUCT_API_URL, {
+  const res = await axios.get(PRODUCT_API_URL, {
     params: {
       orderBy: 'favorite',
       pageSize,
     },
-  });
+  })
 
-  return response.data;
+  return res.data
 }
 
-export { getProducts, getBestProducts };
+// productData: 상품 등록에 필요한 데이터 묶음 { name, description, price, tags }
+async function createProduct(productData) {
+  const res = await axios.post(PRODUCT_API_URL, productData)
+
+  return res.data
+}
+
+export { getProducts, getBestProducts, createProduct }

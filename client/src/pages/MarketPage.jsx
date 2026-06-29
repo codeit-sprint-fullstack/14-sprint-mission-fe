@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { getProducts, getBestProducts } from '../api/productApi';
+import { useState, useEffect } from 'react'
+import { getProducts, getBestProducts } from '../api/productApi'
 import ProductCard from '../components/ProductCard'
-import Dropdown from '../components/Dropdown';
-import Pagination from '../components/Pagination';
-import searchIcon from '../assets/ic_search.svg';
+import Dropdown from '../components/Dropdown'
+import Pagination from '../components/Pagination'
+import searchIcon from '../assets/ic_search.svg'
 import './MarketPage.css'
 
 // const mockProducts = [
@@ -47,47 +47,47 @@ import './MarketPage.css'
 
 function MarketPage() {
   // state
-  const [products, setProducts] = useState([]);
-  const [bestProducts, setBestProducts] = useState([]);
-  const [orderBy, setOrderBy] = useState('recent');
-  const [searchInput, setSearchInput] = useState('');  // 입력중인 값
-  const [keyword, setKeyword] = useState('');          // API 요청 보낼 확정된 검색어
-  const [CurrentPage, setCurrentPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);     // 검색/정렬 조건에 맞는 전체 상품 개수
-  const [pageSize, setPageSize] = useState(10);
-  const [bestPageSize, setBestPageSize] = useState(4);
+  const [products, setProducts] = useState([])
+  const [bestProducts, setBestProducts] = useState([])
+  const [orderBy, setOrderBy] = useState('recent')
+  const [searchInput, setSearchInput] = useState('') // 입력중인 값
+  const [keyword, setKeyword] = useState('') // API 요청 보낼 확정된 검색어
+  const [CurrentPage, setCurrentPage] = useState(1)
+  const [totalCount, setTotalCount] = useState(0) // 검색/정렬 조건에 맞는 전체 상품 개수
+  const [pageSize, setPageSize] = useState(10)
+  const [bestPageSize, setBestPageSize] = useState(4)
 
   // pagination
-  const pageGroupSize = 5;
-  const totalPages = Math.ceil(totalCount / pageSize);
+  const pageGroupSize = 5
+  const totalPages = Math.ceil(totalCount / pageSize)
 
-  const currentGroup = Math.ceil(CurrentPage / pageGroupSize);
-  const startPage = (currentGroup - 1) * pageGroupSize + 1;
-  const endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
+  const currentGroup = Math.ceil(CurrentPage / pageGroupSize)
+  const startPage = (currentGroup - 1) * pageGroupSize + 1
+  const endPage = Math.min(startPage + pageGroupSize - 1, totalPages)
 
-  const pageNumbers = [];  //
+  const pageNumbers = [] //
 
   for (let i = startPage; i <= endPage; i++) {
-    pageNumbers.push(i);
+    pageNumbers.push(i)
   }
 
   const updatePageSize = () => {
     // 브라우저의 현재 뷰포트 너비
-    const width = window.innerWidth;
+    const width = window.innerWidth
 
     if (width >= 1200) {
-      setPageSize(10);
-      setBestPageSize(4);
+      setPageSize(10)
+      setBestPageSize(4)
     } else if (width >= 768) {
-      setPageSize(6);
-      setBestPageSize(2);
+      setPageSize(6)
+      setBestPageSize(2)
     } else {
-      setPageSize(4);
-      setBestPageSize(1);
+      setPageSize(4)
+      setBestPageSize(1)
     }
 
-    setCurrentPage(1);
-  };
+    setCurrentPage(1)
+  }
 
   const fetchProducts = async () => {
     const data = await getProducts({
@@ -96,102 +96,92 @@ function MarketPage() {
       pageSize,
       keyword,
       page: CurrentPage,
-    });
+    })
 
-    setProducts(data.list);
-    setTotalCount(data.totalCount);
-  };
+    setProducts(data.list)
+    setTotalCount(data.totalCount)
+  }
 
   const fetchBestProducts = async () => {
     const data = await getBestProducts({
       pageSize: bestPageSize,
-    });
+    })
 
-    setBestProducts(data.list);
-  };
+    setBestProducts(data.list)
+  }
 
   // 컴포넌트가 처음 생성되면 (페이지가 처음 열릴 때)
   useEffect(() => {
     // 현재 화면 크기에 맞게 pageSize를 계산
-    updatePageSize();
+    updatePageSize()
 
     // 브라우저 크기가 바뀔 때마다 다시 계산
-    window.addEventListener('resize', updatePageSize);
+    window.addEventListener('resize', updatePageSize)
 
     // 컴포넌트가 사라질 때는 resize 감시 제거
     return () => {
-      window.removeEventListener('resize', updatePageSize);
-    };
-    // 이 설정 자체는 처음 한 번만 수행할 것 
-  }, []);
+      window.removeEventListener('resize', updatePageSize)
+    }
+    // 이 설정 자체는 처음 한 번만 수행할 것
+  }, [])
 
   useEffect(() => {
-    fetchBestProducts();
-  }, [bestPageSize]);
+    fetchBestProducts()
+  }, [bestPageSize])
 
   useEffect(() => {
-    fetchProducts();
-  }, [orderBy, keyword, CurrentPage, pageSize]);
+    fetchProducts()
+  }, [orderBy, keyword, CurrentPage, pageSize])
 
   return (
-    <main className='market-background'>
-      <div className='market-page'>
-        <section className='best-products'>
+    <main className="market-background">
+      <div className="market-page">
+        <section className="best-products">
           <h2>베스트 상품</h2>
-          <div className='best-products-cards'>
-            {
-              bestProducts.map(product => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                />
-              ))
-            }
+          <div className="best-products-cards">
+            {bestProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </section>
-        <section className='products'>
-          <div className='products-function'>
+        <section className="products">
+          <div className="products-function">
             <h2>판매 중인 상품</h2>
-            <div className='products-function-right'>
-              <div className='search-box'>
-                <img src={searchIcon} alt='' className='search-icon' />
+            <div className="products-function-right">
+              <div className="search-box">
+                <img src={searchIcon} alt="" className="search-icon" />
                 <input
-                  className='search-input'
+                  className="search-input"
                   value={searchInput}
-                  placeholder='검색할 상품을 입력해주세요'
+                  placeholder="검색할 상품을 입력해주세요"
                   onChange={(e) => {
-                    setSearchInput(e.target.value);
+                    setSearchInput(e.target.value)
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       // 입력 중인 값(searchInput)을 실제 검색어(keyword)로 확정
                       setKeyword(searchInput)
                       // 검색 후 페이지 초기화
-                      setCurrentPage(1);
+                      setCurrentPage(1)
                     }
                   }}
                 />
               </div>
-              <button className='btn-register'>상품 등록하기</button>
+              <button className="btn-register">상품 등록하기</button>
               <Dropdown
                 orderBy={orderBy}
                 onChangeOrderBy={(nextOrderBy) => {
-                  setOrderBy(nextOrderBy);
+                  setOrderBy(nextOrderBy)
                   // 정렬 후 페이지 초기화
-                  setCurrentPage(1);
+                  setCurrentPage(1)
                 }}
               />
             </div>
           </div>
-          <div className='products-cards'>
-            {
-              products.map(product => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                />
-              ))
-            }
+          <div className="products-cards">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
           <Pagination
             page={CurrentPage}
@@ -199,9 +189,10 @@ function MarketPage() {
             pageNumbers={pageNumbers}
             onChangePage={setCurrentPage}
           />
-        </section >
+        </section>
       </div>
-    </main>)
+    </main>
+  )
 }
 
-export default MarketPage;
+export default MarketPage

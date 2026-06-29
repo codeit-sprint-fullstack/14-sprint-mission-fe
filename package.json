@@ -4,17 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "client": "npm --prefix client run dev",
+    "client": "vite client --config client/vite.config.js",
     "server": "nodemon server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm --prefix client run build",
-    "lint": "npm --prefix client run lint",
-    "preview": "npm --prefix client run preview",
+    "build": "vite build --config client/vite.config.js",
+    "lint": "eslint client/src",
+    "preview": "vite preview --config client/vite.config.js",
     "seed": "node server/seed.js"
   },
   "dependencies": {
     "axios": "^1.18.0",
     "concurrently": "^10.0.3",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.7.2",

@@ -7,7 +7,8 @@ productRoutes.get('/products', async (req, res) => {
   const keyword = req.query.keyword || ''
   const sort = req.query.sort
   const offset = Number(req.query.offset) || 0
-  const PAGE_SIZE = 10
+  const pageSize = Number(req.query.pageSize) || 10
+
   // 조건 흐름을 눈으로 보기 위해 if/else로 작성, 추후 리펙토링 예정
   const filter = keyword
     ? {
@@ -26,7 +27,7 @@ productRoutes.get('/products', async (req, res) => {
     .select('name price createdAt')
     .sort(sortOption)
     .skip(offset)
-    .limit(PAGE_SIZE)
+    .limit(pageSize)
 
   const list = filteredProducts
   res.send({ totalCount, list })
