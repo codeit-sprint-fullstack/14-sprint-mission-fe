@@ -23,13 +23,6 @@ const ProductSchema = new mongoose.Schema(
       type: [String],
       validate: [
         {
-          // 컴스텀 요구사항
-          validator: function (array) {
-            return array.length <= 3
-          },
-          message: '태그는 최대 3개까지 등록할 수 있습니다.',
-        },
-        {
           validator: function (array) {
             return !array.some((tag) => tag.length > 5)
           },
