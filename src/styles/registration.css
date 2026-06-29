@@ -1,0 +1,61 @@
+.registrationPage {
+  padding: 40px 0;
+  width: 100%;
+}
+
+.registrationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.registrationHeader h1 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #374151;
+}
+
+.submitBtn {
+  background-color: #3692FF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.formGroup label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.formGroup input,
+.formGroup textarea {
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 14px;
+  background-color: #f3f4f6;
+  color: #374151;
+  outline: none;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #9ca3af;
+}
+
+.formGroup textarea {
+  height: 200px;
+  resize: none;
+}
