@@ -1,4 +1,5 @@
 import homeImage from '../img/Img_home_top.png'
+import Items from '../pages/Items.jsx'
 
 function HeroSection() {
 

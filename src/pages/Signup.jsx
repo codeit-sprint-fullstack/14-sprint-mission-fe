@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './SignupPage.css'
+import './Signup.css'
 
 import eyeImage from '../img/eye.png'
 
@@ -188,7 +188,7 @@ function SignupPage() {
       return
     }
 
-    window.location.href = '/login'
+    window.location.href = '/Login'
   }
 
   function handleModalClose() {
