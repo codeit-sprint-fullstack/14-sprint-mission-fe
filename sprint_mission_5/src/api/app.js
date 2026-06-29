@@ -12,10 +12,6 @@ console.log("DB URL:", process.env.DATABASE_URL);
 await mongoose.connect(DATABASE_URL);
 console.log('Connected to DB');
 
-// await Task.deleteMany({});
-// // seed 데이터 다시 삽입
-// await Task.insertMany(seedData);
-
 const port = process.env.PORT;
 const app = express();
 app.use(express.json());
@@ -23,13 +19,36 @@ app.use(express.json());
 app.get('/tasks', async (req, res) => {
   console.log("데이터를 가져옵니다");
   const sort = req.query.sort;
-  const count = Number(req.query.count) || 0;
+  const { keyword, name, price, createdAt } = req.query;
+
+  const limit = Number(req.query.limit) || 10;   // 페이지당 개수
+  const page = Number(req.query.page) || 1;      // 현재 페이지
+  const offset = (page - 1) * limit;             // 건너뛸 개수
+
+  // Search 조건
+  let filter = {};
+  if (name) filter.name = name;
+  if (price) filter.price = Number(price);
+  if (createdAt) filter.createdAt = new Date(createdAt);
+  if (keyword) {
+    filter.$or = [
+      { name: { $regex: keyword, $options: 'i' } },
+      { description: { $regex: keyword, $options: 'i' } }
+    ];
+  }
 
   const sortOption = { createdAt: sort === "oldest" ? 'asc' : 'desc' };
-  const tasks = await Task.find({}).sort(sortOption).limit(count);
 
-  res.send(tasks);
+  try {
+    const tasks = await Task.find(filter)
+      .sort(sortOption)
+      .skip(offset)
+      .limit(limit);
 
+    res.send(tasks);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 app.get('/tasks/:id', async (req, res) => {
@@ -41,30 +60,24 @@ app.get('/tasks/:id', async (req, res) => {
   }
 });
 
-app.get('/tasks/name/:name', async (req, res) => {
-  const task = await Task.findOne({ name: req.params.name });
-  if (task) {
-    res.send(task);
-  } else {
-    res.status(404).send({ message: 'Cannot find given name.' });
-  }
-});
+app.get('/tasks', async (req, res) => {
+  try {
+    const { name, price, createdAt } = req.query;
+    let filter = {};
 
-app.get('/tasks/price/:price', async (req, res) => {
-  const task = await Task.findOne({ price: req.params.price });
-  if (task) {
-    res.send(task);
-  } else {
-    res.status(404).send({ message: 'Cannot find given price.' });
-  }
-});
+    if (name) filter.name = name;
+    if (price) filter.price = Number(price); // 문자열을 숫자로 변환
+    if (createdAt) filter.createdAt = new Date(createdAt);
 
-app.get('/tasks/createdAt/:createdAt', async (req, res) => {
-  const task = await Task.findOne({ createdAt: req.params.createdAt });
-  if (task) {
-    res.send(task);
-  } else {
-    res.status(404).send({ message: 'Cannot find given createdAt.' });
+    const tasks = await Task.find(filter);
+
+    if (tasks.length > 0) {
+      res.send(tasks);
+    } else {
+      res.status(404).send({ message: 'Cannot find given condition.' });
+    }
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 
