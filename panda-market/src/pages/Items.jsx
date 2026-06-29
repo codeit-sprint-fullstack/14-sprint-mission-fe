@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../utils/axios.js';
 import ProductList from '../component/ProductList.jsx';
-import BestProductList from '../component/BestProductList.jsx';
+
 
 function Items() {
   const [items, setItems] = useState([]);
@@ -18,35 +18,20 @@ function Items() {
       }
     });
     console.log(response.data)
-    setItems(response.data.list)
+    setItems(response.data)
   };
-  //베스트 상품
-  const [bestItems, setBestItems] = useState([]);
-  const handleLoadBest = async () => {
-    const response = await axios.get('/products', {
-      params: {
-        page: 1,
-        pageSize: bestPageSize,
-        orderBy: 'favorite'
-      }
-    });
-    setBestItems(response.data.list);
-  }
+  
   //반응형
-  const [bestPageSize, setBestPageSize] = useState(4);
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 480) {
         setPageSize(2);
-        setBestPageSize(1);
       } else if (window.innerWidth <= 768) {
         setPageSize(6);
-        setBestPageSize(2);
       } else {
         setPageSize(10);
-        setBestPageSize(4);
       }
       setPage(1);
     };
@@ -58,15 +43,10 @@ function Items() {
   useEffect(() => {
     handleLoad();
   }, [orderBy, page, keyword, pageSize]);
-  useEffect(() => {
-    handleLoadBest();
-  }, [bestPageSize]);
-
 
   return (
     <>
       <section className='product'>
-        <BestProductList items={bestItems} />
         <ProductList
           items={items}
           orderBy={orderBy}

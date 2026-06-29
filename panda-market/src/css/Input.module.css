@@ -1,3 +1,11 @@
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .input {
   border-radius: 8px;
   font-size: 16px;
@@ -30,13 +38,23 @@ input:focus {
   font-size: 16px;
 }
 
-@media (max-width:768px){
-  .product { 
+@media (max-width:768px) {
+  .product {
     width: 245px;
-   }
+  }
 }
-@media (max-width:480px){
-  .product { 
-  width: calc(100% - 196px);
-   }
+
+@media (max-width:480px) {
+  .product {
+    width: calc(100% - 196px);
+  }
+}
+
+.formInput {
+  width: 100%;
+  height: 56px;
+  line-height: 26px;
+  padding: 0 24px;
+  background-color: #F3F4F6;
+  box-sizing: border-box;
 }

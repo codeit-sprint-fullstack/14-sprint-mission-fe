@@ -4,6 +4,8 @@
 }
 
 .subPage .inner {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 24px;
   box-sizing: border-box;
 }
@@ -19,3 +21,16 @@
   font-size: 24px;
   font-weight: 700
 }
+
+.formWrap {
+  margin-top: 24px;
+}
+
+.formWrap .formTitle {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.formCont { margin-top:32px; }
+.formCont:first-child { margin-top: 0; }
