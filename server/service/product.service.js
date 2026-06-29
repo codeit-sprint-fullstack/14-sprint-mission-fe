@@ -9,4 +9,5 @@ export async function getProduct(sort, count) {
 
 //post, 상품 등록 기능 구현
 export async function createProduct(data) {
+  return await Product.create(data);
 }
