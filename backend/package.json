@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "seed": "node data/seed.js",
-    "build": "nodemon app.js",
+    "build": "npm install",
     "start": "nodemon app.js"
   },
   "dependencies": {
