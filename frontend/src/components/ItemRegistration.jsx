@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/axios";
+import ItemTag from "./ItemTag.jsx";
 
 function ItemRegistration() {
   const navigate = useNavigate();
+  const [tagInput, setTagInput] = useState("");
+  const [tags, setTags] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -23,6 +26,30 @@ function ItemRegistration() {
     }));
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key !== "Enter") return;
+    if (e.nativeEvent.isComposing) return;
+
+    e.preventDefault();
+
+    const value = e.target.value.trim();
+
+    if (!value) return;
+
+    // 중복 방지
+    if (tags.includes(value)) {
+      setTagInput("");
+      return;
+    }
+
+    setTags((prev) => [...prev, value]);
+    setTagInput("");
+  };
+
+  const handleDeleteTag = (deleteTag) => {
+    setTags((prev) => prev.filter((tag) => tag !== deleteTag));
+  };
+
   const validate = () => {
     const newErrors = {};
 
@@ -40,8 +67,10 @@ function ItemRegistration() {
       newErrors.price = "가격은 숫자로 입력해주세요.";
     }
 
-    if (!formData.tags.trim()) {
+    if (!tags) {
       newErrors.tags = "태그를 입력해주세요.";
+    } else {
+      formData.tags = tags;
     }
 
     setErrors(newErrors);
@@ -60,7 +89,7 @@ function ItemRegistration() {
       name: formData.name,
       description: formData.description,
       price: Number(formData.price),
-      tags: formData.tags.split(",").map((tag) => tag.trim()),
+      tags: formData.tags,
     });
 
     alert("상품이 등록되었습니다.");
@@ -132,9 +161,13 @@ function ItemRegistration() {
                 name="tags"
                 type="text"
                 placeholder="태그를 입력해주세요. 예: 전자기기, 노트북"
-                value={formData.tags}
-                onChange={handleChange}
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
+              <div className="tag_wrap">
+                <ItemTag tags={tags} onDelete={handleDeleteTag}/>
+              </div>
               {errors.tags && <p className="validation_msg item
               _msg">{errors.tags}</p>}
             </div>

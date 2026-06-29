@@ -1023,3 +1023,25 @@ line-height: 16px;
 		width: calc(100% - 32px);
 	}
 }
+
+.tag_wrap { display: flex; flex-direction: row; justify-content: left; gap: 12px; }
+
+.tag {
+	width: fit-content;
+	display: flex;
+	height: 36px;
+	padding: 6px 16px;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	color: var(--Secondary-800, #1F2937);
+	/* pretendard/lg-16px-regular */
+	font-family: Pretendard;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 26px; /* 162.5% */
+	border-radius: 26px;
+	background: var(--Cool-Gray-100, #F3F4F6);
+}

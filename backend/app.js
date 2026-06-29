@@ -6,15 +6,14 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 dotenv.config()
 const DATABASE_URL = process.env.DATABASE_URL;
+const PORT = process.env.PORT;
 
 await mongoose.connect(DATABASE_URL);
 console.log('connected to db');
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
-const port = 3000
 
 app.get('/items', async (req, res) => {
     const page = req.query.page || 1;
@@ -123,6 +122,6 @@ app.delete('/items/:id', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`server running on port ${PORT}`);
 });
