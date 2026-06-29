@@ -1,4 +1,4 @@
-function FormField({ label, placeholder , type = 'text', value, onChange}) {
+function FormField({ label, placeholder , type = 'text', value, onChange, onKeyDown}) {
   return (
     <label>
       {label}
@@ -7,6 +7,7 @@ function FormField({ label, placeholder , type = 'text', value, onChange}) {
       placeholder={placeholder}
       value={value || ""}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       />
     </label>
   )
