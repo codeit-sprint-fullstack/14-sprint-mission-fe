@@ -1,6 +1,8 @@
+import useProductValidation from "../../hooks/useProductValidation.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegistrationPage.css";
+import xIcon from "../../assets/ic_X.png";
 
 function RegistrationPage() {
   const navigate = useNavigate();
@@ -8,27 +10,54 @@ function RegistrationPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [tags, setTags] = useState("");
+  const [tagInput, setTagInput] = useState("");
+  const [tags, setTags] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  const isFormValid =
-    name.trim() !== "" &&
-    description.trim() !== "" &&
-    price.trim() !== "";
+  const { isFormValid } = useProductValidation({
+    name,
+    description,
+    price,
+  });
+
+  function handleTagKeyDown(e) {
+    if (e.key !== "Enter") {
+      return;
+    }
+
+    e.preventDefault();
+
+    const newTag = tagInput.trim().replace("#", "");
+
+    if (newTag === "") {
+      return;
+    }
+
+    if (tags.includes(newTag)) {
+      setTagInput("");
+      return;
+    }
+
+    setTags([...tags, newTag]);
+    setTagInput("");
+  }
+
+  function handleRemoveTag(tagToRemove) {
+    const nextTags = tags.filter((tag) => tag !== tagToRemove)
+    setTags(nextTags);
+  }
 
   async function handleSubmit() {
     if (!isFormValid || isSubmitting) {
       return;
     }
 
-    const cleanedTag = tags.trim().replace("#", "");
-
     const productData = {
       name: name.trim(),
       description: description.trim(),
       price: Number(price),
-      tags: cleanedTag ? [cleanedTag] : [],
+      tags: tags,
       image: "",
     };
 
@@ -48,7 +77,9 @@ function RegistrationPage() {
         throw new Error("상품 등록에 실패했습니다.");
       }
 
-      navigate("/items");
+      const createdProduct = await response.json();
+
+      navigate(`/items${createdProduct.id}`);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -120,11 +151,28 @@ function RegistrationPage() {
             className="tags-input"
             type="text"
             placeholder="태그를 입력해주세요"
-            value={tags}
+            value={tagInput}
             onChange={(e) => {
-              setTags(e.target.value);
+              setTagInput(e.target.value);
             }}
+            onKeyDown={handleTagKeyDown}
           />
+
+          <div className="tag-list">
+            {tags.map((tag) => (
+              <span className="tag-chip" key={tag}>
+                #{tag}
+
+                <button
+                  className="tag-remove"
+                  type="button"
+                  onClick={() => handleRemoveTag(tag)}
+                >
+                  <img src={xIcon} alt="태그 삭제" />
+                </button>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 

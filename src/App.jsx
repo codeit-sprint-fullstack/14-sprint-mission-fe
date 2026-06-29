@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import MarketPage from "./pages/MarketPage/MarketPage.jsx";
 import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage.jsx";
+import ProductDetailPage from "./pages/ProductDetailPage/ProductDetailPage.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/items" element={<MarketPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/items/:id" element={<ProductDetailPage />} />
       </Routes>
 
       <Footer />

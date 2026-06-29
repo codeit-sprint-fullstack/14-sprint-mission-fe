@@ -1,0 +1,5 @@
+.product-detail-page {
+  width: calc(100% - 3rem);
+  max-width: 75rem;
+  margin: 2rem auto 10rem;
+}

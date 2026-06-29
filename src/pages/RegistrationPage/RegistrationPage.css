@@ -1,4 +1,5 @@
 .registration-page {
+  width: calc(100% - 3rem);
   max-width: 75rem;
   display: flex;
   flex-direction: column;
@@ -78,14 +79,16 @@
 .price-input,
 .tags-input {
   width: 100%;
-  display: flex;
   height: 3.5rem;
   padding: 1rem 1.5rem;
-  align-items: flex-start;
-  align-self: stretch;
   border-radius: .75rem;
   background: var(--color-Secondary-100);
   border: none;
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+  color: var(--color-Secondary-800);
 }
 
 .name-input:focus,
@@ -101,13 +104,56 @@
 .tags-input::placeholder {
   color: var(--color-text-muted);
   font-family: "Pretendard";
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 26px;
-
+  line-height: 1.625rem;
 }
 
 .description-input {
   height: 17.625rem;
   resize: none;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.tag-chip {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  height: 2.25rem;
+  padding: .375rem .75rem .375rem 1rem;
+  border-radius: 1.625rem;
+  background: var(--color-Secondary-100);
+  color: var(--color-Secondary-800);
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+}
+
+.tag-remove {
+  width: 1.375rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .registration-page {
+    max-width: 45.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-page {
+    width: calc(100% - 2rem);
+    max-width: 24.5rem;
+  }
 }
