@@ -14,12 +14,12 @@ function Pagination({ page, totalPages, onPageChange }) {
   //시작 페이지 계산 / 현재 페이지를 기준으로 왼쪽으로 2칸
   // ex) page = 5, startPage = 3, 화면 : 3 4 5 6 7
   // -1 방지를 위해 startPage가 무조건 1보다 큰 수일 수 있도록 max 사용
-  const startPage = Math.max(page - 2, 1)
+  let startPage = Math.max(page - 2, 1)
   // 끝 페이지 계산
   // startPage부터 총 5개의 페이지 버튼을 보여주기 위해 + (5 - 1)
   // ex) startPage = 3이면 endPage = 7 → 화면 : 3 4 5 6 7
   // 마지막 페이지(totalPages)를 넘지 않도록 min 사용
-  const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages)
+  let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages)
   // 현재 화면에 보이는 페이지 버튼 개수 계산
   // 공식: 끝 페이지 - 시작 페이지 + 1
   // ex) startPage = 8, endPage = 10 → 10 - 8 + 1 = 3개 (8 9 10)

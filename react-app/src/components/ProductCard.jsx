@@ -1,4 +1,5 @@
 import styles from './ProductCard.module.css'
+import defaultImg from '../assets/img_default.png'
 
 //상품 카드를 하나씩 띄워주는 역할
 
@@ -16,9 +17,13 @@ function ProductCard({ product, variant = 'default' }) {
         {imageUrl ? (
           <img src={imageUrl} alt={product.name} className={styles.image} />
         ) : (
-          <div className={styles.placeholder}>이미지 없음</div>
+          <img
+            src={imageUrl || defaultImg}
+            alt={product.name}
+            className={styles.image}
+          />
+          // 디폴트 이미지 출력
         )}
-        {/* 이미지가 있으면 이미지를 출력하고 : 없으면 이미지 없음 출력 */}
       </div>
 
       <div className={styles.info}>
@@ -41,7 +46,7 @@ function ProductCard({ product, variant = 'default' }) {
             />
           </svg>
 
-          <span>{product.favoriteCount}</span>
+          <span>{product.favoriteCount ?? 0}</span>
         </div>
       </div>
     </article>

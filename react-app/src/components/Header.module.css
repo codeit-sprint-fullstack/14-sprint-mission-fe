@@ -103,6 +103,11 @@
   white-space: nowrap;
 }
 
+.active {
+  color: #3692ff;
+}
+
+
 /* Tablet */
 @media (max-width: 1199px) {
   .inner {
