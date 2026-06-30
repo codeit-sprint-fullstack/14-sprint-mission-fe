@@ -15,7 +15,16 @@ router.post("/", async (req, res) => {
       image,
     });
 
-    res.status(201).json(product);
+    res.status(201).json({
+      id: product._id.toString(),
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      tags: product.tags,
+      image: product.image,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
+    });
   } catch (error) {
     console.error("상품 등록 실패:", error);
 
