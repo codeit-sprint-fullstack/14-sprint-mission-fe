@@ -92,7 +92,9 @@ productRoutes.patch('/products/:id', async (req, res) => {
   try {
     const id = req.params.id
     const product = await Product.findByIdAndUpdate(id, req.body, {
+      // 수정 끝난 최신 데이터를 반환
       new: true,
+      // findByIdAndUpdate는 기본적으로 스키마 validation을 수행하지 않으므로 명시적으로 활성화
       runValidators: true,
     })
 

@@ -1,9 +1,10 @@
 import xIcon from '../assets/ic_X.svg'
+import './Tag.css'
 
 function Tag({ tag, onDelete }) {
   return (
-    <div>
-      <span>{tag}</span>
+    <div className="tag-card">
+      <span>#{tag}</span>
 
       <button type="button" onClick={() => onDelete(tag)}>
         <img src={xIcon} alt="태그 삭제" />
@@ -11,4 +12,5 @@ function Tag({ tag, onDelete }) {
     </div>
   )
 }
+
 export default Tag

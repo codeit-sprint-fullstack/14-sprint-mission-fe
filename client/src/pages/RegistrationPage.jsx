@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createProduct } from '../api/productApi'
 import Tag from '../components/Tag'
+import './RegistrationPage.css'
 
 function RegistrationPage() {
   const navigate = useNavigate()
@@ -10,6 +11,7 @@ function RegistrationPage() {
   const [price, setPrice] = useState('')
   const [tagInput, setTagInput] = useState('')
   const [tags, setTags] = useState([])
+  const [tagError, setTagError] = useState('')
 
   // Product 스키마의 validation 기준과 동일하게 프론트에서도 검사
   const trimmedName = name.trim()
@@ -19,7 +21,9 @@ function RegistrationPage() {
   const isNameValid = trimmedName.length >= 1 && trimmedName.length <= 10
   const isDescriptionValid =
     trimmedDescription.length >= 10 && trimmedDescription.length <= 100
-  const isPriceValid = trimmedPrice !== '' && Number(trimmedPrice) >= 0
+  const isPriceValid = /^\d+$/.test(trimmedPrice)
+  /* type = number 일 때
+  const isPriceValid = trimmedPrice !== '' && Number(trimmedPrice) >= 0 */
 
   /* 태그는 필수값이 아니며
      요구사항에 필수 입력 조건이 명시되지 않아 유효성 검사에서 제외 */
@@ -46,11 +50,13 @@ function RegistrationPage() {
 
     // Product 스키마와 동일하게 태그는 최대 5글자
     if (trimmedTag.length > 5) {
+      setTagError('5글자 이내로 입력해주세요.')
       return
     }
 
     setTags([...tags, trimmedTag])
     setTagInput('')
+    setTagError('')
   }
 
   const handleDeleteTag = (tagToDelete) => {
@@ -73,6 +79,7 @@ function RegistrationPage() {
         tags,
       })
 
+      // 백엔드 응답이 _id 또는 id인 경우 모두 대응
       navigate(`/items/${product._id || product.id}`)
     } catch (error) {
       console.error('상품 등록 실패:', error)
@@ -89,52 +96,81 @@ function RegistrationPage() {
           </button>
         </div>
 
-        <div className="product-name">
+        <div className="registration-name">
           <label>상품명</label>
           <input
+            className={!isNameValid && trimmedName ? 'input-error' : ''}
             value={name}
             placeholder="상품명을 입력해주세요"
             onChange={(e) => {
               setName(e.target.value)
             }}
           />
+          {!isNameValid && trimmedName && (
+            <p className="input-error-message">10자 이내로 입력해주세요.</p>
+          )}
         </div>
 
-        <div className="product-description">
+        <div className="registration-description">
           <label>상품 소개</label>
           <textarea
+            className={
+              !isDescriptionValid && trimmedDescription ? 'input-error' : ''
+            }
             value={description}
             placeholder="상품 소개를 입력해주세요"
             onChange={(e) => {
               setDescription(e.target.value)
             }}
           />
+          {trimmedDescription.length > 0 && trimmedDescription.length < 10 && (
+            <p className="input-error-message">10자 이상 입력해주세요.</p>
+          )}
+
+          {trimmedDescription.length > 100 && (
+            <p className="input-error-message">100자 이내로 입력해주세요.</p>
+          )}
         </div>
 
-        <div className="product-price">
+        <div className="registration-price">
           <label>판매가격</label>
           <input
-            type="number"
+            className={!isPriceValid && trimmedPrice ? 'input-error' : ''}
+            type="text" // number로 명시하려 했으나 요구사항 때문에 text로 설정
             value={price}
             placeholder="판매 가격을 입력해주세요"
             onChange={(e) => {
               setPrice(e.target.value)
             }}
           />
+          {!isPriceValid && trimmedPrice && (
+            <p className="input-error-message">숫자를 입력해주세요.</p>
+          )}
         </div>
 
-        <div className="product-tags-list">
+        <div className="registration-tags">
           <label>태그</label>
           <input
+            className={tagError ? 'input-error' : ''}
             value={tagInput}
             placeholder="태그를 입력해주세요"
             onChange={(e) => {
-              setTagInput(e.target.value)
+              const nextTagInput = e.target.value
+
+              setTagInput(nextTagInput)
+
+              if (nextTagInput.trim().length > 5) {
+                setTagError('5글자 이내로 입력해주세요.')
+                return
+              }
+
+              setTagError('')
             }}
             onKeyDown={handleTagKeyDown}
           />
+          {tagError && <p className="input-error-message">{tagError}</p>}
 
-          <div className="tag-cards">
+          <div className="registration-tag-cards">
             {tags.map((tag) => (
               <Tag key={tag} tag={tag} onDelete={handleDeleteTag} />
             ))}

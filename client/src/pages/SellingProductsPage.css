@@ -1,8 +1,8 @@
 .market-background {
   background-color: var(--soft-gray);
-  min-height: calc(100vh - 70px);
 }
 
+/* PC 기본 */
 .market-page {
   width: 100%;
   max-width: 1200px;
@@ -30,25 +30,6 @@
   .market-page {
     padding: 24px 16px 80px;
   }
-}
-
-.best-products {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.best-products-cards {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-}
-
-/* 남은 빈 공간 전부 차지해서 화면 꽉 채우기 */
-.best-products-cards .product-card {
-  flex: 1;
 }
 
 .products {
@@ -147,7 +128,7 @@
   top: 50%;
   transform: translateY(-50%);
   /* 마우스/터치 이벤트 무시 */
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .sort-icon {

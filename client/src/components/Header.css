@@ -6,6 +6,7 @@
 .header {
   background-color: var(--pure-white);
   width: 100%;
+  height: 70px;
   display: flex;
   padding: 0 200px;
   justify-content: space-between;
@@ -63,6 +64,10 @@
   text-decoration: none;
 }
 
+.header-menu-link.active {
+  color: var(--brand-blue);
+}
+
 .login-button {
   background: var(--brand-blue);
   color: var(--Cool-Gray-100);
@@ -78,10 +83,11 @@
   gap: 10px;
   border-radius: 8px;
   border: none;
+  text-decoration: none;
   cursor: pointer;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1024px) {
   .header {
     padding: 0 24px;
   }

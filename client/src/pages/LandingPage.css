@@ -78,7 +78,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 336px;
+  width: 360px;
 }
 
 .landing-section-left .landing-main-contents {
@@ -130,4 +130,133 @@
   width: 746px;
   height: 397px;
   align-self: flex-end;
+}
+
+/* tablet */
+@media (max-width: 1199px) {
+  .landing-top-banner,
+  .landing-bottom-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    min-height: 540px;
+    padding: 60px 24px 0;
+  }
+
+  .landing-top-contents,
+  .landing-bottom-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 32px;
+  }
+
+  .landing-top-contents h1 br {
+    display: none;
+  }
+
+  .landing-main {
+    gap: 52px;
+    padding: 52px 24px;
+  }
+
+  .landing-section {
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* 두 번째 카드는 JSX 순서가 텍스트 → 이미지라서 뒤집어 준다 */
+  .landing-section-right {
+    flex-direction: column-reverse;
+  }
+
+  .landing-banner-image,
+  .landing-bottom-image,
+  .landing-main-image {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .landing-main-contents {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* 1, 3번째 카드 */
+  .landing-section-left .landing-main-contents {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* 2번째 카드 */
+  .landing-section-right .landing-main-contents {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+/* mobile */
+@media (max-width: 767px) {
+  .landing-top-banner,
+  .landing-bottom-banner {
+    min-height: 540px;
+    padding: 48px 24px 0;
+  }
+
+  .landing-top-contents,
+  .landing-bottom-contents {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .landing-top-contents h1 br {
+    display: block;
+  }
+
+  .landing-main {
+    gap: 52px;
+    padding: 52px 24px;
+  }
+
+  .landing-main-contents {
+    width: 100%;
+  }
+
+  .landing-top-contents h1,
+  .landing-bottom-contents h2,
+  .landing-main-contents h3 {
+    font-size: 32px;
+  }
+
+  .landing-description {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .landing-searching-button {
+    width: 100%;
+    max-width: 357px;
+    padding: 16px 0;
+  }
+
+  .landing-section {
+    gap: 24px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .landing-banner-image,
+  .landing-bottom-image,
+  .landing-main-image {
+    width: 100%;
+    height: auto;
+  }
 }

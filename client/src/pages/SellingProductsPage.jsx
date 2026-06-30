@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard'
 import Pagination from '../components/Pagination'
 import Dropdown from '../components/Dropdown'
 import searchIcon from '../assets/ic_search.svg'
-import './MarketPage.css'
+import './SellingProductsPage.css'
 
 function SellingProductsPage() {
   // useNavigate() : 페이지를 코드로 이동시키는 React Router Hook

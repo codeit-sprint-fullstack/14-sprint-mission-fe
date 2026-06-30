@@ -1,0 +1,173 @@
+.registration-form {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 0 24px 120px;
+}
+
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.registration-header h2 {
+  color: var(--Secondary-900);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.registration-header button {
+  width: 74px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background: var(--brand-blue);
+  color: var(--pure-white);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registration-header button:disabled {
+  background: var(--Secondary-400);
+  cursor: not-allowed;
+}
+
+.registration-name,
+.registration-description,
+.registration-price,
+.registration-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.registration-name,
+.registration-price,
+.registration-tags {
+  min-height: 130px;
+}
+
+.registration-description {
+  min-height: 356px;
+}
+
+.registration-name label,
+.registration-description label,
+.registration-price label,
+.registration-tags label {
+  color: var(--Secondary-900);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.registration-name input,
+.registration-price input,
+.registration-tags input,
+.registration-description textarea {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+  padding: 16px 24px;
+  font-size: 16px;
+  color: var(--Secondary-900);
+}
+
+.registration-name input,
+.registration-price input,
+.registration-tags input {
+  height: 56px;
+}
+
+.registration-description textarea {
+  height: 282px;
+  resize: none;
+}
+
+.registration-name input::placeholder,
+.registration-price input::placeholder,
+.registration-tags input::placeholder,
+.registration-description textarea::placeholder {
+  color: var(--Secondary-400);
+}
+
+/* 정상 상태에서만 파란 Focus */
+.registration-name input:focus:not(.input-error),
+.registration-price input:focus:not(.input-error),
+.registration-tags input:focus:not(.input-error),
+.registration-description textarea:focus:not(.input-error) {
+  outline: 2px solid var(--brand-blue);
+}
+
+.registration-tag-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+
+.input-error {
+  border: 1px solid var(--error-red) !important;
+}
+
+
+.input-error:focus {
+  outline: none;
+}
+
+.input-error-message {
+  color: var(--error-red);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/*Tablet */
+@media (max-width: 1199px) {
+  .registration-form {
+    padding: 0 32px 100px;
+  }
+}
+
+/*Mobile */
+@media (max-width: 767px) {
+  .registration-form {
+    margin-top: 32px;
+    padding: 0 16px 80px;
+  }
+
+  .registration-header {
+    margin-bottom: 32px;
+  }
+
+  .registration-name,
+  .registration-description,
+  .registration-price,
+  .registration-tags {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .registration-name,
+  .registration-price,
+  .registration-tags {
+    min-height: 122px;
+  }
+
+  .registration-description {
+    min-height: 336px;
+  }
+
+  .registration-description textarea {
+    height: 270px;
+  }
+
+  .registration-tag-cards {
+    gap: 8px;
+  }
+}
