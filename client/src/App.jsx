@@ -7,6 +7,7 @@ import ItemPage from "./pages/ItemPage";
 import FaqPage from "./pages/FaqPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import SignupPage from "./pages/SignupPage";
+import RegistrationPage from './pages/RegistrationPage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/registration" element={<RegistrationPage />} />
             </Route>
         </Routes>
     )
