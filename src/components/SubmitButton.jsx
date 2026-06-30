@@ -1,10 +1,8 @@
 import style from "../style/SubmitButton.module.css";
 
-function SubmitButton({ text, boolean }) {
-  console.log("SubmitButton received:", boolean);
+function SubmitButton({ text, boolean, onClick }) {
   return ( 
-    <button className={boolean ? style.button : style.buttonFalse}>
-        {console.log(boolean)}
+    <button className={boolean ? style.button : style.buttonFalse} onClick={onClick}>
       <span>{text}</span>
     </button>
   )

@@ -1,8 +1,11 @@
 import style from "../style/Registration_Content.module.css";
 import SubmitButton from "./SubmitButton";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Registration_Content() {
+  const navigate = useNavigate();
   // 상태 변수들
   const [nameState, setNameState] = useState(false);
   const [nameFirst, setNameFirst] = useState(true);
@@ -13,6 +16,40 @@ function Registration_Content() {
   const [tagsState, setTagsState] = useState(false);
   const [tagsFirst, setTagsFirst] = useState(true);
   const [buttonState, setButtonState] = useState(false);
+
+  const [inputValue, setInputValue] = useState(""); // 태그 input
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && inputValue.trim() !== "" && inputValue.trim().length <= 5) {
+      e.preventDefault();
+      const newTag = inputValue.trim();
+      if (!tags.some(tag => tag.toLowerCase() === newTag.toLowerCase())) {
+        setTags([...tags, newTag]);
+      }
+      setInputValue("");
+    }
+  };
+  const removeTag = (removeIndex) => {
+    setTags(tags.filter((_, index) => index !== removeIndex));
+  };
+
+  const handleSubmit = async () => {
+    const task = {
+      name,
+      description: intro,
+      price: Number(price),
+      tags,
+    };
+
+    console.log("최종 객체:", task);
+    console.log("post를 진행합니다.");
+    try {
+      await axios.post("http://localhost:3001/tasks", task);
+      console.log("등록 성공");
+      navigate("/items"); // 원하는 경로로 이동
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
   
   // DB 변수값들
   const [name, setName] = useState("");
@@ -21,47 +58,24 @@ function Registration_Content() {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    setButtonState(false);
+    const nameValid = name.length > 0 && name.length <= 10;
+    const introValid = intro.length >= 10 && intro.length <= 100;
+    const priceValid = price !== "" && !isNaN(Number(price));
 
-    if (name.length > 0 && name.length <= 10) {
-      setNameState(true);
-    } else {
-      setNameState(false);
-    }
+    setNameState(nameValid);
+    setIntroState(introValid);
+    setPriceState(priceValid);
 
-    if (intro.length >= 10 && intro.length <= 100) {
-      setIntroState(true);
-    } else {
-      setIntroState(false);
-    }
+    setButtonState(nameValid && introValid && priceValid);
 
-    if (!isNaN(Number(price))) {
-      setPriceState(true);
-    } else {
-      setPriceState(false);
-    }
-
-
-
-    if (nameState && introState && priceState) {
-      setButtonState(true);
-      console.log(buttonState);
-    } else {
-      setButtonState(false);
-      console.log(buttonState);
-    }
-
-    // console.log("Name : " + name);
-    // console.log("Intro : " + intro);
-    // console.log("Price : " + price);
-  }, [name, intro, price])
+  }, [name, intro, price, inputValue]);
 
   return (
     <div className={style.main}>
       <div className={style.Content}>
         <div className={style.submit}>
             <h2>상품 등록하기</h2>
-            <SubmitButton text={'등록'} boolean={buttonState}/>
+            <SubmitButton text={'등록'} boolean={buttonState} onClick={handleSubmit}/>
         </div>
         <form className={style.form}>
           <div className={style.itemName}>
@@ -106,11 +120,29 @@ function Registration_Content() {
           <div className={style.itemTag}>
             <h2>태그</h2>
             <input
-              name="tags"
-              placeholder="태그를 입력해주세요"
+              type="text"
+              placeholder="태그 입력 후 엔터"
+              value={inputValue}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+                setTagsState(e.target.value.length <= 5);
+              }}
+              onKeyDown={handleKeyDown}
               onFocus={() => setTagsFirst(false)}
             />
-            <p>5글자 이내로 입력해주세요</p>
+            {tags.length > 0 && (
+              <div className={style.tagList}>
+                {tags.map((tag, index) => (
+                  <span key={index} className={style.tag}>
+                    # {tag}
+                    <button type="button" onClick={() => removeTag(index)}></button>
+                  </span>
+                ))}
+              </div>
+            )}
+            {!tagsState && !tagsFirst && (
+              <p>5글자 이내로 입력해주세요</p>
+            )}
           </div>
         </form>
       </div>
