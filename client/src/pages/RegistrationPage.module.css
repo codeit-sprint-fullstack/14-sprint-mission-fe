@@ -1,17 +1,56 @@
 .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
 .header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 24px;
+display: flex; justify-content: space-between; align-items: center;
+margin-bottom: 24px;
 }
 .submitButton {
-  background: #3692FF; color: #fff; border: 0;
-  padding: 12px 23px; border-radius: 8px; font-weight: 600; cursor: pointer;
-  width: auto; height: auto; /* 전역 button 스타일 덮어쓰기 */
+background: #3692FF; color: #fff; border: 0;
+padding: 12px 23px; border-radius: 8px; font-weight: 600; cursor: pointer;
+width: auto; height: auto; 
 }
 .field { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
 .label { font-size: 1.125rem; font-weight: 700; color: #1F2937; }
 .input, .textarea {
-  width: 100%; padding: 16px 24px; box-sizing: border-box;
-  border-radius: 12px; background: #F3F4F6; border: 0;
+width: 100%; padding: 16px 24px; box-sizing: border-box;
+border-radius: 12px; background: #F3F4F6; border: 0;
 }
 .textarea { min-height: 200px; resize: vertical; font-family: inherit; }
+
+.invalid {
+outline: 1px solid #F74747;
+}
+
+.errorText {
+color: #F74747;
+font-size: 0.875rem;
+margin: 4px 0 0 8px;
+}
+
+.submitButton:disabled {
+background: #9CA3AF;
+cursor: not-allowed;
+}
+
+.chipList {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+margin-top: 12px;
+}
+.chip {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+background: #F3F4F6;
+color: #4B5563;
+padding: 6px 12px;
+border-radius: 9999px;
+font-size: 0.875rem;
+}
+.chipDelete {
+width: 18px; height: 18px;
+display: inline-flex; align-items: center; justify-content: center;
+background: #9CA3AF; color: #fff;
+border: 0; border-radius: 50%;
+font-size: 12px; cursor: pointer; padding: 0;
+}
