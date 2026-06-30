@@ -7,6 +7,9 @@ import arrowDownIcon from "../../assets/ic_arrow_down.png";
 import sortIcon from "../../assets/ic_sort.png";
 import "./MarketPage.css";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
 function MarketPage() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -57,7 +60,7 @@ function MarketPage() {
         }
 
         const productRes = await fetch(
-          `http://localhost:3000/products?offset=${offset}&limit=${productPageSize}${keywordQuery}`
+          `${API_BASE_URL}/products?offset=${offset}&limit=${productPageSize}${keywordQuery}`
         );
 
         if (!productRes.ok) {

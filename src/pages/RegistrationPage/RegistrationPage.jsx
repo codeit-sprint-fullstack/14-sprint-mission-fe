@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "./RegistrationPage.css";
 import xIcon from "../../assets/ic_X.png";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
 function RegistrationPage() {
   const navigate = useNavigate();
 
@@ -88,7 +91,7 @@ function RegistrationPage() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch(`${API_BASE_URL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

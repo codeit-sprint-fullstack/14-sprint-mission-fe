@@ -27,7 +27,7 @@ function useProductValidation({ name, description, price, tagInput }) {
 
   if (trimmedPrice === "") {
     errors.price = "판매 가격을 입력해주세요.";
-  } else if (Number.isNaN(Number(trimmedPrice))) {
+  } else if (!/^\d+$/.test(trimmedPrice)) {
     errors.price = "숫자로 입력해주세요.";
   }
 
@@ -37,7 +37,7 @@ function useProductValidation({ name, description, price, tagInput }) {
 
   const isFormValid =
     errors.name === "" &&
-    errors.description === "" && 
+    errors.description === "" &&
     errors.price === "" &&
     errors.tagInput === "";
 

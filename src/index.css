@@ -1,7 +1,6 @@
 :root {
   --color-bg-main: #FCFCFC;
   --color-bg-white: #FFFFFF;
-  --color-bg-brand-light: #CFE5FF;
   --color-bg-footer: #111827;
   --color-primary: #3692FF;
   --color-btn-hover: #F9FAFB;
@@ -14,6 +13,7 @@
   --color-Secondary-800: #1F2937;
   --color-Gray-500: #6B7280;
   --color-error-red: #F74747;
+  --color-bg-brand-light: #E6F2FF;
 }
 
 * {
