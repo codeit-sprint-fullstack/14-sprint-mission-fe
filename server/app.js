@@ -7,13 +7,14 @@ await mongoose.connect(DATABASE_URL).then(() => console.log('database connected'
 
 
 const app = express();
-// json에 괄호 아 
+// json에 괄호 꼭 붙이기
 app.use(express.json());
 
-// console.log('연결된 함수:', productController.getProduct);
-
-app.get('/products', productController.getProduct);
+app.get('/products', productController.getProductList);
+app.get('/products/:id', productController.getProduct);
 app.post('/products', productController.createProduct);
+app.patch('/products/:id', productController.patchProduct);
+app.delete('/products/:id', productController.deleteProduct);
 
 // 에러처리
 app.use((err, req, res, next) => {
