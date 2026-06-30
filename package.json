@@ -10,7 +10,8 @@
     "build": "vite build --config client/vite.config.js",
     "lint": "eslint client/src",
     "preview": "vite preview --config client/vite.config.js",
-    "seed": "node server/seed.js"
+    "seed": "node server/seed.js",
+    "start": "node server/index.js"
   },
   "dependencies": {
     "axios": "^1.18.0",
