@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
+.register-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registerButton {
+  display: flex;
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--Cool-Gray-400, #9CA3AF);
+  border: none;
+  color: var(--Cool-Gray-100, #F3F4F6);
+  /* pretendard/lg-16px-semibold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  /* 162.5% */
+}
+
+.bigInputBox {
+  display: flex;
+  width: 1200px;
+  height: 282px;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100, #F3F4F6);
+}
+
+.inputBox {
+  display: flex;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100, #F3F4F6);
+
+  width: 1200px;
+  min-height: 56px;
+}
+
+.tag {
+  margin-bottom: 10rem;
+}

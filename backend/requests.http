@@ -1,0 +1,33 @@
+GET http://localhost:3001/products
+
+###
+
+GET http://localhost:3001/products?sort=recent&count=10
+
+###
+
+### 
+GET http://localhost:3001/products/6a3e18c6bba30124a3a4ac21
+
+###
+POST http://localhost:3001/products
+Content-Type: application/json
+
+{
+  "name": "테스트 제품",
+  "description": "테스트 기록 본문 입니다",
+  "price": 8900
+}
+
+###
+PATCH http://localhost:3001/products/6a3e1a82bba30124a3a4ac22
+Content-Type: application/json
+
+{
+  "name": "PATCH 테스트 제목입니다",
+  "description": "PATCH 테스트 본문입니다.",
+  "price": 5123
+}
+
+###
+DELETE http://localhost:3001/products/6a3e18c6bba30124a3a4ac21
