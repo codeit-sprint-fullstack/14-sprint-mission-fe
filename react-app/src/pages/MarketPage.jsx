@@ -1,22 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import ProductCard from '../components/ProductCard.jsx'
 import Pagination from '../components/Pagination.jsx'
 import useProducts from '../hooks/useProducts.js'
-import useBestProducts from '../hooks/useBestProducts.js'
+// import useBestProducts from '../hooks/useBestProducts.js'
 import useResponsivePageSize from '../hooks/useResponsivePageSize.js'
-import useBestProductSize from '../hooks/useBestProductSize.js'
+// import useBestProductSize from '../hooks/useBestProductSize.js'
 import styles from './MarketPage.module.css'
 
 function MarketPage() {
   // 페이지당 표시할 상품 개수
   const pageSize = useResponsivePageSize()
-  const bestPageSize = useBestProductSize()
+  // const bestPageSize = useBestProductSize()
 
   const [orderBy, setOrderBy] = useState('recent') // 최신순으로 정렬
   const [keyword, setKeyword] = useState('') //검색어 상태 | 검색어에 '의자' 입력하면 setKeyworkd('의자)
   const [page, setPage] = useState(1) // 현재 페이지 상태 | setPage(2)
+
+  // 페이지 크기에 따라 전체 페이지 개수가 달라서
+  // 크기가 달라지면 페이지를 첫 페이지로 돌아가게끔
+  useEffect(() => {
+    setPage(1)
+  }, [pageSize])
 
   //상품 가져오기 | 커스텀 Hook 호출 | API에 요쳥을 보내서 products에 상품 목록 저장
   const { products, totalCount, isLoading, error } = useProducts({
@@ -26,29 +33,31 @@ function MarketPage() {
     pageSize,
   })
   // 베스트 상품 가져오기 | 커스텀 Hook 호출 | API에 요청을 보내서 products에 상품 목록 저장 | pageSize=4개만 가져오기
-  const { bestProducts } = useBestProducts({
-    pageSize: bestPageSize,
-  })
+  // const { bestProducts } = useBestProducts({
+  //   pageSize: bestPageSize,
+  // })
 
   // 전체 페이지 수 계산 | 올림.( 전체상품수 / 페이지당상품개수 )
   const totalPages = Math.ceil(totalCount / pageSize)
+
+  const navigate = useNavigate()
 
   return (
     <>
       <Header />
       <main className={styles.main}>
-        <section className={styles.section}>
+        {/* <section className={styles.section}>
           <h2 className={styles.bestTitle}>베스트 상품</h2>
 
-          <div className={styles.bestGrid}>
-            {/* bestProducts = [상품1, 상품2, 상품3, 상품4] 를 map으로 쪼개서 
+          <div className={styles.bestGrid}> */}
+        {/* bestProducts = [상품1, 상품2, 상품3, 상품4] 를 map으로 쪼개서 
             ProductCard.jsx의 ProductCard 함수로 전달되서 <ProductCard>를 하나씩 만들고
               variant="best"가 들어가서 .best{} 스타일 적용 */}
-            {bestProducts.map((product) => (
+        {/* {bestProducts.map((product) => (
               <ProductCard key={product.id} product={product} variant="best" />
             ))}
           </div>
-        </section>
+        </section> */}
 
         <section className={styles.section}>
           <div className={styles.productHeader}>
@@ -78,7 +87,12 @@ function MarketPage() {
                   className={styles.searchInput}
                 />
               </div>
-              <button className={styles.registerButton}>상품 등록하기</button>
+              <button
+                className={styles.registerButton}
+                onClick={() => navigate('/registration')}
+              >
+                상품 등록하기
+              </button>
               <select
                 className={styles.sortSelect}
                 value={orderBy}
@@ -141,7 +155,7 @@ function MarketPage() {
                   <p>상품을 불러오는 중입니다...</p>
                 ) : (
                   products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard key={product._id} product={product} />
                   ))
                 )}
               </div>
