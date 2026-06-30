@@ -1,12 +1,17 @@
-import './Items.css'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
+import './Items.css'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import ProductList from '../components/ProductList.jsx'
 import useSaleProducts from '../hooks/useSaleProducts.js'
 
-function FleaMarket() {
+function Items() {
   const currentPath = window.location.pathname
+
+  const [keyword, setKeyword] = useState('')
+  const [orderBy, setOrderBy] = useState('recent')
 
   const {
     products: saleProducts,
@@ -15,8 +20,8 @@ function FleaMarket() {
   } = useSaleProducts({
     page: 1,
     pageSize: 10,
-    orderBy: 'recent',
-    keyword: '',
+    orderBy,
+    keyword,
   })
 
   return (
@@ -41,14 +46,12 @@ function FleaMarket() {
                   className="product-search-input"
                   placeholder="검색할 상품을 입력해주세요"
                   aria-label="상품 검색"
+                  value={keyword}
+                  onChange={(event) => {
+                    setKeyword(event.target.value)
+                  }}
                 />
-                <a href="./Registration" className='registration_text'>
-                <button
-                  type="button"
-                  className="product-register-button">
-                  상품 등록하기
-                </button>
-                </a>
+                <a href="/registration" className="product-register-button"> 상품 등록하기 </a>
 
                 <select
                   className="product-order-select"
@@ -94,4 +97,4 @@ function FleaMarket() {
   )
 }
 
-export default FleaMarket
+export default Items
