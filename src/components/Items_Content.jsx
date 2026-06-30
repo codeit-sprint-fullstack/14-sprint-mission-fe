@@ -92,7 +92,7 @@ function Items_Content () {
                     console.log(keyword);
                   }}
                 />
-                <button onClick={() => navigate('/')}>
+                <button onClick={() => navigate('/registration')}>
                   <span>상품 <br/>등록하기</span>
                 </button>
                 <select id={style.dropdown} name="category" value={sortRule} onChange={(e) => setSortRule(e.target.value)

@@ -1,0 +1,33 @@
+.button {
+  display: flex;
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;border-radius: 8px;
+  background: var(--brand-blue);
+  border: 0;
+  cursor: pointer;
+}
+
+.buttonFalse {
+  display: flex;
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;border-radius: 8px;
+  background: var(--Cool-Gray-400);
+  border: 0;
+  cursor: not-allowed;
+}
+
+.button span, .buttonFalse span {
+  color: var(--Cool-Gray-100, #F3F4F6);
+  /* pretendard/lg-16px-semibold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px; /* 162.5% */
+}

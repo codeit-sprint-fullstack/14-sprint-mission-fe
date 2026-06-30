@@ -1,4 +1,4 @@
-h2 {
+.bestItem h2, .sellHeader h2 {
   color: var(--Secondary-900);
   /* pretendard/xl-20px-bold */
   font-family: Pretendard;

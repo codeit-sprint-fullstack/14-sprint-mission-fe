@@ -1,0 +1,147 @@
+.main {
+  width: 100%;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.submit {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.submit h2 {
+  color: var(--Cool-Gray-800);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form h2 {
+  align-self: stretch;
+  color: var(--Secondary-800);
+  /* pretendard/2lg-18px-bold */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+}
+
+.form input, .form textarea{
+  width: 100%;
+  height: 56px;
+  display: flex;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+  box-sizing: border-box;
+  border: 0;
+
+  color: var(--Secondary-400, #9CA3AF);
+  /* pretendard/lg-16px-regular */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+}
+
+.form p {
+  margin-left: 16px;
+
+  color: var(--error-red, #F74747);
+  /* pretendard/lg-14px-semibold */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 171.429% */
+}
+
+.itemName {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemIntro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemPrice {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemTag {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemIntro textarea {
+  height: 282px;
+  resize: none;
+}
+
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px)  {
+  .Content {
+    margin: 94px auto 322px;
+    width: 1200px;
+  }
+
+  .form {
+    gap: 32px;
+  }
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px){
+  .Content {
+    margin: 86px auto 0;
+    width: 696px;
+  }
+
+  .form {
+    gap: 24px;
+  }
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px){
+  .Content {
+    margin: 94px auto 0;
+    width: 344px;
+  }
+
+  .form {
+    gap: 24px;
+  }
+}
