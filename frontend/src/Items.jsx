@@ -13,7 +13,7 @@ function Items() {
   const [sortedItems, setSortedItems] = useState([])
 
   const fetchItems = async () => {
-    const res = await axios.get(`http://localhost:3001/products`, {
+    const res = await axios.get(`https://one4-sprint-mission-fe-1.onrender.com/products`, {
       params: {
         order: order,
         page: page

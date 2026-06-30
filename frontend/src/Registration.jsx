@@ -10,7 +10,7 @@ function Registration() {
 
   const postItems = async () => {
     try {
-      const res = await axios.post(`http://localhost:3001/products`, {
+      const res = await axios.post(`https://one4-sprint-mission-fe-1.onrender.com/products`, {
         name: name,
         description: description,
         price: Number(price),

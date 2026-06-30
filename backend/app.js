@@ -6,7 +6,7 @@ dotenv.config()
 import cors from 'cors'
 
 const DATABASE_URL = process.env.DATABASE_URL
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 
 await mongoose.connect(DATABASE_URL)
 console.log('Connected to DB')
@@ -15,7 +15,9 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
-
+app.get('/', (req, res) => {
+  res.send('API server is running')
+})
 
 //GET list
 app.get('/products', async (req, res) => {

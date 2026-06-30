@@ -1,16 +1,18 @@
-GET http://localhost:3001/products
+@baseUrl = https://one4-sprint-mission-fe-1.onrender.com
+
+GET {{baseUrl}}/products
 
 ###
 
-GET http://localhost:3001/products?sort=recent&count=10
+GET {{baseUrl}}/products?sort=recent&count=10
 
 ###
 
 ### 
-GET http://localhost:3001/products/6a3e18c6bba30124a3a4ac21
+GET {{baseUrl}}/products/6a3e18c6bba30124a3a4ac21
 
 ###
-POST http://localhost:3001/products
+POST {{baseUrl}}/products
 Content-Type: application/json
 
 {
@@ -20,7 +22,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3001/products/6a3e1a82bba30124a3a4ac22
+PATCH {{baseUrl}}/products/6a3e1a82bba30124a3a4ac22
 Content-Type: application/json
 
 {
@@ -30,4 +32,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3001/products/6a3e18c6bba30124a3a4ac21
+DELETE {{baseUrl}}/products/6a3e18c6bba30124a3a4ac21
