@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+.topbar {
+  position: fixed;
+  width: 100%;
+  height: 4.375rem;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  border-bottom: 1px solid #DFDFDF;
+  padding-top: 0.56rem;
+  padding-right: 12.5rem;
+  padding-bottom: 0.56rem;
+  padding-left: 12.5rem;
+  gap: 0.625rem;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.panda-letters {
+  font-family: 'ROKAF Sans';
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: normal;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  margin-top: 4px;
+  color: #3692FF;
+  text-decoration: none;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8rem;
+  height: 3rem;
+  font-size: 1rem;
+  background-color: #3692FF;
+  color: #F3F4F6;
+  border-radius: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: #FFFFFF;
+}
