@@ -14,12 +14,31 @@ function RegistrationPage() {
   const [tags, setTags] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [touched, setTouched] = useState({
+    name: false,
+    description: false,
+    price: false,
+  });
 
-  const { isFormValid } = useProductValidation({
+  const { errors, isFormValid } = useProductValidation({
     name,
     description,
     price,
+    tagInput,
   });
+
+  function handleBlur(fieldName) {
+    setTouched((prevTouched) => ({
+      ...prevTouched,
+      [fieldName]: true,
+    }));
+  }
+
+  function showError(fieldName) {
+    return touched[fieldName] && errors[fieldName] !== "";
+  }
+
+  const showTagError = tagInput !== "" && errors.tagInput !== "";
 
   function handleTagKeyDown(e) {
     if (e.key !== "Enter") {
@@ -28,9 +47,13 @@ function RegistrationPage() {
 
     e.preventDefault();
 
-    const newTag = tagInput.trim().replace("#", "");
+    const newTag = tagInput.trim().replaceAll("#", "");
 
     if (newTag === "") {
+      return;
+    }
+
+    if (newTag.length > 5) {
       return;
     }
 
@@ -79,7 +102,7 @@ function RegistrationPage() {
 
       const createdProduct = await response.json();
 
-      navigate(`/items${createdProduct.id}`);
+      navigate(`/items/${createdProduct.id || createdProduct._id}`);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -106,57 +129,106 @@ function RegistrationPage() {
         <div className="registration-name">
           <h2 className="name-title">상품명</h2>
 
-          <input
-            className="name-input"
-            type="text"
-            placeholder="상품명을 입력해주세요"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
+          <div className="input-group">
+            <input
+              className={
+                showError("name")
+                  ? "name-input input-error"
+                  : "name-input"
+              }
+              type="text"
+              placeholder="상품명을 입력해주세요"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              onBlur={() => {
+                handleBlur("name");
+              }}
+            />
+
+            {showError("name") && (
+              <p className="input-error-message">{errors.name}</p>
+            )}
+          </div>
         </div>
 
         <div className="registration-description">
           <h2 className="description-title">상품 소개</h2>
 
-          <textarea
-            className="description-input"
-            placeholder="상품 소개를 입력해주세요"
-            value={description}
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
+          <div className="input-group">
+            <textarea
+              className={
+                showError("description")
+                  ? "description-input input-error"
+                  : "description-input"
+              }
+              placeholder="상품 소개를 입력해주세요"
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+              onBlur={() => {
+                handleBlur("description");
+              }}
+            />
+
+            {showError("description") && (
+              <p className="input-error-message">{errors.description}</p>
+            )}
+          </div>
         </div>
 
         <div className="registration-price">
           <h2 className="price-title">판매가격</h2>
 
-          <input
-            className="price-input"
-            type="number"
-            placeholder="판매 가격을 입력해주세요"
-            value={price}
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
-          />
+          <div className="input-group">
+            <input
+              className={
+                showError("price")
+                  ? "price-input input-error"
+                  : "price-input"
+              }
+              type="text"
+              inputMode="numeric"
+              placeholder="판매 가격을 입력해주세요"
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+              onBlur={() => {
+                handleBlur("price");
+              }}
+            />
+            {showError("price") && (
+              <p className="input-error-message">{errors.price}</p>
+            )}
+          </div>
         </div>
 
         <div className="registration-tags">
           <h2 className="tags-title">태그</h2>
 
-          <input
-            className="tags-input"
-            type="text"
-            placeholder="태그를 입력해주세요"
-            value={tagInput}
-            onChange={(e) => {
-              setTagInput(e.target.value);
-            }}
-            onKeyDown={handleTagKeyDown}
-          />
+          <div className="input-group">
+            <input
+              className={
+                showTagError
+                  ? "tags-input input-error"
+                  : "tags-input"
+              }
+              type="text"
+              placeholder="태그를 입력해주세요"
+              value={tagInput}
+              onChange={(e) => {
+                setTagInput(e.target.value);
+              }}
+              onKeyDown={handleTagKeyDown}
+            />
+
+            {showTagError && (
+              <p className="input-error-message">{errors.tagInput}</p>
+            )}
+          </div>
 
           <div className="tag-list">
             {tags.map((tag) => (
