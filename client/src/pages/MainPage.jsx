@@ -7,7 +7,7 @@ function MainPage() {
                 <div className="hero-content">
                     <div className="hero-text">
                         <h2>일상의 모든 물건을<br /> 거래해 보세요</h2>
-                        <Link to="/item">
+                        <Link to="/items">
                             <div className="item-btn">구경하러 가기</div>
                         </Link>
                     </div>

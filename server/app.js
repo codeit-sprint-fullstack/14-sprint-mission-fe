@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { DATABASE_URL } from './env.js';
+import cors from 'cors';
 import * as productController from './controller/product.controller.js';
 
 await mongoose.connect(DATABASE_URL).then(() => console.log('database connected'))
@@ -9,6 +10,7 @@ await mongoose.connect(DATABASE_URL).then(() => console.log('database connected'
 const app = express();
 // json에 괄호 꼭 붙이기
 app.use(express.json());
+app.use(cors());
 
 app.get('/products', productController.getProductList);
 app.get('/products/:id', productController.getProduct);
