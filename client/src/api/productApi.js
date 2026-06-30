@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const PRODUCT_API_URL = 'http://localhost:3000/products'
+const PRODUCT_API_URL =
+  'https://sprint-mission-5-panda-market.onrender.com/products'
 
 async function getProducts({ keyword, sort, offset, pageSize }) {
   const res = await axios.get(PRODUCT_API_URL, {
