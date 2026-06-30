@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { getProducts } from "../api/productsApi";
 import ProductCard from "./ProductCard";
 import "./ProductList.css";
 import searchImg from "../assets/searchImg.svg";
@@ -56,25 +56,24 @@ function ProductList() {
   }, []);
 
   useEffect(() => {
-    async function getProducts() {
+    async function fetchProducts() {
       const offset = (currentPage - 1) * pageSize;
 
-      const response = await axios.get(
-        `http://localhost:3000/products?offset=${offset}&limit=${pageSize}&sort=${orderBy}`
-      );
+      const data = await getProducts({
+        offset,
+        limit: pageSize,
+        sort: orderBy,
+        keyword: searchText,
+      });
 
-      setProducts(response.data.list);
-      setTotalCount(response.data.totalCount);
+      setProducts(data.list);
+      setTotalCount(data.totalCount);
     }
 
-    getProducts();
-  }, [orderBy, currentPage, pageSize]);
+    fetchProducts();
+  }, [orderBy, currentPage, pageSize, searchText]);
 
-  const filteredProducts = products.filter((product) => {
-    return product.name.toLowerCase().includes(searchText.toLowerCase());
-  });
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortedProducts = [...products].sort((a, b) => {
     if (orderBy === "favorite") {
       return b.favoriteCount - a.favoriteCount;
     }

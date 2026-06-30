@@ -111,7 +111,8 @@ router.delete("/:id", async (req, res) => {
       });
     }
 
-    await Product.findByIdAndDelete(id);
+    const product = await Product.findByIdAndDelete(id);
+
     if (!product) {
       return res.status(404).json({
         message: "상품을 찾을 수 없습니다.",
