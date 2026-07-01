@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const PRODUCT_API_URL =
-  'https://panda-market-api.vercel.app/products'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const PRODUCT_API_URL = `${API_BASE_URL}/products`
 
 function useSaleProducts({
   page = 1,
@@ -21,12 +21,15 @@ function useSaleProducts({
       setError(null)
 
       try {
+        const offset = (page - 1) * pageSize
+        const limit = pageSize
+
         const response = await axios.get(
           PRODUCT_API_URL,
           {
             params: {
-              page,
-              pageSize,
+              offset,
+              limit,
               orderBy,
               keyword: keyword || undefined,
             },
@@ -34,7 +37,7 @@ function useSaleProducts({
         )
 
         console.log(
-          'GET /products 응답:',
+          '내 API GET /products 응답:',
           response.data,
         )
 

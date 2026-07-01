@@ -71,12 +71,18 @@
 }
 
 .header-menu-link {
-  color: var(--Secondary-600);
-
   font-family: Pretendard, Arial, sans-serif;
   font-size: 18px;
   font-weight: 700;
   text-decoration: none;
+}
+
+.nav-link {
+  color: var(--Secondary-600);
+}
+
+.nav-active {
+  color: var(--brand-blue);
 }
 
 .Header_Login {
@@ -238,6 +244,9 @@
 /* 상품 등록 버튼 */
 /* ====================================================================== */
 
+.registration_text
+{text-decoration: none;}
+
 .product-register-button {
   display: flex;
   align-items: center;
@@ -255,6 +264,7 @@
   font-family: Pretendard, Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
+  text-decoration: none;
 
   cursor: pointer;
 }

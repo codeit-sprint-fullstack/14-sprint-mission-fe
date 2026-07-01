@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './LoginPage.css'
+import './Login.css'
 
 import pandaFace from '../img/판다얼굴.png'
 import eyeImage from '../img/eye.png'

@@ -1,4 +1,4 @@
-import './IndexPage.css'
+import './Index.css'
 
 import Header from '../components/Header.jsx'
 import HeroSection from '../components/HeroSection.jsx'

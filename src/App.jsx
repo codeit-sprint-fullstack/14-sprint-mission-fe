@@ -1,49 +1,38 @@
-// import IndexPage from './pages/IndexPage.jsx'
-// import LoginPage from './pages/LoginPage.jsx'
-// import SignupPage from './pages/SignupPage.jsx'
-
-// function App() {
-//   const currentPath = window.location.pathname
-
-//   if (currentPath === '/') {
-//     return <IndexPage />
-//   }
-
-//   if (currentPath === '/login') {
-//     return <LoginPage />
-//   }
-
-//   if (currentPath === '/signup') {
-//     return <SignupPage />
-//   }
-
-//   return <IndexPage />
-// }
-
-// export default App
-
-// ==============================================================================================================
-
-import FleaMarket from './pages/FleaMarket.jsx'
-import LoginPage from './pages/LoginPage.jsx'
-import SignupPage from './pages/SignupPage.jsx'
+import Index from './pages/Index.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import Items from './pages/Items.jsx'
+import Registration from './pages/Registration.jsx'
+import ItemDetail from './pages/ItemDetail.jsx'
 
 function App() {
   const currentPath = window.location.pathname
 
   if (currentPath === '/') {
-    return <FleaMarket />
+    return <Index />
+  }
+
+  if (currentPath === '/items') {
+    return <Items />
+  }
+
+  if (currentPath.startsWith('/items/')) {
+  return <ItemDetail />
+}
+
+    if (currentPath === '/registration') {
+    return <Registration />
   }
 
   if (currentPath === '/login') {
-    return <LoginPage />
+    return <Login />
   }
 
   if (currentPath === '/signup') {
-    return <SignupPage />
+    return <Signup />
   }
 
-  return <FleaMarket />
+  return <Index />
 }
 
 export default App
