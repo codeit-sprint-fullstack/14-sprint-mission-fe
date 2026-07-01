@@ -26,3 +26,18 @@ export async function getProductList({
 
   return response.json();
 }
+
+
+  export async function createProduct({ name, description, price, tags }) {
+    const response = await fetch(`${BASE_URL}/products`, {                                                              
+      method: "POST",                                                                                                   
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, description, price, tags }),                                                         
+    });                                                                                                                 
+   
+    if (!response.ok) {                                                                                                 
+      throw new Error("상품 등록 실패");                                                                              
+    }
+
+    return response.json();
+  }
