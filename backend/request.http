@@ -1,0 +1,5 @@
+GET http://localhost:3000/items
+###
+GET http://localhost:3000/items/6a3cc1f22bda007a106035a0
+###
+DELETE http://localhost:3000/items/6a3e3f8cf8134ff53609df90

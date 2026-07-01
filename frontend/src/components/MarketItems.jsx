@@ -5,6 +5,7 @@ import searchIcon from "../assets/img/ic_search.svg";
 import Pagination from "./Pagination.jsx";
 import axios from "../utils/axios.js";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function MarketItems() {
   const getPageSize = () => {
@@ -26,9 +27,7 @@ function MarketItems() {
     keyword = searchKeyword,
     orderType = sortType,
   ) => {
-    const response = await axios.get(
-      `?page=${nextPage}&pageSize=${pageSize}&orderBy=${orderType}&keyword=${keyword}`,
-    );
+    const response = await axios.get(`/items?page=${nextPage}&pageSize=${pageSize}&orderBy=${orderType}&keyword=${keyword}`);
 
     setMarketItems(response.data.list);
     setTotalCount(response.data.totalCount);
@@ -86,11 +85,11 @@ function MarketItems() {
             />
             <img src={searchIcon} alt="검색 아이콘" />
           </div>
-
-          <button type="button" className="register_btn">
-            상품 등록하기
-          </button>
-
+          <Link to="/registration">
+            <button type="button" className="register_btn">
+              상품 등록하기
+            </button>
+          </Link>
           <div className="select_wrap">
             <div
               className="select_display"
@@ -124,7 +123,7 @@ function MarketItems() {
         </div>
         <div className="item_wrap market">
           {marketItems.map((item) => (
-            <MarketItem key={item.id} item={item} />
+            <MarketItem key={item._id} item={item} />
           ))}
         </div>
       </section>
