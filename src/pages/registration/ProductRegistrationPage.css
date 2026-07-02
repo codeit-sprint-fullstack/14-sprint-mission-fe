@@ -1,0 +1,71 @@
+.product-registration-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 100px;
+}
+
+.product-registration-page__title {
+  font-size: 20px;
+}
+
+.product-registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.product-registration-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-registration-form__label {
+  font-weight: 700;
+  color: var(--color-gray-800);
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.product-registration-form__input,
+.product-registration-form__textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 12px;
+  padding: 16px 24px;
+  background-color: var(--color-gray-100);
+  border: none;
+  color: var(--color-gray-800);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.product-registration-form__textarea {
+  resize: none;
+}
+
+.product-registration-form__input:focus,
+.product-registration-form__textarea:focus {
+  outline: var(--color-primary-100) solid 1px;
+}
+
+.product-registration-form__input::placeholder,
+.product-registration-form__textarea::placeholder {
+  color: var(--color-gray-400);
+}
+
+.product-registration-page__submit-button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-primary-100);
+  color: white;
+  font-weight: 600;
+}
+
+.product-registration-form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

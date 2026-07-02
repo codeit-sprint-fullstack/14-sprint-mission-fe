@@ -6,6 +6,7 @@ import ItemsPage from './pages/items/ItemsPage'
 import FaqPage from './pages/faq/FaqPage'
 import PrivacyPage from './pages/privacy/PrivacyPage'
 import Boards from './pages/boards/Boards'
+import ProductRegistrationPage from './pages/registration/ProductRegistrationPage'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/boards" element={<Boards />} />
       <Route path="/faq" element={<FaqPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/registration" element={<ProductRegistrationPage />} />
     </Routes>
   )
 }
