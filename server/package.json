@@ -1,0 +1,20 @@
+{
+  "name": "panda-market-server",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
