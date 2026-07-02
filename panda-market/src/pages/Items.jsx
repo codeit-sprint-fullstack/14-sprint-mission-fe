@@ -8,7 +8,9 @@ function Items() {
   const [orderBy, setOrderBy] = useState('recent');
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState('');
+  const [totalCount, setTotalCount] = useState(0);
   const handleLoad = async () => {
+    
     const response = await axios.get('/products', {
       params: {
         page: page,
@@ -18,7 +20,9 @@ function Items() {
       }
     });
     console.log(response.data)
-    setItems(response.data)
+    setItems(response.data.products);
+    setTotalCount(response.data.totalCount);
+    
   };
   
   //반응형
@@ -55,6 +59,8 @@ function Items() {
           setPage={setPage}
           keyword={keyword}
           setKeyword={setKeyword}
+          totalCount={totalCount}
+          pageSize={pageSize}
         />
       </section>
     </>

@@ -8,28 +8,63 @@ import cors from "cors";
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
 
-console.log("DB 연결 시작");
-console.log(DATABASE_URL);
 await mongoose.connect(DATABASE_URL)
-console.log("DB 연결 완료");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/products", async(req, res) =>{
-    const products = await Product.find();
-    const totalCount = await Product.countDocuments()
+app.get("/products", async (req, res) => {
+    const keyword = req.query.keyword;
+    const page = Number(req.query.page) 
+    const pageSize = Number(req.query.pageSize) 
+    console.log(keyword)
+    let products;
+    let totalCount;
+    if(keyword){
+        products = await Product.find({
+            "name": { "$regex": keyword }
+        })
+        totalCount = await Product.countDocuments({
+            "name": { "$regex": keyword }
+        })
+    }else{
+        products = await Product.find()
+        totalCount = await Product.countDocuments()
+    }
+    
     res.send({
         products,
         totalCount
     })
 })
-app.post("/products", async(req, res) =>{
-    const newProduct =  await Product.create(req.body);
+app.post("/products", async (req, res) => {
+    const newProduct = await Product.create(req.body);
     res.send(newProduct)
+})
+app.get("/products/:id", async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId)
+    res.send(product)
+})
+app.patch("/products/:id", async (req, res) => {
+     const productId = req.params.id; 
+     const updateData = req.body; 
+     const product = await Product.findByIdAndUpdate(
+        productId,
+        updateData,{
+            new:true
+        }
+     )
+     res.send(product)
+})
+app.delete("/products/:id", async (req, res) => {
+     const productId = req.params.id; 
+     const updateData = req.body; 
+     res.send(product);
 })
 
 app.listen(PORT, () => {
-    console.log("실행완료")
+    console.log("실행완료");
+    
 })

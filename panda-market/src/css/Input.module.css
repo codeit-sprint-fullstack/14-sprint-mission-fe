@@ -13,6 +13,7 @@ input::-webkit-outer-spin-button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: "Pretendard";
 }
 
 input:focus {

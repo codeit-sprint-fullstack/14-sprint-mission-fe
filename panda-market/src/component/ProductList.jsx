@@ -3,8 +3,23 @@ import SortDropDown from './SortDropDown.jsx';
 import Input from './Input.jsx';
 import Button from './Button.jsx';
 import iconHeart from '../assets/ic_heart.svg'
+import { useNavigate, Link } from "react-router-dom";
+import defaultImg from "../assets/img_default.png"
+function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKeyword, totalCount, pageSize }) {
+  const navigate = useNavigate();
+  // 5개씩 묶인 페이지 그룹
+  const pageGroup = Math.floor((page - 1) / 5);
+  // 현재 페이지 그룹의 시작 페이지 번호
+  const startPage = pageGroup * 5 + 1;
+  // 전체 페이지 개수
+  const totalPage = Math.ceil((totalCount / pageSize))
 
-function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKeyword }) {
+  let pageButtonCount;
+  if (totalPage >= 5) {
+    pageButtonCount = 5
+  } else {
+  pageButtonCount = totalPage
+  }
   return (
     <div className="productContents SellProductContents">
       <div className="inner">
@@ -14,7 +29,7 @@ function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKe
             <div className="sectionTool">
               <Input variant="product" type="text" placeholder="검색할 상품을 입력해주세요" value={keyword}
                 onChange={(e) => setKeyword(e.target.value)} />
-              <Button>상품 등록하기</Button>
+              <Button onClick={() => navigate("/register")}>상품 등록하기</Button>
               <SortDropDown
                 orderBy={orderBy}
                 setOrderBy={setOrderBy}
@@ -25,17 +40,17 @@ function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKe
             <ul className="itemList">
               {items.map((item) => {
                 return (
-                  <li className="item">
-                    <a href='/'>
+                  <li className="item" key={item._id}>
+                    <Link to={`/Items/${item._id}`}>
                       <div className="itemImg">
-                        <img src={item.images} alt={item.name} />
+                        <img src={item.images || defaultImg} alt={item.name} />
                       </div>
                       <div className="itemName">{item.name}</div>
                       <div className="itemPrice">{item.price.toLocaleString()}원</div>
                       <div className="itemFav">
                         <img src={iconHeart} alt="찜" />{item.favoriteCount}
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 )
               })}
@@ -43,28 +58,14 @@ function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKe
           </div>
           <div className="pagination">
             <div className="btnWrap">
-              <button
-                onClick={() => setPage(page - 1)}
-                disabled={page === 1}
-                className="btnArrow btnLeft"
-              />
-              {Array.from({ length: 5 }).map((_, index) => {
-                const pageNum = index + 1;
-
+              <button className="btnArrow btnLeft" />
+              {Array.from({ length: pageButtonCount }).map((_, index) => {
+                const pageNum = startPage + index;
                 return (
-                  <button
-                    key={pageNum}
-                    className={page === pageNum ? 'active' : ''}
-                    onClick={() => setPage(pageNum)}
-                  >
-                    {pageNum}
-                  </button>
-                );
+                  <button onClick={() => setPage(pageNum)} key={pageNum}>{pageNum}</button>
+                )
               })}
-              <button
-                onClick={() => setPage(page + 1)}
-                className="btnArrow btnRight"
-              />
+              <button className="btnArrow btnRight" />
             </div>
           </div>
         </div>
