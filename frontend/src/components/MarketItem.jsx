@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function MarketItem({ item }) {
     return (
         <div className="market_item">
-            <Link to={`/items/${item._id}`}>
+            <Link to={`/items/${item.id}`}>
                 <div className="img_box">
                     <img src={itemDefaultImage} alt="상품 이미지"/>
                 </div>

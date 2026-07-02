@@ -1,5 +1,39 @@
+GET http://localhost:3000/users
+###
 GET http://localhost:3000/items
 ###
-GET http://localhost:3000/items/6a3cc1f22bda007a106035a0
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "email": "dodonbo@naver.com",
+    "firstName": "hyunji",      
+    "lastName": "seung",
+    "address": "seoul, korea" 
+}
 ###
-DELETE http://localhost:3000/items/6a3e3f8cf8134ff53609df90
+GET http://localhsot:3000/users
+###
+GET http://localhost:3000/articles
+###
+GET http://localhost:3000/articles/a5a5e97b-c851-4a12-97f6-6307e3d941ce
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+    "title": "테스트용",
+    "content": "잠깨서 미션하는중..",
+    "authorId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff"
+}
+###
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+    "content": "잠이 와야하는데 큰일이다",
+    "articleId": "a5a5e97b-c851-4a12-97f6-6307e3d941ce",
+    "authorId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff"
+}
+###
+GET http://localhost:3000/comments

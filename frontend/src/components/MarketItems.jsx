@@ -123,7 +123,7 @@ function MarketItems() {
         </div>
         <div className="item_wrap market">
           {marketItems.map((item) => (
-            <MarketItem key={item._id} item={item} />
+            <MarketItem key={item.id} item={item} />
           ))}
         </div>
       </section>
