@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logo from '../../assets/logos/logo.svg'
 import './Header.css'
 
@@ -12,8 +12,26 @@ const Header = () => {
           </Link>
 
           <div className="site-header__links">
-            <Link to="/boards">자유게시판</Link>
-            <Link to="/items">중고마켓</Link>
+            <NavLink
+              to="/boards"
+              className={({ isActive }) =>
+                isActive
+                  ? 'site-header__link site-header__link--active'
+                  : 'site-header__link'
+              }
+            >
+              자유게시판
+            </NavLink>
+            <NavLink
+              to="/items"
+              className={({ isActive }) =>
+                isActive
+                  ? 'site-header__link site-header__link--active'
+                  : 'site-header__link'
+              }
+            >
+              중고마켓
+            </NavLink>
           </div>
         </div>
 

@@ -41,7 +41,7 @@
   gap: 24px;
 }
 
-.site-header__links a {
+.site-header__link{
   color: var(--color-gray-600);
   font-size: 18px;
   font-weight: 700;
@@ -49,8 +49,12 @@
   text-decoration: none;
 }
 
+.site-header__link--active {
+  color: #3692ff;
+}
+
 @media (max-width: 767px) {
-  .site-header__links a {
+  .site-header__link {
     font-size: 16px;
   }
   .site-header__nav {
