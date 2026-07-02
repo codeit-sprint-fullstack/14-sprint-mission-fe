@@ -1,0 +1,222 @@
+export const PRODUCTS = [
+  {
+    "name": "멋쟁이 모자",
+    "description": "딥그린 색상의 멋쟁이 모자",
+    "price": 9000,
+    "tags": ["모자"],
+    "images": ["https://source.unsplash.com/800x600/?hat"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 3,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "화이트 스니커즈",
+    "description": "깔끔한 디자인의 화이트 스니커즈",
+    "price": 35000,
+    "tags": ["신발", "운동화"],
+    "images": ["https://source.unsplash.com/800x600/?sneakers"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 8,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "데님 자켓",
+    "description": "사계절 활용 가능한 데님 자켓",
+    "price": 45000,
+    "tags": ["의류", "자켓"],
+    "images": ["https://source.unsplash.com/800x600/?denim-jacket"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 12,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "기계식 키보드",
+    "description": "청축 스위치가 적용된 기계식 키보드",
+    "price": 60000,
+    "tags": ["전자기기", "키보드"],
+    "images": ["https://source.unsplash.com/800x600/?mechanical-keyboard"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 16,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "무선 헤드폰",
+    "description": "노이즈 캔슬링 기능이 포함된 헤드폰",
+    "price": 85000,
+    "tags": ["전자기기", "음향"],
+    "images": ["https://source.unsplash.com/800x600/?headphones"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 22,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "캠핑 랜턴",
+    "description": "야외 활동에 적합한 LED 랜턴",
+    "price": 25000,
+    "tags": ["캠핑", "랜턴"],
+    "images": ["https://source.unsplash.com/800x600/?camping-lantern"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 5,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "원목 책상",
+    "description": "튼튼한 원목 소재의 컴퓨터 책상",
+    "price": 120000,
+    "tags": ["가구", "책상"],
+    "images": ["https://source.unsplash.com/800x600/?wooden-desk"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 10,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "폴라로이드 카메라",
+    "description": "즉석 사진 촬영이 가능한 카메라",
+    "price": 70000,
+    "tags": ["카메라"],
+    "images": ["https://source.unsplash.com/800x600/?polaroid-camera"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 18,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "가죽 백팩",
+    "description": "출퇴근용으로 활용하기 좋은 백팩",
+    "price": 55000,
+    "tags": ["가방"],
+    "images": ["https://source.unsplash.com/800x600/?leather-backpack"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 14,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "닌텐도 스위치",
+    "description": "상태 좋은 닌텐도 스위치 본체",
+    "price": 220000,
+    "tags": ["게임"],
+    "images": ["https://source.unsplash.com/800x600/?nintendo-switch"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 30,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "아이패드 에어",
+    "description": "필기용으로 사용한 아이패드 에어",
+    "price": 480000,
+    "tags": ["태블릿"],
+    "images": ["https://source.unsplash.com/800x600/?ipad"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 25,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "게이밍 마우스",
+    "description": "RGB 조명이 있는 게이밍 마우스",
+    "price": 28000,
+    "tags": ["마우스"],
+    "images": ["https://source.unsplash.com/800x600/?gaming-mouse"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 11,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "러닝화",
+    "description": "가볍고 쿠션감 좋은 러닝화",
+    "price": 40000,
+    "tags": ["운동화"],
+    "images": ["https://source.unsplash.com/800x600/?running-shoes"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 9,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "에어프라이어",
+    "description": "5L 대용량 에어프라이어",
+    "price": 65000,
+    "tags": ["가전"],
+    "images": ["https://source.unsplash.com/800x600/?air-fryer"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 17,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "독서용 스탠드",
+    "description": "밝기 조절이 가능한 LED 스탠드",
+    "price": 15000,
+    "tags": ["조명"],
+    "images": ["https://source.unsplash.com/800x600/?desk-lamp"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 4,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "전자책 리더기",
+    "description": "눈이 편한 전자책 리더기",
+    "price": 90000,
+    "tags": ["전자기기"],
+    "images": ["https://source.unsplash.com/800x600/?ebook-reader"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 13,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "블루투스 스피커",
+    "description": "휴대성이 좋은 블루투스 스피커",
+    "price": 32000,
+    "tags": ["스피커"],
+    "images": ["https://source.unsplash.com/800x600/?bluetooth-speaker"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 19,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "요가 매트",
+    "description": "미끄럼 방지 요가 매트",
+    "price": 12000,
+    "tags": ["운동"],
+    "images": ["https://source.unsplash.com/800x600/?yoga-mat"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 6,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "커피 그라인더",
+    "description": "원두 분쇄용 수동 그라인더",
+    "price": 18000,
+    "tags": ["커피"],
+    "images": ["https://source.unsplash.com/800x600/?coffee-grinder"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 7,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  },
+  {
+    "name": "모니터 암",
+    "description": "32인치까지 지원하는 모니터 암",
+    "price": 45000,
+    "tags": ["모니터"],
+    "images": ["https://source.unsplash.com/800x600/?monitor-arm"],
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 15,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
+  }
+];
