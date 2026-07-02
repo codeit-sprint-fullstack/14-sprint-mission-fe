@@ -69,3 +69,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.product-registration-form__error {
+  color: red;
+}

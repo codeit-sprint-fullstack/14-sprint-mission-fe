@@ -7,6 +7,7 @@ import FaqPage from './pages/faq/FaqPage'
 import PrivacyPage from './pages/privacy/PrivacyPage'
 import Boards from './pages/boards/Boards'
 import ProductRegistrationPage from './pages/registration/ProductRegistrationPage'
+import ProductDetailPage from './pages/items/ProductDetailPage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/faq" element={<FaqPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/registration" element={<ProductRegistrationPage />} />
+      <Route path="/items/:id" element={<ProductDetailPage />} />
     </Routes>
   )
 }
