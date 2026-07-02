@@ -11,7 +11,6 @@ const getProductPageSize = () => {
   if (window.innerWidth < 768) {
     return {
       type: 'mobile',
-      best: 1,
       all: 4,
     }
   }
@@ -19,21 +18,18 @@ const getProductPageSize = () => {
   if (window.innerWidth < 1200) {
     return {
       type: 'tablet',
-      best: 2,
       all: 6,
     }
   }
 
   return {
     type: 'desktop',
-    best: 4,
     all: 10,
   }
 }
 
 const ItemsPage = () => {
   const [pageSize, setPageSize] = useState(getProductPageSize)
-  const [bestProducts, setBestProducts] = useState([])
   const [products, setProducts] = useState([])
   const [keyword, setKeyword] = useState('')
   const [orderBy, setOrderBy] = useState(PRODUCT_ORDER_BY.RECENT)
@@ -71,13 +67,16 @@ const ItemsPage = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const [bestData, productData] = await Promise.all([
-        getProductList(1, pageSize.best, '', PRODUCT_ORDER_BY.FAVORITE),
-        getProductList(page, pageSize.all, keyword, orderBy),
-      ])
+      const offset = (page - 1) * pageSize.all
+
+      const productData = await getProductList({
+        offset,
+        limit: pageSize.all,
+        keyword,
+        orderBy,
+      })
 
       setTotalPages(Math.ceil(productData.totalCount / pageSize.all))
-      setBestProducts(bestData.list)
       setProducts(productData.list)
     }
 
@@ -87,15 +86,6 @@ const ItemsPage = () => {
   return (
     <MainLayout>
       <div className="items-page">
-        <section className="items-section">
-          <h2 className="items-section-title">베스트 상품</h2>
-          <div className="best-products-grid">
-            {bestProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-
         <section className="items-section">
           <div className="items-section-header">
             <h2 className="items-section-title">판매 중인 상품</h2>

@@ -1,6 +1,6 @@
 import { PRODUCT_ORDER_BY } from '../constants/product'
 
-const BASE_URL = 'https://panda-market-api.vercel.app'
+const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
 
 const createQueryString = (params) => {
   const searchParams = new URLSearchParams()
@@ -15,29 +15,27 @@ const createQueryString = (params) => {
 }
 
 const requestProduct = async (path, options = {}) => {
-  try {
-    const response = await fetch(`${BASE_URL}${path}`, options)
+  const response = await fetch(`${BASE_URL}${path}`, options)
 
-    if (!response.ok) {
-      console.error(`Product API error: ${response.status}`)
-      throw new Error('Product API request failed')
-    }
-
-    const data = await response.json()
-    return data
-  } catch (error) {
-    console.error(error.message)
-    throw error
+  if (!response.ok) {
+    throw new Error(`Product API request failed: ${response.status}`)
   }
+
+  if (response.status === 204) {
+    return null
+  }
+
+  const data = await response.json()
+  return data
 }
 
-export const getProductList = async (
-  page = 1,
-  pageSize = 10,
+export const getProductList = async ({
+  offset = 0,
+  limit = 10,
   keyword = '',
   orderBy = PRODUCT_ORDER_BY.RECENT,
-) => {
-  const queryString = createQueryString({ page, pageSize, keyword, orderBy })
+} = {}) => {
+  const queryString = createQueryString({ offset, limit, keyword, orderBy })
 
   return await requestProduct(`/products?${queryString}`)
 }
@@ -46,19 +44,13 @@ export const getProduct = async (productId) => {
   return await requestProduct(`/products/${productId}`)
 }
 
-export const createProduct = async ({
-  name,
-  description,
-  price,
-  tags,
-  images,
-}) => {
+export const createProduct = async ({ name, description, price, tags }) => {
   return await requestProduct('/products', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ name, description, price, tags, images }),
+    body: JSON.stringify({ name, description, price, tags }),
   })
 }
 
