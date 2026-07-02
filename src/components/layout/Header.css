@@ -41,7 +41,7 @@
   gap: 24px;
 }
 
-.site-header__link{
+.site-header__link {
   color: var(--color-gray-600);
   font-size: 18px;
   font-weight: 700;

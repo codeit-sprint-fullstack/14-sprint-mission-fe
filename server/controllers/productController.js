@@ -110,10 +110,7 @@ export const getProducts = async (req, res) => {
       : {}
 
     const [products, totalCount] = await Promise.all([
-      Product.find(filter)
-        .sort({ createdAt: -1 })
-        .skip(offset)
-        .limit(limit),
+      Product.find(filter).sort({ createdAt: -1 }).skip(offset).limit(limit),
       Product.countDocuments(filter),
     ])
 
