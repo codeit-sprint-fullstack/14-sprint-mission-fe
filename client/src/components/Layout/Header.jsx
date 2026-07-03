@@ -1,4 +1,5 @@
-import logoIcon from '../assets/ic_logo.png'
+import logoIcon from '../../assets/ic_logo.png'
+
 import styles from './Header.module.css'
 
 function Header() {
