@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
 import "dotenv/config";
-import productsRouter from "./routes/products.js"
+import { Prisma } from "@prisma/client";
+import productsRouter from "./routes/products.js";
+import articlesRouter from "./routes/articles.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DATABASE_URL = process.env.DATABASE_URL;
 
 app.use(cors());
 app.use(express.json());
@@ -16,18 +16,34 @@ app.get("/", (req, res) => {
 });
 
 app.use("/products", productsRouter);
+app.use("/articles", articlesRouter);
 
-try {
-  if (!DATABASE_URL) {
-    throw new Error("DATABASE_URL is not defined");
+app.use((err, req, res, next) => {
+  if (
+    err.name === "StructError" ||
+    err instanceof Prisma.PrismaClientValidationError
+  ) {
+    return res.status(400).json({
+      message: err.message,
+    });
   }
 
-  await mongoose.connect(DATABASE_URL);
-  console.log("Connected to DB");
+  if (
+    err instanceof Prisma.PrismaClientKnownRequestError &&
+    err.code === "P2025"
+  ) {
+    return res.status(404).json({
+      message: "데이터를 찾을 수 없습니다.",
+    });
+  }
 
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.error(err);
+
+  res.status(500).json({
+    message: err.message,
   });
-} catch (error) {
-  console.error("Server start failed:", error.message);
-}
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

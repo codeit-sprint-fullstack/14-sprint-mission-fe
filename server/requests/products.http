@@ -13,24 +13,22 @@ Content-Type: application/json
 GET http://localhost:3000/products
 
 ###
-GET http://localhost:3000/products?offset=0&limit=5
+GET http://localhost:3000/products?keyword=Test
 
 ###
 GET http://localhost:3000/products?keyword=강아지
 
 ###
-GET http://localhost:3000/products/6a3dcb92a649140702ea6e80
+GET http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
 
 ###
-PATCH http://localhost:3000/products/6a3dcb92a649140702ea6e80
+PATCH http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
 Content-Type: application/json
 
 {
-  "name": "돼지 인형",
-  "description": "작지만 용맹한 돼지 인형",
-  "price": 30000,
-  "tags": ["인형", "돼지", "수제", "핫템"]
+  "price": 250000,
+  "tags": ["공기", "포장", "세일"]
 }
 
 ###
-DELETE http://localhost:3000/products/6a3dd0ce1cebf75dc10b9202
+DELETE http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906

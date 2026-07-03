@@ -1,22 +1,25 @@
 import express from "express";
-import Product from "../models/Product.js"
+import prisma from "../lib/prisma.js";
 
 const router = express.Router();
 
+// 추후 미션 시간이 남으면 에러처리를 수정하자.
 router.post("/", async (req, res) => {
   try {
     const { name, description, price, tags, image } = req.body;
 
-    const product = await Product.create({
-      name,
-      description,
-      price,
-      tags,
-      image,
+    const product = await prisma.product.create({
+      data: {
+        name,
+        description,
+        price: Number(price),
+        tags: tags ?? [],
+        image: image ?? "",
+      },
     });
 
     res.status(201).json({
-      id: product._id.toString(),
+      id: product.id,
       name: product.name,
       description: product.description,
       price: product.price,
@@ -40,36 +43,47 @@ router.get("/", async (req, res) => {
     const limit = Number(req.query.limit) || 10;
     const keyword = req.query.keyword || "";
 
-    const filter = keyword
+    const where = keyword
       ? {
-        $or: [
-          { name: { $regex: keyword, $options: "i" } },
-          { description: { $regex: keyword, $options: "i" } },
-        ],
-      }
+          OR: [
+            {
+              name: {
+                contains: keyword,
+                mode: "insensitive",
+              },
+            },
+            {
+              description: {
+                contains: keyword,
+                mode: "insensitive",
+              },
+            },
+          ],
+        }
       : {};
 
-    const totalCount = await Product.countDocuments(filter);
+    const totalCount = await prisma.product.count({
+      where,
+    });
 
-    const products = await Product.find(filter)
-      .sort({ createdAt: -1 })
-      .skip(offset)
-      .limit(limit)
-      .select("name price createdAt")
-      .lean();
-
-    const formattedProducts = products.map((product) => {
-      return {
-        id: product._id.toString(),
-        name: product.name,
-        price: product.price,
-        image: product.image || "",
-        createdAt: product.createdAt,
-      };
+    const products = await prisma.product.findMany({
+      where,
+      orderBy: {
+        createdAt: "desc",
+      },
+      skip: offset,
+      take: limit,
+      select: {
+        id: true,
+        name: true,
+        price: true,
+        image: true,
+        createdAt: true,
+      },
     });
 
     res.status(200).json({
-      list: formattedProducts,
+      list: products,
       totalCount,
     });
   } catch (error) {
@@ -85,9 +99,20 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    const product = await Product.findById(id)
-      .select("name description price tags createdAt")
-      .lean();
+    const product = await prisma.product.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        tags: true,
+        image: true,
+        createdAt: true,
+      },
+    });
 
     if (!product) {
       return res.status(404).json({
@@ -95,25 +120,9 @@ router.get("/:id", async (req, res) => {
       });
     }
 
-    const formattedProduct = {
-      id: product._id.toString(),
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      tags: product.tags,
-      image: product.image || "",
-      createdAt: product.createdAt,
-    };
-
-    res.status(200).json(formattedProduct);
+    res.status(200).json(product);
   } catch (error) {
     console.error("상품 상세 조회 실패:", error);
-
-    if (error.name === "CastError") {
-      return res.status(400).json({
-        message: error.message,
-      });
-    }
 
     res.status(500).json({
       message: error.message,
@@ -125,43 +134,30 @@ router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    })
-      .select("name description price tags image createdAt updatedAt")
-      .lean();
+    const updatedProduct = await prisma.product.update({
+      where: {
+        id,
+      },
+      data: req.body,
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        tags: true,
+        image: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
 
-    if (!updatedProduct) {
-      return res.status(404).json({
-        message: "상품을 찾을 수 없습니다.",
-      });
-    }
-
-    const formattedProduct = {
-      id: updatedProduct._id.toString(),
-      name: updatedProduct.name,
-      description: updatedProduct.description,
-      price: updatedProduct.price,
-      tags: updatedProduct.tags,
-      image: updatedProduct.image,
-      createdAt: updatedProduct.createdAt,
-      updatedAt: updatedProduct.updatedAt,
-    };
-
-    res.status(200).json(formattedProduct);
+    res.status(200).json(updatedProduct);
   } catch (error) {
     console.error("상품 수정 실패:", error);
 
-    if (error.name === "CastError") {
-      return res.status(400).json({
-        message: "상품 id 형식이 올바르지 않습니다.",
-      });
-    }
-
-    if (error.name === "ValidationError") {
-      return res.status(400).json({
-        message: error.message,
+    if (error.code === "P2025") {
+      return res.status(404).json({
+        message: "상품을 찾을 수 없습니다.",
       });
     }
 
@@ -175,23 +171,19 @@ router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deleteProduct = await Product.findByIdAndDelete(id).lean();
-
-    if (!deleteProduct) {
-      return res.status(404).json({
-        message: "상품을 찾을 수 없습니다.",
-      })
-    }
-
-    res.status(200).json({
-      message: "상품이 삭제되었습니다.",
+    await prisma.product.delete({
+      where: {
+        id,
+      },
     });
+
+    res.sendStatus(204);
   } catch (error) {
     console.error("상품 삭제 실패:", error);
 
-    if (error.name === "CastError") {
-      return res.status(400).json({
-        message: "상품 id 형식이 올바르지 않습니다.",
+    if (error.code === "P2025") {
+      return res.status(404).json({
+        message: "상품을 찾을 수 없습니다.",
       });
     }
 
