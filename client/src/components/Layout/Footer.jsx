@@ -12,8 +12,12 @@ function Footer() {
     <footer className={styles.footer}>
       <p className={styles.copyright}>&copy;codeit - 2024</p>
       <ul className={styles.links}>
-        <li><Link className={styles.link} to="/">Privacy Policy</Link></li>
-        <li><Link className={styles.link} to="/">FAQ</Link></li>
+        <li>
+          <Link className={styles.link} to="/">Privacy Policy</Link>
+        </li>
+        <li>
+          <Link className={styles.link} to="/">FAQ</Link>
+        </li>
       </ul>
       <div className={styles.social}>
         <Link to="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
