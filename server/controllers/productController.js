@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 
 import Product from '../models/Product.js'
 
+const MAX_PRODUCT_LIMIT = 50
+
 const formatProduct = (product) => ({
   id: product._id.toString(),
   name: product.name,
@@ -19,6 +21,16 @@ const formatProductSummary = (product) => ({
   createdAt: product.createdAt,
 })
 
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const getValidationErrorMessage = (error) => {
+  if (error.name !== 'ValidationError') return null
+
+  return Object.values(error.errors)
+    .map((fieldError) => fieldError.message)
+    .join(' ')
+}
+
 const isBlank = (value) => typeof value !== 'string' || value.trim() === ''
 
 const isInvalidObjectId = (id) => !mongoose.isValidObjectId(id)
@@ -28,24 +40,34 @@ const isMissing = (value) =>
   value === null ||
   (typeof value === 'string' && value.trim() === '')
 
-const validateCreateProduct = ({ name, description, price, tags }) => {
-  if (isBlank(name)) return 'name is required'
-  if (isBlank(description)) return 'description is required'
+const hasInvalidTagType = (tags) => tags.some((tag) => typeof tag !== 'string')
 
-  if (isMissing(price)) return 'price is required'
+const validateCreateProduct = ({ name, description, price, tags }) => {
+  if (isBlank(name)) return '상품명을 입력해주세요.'
+  if (isBlank(description)) return '상품 소개를 입력해주세요.'
+
+  if (isMissing(price)) return '판매 가격을 입력해주세요.'
 
   const numericPrice = Number(price)
 
   if (!Number.isFinite(numericPrice)) {
-    return 'price must be a number'
+    return '판매 가격은 숫자로 입력해주세요.'
   }
 
   if (numericPrice < 0) {
-    return 'price must be greater than or equal to 0'
+    return '판매 가격은 0원 이상이어야 합니다.'
   }
 
-  if (tags !== undefined && !Array.isArray(tags)) {
-    return 'tags must be an array'
+  if (!Array.isArray(tags)) {
+    return '태그 형식이 올바르지 않습니다.'
+  }
+
+  if (hasInvalidTagType(tags)) {
+    return '태그 형식이 올바르지 않습니다.'
+  }
+
+  if (tags.length === 0) {
+    return '태그를 1개 이상 입력해주세요.'
   }
 
   return null
@@ -53,29 +75,31 @@ const validateCreateProduct = ({ name, description, price, tags }) => {
 
 const validateUpdateProduct = ({ name, description, price, tags }) => {
   if (name !== undefined && isBlank(name)) {
-    return 'name cannot be empty'
+    return '상품명을 입력해주세요.'
   }
 
   if (description !== undefined && isBlank(description)) {
-    return 'description cannot be empty'
+    return '상품 소개를 입력해주세요.'
   }
 
   if (price !== undefined) {
-    if (isMissing(price)) return 'price cannot be empty'
+    if (isMissing(price)) return '판매 가격을 입력해주세요.'
 
     const numericPrice = Number(price)
 
     if (!Number.isFinite(numericPrice)) {
-      return 'price must be a number'
+      return '판매 가격은 숫자로 입력해주세요.'
     }
 
     if (numericPrice < 0) {
-      return 'price must be greater than or equal to 0'
+      return '판매 가격은 0원 이상이어야 합니다.'
     }
   }
 
-  if (tags !== undefined && !Array.isArray(tags)) {
-    return 'tags must be an array'
+  if (tags !== undefined) {
+    if (!Array.isArray(tags)) return '태그 형식이 올바르지 않습니다.'
+    if (hasInvalidTagType(tags)) return '태그 형식이 올바르지 않습니다.'
+    if (tags.length === 0) return '태그를 1개 이상 입력해주세요.'
   }
 
   return null
@@ -88,23 +112,29 @@ export const getProducts = async (req, res) => {
     const { keyword, orderBy = 'recent' } = req.query
 
     if (
-      Number.isNaN(offset) ||
-      Number.isNaN(limit) ||
+      !Number.isInteger(offset) ||
+      !Number.isInteger(limit) ||
       offset < 0 ||
-      limit < 1
+      limit < 1 ||
+      limit > MAX_PRODUCT_LIMIT
     ) {
-      return res.status(400).json({ message: 'Invalid pagination query' })
+      return res
+        .status(400)
+        .json({ message: '페이지네이션 값이 올바르지 않습니다.' })
     }
 
     if (orderBy !== 'recent') {
-      return res.status(400).json({ message: 'Invalid orderBy query' })
+      return res.status(400).json({ message: '정렬 값이 올바르지 않습니다.' })
     }
 
-    const filter = keyword
+    const normalizedKeyword = typeof keyword === 'string' ? keyword.trim() : ''
+    const escapedKeyword = escapeRegex(normalizedKeyword)
+
+    const filter = escapedKeyword
       ? {
           $or: [
-            { name: { $regex: keyword, $options: 'i' } },
-            { description: { $regex: keyword, $options: 'i' } },
+            { name: { $regex: escapedKeyword, $options: 'i' } },
+            { description: { $regex: escapedKeyword, $options: 'i' } },
           ],
         }
       : {}
@@ -119,7 +149,7 @@ export const getProducts = async (req, res) => {
       totalCount,
     })
   } catch {
-    return res.status(500).json({ message: 'Failed to get products' })
+    return res.status(500).json({ message: '상품 목록 조회에 실패했습니다.' })
   }
 }
 
@@ -145,8 +175,13 @@ export const createProduct = async (req, res) => {
     })
 
     return res.status(201).json(formatProduct(product))
-  } catch {
-    return res.status(500).json({ message: 'Failed to create product' })
+  } catch (error) {
+    const validationMessage = getValidationErrorMessage(error)
+
+    if (validationMessage) {
+      return res.status(400).json({ message: validationMessage })
+    }
+    return res.status(500).json({ message: '상품 등록에 실패했습니다.' })
   }
 }
 
@@ -155,18 +190,18 @@ export const getProductById = async (req, res) => {
     const { id } = req.params
 
     if (isInvalidObjectId(id)) {
-      return res.status(400).json({ message: 'Invalid product id' })
+      return res.status(400).json({ message: '상품 ID가 올바르지 않습니다.' })
     }
 
     const product = await Product.findById(id)
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' })
+      return res.status(404).json({ message: '상품을 찾을 수 없습니다.' })
     }
 
     return res.status(200).json(formatProduct(product))
   } catch {
-    return res.status(500).json({ message: 'Failed to get product' })
+    return res.status(500).json({ message: '상품 조회에 실패했습니다.' })
   }
 }
 
@@ -175,7 +210,7 @@ export const updateProduct = async (req, res) => {
     const { id } = req.params
 
     if (isInvalidObjectId(id)) {
-      return res.status(400).json({ message: 'Invalid product id' })
+      return res.status(400).json({ message: '상품 ID가 올바르지 않습니다.' })
     }
 
     const validationMessage = validateUpdateProduct(req.body)
@@ -185,6 +220,10 @@ export const updateProduct = async (req, res) => {
     }
 
     const updateData = {}
+
+    if (req.body.tags !== undefined) {
+      updateData.tags = req.body.tags
+    }
 
     if (req.body.name !== undefined) {
       updateData.name = req.body.name
@@ -198,12 +237,8 @@ export const updateProduct = async (req, res) => {
       updateData.price = Number(req.body.price)
     }
 
-    if (req.body.tags !== undefined) {
-      updateData.tags = req.body.tags
-    }
-
     if (Object.keys(updateData).length === 0) {
-      return res.status(400).json({ message: 'No fields to update' })
+      return res.status(400).json({ message: '수정할 항목이 없습니다.' })
     }
 
     const product = await Product.findByIdAndUpdate(id, updateData, {
@@ -212,12 +247,18 @@ export const updateProduct = async (req, res) => {
     })
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' })
+      return res.status(404).json({ message: '상품을 찾을 수 없습니다.' })
     }
 
     return res.status(200).json(formatProduct(product))
-  } catch {
-    return res.status(500).json({ message: 'Failed to update product' })
+  } catch (error) {
+    const validationMessage = getValidationErrorMessage(error)
+
+    if (validationMessage) {
+      return res.status(400).json({ message: validationMessage })
+    }
+
+    return res.status(500).json({ message: '상품 수정에 실패했습니다.' })
   }
 }
 
@@ -226,17 +267,17 @@ export const deleteProduct = async (req, res) => {
     const { id } = req.params
 
     if (isInvalidObjectId(id)) {
-      return res.status(400).json({ message: 'Invalid product id' })
+      return res.status(400).json({ message: '상품 ID가 올바르지 않습니다.' })
     }
 
     const product = await Product.findByIdAndDelete(id)
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' })
+      return res.status(404).json({ message: '상품을 찾을 수 없습니다.' })
     }
 
     return res.status(204).send()
   } catch {
-    return res.status(500).json({ message: 'Failed to delete product' })
+    return res.status(500).json({ message: '상품 삭제에 실패했습니다.' })
   }
 }
