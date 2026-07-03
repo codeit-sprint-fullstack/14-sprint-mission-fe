@@ -6,8 +6,7 @@ export const getProducts = async (req, res) => {
     const orderBy = req.query.orderBy === 'recent'? { createdAt: 'desc' } : { favoriteCount: 'desc' };
     const keyword = req.query.keyword || '';
 
-    const where = keyword
-    ? {
+    const where = keyword ? {
         OR: [
             {
                 name: {

@@ -20,3 +20,11 @@ export const getArticleByid = async (id) => {
 export const createArticle = async (data) => {
     return prisma.article.create({ data });
 };
+
+export const updateArticle = async (id, data) => {
+    return prisma.article.update({ where: {id}, data });
+}
+
+export const deleteArticle = async (id) => {
+    await prisma.product.delete({ where: { id } });
+}

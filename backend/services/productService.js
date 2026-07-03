@@ -23,15 +23,10 @@ export const getProducts = async ({
       take: pageSize,
       orderBy: orderBy,
     }),
-    prisma.product.count({
-      where,
-    }),
+    prisma.product.count({ where }),
   ]);
 
-  return {
-    list,
-    totalCount,
-  };
+  return { list, totalCount };
 };
 
 export const getProductById = async (id) => {
@@ -46,20 +41,9 @@ export const createProduct = async (data) => {
 };
 
 export const updateProduct = async (id, data) => {
-  return prisma.product.update({
-    where: {
-      id,
-    },
-    data,
-  });
+  return prisma.product.update({where: {id}, data});
 };
 
-// router.delete("/:id", async (req, res) => {
-//   const { id } = req.params;
-//   await prisma.product.delete({
-//     where: {
-//       id,
-//     },
-//   });
-//   res.sendStatus(204);
-// });
+export const deleteProduct = async (id) => {
+  await prisma.product.delete({where: {id}});
+}

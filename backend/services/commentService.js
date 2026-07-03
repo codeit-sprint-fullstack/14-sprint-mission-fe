@@ -9,27 +9,53 @@ dotenv.config();
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-//댓글 목록조회
-// [ ] 댓글 등록 API를 만들어 주세요.
-// [ ] content를 입력하여 댓글을 등록합니다.
-// [ ] 중고마켓, 자유게시판 댓글 등록 API를 따로 만들어 주세요.
-// [ ] 댓글 수정 API를 만들어 주세요.
-// [ ] PATCH 메서드를 사용해 주세요.
-// [ ] 댓글 삭제 API를 만들어 주세요.
-// [ ] 댓글 목록 조회 API를 만들어 주세요.
-// [ ] id, content, createdAt 를 조회합니다.
-// [ ] cursor 방식의 페이지네이션 기능을 포함해 주세요.
-// [ ] 중고마켓, 자유게시판 댓글 목록 조회 API를 따로 만들어 주세요.
-export const getComments = async () => {
-  return prisma.comment.findMany();
-}
+export const getComments = async (
+  // articleId, 
+  cursor, limit = 10) => {
+  const comments = await prisma.comment.findMany({
+    // where: {
+    //   articleId,
+    // },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: limit + 1,
+    ...(cursor && {
+      cursor: {
+        id: cursor,
+      },
+      skip: 1,
+    }),
+  });
 
-//게시글 단건조회
+  const hasNextPage = comments.length > limit;
+
+  if (hasNextPage) {
+    comments.pop();
+  }
+
+  return {
+    list: comments,
+    nextCursor: hasNextPage
+      ? comments[comments.length - 1].id
+      : null,
+    hasNextPage,
+  };
+};
+
 export const getCommentById = (id) => {
   return prisma.comment.findUniqueOrThrow({where: {id}});
 };
 
-//댓글 등록
-export const createComment = async (data) => {
-    return prisma.comment.create({ data });
+export const createComment = async (data, commentType) => {
+  data.commentType = commentType;
+  return prisma.comment.create({ data });
+}
+
+export const updateComment = async (id, data) => {
+  return prisma.comment.update({where: {id}, data});
+}
+
+export const deleteComment = async (id) => {
+  await prisma.comment.delete({where: {id}});
 }

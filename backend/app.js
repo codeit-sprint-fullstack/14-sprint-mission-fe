@@ -4,6 +4,8 @@ import productRouter from './routes/productRouter.js';
 import userRouter from './routes/userRouter.js';
 import articleRouter from './routes/articleRouter.js';
 import commentRouter from './routes/commentRouter.js';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './swagger.js';
 
 const app = express();
 
@@ -15,6 +17,7 @@ app.use('/users', userRouter);
 app.use('/articles', articleRouter);
 app.use('/comments', commentRouter);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('/', (req, res) => {
     res.send('server is alive');
 });
