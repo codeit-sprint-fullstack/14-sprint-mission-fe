@@ -1,4 +1,4 @@
-@baseUrl = https://one4-sprint-mission-fe-1.onrender.com
+@baseUrl = http://localhost:3001
 
 GET {{baseUrl}}/products
 

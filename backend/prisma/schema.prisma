@@ -6,6 +6,12 @@ model Article {
   updatedAt DateTime
 }
 
+model Comment {
+  id String @id
+  content String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
 
 generator client {
   provider = "prisma-client-js"
