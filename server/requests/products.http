@@ -1,0 +1,29 @@
+Get http://localhost:3000/products?sort=recent&limit=3
+
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "테스트 상품",
+  "description": "Prisma POST 테스트 상품입니다.",
+  "price": 12345,
+  "tags": ["테스트", "프리즈마"]
+}
+
+###
+
+Get http://localhost:3000/products/aa719662-6edb-4dda-a568-4fde901d806c
+
+###
+PATCH http://localhost:3000/products/1b8f3f01-db74-4967-b7dc-03cec5737007
+Content-Type: application/json
+
+{
+  "name": "수정된 테스트 상품",
+  "price": 99999
+}
+
+###
+DELETE http://localhost:3000/products/1b8f3f01-db74-4967-b7dc-03cec5737007

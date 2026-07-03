@@ -1,6 +1,5 @@
 import express from "express";
-import Product from "../models/Product.js";
-import mongoose from "mongoose";
+import prisma from "../lib/prisma.js";
 
 const router = express.Router();
 
@@ -8,22 +7,24 @@ router.get("/", async (req, res) => {
   const { offset, limit, keyword, sort } = req.query;
 
   const offsetNum = Number(offset) || 0;
-  const limitNum = Number(limit) || 20;
+  const limitNum = Number(limit) || 3;
 
-  const filter = keyword
+  const where = keyword
     ? {
-        $or: [
-          { name: { $regex: keyword, $options: "i" } },
-          { description: { $regex: keyword, $options: "i" } },
+        OR: [
+          { name: { contains: keyword, mode: "insensitive" } },
+          { description: { contains: keyword, mode: "insensitive" } },
         ],
       }
     : {};
 
-  const totalCount = await Product.countDocuments(filter);
-  const products = await Product.find(filter)
-    .sort(sort === "recent" ? "-createdAt" : "createdAt")
-    .skip(offsetNum)
-    .limit(limitNum);
+  const totalCount = await prisma.product.count({ where });
+  const products = await prisma.product.findMany({
+    where,
+    orderBy: sort === "recent" ? { createdAt: "desc" } : { createdAt: "asc" },
+    skip: offsetNum,
+    take: limitNum,
+  });
 
   res.json({
     list: products,
@@ -33,7 +34,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const product = await prisma.product.create({ data: req.body });
 
     res.status(201).json(product);
   } catch (error) {
@@ -49,13 +50,9 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        message: "잘못된 상품 ID 입니다.",
-      });
-    }
-
-    const product = await Product.findById(id);
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
 
     if (!product) {
       return res.status(404).json({
@@ -77,20 +74,20 @@ router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        message: "잘못된 상품 ID 입니다.",
-      });
-    }
-    const product = await Product.findByIdAndUpdate(id, req.body, {
-      new: true,
+    const existingProduct = await prisma.product.findUnique({
+      where: { id },
     });
 
-    if (!product) {
+    if (!existingProduct) {
       return res.status(404).json({
         message: "상품을 찾을 수 없습니다.",
       });
     }
+
+    const product = await prisma.product.update({
+      where: { id },
+      data: req.body,
+    });
 
     res.json(product);
   } catch (error) {
@@ -105,19 +102,20 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        message: "잘못된 상품 ID 입니다.",
-      });
-    }
 
-    const product = await Product.findByIdAndDelete(id);
+    const existingProduct = await prisma.product.findUnique({
+      where: { id },
+    });
 
-    if (!product) {
+    if (!existingProduct) {
       return res.status(404).json({
         message: "상품을 찾을 수 없습니다.",
       });
     }
+
+    await prisma.product.delete({
+      where: { id },
+    });
 
     res.sendStatus(204);
   } catch (error) {
