@@ -14,19 +14,27 @@ const createQueryString = (params) => {
   return searchParams.toString()
 }
 
+const fetchProduct = async (path, options) => {
+  try {
+    return await fetch(`${BASE_URL}${path}`, options)
+  } catch {
+    throw new Error('상품 요청에 실패했습니다.')
+  }
+}
+
 const requestProduct = async (path, options = {}) => {
-  const response = await fetch(`${BASE_URL}${path}`, options)
+  const response = await fetchProduct(path, options)
 
   if (!response.ok) {
-    throw new Error(`Product API request failed: ${response.status}`)
+    const errorData = await response.json().catch(() => ({}))
+    throw new Error(errorData.message ?? '상품 요청에 실패했습니다.')
   }
 
   if (response.status === 204) {
     return null
   }
 
-  const data = await response.json()
-  return data
+  return await response.json()
 }
 
 export const getProductList = async ({
