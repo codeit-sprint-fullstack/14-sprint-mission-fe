@@ -59,13 +59,13 @@
   background-color: var(--primary-100);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 744px) {
   .headerLeft {
     gap: 35px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 375px) {
   .header {
     padding: 16px;
   }
