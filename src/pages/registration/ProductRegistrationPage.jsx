@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createProduct } from '../../services/ProductService'
 import MainLayout from '../../components/layout/MainLayout.jsx'
+import useProductFormValidation from './hooks/useProductFormValidation'
+import tagRemoveIcon from '../../assets/icons/ic_tag_remove.svg'
 import './ProductRegistrationPage.css'
-import { useState } from 'react'
 
 const ProductRegistrationPage = () => {
   const navigate = useNavigate()
@@ -15,13 +17,19 @@ const ProductRegistrationPage = () => {
     tagInput: '',
     tags: [],
   })
+  const { errors, isValid } = useProductFormValidation(formValues)
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [hasTriedAddingTag, setHasTriedAddingTag] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setHasSubmitted(true)
+    setSubmitError('')
+
+    if (!isValid) return
 
     try {
       setIsSubmitting(true)
-      setSubmitError('')
 
       const createdProduct = await createProduct({
         name: formValues.name,
@@ -31,8 +39,8 @@ const ProductRegistrationPage = () => {
       })
 
       navigate(`/items/${createdProduct.id}`)
-    } catch {
-      setSubmitError('상품 등록에 실패했습니다.')
+    } catch (error) {
+      setSubmitError(error.message)
     } finally {
       setIsSubmitting(false)
     }
@@ -41,11 +49,64 @@ const ProductRegistrationPage = () => {
   const handleFormFieldChange = (event) => {
     const { name, value } = event.target
 
+    if (name === 'tagInput') {
+      setHasTriedAddingTag(false)
+    }
+
     setFormValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }))
   }
+
+  const handleTagEnter = (event) => {
+    if (event.key !== 'Enter') return
+    event.preventDefault()
+    setHasTriedAddingTag(true)
+
+    const nextTag = formValues.tagInput.trim()
+
+    if (!nextTag || nextTag.length > 5) {
+      return
+    }
+
+    if (formValues.tags.includes(nextTag)) {
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        tagInput: '',
+      }))
+      setHasTriedAddingTag(false)
+      return
+    }
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      tags: [...prevValues.tags, nextTag],
+      tagInput: '',
+    }))
+    setHasTriedAddingTag(false)
+  }
+
+  const handleTagRemove = (tagToRemove) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      tags: prevValues.tags.filter((tag) => tag !== tagToRemove),
+    }))
+  }
+
+  const isRequiredInputEmpty =
+    !formValues.name.trim() ||
+    !formValues.description.trim() ||
+    !formValues.price.toString().trim() ||
+    formValues.tags.length === 0
+
+  const shouldShowTagError =
+    hasTriedAddingTag && Boolean(errors.tagInput || errors.tags)
+
+  const tagErrorMessage =
+    shouldShowTagError || (hasSubmitted && (errors.tagInput || errors.tags))
+      ? errors.tagInput || errors.tags
+      : ''
 
   return (
     <MainLayout>
@@ -55,7 +116,7 @@ const ProductRegistrationPage = () => {
             <h1 className="product-registration-page__title">상품 등록하기</h1>
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isRequiredInputEmpty}
               className="product-registration-page__submit-button"
             >
               {isSubmitting ? '등록 중' : '등록하기'}
@@ -71,10 +132,19 @@ const ProductRegistrationPage = () => {
               name="name"
               value={formValues.name}
               onChange={handleFormFieldChange}
-              className="product-registration-form__input"
+              className={`product-registration-form__input ${
+                hasSubmitted && errors.name
+                  ? 'product-registration-form__input--error'
+                  : ''
+              }`}
               type="text"
               placeholder="상품명을 입력해 주세요"
             />
+            {hasSubmitted && errors.name && (
+              <p className="product-registration-form__field-error">
+                {errors.name}
+              </p>
+            )}
           </label>
           <label className="product-registration-form__field">
             <span className="product-registration-form__label">상품소개</span>
@@ -82,10 +152,19 @@ const ProductRegistrationPage = () => {
               name="description"
               value={formValues.description}
               onChange={handleFormFieldChange}
-              className="product-registration-form__textarea"
+              className={`product-registration-form__textarea ${
+                hasSubmitted && errors.description
+                  ? 'product-registration-form__input--error'
+                  : ''
+              }`}
               placeholder="상품소개를 입력해 주세요"
               rows={10}
             />
+            {hasSubmitted && errors.description && (
+              <p className="product-registration-form__field-error">
+                {errors.description}
+              </p>
+            )}
           </label>
           <label className="product-registration-form__field">
             <span className="product-registration-form__label">판매가격</span>
@@ -93,22 +172,70 @@ const ProductRegistrationPage = () => {
               name="price"
               value={formValues.price}
               onChange={handleFormFieldChange}
-              className="product-registration-form__input"
+              className={`product-registration-form__input ${
+                hasSubmitted && errors.price
+                  ? 'product-registration-form__input--error'
+                  : ''
+              }`}
               type="number"
               placeholder="판매가격을 입력해 주세요"
             />
+            {hasSubmitted && errors.price && (
+              <p className="product-registration-form__field-error">
+                {errors.price}
+              </p>
+            )}
           </label>
-          <label className="product-registration-form__field">
-            <span className="product-registration-form__label">태그</span>
-            <input
-              name="tagInput"
-              value={formValues.tagInput}
-              onChange={handleFormFieldChange}
-              className="product-registration-form__input"
-              type="text"
-              placeholder="태그를 입력해 주세요"
-            />
-          </label>
+          <div className="product-registration-form__tag-section">
+            <label className="product-registration-form__field">
+              <span className="product-registration-form__label">태그</span>
+              <input
+                name="tagInput"
+                value={formValues.tagInput}
+                onChange={handleFormFieldChange}
+                onKeyDown={handleTagEnter}
+                className={`product-registration-form__input ${
+                  tagErrorMessage
+                    ? 'product-registration-form__input--error'
+                    : ''
+                }`}
+                type="text"
+                placeholder="태그를 입력해 주세요"
+              />
+              {tagErrorMessage && (
+                <p className="product-registration-form__field-error">
+                  {tagErrorMessage}
+                </p>
+              )}
+            </label>
+            {formValues.tags.length > 0 && (
+              <div className="product-registration-form__tag-list">
+                {formValues.tags.map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    className="product-registration-form__tag-chip"
+                    onClick={() => handleTagRemove(tag)}
+                    aria-label={`${tag} 태그 삭제`}
+                  >
+                    <span className="product-registration-form__tag-chip-text">
+                      #{tag}
+                    </span>
+                    <span
+                      className="product-registration-form__tag-chip-remove"
+                      aria-hidden="true"
+                    >
+                      <img
+                        src={tagRemoveIcon}
+                        alt=""
+                        className="product-registration-form__tag-chip-remove-icon"
+                      />
+                    </span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </form>
       </div>
     </MainLayout>

@@ -73,3 +73,62 @@
 .product-registration-form__error {
   color: red;
 }
+
+.product-registration-form__input--error {
+  border: 1px solid red;
+}
+
+.product-registration-form__field-error {
+  margin: -8px 0 0;
+  color: red;
+  font-size: 14px;
+}
+
+.product-registration-form__tag-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-registration-form__tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.product-registration-form__tag-chip {
+  width: fit-content;
+  border: 0;
+  border-radius: 100rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 12px 6px 16px;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.product-registration-form__tag-chip-text {
+  display: inline-block;
+}
+
+.product-registration-form__tag-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.product-registration-form__tag-chip-remove-icon {
+  display: block;
+  width: 22px;
+  height: 24px;
+}
+
+.product-registration-page__submit-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
