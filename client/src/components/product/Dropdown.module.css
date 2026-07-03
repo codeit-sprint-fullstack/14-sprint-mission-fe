@@ -1,0 +1,80 @@
+.wrapper {
+  position: relative;
+}
+
+.sortBtn {
+  width: 130px;
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: 1px solid var(--secondary-200);
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.btnContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btnText {
+  font-size: 16px;
+}
+
+.caretIcon {
+  width: 24px;
+}
+
+.sortIcon {
+  display: none;
+}
+
+.sortMenu {
+  width: 130px;
+  margin-top: 8px;
+  list-style: none;
+  border: 1px solid var(--secondary-200);
+  border-radius: 12px;
+  background-color: #FFF;
+  position: absolute;
+}
+
+.sortItem {
+  width: 130px;
+  height: 42px;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.firstItem {
+  border-bottom: 1px solid var(--secondary-200);
+}
+
+@media (max-width: 375px) {
+  .sortBtn {
+    width: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btnContent {
+    display: none;
+  }
+
+  .sortIcon {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .sortMenu {
+    right: 0
+  }
+}
