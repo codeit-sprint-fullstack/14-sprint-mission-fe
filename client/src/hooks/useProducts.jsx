@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from '../utils/axios.js'
 
-function useProducts(page, pageSize, bestPageSize, orderBy, keyword) {
+function useProducts(page, pageSize, orderBy, keyword) {
   const [itemList, setItemList] = useState([])
-  const [bestItemList, setBestItemList] = useState([])
   const [totalCount, setTotalCount] = useState(0)
 
   const [isLoading, setIsLoading] = useState(false)
@@ -16,9 +15,9 @@ function useProducts(page, pageSize, bestPageSize, orderBy, keyword) {
     try {
       const res = await axios.get('/products', {
         params: {
-          page,
-          pageSize,
-          orderBy,
+          sort: orderBy,
+          limit: pageSize,
+          offset: (page - 1) * pageSize,
           keyword,
         }
       })
@@ -34,21 +33,6 @@ function useProducts(page, pageSize, bestPageSize, orderBy, keyword) {
     }
   }
 
-  const getBestItemList = async () => {
-    try {
-      const res = await axios.get('/products', {
-        params: {
-          pageSize: bestPageSize,
-          orderBy: 'favorite',
-        }
-      })
-      const { list } = res.data
-      setBestItemList(list)
-    } catch (err) {
-      setError('베스트 상품을 불러오지 못했습니다')
-    }
-  }
-
   useEffect(() => {
     getItemList()
   }, [page, pageSize, orderBy, keyword])
@@ -59,7 +43,6 @@ function useProducts(page, pageSize, bestPageSize, orderBy, keyword) {
 
   return { 
     itemList, 
-    bestItemList, 
     totalCount, 
     isLoading, 
     error 
