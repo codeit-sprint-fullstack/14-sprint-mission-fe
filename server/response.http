@@ -1,0 +1,26 @@
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products?sort=recent&limit=10
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "아이폰 미니13",
+  "description": "사용감 있는 제품입니다!",
+  "price": 1000000,
+  "tags": ["애플", "아이폰"]
+}
+
+###
+PATCH http://localhost:3000/products/6a470caf7587773555d24b4e
+Content-Type: application/json
+
+{
+  "price": 800000
+}
+
+###
+DELETE http://localhost:3000/products/6a470caf7587773555d24b4e
