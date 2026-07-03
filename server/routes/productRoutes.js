@@ -1,5 +1,7 @@
 import express from 'express'
 import prisma from '../lib/prisma.js'
+import { assert } from 'superstruct'
+import { CreateProduct, UpdateProduct } from '../validators/productValidator.js'
 
 const productRoutes = express.Router()
 
@@ -71,6 +73,7 @@ productRoutes.get('/products/:id', async (req, res) => {
 })
 
 productRoutes.post('/products', async (req, res) => {
+  assert(req.body, CreateProduct)
   try {
     const { name, description, price, tags } = req.body
 
@@ -99,6 +102,7 @@ productRoutes.post('/products', async (req, res) => {
 })
 
 productRoutes.patch('/products/:id', async (req, res) => {
+  assert(req.body, UpdateProduct)
   try {
     const id = req.params.id
     const targetProduct = await prisma.product.findUnique({ where: { id } })
