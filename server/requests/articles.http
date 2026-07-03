@@ -1,0 +1,49 @@
+GET http://localhost:3000/articles
+
+###
+GET http://localhost:3000/articles?keyword=Prisma
+
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+  "title": "첫 번째 게시글",
+  "content": "Article CRUD 테스트용 게시글입니다."
+}
+###
+
+PATCH http://localhost:3000/articles/a48748ca-d199-4345-954b-5af685bfc04f
+Content-Type: application/json
+
+{
+  "title": "수정된 첫 번째 게시글",
+  "content": "Article PATCH 테스트로 수정된 내용입니다."
+}
+
+###
+
+
+DELETE http://localhost:3000/articles/a48748ca-d199-4345-954b-5af685bfc04f
+
+
+# ### POST article 두 번째 게시글
+# POST http://localhost:3000/articles
+# Content-Type: application/json
+
+# {
+#   "title": "Prisma 관계형 데이터베이스 정리",
+#   "content": "Prisma와 PostgreSQL을 사용해서 Article CRUD를 구현하는 중입니다."
+# }
+
+
+# ### POST article 세 번째 게시글
+# POST http://localhost:3000/articles
+# Content-Type: application/json
+
+# {
+#   "title": "Express 라우터 복습",
+#   "content": "Express에서 req.params, req.query, req.body를 구분해서 사용합니다."
+# }
+
+
