@@ -1,6 +1,6 @@
 import styles from './Input.module.css'
 
-function Input({ label, id, type, placeholder }) {
+function Input({ label, id, type, placeholder, value, onChange }) {
   return (
     <div className={styles.wrapper}>
       <label 
@@ -15,6 +15,8 @@ function Input({ label, id, type, placeholder }) {
         name={id} 
         type={type} 
         placeholder={placeholder} 
+        value={value}
+        onChange={onChange}
       />
     </div>
   )

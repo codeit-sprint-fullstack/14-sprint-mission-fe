@@ -30,6 +30,11 @@
   background-color: var(--primary-100);
 }
 
+.submitBtn:disabled {
+  color: var(--secondary-100);
+  background-color: var(--secondary-400);
+}
+
 @media (max-width: 744px) {
   .wrapper {
     width: 100%;
