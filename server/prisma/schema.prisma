@@ -22,13 +22,13 @@ model Product {
   comments    Comment[]
 }
 
-// 상품/게시글 통합 댓글 모델
+// 상품/게시글의 댓글 통합 모델
 model Comment {
   id        String   @id @default(uuid())
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  // 댓글은 상품 혹은 게시글 둘 중 하나의 부모에만 속할 수 있음
+  // 댓글은 상품과 게시글 둘 중 하나의 부모에만 속할 수 있음
   productId String?
   product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
   articleId String?

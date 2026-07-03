@@ -1,16 +1,21 @@
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import Product from './models/Product.js'
-import products from './data/seedData.js'
+import prisma from './lib/prisma.js'
+import { productData } from './data/seedData.js'
 
-dotenv.config()
+async function main() {
+  await prisma.product.deleteMany()
 
-await mongoose.connect(process.env.MONGODB_URI)
+  await prisma.product.createMany({
+    data: productData,
+  })
 
-await Product.deleteMany({})
+  console.log('Seed data inserted successfully.')
+}
 
-await Product.insertMany(products)
-
-await mongoose.disconnect()
-
-console.log('Seed data inserted successfully.')
+main()
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })

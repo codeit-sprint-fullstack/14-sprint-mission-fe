@@ -15,22 +15,22 @@ Content-Type: application/json
 
 
 ### 상품 상세 조회
-GET http://localhost:3000/products/6a3e39a5b7f1f0a2cbfbbb5f
+GET http://localhost:3000/products/b955d93b-47bb-4917-8fbd-99f4fc6d4a08
 
 
 ### 상품 수정
-PATCH http://localhost:3000/products/6a3e39a5b7f1f0a2cbfbbb5f
+PATCH http://localhost:3000/products/b955d93b-47bb-4917-8fbd-99f4fc6d4a08
 Content-Type: application/json
 
 {
   "name": "수정된 테스트 상품",
-  "price": 15000
+  "tags": ["test", "migration"]
 }
 
 
 ### 상품 삭제
-DELETE http://localhost:3000/products/6a3e39107ef3f3dac3300595
+DELETE http://localhost:3000/products/b955d93b-47bb-4917-8fbd-99f4fc6d4a08
 
 
 ### 삭제 후 상세 조회 확인
-GET http://localhost:3000/products/6a3e39a5b7f1f0a2cbfbbb5f
+GET http://localhost:3000/products/b955d93b-47bb-4917-8fbd-99f4fc6d4a08
