@@ -9,6 +9,7 @@
   padding: 0 23px;
   background: #3692ff;
   color: white;
+  cursor: pointer;
 }
 .btnDisable {
   background-color: #9CA3AF;

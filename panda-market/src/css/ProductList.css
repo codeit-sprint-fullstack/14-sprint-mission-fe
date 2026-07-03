@@ -129,6 +129,7 @@ section.product { padding: 68px 0 140px; }
   background: #fff;
   color: #6b7280;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .pagination button.active {

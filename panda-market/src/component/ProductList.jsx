@@ -58,14 +58,14 @@ function ProductList({ items, orderBy, setOrderBy, page, setPage, keyword, setKe
           </div>
           <div className="pagination">
             <div className="btnWrap">
-              <button className="btnArrow btnLeft" />
+              <button className="btnArrow btnLeft" onClick={() => setPage(page - 1)} disabled={page === 1} />
               {Array.from({ length: pageButtonCount }).map((_, index) => {
                 const pageNum = startPage + index;
                 return (
-                  <button onClick={() => setPage(pageNum)} key={pageNum}>{pageNum}</button>
+                  <button onClick={() => setPage(pageNum)} className={page === pageNum ? "active" : ""} key={pageNum}>{pageNum}</button>
                 )
               })}
-              <button className="btnArrow btnRight" />
+              <button className="btnArrow btnRight" onClick={() => setPage(page + 1)} disabled={page == totalPage} />
             </div>
           </div>
         </div>
