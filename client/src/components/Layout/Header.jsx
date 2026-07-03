@@ -1,4 +1,4 @@
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, NavLink } from 'react-router-dom'
 
 import logoIcon from '../../assets/ic_logo.png'
 
@@ -21,7 +21,13 @@ function Header() {
               <Link className={styles.link} to='/'>자유게시판</Link>
             </li>
             <li>
-              <Link className={styles.link} to='items'>중고마켓</Link>
+              <NavLink 
+                className={({ isActive }) => 
+                  `${styles.link} ${isActive ? styles.active : ''}`} 
+                to='/items'
+              >
+                중고마켓
+              </NavLink>
             </li>
           </ul>
         }

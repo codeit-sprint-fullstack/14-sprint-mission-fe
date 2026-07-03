@@ -48,6 +48,10 @@
   color: var(--secondary-600);
 }
 
+.active {
+  color: var(--primary-100);
+}
+
 .loginBtn {
   height: 42px;
   padding: 12px 23px;
