@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 .env
 *.http
+/generated/prisma
+.mongodb-backup/
