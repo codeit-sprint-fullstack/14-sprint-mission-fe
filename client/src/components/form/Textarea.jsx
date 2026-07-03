@@ -1,6 +1,6 @@
 import styles from './Textarea.module.css'
 
-function Textarea({ label, id, placeholder, value, onChange }) {
+function Textarea({ label, id, error, ...props }) {
   return (
     <div className={styles.wrapper}>
       <label 
@@ -10,14 +10,14 @@ function Textarea({ label, id, placeholder, value, onChange }) {
         {label}
       </label>
       <textarea 
-       className={styles.textarea}
+       className={`${styles.textarea} ${error ? styles.errorTextarea : ''}`}
         id={id} 
         name={id} 
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      >
-      </textarea>
+        {...props}
+      />
+      {error && (
+        <p className={styles.errorMsg}>{error}</p>
+      )}
     </div>
   )
 }

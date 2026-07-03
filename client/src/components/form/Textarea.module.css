@@ -26,3 +26,18 @@
   outline: none;
   border: 1px solid var(--primary-100);
 }
+
+.errorTextarea {
+ border: 1px solid var(--error)
+}
+
+.errorTextarea:focus {
+ border: 1px solid var(--error)
+}
+
+.errorMsg {
+  margin-left: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--error);
+}

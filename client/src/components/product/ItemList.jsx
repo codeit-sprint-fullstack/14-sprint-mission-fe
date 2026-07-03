@@ -6,7 +6,7 @@ function ItemList({ itemList }) {
   return (
     <ul className={styles.itemList}>
       {itemList.map((item) => (
-        <li key={item.id}>
+        <li key={item._id}>
           <ItemCard item={item}/>
         </li>
       ))}

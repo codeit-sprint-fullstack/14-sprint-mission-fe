@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useRegisterItem from '../hooks/useRegisterItem.jsx'
 
 import Input from '../components/form/Input.jsx'
 import Textarea from '../components/form/Textarea.jsx'
@@ -12,6 +13,8 @@ function RegistrationPage() {
   const [price, setPrice] = useState('')
   const [tags, setTags] = useState([])
 
+  const {state, formAction, isPending} = useRegisterItem(tags)
+
   const isFormEmpty =
     name === '' ||
     description === '' ||
@@ -20,13 +23,13 @@ function RegistrationPage() {
 
   return (
     <div className={styles.wrapper}>
-      <form className={styles.form}>
+      <form className={styles.form} action={formAction}>
         <header className={styles.header}>
           <h2 className={styles.title}>상품 등록하기</h2>
           <button 
             className={styles.submitBtn}
             type='submit'
-            disabled={isFormEmpty}
+            disabled={isFormEmpty || isPending}
           >
             제출
           </button>
@@ -38,6 +41,7 @@ function RegistrationPage() {
           placeholder='상품명을 입력해주세요'
           value={name}
           onChange={(e) => setName(e.target.value)}
+          error={state.errors.name}
         />
         <Textarea 
           label='상품 소개'
@@ -45,6 +49,7 @@ function RegistrationPage() {
           placeholder='상품 소개를 입력해주세요'
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          error={state.errors.description}
         />
         <Input 
           label='판매 가격'
@@ -53,6 +58,7 @@ function RegistrationPage() {
           placeholder='판매 가격을 입력해주세요'
           value={price}
           onChange={(e) => setPrice(e.target.value)}
+          error={state.errors.price}
         />
         <TagInput 
           label='태그'
@@ -61,6 +67,7 @@ function RegistrationPage() {
           placeholder='태그를 입력해주세요'
           tags={tags}
           setTags={setTags}
+          error={state.errors.tags}
         />
       </form>
     </div>

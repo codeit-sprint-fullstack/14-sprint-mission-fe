@@ -4,7 +4,7 @@ import TagChip from './TagChip.jsx'
 
 import styles from  './Input.module.css'
 
-function TagInput({ label, id, type, placeholder, tags, setTags }) {
+function TagInput({ label, id, tags, setTags, error, ...props }) {
     const [inputValue, setInputValue] = useState('')
 
   const handleEnter = (e) => {
@@ -15,6 +15,7 @@ function TagInput({ label, id, type, placeholder, tags, setTags }) {
     if (e.key === 'Enter') {
       e.preventDefault()
       setTags([...tags, inputValue])
+      setInputValue('')
     }
   }
 
@@ -31,15 +32,16 @@ function TagInput({ label, id, type, placeholder, tags, setTags }) {
         {label}
       </label>
       <input 
-        className={styles.input}
+        className={`${styles.input} ${error ? styles.errorInput : ''}`}
         id={id} 
         name={id} 
-        type={type} 
-        placeholder={placeholder} 
-        value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleEnter}
+        {...props}
       />
+      {error && (
+        <p className={styles.errorMsg}>{error}</p>
+      )}
       <div>
         {tags.map((tag, index) => (
           <TagChip 
