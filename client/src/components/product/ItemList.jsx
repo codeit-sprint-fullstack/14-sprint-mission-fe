@@ -2,10 +2,10 @@ import ItemCard from "./ItemCard"
 
 import styles from './ItemList.module.css'
 
-function ItemList({ items }) {
+function ItemList({ itemList }) {
   return (
     <ul className={styles.itemList}>
-      {items.map((item) => (
+      {itemList.map((item) => (
         <li key={item.id}>
           <ItemCard item={item}/>
         </li>

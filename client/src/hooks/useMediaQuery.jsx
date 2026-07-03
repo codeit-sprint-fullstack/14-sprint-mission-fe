@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-function UseMediaQuery () {
+function useMediaQuery () {
   const [pageSize, setPageSize] = useState(10)
 
   const handleResize = () => {
@@ -25,4 +25,4 @@ function UseMediaQuery () {
   return { pageSize }
 }
 
-export default UseMediaQuery
+export default useMediaQuery

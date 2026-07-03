@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import axios from '../utils/axios.js'
 
 function useProducts(page, pageSize, orderBy, keyword) {
@@ -36,10 +37,6 @@ function useProducts(page, pageSize, orderBy, keyword) {
   useEffect(() => {
     getItemList()
   }, [page, pageSize, orderBy, keyword])
-
-  useEffect(() => {
-      getBestItemList()
-    }, [bestPageSize])
 
   return { 
     itemList, 
