@@ -24,6 +24,12 @@
   margin-bottom: 24px;
 }
 
+.items-message {
+  padding: 40px 0;
+  text-align: center;
+  color: #9ca3af;
+}
+
 @media (max-width: 1199px) {
   .all-products-grid {
     gap: 40px 16px;
