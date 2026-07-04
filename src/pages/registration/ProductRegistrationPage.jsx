@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createProduct } from '../../services/ProductService'
 import MainLayout from '../../components/layout/MainLayout.jsx'
-import getProductFormValidation from './hooks/getProductFormValidation.js'
+import getProductFormValidation from './utils/getProductFormValidation.js'
 import tagRemoveIcon from '../../assets/icons/ic_tag_remove.svg'
 import './ProductRegistrationPage.css'
 import { PRODUCT_TAG_MAX_LENGTH } from '../../constants/product'
+import ProductFormField from './components/ProductFormField.jsx'
 
 const ProductRegistrationPage = () => {
   const navigate = useNavigate()
@@ -27,6 +28,8 @@ const ProductRegistrationPage = () => {
     event.preventDefault()
     setHasSubmitted(true)
     setSubmitError('')
+    setFormValues((prevValues) => ({ ...prevValues, tagInput: '' }))
+    setHasTriedAddingTag(false)
 
     if (!isValid) return
 
@@ -119,92 +122,50 @@ const ProductRegistrationPage = () => {
           {submitError && (
             <p className="product-registration-form__error">{submitError}</p>
           )}
+          <ProductFormField
+            label="상품명"
+            name="name"
+            value={formValues.name}
+            onChange={handleFormFieldChange}
+            error={hasSubmitted ? errors.name : ''}
+            type="text"
+            placeholder="상품명을 입력해 주세요"
+          />
 
-          <label className="product-registration-form__field">
-            <span className="product-registration-form__label">상품명</span>
-            <input
-              name="name"
-              value={formValues.name}
-              onChange={handleFormFieldChange}
-              className={`product-registration-form__input ${
-                hasSubmitted && errors.name
-                  ? 'product-registration-form__input--error'
-                  : ''
-              }`}
-              type="text"
-              placeholder="상품명을 입력해 주세요"
-            />
-            {hasSubmitted && errors.name && (
-              <p className="product-registration-form__field-error">
-                {errors.name}
-              </p>
-            )}
-          </label>
-          <label className="product-registration-form__field">
-            <span className="product-registration-form__label">상품소개</span>
-            <textarea
-              name="description"
-              value={formValues.description}
-              onChange={handleFormFieldChange}
-              className={`product-registration-form__textarea ${
-                hasSubmitted && errors.description
-                  ? 'product-registration-form__input--error'
-                  : ''
-              }`}
-              placeholder="상품소개를 입력해 주세요"
-              rows={10}
-            />
-            {hasSubmitted && errors.description && (
-              <p className="product-registration-form__field-error">
-                {errors.description}
-              </p>
-            )}
-          </label>
-          <label className="product-registration-form__field">
-            <span className="product-registration-form__label">판매가격</span>
-            <input
-              name="price"
-              value={formValues.price}
-              onChange={handleFormFieldChange}
-              className={`product-registration-form__input ${
-                hasSubmitted && errors.price
-                  ? 'product-registration-form__input--error'
-                  : ''
-              }`}
-              type="number"
-              min="0"
-              step="1"
-              inputMode="numeric"
-              placeholder="판매가격을 입력해 주세요"
-            />
-            {hasSubmitted && errors.price && (
-              <p className="product-registration-form__field-error">
-                {errors.price}
-              </p>
-            )}
-          </label>
+          <ProductFormField
+            label="상품소개"
+            name="description"
+            value={formValues.description}
+            onChange={handleFormFieldChange}
+            error={hasSubmitted ? errors.description : ''}
+            multiline
+            rows={10}
+            placeholder="상품소개를 입력해 주세요"
+          />
+
+          <ProductFormField
+            label="판매가격"
+            name="price"
+            value={formValues.price}
+            onChange={handleFormFieldChange}
+            error={hasSubmitted ? errors.price : ''}
+            type="number"
+            min="0"
+            step="1"
+            inputMode="numeric"
+            placeholder="판매가격을 입력해 주세요"
+          />
           <div className="product-registration-form__tag-section">
-            <label className="product-registration-form__field">
-              <span className="product-registration-form__label">태그</span>
-              <input
-                name="tagInput"
-                value={formValues.tagInput}
-                onChange={handleFormFieldChange}
-                onKeyDown={handleTagEnter}
-                className={`product-registration-form__input ${
-                  tagErrorMessage
-                    ? 'product-registration-form__input--error'
-                    : ''
-                }`}
-                type="text"
-                placeholder="태그를 입력해 주세요"
-              />
-              {tagErrorMessage && (
-                <p className="product-registration-form__field-error">
-                  {tagErrorMessage}
-                </p>
-              )}
-            </label>
+            <ProductFormField
+              label="태그"
+              name="tagInput"
+              value={formValues.tagInput}
+              onChange={handleFormFieldChange}
+              onKeyDown={handleTagEnter}
+              error={tagErrorMessage}
+              type="text"
+              placeholder="태그를 입력해 주세요"
+            />
             {formValues.tags.length > 0 && (
               <div className="product-registration-form__tag-list">
                 {formValues.tags.map((tag) => (
