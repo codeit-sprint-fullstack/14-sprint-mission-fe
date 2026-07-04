@@ -1,0 +1,38 @@
+.itemImg {
+  margin-bottom: 16px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.itemName {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.itemDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemPrice {
+  font-weight: 700;
+}
+
+.itemFav {
+  display: flex;
+  gap: 4px;
+}
+
+.favCount {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--secondary-600);
+}
+
+.heartIcon {
+  width: 16px;
+  height: 16px;
+}
