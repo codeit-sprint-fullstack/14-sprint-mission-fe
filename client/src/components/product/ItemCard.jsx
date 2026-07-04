@@ -15,7 +15,7 @@ function ItemCard({ item }) {
           <p className={styles.price}>{item.price}원</p>
           <div className={styles.itemFav}>
             <img className={styles.heartIcon} src={heartIcon} alt="" />
-            <p className={styles.favCount}>240</p>
+            <p className={styles.favCount}>{item.favoriteCount ?? 0}</p>
           </div>
         </div>
       </article>
