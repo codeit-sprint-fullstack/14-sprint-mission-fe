@@ -82,10 +82,6 @@ app.delete('/products/:id', async (req, res) => {
   }
 })
 
-app.get('/', (req, res) => {
-  res.send('Server is running')
-})
-
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server Started!')
 })
