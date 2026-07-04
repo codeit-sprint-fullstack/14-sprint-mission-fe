@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useRegisterItem from '../hooks/useRegisterItem.jsx'
 
 import Input from '../components/form/Input.jsx'
@@ -13,7 +13,17 @@ function RegistrationPage() {
   const [price, setPrice] = useState('')
   const [tags, setTags] = useState([])
 
-  const {state, formAction, isPending} = useRegisterItem(tags)
+  const { state, formAction, isPending } = useRegisterItem(tags)
+
+  // 제품 등록 성공 시, 폼 초기화
+  useEffect(() => {
+    if (state.itemId) {
+      setName('')
+      setDescription('')
+      setPrice('')
+      setTags([])
+    }
+  }, [state.itemId])
 
   const isFormEmpty =
     name === '' ||
