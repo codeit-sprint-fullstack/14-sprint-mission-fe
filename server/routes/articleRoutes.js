@@ -3,7 +3,7 @@ import prisma from "../lib/prisma.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const { offset, limit, keyword, sort } = req.query;
 
@@ -38,15 +38,11 @@ router.get("/", async (req, res) => {
       totalCount,
     });
   } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "게시글 목록 조회에 실패했습니다.",
-    });
+    next(error);
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -61,29 +57,21 @@ router.get("/:id", async (req, res) => {
     }
     res.json(article);
   } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "게시글 상세 조회에 실패했습니다.",
-    });
+    next(error);
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const article = await prisma.article.create({ data: req.body });
 
     res.status(201).json(article);
   } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "게시글 등록에 실패했습니다.",
-    });
+    next(error);
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -103,15 +91,11 @@ router.patch("/:id", async (req, res) => {
 
     res.json(article);
   } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "게시글 수정에 실패했습니다.",
-    });
+    next(error);
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -131,11 +115,7 @@ router.delete("/:id", async (req, res) => {
 
     res.status(204).send();
   } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "게시글 삭제에 실패했습니다.",
-    });
+    next(error);
   }
 });
 export default router;
