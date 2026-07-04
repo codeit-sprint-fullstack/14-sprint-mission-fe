@@ -5,17 +5,18 @@ import { getProductList } from '../../services/ProductService'
 import ProductCard from './components/ProductCard'
 import ProductToolbar from './components/ProductToolbar'
 import Pagination from './components/Pagination'
+import { BREAKPOINT_TABLET, BREAKPOINT_DESKTOP } from '../../constants/layout'
 import './ItemsPage.css'
 
 const getProductPageSize = () => {
-  if (window.innerWidth < 768) {
+  if (window.innerWidth < BREAKPOINT_TABLET) {
     return {
       type: 'mobile',
       all: 4,
     }
   }
 
-  if (window.innerWidth < 1200) {
+  if (window.innerWidth < BREAKPOINT_DESKTOP) {
     return {
       type: 'tablet',
       all: 6,
