@@ -55,7 +55,13 @@ const ItemsPage = () => {
 
         if (ignore) return
 
-        setTotalPages(Math.ceil(productData.totalCount / pageSize.all))
+        const nextTotalPages = Math.max(
+          1,
+          Math.ceil(productData.totalCount / pageSize.all),
+        )
+
+        setTotalPages(nextTotalPages)
+        setPage((prevPage) => Math.min(prevPage, nextTotalPages))
         setProducts(productData.list)
       } catch (error) {
         if (ignore) return
