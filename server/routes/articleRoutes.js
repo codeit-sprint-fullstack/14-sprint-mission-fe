@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     const { offset, limit, keyword, sort } = req.query;
 
     const offsetNum = Number(offset) || 0;
-    const limitNum = Number(limit) || 20;
+    const limitNum = Number(limit) || 10;
 
     const where = keyword
       ? {
@@ -129,7 +129,7 @@ router.delete("/:id", async (req, res) => {
       where: { id },
     });
 
-    res.sendStatus(204);
+    res.status(204).send();
   } catch (error) {
     console.error(error);
 

@@ -1,4 +1,4 @@
-Get http://localhost:3000/products?sort=recent&limit=3
+Get http://localhost:3000/products
 
 ###
 
@@ -26,4 +26,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/products/1b8f3f01-db74-4967-b7dc-03cec5737007
+DELETE http://localhost:3000/products/f085e905-260e-45cf-946d-a51b64f7d77b

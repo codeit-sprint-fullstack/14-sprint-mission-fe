@@ -8,8 +8,8 @@ POST http://localhost:3000/articles
 Content-Type: application/json
 
 {
-  "title": "첫 번째 게시글",
-  "content": "Article CRUD 테스트용 게시글입니다."
+  "title": "테스트 게시글",
+  "content": "댓글 삭제 테스트용 게시글입니다."
 }
 ###
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 ###
 
 
-DELETE http://localhost:3000/articles/a48748ca-d199-4345-954b-5af685bfc04f
+DELETE http://localhost:3000/articles/1756bcf0-eb30-4041-bdf8-e30a9f13d5b1
 
 
 # ### POST article 두 번째 게시글

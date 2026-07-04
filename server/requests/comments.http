@@ -1,0 +1,39 @@
+POST http://localhost:3000/products/aa719662-6edb-4dda-a568-4fde901d806c/comments
+Content-Type: application/json
+
+{
+  "content": "이 상품 아직 판매 중인가요?"
+}
+
+### POST article comment 등록 테스트
+POST http://localhost:3000/articles/c8f0f356-288d-45b6-a4d9-d045cbc4a4f9/comments
+Content-Type: application/json
+
+{
+  "content": "이 게시글 추천할 만 한것 같아요."
+}
+
+### GET product comment 조회 테스트
+GET http://localhost:3000/products/aa719662-6edb-4dda-a568-4fde901d806c/comments?cursor=9360b40e-d238-4f38-a9be-8a8984c7266d&limit=10
+
+### GET article comments 목록 조회
+GET http://localhost:3000/articles/c8f0f356-288d-45b6-a4d9-d045cbc4a4f9/comments?cursor=25f0dc70-be74-4dff-9f73-962f234ce066&limit=
+
+### PATCH comment 수정 테스트
+PATCH http://localhost:3000/comments/916794f0-4c68-4389-99ef-de3a388a4ec1
+Content-Type: application/json
+
+{
+  "content": "수정된 댓글입니다."
+}
+
+### DELETE comment 삭제 테스트
+DELETE http://localhost:3000/comments/916794f0-4c68-4389-99ef-de3a388a4ec1
+
+
+### GET product comments - cascade 삭제 테스트 조회
+GET http://localhost:3000/products/f085e905-260e-45cf-946d-a51b64f7d77b/comments?limit=10
+
+### GET article comments - cascade 삭제 전 확인
+GET http://localhost:3000/articles/1756bcf0-eb30-4041-bdf8-e30a9f13d5b1/comments?limit=10
+
