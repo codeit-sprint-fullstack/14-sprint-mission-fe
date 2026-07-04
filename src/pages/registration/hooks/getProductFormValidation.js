@@ -1,3 +1,10 @@
+import {
+  PRODUCT_NAME_MAX_LENGTH,
+  PRODUCT_DESCRIPTION_MIN_LENGTH,
+  PRODUCT_DESCRIPTION_MAX_LENGTH,
+  PRODUCT_TAG_MAX_LENGTH,
+} from '../../../constants/product'
+
 const getProductFormValidation = ({
   name,
   description,
@@ -17,16 +24,16 @@ const getProductFormValidation = ({
 
   if (!trimmedName) {
     errors.name = '상품명을 입력해주세요.'
-  } else if (trimmedName.length > 10) {
-    errors.name = '상품명은 10자 이내로 입력해주세요.'
+  } else if (trimmedName.length > PRODUCT_NAME_MAX_LENGTH) {
+    errors.name = `상품명은 ${PRODUCT_NAME_MAX_LENGTH}자 이내로 입력해주세요.`
   }
 
   if (!trimmedDescription) {
     errors.description = '상품 소개를 입력해주세요.'
-  } else if (trimmedDescription.length < 10) {
-    errors.description = '상품 소개는 10자 이상 입력해주세요.'
-  } else if (trimmedDescription.length > 100) {
-    errors.description = '상품 소개는 100자 이내로 입력해주세요.'
+  } else if (trimmedDescription.length < PRODUCT_DESCRIPTION_MIN_LENGTH) {
+    errors.description = `상품 소개는 ${PRODUCT_DESCRIPTION_MIN_LENGTH}자 이상 입력해주세요.`
+  } else if (trimmedDescription.length > PRODUCT_DESCRIPTION_MAX_LENGTH) {
+    errors.description = `상품 소개는 ${PRODUCT_DESCRIPTION_MAX_LENGTH}자 이내로 입력해주세요.`
   }
 
   if (!trimmedPrice) {
@@ -36,14 +43,14 @@ const getProductFormValidation = ({
   } else if (Number(trimmedPrice) < 0) {
     errors.price = '판매 가격은 0원 이상이어야 합니다.'
   }
-  if (trimmedTagInput.length > 5) {
-    errors.tagInput = '태그는 5자 이내로 입력해주세요.'
+  if (trimmedTagInput.length > PRODUCT_TAG_MAX_LENGTH) {
+    errors.tagInput = `태그는 1자 이상 ${PRODUCT_TAG_MAX_LENGTH}자 이내로 입력해주세요.`
   }
 
   if (tags.length === 0) {
     errors.tags = '태그를 1개 이상 입력해주세요.'
-  } else if (tags.some((tag) => tag.trim().length > 5)) {
-    errors.tags = '태그는 5자 이내로 입력해주세요.'
+  } else if (tags.some((tag) => tag.trim().length > PRODUCT_TAG_MAX_LENGTH)) {
+    errors.tags = `태그는 1자 이상 ${PRODUCT_TAG_MAX_LENGTH}자 이내로 입력해주세요.`
   }
 
   const isValid =

@@ -5,6 +5,7 @@ import MainLayout from '../../components/layout/MainLayout.jsx'
 import getProductFormValidation from './hooks/getProductFormValidation.js'
 import tagRemoveIcon from '../../assets/icons/ic_tag_remove.svg'
 import './ProductRegistrationPage.css'
+import { PRODUCT_TAG_MAX_LENGTH } from '../../constants/product'
 
 const ProductRegistrationPage = () => {
   const navigate = useNavigate()
@@ -67,7 +68,7 @@ const ProductRegistrationPage = () => {
     const nextTag = formValues.tagInput.trim()
     setHasTriedAddingTag(true)
 
-    if (!nextTag || nextTag.length > 5) {
+    if (!nextTag || nextTag.length > PRODUCT_TAG_MAX_LENGTH) {
       return
     }
 
