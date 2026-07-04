@@ -1,34 +1,11 @@
+import { createApiClient, createQueryString } from './apiClient'
+
 const BASE_URL = 'https://panda-market-api-crud.vercel.app'
 
-const createQueryString = (params) => {
-  const searchParams = new URLSearchParams()
-
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== '') {
-      searchParams.append(key, value)
-    }
-  })
-
-  return searchParams.toString()
-}
-
-const parseResponse = (response) => {
-  if (response.ok) {
-    return response.json()
-  }
-
-  console.error(`Article API error: ${response.status}`)
-  throw new Error('Article API request failed')
-}
-
-const requestArticle = (path, options = {}) => {
-  return fetch(`${BASE_URL}${path}`, options)
-    .then(parseResponse)
-    .catch((error) => {
-      console.error(error.message)
-      throw error
-    })
-}
+const requestArticle = createApiClient({
+  baseUrl: BASE_URL,
+  errorMessage: '게시글 요청에 실패했습니다.',
+})
 
 export const getArticleList = (page = 1, pageSize = 10, keyword = '') => {
   const queryString = createQueryString({ page, pageSize, keyword })

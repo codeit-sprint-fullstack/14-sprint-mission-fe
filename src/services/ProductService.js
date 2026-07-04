@@ -1,41 +1,12 @@
 import { PRODUCT_ORDER_BY } from '../constants/product'
+import { createApiClient, createQueryString } from './apiClient'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
 
-const createQueryString = (params) => {
-  const searchParams = new URLSearchParams()
-
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== '') {
-      searchParams.append(key, value)
-    }
-  })
-
-  return searchParams.toString()
-}
-
-const fetchProduct = async (path, options) => {
-  try {
-    return await fetch(`${BASE_URL}${path}`, options)
-  } catch {
-    throw new Error('상품 요청에 실패했습니다.')
-  }
-}
-
-const requestProduct = async (path, options = {}) => {
-  const response = await fetchProduct(path, options)
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}))
-    throw new Error(errorData.message ?? '상품 요청에 실패했습니다.')
-  }
-
-  if (response.status === 204) {
-    return null
-  }
-
-  return await response.json()
-}
+const requestProduct = createApiClient({
+  baseUrl: BASE_URL,
+  errorMessage: '상품 요청에 실패했습니다.',
+})
 
 export const getProductList = async ({
   offset = 0,
