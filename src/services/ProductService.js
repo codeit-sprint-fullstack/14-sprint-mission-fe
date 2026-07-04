@@ -23,28 +23,22 @@ export const getProduct = async (productId) => {
   return await requestProduct(`/products/${productId}`)
 }
 
-export const createProduct = async ({ name, description, price, tags }) => {
-  return await requestProduct('/products', {
+export const createProduct = ({ name, description, price, tags }) => {
+  return requestProduct('/products', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ name, description, price, tags }),
+    body: { name, description, price, tags },
   })
 }
 
-export const patchProduct = async (productId, product) => {
-  return await requestProduct(`/products/${productId}`, {
+export const patchProduct = (productId, product) => {
+  return requestProduct(`/products/${productId}`, {
     method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(product),
+    body: product,
   })
 }
 
-export const deleteProduct = async (productId) => {
-  return await requestProduct(`/products/${productId}`, {
+export const deleteProduct = (productId) => {
+  return requestProduct(`/products/${productId}`, {
     method: 'DELETE',
   })
 }

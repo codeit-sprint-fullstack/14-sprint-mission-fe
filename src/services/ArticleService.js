@@ -20,20 +20,14 @@ export const getArticle = (articleId) => {
 export const createArticle = ({ title, content, image }) => {
   return requestArticle('/articles', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ title, content, image }),
+    body: { title, content, image },
   })
 }
 
 export const patchArticle = (articleId, article) => {
   return requestArticle(`/articles/${articleId}`, {
     method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(article),
+    body: article,
   })
 }
 

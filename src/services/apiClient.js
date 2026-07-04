@@ -11,11 +11,18 @@ export const createQueryString = (params) => {
 }
 
 export const createApiClient = ({ baseUrl, errorMessage }) => {
-  return async (path, options = {}) => {
+  return async (path, { body, ...options } = {}) => {
+    const fetchOptions = { ...options }
+
+    if (body !== undefined) {
+      fetchOptions.headers = { 'Content-Type': 'application/json' }
+      fetchOptions.body = JSON.stringify(body)
+    }
+
     let response
 
     try {
-      response = await fetch(`${baseUrl}${path}`, options)
+      response = await fetch(`${baseUrl}${path}`, fetchOptions)
     } catch {
       throw new Error(errorMessage)
     }
