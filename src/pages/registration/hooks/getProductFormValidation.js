@@ -1,4 +1,4 @@
-const useProductFormValidation = ({
+const getProductFormValidation = ({
   name,
   description,
   price,
@@ -11,6 +11,9 @@ const useProductFormValidation = ({
   const trimmedDescription = description.trim()
   const trimmedPrice = price.toString().trim()
   const trimmedTagInput = tagInput.trim()
+
+  const hasEmptyRequired =
+    !trimmedName || !trimmedDescription || !trimmedPrice || tags.length === 0
 
   if (!trimmedName) {
     errors.name = '상품명을 입력해주세요.'
@@ -28,29 +31,29 @@ const useProductFormValidation = ({
 
   if (!trimmedPrice) {
     errors.price = '판매 가격을 입력해주세요.'
-  } else if (!/^\d+$/.test(trimmedPrice)) {
-    errors.price = '판매 가격은 숫자로 입력해주세요.'
+  } else if (!Number.isInteger(Number(trimmedPrice))) {
+    errors.price = '판매 가격은 정수로 입력해주세요.'
+  } else if (Number(trimmedPrice) < 0) {
+    errors.price = '판매 가격은 0원 이상이어야 합니다.'
   }
-
   if (trimmedTagInput.length > 5) {
     errors.tagInput = '태그는 5자 이내로 입력해주세요.'
   }
 
   if (tags.length === 0) {
     errors.tags = '태그를 1개 이상 입력해주세요.'
-  } else if (tags.some((tag) => tag.length > 5)) {
+  } else if (tags.some((tag) => tag.trim().length > 5)) {
     errors.tags = '태그는 5자 이내로 입력해주세요.'
   }
 
+  const isValid =
+    !errors.name && !errors.description && !errors.price && !errors.tags
+
   return {
     errors,
-    isValid:
-      !errors.name &&
-      !errors.description &&
-      !errors.price &&
-      !errors.tagInput &&
-      !errors.tags,
+    hasEmptyRequired,
+    isValid,
   }
 }
 
-export default useProductFormValidation
+export default getProductFormValidation

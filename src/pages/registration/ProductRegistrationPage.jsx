@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createProduct } from '../../services/ProductService'
 import MainLayout from '../../components/layout/MainLayout.jsx'
-import useProductFormValidation from './hooks/useProductFormValidation'
+import getProductFormValidation from './hooks/getProductFormValidation.js'
 import tagRemoveIcon from '../../assets/icons/ic_tag_remove.svg'
 import './ProductRegistrationPage.css'
 
@@ -17,7 +17,8 @@ const ProductRegistrationPage = () => {
     tagInput: '',
     tags: [],
   })
-  const { errors, isValid } = useProductFormValidation(formValues)
+  const { errors, hasEmptyRequired, isValid } =
+    getProductFormValidation(formValues)
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [hasTriedAddingTag, setHasTriedAddingTag] = useState(false)
 
@@ -62,9 +63,9 @@ const ProductRegistrationPage = () => {
   const handleTagEnter = (event) => {
     if (event.key !== 'Enter') return
     event.preventDefault()
-    setHasTriedAddingTag(true)
 
     const nextTag = formValues.tagInput.trim()
+    setHasTriedAddingTag(true)
 
     if (!nextTag || nextTag.length > 5) {
       return
@@ -94,19 +95,11 @@ const ProductRegistrationPage = () => {
     }))
   }
 
-  const isRequiredInputEmpty =
-    !formValues.name.trim() ||
-    !formValues.description.trim() ||
-    !formValues.price.toString().trim() ||
-    formValues.tags.length === 0
+  const shouldShowTagError = hasTriedAddingTag || hasSubmitted
 
-  const shouldShowTagError =
-    hasTriedAddingTag && Boolean(errors.tagInput || errors.tags)
-
-  const tagErrorMessage =
-    shouldShowTagError || (hasSubmitted && (errors.tagInput || errors.tags))
-      ? errors.tagInput || errors.tags
-      : ''
+  const tagErrorMessage = shouldShowTagError
+    ? errors.tagInput || errors.tags || ''
+    : ''
 
   return (
     <MainLayout>
@@ -116,7 +109,7 @@ const ProductRegistrationPage = () => {
             <h1 className="product-registration-page__title">상품 등록하기</h1>
             <button
               type="submit"
-              disabled={isSubmitting || isRequiredInputEmpty}
+              disabled={isSubmitting || hasEmptyRequired}
               className="product-registration-page__submit-button"
             >
               {isSubmitting ? '등록 중' : '등록하기'}
@@ -178,6 +171,9 @@ const ProductRegistrationPage = () => {
                   : ''
               }`}
               type="number"
+              min="0"
+              step="1"
+              inputMode="numeric"
               placeholder="판매가격을 입력해 주세요"
             />
             {hasSubmitted && errors.price && (
