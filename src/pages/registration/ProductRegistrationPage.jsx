@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createProduct } from '../../services/ProductService'
+import { createProduct } from '../../services/productService.js'
 import MainLayout from '../../components/layout/MainLayout.jsx'
 import getProductFormValidation from './utils/getProductFormValidation.js'
 import tagRemoveIcon from '../../assets/icons/ic_tag_remove.svg'
