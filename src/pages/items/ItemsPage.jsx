@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import MainLayout from '../../components/layout/MainLayout'
 import { PRODUCT_ORDER_BY } from '../../constants/product'
-import { getProductList } from '../../services/productService.js'
+import { getProductList } from '../../services/productService'
 import ProductCard from './components/ProductCard'
 import ProductToolbar from './components/ProductToolbar'
 import Pagination from './components/Pagination'
