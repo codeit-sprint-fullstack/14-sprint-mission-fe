@@ -42,7 +42,6 @@ productRoutes.get('/products', async (req, res) => {
     const list = filteredProducts
     res.send({ totalCount, list })
   } catch (error) {
-    console.error(error)
     res.status(500).send({ message: 'Failed to get products.' })
   }
 })
@@ -51,7 +50,6 @@ productRoutes.get('/products/:id', async (req, res) => {
   try {
     const id = req.params.id
     const product = await prisma.product.findUnique({ where: { id } })
-
     if (!product) {
       res.status(404).send({ message: 'Cannot find given id.' })
       return

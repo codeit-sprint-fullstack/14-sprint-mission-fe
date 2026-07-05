@@ -1,3 +1,5 @@
+// 시간순(recent) 정렬 테스트를 위해 createdAt, updatedAt을 명시적으로 설정
+
 export const productData = [
   {
     name: '노트북',
@@ -166,5 +168,286 @@ export const productData = [
     tags: ['게임', '전자'],
     createdAt: new Date('2026-06-21T09:00:00.000Z'),
     updatedAt: new Date('2026-06-21T09:10:00.000Z'),
+  },
+]
+
+export const articleData = [
+  {
+    title: '아 요즘 귀칼 피규어 가격 무슨 일임;',
+    content:
+      '내 사랑 네즈코 ㅠㅠㅠㅠㅠㅠ 어떤 커뮤에서 네즈코 귀여움 짤 풀어서 네즈코 관련 굿즈 구하기 하늘의 별 따기임. 다들 요즘 어디서 구함요?',
+    createdAt: new Date('2026-07-01T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-01T09:10:00.000Z'),
+  },
+  {
+    title: '저메추',
+    content: '제곧내 ㅇㅇ',
+    createdAt: new Date('2026-07-02T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-02T09:10:00.000Z'),
+  },
+  {
+    title: '아 지난달에 여기서 산 물건인데',
+    content:
+      '사놓고 여태 확인 안 해보고 오늘 딱 까 봤더니 상태가 좀 별로임ㅡㅡ 이거 어디다 얘기해야 하냐. 판매자 정보가 사라졌는데...하..',
+    createdAt: new Date('2026-07-03T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-03T09:10:00.000Z'),
+  },
+  {
+    title: '어린이대공원 경도 ㄱㄱ (9/100)',
+    content:
+      '30대 늙크크 안됨. 저번에 꼈는데 도가니 이슈로 우리팀이 경찰이었는데 도둑 다 놓침ㅋㅋㅋ 근데 끝나고 음료수 사줘서 좋았음.',
+    createdAt: new Date('2026-07-04T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-04T09:10:00.000Z'),
+  },
+  {
+    title: '판다마켓 첫 거래인데',
+    content:
+      '판매자가 너무 급하게 거래하자고 해서 조금 무섭네요. 다들 거래 전에 어떤 거 확인하세요?',
+    createdAt: new Date('2026-07-05T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-05T09:10:00.000Z'),
+  },
+  {
+    title: '노트북 시세 잘 아는 분',
+    content:
+      '대학교 과제용으로 하나 사려고 하는데 중고로 어느 정도면 적당한 가격인가여?',
+    createdAt: new Date('2026-07-06T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-06T09:10:00.000Z'),
+  },
+  {
+    title: '이사 때문에 책상 나눔',
+    content: '직접 가져가실 분만 연락 주세요. 엘리베이터 있습니다.',
+    createdAt: new Date('2026-07-07T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-07T09:10:00.000Z'),
+  },
+  {
+    title: '다들 주말에 뭐함?',
+    content: '비도 오고 집에만 있기 심심한데 뭐할지 추천 좀',
+    createdAt: new Date('2026-07-08T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-08T09:10:00.000Z'),
+  },
+  {
+    title: '키보드 추천 부탁드립니다.',
+    content: '기계식 입문하려는데 너무 시끄럽지 않은 제품 있을까요?',
+    createdAt: new Date('2026-07-09T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-09T09:10:00.000Z'),
+  },
+  {
+    title: '혹시 에어팟 분실하신 분',
+    content: '공원 벤치에서 하나 주웠는데 케이스에 스티커 붙어 있습니당',
+    createdAt: new Date('2026-07-10T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-10T09:10:00.000Z'),
+  },
+  {
+    title: '오늘 거래하다 식겁함',
+    content:
+      '거래 장소 갔는데 서로 다른 편의점에서 기다리고 있었음ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 다시 생각해도 진심 ㄱ웃김ㅋㅋㅋㅋㅋㅋ',
+    createdAt: new Date('2026-07-11T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-11T09:10:00.000Z'),
+  },
+  {
+    title: '중고거래 꿀팁 공유!',
+    content:
+      '사진 많이 올리고 설명 자세하게 쓰니까 문의가 확실히 많아졌어요ㅎㅎ',
+    createdAt: new Date('2026-07-12T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-12T09:10:00.000Z'),
+  },
+  {
+    title: '다들 운동 뭐 하세요?',
+    content:
+      '요즘 체력이 너무 떨어져서 가볍게 시작할 운동 찾는 중입니다. 조언 부탁드립니다.',
+    createdAt: new Date('2026-07-13T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-13T09:10:00.000Z'),
+  },
+  {
+    title: '악! 악! 과제 드디어 끝!!!!!!',
+    content:
+      'Article API 끝내고 이제 Comment만 남았다. 오늘은 진심 꼭 일찍 자고 만다....',
+    createdAt: new Date('2026-07-14T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-14T09:10:00.000Z'),
+  },
+  {
+    title: '커피 맛집 추천',
+    content: '조용하게 공부할 만한 카페 있으면 추천 부탁드립니다.',
+    createdAt: new Date('2026-07-15T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-15T09:10:00.000Z'),
+  },
+  {
+    title: '판다마켓에서 산 의자 후기',
+    content: '생각보다 상태 너무 좋아서 만족했습니다. 판매자분 감사합니다!',
+    createdAt: new Date('2026-07-16T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-16T09:10:00.000Z'),
+  },
+  {
+    title: '희귀 레고 구하는 중',
+    content: '몇 달째 찾고 있는데 매물이 진짜 안 보이네요. 혹시 보신 분?????',
+    createdAt: new Date('2026-07-17T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-17T09:10:00.000Z'),
+  },
+  {
+    title: '오늘 점심 뭐 먹었어요?',
+    content: '전 김치찌개 먹었는데 저녁 메뉴도 추천받습니다.',
+    createdAt: new Date('2026-07-18T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-18T09:10:00.000Z'),
+  },
+  {
+    title: '모니터암 써보신 분',
+    content: '책상이 좁아서 고민인데 체감 차이 많이 나나요?',
+    createdAt: new Date('2026-07-19T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-19T09:10:00.000Z'),
+  },
+  {
+    title: '같이 롤 할 사람',
+    content: '퇴근하고 가볍게 할 사람 구함요 마이크 가능',
+    createdAt: new Date('2026-07-20T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-20T09:10:00.000Z'),
+  },
+  {
+    title: '오늘도 평화로운 판다마켓 ^^....',
+    content: '구경만 하려고 들어왔는데 또 충동구매함ㅋㅋㅋㅋ',
+    createdAt: new Date('2026-07-21T09:00:00.000Z'),
+    updatedAt: new Date('2026-07-21T09:10:00.000Z'),
+  },
+]
+
+export const commentData = [
+  {
+    type: 'product',
+    targetIndex: 0,
+    content: '혹시 이 노트북 아직 거래 가능할까요?',
+    createdAt: new Date('2026-08-01T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-01T09:10:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 0,
+    content: '배터리 사이클 몇 회인지 알 수 있을까요?',
+    createdAt: new Date('2026-08-01T09:05:00.000Z'),
+    updatedAt: new Date('2026-08-01T09:15:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 0,
+    content: '아 이거 탐난다... 월급날까지 살아있어줘 제발',
+    createdAt: new Date('2026-08-01T09:10:00.000Z'),
+    updatedAt: new Date('2026-08-01T09:20:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 0,
+    content: '문서 작업용이면 충분히 괜찮아 보입니다.',
+    createdAt: new Date('2026-08-01T09:15:00.000Z'),
+    updatedAt: new Date('2026-08-01T09:25:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 0,
+    content: '혹시 충전기도 같이 주시나요?',
+    createdAt: new Date('2026-08-01T09:20:00.000Z'),
+    updatedAt: new Date('2026-08-01T09:30:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 0,
+    content: '가격 조금만 네고 가능하면 바로 갈게요 ㅠ',
+    createdAt: new Date('2026-08-01T09:25:00.000Z'),
+    updatedAt: new Date('2026-08-01T09:35:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 2,
+    content: '키보드 소리 많이 큰 편인가요?',
+    createdAt: new Date('2026-08-02T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-02T09:10:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 3,
+    content: '모니터암 설치는 어렵지 않은가요?',
+    createdAt: new Date('2026-08-03T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-03T09:10:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 5,
+    content: '에어팟 상태 사진 더 볼 수 있을까요?',
+    createdAt: new Date('2026-08-04T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-04T09:10:00.000Z'),
+  },
+  {
+    type: 'product',
+    targetIndex: 10,
+    content: '의자 착석감 어떤지 궁금합니다.',
+    createdAt: new Date('2026-08-05T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-05T09:10:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 0,
+    content: '네즈코는 못 참지... 요즘 진짜 매물 씨가 말랐어요.',
+    createdAt: new Date('2026-08-06T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-06T09:10:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 0,
+    content: '저는 알림 걸어두고 새로고침합니다. 근데 손 느리면 끝이에요.',
+    createdAt: new Date('2026-08-06T09:05:00.000Z'),
+    updatedAt: new Date('2026-08-06T09:15:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 0,
+    content: '인기 캐릭터 굿즈는 가격 오를 때 진짜 무섭습니다.',
+    createdAt: new Date('2026-08-06T09:10:00.000Z'),
+    updatedAt: new Date('2026-08-06T09:20:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 0,
+    content: 'ㅋㅋㅋㅋㅋ 네즈코 귀여운 건 인정합니다.',
+    createdAt: new Date('2026-08-06T09:15:00.000Z'),
+    updatedAt: new Date('2026-08-06T09:25:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 1,
+    content: '김치찌개 ㄱㄱ 실패 확률 낮음',
+    createdAt: new Date('2026-08-07T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-07T09:10:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 1,
+    content: '오늘 같은 날은 제육이죠. 든든하게 드세요.',
+    createdAt: new Date('2026-08-07T09:05:00.000Z'),
+    updatedAt: new Date('2026-08-07T09:15:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 3,
+    content: '30대 늙크크 금지라니 너무 가혹한 조건 아닌가요ㅋㅋ',
+    createdAt: new Date('2026-08-08T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-08T09:10:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 3,
+    content: '도가니 이슈 공감합니다. 준비운동 필수예요.',
+    createdAt: new Date('2026-08-08T09:05:00.000Z'),
+    updatedAt: new Date('2026-08-08T09:15:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 13,
+    content: 'Article 끝낸 거면 거의 다 왔네요. 댓글만 버티면 됩니다.',
+    createdAt: new Date('2026-08-09T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-09T09:10:00.000Z'),
+  },
+  {
+    type: 'article',
+    targetIndex: 20,
+    content: '판다마켓 구경만 하려고 들어가는 거 제일 위험함ㅋㅋㅋ',
+    createdAt: new Date('2026-08-10T09:00:00.000Z'),
+    updatedAt: new Date('2026-08-10T09:10:00.000Z'),
   },
 ]
