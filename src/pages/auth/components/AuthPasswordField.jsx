@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import visibilityOffIcon from '../../../assets/icons/btn_visibility_off.svg'
+import visibilityOffIcon from '../../../assets/icons/ic_visibility_off.svg'
 
 const AuthPasswordField = ({
   id,
