@@ -1,4 +1,4 @@
-import MainLayout from '../../components/layout/MainLayout.jsx'
+import MainLayout from '../../components/layout/MainLayout'
 
 const ProductDetailPage = () => {
   return (

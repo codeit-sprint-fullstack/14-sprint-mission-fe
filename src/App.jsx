@@ -9,7 +9,7 @@ import BoardPage from './pages/board/BoardPage.jsx'
 import ProductRegistrationPage from './pages/registration/ProductRegistrationPage'
 import ProductDetailPage from './pages/items/ProductDetailPage'
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />

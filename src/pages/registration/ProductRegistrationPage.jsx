@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createProduct } from '../../services/productService.js'
-import MainLayout from '../../components/layout/MainLayout.jsx'
+import MainLayout from '../../components/layout/MainLayout'
 import getProductFormValidation from './utils/getProductFormValidation.js'
 import tagRemoveIcon from '../../assets/icons/ic_tag_remove.svg'
 import './ProductRegistrationPage.css'
 import { PRODUCT_TAG_MAX_LENGTH } from '../../constants/product'
-import ProductFormField from './components/ProductFormField.jsx'
+import ProductFormField from './components/ProductFormField'
 
 const ProductRegistrationPage = () => {
   const navigate = useNavigate()
