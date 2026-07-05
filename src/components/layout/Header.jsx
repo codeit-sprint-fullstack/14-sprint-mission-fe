@@ -13,7 +13,7 @@ const Header = () => {
 
           <div className="site-header__links">
             <NavLink
-              to="/boards"
+              to="/board"
               className={({ isActive }) =>
                 isActive
                   ? 'site-header__link site-header__link--active'
