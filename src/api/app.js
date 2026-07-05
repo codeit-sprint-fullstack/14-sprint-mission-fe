@@ -1,136 +1,45 @@
+import "dotenv/config";
 import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import Task from "./models/Task.js";
-import cors from "cors";
-import seedData from "./data/seedData.js";
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from '@prisma/adapter-pg';
 
 const app = express();
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
+
 app.use(express.json());
 
-const corsOptions = {
-  origin: [
-    "http://localhost:3003", 
-    "http://localhost:5173", 
-    "http://localhost:5174",
-    "https://<frontend>.onrender.com" // 실제 배포된 프론트엔드 주소
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "Cache-Control"], // ← 여기 추가
-  credentials: true
-};
-
-app.use(cors(corsOptions));
-
-dotenv.config();
-
-const DATABASE_URL = process.env.DATABASE_URL;
-console.log("DB URL:", process.env.DATABASE_URL);
-await mongoose.connect(DATABASE_URL);
-console.log('Connected to DB');
-
-
-
-app.get('/tasks', async (req, res) => {
-  console.log("데이터를 가져옵니다");
-  const sort = req.query.sort;
-  const { keyword, name, price, createdAt } = req.query;
-
-  const limit = Number(req.query.limit) || 10;   // 페이지당 개수
-  const page = Number(req.query.page) || 1;      // 현재 페이지
-  const offset = (page - 1) * limit;             // 건너뛸 개수
-
-  // Search 조건
-  let filter = {};
-  if (name) filter.name = name;
-  if (price) filter.price = Number(price);
-  if (createdAt) filter.createdAt = new Date(createdAt);
-  if (keyword) {
-    filter.$or = [
-      { name: { $regex: keyword, $options: 'i' } },
-      { description: { $regex: keyword, $options: 'i' } }
-    ];
-  }
-
-  const sortOption = { createdAt: sort === "oldest" ? 'asc' : 'desc' };
-
+app.get("/articles", async (req, res) => {
   try {
-    const tasks = await Task.find(filter)
-      .sort(sortOption)
-      .skip(offset)
-      .limit(limit);
+    console.log("✅ /articles 라우트 호출됨");
+    const articles = await prisma.article.findMany();
+    res.json(articles);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Articles를 가져오는데 실패했습니다."});
+  }
+});
 
-    const totalCount = await Task.countDocuments(filter); 
-    res.send({
-      list: tasks,
-      totalCount
+app.get("/articles/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const article = await prisma.article.findUnique({
+      where: { id },
+      include: { comments: true },
     });
-  } catch (err) {
-    console.error("❌ /tasks 라우트 에러:", err.message);
-    res.status(500).send({ error: err.message });
-  }
-});
 
-app.get('/tasks/:id', async (req, res) => {
-  const task = await Task.findById(req.params.id);
-  if (task) {
-    res.send({ item: task });
-  } else {
-    res.status(404).send({ message: 'Cannot find given id.' });
-  }
-});
-
-app.post('/tasks', async (req, res) => {
-  console.log("받은 데이터:", req.body);
-  const newTask = await Task.create(req.body);
-  res.status(201).send({ item: newTask });
-});
-
-app.patch('/tasks/:id', async (req, res) => {
-  const task = await Task.findById(req.params.id);
-  if (task) {
-    Object.keys(req.body).forEach((key) => {
-      task[key] = req.body[key];
-    });
-    await task.save();
-    res.send({ item: task });
-  } else {
-    res.status(404).send({ message: 'Cannot find given id.' });
-  }
-});
-
-app.delete('/tasks/:id', async (req, res) => {
-  const task = await Task.findByIdAndDelete(req.params.id);
-  if (task) {
-    res.sendStatus(204);
-  } else {
-    res.status(404).send({ message: 'Cannot find given id.' });
-  }
-});
-
-const port = process.env.PORT;
-app.listen(port, () => {
-  console.log(`BackEnd Server running on port ${port}`);
-});~
-
-
-
-app.use((err, req, res, next) => {
-  console.log(err);
-  console.log(err, err.name);
-  switch (err.name) {
-    case 'ValidationError': {
-      res.status(400).send({ message: err.message });
-      return ;
+    if (!article) {
+      return res.status(404).json({ error: "해당하는 Article이 없습니다."});
     }
-    case 'CastError': {
-      res.status(404).send({ message: 'Cannot find given id.' });
-      return ;
-    }
-    default: {
-      console.error(err);
-      res.status(500).send({ message: err.message });
-      return ;
-    }
+
+    res.json(article);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Article를 가져오는데 실패했습니다."})
   }
-});
+})
+
+
+app.listen(3000, () => console.log('✅ DB 서버가 3000번 포트에서 실행될 예정입니다'));
+
+

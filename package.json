@@ -4,13 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"nodemon src/api/app_new.js\"",
+    "dev": "concurrently \"vite\" \"nodemon src/api/app.js\"",
     "start": "node src/api/app.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api": "nodemon src/api/app.js",
-    "seed": "node src/api/data/seed.js"
+    "api": "nodemon src/api/app.js"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
@@ -20,12 +19,12 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.7.2",
-    "prisma": "^7.8.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.17.0"
   },
   "devDependencies": {
+    "prisma": "^7.8.0",
     "@eslint/js": "^10.0.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
