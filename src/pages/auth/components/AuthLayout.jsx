@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/logos/logo.svg'
-import '../AuthPage.css'
+import './AuthLayout.css'
 
 const AuthLayout = ({ title, children }) => {
   return (
