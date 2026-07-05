@@ -1,4 +1,4 @@
-import defaultImage from '../../../assets/images/default.png'
+import defaultImage from '../../../assets/images/img_product_default.png'
 import './ProductCard.css'
 
 const ProductCard = ({ product }) => {
