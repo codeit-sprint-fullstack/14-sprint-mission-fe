@@ -25,3 +25,30 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/products/00891d0f-99e3-491d-b27e-5a417556be8e
+
+#/*********** articles ***********/
+###
+GET http://localhost:3000/articles?limit=5&sort=oldest
+
+###
+GET http://localhost:3000/articles/a7c3e9f1-4b62-4d8a-91f0-3e6b2c7d5a84
+
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+  "title": "대학생 필기용 아이패드 추천해주세요!",
+  "content": "가성비 아이패드 추천해주세요! 필기, 영상보는 용도로 사용할 거예용"
+}
+
+###
+PATCH http://localhost:3000/articles/38bc3162-8bd7-408e-99c7-7476d2ffac16
+Content-Type: application/json
+
+{
+  "title": "아이패드 추천"
+}
+
+###
+DELETE http://localhost:3000/articles/38bc3162-8bd7-408e-99c7-7476d2ffac16
