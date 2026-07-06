@@ -23,13 +23,13 @@ async function main() {
   })
 
   await prisma.comment.createMany({
-    data: commentData.map((comment, index) => {
+    data: commentData.map((comment) => {
       if (comment.type === 'product') {
         return {
           content: comment.content,
           createdAt: comment.createdAt,
           updatedAt: comment.updatedAt,
-          productId: products[index % products.length].id,
+          productId: products[comment.targetIndex].id,
         }
       }
 
@@ -37,7 +37,7 @@ async function main() {
         content: comment.content,
         createdAt: comment.createdAt,
         updatedAt: comment.updatedAt,
-        articleId: articles[index % articles.length].id,
+        articleId: articles[comment.targetIndex].id,
       }
     }),
   })

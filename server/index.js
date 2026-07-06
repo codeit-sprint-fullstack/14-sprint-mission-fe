@@ -1,6 +1,7 @@
 import express from 'express'
 import productRoutes from './routes/productRoutes.js'
 import articleRoutes from './routes/articleRoutes.js'
+import commentRoutes from './routes/commentRoutes.js'
 import errorHandler from './middleware/errorHandler.js'
 
 const app = express()
@@ -10,6 +11,7 @@ app.use(express.json())
 
 app.use(productRoutes)
 app.use(articleRoutes)
+app.use(commentRoutes)
 
 app.use(errorHandler)
 

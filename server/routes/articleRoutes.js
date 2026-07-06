@@ -39,9 +39,12 @@ articleRoutes.get('/articles', async (req, res) => {
     })
 
     const list = filteredArticles
-    res.send({ totalCount, list })
+    res.json({ totalCount, list })
   } catch (error) {
-    res.status(500).send({ message: 'Failed to get articles' })
+    res.status(500).json({
+      message: 'Failed to get articles.',
+      code: 'GET_ARTICLES_FAILED',
+    })
   }
 })
 
@@ -51,7 +54,10 @@ articleRoutes.get('/articles/:id', async (req, res) => {
     const article = await prisma.article.findUnique({ where: { id } })
 
     if (!article) {
-      res.status(404).send({ message: 'cannot find given id.' })
+      res.status(404).json({
+        message: 'Article not found.',
+        code: 'ARTICLE_NOT_FOUND',
+      })
       return
     }
 
@@ -60,11 +66,15 @@ articleRoutes.get('/articles/:id', async (req, res) => {
       title: article.title,
       content: article.content,
       createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
     }
 
-    res.send(responseArticle)
+    res.json(responseArticle)
   } catch (error) {
-    res.status(500).send({ message: 'Failed to get article' })
+    res.status(500).json({
+      message: 'Failed to get article.',
+      code: 'GET_ARTICLE_FAILED',
+    })
   }
 })
 
@@ -87,9 +97,16 @@ articleRoutes.post('/articles', async (req, res) => {
       createdAt: article.createdAt,
     }
 
-    res.status(201).send(responseArticle)
+    res.status(201).json({
+      message: 'Article created successfully.',
+      code: 'CREATE_ARTICLE_SUCCESS',
+      article: responseArticle,
+    })
   } catch (error) {
-    res.status(400).send({ message: 'Failed to create article.' })
+    res.status(400).json({
+      message: 'Failed to create article.',
+      code: 'CREATE_ARTICLE_FAILED',
+    })
   }
 })
 
@@ -99,7 +116,10 @@ articleRoutes.patch('/articles/:id', async (req, res) => {
     const { id } = req.params
     const targetArticle = await prisma.article.findUnique({ where: { id } })
     if (!targetArticle) {
-      res.status(404).send({ message: 'Cannot find given id.' })
+      res.status(404).json({
+        message: 'Article not found.',
+        code: 'ARTICLE_NOT_FOUND',
+      })
       return
     }
 
@@ -116,9 +136,16 @@ articleRoutes.patch('/articles/:id', async (req, res) => {
       updatedAt: article.updatedAt,
     }
 
-    res.send(responseArticle)
+    res.json({
+      message: 'Article updated successfully.',
+      code: 'UPDATE_ARTICLE_SUCCESS',
+      article: responseArticle,
+    })
   } catch (error) {
-    res.status(400).send({ message: 'Failed to update article.' })
+    res.status(400).json({
+      message: 'Failed to update article.',
+      code: 'UPDATE_ARTICLE_FAILED',
+    })
   }
 })
 
@@ -127,15 +154,24 @@ articleRoutes.delete('/articles/:id', async (req, res) => {
     const { id } = req.params
     const targetArticle = await prisma.article.findUnique({ where: { id } })
     if (!targetArticle) {
-      res.status(404).send({ message: 'Cannot find given id.' })
+      res.status(404).json({
+        message: 'Article not found.',
+        code: 'ARTICLE_NOT_FOUND',
+      })
       return
     }
 
     await prisma.article.delete({ where: { id } })
 
-    res.sendStatus(204)
+    res.status(200).json({
+      message: 'Article deleted successfully.',
+      code: 'DELETE_ARTICLE_SUCCESS',
+    })
   } catch (error) {
-    res.status(500).send({ message: 'Failed to delete article.' })
+    res.status(500).json({
+      message: 'Failed to delete article.',
+      code: 'DELETE_ARTICLE_FAILED',
+    })
   }
 })
 

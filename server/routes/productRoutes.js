@@ -7,10 +7,9 @@ const productRoutes = express.Router()
 
 productRoutes.get('/products', async (req, res) => {
   try {
-    const keyword = req.query.keyword || ''
-    const sort = req.query.sort
-    const offset = Number(req.query.offset) || 0
-    const pageSize = Number(req.query.pageSize) || 10
+    const { keyword = '', sort, offset, pageSize } = req.query
+    const skip = Number(offset) || 0
+    const take = Number(pageSize) || 10
 
     const filter = keyword
       ? {
@@ -35,23 +34,29 @@ productRoutes.get('/products', async (req, res) => {
         createdAt: true,
       },
       orderBy: sortOption,
-      skip: offset,
-      take: pageSize,
+      skip,
+      take,
     })
 
     const list = filteredProducts
-    res.send({ totalCount, list })
+    res.json({ totalCount, list })
   } catch (error) {
-    res.status(500).send({ message: 'Failed to get products.' })
+    res.status(500).json({
+      message: 'Failed to get products.',
+      code: 'GET_PRODUCTS_FAILED',
+    })
   }
 })
 
 productRoutes.get('/products/:id', async (req, res) => {
   try {
-    const id = req.params.id
+    const { id } = req.params
     const product = await prisma.product.findUnique({ where: { id } })
     if (!product) {
-      res.status(404).send({ message: 'Cannot find given id.' })
+      res.status(404).json({
+        message: 'Product not found.',
+        code: 'PRODUCT_NOT_FOUND',
+      })
       return
     }
 
@@ -64,9 +69,12 @@ productRoutes.get('/products/:id', async (req, res) => {
       createdAt: product.createdAt,
     }
 
-    res.send(responseProduct)
+    res.json(responseProduct)
   } catch (error) {
-    res.status(500).send({ message: 'Failed to get product.' })
+    res.status(500).json({
+      message: 'Failed to get product.',
+      code: 'GET_PRODUCT_FAILED',
+    })
   }
 })
 
@@ -93,19 +101,29 @@ productRoutes.post('/products', async (req, res) => {
       createdAt: product.createdAt,
     }
 
-    res.status(201).send(responseProduct)
+    res.status(201).json({
+      message: 'Product created successfully.',
+      code: 'CREATE_PRODUCT_SUCCESS',
+      product: responseProduct,
+    })
   } catch (error) {
-    res.status(400).send({ message: 'Failed to create product.' })
+    res.status(400).json({
+      message: 'Failed to create product.',
+      code: 'CREATE_PRODUCT_FAILED',
+    })
   }
 })
 
 productRoutes.patch('/products/:id', async (req, res) => {
   assert(req.body, UpdateProduct)
   try {
-    const id = req.params.id
+    const { id } = req.params
     const targetProduct = await prisma.product.findUnique({ where: { id } })
     if (!targetProduct) {
-      res.status(404).send({ message: 'Cannot find given id.' })
+      res.status(404).json({
+        message: 'Product not found.',
+        code: 'PRODUCT_NOT_FOUND',
+      })
       return
     }
 
@@ -125,26 +143,42 @@ productRoutes.patch('/products/:id', async (req, res) => {
       updatedAt: product.updatedAt,
     }
 
-    res.send(responseProduct)
+    res.json({
+      message: 'Product updated successfully.',
+      code: 'UPDATE_PRODUCT_SUCCESS',
+      product: responseProduct,
+    })
   } catch (error) {
-    res.status(400).send({ message: 'Failed to update product.' })
+    res.status(400).json({
+      message: 'Failed to update product.',
+      code: 'UPDATE_PRODUCT_FAILED',
+    })
   }
 })
 
 productRoutes.delete('/products/:id', async (req, res) => {
   try {
-    const id = req.params.id
+    const { id } = req.params
     const targetProduct = await prisma.product.findUnique({ where: { id } })
     if (!targetProduct) {
-      res.status(404).send({ message: 'Cannot find given id.' })
+      res.status(404).json({
+        message: 'Product not found.',
+        code: 'PRODUCT_NOT_FOUND',
+      })
       return
     }
 
     await prisma.product.delete({ where: { id } })
 
-    res.sendStatus(204)
+    res.status(200).json({
+      message: 'Product deleted successfully.',
+      code: 'DELETE_PRODUCT_SUCCESS',
+    })
   } catch (error) {
-    res.status(500).send({ message: 'Failed to delete product.' })
+    res.status(500).json({
+      message: 'Failed to delete product.',
+      code: 'DELETE_PRODUCT_FAILED',
+    })
   }
 })
 
