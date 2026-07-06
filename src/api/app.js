@@ -166,21 +166,37 @@ app.delete("/articles/:id", async (req, res) => {
 app.get("/articles/:id/comments", async (req, res) => {
   try {
     const { id } = req.params;
-    const { cursor, limit = 10 } = req.query;
+    const { cursor, limit = 10, commentId, content, from, to } = req.query;
+
+    const take = Number(limit) || 10;
 
     const comments = await prisma.comment.findMany({
-      where: { articleId: id },
-      take: parseInt(limit),
+      where: {
+        articleId: id,
+        ...(commentId && { id: commentId }),
+        ...(content && { content: { contains: content } }),
+        ...(from && to && {
+          createdAt: {
+            gte: new Date(from),
+            lte: new Date(to),
+          },
+        }),
+      },
+      take,
       skip: cursor ? 1 : 0,
       cursor: cursor ? { id: cursor } : undefined,
       orderBy: { createdAt: "desc" },
     });
+    
 
     if (comments.length === 0) {
       return res.json([]);
     }
 
-    res.json(comments);
+    res.json({
+      comments,
+      nextCursor: comments.length > 0 ? comments[comments.length - 1].id : null,
+    });
 
   } catch (error) {
     console.error(error);
