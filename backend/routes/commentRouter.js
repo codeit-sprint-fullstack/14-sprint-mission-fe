@@ -9,6 +9,13 @@ const router = express.Router();
  *   get:
  *     summary: 댓글 목록 조회
  *     tags: [Comments]
+ *     parameters:
+ *       - in: query
+ *         name: cursor
+ *         required: true
+ * 
+ *       - in: query
+ *         name: limit
  *     responses:
  *       200:
  *         description: 댓글 목록 조회 성공

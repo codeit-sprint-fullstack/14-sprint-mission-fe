@@ -1,64 +1,135 @@
 import * as commentService from '../services/commentService.js';
 
-//댓글 목록조회
-// [ ] 댓글 등록 API를 만들어 주세요.
-// [ ] content를 입력하여 댓글을 등록합니다.
-// [ ] 중고마켓, 자유게시판 댓글 등록 API를 따로 만들어 주세요.
-// [ ] 댓글 수정 API를 만들어 주세요.
-// [ ] PATCH 메서드를 사용해 주세요.
-// [ ] 댓글 삭제 API를 만들어 주세요.
-// [ ] 댓글 목록 조회 API를 만들어 주세요.
-// [ ] id, content, createdAt 를 조회합니다.
-// [ ] cursor 방식의 페이지네이션 기능을 포함해 주세요.
-// [ ] 중고마켓, 자유게시판 댓글 목록 조회 API를 따로 만들어 주세요.
+export const getArticleComments = async (req, res) => {
+  try {
+    const commentType = 'ARTICLE_COMMENT';
+    const cursor = req.query.cursor;
+    const limit = Number(req.query.limit ?? 10);
+
+    const result = await commentService.getComments(
+      commentType,
+      cursor,
+      limit
+    );
+
+    res.status(200).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: '게시글 댓글 조회에 실패했습니다.' });
+  }
+};
+
+export const getProductComments = async (req, res) => {
+  try {
+    const commentType = 'PRODUCT_COMMENT';
+    const cursor = req.query.cursor;
+    const limit = Number(req.query.limit ?? 10);
+
+    const result = await commentService.getComments(
+      commentType,
+      cursor,
+      limit
+    );
+
+    res.status(200).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: '상품 댓글 조회에 실패했습니다.' });
+  }
+};
+
 export const getComments = async (req, res) => {
-  // const articleId = req.params.id;
-  const cursor = req.query.cursor;
-  const limit = Number(req.query.limit ?? 10);
+  try {
+    const commentType = req.query.commentType;
+    const cursor = req.query.cursor;
+    const limit = Number(req.query.limit ?? 10);
 
-  const result = await commentService.getComments(
-    // articleId,
-    cursor,
-    limit
-  );
+    const result = await commentService.getComments(
+      commentType,
+      cursor,
+      limit
+    );
 
-  res.send(result);
+    res.status(200).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: '댓글 조회에 실패했습니다.' });
+  }
 };
 
-//댓글 단건조회
+// 댓글 단건 조회
 export const getCommentById = async (req, res) => {
-  const {id} = req.params;
-  const comment = await commentService.getCommentById(id);
+  try {
+    const { id } = req.params;
+    const comment = await commentService.getCommentById(id);
 
-  res.send(comment);
+    if (!comment) {
+      return res.status(404).send({ message: '댓글을 찾을 수 없습니다.' });
+    }
+
+    res.status(200).send(comment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: '댓글 조회에 실패했습니다.' });
+  }
 };
 
-//댓글 수정
+// 댓글 수정
 export const updateComment = async (req, res) => {
-  const {id} = req.params;
-  const result = await commentService.updateComment(id, req.body);
+  try {
+    const { id } = req.params;
+    const result = await commentService.updateComment(id, req.body);
 
-  res.status(201).send(result);
-}
+    if (!result) {
+      return res.status(404).send({ message: '댓글을 찾을 수 없습니다.' });
+    }
 
-//댓글 삭제
+    res.status(200).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send({ message: '댓글 수정에 실패했습니다.' });
+  }
+};
+
+// 댓글 삭제
 export const deleteComment = async (req, res) => {
-  const {id} = req.params;
-  await commentService.deleteComment(id);
+  try {
+    const { id } = req.params;
+    await commentService.deleteComment(id);
 
-  res.sendStatus(204);
-}
+    res.sendStatus(204);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: '댓글 삭제에 실패했습니다.' });
+  }
+};
 
-//중고거래 댓글 등록
+// 중고거래 댓글 등록
 export const createProductComment = async (req, res) => {
-  const result = await commentService.createComment(req.body, 'PRODUCT_COMMENT');
+  try {
+    const result = await commentService.createComment(
+      req.body,
+      'PRODUCT_COMMENT'
+    );
 
-  res.status(201).send(result);
-}
+    res.status(201).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send({ message: '상품 댓글 등록에 실패했습니다.' });
+  }
+};
 
-//자유게시판 댓글 등록
+// 자유게시판 댓글 등록
 export const createArticleComment = async (req, res) => {
-  const result = await commentService.createComment(req.body, 'ARTICLE_COMMENT');
+  try {
+    const result = await commentService.createComment(
+      req.body,
+      'ARTICLE_COMMENT'
+    );
 
-  res.status(201).send(result);
-}
+    res.status(201).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send({ message: '게시글 댓글 등록에 실패했습니다.' });
+  }
+};

@@ -1,3 +1,29 @@
+export const USER = [
+  {
+    email: 'user1@example.com',
+    firstName: '길동',
+    lastName: '홍',
+    address: '서울',
+  },
+  {
+    email: 'user2@example.com',
+    firstName: '철수',
+    lastName: '김',
+    address: '부산',
+  },
+];
+
+export const ARTICLE = [
+  {
+    title: 'Prisma 정말 편하네요',
+    content: '관계 설정이 생각보다 어렵지 않았습니다.',
+  },
+  {
+    title: '오늘 점심 추천',
+    content: '뭐 먹을까요?',
+  },
+];
+
 export const PRODUCTS = [
   {
     "name": "멋쟁이 모자",

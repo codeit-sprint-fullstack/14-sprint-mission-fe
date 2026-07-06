@@ -10,12 +10,13 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
 export const getComments = async (
-  // articleId, 
+  // articleId,
+  commentType, 
   cursor, limit = 10) => {
   const comments = await prisma.comment.findMany({
-    // where: {
-    //   articleId,
-    // },
+    where: {
+      commentType,
+    },
     orderBy: {
       createdAt: 'desc',
     },
