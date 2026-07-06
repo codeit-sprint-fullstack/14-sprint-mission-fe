@@ -11,9 +11,43 @@ app.use(express.json());
 
 app.get("/articles", async (req, res) => {
   try {
+    
     console.log("✅ /articles 라우트 호출됨");
-    const articles = await prisma.article.findMany();
-    res.json(articles);
+    
+    const { title, content, from, to } = req.query;
+
+    const where = {};
+
+    if (title) {
+      where.title = {
+        contains: title,
+        mode: "insensitive",
+      };
+    }
+
+    if (content) {
+      where.content = {
+        contains: content,
+        mode: "insensitive",
+      };
+    }
+
+    if (from || to) {
+      where.createdAt = {};
+      if(from) {
+        where.createdAt.gte = new Date(from);
+      }
+      if (to) {
+        where.createdAt.lte = new Date(to);
+      }
+    }
+
+    const articles = await prisma.article.findMany({where});
+
+    if (articles.length === 0) {
+      return res.status(404).json({ error: "해당 title을 가진 Article이 없습니다." });
+    }
+    return res.json(articles);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Articles를 가져오는데 실패했습니다."});
