@@ -1,5 +1,9 @@
 import express from "express";
 import prisma from "../lib/prisma.js";
+import {
+  validateCreateArticleBody,
+  validateUpdateArticleBody,
+} from "../validators/articleValidator.js";
 
 const router = express.Router();
 
@@ -13,6 +17,7 @@ router.get("/", async (req, res, next) => {
     const where = keyword
       ? {
           OR: [
+            // 제목이나 본문에 keyword가 포함되어있는지 찾겠다
             { title: { contains: keyword, mode: "insensitive" } },
             { content: { contains: keyword, mode: "insensitive" } },
           ],
@@ -63,7 +68,11 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const article = await prisma.article.create({ data: req.body });
+    const data = validateCreateArticleBody(req.body);
+
+    const article = await prisma.article.create({
+      data,
+    });
 
     res.status(201).json(article);
   } catch (error) {
@@ -84,9 +93,11 @@ router.patch("/:id", async (req, res, next) => {
       });
     }
 
+    const data = validateUpdateArticleBody(req.body);
+
     const article = await prisma.article.update({
       where: { id },
-      data: req.body,
+      data,
     });
 
     res.json(article);

@@ -1,12 +1,15 @@
 import express from "express";
 import prisma from "../lib/prisma.js";
+import {
+  validateCreateCommentBody,
+  validateUpdateCommentBody,
+} from "../validators/commentValidator.js";
 
 const router = express.Router();
 
 router.post("/products/:productId/comments", async (req, res, next) => {
   try {
     const { productId } = req.params;
-    const { content } = req.body;
 
     const product = await prisma.product.findUnique({
       where: { id: productId },
@@ -18,9 +21,11 @@ router.post("/products/:productId/comments", async (req, res, next) => {
       });
     }
 
+    const data = validateCreateCommentBody(req.body);
+
     const comment = await prisma.comment.create({
       data: {
-        content,
+        ...data,
         productId,
       },
     });
@@ -34,7 +39,6 @@ router.post("/products/:productId/comments", async (req, res, next) => {
 router.post("/articles/:articleId/comments", async (req, res, next) => {
   try {
     const { articleId } = req.params;
-    const { content } = req.body;
 
     const article = await prisma.article.findUnique({
       where: { id: articleId },
@@ -45,9 +49,11 @@ router.post("/articles/:articleId/comments", async (req, res, next) => {
       });
     }
 
+    const data = validateCreateCommentBody(req.body);
+
     const comment = await prisma.comment.create({
       data: {
-        content,
+        ...data,
         articleId,
       },
     });
@@ -116,6 +122,7 @@ router.get("/articles/:articleId/comments", async (req, res, next) => {
       orderBy: { createdAt: "desc" },
       take: limitNum,
       ...(cursor && {
+        //...(스프레드) 조건문이 객체일때, 객체 값이 있으면 객체내용이 바로 보이게 펼침
         cursor: { id: cursor },
         skip: 1,
       }),
@@ -135,7 +142,6 @@ router.get("/articles/:articleId/comments", async (req, res, next) => {
 router.patch("/comments/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { content } = req.body;
 
     const existingComment = await prisma.comment.findUnique({
       where: { id },
@@ -146,9 +152,11 @@ router.patch("/comments/:id", async (req, res, next) => {
       });
     }
 
+    const data = validateUpdateCommentBody(req.body);
+
     const comment = await prisma.comment.update({
       where: { id },
-      data: { content },
+      data,
     });
 
     res.json(comment);

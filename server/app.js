@@ -23,8 +23,10 @@ app.get("/", (req, res) => {
 app.use((error, req, res, next) => {
   console.error(error);
 
-  res.status(500).json({
-    message: "서버 오류가 발생했습니다.",
+  const status = error.status || 500;
+
+  res.status(status).json({
+    message: error.message || "서버 오류가 발생했습니다.",
   });
 });
 

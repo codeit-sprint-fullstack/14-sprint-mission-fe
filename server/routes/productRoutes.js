@@ -1,5 +1,9 @@
 import express from "express";
 import prisma from "../lib/prisma.js";
+import {
+  validationCreateProductBody,
+  validationUpdateProductBody,
+} from "../validators/productValidator.js";
 
 const router = express.Router();
 
@@ -22,8 +26,7 @@ router.get("/", async (req, res, next) => {
     const totalCount = await prisma.product.count({ where });
     const products = await prisma.product.findMany({
       where,
-      orderBy:
-        sort === "recent" ? { createdAt: "desc" } : { createdAt: "asc" },
+      orderBy: sort === "recent" ? { createdAt: "desc" } : { createdAt: "asc" },
       skip: offsetNum,
       take: limitNum,
     });
@@ -39,7 +42,11 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const product = await prisma.product.create({ data: req.body });
+    const data = validationCreateProductBody(req.body);
+
+    const product = await prisma.product.create({
+      data,
+    });
 
     res.status(201).json(product);
   } catch (error) {
@@ -81,9 +88,11 @@ router.patch("/:id", async (req, res, next) => {
       });
     }
 
+    const data = validationUpdateProductBody(req.body);
+
     const product = await prisma.product.update({
       where: { id },
-      data: req.body,
+      data,
     });
 
     res.json(product);

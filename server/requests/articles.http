@@ -8,17 +8,16 @@ POST http://localhost:3000/articles
 Content-Type: application/json
 
 {
-  "title": "테스트 게시글",
-  "content": "댓글 삭제 테스트용 게시글입니다."
+  "title": "",
+  "content": ""
 }
 ###
 
-PATCH http://localhost:3000/articles/a48748ca-d199-4345-954b-5af685bfc04f
+PATCH http://localhost:3000/articles/78a4c125-89d3-465a-bd75-c954815cef69
 Content-Type: application/json
 
 {
-  "title": "수정된 첫 번째 게시글",
-  "content": "Article PATCH 테스트로 수정된 내용입니다."
+  "content": "     "
 }
 
 ###

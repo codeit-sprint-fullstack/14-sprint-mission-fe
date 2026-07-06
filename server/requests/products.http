@@ -6,10 +6,10 @@ POST http://localhost:3000/products
 Content-Type: application/json
 
 {
-  "name": "테스트 상품",
-  "description": "Prisma POST 테스트 상품입니다.",
-  "price": 12345,
-  "tags": ["테스트", "프리즈마"]
+  "name": "validator 테스트 상품",
+  "description": "validator 테스트 설명",
+  "price": 10000,
+  "tags": "테스트"
 }
 
 ###
@@ -17,12 +17,13 @@ Content-Type: application/json
 Get http://localhost:3000/products/aa719662-6edb-4dda-a568-4fde901d806c
 
 ###
-PATCH http://localhost:3000/products/1b8f3f01-db74-4967-b7dc-03cec5737007
+PATCH http://localhost:3000/products/6255dc1a-89f8-4a6a-94df-97e958bd45e6
 Content-Type: application/json
 
 {
-  "name": "수정된 테스트 상품",
-  "price": 99999
+  "name": "허용 필드만 수정",
+  "createdAt": "2000-01-01T00:00:00.000Z",
+  "comments": []
 }
 
 ###

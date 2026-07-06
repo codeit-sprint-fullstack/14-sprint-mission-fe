@@ -1,8 +1,8 @@
-POST http://localhost:3000/products/aa719662-6edb-4dda-a568-4fde901d806c/comments
+POST http://localhost:3000/products/509206ef-072d-49ae-903a-dbb16b1cdc4b/comments
 Content-Type: application/json
 
 {
-  "content": "이 상품 아직 판매 중인가요?"
+  "content": ""
 }
 
 ### POST article comment 등록 테스트
@@ -10,21 +10,25 @@ POST http://localhost:3000/articles/c8f0f356-288d-45b6-a4d9-d045cbc4a4f9/comment
 Content-Type: application/json
 
 {
-  "content": "이 게시글 추천할 만 한것 같아요."
+  "content": "게시글 댓글 validator 테스트 ^.^"
 }
 
 ### GET product comment 조회 테스트
-GET http://localhost:3000/products/aa719662-6edb-4dda-a568-4fde901d806c/comments?cursor=9360b40e-d238-4f38-a9be-8a8984c7266d&limit=10
+GET http://localhost:3000/products/509206ef-072d-49ae-903a-dbb16b1cdc4b/comments
 
 ### GET article comments 목록 조회
-GET http://localhost:3000/articles/c8f0f356-288d-45b6-a4d9-d045cbc4a4f9/comments?cursor=25f0dc70-be74-4dff-9f73-962f234ce066&limit=
+GET http://localhost:3000/articles/c8f0f356-288d-45b6-a4d9-d045cbc4a4f9/comments
 
 ### PATCH comment 수정 테스트
-PATCH http://localhost:3000/comments/916794f0-4c68-4389-99ef-de3a388a4ec1
+PATCH http://localhost:3000/comments/274d95e4-cf88-4dc8-a3f8-34b1b167fe0e
 Content-Type: application/json
 
 {
-  "content": "수정된 댓글입니다."
+  "content": "허용 필드만 수정되는지 확인",
+  "id": "hacked-id",
+  "createdAt": "2000-01-01",
+  "productId": "fake-product-id",
+  "articleId": "fake-article-id"
 }
 
 ### DELETE comment 삭제 테스트
