@@ -2,6 +2,7 @@ import cors from 'cors'
 import express from 'express'
 
 import productRoutes from './routes/productRoutes.js'
+import articleRoutes from './routes/articleRoutes.js'
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.get('/health', (_req, res) => {
 })
 
 app.use('/products', productRoutes)
+app.use('/articles', articleRoutes)
 
 app.use((_req, res) => {
   res.status(404).json({ message: 'Route not found' })
