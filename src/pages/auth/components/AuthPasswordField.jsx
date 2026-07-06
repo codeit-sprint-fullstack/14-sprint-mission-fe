@@ -17,7 +17,6 @@ const AuthPasswordField = ({
       <label htmlFor={id}>{label}</label>
       <div className="auth-page__password-wrapper">
         <input
-          className="password"
           type={isPasswordVisible ? 'text' : 'password'}
           id={id}
           name={name}
@@ -32,7 +31,7 @@ const AuthPasswordField = ({
           aria-pressed={isPasswordVisible}
           onClick={() => setIsPasswordVisible((prevValue) => !prevValue)}
         >
-          <img src={visibilityOffIcon} alt="" className="visibility" />
+          <img src={visibilityOffIcon} alt="" />
         </button>
       </div>
     </div>
