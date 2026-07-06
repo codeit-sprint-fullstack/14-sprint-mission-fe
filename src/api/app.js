@@ -39,6 +39,27 @@ app.get("/articles/:id", async (req, res) => {
   }
 })
 
+app.post("/articles", async (req, res) => {
+  try {
+    const { title, content } = req.body;
+
+    if ( !title || !content ) {
+      return res.status(400).json({ error: "title과 content 값이 없습니다."});
+    }
+
+    const newArticle = await prisma.article.create({
+      data: {
+        title,
+        content,
+      },
+    });
+
+    res.status(201).json(newArticle);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Article을 생성하는데 실패했습니다." });
+  }
+});
 
 app.listen(3000, () => console.log('✅ DB 서버가 3000번 포트에서 실행될 예정입니다'));
 
