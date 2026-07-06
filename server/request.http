@@ -1,0 +1,27 @@
+#/*********** products ***********/
+GET http://localhost:3000/products?sort=oldest
+
+###
+GET http://localhost:3000/products/3a7e9f21-b4c8-4df5-9a2e-6c0f8d31b572
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "아이폰 미니 13",
+  "description": "아이폰 미니 13 팔아요! 사용감 있습니다.",
+  "price": "십만원",
+  "tags": ["애플", "아이폰"]
+}
+
+###
+PATCH http://localhost:3000/products/00891d0f-99e3-491d-b27e-5a417556be8e
+Content-Type: application/json
+
+{
+  "price": 1200000
+}
+
+###
+DELETE http://localhost:3000/products/00891d0f-99e3-491d-b27e-5a417556be8e
