@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/products/91ba6d3b-c12a-4316-a645-b321cf3d7e5d/comments
+GET http://localhost:3000/products/e2142da8-6512-4223-a8fd-d2723c55ce7b/comments
 
 ### 상품 댓글 목록 조회
 GET http://localhost:3000/products/91ba6d3b-c12a-4316-a645-b321cf3d7e5d/comments?limit=2
