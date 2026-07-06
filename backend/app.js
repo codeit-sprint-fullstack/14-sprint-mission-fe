@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import cors from "cors";
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -12,6 +13,8 @@ const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -22,7 +25,7 @@ app.get("/", (req, res) => {
 // ARTICLES
 //
 app.get("/articles", async (req, res) => {
-  const { offset = 0, limit = 10, order = newest } = req.query;
+  const { offset = 0, limit = 10, order = "newest" } = req.query;
 
   let orderBy;
   switch (order) {
@@ -38,6 +41,13 @@ app.get("/articles", async (req, res) => {
     orderBy,
     skip: parseInt(offset),
     take: parseInt(limit),
+
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      createdAt: true,
+    },
   });
   res.send(articles);
 });
@@ -48,12 +58,12 @@ app.get("/articles/:id", async (req, res) => {
   res.send(article);
 });
 
-app.post("/articles", async (res, req) => {
+app.post("/articles", async (req, res) => {
   const article = await prisma.article.create({ data: req.body });
-  res.statusCode(201).send(article);
+  res.status(201).send(article);
 });
 
-app.patch("/article/:id", async (res, req) => {
+app.patch("/articles/:id", async (req, res) => {
   const { id } = req.params;
   const article = await prisma.article.update({
     where: { id },
@@ -62,12 +72,58 @@ app.patch("/article/:id", async (res, req) => {
   res.send(article);
 });
 
-app.delete("/article/:id", async (res, req) => {
+app.delete("/articles/:id", async (req, res) => {
   const { id } = req.params;
   await prisma.article.delete({ where: { id } });
-  res.sendStatus(204);
+  res.send(204);
 });
 
+//
+// COMMENTS
+//
+app.get("/comments", async (req, res) => {
+  const comments = await prisma.comment.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+  res.send(comments);
+});
+
+app.get("/comments/:commentsId", async (req, res) => {
+  const { commentsId } = req.params;
+  const comment = await prisma.comment.findUniqueOrThrow({
+    where: { id: parseInt(commentsId) },
+  });
+  res.send(comment);
+});
+
+app.post("/articles/:articleId/comments", async (req, res) => {
+  const { articleId } = req.params;
+  const comment = await prisma.comment.create({
+    data: {
+      content: req.body.content,
+      user: { connect: { id: req.body.userId } },
+      article: { connect: { id: articleId } },
+    },
+  });
+  res.status(201).send(comment);
+});
+
+app.patch("/comments/:commentsId", async (req, res) => {
+  const { commentsId } = req.params;
+  const updatedComment = await prisma.comment.update({
+    where: { id: parseInt(commentsId) },
+    data: req.body,
+  });
+  res.send(updatedComment);
+});
+
+app.delete("/comments/:commentsId", async (req, res) => {
+  const { commentsId } = req.params;
+  await prisma.comment.delete({ where: { id: parseInt(commentsId) } });
+  res.status(204).send();
+});
+
+//
 // // PRODUCTS //
 // //GET list
 // app.get("/products", async (req, res) => {
@@ -143,6 +199,15 @@ app.delete("/article/:id", async (res, req) => {
 //     res.status(404).send({ message: "Cannot find given id. " });
 //   }
 // });
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  if (err.name === "NotFoundError" || err.code === "P2025") {
+    return res.status(404).json({ error: `Couldn't find requested data` });
+  }
+
+  res.status(500).json({ message: err.message });
+});
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

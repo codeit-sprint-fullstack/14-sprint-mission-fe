@@ -33,3 +33,66 @@ Content-Type: application/json
 
 ###
 DELETE {{baseUrl}}/products/6a3e18c6bba30124a3a4ac21
+
+
+
+// ARTICLES
+###
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "title": "글 테스트입니다",
+  "content": "글 테스트입니다.",
+  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317"
+}
+
+###
+GET {{baseUrl}}/articles
+
+###
+GET {{baseUrl}}/articles?sort=recent&count=10
+
+###
+PATCH {{baseUrl}}/articles/87350587-f132-4342-a4da-48a107801085
+Content-Type: application/json
+
+{
+  "title": "PATCH 게시글 제목입니다",
+  "content": "PATCH 테스트 본문입니다."
+}
+
+###
+DELETE {{baseUrl}}/articles/5ab3b753-5545-4a44-a990-28d8bfa9d11f
+
+
+
+// COMMENTS
+
+###
+GET {{baseUrl}}/comments
+
+
+###
+GET {{baseUrl}}/comments/10
+
+
+###
+POST {{baseUrl}}/articles/1418fc5e-7ab9-4f06-8da1-9972f128f122/comments
+Content-Type: application/json
+
+{
+  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317",
+  "content": "코멘트 테스트입니다."
+}
+
+###
+PATCH {{baseUrl}}/comments/8
+Content-Type: application/json
+
+{
+  "content": "PATCH 코멘트 테스트입니다"
+}
+
+###
+DELETE {{baseUrl}}/comments/12
