@@ -95,6 +95,36 @@ app.post("/articles", async (req, res) => {
   }
 });
 
+app.patch("/articles/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+
+    const updateData = {};
+    if (title) updateData.title = title;
+    if (content) updateData.content = content;
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ error: "수정할 데이터가 필요합니다." });
+    }
+
+    const updatedArticle = await prisma.article.update({
+      where: { id },
+      data: updateData,
+    });
+
+    res.json(updatedArticle);
+  } catch (error) {
+    console.error(error);
+
+    if (error.code === "P2025") {
+      return res.status(404).json({ error: "해당하는 Article을 찾을 수 없습니다." });
+    }
+
+    res.status(500).json({ error: "Article 수정에 실패했습니다." });
+  }
+});
+
 app.listen(3000, () => console.log('✅ DB 서버가 3000번 포트에서 실행될 예정입니다'));
 
 
