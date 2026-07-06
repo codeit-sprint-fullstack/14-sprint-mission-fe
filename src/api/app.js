@@ -125,6 +125,26 @@ app.patch("/articles/:id", async (req, res) => {
   }
 });
 
+app.delete("/articles/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedArticle = await prisma.article.delete({
+      where: { id },
+    });
+
+    res.json({ message: "Article이 삭제되었습니다.", deletedArticle});
+  } catch (error) {
+    console.error(error);
+
+    if (error.code === "P2025") {
+      return res.status(404).json({ error: "해당 Article을 찾을 수 없습니다." });
+    }
+
+    res.status(500).json({ error: "Article 삭제에 실패했습니다." });
+  }
+});
+
 app.listen(3000, () => console.log('✅ DB 서버가 3000번 포트에서 실행될 예정입니다'));
 
 

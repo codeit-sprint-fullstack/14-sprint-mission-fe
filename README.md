@@ -22,8 +22,8 @@
 - [x] title, content를 입력해 게시글을 등록합니다.
 - [x] 게시글 조회 API를 만들어 주세요.
 - [x] id, title, content, createdAt를 조회합니다.
-- [ ] 게시글 수정 API를 만들어 주세요.
-- [ ] 게시글 삭제 API를 만들어 주세요.
+- [x] 게시글 수정 API를 만들어 주세요.
+- [x] 게시글 삭제 API를 만들어 주세요.
 - [ ] 게시글 목록 조회 API를 만들어 주세요.
 - [ ] id, title, content, createdAt를 조회합니다.
 - [ ] offset 방식의 페이지네이션 기능을 포함해 주세요.
