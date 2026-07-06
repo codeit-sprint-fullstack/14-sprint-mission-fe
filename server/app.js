@@ -3,6 +3,7 @@ import express from 'express'
 
 import productRoutes from './routes/productRoutes.js'
 import articleRoutes from './routes/articleRoutes.js'
+import articleCommentRoutes from './routes/articleCommentRoutes.js'
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.get('/health', (_req, res) => {
 
 app.use('/products', productRoutes)
 app.use('/articles', articleRoutes)
+app.use('/article-comments', articleCommentRoutes)
 
 app.use((_req, res) => {
   res.status(404).json({ message: 'Route not found' })
