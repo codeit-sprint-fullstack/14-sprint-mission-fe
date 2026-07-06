@@ -1,9 +1,9 @@
 import cors from 'cors'
 import express from 'express'
 
-import productRoutes from './routes/productRoutes.js'
-import articleRoutes from './routes/articleRoutes.js'
 import articleCommentRoutes from './routes/articleCommentRoutes.js'
+import articleRoutes from './routes/articleRoutes.js'
+import productRoutes from './routes/productRoutes.js'
 
 const app = express()
 
