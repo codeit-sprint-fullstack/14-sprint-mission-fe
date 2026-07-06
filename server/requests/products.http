@@ -32,3 +32,11 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
+
+### 상품 가격 수정 테스트
+PATCH http://localhost:3000/products/e2142da8-6512-4223-a8fd-d2723c55ce7b
+Content-Type: application/json
+
+{
+  "price": "19900"
+}
