@@ -193,4 +193,63 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.post("/:productId/comments", async (req, res) => {
+  const { productId } = req.params;
+  const { content } = req.body;
+
+  const comment = await prisma.comment.create({
+    data: {
+      content,
+      productId,
+    },
+    select: {
+      id: true,
+      content: true,
+      createdAt: true,
+      updatedAt: true,
+      productId: true,
+    },
+  });
+
+  res.status(201).json(comment);
+});
+
+router.get("/:productId/comments", async (req, res) => {
+  const { productId } = req.params;
+  const { cursor } = req.query;
+  const limit = Number(req.query.limit) || 10;
+
+  const queryOptions = {
+    where: {
+      productId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    skip: cursor ? 1 : 0,
+    take: limit,
+    select: {
+      id: true,
+      content: true,
+      createdAt: true,
+    },
+  };
+
+  if (cursor) {
+    queryOptions.cursor = {
+      id: cursor,
+    };
+  }
+
+  const comments = await prisma.comment.findMany(queryOptions);
+
+  const nextCursor =
+    comments.length === limit ? comments[comments.length - 1].id : null;
+
+  res.status(200).json({
+    list: comments,
+    nextCursor,
+  });
+});
+
 export default router;

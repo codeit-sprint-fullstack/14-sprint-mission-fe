@@ -123,4 +123,64 @@ router.delete("/:id", async (req, res) => {
     res.sendStatus(204);
 });
 
+router.post("/:articleId/comments", async (req, res) => {
+  const { articleId } = req.params;
+  const { content } = req.body;
+
+  const comment = await prisma.comment.create({
+    data: {
+      content,
+      articleId,
+    },
+    select: {
+      id: true,
+      content: true,
+      createdAt: true,
+      updatedAt: true,
+      articleId: true,
+    },
+  });
+
+  res.status(201).json(comment);
+});
+
+router.get("/:articleId/comments", async (req, res) => {
+  const { articleId } = req.params;
+  const { cursor } = req.query;
+  const limit = Number(req.query.limit) || 10;
+
+  const queryOptions = {
+    where: {
+      articleId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    skip: cursor ? 1 : 0,
+    take: limit,
+    select: {
+      id: true,
+      content: true,
+      createdAt: true,
+    },
+  };
+
+  if (cursor) {
+    queryOptions.cursor = {
+      id: cursor,
+    };
+  }
+
+  const comments = await prisma.comment.findMany(queryOptions);
+
+  const nextCursor =
+    comments.length === limit ? comments[comments.length - 1].id : null;
+
+  res.status(200).json({
+    list: comments,
+    nextCursor,
+  });
+});
+
+
 export default router;

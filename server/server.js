@@ -4,6 +4,7 @@ import "dotenv/config";
 import { Prisma } from "@prisma/client";
 import productsRouter from "./routes/products.js";
 import articlesRouter from "./routes/articles.js";
+import commentsRouter from "./routes/comments.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 
 app.use("/products", productsRouter);
 app.use("/articles", articlesRouter);
+app.use("/comments", commentsRouter);
 
 app.use((err, req, res, next) => {
   if (
