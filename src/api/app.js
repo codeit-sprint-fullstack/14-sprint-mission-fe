@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from '@prisma/adapter-pg';
+import { parse } from "dotenv";
 
 const app = express();
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
@@ -14,7 +15,7 @@ app.get("/articles", async (req, res) => {
     
     console.log("✅ /articles 라우트 호출됨");
     
-    const { title, content, from, to } = req.query;
+    const { title, content, from, to, page = 1, limit = 10, sort = "createdAt", order = "desc" } = req.query;
 
     const where = {};
 
@@ -42,12 +43,26 @@ app.get("/articles", async (req, res) => {
       }
     }
 
-    const articles = await prisma.article.findMany({where});
+    const articles = await prisma.article.findMany({
+      where,
+      skip: (page - 1) * limit,
+      take: parseInt(limit),
+      orderBy: { [sort]: order },
+    });
+
+    const totalCount = await prisma.article.count({where});
 
     if (articles.length === 0) {
-      return res.status(404).json({ error: "해당 title을 가진 Article이 없습니다." });
+      return res.status(404).json({ error: "조건에 맞는 Article이 없습니다." });
     }
-    return res.json(articles);
+
+    return res.json({
+      totalCount,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      articles,
+    });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Articles를 가져오는데 실패했습니다."});
