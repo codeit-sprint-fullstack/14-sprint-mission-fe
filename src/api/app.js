@@ -238,7 +238,25 @@ app.patch("/comments/:id", async (req, res) => {
 
     res.status(500).json({ error: "Comment 수정에 실패했습니다." });
   }
-})
+});
+
+app.delete("/comments/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await prisma.comment.delete({
+      where: { id },
+    });
+
+    res.json({ message: "Comment를 성공적으로 삭제하였습니다."});
+  } catch (error) {
+    console.error(error);
+    if (error.code === "P2025") {
+      return res.status(404).json({ error: "Id에 해당하는 Comment를 찾을 수 없습니다"});
+    }
+    res.status(500).json({ error: "Comment 삭제에 실패하였습니다."});
+  }
+});
 
 app.listen(3000, () => console.log('✅ DB 서버가 3000번 포트에서 실행될 예정입니다'));
 
