@@ -1,19 +1,34 @@
 import mongoose from 'mongoose'
 
+export const PRODUCT_NAME_MAX_LENGTH = 10
+export const PRODUCT_DESCRIPTION_MIN_LENGTH = 10
+export const PRODUCT_DESCRIPTION_MAX_LENGTH = 100
+export const PRODUCT_TAG_MIN_LENGTH = 1
+export const PRODUCT_TAG_MAX_LENGTH = 5
+
 const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: [true, '상품명을 입력해주세요.'],
       trim: true,
-      maxlength: [10, '상품명은 10자 이내로 입력해주세요.'],
+      maxlength: [
+        PRODUCT_NAME_MAX_LENGTH,
+        `상품명은 ${PRODUCT_NAME_MAX_LENGTH}자 이내로 입력해주세요.`,
+      ],
     },
     description: {
       type: String,
       required: [true, '상품 소개를 입력해주세요.'],
       trim: true,
-      minlength: [10, '상품 소개는 10자 이상 입력해주세요.'],
-      maxlength: [100, '상품 소개는 100자 이내로 입력해주세요.'],
+      minlength: [
+        PRODUCT_DESCRIPTION_MIN_LENGTH,
+        `상품 소개는 ${PRODUCT_DESCRIPTION_MIN_LENGTH}자 이상 입력해주세요.`,
+      ],
+      maxlength: [
+        PRODUCT_DESCRIPTION_MAX_LENGTH,
+        `상품 소개는 ${PRODUCT_DESCRIPTION_MAX_LENGTH}자 이내로 입력해주세요.`,
+      ],
     },
     price: {
       type: Number,
@@ -38,8 +53,12 @@ const productSchema = new mongoose.Schema(
         },
         {
           validator: (tags) =>
-            tags.every((tag) => tag.length >= 1 && tag.length <= 5),
-          message: '태그는 1자 이상 5자 이내로 입력해주세요.',
+            tags.every(
+              (tag) =>
+                tag.length >= PRODUCT_TAG_MIN_LENGTH &&
+                tag.length <= PRODUCT_TAG_MAX_LENGTH,
+            ),
+          message: `태그는 ${PRODUCT_TAG_MIN_LENGTH}자 이상 ${PRODUCT_TAG_MAX_LENGTH}자 이내로 입력해주세요.`,
         },
       ],
     },
