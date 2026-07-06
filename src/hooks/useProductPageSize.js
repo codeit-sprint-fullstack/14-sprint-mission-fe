@@ -2,24 +2,9 @@ import { useEffect, useState } from 'react'
 import { BREAKPOINT_TABLET, BREAKPOINT_DESKTOP } from '../constants/layout'
 
 const getProductPageSize = () => {
-  if (window.innerWidth < BREAKPOINT_TABLET) {
-    return {
-      type: 'mobile',
-      all: 4,
-    }
-  }
-
-  if (window.innerWidth < BREAKPOINT_DESKTOP) {
-    return {
-      type: 'tablet',
-      all: 6,
-    }
-  }
-
-  return {
-    type: 'desktop',
-    all: 10,
-  }
+  if (window.innerWidth < BREAKPOINT_TABLET) return 4
+  if (window.innerWidth < BREAKPOINT_DESKTOP) return 6
+  return 10
 }
 
 const useProductPageSize = (onPageSizeChange) => {
@@ -29,9 +14,7 @@ const useProductPageSize = (onPageSizeChange) => {
     const handleResize = () => {
       const nextPageSize = getProductPageSize()
 
-      if (pageSize.type === nextPageSize.type) {
-        return
-      }
+      if (nextPageSize === pageSize) return
 
       setPageSize(nextPageSize)
       onPageSizeChange?.()
@@ -42,7 +25,7 @@ const useProductPageSize = (onPageSizeChange) => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [pageSize.type, onPageSizeChange])
+  }, [pageSize, onPageSizeChange])
 
   return pageSize
 }

@@ -44,11 +44,11 @@ const ItemsPage = () => {
       setErrorMessage('')
 
       try {
-        const offset = (page - 1) * pageSize.all
+        const offset = (page - 1) * pageSize
 
         const productData = await getProductList({
           offset,
-          limit: pageSize.all,
+          limit: pageSize,
           keyword,
           orderBy,
         })
@@ -57,7 +57,7 @@ const ItemsPage = () => {
 
         const nextTotalPages = Math.max(
           1,
-          Math.ceil(productData.totalCount / pageSize.all),
+          Math.ceil(productData.totalCount / pageSize),
         )
 
         setTotalPages(nextTotalPages)
@@ -81,7 +81,7 @@ const ItemsPage = () => {
     return () => {
       ignore = true
     }
-  }, [page, pageSize.all, keyword, orderBy])
+  }, [page, pageSize, keyword, orderBy])
 
   return (
     <MainLayout>
