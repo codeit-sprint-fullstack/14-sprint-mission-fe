@@ -166,14 +166,18 @@ app.delete("/articles/:id", async (req, res) => {
 app.get("/articles/:id/comments", async (req, res) => {
   try {
     const { id } = req.params;
+    const { cursor, limit = 10 } = req.query;
 
     const comments = await prisma.comment.findMany({
       where: { articleId: id },
+      take: parseInt(limit),
+      skip: cursor ? 1 : 0,
+      cursor: cursor ? { id: cursor } : undefined,
       orderBy: { createdAt: "desc" },
     });
 
     if (comments.length === 0) {
-      return res.status(404).json({ error: "해당 Article에 Comment가 없습니다." });
+      return res.json([]);
     }
 
     res.json(comments);
