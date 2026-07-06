@@ -39,7 +39,7 @@ const ProductRegistrationPage = () => {
       const createdProduct = await createProduct({
         name: formValues.name,
         description: formValues.description,
-        price: formValues.price,
+        price: Number(formValues.price),
         tags: formValues.tags,
       })
 
