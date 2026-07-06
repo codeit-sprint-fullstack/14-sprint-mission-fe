@@ -87,8 +87,8 @@ const ItemsPage = () => {
     <MainLayout>
       <div className="items-page">
         <section className="items-section">
-          <div className="items-section-header">
-            <h2 className="items-section-title">판매 중인 상품</h2>
+          <div className="items-section__header">
+            <h2 className="items-section__title">판매 중인 상품</h2>
             <ProductToolbar
               keyword={keywordInput}
               orderBy={orderBy}
@@ -97,13 +97,13 @@ const ItemsPage = () => {
             />
           </div>
           {errorMessage ? (
-            <p className="items-message">{errorMessage}</p>
+            <p className="items-section__message">{errorMessage}</p>
           ) : isLoading ? (
-            <p className="items-message">상품을 불러오는 중...</p>
+            <p className="items-section__message">상품을 불러오는 중...</p>
           ) : products.length === 0 ? (
-            <p className="items-message">검색 결과가 없습니다.</p>
+            <p className="items-section__message">검색 결과가 없습니다.</p>
           ) : (
-            <div className="all-products-grid">
+            <div className="items-section__grid">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
