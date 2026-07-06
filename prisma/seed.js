@@ -14,9 +14,24 @@ async function main() {
   await prisma.Product.deleteMany();
   await prisma.Tags.deleteMany();
   await prisma.Article.deleteMany();
+  await prisma.Comment.deleteMany();
 
   await prisma.Product.createMany({ data: PRODUCTS, skipDuplicates: true});
   await prisma.Article.createMany({ data: ARTICLES, skipDuplicates: true});
+  
+
+  // Article id 조회 후 Comment 자동 생성 
+  const articles = await prisma.article.findMany();
+
+  await prisma.Comment.createMany({
+    data: articles
+      .map((article) => [
+        { content: `${article.title}에 대한 첫 번째 댓글`, articleId: article.id },
+        { content: `${article.title}에 대한 두 번째 댓글`, articleId: article.id },
+      ])
+      .flat(),
+  });
+  // (테스트용이며 나중에 지워야함)
   
 }
 

@@ -73,7 +73,7 @@ const PRODUCTS = [
 
 
 // mook.js
-export const ARTICLES = [
+const ARTICLES = [
   {
     title: "첫 번째 글",
     content: "테스트용 내용 1",

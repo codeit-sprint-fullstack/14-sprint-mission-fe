@@ -10,6 +10,8 @@ const prisma = new PrismaClient({ adapter });
 
 app.use(express.json());
 
+// Articles 메서드
+
 app.get("/articles", async (req, res) => {
   try {
     
@@ -157,6 +159,28 @@ app.delete("/articles/:id", async (req, res) => {
     }
 
     res.status(500).json({ error: "Article 삭제에 실패했습니다." });
+  }
+});
+
+// Comment 메서드
+app.get("/articles/:id/comment", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const comments = await prisma.comment.findMany({
+      where: { articleId: id },
+      orderBy: { createdAt: "desc" },
+    });
+
+    if (comments.length === 0) {
+      return res.status(404).json({ error: "해당 Article에 Comment가 없습니다." });
+    }
+
+    res.json(comments);
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Comment를 가져오는데 실패했습니다." });
   }
 });
 
