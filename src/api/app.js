@@ -163,7 +163,7 @@ app.delete("/articles/:id", async (req, res) => {
 });
 
 // Comment 메서드
-app.get("/articles/:id/comment", async (req, res) => {
+app.get("/articles/:id/comments", async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -183,6 +183,62 @@ app.get("/articles/:id/comment", async (req, res) => {
     return res.status(500).json({ error: "Comment를 가져오는데 실패했습니다." });
   }
 });
+
+app.post("/articles/:id/comments", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { content } = req.body;
+
+    if (!content) {
+      return res.status(400).json({ error: "Content를 입력해야 합니다." });
+    }
+
+    const newComment = await prisma.comment.create({
+      data: {
+        content,
+        articleId: id,
+      },
+    });
+
+    res.status(201).json(newComment);
+
+  } catch (error) {
+    console.error(error);
+    
+    if (error.code === "P2003") {
+      return res.status(404).json({ error: "ID에 해당하는 Article을 찾을 수 없습니다." });
+    }
+
+    res.status(500).json({ error: "Comment 생성에 실패했습니다." });
+  }
+});
+
+app.patch("/comments/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { content } = req.body;
+
+    if(!content) {
+      return res.status(400).json({ error: "수정할 Comment가 필요합니다." });
+    }
+
+    const updatedComment = await prisma.comment.update({
+      where: { id },
+      data: { content },
+    });
+
+    res.json(updatedComment);
+
+  } catch (error) {
+    console.error(error);
+
+    if (error.code === "P2025") {
+      return res.status(404).json({ error: "ID에 해당하는 Comment를 찾을 수 없습니다." });
+    }
+
+    res.status(500).json({ error: "Comment 수정에 실패했습니다." });
+  }
+})
 
 app.listen(3000, () => console.log('✅ DB 서버가 3000번 포트에서 실행될 예정입니다'));
 
