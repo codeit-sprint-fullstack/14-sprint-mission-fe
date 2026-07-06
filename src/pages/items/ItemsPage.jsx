@@ -100,6 +100,8 @@ const ItemsPage = () => {
             <p className="items-message">{errorMessage}</p>
           ) : isLoading ? (
             <p className="items-message">상품을 불러오는 중...</p>
+          ) : products.length === 0 ? (
+            <p className="items-message">검색 결과가 없습니다.</p>
           ) : (
             <div className="all-products-grid">
               {products.map((product) => (
