@@ -93,12 +93,23 @@ router.get("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
+  const { title, content } = req.body;
+
+  const data = {};
+
+  if (title !== undefined) {
+    data.title = title;
+  }
+
+  if (content !== undefined) {
+    data.content = content;
+  }
 
   const updatedArticle = await prisma.article.update({
     where: {
       id,
     },
-    data: req.body,
+    data,
     select: {
       id: true,
       title: true,
@@ -112,15 +123,15 @@ router.patch("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    await prisma.article.delete({
-      where: {
-        id,
-      },
-    });
+  await prisma.article.delete({
+    where: {
+      id,
+    },
+  });
 
-    res.sendStatus(204);
+  res.sendStatus(204);
 });
 
 router.post("/:articleId/comments", async (req, res) => {
@@ -181,6 +192,5 @@ router.get("/:articleId/comments", async (req, res) => {
     nextCursor,
   });
 });
-
 
 export default router;

@@ -92,7 +92,7 @@ router.get("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, description, price, tags, image} = req.body;
+  const { name, description, price, tags, image } = req.body;
 
   const data = {};
 
