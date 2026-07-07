@@ -9,6 +9,11 @@ import {
   PRODUCT_TAG_MAX_LENGTH,
 } from '../../shared/constants/product.js'
 import prisma from '../lib/prisma.js'
+import {
+  getOffsetPagination,
+  isPrismaNotFoundError,
+  parsePositiveInt,
+} from '../utils/request.js'
 
 const MAX_PRODUCT_LIMIT = 50
 
@@ -27,12 +32,6 @@ const ProductCreateStruct = object({
 })
 
 const ProductUpdateStruct = partial(ProductCreateStruct)
-
-const parseProductId = (id) => {
-  const productId = Number(id)
-
-  return Number.isInteger(productId) && productId > 0 ? productId : null
-}
 
 const normalizeProductBody = (body) => {
   const normalizedBody = { ...body }
@@ -140,17 +139,14 @@ const getProductSearchWhere = (keyword) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const offset = Number(req.query.offset ?? 0)
-    const limit = Number(req.query.limit ?? 10)
     const { keyword, orderBy = PRODUCT_ORDER_BY.RECENT } = req.query
+    const {
+      offset,
+      limit,
+      error: paginationError,
+    } = getOffsetPagination(req.query, { maxLimit: MAX_PRODUCT_LIMIT })
 
-    if (
-      !Number.isInteger(offset) ||
-      !Number.isInteger(limit) ||
-      offset < 0 ||
-      limit < 1 ||
-      limit > MAX_PRODUCT_LIMIT
-    ) {
+    if (paginationError) {
       return res
         .status(400)
         .json({ message: '페이지네이션 값이 올바르지 않습니다.' })
@@ -202,7 +198,7 @@ export const createProduct = async (req, res) => {
 
 export const getProductById = async (req, res) => {
   try {
-    const id = parseProductId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '상품 ID가 올바르지 않습니다.' })
@@ -224,7 +220,7 @@ export const getProductById = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
-    const id = parseProductId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '상품 ID가 올바르지 않습니다.' })
@@ -247,7 +243,7 @@ export const updateProduct = async (req, res) => {
 
     return res.status(200).json(product)
   } catch (error) {
-    if (error.code === 'P2025') {
+    if (isPrismaNotFoundError(error)) {
       return res.status(404).json({ message: '상품을 찾을 수 없습니다.' })
     }
 
@@ -257,7 +253,7 @@ export const updateProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
   try {
-    const id = parseProductId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '상품 ID가 올바르지 않습니다.' })
@@ -269,7 +265,7 @@ export const deleteProduct = async (req, res) => {
 
     return res.status(204).send()
   } catch (error) {
-    if (error.code === 'P2025') {
+    if (isPrismaNotFoundError(error)) {
       return res.status(404).json({ message: '상품을 찾을 수 없습니다.' })
     }
 

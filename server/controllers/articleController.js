@@ -2,6 +2,11 @@ import { object, partial, string, validate } from 'superstruct'
 
 import { ARTICLE_ORDER_BY } from '../../shared/constants/article.js'
 import prisma from '../lib/prisma.js'
+import {
+  getOffsetPagination,
+  isPrismaNotFoundError,
+  parsePositiveInt,
+} from '../utils/request.js'
 
 const MAX_ARTICLE_LIMIT = 50
 
@@ -18,12 +23,6 @@ const ArticleCreateStruct = object({
 })
 
 const ArticleUpdateStruct = partial(ArticleCreateStruct)
-
-const parseArticleId = (id) => {
-  const articleId = Number(id)
-
-  return Number.isInteger(articleId) && articleId > 0 ? articleId : null
-}
 
 const normalizeArticleBody = (body) => {
   const normalizedBody = { ...body }
@@ -76,17 +75,14 @@ const getArticleSearchWhere = (keyword) => {
 
 export const getArticles = async (req, res) => {
   try {
-    const offset = Number(req.query.offset ?? 0)
-    const limit = Number(req.query.limit ?? 10)
     const { keyword, orderBy = ARTICLE_ORDER_BY.RECENT } = req.query
+    const {
+      offset,
+      limit,
+      error: paginationError,
+    } = getOffsetPagination(req.query, { maxLimit: MAX_ARTICLE_LIMIT })
 
-    if (
-      !Number.isInteger(offset) ||
-      !Number.isInteger(limit) ||
-      offset < 0 ||
-      limit < 1 ||
-      limit > MAX_ARTICLE_LIMIT
-    ) {
+    if (paginationError) {
       return res
         .status(400)
         .json({ message: '페이지네이션 값이 올바르지 않습니다.' })
@@ -138,7 +134,7 @@ export const createArticle = async (req, res) => {
 
 export const getArticleById = async (req, res) => {
   try {
-    const id = parseArticleId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '게시글 ID가 올바르지 않습니다.' })
@@ -160,7 +156,7 @@ export const getArticleById = async (req, res) => {
 
 export const updateArticle = async (req, res) => {
   try {
-    const id = parseArticleId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '게시글 ID가 올바르지 않습니다.' })
@@ -183,7 +179,7 @@ export const updateArticle = async (req, res) => {
 
     return res.status(200).json(article)
   } catch (error) {
-    if (error.code === 'P2025') {
+    if (isPrismaNotFoundError(error)) {
       return res.status(404).json({ message: '게시글을 찾을 수 없습니다.' })
     }
 
@@ -193,7 +189,7 @@ export const updateArticle = async (req, res) => {
 
 export const deleteArticle = async (req, res) => {
   try {
-    const id = parseArticleId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '게시글 ID가 올바르지 않습니다.' })
@@ -205,7 +201,7 @@ export const deleteArticle = async (req, res) => {
 
     return res.status(204).send()
   } catch (error) {
-    if (error.code === 'P2025') {
+    if (isPrismaNotFoundError(error)) {
       return res.status(404).json({ message: '게시글을 찾을 수 없습니다.' })
     }
 

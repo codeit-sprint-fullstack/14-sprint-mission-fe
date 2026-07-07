@@ -1,6 +1,12 @@
 import { object, string, validate } from 'superstruct'
 
 import prisma from '../lib/prisma.js'
+import {
+  getCursorPagination,
+  isPrismaForeignKeyError,
+  isPrismaNotFoundError,
+  parsePositiveInt,
+} from '../utils/request.js'
 
 const MAX_COMMENT_LIMIT = 50
 
@@ -13,12 +19,6 @@ const commentListSelect = {
 const CommentStruct = object({
   content: string(),
 })
-
-const parseId = (value) => {
-  const id = Number(value)
-
-  return Number.isInteger(id) && id > 0 ? id : null
-}
 
 const normalizeCommentBody = (body) => {
   const normalizedBody = { ...body }
@@ -50,22 +50,19 @@ const validateComment = (body) => {
 
 export const getArticleComments = async (req, res) => {
   try {
-    const articleId = parseId(req.params.articleId)
+    const articleId = parsePositiveInt(req.params.articleId)
 
     if (!articleId) {
       return res.status(400).json({ message: '게시글 ID가 올바르지 않습니다.' })
     }
 
-    const limit = Number(req.query.limit ?? 10)
-    const cursor =
-      req.query.cursor === undefined ? null : parseId(req.query.cursor)
+    const {
+      limit,
+      cursor,
+      error: paginationError,
+    } = getCursorPagination(req.query, { maxLimit: MAX_COMMENT_LIMIT })
 
-    if (
-      !Number.isInteger(limit) ||
-      limit < 1 ||
-      limit > MAX_COMMENT_LIMIT ||
-      (req.query.cursor !== undefined && !cursor)
-    ) {
+    if (paginationError) {
       return res
         .status(400)
         .json({ message: '페이지네이션 값이 올바르지 않습니다.' })
@@ -102,7 +99,7 @@ export const getArticleComments = async (req, res) => {
 
 export const createArticleComment = async (req, res) => {
   try {
-    const articleId = parseId(req.params.articleId)
+    const articleId = parsePositiveInt(req.params.articleId)
 
     if (!articleId) {
       return res.status(400).json({ message: '게시글 ID가 올바르지 않습니다.' })
@@ -123,7 +120,7 @@ export const createArticleComment = async (req, res) => {
 
     return res.status(201).json(comment)
   } catch (error) {
-    if (error.code === 'P2003') {
+    if (isPrismaForeignKeyError(error)) {
       return res.status(404).json({ message: '게시글을 찾을 수 없습니다.' })
     }
 
@@ -133,7 +130,7 @@ export const createArticleComment = async (req, res) => {
 
 export const updateArticleComment = async (req, res) => {
   try {
-    const id = parseId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '댓글 ID가 올바르지 않습니다.' })
@@ -152,7 +149,7 @@ export const updateArticleComment = async (req, res) => {
 
     return res.status(200).json(comment)
   } catch (error) {
-    if (error.code === 'P2025') {
+    if (isPrismaNotFoundError(error)) {
       return res.status(404).json({ message: '댓글을 찾을 수 없습니다.' })
     }
 
@@ -162,7 +159,7 @@ export const updateArticleComment = async (req, res) => {
 
 export const deleteArticleComment = async (req, res) => {
   try {
-    const id = parseId(req.params.id)
+    const id = parsePositiveInt(req.params.id)
 
     if (!id) {
       return res.status(400).json({ message: '댓글 ID가 올바르지 않습니다.' })
@@ -174,7 +171,7 @@ export const deleteArticleComment = async (req, res) => {
 
     return res.status(204).send()
   } catch (error) {
-    if (error.code === 'P2025') {
+    if (isPrismaNotFoundError(error)) {
       return res.status(404).json({ message: '댓글을 찾을 수 없습니다.' })
     }
 
