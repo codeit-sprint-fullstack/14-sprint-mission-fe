@@ -16,7 +16,7 @@ const getProductFormValidation = ({
 
   const trimmedName = name.trim()
   const trimmedDescription = description.trim()
-  const trimmedPrice = price.toString().trim()
+  const trimmedPrice = String(price).trim()
   const trimmedTagInput = tagInput.trim()
 
   const hasEmptyRequired =
