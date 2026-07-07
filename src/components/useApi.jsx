@@ -16,7 +16,7 @@ function useApi (page, size, option, keyword){
         setLoading(true);
         const res = await axios.get(
           // `https://mongodb-g9dr.onrender.com/tasks?page=${page}&limit=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`, 
-          `http://localhost:3001/tasks?page=${page}&limit=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`,
+          `http://localhost:3000/tasks?page=${page}&limit=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`,
           {
             headers: { "Cache-Control": "no-cache" },
           }
