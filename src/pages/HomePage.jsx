@@ -66,7 +66,7 @@ function HomePage() {
               <br />
               거래해 보세요
             </h1>
-            <a className="primary-button home-hero__button" href="#/market">
+            <a className="primary-button home-hero__button" href="/items">
               구경하러 가기
             </a>
           </div>

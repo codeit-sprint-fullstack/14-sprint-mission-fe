@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthShell from '../components/AuthShell.jsx';
 import FormField from '../components/FormField.jsx';
 import MessageModal from '../components/MessageModal.jsx';
@@ -16,6 +17,7 @@ const initialValues = {
 };
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   const [touched, setTouched] = useState({});
   const [modalMessage, setModalMessage] = useState('');
@@ -50,7 +52,7 @@ function LoginPage() {
       return;
     }
 
-    window.location.hash = '/market';
+    navigate('/items');
   };
 
   return (
@@ -100,7 +102,7 @@ function LoginPage() {
       </section>
 
       <p className="mt-6 text-center text-sm font-medium text-gray-800">
-        판다마켓이 처음이신가요? <a className="text-primary underline" href="#/signup">회원가입</a>
+        판다마켓이 처음이신가요? <Link className="text-primary underline" to="/signup">회원가입</Link>
       </p>
 
       <MessageModal message={modalMessage} onClose={() => setModalMessage('')} />

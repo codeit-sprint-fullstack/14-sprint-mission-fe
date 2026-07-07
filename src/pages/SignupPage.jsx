@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthShell from '../components/AuthShell.jsx';
 import FormField from '../components/FormField.jsx';
 import MessageModal from '../components/MessageModal.jsx';
@@ -27,6 +28,7 @@ const passwordRules = [
 ];
 
 function SignupPage() {
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   const [touched, setTouched] = useState({});
   const [modalMessage, setModalMessage] = useState('');
@@ -62,7 +64,7 @@ function SignupPage() {
       return;
     }
 
-    window.location.hash = '/login';
+    navigate('/login');
   };
 
   return (
@@ -170,7 +172,7 @@ function SignupPage() {
       </section>
 
       <p className="mt-6 text-center text-sm font-medium text-gray-800">
-        이미 회원이신가요? <a className="text-primary underline" href="#/login">로그인</a>
+        이미 회원이신가요? <Link className="text-primary underline" to="/login">로그인</Link>
       </p>
 
       <MessageModal message={modalMessage} onClose={() => setModalMessage('')} />

@@ -1,105 +1,170 @@
-const BASE_URL = 'https://panda-market-api.vercel.app';
+import axios from 'axios';
 
-function buildListUrl(path, { page = 1, pageSize = 15, keyword = '', orderBy = '' } = {}) {
-  const url = new URL(path, BASE_URL);
-  url.searchParams.set('page', page);
-  url.searchParams.set('pageSize', pageSize);
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
-  if (keyword) {
-    url.searchParams.set('keyword', keyword);
+const pandaApi = axios.create({
+  baseURL: API_BASE_URL,
+});
+
+function getRequestErrorMessage(error) {
+  const status = error.response?.status;
+  const message = error.response?.data?.message;
+
+  if (message) {
+    return message;
   }
 
-  if (orderBy) {
-    url.searchParams.set('orderBy', orderBy);
+  if (status) {
+    return `요청 실패. 에러 코드 : ${status}`;
   }
 
-  return url;
+  return error.message || '요청에 실패했습니다.';
 }
 
-async function parseJson(response) {
-  const text = await response.text();
-  return text ? JSON.parse(text) : null;
-}
-
-async function request(path, options) {
-  const response = await fetch(`${BASE_URL}${path}`, options);
-  const data = await parseJson(response);
-
-  if (!response.ok) {
-    throw new Error(data?.message || `요청 실패. 에러 코드 : ${response.status}`);
+async function request(config) {
+  try {
+    const response = await pandaApi.request(config);
+    return response.data === '' ? null : response.data;
+  } catch (error) {
+    throw new Error(getRequestErrorMessage(error));
   }
-
-  return data;
 }
 
-export function getProductList(params) {
-  return fetch(buildListUrl('/products', params)).then(async (response) => {
-    const data = await parseJson(response);
-
-    if (!response.ok) {
-      throw new Error(data?.message || `요청 실패. 에러 코드 : ${response.status}`);
-    }
-
-    return data;
+export function getProductList({ page = 1, pageSize = 15, keyword = '' } = {}) {
+  return request({
+    url: '/products',
+    method: 'GET',
+    params: {
+      offset: Math.max(0, (page - 1) * pageSize),
+      limit: pageSize,
+      orderBy: 'recent',
+      ...(keyword ? { keyword } : {}),
+    },
   });
 }
 
 export function getProduct(productId) {
-  return request(`/products/${productId}`);
+  return request({
+    url: `/products/${productId}`,
+    method: 'GET',
+  });
 }
 
 export function createProduct(product) {
-  return request('/products', {
+  return request({
+    url: '/products',
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(product),
+    data: product,
   });
 }
 
 export function patchProduct(productId, product) {
-  return request(`/products/${productId}`, {
+  return request({
+    url: `/products/${productId}`,
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(product),
+    data: product,
   });
 }
 
 export function deleteProduct(productId) {
-  return request(`/products/${productId}`, { method: 'DELETE' });
+  return request({
+    url: `/products/${productId}`,
+    method: 'DELETE',
+  });
 }
 
-export function getArticleList(params) {
-  return fetch(buildListUrl('/articles', params)).then(async (response) => {
-    const data = await parseJson(response);
-
-    if (!response.ok) {
-      throw new Error(data?.message || `요청 실패. 에러 코드 : ${response.status}`);
-    }
-
-    return data;
+export function getArticleList({ page = 1, pageSize = 10, keyword = '' } = {}) {
+  return request({
+    url: '/articles',
+    method: 'GET',
+    params: {
+      offset: Math.max(0, (page - 1) * pageSize),
+      limit: pageSize,
+      orderBy: 'recent',
+      ...(keyword ? { keyword } : {}),
+    },
   });
 }
 
 export function getArticle(articleId) {
-  return request(`/articles/${articleId}`);
+  return request({
+    url: `/articles/${articleId}`,
+    method: 'GET',
+  });
 }
 
 export function createArticle(article) {
-  return request('/articles', {
+  return request({
+    url: '/articles',
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(article),
+    data: article,
   });
 }
 
 export function patchArticle(articleId, article) {
-  return request(`/articles/${articleId}`, {
+  return request({
+    url: `/articles/${articleId}`,
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(article),
+    data: article,
   });
 }
 
 export function deleteArticle(articleId) {
-  return request(`/articles/${articleId}`, { method: 'DELETE' });
+  return request({
+    url: `/articles/${articleId}`,
+    method: 'DELETE',
+  });
+}
+
+export function getArticleComments(articleId, { cursor = '', pageSize = 10 } = {}) {
+  return request({
+    url: `/articles/${articleId}/comments`,
+    method: 'GET',
+    params: {
+      limit: pageSize,
+      ...(cursor ? { cursor } : {}),
+    },
+  });
+}
+
+export function createArticleComment(articleId, comment) {
+  return request({
+    url: `/articles/${articleId}/comments`,
+    method: 'POST',
+    data: comment,
+  });
+}
+
+export function getProductComments(productId, { cursor = '', pageSize = 10 } = {}) {
+  return request({
+    url: `/products/${productId}/comments`,
+    method: 'GET',
+    params: {
+      limit: pageSize,
+      ...(cursor ? { cursor } : {}),
+    },
+  });
+}
+
+export function createProductComment(productId, comment) {
+  return request({
+    url: `/products/${productId}/comments`,
+    method: 'POST',
+    data: comment,
+  });
+}
+
+export function patchComment(commentId, comment) {
+  return request({
+    url: `/comments/${commentId}`,
+    method: 'PATCH',
+    data: comment,
+  });
+}
+
+export function deleteComment(commentId) {
+  return request({
+    url: `/comments/${commentId}`,
+    method: 'DELETE',
+  });
 }
