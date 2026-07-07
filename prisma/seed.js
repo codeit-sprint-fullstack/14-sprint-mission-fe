@@ -16,7 +16,6 @@ async function main() {
 
   await prisma.product.createMany({
     data: PRODUCTS,
-    skipDuplicates: true,
   })
   for (const article of ARTICLES) {
     await prisma.article.create({
