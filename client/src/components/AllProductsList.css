@@ -1,0 +1,127 @@
+/* .products-list.all{
+  margin-top:25px;
+} */
+.products-list{
+  /* min-width: 1200px; */
+  max-width: 1200px;
+  margin-bottom: 4rem;
+}
+.products-list .section-title{
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 3.2rem; 
+}
+.products-list.all .grid{
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 4rem;
+  column-gap: 2.4rem;
+}
+
+.section-title-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.products-filter{
+  flex-grow: 1;
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.section-title-header form{
+  display: flex;
+  justify-content: end;
+  align-items: stretch;
+}
+.search-box{
+  width:28.9rem;
+  height: 24px;
+  padding:.9rem 2rem .9rem 1.6rem;
+  background-color: #F3F4F6;
+  color: #000;
+  border-radius: 1.2rem;
+  font-weight: 400;
+  line-height: 2.6rem; 
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  box-sizing: content-box;
+}
+.search-box svg{
+  vertical-align: middle;
+}
+.search-box input{
+  background-color: transparent;
+  width: 100%;
+}
+.search-box input:focus{
+  outline:none;
+}
+.search-box input::placeholder{
+    color: #9CA3AF;
+}
+.bt-search {
+  background-color: var(--color-text-base);
+}
+
+
+
+
+
+@media (max-width:1024px) {
+  .products-list.all{
+    min-width: 100%;
+  }
+  .products-list.all .grid{
+    gap: 1rem;
+    grid-template-columns: repeat(3, 2fr);
+    row-gap: 4rem;
+  }
+  .section-title-header{
+    align-items:start;
+  }
+  .section-title-header .section-title{
+    padding-top: 6px;
+    flex-basis: 205px;
+  }
+  .products-filter .search-box{
+    max-width: 20.6rem;
+  }
+}
+
+@media (max-width:480px) {
+  .products-list.all{
+    min-width: 100%;
+  }
+  .products-list.all .grid{
+    grid-template-columns: repeat(2, 2fr);
+    row-gap: 3.2rem;
+  }
+  .section-title-header {
+    flex-wrap: wrap;
+    gap: .8rem;
+  }
+  .section-title-header .section-title{
+    flex-shrink: 1;
+  }
+  .products-search-m{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.2rem;
+    width: 100%;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  .products-search-m form{
+    flex-grow: 1;
+  }
+  .search-box{
+    width: 100%;
+  }
+  .bt-search{
+    flex-shrink: 0;
+  }
+}

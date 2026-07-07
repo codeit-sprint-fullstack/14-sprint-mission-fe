@@ -1,0 +1,20 @@
+.pagination{
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 4.3rem !important;
+  margin-bottom: 14rem;
+}
+.pagination li button{
+  width: 4rem;
+  height: 4rem;
+  border:1px solid var(--color-text-footer);
+  border-radius: 50%;
+  font-weight: 600;
+  color: #6B7280;
+}
+.pagination li.active button{
+  background-color: var(--color-primary);
+  color: var(  --color-bg-sub);
+  border: 0 none;
+}

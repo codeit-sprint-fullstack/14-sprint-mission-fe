@@ -1,0 +1,10 @@
+.register_wrap{
+  /* min-width: 1200px; */
+  width:100%;
+  margin-bottom: 16rem;
+}
+@media (min-width: 1280px) {
+  .register_wrap{
+    max-width: 1200px;
+  }
+}
