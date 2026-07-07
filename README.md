@@ -4,7 +4,7 @@
 ## 기본 요구사항
 # 중고마켓
 
-- [ ] mongoDB에서 PostgreSQL을 사용하도록 코드를 마이그레이션 해주세요.
+- [x] mongoDB에서 PostgreSQL을 사용하도록 코드를 마이그레이션 해주세요.
 
 # 공통
 
