@@ -8,7 +8,7 @@ const requestProduct = createApiClient({
   errorMessage: '상품 요청에 실패했습니다.',
 })
 
-export const getProductList = async ({
+export const getProductList = ({
   offset = 0,
   limit = 10,
   keyword = '',
@@ -16,11 +16,11 @@ export const getProductList = async ({
 } = {}) => {
   const queryString = createQueryString({ offset, limit, keyword, orderBy })
 
-  return await requestProduct(`/products?${queryString}`)
+  return requestProduct(`/products?${queryString}`)
 }
 
-export const getProduct = async (productId) => {
-  return await requestProduct(`/products/${productId}`)
+export const getProduct = (productId) => {
+  return requestProduct(`/products/${productId}`)
 }
 
 export const createProduct = ({ name, description, price, tags }) => {
