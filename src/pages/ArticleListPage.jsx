@@ -145,7 +145,7 @@ function ArticleListPage() {
               <input
                 id="article-search"
                 type="search"
-                placeholder="검색할 상품을 입력해주세요"
+                placeholder="검색할 게시글을 입력해주세요"
                 value={searchValue}
                 onChange={(event) => setSearchValue(event.target.value)}
               />

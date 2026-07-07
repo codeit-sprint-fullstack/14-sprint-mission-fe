@@ -6,6 +6,7 @@ import {
 } from '../controllers/commentController.js';
 import {
   createHttpError,
+  normalizeOptionalText,
   normalizeRequiredText,
   parseLimit,
   parseOffset,
@@ -37,6 +38,7 @@ function serializeProduct(row) {
     description: row.description,
     price: row.price,
     tags: row.tags || [],
+    image: row.image,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };
@@ -81,6 +83,10 @@ function pickProductPayload(body, { partial = false } = {}) {
     payload.tags = tags;
   }
 
+  if (Object.prototype.hasOwnProperty.call(body, 'image')) {
+    payload.image = normalizeOptionalText(body.image) || null;
+  }
+
   if (!partial) {
     ['name', 'description', 'price'].forEach((field) => {
       if (!Object.prototype.hasOwnProperty.call(payload, field)) {
@@ -112,7 +118,7 @@ router.get('/', async (req, res, next) => {
     const sort = orderBy === 'recent' ? 'created_at DESC, id DESC' : 'created_at DESC, id DESC';
     const totalResult = await query(`SELECT COUNT(*)::int AS count FROM products ${where}`, params);
     const listResult = await query(
-      `SELECT id, name, price, created_at AS "createdAt"
+      `SELECT id, name, price, image, created_at AS "createdAt"
        FROM products
        ${where}
        ORDER BY ${sort}
@@ -136,12 +142,12 @@ router.post('/', async (req, res, next) => {
   try {
     const payload = pickProductPayload(req.body);
     const result = await query(
-      `INSERT INTO products (name, description, price, tags)
-       VALUES ($1, $2, $3, $4)
-       RETURNING id, name, description, price, tags,
+      `INSERT INTO products (name, description, price, tags, image)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id, name, description, price, tags, image,
          created_at AS "createdAt",
          updated_at AS "updatedAt"`,
-      [payload.name, payload.description, payload.price, payload.tags || []],
+      [payload.name, payload.description, payload.price, payload.tags || [], payload.image || null],
     );
 
     res.status(201).json(serializeProduct(result.rows[0]));
@@ -155,6 +161,7 @@ router.get('/:productId', async (req, res, next) => {
     const productId = parsePositiveInteger(req.params.productId, 'productId');
     const result = await query(
       `SELECT id, name, description, price, tags,
+        image,
         created_at AS "createdAt"
        FROM products
        WHERE id = $1`,
@@ -171,6 +178,7 @@ router.get('/:productId', async (req, res, next) => {
       description: result.rows[0].description,
       price: result.rows[0].price,
       tags: result.rows[0].tags || [],
+      image: result.rows[0].image,
       createdAt: result.rows[0].createdAt,
     });
   } catch (error) {
@@ -196,7 +204,7 @@ router.patch('/:productId', async (req, res, next) => {
       `UPDATE products
        SET ${fields.join(', ')}
        WHERE id = $${values.length}
-       RETURNING id, name, description, price, tags,
+       RETURNING id, name, description, price, tags, image,
          created_at AS "createdAt",
          updated_at AS "updatedAt"`,
       values,

@@ -11,11 +11,26 @@ const initialValues = {
   price: '',
 };
 
+const MAX_PRODUCT_IMAGE_SIZE = 2 * 1024 * 1024;
+
+function readImageAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => resolve(reader.result));
+    reader.addEventListener('error', () => reject(new Error('이미지를 읽지 못했습니다.')));
+    reader.readAsDataURL(file);
+  });
+}
+
 function ProductRegistrationPage() {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
+  const [imageDataUrl, setImageDataUrl] = useState('');
+  const [imageName, setImageName] = useState('');
+  const [imageError, setImageError] = useState('');
   const [touched, setTouched] = useState({});
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,6 +52,49 @@ function ProductRegistrationPage() {
 
   const touchField = (name) => () => {
     setTouched((current) => ({ ...current, [name]: true }));
+  };
+
+  const updateImage = async (event) => {
+    const file = event.target.files?.[0];
+    setImageError('');
+
+    if (!file) {
+      setImageDataUrl('');
+      setImageName('');
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      setImageDataUrl('');
+      setImageName('');
+      setImageError('이미지 파일만 등록할 수 있습니다.');
+      event.target.value = '';
+      return;
+    }
+
+    if (file.size > MAX_PRODUCT_IMAGE_SIZE) {
+      setImageDataUrl('');
+      setImageName('');
+      setImageError('이미지는 2MB 이하로 등록해주세요.');
+      event.target.value = '';
+      return;
+    }
+
+    try {
+      const dataUrl = await readImageAsDataUrl(file);
+      setImageDataUrl(dataUrl);
+      setImageName(file.name);
+    } catch (error) {
+      setImageDataUrl('');
+      setImageName('');
+      setImageError(error.message);
+    }
+  };
+
+  const removeImage = () => {
+    setImageDataUrl('');
+    setImageName('');
+    setImageError('');
   };
 
   const addTag = () => {
@@ -91,6 +149,7 @@ function ProductRegistrationPage() {
         description: values.description.trim(),
         price: Number(values.price),
         tags,
+        image: imageDataUrl || null,
       });
 
       navigate(`/items/${product.id}`);
@@ -111,6 +170,30 @@ function ProductRegistrationPage() {
             <button className="registration-submit-button" type="submit" disabled={isSubmitDisabled}>
               {isSubmitting ? '등록 중' : '등록'}
             </button>
+          </div>
+
+          <div className="registration-field">
+            <span className="registration-label">상품 이미지</span>
+            <div className="registration-image-row">
+              <label className={`registration-image-upload ${imageDataUrl ? 'has-image' : ''}`}>
+                {imageDataUrl ? (
+                  <img src={imageDataUrl} alt="등록할 상품 이미지 미리보기" />
+                ) : (
+                  <>
+                    <span className="registration-image-upload__plus" aria-hidden="true">+</span>
+                    <span>이미지 등록</span>
+                  </>
+                )}
+                <input type="file" accept="image/*" onChange={updateImage} />
+              </label>
+              {imageDataUrl ? (
+                <button className="registration-image-remove" type="button" onClick={removeImage}>
+                  이미지 삭제
+                </button>
+              ) : null}
+            </div>
+            {imageName ? <span className="registration-image-name">{imageName}</span> : null}
+            {imageError ? <span className="registration-error">{imageError}</span> : null}
           </div>
 
           <label className="registration-field">

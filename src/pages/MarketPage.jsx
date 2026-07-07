@@ -22,9 +22,12 @@ function ProductCard({ product, isLoading = false }) {
     <article className={`market-product-card ${isLoading ? 'is-loading' : ''}`}>
       <img
         className="market-product-card__image"
-        src={FALLBACK_IMAGE}
+        src={product?.image || FALLBACK_IMAGE}
         alt={product?.name || '상품 이미지'}
         loading="lazy"
+        onError={(event) => {
+          event.currentTarget.src = FALLBACK_IMAGE;
+        }}
       />
       <div className="market-product-card__body">
         <h3 className="market-product-card__name">{product?.name || '불러오는 중'}</h3>
