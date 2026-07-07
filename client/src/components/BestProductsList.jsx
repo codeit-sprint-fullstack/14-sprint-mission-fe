@@ -7,9 +7,7 @@ function BestProductsList () {
   const [bestItems, setBestItems] = useState([]);
   const [pageSize, setPageSize] = useState(4);
 
-  //똑같이 handleLoad를 불러오는데, 딱 4개 일단 셋팅
-  const handleLoad = useCallback(async() => {
-    console.log('핸들로드안의 페이지사이즈', pageSize);
+  const handleLoad = useCallback(async () => {
     const response = await axios.get('/tasks',{
       params: {
         pageSize: pageSize,
@@ -19,8 +17,6 @@ function BestProductsList () {
     const { items } = response.data;
     setBestItems(items);
   },[pageSize]);
-
-  console.log('페이지사이즈', pageSize);
 
   const handleSize = useCallback(() => {
      const contentWidth = window.innerWidth;
@@ -38,11 +34,8 @@ function BestProductsList () {
    },[]);
  
    useEffect(() => {
-     //처음
      handleSize();
-     //리사이즈했을때 실행하셈
      window.addEventListener('resize',handleSize);
-     //이벤트리스너 리턴한다 -> 나중에 화면필요없을때 실행됨
      return () => window.removeEventListener('resize',handleSize);
    },[handleSize]);
  

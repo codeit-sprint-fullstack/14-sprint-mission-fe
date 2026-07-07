@@ -1,7 +1,7 @@
 import IconFB from '../assets/ic_facebook.svg';
 import IconTW from '../assets/ic_twitter.svg';
-import IconYT from '../assets/ic_Youtube.svg';
-import IconIG from '../assets/ic_Instagram.svg';
+import IconYT from '../assets/ic_youtube.svg';
+import IconIG from '../assets/ic_instagram.svg';
 
 function Footer() {
   return (

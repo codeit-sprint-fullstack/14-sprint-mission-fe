@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const axios = Axios.create({
-  baseURL: 'https://one4-sprint-mission-fe-69qt.onrender.com',
+  baseURL: 'http://localhost:3003',
 });
 
 export default axios;

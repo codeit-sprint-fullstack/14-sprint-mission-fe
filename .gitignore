@@ -27,3 +27,4 @@ dist-ssr
 *.http
 *.log
 node_modules/
+server/

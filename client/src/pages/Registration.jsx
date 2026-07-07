@@ -11,8 +11,8 @@ function Registration () {
 
     try{
       const response = await axios.post('/tasks', data);
-      const newItemSlug = response.data._id;  
-      console.log(response.data._id);  
+      const newItemSlug = response.data.id;  
+      console.log(response.data.id);  
       console.log('보낼 데이터:', data);
       if (newItemSlug) {
         navigate(`/items/${newItemSlug}`);
