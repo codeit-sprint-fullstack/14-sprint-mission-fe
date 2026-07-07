@@ -3,15 +3,16 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from '@prisma/adapter-pg';
 import { parse } from "dotenv";
+import cors from "cors";
 
 const app = express();
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:3003" }));
 
 // Articles 메서드
-
 app.get("/articles", async (req, res) => {
   try {
     

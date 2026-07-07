@@ -16,12 +16,12 @@ function useApi (page, size, option, keyword){
         setLoading(true);
         const res = await axios.get(
           // `https://mongodb-g9dr.onrender.com/tasks?page=${page}&limit=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`, 
-          `http://localhost:3000/tasks?page=${page}&limit=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`,
+          `http://localhost:3000/products?page=${page}&limit=${size}&orderBy=${option}${keyword ? `&keyword=${keyword}` : ""}`,
           {
             headers: { "Cache-Control": "no-cache" },
           }
         );
-        setProducts(res.data.list);
+        setProducts(res.data.products);
         setCount(res.data.totalCount);
         setTotalPage(Math.ceil(res.data.totalCount / size));
       } catch (err) {

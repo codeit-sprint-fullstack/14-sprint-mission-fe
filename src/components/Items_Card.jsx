@@ -40,7 +40,7 @@ function Items_Card({ page, size, option, keyword, index, onMeta }){
   return (
     <>
       {products.map((item, idx) => (
-        <div key={`${item._id}-${index ? 'main' : 'sub'}`} className={style.ItemList}>
+        <div key={`${item.id}-${index ? 'main' : 'sub'}`} className={style.ItemList}>
           <div className={ index === true
             ? `${style.product_card} ${style.mainlist}`
             : `${style.product_card} ${style.sublist}`}>
@@ -50,7 +50,7 @@ function Items_Card({ page, size, option, keyword, index, onMeta }){
               onError={(e) => { e.target.src = defaultImg }}
             />
             <div className={style.itemInfo}>
-              <h3>{item.name}</h3>
+              <h3>{item.title}</h3>
               <p>{item.price}원</p>
               <div id={style.likeCount}>
                 <img src={ic_heart}/>
