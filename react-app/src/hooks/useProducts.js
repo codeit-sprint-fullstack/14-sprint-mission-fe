@@ -14,13 +14,19 @@ function useProducts({ orderBy, keyword, page, pageSize }) {
     setError(null);
     //API를 요청 시도하기
     // /products에 GET 요청을 보낸다
+
+    //추가한부분//
+    const offset = (page - 1) * pageSize
+
     try {
       const response = await axios.get('/products', {
         params: {
           orderBy,
           keyword,
-          page,
-          pageSize,
+          // page,
+          // pageSize,
+          offset,
+          limit: pageSize,
         },
       });
 

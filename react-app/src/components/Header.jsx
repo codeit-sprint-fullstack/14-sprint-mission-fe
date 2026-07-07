@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import styles from './Header.module.css'
 import logoImage from '../assets/logo.png'
 import logoText from '../assets/logo-text.png'
@@ -7,28 +8,38 @@ function Header() {
     <header className={styles.header}>
       <div className={styles.inner}>
         <div className={styles.left}>
-          <a href="/" className={styles.logo}>
+          <NavLink to="/" className={styles.logo}>
             <img
               src={logoImage}
               alt="판다마켓"
               className={styles.logoDesktop}
             />
             <img src={logoText} alt="판다마켓" className={styles.logoMobile} />
-          </a>
+          </NavLink>
 
           <nav className={styles.nav}>
-            <a href="/articles" className={styles.navLink}>
+            <NavLink
+              to="/articles"
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ''}`
+              }
+            >
               자유게시판
-            </a>
-            <a href="/" className={styles.navLink}>
+            </NavLink>
+            <NavLink
+              to="/items"
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ''}`
+              }
+            >
               중고마켓
-            </a>
+            </NavLink>
           </nav>
         </div>
 
-        <a href="/login" className={styles.loginButton}>
+        <NavLink to="/login" className={styles.loginButton}>
           로그인
-        </a>
+        </NavLink>
       </div>
     </header>
   )
