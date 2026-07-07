@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import * as productController from './controller/product.controller.js';
+import * as articleController from './controller/article.controller.js';
 
 const app = express();
 // json에 괄호 꼭 붙이기
@@ -12,6 +13,12 @@ app.get('/products/:id', productController.getProduct);
 app.post('/products', productController.createProduct);
 app.patch('/products/:id', productController.patchProduct);
 app.delete('/products/:id', productController.deleteProduct);
+
+app.get('/article', articleController.getArticleList);
+app.get('/article/:id', articleController.getArticle);
+app.post('/article', articleController.createArticle);
+app.patch('/article/:id', articleController.patchArticle);
+app.delete('/article/:id', articleController.deleteArticle);
 
 // 에러처리
 app.use((err, req, res, next) => {

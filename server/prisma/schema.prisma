@@ -13,11 +13,37 @@ datasource db {
 }
 
 model Product {
-    id          Int      @id @default(autoincrement())
-    name        String
-    description String
-    price       Float
-    tags        String[] @default([])
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    id             Int              @id @default(autoincrement())
+    name           String
+    description    String
+    price          Float
+    tags           String[]         @default([])
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    productComment productComment[]
+}
+
+model Article {
+    id             Int              @id @default(autoincrement())
+    title          String
+    content        String
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    articleComment articleComment[]
+}
+
+model articleComment {
+    id        Int      @id @default(autoincrement())
+    content   String
+    createdAt DateTime @default(now())
+    article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+    articleId Int
+}
+
+model productComment {
+    id        Int      @id @default(autoincrement())
+    content   String
+    createdAt DateTime @default(now())
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId Int
 }
