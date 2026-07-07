@@ -1,0 +1,139 @@
+.item-detail {
+  min-height: calc(100vh - 240px);
+  padding: 48px 24px 80px;
+
+  background-color: #f9fafb;
+}
+
+.item-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.item-detail-card {
+  padding: 40px;
+
+  border-radius: 24px;
+  background-color: #ffffff;
+}
+
+.item-detail-title {
+  margin: 0 0 16px;
+
+  color: #111827;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.item-detail-price {
+  margin: 0 0 32px;
+
+  color: #111827;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.item-detail-section {
+  margin-top: 32px;
+}
+
+.item-detail-section-title {
+  margin: 0 0 12px;
+
+  color: #111827;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.item-detail-description {
+  margin: 0;
+
+  color: #374151;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.item-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.item-detail-tag {
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  color: #374151;
+  background-color: #f3f4f6;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.item-detail-back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 40px;
+  padding: 12px 20px;
+
+  border-radius: 999px;
+
+  color: #ffffff;
+  background-color: #3692ff;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.item-detail-status {
+  margin: 80px 0;
+
+  color: #6b7280;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+.item-detail-error {
+  color: #f74747;
+}
+
+@media (max-width: 743px) {
+  .item-detail {
+    padding: 32px 16px 64px;
+  }
+
+  .item-detail-card {
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .item-detail-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .item-detail-price {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}

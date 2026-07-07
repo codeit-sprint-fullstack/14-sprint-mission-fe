@@ -1,5 +1,6 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import './Items.css'
 import Header from '../components/Header.jsx'
@@ -8,27 +9,57 @@ import ProductList from '../components/ProductList.jsx'
 import useSaleProducts from '../hooks/useSaleProducts.js'
 
 function Items() {
-  const currentPath = window.location.pathname
+
+  const PAGE_SIZE = 10
 
   const [keyword, setKeyword] = useState('')
-  const [orderBy, setOrderBy] = useState('recent')
+  const [page, setPage] = useState(1)
 
   const {
     products: saleProducts,
+    totalCount,
     isLoading: isSaleLoading,
     error: saleError,
   } = useSaleProducts({
-    page: 1,
-    pageSize: 10,
-    orderBy,
+    page,
+    pageSize: PAGE_SIZE,
+    orderBy: 'recent',
     keyword,
   })
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(totalCount / PAGE_SIZE),
+  )
+
+  const isFirstPage = page === 1
+  const isLastPage = page >= totalPages
+
+  const MAX_VISIBLE_PAGES = 5
+
+  const startPage = Math.max(
+    1,
+    Math.min(
+      page - 2,
+      totalPages - MAX_VISIBLE_PAGES + 1,
+    ),
+  )
+
+  const endPage = Math.min(
+    totalPages,
+    startPage + MAX_VISIBLE_PAGES - 1,
+  )
+
+  const visiblePages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, index) => startPage + index,
+  )
 
   return (
     <>
       <Header>
-        <a href="/" className={`header-menu-link ${currentPath === '/' ? 'nav-active' : 'nav-link'}`}>자유게시판</a>
-        <a href="/items" className={`header-menu-link ${currentPath === '/items' ? 'nav-active' : 'nav-link'}`}>중고마켓</a>
+        <NavLink to="/" end className={({ isActive }) => `header-menu-link ${isActive ? 'nav-active' : 'nav-link'}`}>자유게시판</NavLink>
+        <NavLink to="/items" className={({ isActive }) => `header-menu-link ${isActive ? 'nav-active' : 'nav-link'}`}>중고마켓</NavLink>
       </Header>
 
       <main className="flea-market">
@@ -49,23 +80,14 @@ function Items() {
                   value={keyword}
                   onChange={(event) => {
                     setKeyword(event.target.value)
+                    setPage(1)
                   }}
                 />
-                <a href="/registration" className="product-register-button"> 상품 등록하기 </a>
+                <Link to="/registration" className="product-register-button">상품 등록하기</Link>
 
-                <select
-                  className="product-order-select"
-                  defaultValue="recent"
-                  aria-label="상품 정렬 방식"
-                >
-                  <option value="recent">
-                    최신순
-                  </option>
-
-                  <option value="favorite">
-                    좋아요순
-                  </option>
-                </select>
+                <span className="product-order-label">
+                  최신순
+                </span>
               </div>
             </div>
 
@@ -82,10 +104,61 @@ function Items() {
             )}
 
             {!isSaleLoading && !saleError && (
-              <ProductList
-                products={saleProducts}
-                list="all-product-list"
-              />
+              <>
+                <ProductList
+                  products={saleProducts}
+                  list="all-product-list"
+                />
+
+                {totalCount > 0 && (
+                  <div className="product-pagination">
+                    <button
+                      type="button"
+                      className="product-page-arrow"
+                      disabled={isFirstPage}
+                      aria-label="이전 페이지"
+                      onClick={() => {
+                        setPage((previousPage) =>
+                          Math.max(previousPage - 1, 1),
+                        )
+                      }}
+                    >
+                      ‹
+                    </button>
+
+                    {visiblePages.map((pageNumber) => {
+                      return (
+                        <button
+                          type="button"
+                          key={pageNumber}
+                          className={`product-page-number ${page === pageNumber ? 'product-page-number-active' : ''
+                            }`}
+                          aria-current={page === pageNumber ? 'page' : undefined}
+                          onClick={() => {
+                            setPage(pageNumber)
+                          }}
+                        >
+                          {pageNumber}
+                        </button>
+                      )
+                    })}
+
+                    <button
+                      type="button"
+                      className="product-page-arrow"
+                      disabled={isLastPage}
+                      aria-label="다음 페이지"
+                      onClick={() => {
+                        setPage((previousPage) =>
+                          Math.min(previousPage + 1, totalPages),
+                        )
+                      }}
+                    >
+                      ›
+                    </button>
+                  </div>
+                )}
+              </>
             )}
 
           </section>

@@ -1,9 +1,8 @@
+import { Link } from 'react-router-dom'
+
 import homeImage from '../img/Img_home_top.png'
-import Items from '../pages/Items.jsx'
 
 function HeroSection() {
-
-
   return (
     <div className="hot_sangpum">
       <div className="gugyeong">
@@ -14,14 +13,13 @@ function HeroSection() {
         </h1>
 
         <div className="gugyeong_button_group">
-          <a
-            href="/items"
+          <Link
+            to="/items"
             className="gugyeong_button"
           >
             구경하러 가기
-          </a>
+          </Link>
         </div>
-
       </div>
 
       <div>

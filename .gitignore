@@ -25,3 +25,4 @@ dist-ssr
 
 미션3-api
 .env
+/src/generated/prisma

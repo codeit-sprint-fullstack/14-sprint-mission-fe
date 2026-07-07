@@ -1,3 +1,5 @@
+import defaultProductImage from '../img/img_default.svg'
+
 function ProductList({
   products,
   list,
@@ -13,23 +15,20 @@ function ProductList({
   return (
     <div className={list}>
       {products.map((product) => {
-        const imageUrl = product.images?.[0]
+        const imageUrl =
+          product.images?.[0] ?? defaultProductImage
 
         return (
           <article
             className="product-card"
-            key={product.id}>
+            key={product.id}
+          >
             <div className="product-card-image-wrapper">
-              {imageUrl ? (
-                <img
-                  className="product-card-image"
-                  src={imageUrl}
-                  alt={`${product.name} 상품 이미지`} />
-              ) : (
-                <div className="product-card-image-empty">
-                  이미지 없음
-                </div>
-              )}
+              <img
+                className="product-card-image"
+                src={imageUrl}
+                alt={`${product.name} 상품 이미지`}
+              />
             </div>
 
             <div className="product-card-information">
@@ -38,24 +37,9 @@ function ProductList({
               </h3>
 
               <p className="product-card-price">
-                {Number(
-                  product.price ?? 0,
-                ).toLocaleString('ko-KR')}
+                {Number(product.price ?? 0).toLocaleString('ko-KR')}
                 원
               </p>
-
-              <div className="product-card-favorite">
-                <span
-                  className="product-card-heart"
-                  aria-hidden="true"
-                >
-                  ♡
-                </span>
-
-                <span>
-                  {product.favoriteCount ?? 0}
-                </span>
-              </div>
             </div>
           </article>
         )

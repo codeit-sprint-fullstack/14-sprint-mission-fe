@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Login.css'
 
 import pandaFace from '../img/판다얼굴.png'
@@ -9,6 +10,8 @@ import kakaoImage from '../img/kakao.png'
 import { USER_DATA } from '../../UserData.js'
 
 function LoginPage() {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -85,7 +88,7 @@ function LoginPage() {
       return
     }
 
-    window.location.href = '/'
+    navigate('/')
   }
 
   function handleModalClose() {
@@ -95,11 +98,7 @@ function LoginPage() {
   return (
     <main className="login-page">
       <section className="login-page__container">
-        <a
-          href="/"
-          className="login-page__logo-link"
-          aria-label="판다마켓 홈으로 이동"
-        >
+        <Link to="/" className="login-page__logo-link" aria-label="판다마켓 홈으로 이동">
           <img
             src={pandaFace}
             alt="판다마켓 로고"
@@ -109,7 +108,7 @@ function LoginPage() {
           <h1 className="login-page__logo-text">
             판다마켓
           </h1>
-        </a>
+        </Link>
 
         <form
           className="login-page__form"
@@ -240,12 +239,12 @@ function LoginPage() {
             판다마켓이 처음이신가요?
           </p>
 
-          <a
-            href="/signup"
+          <Link
+            to="/signup"
             className="login-page__signup-link"
           >
             회원가입
-          </a>
+          </Link>
         </div>
       </section>
 

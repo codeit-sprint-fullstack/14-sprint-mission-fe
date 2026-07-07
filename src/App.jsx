@@ -1,38 +1,46 @@
+import { Routes, Route } from 'react-router-dom'
+
 import Index from './pages/Index.jsx'
-import Login from './pages/Login.jsx'
-import Signup from './pages/Signup.jsx'
 import Items from './pages/Items.jsx'
 import Registration from './pages/Registration.jsx'
 import ItemDetail from './pages/ItemDetail.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
 
 function App() {
-  const currentPath = window.location.pathname
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={<Index />}
+      />
 
-  if (currentPath === '/') {
-    return <Index />
-  }
+      <Route
+        path="/items"
+        element={<Items />}
+      />
 
-  if (currentPath === '/items') {
-    return <Items />
-  }
+      <Route
+        path="/registration"
+        element={<Registration />}
+      />
 
-  if (currentPath.startsWith('/items/')) {
-  return <ItemDetail />
-}
+      <Route
+        path="/items/:id"
+        element={<ItemDetail />}
+      />
 
-    if (currentPath === '/registration') {
-    return <Registration />
-  }
+      <Route
+        path="/login"
+        element={<Login />}
+      />
 
-  if (currentPath === '/login') {
-    return <Login />
-  }
-
-  if (currentPath === '/signup') {
-    return <Signup />
-  }
-
-  return <Index />
+      <Route
+        path="/signup"
+        element={<Signup />}
+      />
+    </Routes>
+  )
 }
 
 export default App

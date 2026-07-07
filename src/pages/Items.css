@@ -27,7 +27,7 @@
 
   background-color: var(--WhiteGray-color);
   box-sizing: border-box;
-  border-bottom: 1px solid #DFDFDF;
+  border-bottom: 1px solid var(--border-line);
 }
 
 .header-left {
@@ -215,26 +215,6 @@
   box-shadow: 0 0 0 2px var(--brand-blue);
 }
 
-.product-order-select {
-  width: 130px;
-  height: 42px;
-  padding: 0 12px;
-
-  border: 1px solid var(--Cool-Gray-200);
-  border-radius: 12px;
-  outline: none;
-
-  color: var(--Secondary-800);
-  background-color: var(--WhiteGray-color);
-
-  font-family: Pretendard, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
 .product-order-select:focus {
   border-color: var(--brand-blue);
 }
@@ -412,19 +392,6 @@
   line-height: 24px;
 }
 
-.product-card-favorite {
-  display: flex;
-  align-items: center;
-
-  margin-top: 6px;
-  gap: 4px;
-
-  color: var(--Secondary-600);
-
-  font-size: 12px;
-  line-height: 18px;
-}
-
 .product-card-heart {
   font-size: 16px;
   line-height: 16px;
@@ -506,6 +473,88 @@
   height: 20px;
 }
 
+
+.product-order-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 42px;
+  padding: 0 16px;
+
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 12px;
+
+  color: var(--Secondary-800);
+  background-color: var(--WhiteGray-color);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.product-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 40px;
+  gap: 12px;
+}
+
+
+.product-page-info {
+  color: var(--Secondary-700);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.product-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 40px;
+  gap: 4px;
+}
+
+.product-page-arrow,
+.product-page-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 50%;
+
+  color: var(--Secondary-600);
+  background-color: var(--White-color);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.product-page-arrow:disabled {
+  color: var(--Secondary-400);
+  cursor: not-allowed;
+}
+
+.product-page-number-active {
+  border-color: var(--brand-blue);
+
+  color: var(--White-color);
+  background-color: var(--brand-blue);
+
+  font-weight: 700;
+}
 
 /* ====================================================================== */
 /* Tablet: 744px 이상 1199px 이하 */
@@ -623,9 +672,6 @@
     width: 100%;
   }
 
-  .product-order-select {
-    margin-left: auto;
-  }
 
   /* 베스트 상품: 모바일 1열 */
 
