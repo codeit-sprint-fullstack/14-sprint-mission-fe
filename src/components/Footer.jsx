@@ -16,7 +16,7 @@ function Footer() {
             <Link to="/policy">Privacy Policy</Link>
             <Link to="/faq">FAQ</Link>
           </nav>
-          <p className="footer-copy">©codeit - 2024</p>
+          <p className="footer-copy">©codeit - 2026</p>
         </div>
         <div className="footer-socials">
           {socialLinks.map(([href, src, label]) => (
@@ -25,7 +25,7 @@ function Footer() {
             </a>
           ))}
         </div>
-        <p className="footer-copy footer-copy--desktop">©codeit - 2024</p>
+        <p className="footer-copy footer-copy--desktop">©codeit - 2026</p>
         <nav className="footer-links footer-links--desktop" aria-label="도움말 데스크톱">
           <Link to="/policy">Privacy Policy</Link>
           <Link to="/faq">FAQ</Link>

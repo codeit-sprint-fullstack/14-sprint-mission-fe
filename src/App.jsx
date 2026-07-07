@@ -2,6 +2,9 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
 import ScrollTopButton from './components/ScrollTopButton.jsx';
+import ArticleDetailPage from './pages/ArticleDetailPage.jsx';
+import ArticleListPage from './pages/ArticleListPage.jsx';
+import ArticleRegistrationPage from './pages/ArticleRegistrationPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import MarketPage from './pages/MarketPage.jsx';
@@ -39,14 +42,9 @@ function App() {
       <Route path="/items" element={<MarketPage />} />
       <Route path="/items/:productId" element={<ProductDetailPage />} />
       <Route path="/registration" element={<ProductRegistrationPage />} />
-      <Route
-        path="/free-board"
-        element={(
-          <StandardLayout>
-            <SimplePage title="자유게시판" links={[[ '/', '홈으로 돌아가기' ]]} />
-          </StandardLayout>
-        )}
-      />
+      <Route path="/free-board" element={<ArticleListPage />} />
+      <Route path="/free-board/new" element={<ArticleRegistrationPage />} />
+      <Route path="/free-board/:articleId" element={<ArticleDetailPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route

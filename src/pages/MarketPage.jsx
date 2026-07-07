@@ -110,10 +110,21 @@ function Pagination({ page, totalCount, pageSize, onPageChange }) {
   );
 }
 
+function MarketSortFilter() {
+  return (
+    <div className="market-sort-control">
+      <button className="market-sort-button" type="button" aria-label="상품 정렬 기준 최신순">
+        <span className="market-sort-button__label">최신순</span>
+        <span className="market-sort-button__icon" aria-hidden="true" />
+      </button>
+    </div>
+  );
+}
+
 function MarketFloatingControls({ searchValue, onSearchChange, onSubmitSearch }) {
   return (
     <div className="market-floating-panel">
-      <div className="market-floating-controls" aria-label="상품 검색과 등록">
+      <div className="market-floating-controls" aria-label="상품 검색, 정렬과 등록">
         <form className="market-search-form" role="search" onSubmit={onSubmitSearch}>
           <label className="sr-only" htmlFor="product-search">상품 검색</label>
           <span className="market-search-form__icon" aria-hidden="true" />
@@ -126,6 +137,7 @@ function MarketFloatingControls({ searchValue, onSearchChange, onSubmitSearch })
             autoComplete="off"
           />
         </form>
+        <MarketSortFilter />
         <Link className="market-register-button" to="/registration">상품 등록하기</Link>
       </div>
       <ScrollTopButton />
@@ -186,7 +198,6 @@ function MarketPage() {
         <section className="market-section market-sale-section" aria-labelledby="sale-title">
           <div className="market-sale-toolbar">
             <h1 id="sale-title" className="market-section-title">판매 중인 상품</h1>
-            <p className="market-sort-label">최신순</p>
           </div>
 
           <p className="market-product-status" aria-live="polite">{statusText}</p>

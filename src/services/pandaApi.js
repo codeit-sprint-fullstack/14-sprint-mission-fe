@@ -72,3 +72,99 @@ export function deleteProduct(productId) {
     method: 'DELETE',
   });
 }
+
+export function getArticleList({ page = 1, pageSize = 10, keyword = '' } = {}) {
+  return request({
+    url: '/articles',
+    method: 'GET',
+    params: {
+      offset: Math.max(0, (page - 1) * pageSize),
+      limit: pageSize,
+      orderBy: 'recent',
+      ...(keyword ? { keyword } : {}),
+    },
+  });
+}
+
+export function getArticle(articleId) {
+  return request({
+    url: `/articles/${articleId}`,
+    method: 'GET',
+  });
+}
+
+export function createArticle(article) {
+  return request({
+    url: '/articles',
+    method: 'POST',
+    data: article,
+  });
+}
+
+export function patchArticle(articleId, article) {
+  return request({
+    url: `/articles/${articleId}`,
+    method: 'PATCH',
+    data: article,
+  });
+}
+
+export function deleteArticle(articleId) {
+  return request({
+    url: `/articles/${articleId}`,
+    method: 'DELETE',
+  });
+}
+
+export function getArticleComments(articleId, { cursor = '', pageSize = 10 } = {}) {
+  return request({
+    url: `/articles/${articleId}/comments`,
+    method: 'GET',
+    params: {
+      limit: pageSize,
+      ...(cursor ? { cursor } : {}),
+    },
+  });
+}
+
+export function createArticleComment(articleId, comment) {
+  return request({
+    url: `/articles/${articleId}/comments`,
+    method: 'POST',
+    data: comment,
+  });
+}
+
+export function getProductComments(productId, { cursor = '', pageSize = 10 } = {}) {
+  return request({
+    url: `/products/${productId}/comments`,
+    method: 'GET',
+    params: {
+      limit: pageSize,
+      ...(cursor ? { cursor } : {}),
+    },
+  });
+}
+
+export function createProductComment(productId, comment) {
+  return request({
+    url: `/products/${productId}/comments`,
+    method: 'POST',
+    data: comment,
+  });
+}
+
+export function patchComment(commentId, comment) {
+  return request({
+    url: `/comments/${commentId}`,
+    method: 'PATCH',
+    data: comment,
+  });
+}
+
+export function deleteComment(commentId) {
+  return request({
+    url: `/comments/${commentId}`,
+    method: 'DELETE',
+  });
+}

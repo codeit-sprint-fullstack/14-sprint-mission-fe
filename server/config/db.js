@@ -1,14 +1,31 @@
-import mongoose from 'mongoose';
+import pg from 'pg';
 
-async function connectDatabase() {
-  const uri = process.env.MONGODB_URI;
+const { Pool } = pg;
 
-  if (!uri) {
-    throw new Error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
+function resolveSslConfig() {
+  if (process.env.DATABASE_SSL === 'true' || process.env.PGSSLMODE === 'require') {
+    return { rejectUnauthorized: false };
   }
 
-  await mongoose.connect(uri);
-  console.log('MongoDB connected');
+  return false;
+}
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL || process.env.DATABASE_URI,
+  ssl: resolveSslConfig(),
+});
+
+export function query(text, params) {
+  return pool.query(text, params);
+}
+
+async function connectDatabase() {
+  if (!process.env.DATABASE_URL && !process.env.DATABASE_URI) {
+    throw new Error('DATABASE_URL 또는 DATABASE_URI 환경 변수가 설정되지 않았습니다.');
+  }
+
+  await pool.query('SELECT 1');
+  console.log('PostgreSQL connected');
 }
 
 export default connectDatabase;

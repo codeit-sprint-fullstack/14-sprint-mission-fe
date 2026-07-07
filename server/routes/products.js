@@ -1,20 +1,18 @@
 import { Router } from 'express';
-import mongoose from 'mongoose';
-import Product from '../models/Product.js';
+import { query } from '../config/db.js';
+import {
+  createProductComment,
+  listProductComments,
+} from '../controllers/commentController.js';
+import {
+  createHttpError,
+  normalizeRequiredText,
+  parseLimit,
+  parseOffset,
+  parsePositiveInteger,
+} from '../utils/http.js';
 
 const router = Router();
-
-function createHttpError(status, message) {
-  const error = new Error(message);
-  error.status = status;
-  return error;
-}
-
-function assertValidObjectId(id) {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw createHttpError(400, '유효하지 않은 상품 id입니다.');
-  }
-}
 
 function normalizeTags(tags) {
   if (!Array.isArray(tags)) {
@@ -24,27 +22,64 @@ function normalizeTags(tags) {
   return [...new Set(tags.map((tag) => String(tag).trim()).filter(Boolean))];
 }
 
-function serializeProduct(product) {
+function validateTags(tags) {
+  const invalidTag = tags.find((tag) => tag.length > 5);
+
+  if (invalidTag) {
+    throw createHttpError(400, '태그는 5글자 이내여야 합니다.');
+  }
+}
+
+function serializeProduct(row) {
   return {
-    id: product._id.toString(),
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    tags: product.tags,
-    createdAt: product.createdAt,
-    updatedAt: product.updatedAt,
+    id: row.id,
+    name: row.name,
+    description: row.description,
+    price: row.price,
+    tags: row.tags || [],
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
   };
 }
 
 function pickProductPayload(body, { partial = false } = {}) {
   const payload = {};
-  const fields = ['name', 'description', 'price', 'tags'];
 
-  fields.forEach((field) => {
-    if (Object.prototype.hasOwnProperty.call(body, field)) {
-      payload[field] = field === 'tags' ? normalizeTags(body[field]) : body[field];
+  if (Object.prototype.hasOwnProperty.call(body, 'name')) {
+    const name = normalizeRequiredText(body.name, 'name');
+
+    if (name.length > 10) {
+      throw createHttpError(400, '상품명은 10자 이내여야 합니다.');
     }
-  });
+
+    payload.name = name;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(body, 'description')) {
+    const description = normalizeRequiredText(body.description, 'description');
+
+    if (description.length < 10 || description.length > 100) {
+      throw createHttpError(400, '상품 소개는 10자 이상 100자 이내여야 합니다.');
+    }
+
+    payload.description = description;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(body, 'price')) {
+    const price = Number(body.price);
+
+    if (!Number.isInteger(price) || price < 0) {
+      throw createHttpError(400, '판매 가격은 0 이상의 숫자로 입력해주세요.');
+    }
+
+    payload.price = price;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(body, 'tags')) {
+    const tags = normalizeTags(body.tags);
+    validateTags(tags);
+    payload.tags = tags;
+  }
 
   if (!partial) {
     ['name', 'description', 'price'].forEach((field) => {
@@ -54,14 +89,8 @@ function pickProductPayload(body, { partial = false } = {}) {
     });
   }
 
-  if (Object.prototype.hasOwnProperty.call(payload, 'price')) {
-    const price = Number(payload.price);
-
-    if (!Number.isFinite(price)) {
-      throw createHttpError(400, '판매 가격은 숫자로 입력해주세요.');
-    }
-
-    payload.price = price;
+  if (partial && Object.keys(payload).length === 0) {
+    throw createHttpError(400, '수정할 필드가 없습니다.');
   }
 
   return payload;
@@ -69,38 +98,32 @@ function pickProductPayload(body, { partial = false } = {}) {
 
 router.get('/', async (req, res, next) => {
   try {
-    const offset = Math.max(0, Number(req.query.offset || 0));
-    const limit = Math.min(50, Math.max(1, Number(req.query.limit || 10)));
+    const offset = parseOffset(req.query.offset || 0);
+    const limit = parseLimit(req.query.limit || 10);
     const keyword = String(req.query.keyword || '').trim();
     const orderBy = req.query.orderBy || 'recent';
-    const filter = keyword
-      ? {
-          $or: [
-            { name: { $regex: keyword, $options: 'i' } },
-            { description: { $regex: keyword, $options: 'i' } },
-          ],
-        }
-      : {};
-    const sort = orderBy === 'recent' ? { createdAt: -1 } : { createdAt: -1 };
+    const params = [];
+    const where = keyword ? 'WHERE name ILIKE $1 OR description ILIKE $1' : '';
 
-    const [totalCount, products] = await Promise.all([
-      Product.countDocuments(filter),
-      Product.find(filter)
-        .sort(sort)
-        .skip(offset)
-        .limit(limit)
-        .select('name price createdAt')
-        .lean(),
-    ]);
+    if (keyword) {
+      params.push(`%${keyword}%`);
+    }
+
+    const sort = orderBy === 'recent' ? 'created_at DESC, id DESC' : 'created_at DESC, id DESC';
+    const totalResult = await query(`SELECT COUNT(*)::int AS count FROM products ${where}`, params);
+    const listResult = await query(
+      `SELECT id, name, price, created_at AS "createdAt"
+       FROM products
+       ${where}
+       ORDER BY ${sort}
+       OFFSET $${params.length + 1}
+       LIMIT $${params.length + 2}`,
+      [...params, offset, limit],
+    );
 
     res.status(200).json({
-      list: products.map((product) => ({
-        id: product._id.toString(),
-        name: product.name,
-        price: product.price,
-        createdAt: product.createdAt,
-      })),
-      totalCount,
+      list: listResult.rows,
+      totalCount: totalResult.rows[0].count,
       offset,
       limit,
     });
@@ -112,9 +135,16 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const payload = pickProductPayload(req.body);
-    const product = await Product.create(payload);
+    const result = await query(
+      `INSERT INTO products (name, description, price, tags)
+       VALUES ($1, $2, $3, $4)
+       RETURNING id, name, description, price, tags,
+         created_at AS "createdAt",
+         updated_at AS "updatedAt"`,
+      [payload.name, payload.description, payload.price, payload.tags || []],
+    );
 
-    res.status(201).json(serializeProduct(product));
+    res.status(201).json(serializeProduct(result.rows[0]));
   } catch (error) {
     next(error);
   }
@@ -122,22 +152,26 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
-    const { productId } = req.params;
-    assertValidObjectId(productId);
+    const productId = parsePositiveInteger(req.params.productId, 'productId');
+    const result = await query(
+      `SELECT id, name, description, price, tags,
+        created_at AS "createdAt"
+       FROM products
+       WHERE id = $1`,
+      [productId],
+    );
 
-    const product = await Product.findById(productId).select('name description price tags createdAt');
-
-    if (!product) {
+    if (result.rowCount === 0) {
       throw createHttpError(404, '상품을 찾을 수 없습니다.');
     }
 
     res.status(200).json({
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      tags: product.tags,
-      createdAt: product.createdAt,
+      id: result.rows[0].id,
+      name: result.rows[0].name,
+      description: result.rows[0].description,
+      price: result.rows[0].price,
+      tags: result.rows[0].tags || [],
+      createdAt: result.rows[0].createdAt,
     });
   } catch (error) {
     next(error);
@@ -146,20 +180,33 @@ router.get('/:productId', async (req, res, next) => {
 
 router.patch('/:productId', async (req, res, next) => {
   try {
-    const { productId } = req.params;
-    assertValidObjectId(productId);
-
+    const productId = parsePositiveInteger(req.params.productId, 'productId');
     const payload = pickProductPayload(req.body, { partial: true });
-    const product = await Product.findByIdAndUpdate(productId, payload, {
-      new: true,
-      runValidators: true,
+    const fields = [];
+    const values = [];
+
+    Object.entries(payload).forEach(([field, value]) => {
+      values.push(value);
+      fields.push(`${field} = $${values.length}`);
     });
 
-    if (!product) {
+    values.push(productId);
+
+    const result = await query(
+      `UPDATE products
+       SET ${fields.join(', ')}
+       WHERE id = $${values.length}
+       RETURNING id, name, description, price, tags,
+         created_at AS "createdAt",
+         updated_at AS "updatedAt"`,
+      values,
+    );
+
+    if (result.rowCount === 0) {
       throw createHttpError(404, '상품을 찾을 수 없습니다.');
     }
 
-    res.status(200).json(serializeProduct(product));
+    res.status(200).json(serializeProduct(result.rows[0]));
   } catch (error) {
     next(error);
   }
@@ -167,12 +214,10 @@ router.patch('/:productId', async (req, res, next) => {
 
 router.delete('/:productId', async (req, res, next) => {
   try {
-    const { productId } = req.params;
-    assertValidObjectId(productId);
+    const productId = parsePositiveInteger(req.params.productId, 'productId');
+    const result = await query('DELETE FROM products WHERE id = $1', [productId]);
 
-    const product = await Product.findByIdAndDelete(productId);
-
-    if (!product) {
+    if (result.rowCount === 0) {
       throw createHttpError(404, '상품을 찾을 수 없습니다.');
     }
 
@@ -181,5 +226,8 @@ router.delete('/:productId', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/:productId/comments', listProductComments);
+router.post('/:productId/comments', createProductComment);
 
 export default router;

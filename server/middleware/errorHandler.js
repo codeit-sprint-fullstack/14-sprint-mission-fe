@@ -1,16 +1,24 @@
-function getMongooseValidationMessage(error) {
-  return Object.values(error.errors || {})
-    .map((validationError) => validationError.message)
-    .join(' ');
+function getDatabaseErrorMessage(error) {
+  if (error.code === '23505') {
+    return '이미 존재하는 데이터입니다.';
+  }
+
+  if (error.code === '23503') {
+    return '연결된 데이터를 찾을 수 없습니다.';
+  }
+
+  if (error.code === '23502' || error.code === '23514' || error.code === '22P02') {
+    return '요청 값이 올바르지 않습니다.';
+  }
+
+  return null;
 }
 
 function errorHandler(error, _req, res, _next) {
-  if (error.name === 'ValidationError') {
-    return res.status(400).json({ message: getMongooseValidationMessage(error) });
-  }
+  const databaseMessage = getDatabaseErrorMessage(error);
 
-  if (error.name === 'CastError') {
-    return res.status(400).json({ message: '요청 값이 올바르지 않습니다.' });
+  if (databaseMessage) {
+    return res.status(400).json({ message: databaseMessage });
   }
 
   const status = error.status || 500;

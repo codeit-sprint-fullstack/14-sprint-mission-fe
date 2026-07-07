@@ -1,5 +1,5 @@
 {
-  "name": "sprint-mission-05",
+  "name": "sprint-mission-06",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -8,14 +8,16 @@
     "dev:server": "node server/server.js",
     "server": "node server/server.js",
     "build": "vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "db:migrate": "node server/db/migrate.js",
+    "db:seed": "node server/db/seed.js"
   },
   "dependencies": {
     "axios": "^1.18.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.7.2",
+    "pg": "^8.22.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.18.0",
