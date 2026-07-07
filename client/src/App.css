@@ -230,6 +230,14 @@ button {
     font-weight: 600;
 }
 
+.pagenation {
+
+    display: flex;
+    max-width: 36px;
+    font-size: 12px;
+
+}
+
 .social-login-container {
     display: flex;
     justify-content: space-between;

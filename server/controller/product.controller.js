@@ -27,10 +27,12 @@ export async function getProductList(req, res, next) {
 
 // 상세 조회
 export async function getProduct(req, res, next) {
+  //프리즈마에서 id를 int로 정의했으니 넘버로 바꿔준다
+  const id = Number(req.params.id);
   try {
     console.log('1) getProduct 들어옴');
 
-    const product = await productService.getProduct(req.params.id);
+    const product = await productService.getProduct(id);
     if (!product) {
       return res.status(404).json({ message: 'Cannot find given id.' });
     }
@@ -59,8 +61,9 @@ export async function createProduct(req, res, next) {
 export async function patchProduct(req, res, next) {
   try {
     console.log('1)patchProduct 들어옴');
-
-    const updatedProduct = await productService.patchProduct(req.params.id, req.body);
+    //프리즈마에서 id를 int로 정의했으니 넘버로 바꿔준다
+    const id = Number(req.params.id);
+    const updatedProduct = await productService.patchProduct(id, req.body);
     console.log('2) 콘트롤러가 서비스로 요청 보냄');
 
     res.status(200).json(updatedProduct);
@@ -73,8 +76,9 @@ export async function patchProduct(req, res, next) {
 export async function deleteProduct(req, res, next) {
   try {
     console.log('1)deleteProduct 들어옴');
-
-    const deleted = await productService.deleteProduct(req.params.id);
+    //프리즈마에서 id를 int로 정의했으니 넘버로 바꿔준다
+    const id = Number(req.params.id);
+    const deleted = await productService.deleteProduct(id);
     if (!deleted) {  // deleteProduct의 경우 지울 게 없으면 null을 반환한다.
       return res.status(404).json({ message: 'Cannot find given id.' });
     }

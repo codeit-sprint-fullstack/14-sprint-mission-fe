@@ -50,6 +50,7 @@ export default function RegistrationPage() {
     }
 
     async function handleSubmit() {
+        e.preventDefault()
         try {
             const newProduct = await createProduct({
                 name,
@@ -66,12 +67,12 @@ export default function RegistrationPage() {
     }
 
     return (
-        <div className={styles.container}>
+        <form onSubmit={handleSubmit} className={styles.container}>
             <div className={styles.header}>
                 <h2>상품 등록하기</h2>
                 <button
+                    type="submit"
                     className={styles.submitButton}
-                    onClick={handleSubmit}
                     disabled={isEmpty} // ① 빈값 있으면 비활성화
                 >
                     등록
@@ -138,6 +139,6 @@ export default function RegistrationPage() {
                     ))}
                 </div>
             </div>
-        </div>
+        </form>
     );
 }

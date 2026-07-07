@@ -8,6 +8,7 @@ import FaqPage from "./pages/FaqPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import SignupPage from "./pages/SignupPage";
 import RegistrationPage from './pages/RegistrationPage';
+import ItemDetailPage from './pages/ItemDetailPage';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/registration" element={<RegistrationPage />} />
+                <Route path="/items/:id" element={<ItemDetailPage />} />
             </Route>
         </Routes>
     )
