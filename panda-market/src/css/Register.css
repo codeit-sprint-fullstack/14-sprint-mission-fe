@@ -1,0 +1,5 @@
+.tagList { display: flex; flex-wrap: wrap; } 
+.tagList .tagWrap { display: flex;  align-items: center; margin-top: 14px; margin-left: 12px; padding: 10px 15px; box-sizing: border-box; background-color:#F3F4F6 ; border-radius: 30px;}
+.tagList .tagWrap:first-child { margin-left: 0; }
+.tagTxt { line-height: 20px; }
+.tagTxt::before { content: "#"; margin-right: 2px; }

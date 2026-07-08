@@ -1,0 +1,19 @@
+.button {
+  outline: none;
+  border: none;
+  height: 42px;
+  line-height: 42px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 23px;
+  background: #3692ff;
+  color: white;
+  cursor: pointer;
+}
+.btnDisable {
+  background-color: #9CA3AF;
+}
+
+.btnTagDel { padding: 0; width: 20px; height: 20px; margin-left: 8px; background-image: url(../assets/ic_delete.png); background-repeat: no-repeat; background-size:8px ; background-position: center; background-color: #9CA3AF; border-radius: 999px; }
+
