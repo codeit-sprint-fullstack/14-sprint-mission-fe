@@ -6,7 +6,7 @@ import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', 'coverage']),
+  globalIgnores(['dist', 'coverage', 'src/generated/prisma', 'server/generated/prisma']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

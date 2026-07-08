@@ -11,7 +11,10 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "preview": "vite preview",
+    "prisma:generate": "prisma generate",
+    "predev:server": "npm run prisma:generate",
     "dev:server": "nodemon server/server.js",
+    "prestart": "npm run prisma:generate",
     "start": "node server/server.js"
   },
   "dependencies": {
