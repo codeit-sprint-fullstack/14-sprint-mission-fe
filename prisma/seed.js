@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import process from 'node:process'
-import { PrismaClient } from '@prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
+import { PrismaClient } from '../server/generated/prisma/index.js'
 
 import { ARTICLES, PRODUCTS } from './mock.js'
 
