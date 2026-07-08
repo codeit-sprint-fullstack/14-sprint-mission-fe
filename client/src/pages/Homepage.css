@@ -1,0 +1,225 @@
+/* main-hero */
+  .home-wrap{
+      width: 100%;
+  }
+.hero-bg{
+  position: relative;
+  width: 100%;
+  background-color: var(--color-secondary);
+  height:540px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.hero-content{
+  max-width: 1110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.hero-content img {
+  width: 70%;
+  overflow: hidden;
+}
+.hero-copy h1{
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 140%;
+  margin-bottom: 32px;
+}
+.hero-copy a{
+  display: flex;
+  padding: 16px 120px;
+  height:56px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-primary);
+  border-radius: 40px;
+  color: var(--color-text-button);
+  font-size:2rem;
+  font-weight: 600;
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+
+.features article{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 138px 0;
+}
+.features article .features-box{
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  width:988px; 
+}
+.features article img{
+  width:588px;
+}
+.features article:nth-child(2) .features-box{
+  flex-direction: row-reverse;
+}
+
+.features article .features-copy h2{
+  color: var(--color-text-point);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 26px;
+  margin-bottom: 12px;
+}
+.features article .features-copy h3{
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 140%; 
+  letter-spacing: 0.8px;
+  margin-bottom: 24px;
+}
+.features article .features-copy p{
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 32px;
+}
+.features article:nth-child(2) .features-copy{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+/* bot */
+.bot-bg{
+  width: 100%;
+  padding-top: 138px;
+  background-color: var(--color-bg-grey);
+}
+.bot{
+  position: relative;
+  background-color: var(--color-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 143px;
+}
+.bot-banner{
+  max-width: 1110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+.bot-banner-copy{
+  margin-bottom: 60px;
+  flex-shrink :0;
+}
+.bot-banner-copy h2{
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 140%;
+}
+.bot-banner img{
+  width: 70%;
+}
+
+
+@media (min-width:1024px) {
+
+}
+@media (max-width:1023px) {
+  .hero-bg{
+    height: auto;
+  }
+  .hero-content, .bot-banner{
+    flex-direction: column;
+    height: 770px;
+    justify-content: flex-end;
+    gap: 211px;
+    text-align: center;
+  }
+  .hero-copy a{
+    display: inline-block;
+    padding: 11px 120px;
+  }
+  .hero-content img{
+    width: 100%;
+  }
+  .bot-banner{
+    flex-direction: column;
+    height: 770px;
+    justify-content: flex-end;
+  }
+  .features article .features-box {
+    gap: 24px;
+  }
+  .features article .features-copy {
+    width: 100%;
+  }
+  .features article .features-box, .features article:nth-child(2) .features-box{
+    flex-direction: column;
+  }
+  .features article{
+    padding: 24px 24px 56px 24px;
+  }
+  .features article img, .bot-banner img {
+    width: 100%;
+  }
+  .features article .features-copy h3{
+   font-size: 3.2rem;
+   line-height: 42px;
+  }
+  .features article .features-copy p{
+    font-size: 1.8rem;
+   line-height: 26px; 
+   color: #374151;
+  }
+  .bot-bg{
+    padding-top:0;
+  }
+}
+
+@media (max-width:480px) {
+   .hero-content, .bot-banner{
+    height: 540px;
+    gap: 132px;
+    overflow: hidden;
+   }
+  
+  .hero-content img, .bot-banner img{
+    width: 120%;
+    object-fit: contain;
+  }
+  .hero-copy{
+    width: 240px;
+    padding-top: 48px;
+  }
+  .hero-copy h1, .bot-banner-copy h2{
+    font-size: 3.2rem;
+    margin-bottom: 1.8rem;
+  }
+  .bot-banner-copy {
+    margin-bottom:0;
+  }
+  .hero-copy a{
+    padding: 11px 0;
+    width: 100%;
+  }
+  .features article{
+    padding: 52px 16px 83px 16px;
+  }
+  .features article .features-copy h3{
+   font-size: 2.4rem;
+   line-height: 32px;
+   margin-bottom: 16px;
+  }
+   .features-box {
+    gap: 16px;
+  }
+  .features article .features-copy p {
+    font-size: 1.6rem;
+  }
+  .bot {
+    padding-top:0;
+  }
+  
+}
