@@ -36,7 +36,7 @@ const Header = () => {
         </div>
 
         <Link to="/login" className="site-header__login-link">
-          로그인
+          로그In
         </Link>
       </nav>
     </header>
