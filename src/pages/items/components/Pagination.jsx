@@ -22,8 +22,7 @@ const getVisiblePages = (page, totalPages) => {
 }
 
 const Pagination = ({ page, totalPages, onPageChange }) => {
-  const pageCount = Math.max(totalPages, 1)
-  const pages = getVisiblePages(page, pageCount)
+  const pages = getVisiblePages(page, totalPages)
 
   return (
     <div className="pagination">
@@ -48,7 +47,7 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
 
       <button
         type="button"
-        disabled={page === pageCount}
+        disabled={page >= totalPages}
         onClick={() => onPageChange(page + 1)}
       >
         &gt;

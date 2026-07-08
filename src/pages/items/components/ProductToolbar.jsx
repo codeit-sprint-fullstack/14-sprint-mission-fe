@@ -1,4 +1,5 @@
 import { PRODUCT_SORT_OPTIONS } from '../../../constants/product'
+import { useNavigate } from 'react-router-dom'
 import './ProductToolbar.css'
 
 const ProductToolbar = ({
@@ -7,6 +8,8 @@ const ProductToolbar = ({
   onKeywordChange,
   onOrderByChange,
 }) => {
+  const navigate = useNavigate()
+
   return (
     <div className="product-toolbar">
       <input
@@ -17,7 +20,11 @@ const ProductToolbar = ({
         onChange={(event) => onKeywordChange(event.target.value)}
       />
 
-      <button className="product-toolbar__button" type="button">
+      <button
+        className="product-toolbar__button"
+        type="button"
+        onClick={() => navigate('/registration')}
+      >
         상품 등록하기
       </button>
 

@@ -1,0 +1,134 @@
+.product-registration-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 100px;
+}
+
+.product-registration-page__title {
+  font-size: 20px;
+}
+
+.product-registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.product-registration-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-registration-form__label {
+  font-weight: 700;
+  color: var(--color-gray-800);
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.product-registration-form__input,
+.product-registration-form__textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 12px;
+  padding: 16px 24px;
+  background-color: var(--color-gray-100);
+  border: none;
+  color: var(--color-gray-800);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.product-registration-form__textarea {
+  resize: none;
+}
+
+.product-registration-form__input:focus,
+.product-registration-form__textarea:focus {
+  outline: var(--color-primary-100) solid 1px;
+}
+
+.product-registration-form__input::placeholder,
+.product-registration-form__textarea::placeholder {
+  color: var(--color-gray-400);
+}
+
+.product-registration-page__submit-button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-primary-100);
+  color: white;
+  font-weight: 600;
+}
+
+.product-registration-form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-registration-form__error {
+  color: red;
+}
+
+.product-registration-form__input--error {
+  border: 1px solid red;
+}
+
+.product-registration-form__field-error {
+  margin: -8px 0 0;
+  color: red;
+  font-size: 14px;
+}
+
+.product-registration-form__tag-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-registration-form__tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.product-registration-form__tag-chip {
+  width: fit-content;
+  border: 0;
+  border-radius: 100rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 12px 6px 16px;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.product-registration-form__tag-chip-text {
+  display: inline-block;
+}
+
+.product-registration-form__tag-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.product-registration-form__tag-chip-remove-icon {
+  display: block;
+  width: 22px;
+  height: 24px;
+}
+
+.product-registration-page__submit-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}

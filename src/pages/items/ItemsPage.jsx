@@ -1,47 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import MainLayout from '../../components/layout/MainLayout'
 import { PRODUCT_ORDER_BY } from '../../constants/product'
-import { getProductList } from '../../services/ProductService'
+import { getProductList } from '../../services/productService'
 import ProductCard from './components/ProductCard'
 import ProductToolbar from './components/ProductToolbar'
 import Pagination from './components/Pagination'
+import useDebouncedValue from '../../hooks/useDebouncedValue'
+import useProductPageSize from '../../hooks/useProductPageSize'
 import './ItemsPage.css'
 
-const getProductPageSize = () => {
-  if (window.innerWidth < 768) {
-    return {
-      type: 'mobile',
-      best: 1,
-      all: 4,
-    }
-  }
-
-  if (window.innerWidth < 1200) {
-    return {
-      type: 'tablet',
-      best: 2,
-      all: 6,
-    }
-  }
-
-  return {
-    type: 'desktop',
-    best: 4,
-    all: 10,
-  }
-}
-
 const ItemsPage = () => {
-  const [pageSize, setPageSize] = useState(getProductPageSize)
-  const [bestProducts, setBestProducts] = useState([])
   const [products, setProducts] = useState([])
-  const [keyword, setKeyword] = useState('')
+  const [keywordInput, setKeywordInput] = useState('')
   const [orderBy, setOrderBy] = useState(PRODUCT_ORDER_BY.RECENT)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
+  const [isLoading, setIsLoading] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const keyword = useDebouncedValue(keywordInput)
+
+  const resetPage = useCallback(() => {
+    setPage(1)
+  }, [])
+
+  const pageSize = useProductPageSize(resetPage)
 
   const handleKeywordChange = (nextKeyword) => {
-    setKeyword(nextKeyword)
+    setKeywordInput(nextKeyword)
     setPage(1)
   }
 
@@ -51,66 +37,78 @@ const ItemsPage = () => {
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      const nextPageSize = getProductPageSize()
+    let ignore = false
 
-      if (pageSize.type === nextPageSize.type) {
-        return
-      }
-
-      setPageSize(nextPageSize)
-      setPage(1)
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [pageSize.type])
-
-  useEffect(() => {
     const fetchProducts = async () => {
-      const [bestData, productData] = await Promise.all([
-        getProductList(1, pageSize.best, '', PRODUCT_ORDER_BY.FAVORITE),
-        getProductList(page, pageSize.all, keyword, orderBy),
-      ])
+      setIsLoading(true)
+      setErrorMessage('')
 
-      setTotalPages(Math.ceil(productData.totalCount / pageSize.all))
-      setBestProducts(bestData.list)
-      setProducts(productData.list)
+      try {
+        const offset = (page - 1) * pageSize
+
+        const productData = await getProductList({
+          offset,
+          limit: pageSize,
+          keyword,
+          orderBy,
+        })
+
+        if (ignore) return
+
+        const nextTotalPages = Math.max(
+          1,
+          Math.ceil(productData.totalCount / pageSize),
+        )
+
+        setTotalPages(nextTotalPages)
+        setPage((prevPage) => Math.min(prevPage, nextTotalPages))
+        setProducts(productData.list)
+      } catch (error) {
+        if (ignore) return
+
+        setErrorMessage(error.message)
+        setProducts([])
+        setTotalPages(1)
+      } finally {
+        if (!ignore) {
+          setIsLoading(false)
+        }
+      }
     }
 
     fetchProducts()
+
+    return () => {
+      ignore = true
+    }
   }, [page, pageSize, keyword, orderBy])
 
   return (
     <MainLayout>
       <div className="items-page">
         <section className="items-section">
-          <h2 className="items-section-title">베스트 상품</h2>
-          <div className="best-products-grid">
-            {bestProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-
-        <section className="items-section">
-          <div className="items-section-header">
-            <h2 className="items-section-title">판매 중인 상품</h2>
+          <div className="items-section__header">
+            <h2 className="items-section__title">판매 중인 상품</h2>
             <ProductToolbar
-              keyword={keyword}
+              keyword={keywordInput}
               orderBy={orderBy}
               onKeywordChange={handleKeywordChange}
               onOrderByChange={handleOrderByChange}
             />
           </div>
-          <div className="all-products-grid">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {errorMessage ? (
+            <p className="items-section__message">{errorMessage}</p>
+          ) : isLoading ? (
+            <p className="items-section__message">상품을 불러오는 중...</p>
+          ) : products.length === 0 ? (
+            <p className="items-section__message">검색 결과가 없습니다.</p>
+          ) : (
+            <div className="items-section__grid">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
           <Pagination
             page={page}
             totalPages={totalPages}

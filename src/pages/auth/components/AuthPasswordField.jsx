@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import visibilityOffIcon from '../../../assets/icons/btn_visibility_off.svg'
+import visibilityOffIcon from '../../../assets/icons/ic_visibility_off.svg'
 
 const AuthPasswordField = ({
   id,
@@ -17,7 +17,6 @@ const AuthPasswordField = ({
       <label htmlFor={id}>{label}</label>
       <div className="auth-page__password-wrapper">
         <input
-          className="password"
           type={isPasswordVisible ? 'text' : 'password'}
           id={id}
           name={name}
@@ -32,7 +31,7 @@ const AuthPasswordField = ({
           aria-pressed={isPasswordVisible}
           onClick={() => setIsPasswordVisible((prevValue) => !prevValue)}
         >
-          <img src={visibilityOffIcon} alt="" className="visibility" />
+          <img src={visibilityOffIcon} alt="" />
         </button>
       </div>
     </div>
