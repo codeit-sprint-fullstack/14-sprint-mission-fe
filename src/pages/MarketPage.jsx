@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import BestProductList from "../components/BestProductList";
+// import BestProductList from "../components/BestProductList";
 import ProductList from "../components/ProductList";
 import Footer from "../components/Footer";
 import './MarketPage.css';
@@ -12,7 +12,7 @@ function MarketPage () {
     <Header />
     
     <main className="market-page">
-      <BestProductList />
+      {/* <BestProductList /> */}
       <ProductList />
     </main>
 

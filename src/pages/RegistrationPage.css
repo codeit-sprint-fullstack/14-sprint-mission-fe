@@ -1,0 +1,175 @@
+.registration-page {
+  width: 100%;
+  max-width: 948px;
+  min-height: calc(100vh - 230px);
+  margin: 0 auto;
+  padding: 40px 24px 120px;
+  box-sizing: border-box;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.registration-header h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.registration-header button {
+  width: 74px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3692ff;
+  color: #f3f4f6;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.registration-header button:disabled {
+  background-color: #9ca3af;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.registration-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.registration-form input,
+.registration-form textarea {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  background-color: #f3f4f6;
+  color: #111827;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  box-sizing: border-box;
+}
+
+.registration-form input {
+  height: 56px;
+  padding: 15px 24px;
+}
+
+.registration-form textarea {
+  height: 282px;
+  padding: 16px 24px;
+  resize: none;
+}
+
+.registration-form input::placeholder,
+.registration-form textarea::placeholder {
+  color: #9ca3af;
+}
+
+.tag-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tag-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 6px 12px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 14px;
+}
+
+.tag-chip-remove {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #9ca3af;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0;
+}
+
+@media (max-width: 1024px) {
+  .registration-page {
+    max-width: none;
+    padding: 40px 24px 120px;
+  }
+}
+
+@media (max-width: 767px) {
+  .registration-page {
+    min-height: calc(100vh - 216px);
+    padding: 32px 16px 120px;
+  }
+
+  .registration-form {
+    gap: 24px;
+  }
+
+  .registration-header h3 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .registration-header button {
+    width: 58px;
+    height: 42px;
+    font-size: 14px;
+  }
+
+  .registration-form label {
+    gap: 10px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .registration-form input {
+    height: 52px;
+    padding: 13px 16px;
+    font-size: 14px;
+  }
+
+  .registration-form textarea {
+    height: 240px;
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .tag-field-group::after {
+    height: 30px;
+  }
+}

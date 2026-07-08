@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import { getProducts } from "../api/productsApi";
 import ProductCard from "./ProductCard";
 import "./ProductList.css";
 import searchImg from "../assets/searchImg.svg";
@@ -55,23 +56,24 @@ function ProductList() {
   }, []);
 
   useEffect(() => {
-    async function getProducts() {
-      const response = await axios.get(
-        `https://panda-market-api.vercel.app/products?page=${currentPage}&pageSize=${pageSize}&orderBy=${orderBy}`
-      );
+    async function fetchProducts() {
+      const offset = (currentPage - 1) * pageSize;
 
-      setProducts(response.data.list);
-      setTotalCount(response.data.totalCount);
+      const data = await getProducts({
+        offset,
+        limit: pageSize,
+        sort: orderBy,
+        keyword: searchText,
+      });
+
+      setProducts(data.list);
+      setTotalCount(data.totalCount);
     }
 
-    getProducts();
-  }, [orderBy, currentPage, pageSize]);
+    fetchProducts();
+  }, [orderBy, currentPage, pageSize, searchText]);
 
-  const filteredProducts = products.filter((product) => {
-    return product.name.toLowerCase().includes(searchText.toLowerCase());
-  });
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortedProducts = [...products].sort((a, b) => {
     if (orderBy === "favorite") {
       return b.favoriteCount - a.favoriteCount;
     }
@@ -119,7 +121,7 @@ function ProductList() {
   }
 
   return (
-    <>
+    <div className="product-list">
       <div className="product-list-header">
         <h3 className="list-title">판매중인 상품</h3>
 
@@ -139,7 +141,7 @@ function ProductList() {
             />
           </div>
 
-          <button className="register-button">상품 등록하기</button>
+          <Link to='/registration' className="register-button">상품 등록하기</Link>
 
           <select
             className="order-select"
@@ -154,7 +156,7 @@ function ProductList() {
 
       <div className="items">
         {sortedProducts.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
+          return <ProductCard key={product._id || product.id} product={product} />;
         })}
       </div>
 
@@ -191,7 +193,7 @@ function ProductList() {
           &gt;
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

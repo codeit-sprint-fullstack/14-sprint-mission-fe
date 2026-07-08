@@ -1,14 +1,23 @@
 .market-page {
   width: 100%;
   max-width: 1200px;
-  min-height: 1500px;
+  min-height: calc(100vh - 230px);
   margin: 0 auto;
-  padding: 0 24px 120px;
+  padding: 0 24px 72px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .market-page {
+    padding: 0 24px 72px;
+  }
 }
 
 @media (max-width: 767px) {
   .market-page {
-    padding: 0 16px 96px;
+    min-height: calc(100vh - 216px);
+    padding: 0 16px 64px;
   }
 }
