@@ -1,3 +1,9 @@
+.card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .itemImg {
   margin-bottom: 16px;
   width: 100%;

@@ -22,7 +22,6 @@ function ItemsPage() {
   const totalPages = Math.ceil(totalCount / pageSize)
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1)
 
-
   if (isLoading) {
     return <div>로딩중...</div>
   }
