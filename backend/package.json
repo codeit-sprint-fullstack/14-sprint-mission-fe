@@ -8,15 +8,23 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "seed": "node data/seed.js",
+    "seed": "node prisma/seed.js",
+    "migrate": "prisma migrate dev",
     "build": "npm install",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "studio": "prisma studio"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.7.2"
+    "is-email": "^1.0.2",
+    "prisma": "^7.8.0",
+    "superstruct": "^2.0.2",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

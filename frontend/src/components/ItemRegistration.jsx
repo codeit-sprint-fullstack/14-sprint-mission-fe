@@ -103,7 +103,7 @@ function ItemRegistration() {
         name: formData.name,
         description: formData.description,
         price: Number(formData.price),
-        tags: formData.tags,
+        tags: tags,
       });
 
       alert("상품이 등록되었습니다.");

@@ -1,12 +1,40 @@
-const seedData = [
+export const USER = [
+  {
+    email: 'user1@example.com',
+    firstName: '길동',
+    lastName: '홍',
+    address: '서울',
+  },
+  {
+    email: 'user2@example.com',
+    firstName: '철수',
+    lastName: '김',
+    address: '부산',
+  },
+];
+
+export const ARTICLE = [
+  {
+    title: 'Prisma 정말 편하네요',
+    content: '관계 설정이 생각보다 어렵지 않았습니다.',
+  },
+  {
+    title: '오늘 점심 추천',
+    content: '뭐 먹을까요?',
+  },
+];
+
+export const PRODUCTS = [
   {
     "name": "멋쟁이 모자",
     "description": "딥그린 색상의 멋쟁이 모자",
     "price": 9000,
     "tags": ["모자"],
     "images": ["https://source.unsplash.com/800x600/?hat"],
-    "ownerId": 1,
-    "favoriteCount": 3
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 3,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "화이트 스니커즈",
@@ -14,8 +42,10 @@ const seedData = [
     "price": 35000,
     "tags": ["신발", "운동화"],
     "images": ["https://source.unsplash.com/800x600/?sneakers"],
-    "ownerId": 2,
-    "favoriteCount": 8
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 8,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "데님 자켓",
@@ -23,8 +53,10 @@ const seedData = [
     "price": 45000,
     "tags": ["의류", "자켓"],
     "images": ["https://source.unsplash.com/800x600/?denim-jacket"],
-    "ownerId": 3,
-    "favoriteCount": 12
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 12,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "기계식 키보드",
@@ -32,8 +64,10 @@ const seedData = [
     "price": 60000,
     "tags": ["전자기기", "키보드"],
     "images": ["https://source.unsplash.com/800x600/?mechanical-keyboard"],
-    "ownerId": 4,
-    "favoriteCount": 16
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 16,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "무선 헤드폰",
@@ -41,8 +75,10 @@ const seedData = [
     "price": 85000,
     "tags": ["전자기기", "음향"],
     "images": ["https://source.unsplash.com/800x600/?headphones"],
-    "ownerId": 5,
-    "favoriteCount": 22
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 22,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "캠핑 랜턴",
@@ -50,8 +86,10 @@ const seedData = [
     "price": 25000,
     "tags": ["캠핑", "랜턴"],
     "images": ["https://source.unsplash.com/800x600/?camping-lantern"],
-    "ownerId": 6,
-    "favoriteCount": 5
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 5,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "원목 책상",
@@ -59,8 +97,10 @@ const seedData = [
     "price": 120000,
     "tags": ["가구", "책상"],
     "images": ["https://source.unsplash.com/800x600/?wooden-desk"],
-    "ownerId": 7,
-    "favoriteCount": 10
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 10,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "폴라로이드 카메라",
@@ -68,8 +108,10 @@ const seedData = [
     "price": 70000,
     "tags": ["카메라"],
     "images": ["https://source.unsplash.com/800x600/?polaroid-camera"],
-    "ownerId": 8,
-    "favoriteCount": 18
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 18,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "가죽 백팩",
@@ -77,8 +119,10 @@ const seedData = [
     "price": 55000,
     "tags": ["가방"],
     "images": ["https://source.unsplash.com/800x600/?leather-backpack"],
-    "ownerId": 9,
-    "favoriteCount": 14
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 14,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "닌텐도 스위치",
@@ -86,8 +130,10 @@ const seedData = [
     "price": 220000,
     "tags": ["게임"],
     "images": ["https://source.unsplash.com/800x600/?nintendo-switch"],
-    "ownerId": 10,
-    "favoriteCount": 30
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 30,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "아이패드 에어",
@@ -95,8 +141,10 @@ const seedData = [
     "price": 480000,
     "tags": ["태블릿"],
     "images": ["https://source.unsplash.com/800x600/?ipad"],
-    "ownerId": 1,
-    "favoriteCount": 25
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 25,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "게이밍 마우스",
@@ -104,8 +152,10 @@ const seedData = [
     "price": 28000,
     "tags": ["마우스"],
     "images": ["https://source.unsplash.com/800x600/?gaming-mouse"],
-    "ownerId": 2,
-    "favoriteCount": 11
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 11,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "러닝화",
@@ -113,8 +163,10 @@ const seedData = [
     "price": 40000,
     "tags": ["운동화"],
     "images": ["https://source.unsplash.com/800x600/?running-shoes"],
-    "ownerId": 3,
-    "favoriteCount": 9
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 9,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "에어프라이어",
@@ -122,8 +174,10 @@ const seedData = [
     "price": 65000,
     "tags": ["가전"],
     "images": ["https://source.unsplash.com/800x600/?air-fryer"],
-    "ownerId": 4,
-    "favoriteCount": 17
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 17,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "독서용 스탠드",
@@ -131,8 +185,10 @@ const seedData = [
     "price": 15000,
     "tags": ["조명"],
     "images": ["https://source.unsplash.com/800x600/?desk-lamp"],
-    "ownerId": 5,
-    "favoriteCount": 4
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 4,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "전자책 리더기",
@@ -140,8 +196,10 @@ const seedData = [
     "price": 90000,
     "tags": ["전자기기"],
     "images": ["https://source.unsplash.com/800x600/?ebook-reader"],
-    "ownerId": 6,
-    "favoriteCount": 13
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 13,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "블루투스 스피커",
@@ -149,8 +207,10 @@ const seedData = [
     "price": 32000,
     "tags": ["스피커"],
     "images": ["https://source.unsplash.com/800x600/?bluetooth-speaker"],
-    "ownerId": 7,
-    "favoriteCount": 19
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 19,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "요가 매트",
@@ -158,8 +218,10 @@ const seedData = [
     "price": 12000,
     "tags": ["운동"],
     "images": ["https://source.unsplash.com/800x600/?yoga-mat"],
-    "ownerId": 8,
-    "favoriteCount": 6
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 6,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "커피 그라인더",
@@ -167,8 +229,10 @@ const seedData = [
     "price": 18000,
     "tags": ["커피"],
     "images": ["https://source.unsplash.com/800x600/?coffee-grinder"],
-    "ownerId": 9,
-    "favoriteCount": 7
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 7,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   },
   {
     "name": "모니터 암",
@@ -176,9 +240,9 @@ const seedData = [
     "price": 45000,
     "tags": ["모니터"],
     "images": ["https://source.unsplash.com/800x600/?monitor-arm"],
-    "ownerId": 10,
-    "favoriteCount": 15
+    "ownerId": "4ce8c329-3b0d-4603-ba16-d9a6eb7de7ff",
+    "favoriteCount": 15,
+    "createdAt": "2026-07-02T08:29:43.537Z",
+    "updatedAt": "2026-07-02T08:29:43.537Z"
   }
-]
-
-export default seedData;
+];
