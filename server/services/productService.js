@@ -15,23 +15,33 @@ export async function getProducts(query = {}) {
       orderBy = { createdAt: 'desc' }
   }
 
-  return await prisma.product.findMany({
-    where: {
-      OR: [
-        { name: { contains: keyword, mode: 'insensitive' } },
-        { description: { contains: keyword, mode: 'insensitive' } }
-      ]
-    },
-    select: {
-      id: true,
-      name: true,
-      price: true,
-      createdAt: true
-    },
-    orderBy,
-    skip: parseInt(offset),
-    take: parseInt(limit)
-  })
+  const where = {
+    OR: [
+      { name: { contains: keyword, mode: 'insensitive' } },
+      { description: { contains: keyword, mode: 'insensitive' } }
+    ]
+  }
+
+  const [products, totalCount] = await Promise.all([
+    prisma.product.findMany({
+      where,
+      select: {
+        id: true,
+        name: true,
+        price: true,
+        createdAt: true
+      },
+      orderBy,
+        skip: parseInt(offset),
+        take: parseInt(limit)
+    }),
+    prisma.product.count({ where })
+  ])
+
+  return {
+    list: products,
+    totalCount
+  }
 }
 
 export async function getProduct(productId) {

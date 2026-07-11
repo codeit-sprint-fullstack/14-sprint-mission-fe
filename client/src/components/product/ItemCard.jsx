@@ -7,7 +7,7 @@ import styles from './ItemCard.module.css'
 
 function ItemCard({ item }) {
   return (
-    <Link className={styles.card} to={`/items/${item._id}`}>
+    <Link className={styles.card} to={`/items/${item.id}`}>
       <article>
         <img className={styles.image} src={defaultImg} alt="상품 이미지" />
         <div className={styles.itemDesc}>
