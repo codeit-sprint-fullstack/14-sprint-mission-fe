@@ -13,7 +13,8 @@ export async function getProducts(req, res, next) {
 
 export async function getProduct(req, res, next) {
   try {
-    const product = await productService.getProduct(req.params.id)
+    const { productId } = req.params
+    const product = await productService.getProduct(productId)
     res.send(product)
   } catch (err) {
     next(err)
@@ -35,7 +36,8 @@ export async function patchProduct(req, res, next) {
   try {
     assert(req.body, PatchProduct)
 
-    const product = await productService.patchProduct(req.params.id, req.body)
+    const { productId } = req.params
+    const product = await productService.patchProduct(productId, req.body)
     res.send(product)
   } catch (err) {
     next(err)
@@ -44,7 +46,8 @@ export async function patchProduct(req, res, next) {
 
 export async function deleteProduct(req, res, next) {
   try {
-    await productService.deleteProduct(req.params.id)
+    const { productId } = req.params
+    await productService.deleteProduct(productId)
     res.sendStatus(204)
   } catch (err) {
     next(err)

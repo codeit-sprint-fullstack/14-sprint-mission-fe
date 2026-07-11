@@ -13,7 +13,8 @@ export async function getArticles(req, res, next) {
 
 export async function getArticle(req, res, next) {
   try {
-    const article = await articleService.getArticle(req.params.id)
+    const { articleId } = req.params
+    const article = await articleService.getArticle(articleId)
     res.send(article)
   } catch (err) {
     next(err)
@@ -35,7 +36,8 @@ export async function patchArticle(req, res, next) {
   try {
     assert(req.body, PatchArticle)
 
-    const article = await articleService.patchArticle(req.params.id, req.body)
+    const { articleId } = req.params
+    const article = await articleService.patchArticle(articleId, req.body)
     res.send(article)
   } catch(err) {
     next(err)
@@ -44,7 +46,8 @@ export async function patchArticle(req, res, next) {
 
 export async function deleteArticle(req, res, next) {
   try {
-    await articleService.deleteArticle(req.params.id)
+    const { articleId } = req.params
+    await articleService.deleteArticle(articleId)
     res.sendStatus(204)
   } catch (err) {
     next(err)

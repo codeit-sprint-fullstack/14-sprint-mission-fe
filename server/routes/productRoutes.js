@@ -4,9 +4,9 @@ import * as productController from '../controllers/productController.js'
 const router = express.Router()
 
 router.get('/', productController.getProducts)
-router.get('/:id', productController.getProduct)
+router.get('/:productId', productController.getProduct)
 router.post('/', productController.createProduct)
-router.patch('/:id', productController.patchProduct)
-router.delete('/:id', productController.deleteProduct)
+router.patch('/:productId', productController.patchProduct)
+router.delete('/:productId', productController.deleteProduct)
 
 export default router

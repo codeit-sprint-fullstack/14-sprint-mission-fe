@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client'
 import prisma from '../lib/prisma.js'
 
 export async function getArticles(query = {}) {
@@ -33,9 +33,9 @@ export async function getArticles(query = {}) {
   })
 }
 
-export async function getArticle(id) {
+export async function getArticle(articleId) {
   return await prisma.article.findUniqueOrThrow({
-    where: { id },
+    where: { id: articleId },
     select: {
       id: true,
       title: true,
@@ -51,9 +51,9 @@ export async function createArticle(data) {
   })
 }
 
-export async function patchArticle(id, data) {
+export async function patchArticle(articleId, data) {
   return await prisma.article.update({
-    where: { id },
+    where: { id: articleId },
     data: {
       title: data.title ?? Prisma.skip,
       content: data.content ?? Prisma.skip
@@ -61,8 +61,8 @@ export async function patchArticle(id, data) {
   })
 }
 
-export async function deleteArticle(id) {
+export async function deleteArticle(articleId) {
   return await prisma.article.delete({
-    where: { id }
+    where: { id: articleId }
   })
 }
