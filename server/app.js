@@ -2,112 +2,15 @@ import 'dotenv/config'
 import express from 'express'
 
 import productRoutes from './routes/productRoutes.js'
+import articleRoutes from './routes/articleRoutes.js'
+
 import errorHandler from './middlewares/errorHandler.js'
 
 const app = express()
 app.use(express.json())
 
 app.use('/products', productRoutes)
-
-/*********** article ***********/
-app.get('/articles', async (req, res, next) => {
-  try {
-    const { limit = 3, offset = 0, sort = 'recent', keyword = '' } = req.query
-
-    let orderBy
-    switch (sort) {
-      case 'oldest':
-        orderBy = { createdAt: 'asc' }
-        break
-      case 'recent':
-      default: 
-        orderBy = { createdAt: 'desc' }
-    }
-
-    const articles = await prisma.article.findMany({
-      where: {
-        OR: [
-          { title: { contains: keyword, mode: 'insensitive' } },
-          { content: { contains: keyword, mode: 'insensitive' } }
-        ]
-      },
-      select: {
-        id: true,
-        title: true,
-        content: true,
-        createdAt: true
-      },
-      orderBy,
-      skip: parseInt(offset),
-      take: parseInt(limit)
-    })
-    res.send(articles)
-  } catch (err) {
-    next(err)
-  }
-})
-
-app.get('/articles/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params
-
-    const article = await prisma.article.findUniqueOrThrow({
-      where: { id },
-      select: {
-        id: true,
-        title: true,
-        content: true,
-        createdAt: true
-      }
-    })
-    res.send(article)
-  } catch (err) {
-    next(err)
-  }
-})
-
-app.post('/articles', async (req, res, next) => {
-  try {
-    assert(req.body, CreateArticle)
-    const article = await prisma.article.create({
-      data: req.body
-    })
-    res.status(201).send(article)
-  } catch (err) {
-    next(err)
-  }
-})
-
-app.patch('/articles/:id', async (req, res, next) => {
-  try {
-    assert(req.body, PatchArticle)
-    const { id } = req.params
-
-    const article = await prisma.article.update({
-      where: { id },
-      data: {
-        title: req.body.title ?? Prisma.skip,
-        content: req.body.content ?? Prisma.skip
-      }
-    })
-    res.send(article)
-  } catch (err) {
-    next(err)
-  }
-})
-
-app.delete('/articles/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params
-
-    await prisma.article.delete({
-      where: { id }
-    })
-    res.sendStatus(204)
-  } catch (err) {
-    next(err)
-  }
-})
+app.use('/articles', articleRoutes)
 
 /*********** comment ***********/
 app.get('/products/:id/comments', async (req, res, next) => {
