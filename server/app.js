@@ -14,4 +14,4 @@ app.use('/articles', articleRoutes)
 app.use('/', commentRoutes)
 app.use(errorHandler)
 
-app.listen(3000, () => console.log('Server Started!'))
+app.listen(process.env.PORT || 3000, () => console.log('Server Started!'))

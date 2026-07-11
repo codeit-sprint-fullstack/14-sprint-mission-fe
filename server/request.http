@@ -11,12 +11,12 @@ Content-Type: application/json
 {
   "name": "아이폰 미니 13",
   "description": "아이폰 미니 13 팔아요! 사용감 있습니다.",
-  "price": "십만원",
+  "price": 1000000,
   "tags": ["애플", "아이폰"]
 }
 
 ###
-PATCH http://localhost:3000/products/00891d0f-99e3-491d-b27e-5a417556be8e
+PATCH http://localhost:3000/products/d8ac25ff-7e45-473c-a3f1-b629f70708ef
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/products/00891d0f-99e3-491d-b27e-5a417556be8e
+DELETE http://localhost:3000/products/d8ac25ff-7e45-473c-a3f1-b629f70708ef
 
 #/*********** articles ***********/
 ###
@@ -43,7 +43,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/articles/38bc3162-8bd7-408e-99c7-7476d2ffac16
+PATCH http://localhost:3000/articles/2f5838ec-bec1-49cc-b7bf-02b82ed3f2a9
 Content-Type: application/json
 
 {
@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/articles/38bc3162-8bd7-408e-99c7-7476d2ffac16
+DELETE http://localhost:3000/articles/2f5838ec-bec1-49cc-b7bf-02b82ed3f2a9
 
 #/*********** comments ***********/
 ###
@@ -61,7 +61,7 @@ GET http://localhost:3000/products/0a6f3c9d-8b21-4e75-96d4-3f1a7c0e5b82/comments
 GET http://localhost:3000/articles/1f6e9c2a-8d74-4b53-a7c0-5e3d9f1b6248/comments
 
 ###
-POST http://localhost:3000/products/3a7e9f21-b4c8-4df5-9a2e-6c0f8d31b572/comments
+POST http://localhost:3000/products/2b5e7d9a-0c61-4f38-a8d2-7e9c1b4f6530/comments
 Content-Type: application/json
 
 {
@@ -69,15 +69,15 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/articles/d8f1b3a6-7c25-4e90-9a4b-1f6c8e2d5730/comments
+POST http://localhost:3000/articles/1f6e9c2a-8d74-4b53-a7c0-5e3d9f1b6248/comments
 Content-Type: application/json
 
 {
-  "content": "학습용이면 에어 추천해요!"
+  "content": "저는 지하철 역 앞에서 거래 많이해요!"
 }
 
 ###
-PATCH http://localhost:3000/comments/973285f3-c2b0-439f-a143-225899caa23e
+PATCH http://localhost:3000/comments/0e2a6d5f-7c91-4b38-a6e2-9f1c3d8b4270
 Content-Type: application/json
 
 {
@@ -85,4 +85,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/comments/973285f3-c2b0-439f-a143-225899caa23e
+DELETE http://localhost:3000/comments/0e2a6d5f-7c91-4b38-a6e2-9f1c3d8b4270
