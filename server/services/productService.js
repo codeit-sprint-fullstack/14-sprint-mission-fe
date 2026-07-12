@@ -15,12 +15,14 @@ export async function getProducts(query = {}) {
       orderBy = { createdAt: 'desc' }
   }
 
-  const where = {
-    OR: [
-      { name: { contains: keyword, mode: 'insensitive' } },
-      { description: { contains: keyword, mode: 'insensitive' } }
-    ]
-  }
+  const where = keyword
+  ? {
+      OR: [
+        { name: { contains: keyword, mode: 'insensitive' } },
+        { description: { contains: keyword, mode: 'insensitive' } }
+      ]
+    }
+  : {}
 
   const [products, totalCount] = await Promise.all([
     prisma.product.findMany({

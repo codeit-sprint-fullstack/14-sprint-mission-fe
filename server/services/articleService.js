@@ -5,6 +5,7 @@ export async function getArticles(query = {}) {
   const { limit = 3, offset = 0, sort = 'recent', keyword = ''} = query
 
   let orderBy
+
   switch (sort) {
     case 'oldest':
       orderBy = { createdAt: 'asc'}
@@ -14,13 +15,17 @@ export async function getArticles(query = {}) {
       orderBy = { createdAt: 'desc'}
   }
 
-  return await prisma.article.findMany({
-    where: {
+  const where = keyword
+    ? {
       OR: [
         { title: { contains: keyword, mode: 'insensitive' } },
         { content: { contains: keyword, mode: 'insensitive' } }
       ]
-    },
+    }
+    : {}
+
+  return await prisma.article.findMany({
+    where,
     select: {
       id: true,
       title: true,
