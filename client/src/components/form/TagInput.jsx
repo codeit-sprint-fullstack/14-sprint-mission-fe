@@ -36,7 +36,8 @@ function TagInput({ label, id, tags, setTags, error, ...props }) {
       <input 
         className={`${styles.input} ${error ? styles.errorInput : ''}`}
         id={id} 
-        name={id} 
+        name={id}
+        value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleEnter}
         {...props}
