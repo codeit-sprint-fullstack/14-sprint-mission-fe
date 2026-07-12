@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import * as productController from './controller/product.controller.js';
 import * as articleController from './controller/article.controller.js';
+import * as articleCommentController from './controller/articleComment.controller.js';
+import * as productCommentController from './controller/productComment.controller.js';
 
 const app = express();
 // json에 괄호 꼭 붙이기
@@ -19,6 +21,17 @@ app.get('/article/:id', articleController.getArticle);
 app.post('/article', articleController.createArticle);
 app.patch('/article/:id', articleController.patchArticle);
 app.delete('/article/:id', articleController.deleteArticle);
+
+//중첩은 3단 이상이 되지 않게, 고유 id로 특정 가능한 단일 리소스 조작은 최상위로 평탄화.
+app.get('/articles/:articleId/comments', articleCommentController.getArticleCommentList);
+app.post('/articles/:articleId/comments', articleCommentController.createArticleComment);
+app.patch('/article-comments/:id', articleCommentController.patchArticleComment);
+app.delete('/article-comments/:id', articleCommentController.deleteArticleComment);
+
+app.get('/products/:productId/comments', productCommentController.getProductCommentList);
+app.post('/products/:productId/comments', productCommentController.createProductComment);
+app.patch('/product-comments/:id', productCommentController.patchProductComment);
+app.delete('/product-comments/:id', productCommentController.deleteProductComment);
 
 // 에러처리
 app.use((err, req, res, next) => {
