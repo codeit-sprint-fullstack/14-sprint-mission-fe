@@ -14,7 +14,7 @@ app.use(express.json())
 
 app.use('/products', productRoutes)
 app.use('/articles', articleRoutes)
-app.use('/', commentRoutes)
+app.use('/comments', commentRoutes)
 app.use(errorHandler)
 
 app.listen(process.env.PORT || 3000, () => console.log('Server Started!'))
