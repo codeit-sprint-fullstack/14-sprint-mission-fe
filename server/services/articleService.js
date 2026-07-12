@@ -24,18 +24,26 @@ export async function getArticles(query = {}) {
     }
     : {}
 
-  return await prisma.article.findMany({
-    where,
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true
-    },
-    orderBy,
-    skip: parseInt(offset),
-    take: parseInt(limit)
-  })
+  const [list, totalCount] = await Promise.all([
+    prisma.article.findMany({
+      where,
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        createdAt: true
+      },
+      orderBy,
+      skip: parseInt(offset),
+      take: parseInt(limit)
+    }),
+    prisma.article.count({ where })
+  ])
+
+  return {
+    list,
+    totalCount
+  }
 }
 
 export async function getArticle(articleId) {
