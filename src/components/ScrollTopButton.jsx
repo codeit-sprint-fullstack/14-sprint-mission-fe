@@ -19,16 +19,14 @@ function ScrollTopButton() {
     };
   }, []);
 
-  if (!isVisible) {
-    return null;
-  }
-
   return (
     <button
-      className="scroll-top-button"
+      className={`scroll-top-button ${isVisible ? 'is-visible' : ''}`}
       type="button"
       onClick={() => scrollToPageTop()}
       aria-label="위로 가기"
+      aria-hidden={!isVisible}
+      tabIndex={isVisible ? 0 : -1}
     >
       <span aria-hidden="true">↑</span>
     </button>

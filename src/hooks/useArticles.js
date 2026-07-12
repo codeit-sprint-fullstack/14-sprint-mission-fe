@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getProductList } from '../services/pandaApi.js';
+import { getArticleList } from '../services/pandaApi.js';
 
-function useProducts({ page, pageSize, keyword = '' }) {
+function useArticles({ page, pageSize, keyword = '' }) {
   const [data, setData] = useState({ list: [], totalCount: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -12,7 +12,7 @@ function useProducts({ page, pageSize, keyword = '' }) {
     setIsLoading(true);
     setError('');
 
-    getProductList({ page, pageSize, keyword })
+    getArticleList({ page, pageSize, keyword })
       .then((response) => {
         if (ignore) {
           return;
@@ -29,7 +29,7 @@ function useProducts({ page, pageSize, keyword = '' }) {
         }
 
         setData({ list: [], totalCount: 0 });
-        setError(requestError.message || '상품 데이터를 불러오지 못했습니다.');
+        setError(requestError.message || '게시글 데이터를 불러오지 못했습니다.');
       })
       .finally(() => {
         if (!ignore) {
@@ -45,4 +45,4 @@ function useProducts({ page, pageSize, keyword = '' }) {
   return { ...data, isLoading, error };
 }
 
-export default useProducts;
+export default useArticles;

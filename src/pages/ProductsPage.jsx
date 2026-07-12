@@ -60,7 +60,7 @@ function ProductsPage() {
   }, [error, products.length, status]);
 
   return (
-    <section className="content-width min-h-[calc(100vh-70px)] py-16">
+    <section className="content-width min-h-[calc(100vh-4.375rem)] py-16">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-lg font-bold text-primary">Products</p>
