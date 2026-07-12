@@ -17,7 +17,7 @@ function TagInput({ label, id, tags, setTags, error, ...props }) {
     if (value.length > 5) return  // 5글자 초과 제한 - UX 향상
     if (tags.includes(value)) return  // 태그 중복 추가 제한
 
-    setTags([...tags, inputValue])
+    setTags([...tags, value])
     setInputValue('')
   }
 
