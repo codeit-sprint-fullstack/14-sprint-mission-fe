@@ -193,3 +193,15 @@ margin-bottom: 16px;
     font-size: 13px;
   }
 }
+
+.registration-input-error {
+  border: 1px solid var(--error-red);
+}
+
+.registration-error-message {
+  margin-top: 8px;
+  color: var(--error-red);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}

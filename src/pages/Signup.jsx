@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Signup.css'
 
 import eyeImage from '../img/eye.png'
@@ -9,6 +10,8 @@ import EasyLogin from '../components/EasyLogin.jsx'
 import { USER_DATA } from '../../UserData.js'
 
 function SignupPage() {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [nickname, setNickname] = useState('')
   const [password, setPassword] = useState('')
@@ -188,7 +191,7 @@ function SignupPage() {
       return
     }
 
-    window.location.href = '/Login'
+    navigate('/login')
   }
 
   function handleModalClose() {
@@ -384,9 +387,7 @@ function SignupPage() {
           이미 회원이신가요?
         </p>
 
-        <a href="/login" className="signup">
-          로그인
-        </a>
+        <Link to="/login" className="signup">로그인</Link>
       </div>
 
       {isModalOpen && (
