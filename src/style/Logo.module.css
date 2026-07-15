@@ -1,0 +1,35 @@
+.Logo {
+    color: var(--brand-blue);
+    display: flex;
+    align-items: center;
+    font-family: "BarunAirForce_Bold";
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0 0 40px 0;
+    text-decoration: none;
+    font-size: 66.344px;
+    gap: 22.24px;
+}
+
+.Logo img {
+  width: 103.529px;
+  height: 103.88px;
+  margin: 12.98px 0 15.14px 0;
+}
+
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px){
+  .Logo {
+    font-size: 33.172px;
+    gap: 11.119px;
+    margin-bottom: 10px;
+  }
+
+  .Logo img {
+    width: 51.765px;
+    height: 51.94px;
+    flex-shrink: 0;
+  }
+}

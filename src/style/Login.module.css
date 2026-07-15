@@ -1,0 +1,83 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /*최상단 뷰포트 크기*/
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+#Email, #Password {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#Email h2, #Password h2{
+  color: var(--Secondary-800);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+#first_login {
+  gap: 4px;
+  color: var(--Secondary-800);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#first_login a {
+  color: var(--Primary-100);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px)  {
+
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px){
+
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px){
+
+  .container {
+    width: 343px;
+    gap: 16px;
+  }
+
+  #Email h2, #Password h2{
+    font-size: 14px;
+  }
+
+  #Email, #Password {
+    gap: 8px;
+  }
+}
