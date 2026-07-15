@@ -1,0 +1,30 @@
+Get http://localhost:3000/products
+
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "validator 테스트 상품",
+  "description": "validator 테스트 설명",
+  "price": 10000,
+  "tags": "테스트"
+}
+
+###
+
+Get http://localhost:3000/products/aa719662-6edb-4dda-a568-4fde901d806c
+
+###
+PATCH http://localhost:3000/products/6255dc1a-89f8-4a6a-94df-97e958bd45e6
+Content-Type: application/json
+
+{
+  "name": "허용 필드만 수정",
+  "createdAt": "2000-01-01T00:00:00.000Z",
+  "comments": []
+}
+
+###
+DELETE http://localhost:3000/products/f085e905-260e-45cf-946d-a51b64f7d77b

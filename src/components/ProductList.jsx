@@ -33,23 +33,23 @@ function ProductList() {
   useEffect(() => {
     function handleResize() {
       const nextPageSize = getPageSizeByWidth();
-
+      // 현재 브라우저 너비에 맞는 pageSize를 다시 계산한다.
       setPageSize((prevPageSize) => {
         if (prevPageSize === nextPageSize) {
-          return prevPageSize;
+          return prevPageSize; // 이전 과pageSize가 같다면 굳이 state를 바꾸지 않고 기존 값을 그대로 유지한다.
         }
 
         setCurrentPage(1);
         setPageGroup(1);
-
+        // 페이지의 크기가 바뀌면 1페이지, 1페이지 그룹으로 초기화한다.
         return nextPageSize;
       });
     }
 
-    handleResize();
+    handleResize(); // 현재 화면 크기에 맞게 pageSize를 한 번 맞춰준다.
 
     window.addEventListener("resize", handleResize);
-
+    // 브라우저 창 크기가 바뀔 때마다 handleResize가 실행되도록 등록한다.
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -89,7 +89,7 @@ function ProductList() {
 
   const pageNumbers = Array.from(
     { length: Math.max(endPage - startPage + 1, 0) },
-    (_, index) => startPage + index
+    (_, index) => startPage + index,
   );
 
   function handleOrderChange(e) {
@@ -107,7 +107,7 @@ function ProductList() {
   function handlePrevPageGroup() {
     const nextPageGroup = pageGroup - 1;
     const nextPage = (nextPageGroup - 1) * pageGroupSize + 1;
-
+    // nextPage: 이전 페이지로 이동했을때 의 첫번째 페이지 번호
     setPageGroup(nextPageGroup);
     setCurrentPage(nextPage);
   }
@@ -115,7 +115,7 @@ function ProductList() {
   function handleNextPageGroup() {
     const nextPageGroup = pageGroup + 1;
     const nextPage = (nextPageGroup - 1) * pageGroupSize + 1;
-
+    // nextPage: 다음 페이지로 이동했을때 의 첫번째 페이지 번호
     setPageGroup(nextPageGroup);
     setCurrentPage(nextPage);
   }
@@ -141,7 +141,9 @@ function ProductList() {
             />
           </div>
 
-          <Link to='/registration' className="register-button">상품 등록하기</Link>
+          <Link to="/registration" className="register-button">
+            상품 등록하기
+          </Link>
 
           <select
             className="order-select"
@@ -156,7 +158,9 @@ function ProductList() {
 
       <div className="items">
         {sortedProducts.map((product) => {
-          return <ProductCard key={product._id || product.id} product={product} />;
+          return (
+            <ProductCard key={product._id || product.id} product={product} />
+          );
         })}
       </div>
 
@@ -172,9 +176,7 @@ function ProductList() {
         {pageNumbers.map((pageNumber) => {
           return (
             <button
-              className={`button ${
-                currentPage === pageNumber ? "active" : ""
-              }`}
+              className={`button ${currentPage === pageNumber ? "active" : ""}`}
               key={pageNumber}
               onClick={() => {
                 setCurrentPage(pageNumber);
