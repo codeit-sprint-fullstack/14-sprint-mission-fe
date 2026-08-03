@@ -1,11 +1,10 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+@import 'tailwindcss';
 
 @font-face {
   font-family: 'ROKAF Sans';
+  src: url("../assets/fonts/ROKAF Sans Bold.ttf") format('truetype');
   font-weight: 700;
   font-display: swap;
-  src: url('../src/assets/fonts/ROKAF\ Sans\ Bold.ttf') format('truetype');
-
 }
 
 :root {
@@ -28,11 +27,10 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 body {
-  color: var(--secondary-800);
-  font-family: 'Prentendard', sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
 }

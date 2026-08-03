@@ -1,3 +1,6 @@
+# React 백업 폴더
+client-react
+
 # Logs
 logs
 *.log
@@ -7,13 +10,43 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# Dependencies
+/node_modules
+**/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Build
 dist
 dist-ssr
-*.local
-.env
+.next
+out
+build
+coverage
 
+# Environment
+.env
+.env*
+*.local
+
+# Prisma
 server/generated/prisma/
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# misc
+.DS_Store
+*.pem
 
 # Editor directories and files
 .vscode/*
