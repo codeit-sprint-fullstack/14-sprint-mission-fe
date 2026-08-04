@@ -1,4 +1,4 @@
-import { createArticle } from "@/app/actions";
+import { createArticle } from "@/app/actions/articleActions";
 import styles from "./page.module.css";
 
 export default function ArticleWrite() {
