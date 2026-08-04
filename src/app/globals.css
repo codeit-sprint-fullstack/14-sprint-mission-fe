@@ -1,0 +1,61 @@
+:root {
+  --color-bg-main: #fcfcfc;
+  --color-bg-white: #ffffff;
+  --color-bg-brand-light: #cfe5ff;
+  --color-bg-footer: #111827;
+  --color-primary: #3692ff;
+  --color-btn-hover: #f9fafb;
+  --color-text-dark: #374151;
+  --color-text-muted: #9ca3af;
+  --color-text-light: #e5e7eb;
+  --color-border-light: #dfdfdf;
+  --color-secondary-600: #4b5563;
+  --color-Secondary-100: #f3f4f6;
+  --color-Secondary-800: #1f2937;
+  --color-Gray-500: #6b7280;
+  --color-Gray-300: #d1d5db;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-white);
+  font-family: var(--font-pretendard), sans-serif;
+}
+
+main {
+  flex: 1;
+  width: calc(100% - 3rem);
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+@media (max-width: 480px) {
+  main {
+    width: calc(100% - 2rem);
+  }
+}

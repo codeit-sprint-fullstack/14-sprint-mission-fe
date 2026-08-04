@@ -1,0 +1,29 @@
+.searchInput {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  height: 2.625rem;
+  padding: 0.5625rem 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--color-Secondary-100);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--color-Secondary-800);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
