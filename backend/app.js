@@ -96,6 +96,40 @@ app.get("/comments/:commentsId", async (req, res) => {
   res.send(comment);
 });
 
+app.get("/articles/:articleId/comments", async (req, res, next) => {
+  try {
+    const { articleId } = req.params;
+
+    const article = await prisma.article.findUnique({
+      where: {
+        id: articleId,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!article) {
+      return res.status(404).json({
+        message: "게시글을 찾을 수 없습니다",
+      });
+    }
+
+    const comments = await prisma.comment.findMany({
+      where: {
+        articleId,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+
+    return res.status(200).json(comments);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post("/articles/:articleId/comments", async (req, res) => {
   const { articleId } = req.params;
   const comment = await prisma.comment.create({
