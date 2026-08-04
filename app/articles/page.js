@@ -1,7 +1,7 @@
 import ArticleList from "@/components/ArticleList";
 import SearchForm from "@/components/SearchForm";
 
-export default async function Board() {
+export default async function Articles() {
   const res = await fetch(
     "https://one4-sprint-mission-prisma.onrender.com/articles",
     {

@@ -8,7 +8,7 @@ export default function ArticleList({ articles = [] }) {
   return (
     <ul>
       {articles.map((articles) => (
-        <Link key={articles.id} href={`/board/${articles.id}`}>
+        <Link key={articles.id} href={`/articles/${articles.id}`}>
           <div>
             <span>{articles.title}</span>
           </div>

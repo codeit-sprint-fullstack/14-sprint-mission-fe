@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
         <header>
           <Link href="/">판다마켓</Link>
         </header>
-        <main>{children}</main>
+        <main className="siteContainer">{children}</main>
       </body>
     </html>
   );
