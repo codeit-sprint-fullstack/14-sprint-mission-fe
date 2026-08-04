@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <header>
+    <header className='bg-white flex items-center'>
       <div>
-        <Link href='/'>
+        <Link href='/' className='flex items-center gap-2'>
           <Image 
             src={logo}
             width={40}
@@ -18,11 +18,17 @@ export default function Header() {
         </Link>
       </div>
       <div>
-        <Link href='/articles'>자유게시판</Link>
-        <Link href='/products'>중고마켓</Link>
+        <Link href='/articles'>
+          자유게시판
+        </Link>
+        <Link href='/products'>
+          중고마켓
+        </Link>
       </div>
       <div>
-        <Link href='/signin'>로그인</Link>
+        <Link href='/signin'>
+          로그인
+        </Link>
       </div>
     </header>
   )

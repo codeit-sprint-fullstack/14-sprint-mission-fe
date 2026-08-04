@@ -1,4 +1,4 @@
-import ArticleMenu from "@/components/ArticleMenu";
+import ArticleMenu from "@/components/article/ArticleMenu";
 
 export default async function ArticleDetail({ params }) {
   const { id } = await params;

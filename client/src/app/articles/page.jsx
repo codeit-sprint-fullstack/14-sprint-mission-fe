@@ -1,4 +1,4 @@
-import ArticleList from '@/components/ArticleList';
+import ArticleList from '@/components/article/ArticleList';
 import Dropdown from '@/components/Dropdown';
 import Input from '@/components/SearchInput';
 import Link from 'next/link';
