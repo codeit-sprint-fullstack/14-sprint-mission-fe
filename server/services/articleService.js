@@ -17,10 +17,7 @@ export async function getArticles(query = {}) {
 
   const where = keyword
     ? {
-      OR: [
-        { title: { contains: keyword, mode: 'insensitive' } },
-        { content: { contains: keyword, mode: 'insensitive' } }
-      ]
+      title: { contains: keyword, mode: 'insensitive' } 
     }
     : {}
 
