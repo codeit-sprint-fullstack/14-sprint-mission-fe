@@ -1,0 +1,83 @@
+/* 웹폰트로 사용 */
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --background-blue: #CFE5FF;
+  --brand-blue: #3692FF;
+  --brand-yellow: #FFC117;
+  --Cool-Gray-50: #F9FAFB;
+  --Cool-Gray-100: #F3F4F6;
+  --Cool-Gray-200: #E5E7EB;
+  --Cool-Gray-300: #D1D5DB;
+  --Cool-Gray-400: #9CA3AF;
+  --Cool-Gray-500: #6B7280;
+  --Cool-Gray-600: #4B5563;
+  --Cool-Gray-800: #1F2937;
+  --Cool-Gray-900: #111827;
+  --error-red: #F74747;
+  --line-gray: #DFDFDF;
+  --pure-white: #FFFFFF;
+  --Secondary-100: #F9FAFB;
+  --Secondary-200: #E5E7EB;
+  --Secondary-400: #9CA3AF;
+  --Secondary-500: #6B7280;
+  --Secondary-600: #4B5563;
+  --Secondary-800: #1F2937;
+  --Secondary-900: #111827;
+  --soft-gray: #FCFCFC;
+  --warm-skyblue: #E6F2FF;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}

@@ -1,0 +1,13 @@
+.layout {
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+}
