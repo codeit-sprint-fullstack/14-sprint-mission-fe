@@ -1,21 +1,26 @@
-import facebook from '@/assets/ic_facebook.png'
-import twitter from '@/assets/ic_twitter.png'
-import youtube from '@/assets/ic_youtube.png'
-import instagram from '@/assets/ic_instagram.png'
+import facebook from '@/assets/ic_facebook.png';
+import twitter from '@/assets/ic_twitter.png';
+import youtube from '@/assets/ic_youtube.png';
+import instagram from '@/assets/ic_instagram.png';
 import Link from 'next/link';
 import Image from 'next/image';
+import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <footer>
-      <div>
+    <footer className={styles.footerWrapper}>
+      <p className={styles.copyright}>
         &copy;codeit - 2024
-      </div>
-      <div>
-        <Link href='/privacy'>Privacy Policy</Link>
-        <Link href='/faq'>FAQ</Link>
-      </div>
-      <div>
+      </p>
+      <nav className={styles.nav}>
+        <Link href='/privacy' className={styles.navLink}>
+          Privacy Policy
+        </Link>
+        <Link href='/faq' className={styles.navLink}>
+          FAQ
+        </Link>
+      </nav>
+      <div className={styles.socialLink}>
         <Link href='https://www.facebook.com/' target='_blank' rel='noopener noreferrer'>
           <Image
             src={facebook}

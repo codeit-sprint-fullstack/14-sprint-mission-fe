@@ -31,4 +31,10 @@
 
 body {
   font-family: var(--font-pretendard), sans-serif;
+  width: 100%;
+}
+
+.main {
+  width: 1200px;
+  margin: 90px auto 0;
 }
