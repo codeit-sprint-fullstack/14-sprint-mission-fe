@@ -1,13 +1,32 @@
+import { createComment } from "@/app/actions/commentActions";
 import styles from "./page.module.css";
 
 export default async function ArticleDetail({ params }) {
   const { id } = await params;
-  const res = await fetch(
-    `https://one4-sprint-mission-prisma.onrender.com/articles/${id}`,
-    { cache: "no-store" },
-  );
 
-  const article = await res.json();
+  const [articleRes, commentsRes] = await Promise.all([
+    fetch(`https://one4-sprint-mission-prisma.onrender.com/articles/${id}`, {
+      cache: "no-store",
+    }),
+    fetch(
+      `https://one4-sprint-mission-prisma.onrender.com/articles/${id}/comments`,
+      {
+        cache: "no-store",
+      },
+    ),
+  ]);
+
+  if (!articleRes.ok) {
+    throw new Error("게시글을 불러오는데 실패했습니다");
+  }
+
+  if (!commentsRes.ok) {
+    throw new Error("댓글을 불러오는데 실패했습니다");
+  }
+
+  const article = await articleRes.json();
+  const comments = await commentsRes.json();
+  const createCommentWithArticleId = createComment.bind(null, id);
 
   return (
     <article>
@@ -25,9 +44,37 @@ export default async function ArticleDetail({ params }) {
       <p className={styles.articleContent}>{article.content}</p>
 
       <section className={styles.commentSection}>
-        <h2>댓글달기</h2>
-        <form></form>
+        <h2 className={styles.commentTitle}>댓글달기</h2>
+        <form action={createCommentWithArticleId}>
+          <textarea
+            className={styles.commentTextArea}
+            name="content"
+            placeholder="댓글을 입력해주세요"
+            required
+          />
+          <button className={styles.commentSubmitButton} type="submit">
+            등록
+          </button>
+        </form>
+
+        <div className={styles.commentList}>
+          {comments.length === 0 ? (
+            <p className={styles.emptyComment}>
+              아직 댓글이 없어요, 지금 댓글을 달아보세요!
+            </p>
+          ) : (
+            comments.map((comment) => (
+              <div className={styles.commentIdBox}>
+                <div key={comment.id}>
+                  <p>{comment.content}</p>
+                  <div>똑똑한판다</div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </section>
+      <div className={styles.goBackButton}>목록으로 돌아가기</div>
     </article>
   );
 }

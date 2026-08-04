@@ -42,7 +42,10 @@ GET {{baseUrl}}/comments/10
 
 
 ###
-POST {{baseUrl}}/articles/1418fc5e-7ab9-4f06-8da1-9972f128f122/comments
+GET {{baseUrl}}/articles/10eff9c0-51f8-4e04-b7c8-44d1ec58f09b/comments
+
+###
+POST {{baseUrl}}/articles/10eff9c0-51f8-4e04-b7c8-44d1ec58f09b/comments
 Content-Type: application/json
 
 {
