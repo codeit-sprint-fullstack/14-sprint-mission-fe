@@ -8,6 +8,7 @@ import Registration from './pages/Registration';
 import ItemDetail from './pages/ItemDetail';
 import Board from './pages/Board';
 import ArticleDetail from './pages/ArticleDetail';
+import ArticleForm from './pages/ArticleForm';
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
         <Route path="/registration" element={<Registration/>}/>
         <Route path="/items/:id" element={<ItemDetail />} />
         <Route path="/board" element={<Board />} />
+        {/* :id 보다 먼저 선언해야 'registration'이 게시글 id로 잡히지 않는다 */}
+        <Route path="/board/registration" element={<ArticleForm />} />
         <Route path="/board/:id" element={<ArticleDetail />} />
+        <Route path="/board/:id/edit" element={<ArticleForm />} />
       </Routes>
     </BrowserRouter>
   );

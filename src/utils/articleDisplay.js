@@ -26,6 +26,31 @@ export function getLikeCount(id) {
   return (hashCode(id) % 9999) + 1;
 }
 
+/** "1시간 전" 형태의 상대 시간으로 표기 */
+export function formatRelativeTime(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+
+  const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+
+  if (seconds < 60) return '방금 전';
+
+  const units = [
+    { limit: 60, label: '분' },
+    { limit: 24, label: '시간' },
+    { limit: 30, label: '일' },
+    { limit: 12, label: '개월' },
+  ];
+
+  let amount = Math.floor(seconds / 60);
+  for (const { limit, label } of units) {
+    if (amount < limit) return `${amount}${label} 전`;
+    amount = Math.floor(amount / limit);
+  }
+
+  return `${amount}년 전`;
+}
+
 /** 2024. 04. 16. 형태로 표기 */
 export function formatDate(value) {
   const date = new Date(value);
