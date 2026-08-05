@@ -18,3 +18,29 @@ export async function getArticles(keyword = "") {
 
   return res.json();
 }
+
+export async function getArticle(id) {
+  const res = await fetch(`${API_BASE_URL}/articles/${id}`, {
+    cache: "no-store",
+  });
+
+  if (res.status === 404) {
+    return null;
+  }
+
+  if (!res.ok) {
+    throw new Error("게시글을 불러오지 못했습니다.");
+  }
+
+  return res.json();
+}
+
+export async function deleteArticle(articleId) {
+  const res = await fetch(`${API_BASE_URL}/articles/${articleId}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("게시글을 삭제하지 못했습니다.");
+  }
+}

@@ -1,9 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import "./NavBar.css";
 import Button from "@/components/Button/Button";
+import { usePathname } from "next/navigation";
 
 export default function NavBar() {
+  const pathname = usePathname();
+
+  const isBoardsActive =
+    pathname === "/boards" || pathname.startsWith("/boards/");
+
   return (
     <nav className="nav-container">
       <div className="nav-wrapper">
@@ -19,7 +27,10 @@ export default function NavBar() {
             <span className="logo-text">판다마켓</span>
           </Link>
           <div className="nav-texts">
-            <Link href="/boards" className="nav-text">
+            <Link
+              href="/boards"
+              className={`nav-text ${isBoardsActive ? "nav-text-active" : ""}`}
+            >
               자유게시판
             </Link>
             <Link href="/items" className="nav-text">

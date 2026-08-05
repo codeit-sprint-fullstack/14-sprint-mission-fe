@@ -66,6 +66,23 @@
   cursor: pointer;
 }
 
+.trigger.menuTrigger {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  justify-content: center;
+}
+
+.menu.actionMenu {
+  left: auto;
+  right: 0;
+  width: 130px;
+}
+
 @media (max-width: 480px) {
   .menu {
     left: auto;

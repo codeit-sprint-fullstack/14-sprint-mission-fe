@@ -61,6 +61,10 @@
   line-height: 1.625rem;
 }
 
+.nav-text-active {
+  color: var(--color-primary);
+}
+
 @media (max-width: 768px) {
   .nav-wrapper {
     padding: 0 1.5rem;

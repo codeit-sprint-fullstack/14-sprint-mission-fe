@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Dropdown.module.css";
 import Image from "next/image";
 
@@ -12,6 +12,21 @@ export default function Dropdown({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const selectedOption = options.find(
     (option) => option.value === selectedValue,
@@ -24,10 +39,12 @@ export default function Dropdown({
   };
 
   return (
-    <div className={styles.dropdown}>
+    <div className={styles.dropdown} ref={dropdownRef}>
       <button
         type="button"
-        className={styles.trigger}
+        className={`${styles.trigger} ${
+          variant === "menu" ? styles.menuTrigger : ""
+        }`}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {variant === "select" ? (
@@ -63,7 +80,11 @@ export default function Dropdown({
       </button>
 
       {isOpen && (
-        <ul className={styles.menu}>
+        <ul
+          className={`${styles.menu} ${
+            variant === "menu" ? styles.actionMenu : ""
+          }`}
+        >
           {options.map((option) => (
             <li key={option.value}>
               <button

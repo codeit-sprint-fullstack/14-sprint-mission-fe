@@ -7,6 +7,7 @@ export default function Button({
   type = "button",
   disabled = false,
   className = "",
+  onClick,
 }) {
   const buttonClassName = `${styles.button} ${className}`;
 
@@ -19,7 +20,12 @@ export default function Button({
   }
 
   return (
-    <button type={type} disabled={disabled} className={buttonClassName}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={buttonClassName}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
