@@ -1,6 +1,11 @@
 import styles from './Textarea.module.css';
 
-export default function Textarea({ label, id, placeholder, value, onChange }) {
+export default function Textarea({ label, id, placeholder, value, onChange, varient = 'default' }) {
+  const inputClassName = `
+    ${styles.input}
+    ${varient === 'comment' ? styles.commentInput : ''}
+  `;
+
   return (
     <div className={styles.wrapper}>
       <label 
@@ -10,7 +15,7 @@ export default function Textarea({ label, id, placeholder, value, onChange }) {
         {label}
       </label>
       <textarea 
-        className={styles.input}
+        className={inputClassName}
         id={id} 
         name={id} 
         placeholder={placeholder}

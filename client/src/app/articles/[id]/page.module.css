@@ -1,0 +1,88 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; 
+}
+
+.articleSection {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  color: var(--secondary-800);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+}
+
+.infoLeft {
+  padding-right: 32px;
+  border-right: 1px solid var(--secondary-200);
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nickname {
+  color: var(--secondary-600);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.date {
+  color: var(--secondary-400);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.heart {
+  height: 40px;
+  padding: 4px 12px;
+  margin-left: 32px;
+  border-radius: 35px;
+  border: 1px solid var(--secondary-200,);
+  background: #FFF;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.heartCount {
+  color: var(--secondary-500);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.content {
+  padding-top: 24px;
+  color: var(--secondary-800);
+  font-size: 18px;
+  font-weight: 400;
+  border-top: 1px solid var(--secondary-200);
+}
+
+.commentFormSection {
+  margin-bottom: 40px;
+}
+
+.backLink {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+}
+

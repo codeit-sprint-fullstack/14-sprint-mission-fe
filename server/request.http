@@ -55,17 +55,17 @@ DELETE http://localhost:3000/articles/2f5838ec-bec1-49cc-b7bf-02b82ed3f2a9
 
 #/*********** comments ***********/
 ###
-GET http://localhost:3000/products/0a6f3c9d-8b21-4e75-96d4-3f1a7c0e5b82/comments
+GET http://localhost:3001/products/6a1d9e7c-3b58-4f20-8c94-1e5b7a2d6039/comments
 
 ###
-GET http://localhost:3000/articles/1f6e9c2a-8d74-4b53-a7c0-5e3d9f1b6248/comments
+GET http://localhost:3001/articles/bbfa4762-2fcd-4eca-97cf-62a589798987/comments
 
 ###
-POST http://localhost:3000/products/2b5e7d9a-0c61-4f38-a8d2-7e9c1b4f6530/comments
+POST http://localhost:3001/articles/bbfa4762-2fcd-4eca-97cf-62a589798987/comments
 Content-Type: application/json
 
 {
-  "content": "아직 거래 가능한가요?"
+  "content": "저는 역 앞에서 주로 거래해요!"
 }
 
 ###

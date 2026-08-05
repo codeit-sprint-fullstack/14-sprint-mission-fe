@@ -30,3 +30,8 @@
   outline: none;
   border: 1px solid var(--primary-100);
 }
+
+.commentInput {
+  height: 104px;
+  margin-bottom: 16px;
+}
