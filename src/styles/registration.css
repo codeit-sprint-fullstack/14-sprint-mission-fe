@@ -59,3 +59,58 @@
   height: 200px;
   resize: none;
 }
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.tag button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ===== 태블릿 (768px ~ 1199px) ===== */
+@media (max-width: 1199px) {
+  .formGroup textarea { height: 160px; }
+}
+
+/* ===== 모바일 (~ 767px) ===== */
+@media (max-width: 767px) {
+  .registrationPage { padding: 24px 0; }
+  .registrationHeader { margin-bottom: 24px; }
+  .registrationHeader h1 { font-size: 18px; }
+  .submitBtn { padding: 8px 16px; font-size: 13px; }
+
+  .formGroup { gap: 6px; margin-bottom: 20px; }
+  .formGroup input,
+  .formGroup textarea { padding: 12px; border-radius: 8px; }
+  .formGroup textarea { height: 140px; }
+}
+
+/* ===== 소형 모바일 (~ 479px) ===== */
+@media (max-width: 479px) {
+  .registrationHeader h1 { font-size: 16px; }
+  .formGroup label { font-size: 13px; }
+  .formGroup input,
+  .formGroup textarea { font-size: 13px; }
+  .tag { font-size: 13px; padding: 6px 10px; }
+}

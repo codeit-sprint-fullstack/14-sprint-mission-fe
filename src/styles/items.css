@@ -164,3 +164,36 @@
 .dropdownMenu li:hover {
   background-color: #f3f4f6;
 }
+
+/* ===== 태블릿 (768px ~ 1199px) ===== */
+@media (max-width: 1199px) {
+  .itemsGrid { grid-template-columns: repeat(3, 1fr); }
+  .bestGrid { grid-template-columns: repeat(2, 1fr); }
+  .searchInput { width: 200px; }
+}
+
+/* ===== 모바일 (~ 767px) ===== */
+@media (max-width: 767px) {
+  .itemsGrid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .bestGrid { grid-template-columns: 1fr; }
+
+  /* 검색 헤더: 한 줄 → 2행 배치 (제목+버튼 / 검색+정렬) */
+  .sectionHeader { flex-wrap: wrap; gap: 12px; }
+  .sectionHeader .sectionTitle { margin-right: auto; font-size: 18px; }
+  .searchInput { order: 1; flex: 1; width: auto; min-width: 0; }
+  .dropdown { order: 2; }
+  .addItemBtn { padding: 8px 16px; }
+
+  .main { padding: 24px 0; }
+  .pagination { gap: 4px; margin: 24px 0; }
+  .pageBtn { width: 34px; height: 34px; font-size: 13px; }
+}
+
+/* ===== 소형 모바일 (~ 479px) ===== */
+@media (max-width: 479px) {
+  .itemsGrid { gap: 12px; }
+  .itemName { font-size: 13px; }
+  .itemPrice { font-size: 14px; }
+  .pageBtn { width: 30px; height: 30px; font-size: 12px; }
+  .dropdownBtn { padding: 10px 16px; }
+}

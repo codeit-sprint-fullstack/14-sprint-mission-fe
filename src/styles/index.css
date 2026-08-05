@@ -10,11 +10,11 @@
     --footer-text: #888888;
 }
 
-.inner { max-width: 1200px; margin: 0 auto; padding: 0 200px; }
+.inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 /* 헤더 */
 .header { background-color: white; border-bottom: 1px solid var(--border-light); position: sticky; top: 0; z-index: 100; }
-.header .inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 200px; }
+.header .inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 24px; }
 .logoLink { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
 .logoLink img { height: 40px; }
 .logoLink span { font-size: 20px; font-weight: bold; color: var(--primary-blue); }
@@ -40,7 +40,7 @@
 
 /* 히어로 */
 .hero { background-color: var(--primary-blue-light); overflow: hidden; }
-.hero .inner { display: flex; justify-content: center; align-items: flex-end; gap: 50px; min-height: 340px; padding: 60px 200px 0; }
+.hero .inner { display: flex; justify-content: center; align-items: flex-end; gap: 50px; min-height: 340px; padding: 60px 24px 0; }
 .heroText { padding-bottom: 60px; }
 .heroText h1 { font-size: 40px; font-weight: bold; line-height: 1.4; margin-bottom: 28px; color: var(--text-dark); }
 .shopButton { background-color: var(--primary-blue); color: white; border: none; border-radius: 30px; padding: 14px 36px; font-size: 16px; font-weight: bold; cursor: pointer; }
@@ -50,7 +50,7 @@
 .featuresWrap { border: 2px dashed var(--primary-blue-dashed); }
 .featureRow { border-bottom: 2px dashed var(--primary-blue-dashed); }
 .featureRow:last-child { border-bottom: none; }
-.featureRow .inner { display: flex; align-items: center; gap: 80px; padding: 80px 350px; }
+.featureRow .inner { display: flex; align-items: center; gap: 80px; padding: 80px 24px; }
 .featureRow.reverse .inner { flex-direction: row-reverse; }
 .featureImage { width: 400px; }
 .featureLabel { font-size: 13px; font-weight: bold; color: var(--primary-blue); margin-bottom: 14px; }
@@ -59,13 +59,13 @@
 
 /* 하단 신뢰 섹션 */
 .trust { background-color: var(--primary-blue-light); overflow: hidden; }
-.trust .inner { display: flex; justify-content: center; align-items: flex-end; gap: 60px; min-height: 280px; padding: 60px 200px 0; }
+.trust .inner { display: flex; justify-content: center; align-items: flex-end; gap: 60px; min-height: 280px; padding: 60px 24px 0; }
 .trust h2 { font-size: 36px; font-weight: bold; line-height: 1.4; padding-bottom: 60px; color: var(--text-dark); }
 .trustImage { height: 260px; }
 
 /* 푸터 */
 .footer { background-color: var(--footer-bg); border-top: 1px solid var(--border-light); }
-.footer .inner { display: flex; justify-content: space-between; align-items: center; padding: 30px 200px; }
+.footer .inner { display: flex; justify-content: space-between; align-items: center; padding: 30px 24px; }
 .footerLeft { flex: 1; font-size: 14px; color: var(--footer-text); }
 .footerCenter { flex: 1; display: flex; justify-content: center; gap: 30px; }
 .footerLink { font-size: 14px; color: var(--text-gray); text-decoration: none; cursor: pointer; }
@@ -73,22 +73,75 @@
 .snsLink { display: flex; align-items: center; cursor: pointer; }
 .snsLink svg { width: 24px; height: 24px; }
 
-/* 태블릿 (744px ~ 1199px) */
+/* ===== 태블릿 (768px ~ 1199px) ===== */
 @media (max-width: 1199px) {
-    .inner { padding: 0 40px; }
-    .header .inner { padding: 15px 40px; }
-    .hero .inner { padding: 60px 40px 0; }
-    .footer .inner { padding: 30px 40px; }
+    /* 히어로: 제목/버튼/이미지 축소 */
+    .hero .inner { gap: 32px; min-height: 280px; }
+    .heroText h1 { font-size: 32px; margin-bottom: 20px; }
+    .shopButton { padding: 12px 30px; font-size: 15px; }
+    .heroImage { height: 190px; }
+
+    /* 피처 섹션: 가로 배치 유지하되 이미지/폰트 축소 */
+    .featureRow .inner { gap: 40px; padding: 60px 24px; }
+    .featureImage { width: 45%; max-width: 400px; }
+    .featureText h2 { font-size: 28px; }
+    .featureText p { font-size: 16px; }
+
+    .trust .inner { gap: 40px; }
+    .trust h2 { font-size: 28px; }
+    .trustImage { height: 220px; }
 }
 
-/* 모바일 (~ 743px) */
-@media (max-width: 743px) {
+/* ===== 모바일 (~ 767px) ===== */
+@media (max-width: 767px) {
     .inner { padding: 0 16px; }
     .header .inner { padding: 12px 16px; }
+
+    /* 헤더: 로고 축소, 네비 간격 정리 */
+    .logoLink img { height: 30px; }
+    .logoLink span { font-size: 16px; }
+    .headerNav { gap: 14px; margin-left: 14px; }
+    .navLink { font-size: 14px; }
+    .loginButton { padding: 8px 14px; font-size: 13px; }
+
+    /* 히어로: 세로 스택 */
     .hero .inner { padding: 30px 16px 0; flex-direction: column; align-items: center; min-height: auto; }
-    .hero .heroText { padding-bottom: 20px; }
+    .hero .heroText { padding-bottom: 20px; text-align: center; }
     .heroText h1 { font-size: 24px; }
     .heroImage { height: 160px; }
+
+    /* 피처 섹션: 가로 배치 → 세로 스택 (reverse도 동일하게) */
+    .featureRow .inner,
+    .featureRow.reverse .inner { flex-direction: column; gap: 24px; padding: 40px 16px; text-align: center; }
+    .featureImage { width: 100%; max-width: 320px; }
+    .featureText h2 { font-size: 22px; }
+    .featureText p { font-size: 15px; }
+
+    /* 신뢰 섹션: 세로 스택 */
+    .trust .inner { flex-direction: column; align-items: center; gap: 24px; padding: 40px 16px 0; min-height: auto; text-align: center; }
+    .trust h2 { font-size: 22px; padding-bottom: 0; }
+    .trustImage { height: 180px; }
+
+    /* 푸터: 3단 → 세로 스택 */
     .footer .inner { padding: 20px 16px; flex-direction: column; gap: 12px; }
     .footerLeft, .footerCenter, .footerRight { flex: none; width: 100%; justify-content: center; }
+    .footerLeft { text-align: center; }
+}
+
+/* ===== 소형 모바일 (~ 479px) ===== */
+@media (max-width: 479px) {
+    .logoLink span { display: none; }
+    .headerNav { gap: 10px; margin-left: 10px; }
+    .navLink { font-size: 13px; }
+
+    .heroText h1 { font-size: 20px; }
+    .shopButton { padding: 12px 28px; font-size: 14px; }
+    .heroImage { height: 130px; }
+
+    .featureText h2 { font-size: 19px; }
+    .featureText p { font-size: 14px; }
+    .trust h2 { font-size: 19px; }
+    .trustImage { height: 150px; }
+
+    .footerCenter { gap: 20px; }
 }

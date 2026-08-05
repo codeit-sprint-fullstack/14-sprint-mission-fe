@@ -121,7 +121,7 @@
   text-decoration: underline;
 }
 
-@media (min-width: 744px) and (max-width: 1199px) {
+@media (max-width: 1199px) {
   .container {
     width: calc(100% - 80px);
     padding-top: 40px;
@@ -132,7 +132,7 @@
   .signup-btn { font-size: 16px; }
 }
 
-@media (min-width: 375px) and (max-width: 743px) {
+@media (max-width: 767px) {
   .container {
     width: calc(100% - 32px);
     padding: 40px 16px 0;
@@ -149,4 +149,11 @@
   .sns-box span { line-height: 40px; font-size: 12px; }
   .sns-icon { width: 40px; height: 40px; line-height: 40px; margin-left: 6px; }
   .login-text { margin-top: 16px; font-size: 12px; }
+}
+/* ===== 소형 모바일 (~ 479px) ===== */
+@media (max-width: 479px) {
+  .logo img { height: 60px; }
+  .logo span { font-size: 30px; }
+  .sns-box { padding: 10px 12px; }
+  .sns-icon { width: 36px; height: 36px; line-height: 36px; }
 }

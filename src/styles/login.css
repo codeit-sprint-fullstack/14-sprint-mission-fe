@@ -164,7 +164,7 @@ body {
 }
 
 /* ===== 태블릿 버전 (744px ~ 1199px) ===== */
-@media (min-width: 744px) and (max-width: 1199px) {
+@media (max-width: 1199px) {
     .container {
         width: calc(100% - 80px);
         padding: 40px 0;
@@ -186,7 +186,7 @@ body {
 }
 
 /* ===== 모바일 버전 (375px ~ 743px) ===== */
-@media (min-width: 375px) and (max-width: 743px) {
+@media (max-width: 767px) {
     .container {
         width: calc(100% - 32px);
         padding: 0 16px;
@@ -252,4 +252,12 @@ body {
         margin-top: 16px;
         font-size: 12px;
     }
+}
+
+/* ===== 소형 모바일 (~ 479px) ===== */
+@media (max-width: 479px) {
+    .logo img { height: 60px; }
+    .logo span { font-size: 30px; }
+    .sns-box { padding: 10px 12px; }
+    .sns-icon { width: 36px; height: 36px; line-height: 36px; }
 }
