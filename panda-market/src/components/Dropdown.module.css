@@ -1,0 +1,98 @@
+.dropdown {
+  width: 130px;
+  height: 42px;
+  position: relative;
+}
+
+.dropdownToggle {
+  background: var(--pure-white);
+  color: var(--Secondary-800);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  width: 100%;
+  height: 100%;
+  padding: 0 44px 0 20px;
+  border-radius: 12px;
+  border: 1px solid var(--Cool-Gray-200);
+  cursor: pointer;
+  text-align: left;
+}
+
+.selectedLabel {
+  white-space: nowrap;
+}
+
+.dropdownIcon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.sortIcon {
+  display: none;
+}
+
+.optionList {
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 12px;
+  background: var(--pure-white);
+}
+
+.optionButton {
+  display: block;
+  width: 100%;
+  padding: 8px 20px;
+  border: 0;
+  background: var(--pure-white);
+  color: var(--Secondary-800);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.selectedOption {
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  .dropdown {
+    order: 4;
+    width: 42px;
+    height: 42px;
+  }
+
+  .dropdownToggle {
+    padding: 0;
+  }
+
+  .selectedLabel,
+  .arrowIcon {
+    display: none;
+  }
+
+  .sortIcon {
+    display: block;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+
+  .optionList {
+    right: 0;
+    left: auto;
+    width: 130px;
+  }
+}

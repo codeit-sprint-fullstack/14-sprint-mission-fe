@@ -1,11 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Dropdown from '@/components/Dropdown'
 import styles from '@/app/(with-layout)/boards/boardPage.module.css'
 
 function BoardsPage() {
+  const [sort, setSort] = useState('recent')
   return (
     <>
       <section className={styles.bestArticlesSection}>
@@ -34,10 +36,10 @@ function BoardsPage() {
             />
             <input
               className={styles.searchInput}
-              placeholder="검색할 상품을 입력해주세요"
+              placeholder="검색어를 입력해주세요"
             />
           </form>
-          <Dropdown />
+          <Dropdown value={sort} onChange={setSort} />
         </div>
         <div className={styles.articlesList}>
           게시글 카드 컴포넌트 들어올 자리 (데스크탑:4개/태블릿:6개/모바일:3개)
