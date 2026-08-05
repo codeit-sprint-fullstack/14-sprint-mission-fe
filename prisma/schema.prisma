@@ -10,3 +10,11 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Article {
+  id        String   @id @default(uuid())
+  title     String
+  contnet   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
