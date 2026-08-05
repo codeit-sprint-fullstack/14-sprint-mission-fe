@@ -1,35 +1,39 @@
 .dropdown {
+  position: relative;
   width: 130px;
   height: 42px;
-  position: relative;
+  flex-shrink: 0;
 }
 
 .dropdownToggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 44px 0 20px;
   background: var(--pure-white);
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 12px;
   color: var(--Secondary-800);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 26px;
-  width: 100%;
-  height: 100%;
-  padding: 0 44px 0 20px;
-  border-radius: 12px;
-  border: 1px solid var(--Cool-Gray-200);
-  cursor: pointer;
   text-align: left;
+  cursor: pointer;
 }
 
 .selectedLabel {
   white-space: nowrap;
+  font-weight: 400;
 }
 
 .dropdownIcon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
   width: 24px;
   height: 24px;
-  position: absolute;
-  right: 20px;
-  top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -40,32 +44,44 @@
 
 .optionList {
   position: absolute;
-  z-index: 1;
   top: calc(100% + 4px);
   left: 0;
-  width: 100%;
+  z-index: 10;
+  width: 130px;
   overflow: hidden;
+  background: var(--pure-white);
   border: 1px solid var(--Cool-Gray-200);
   border-radius: 12px;
-  background: var(--pure-white);
 }
 
 .optionButton {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 8px 20px;
+  height: 42px;
+  padding: 0;
   border: 0;
   background: var(--pure-white);
   color: var(--Secondary-800);
   font-size: 16px;
+  font-style: normal;
   font-weight: 400;
   line-height: 26px;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
 }
 
+.optionButton + .optionButton {
+  border-top: 1px solid var(--Cool-Gray-200);
+}
+
+.optionButton:hover {
+  background: var(--Cool-Gray-50);
+}
+
 .selectedOption {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 @media (max-width: 767px) {
@@ -76,6 +92,7 @@
   }
 
   .dropdownToggle {
+    justify-content: center;
     padding: 0;
   }
 

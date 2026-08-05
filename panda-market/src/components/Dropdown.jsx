@@ -6,7 +6,7 @@ import styles from '@/components/Dropdown.module.css'
 
 const SORT_OPTIONS = [
   { value: 'recent', label: '최신순' },
-  { value: 'oldest', label: '오래된순' },
+  { value: 'oldest', label: '등록순' },
 ]
 
 function Dropdown({ value, onChange }) {
