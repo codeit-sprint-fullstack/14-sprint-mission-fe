@@ -41,3 +41,26 @@ export async function deleteArticle(articleId) {
   revalidatePath("/articles");
   redirect(`/articles`);
 }
+
+//수정
+export async function updateArticle(articleId, formData) {
+  const title = String(formData.get("title") ?? "");
+  const content = String(formData.get("content") ?? "");
+
+  const res = await fetch(
+    "https://one4-sprint-mission-prisma.onrender.com/articles",
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, content }),
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error("게시글 수정에 실패했습니다");
+  }
+
+  revalidatePath("/articles");
+  revalidatePath(`/articles/${articleId}`);
+  redirect(`/articles/${articleId}`);
+}
