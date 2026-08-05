@@ -1,0 +1,5 @@
+###
+GET http://localhost:3000/api/notice
+
+###
+GET http://localhost:3000/api/notice?page=1&limit=5&sort=likes

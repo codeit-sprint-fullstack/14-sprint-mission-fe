@@ -1,9 +1,44 @@
 import Link from 'next/link';
+import { useEffect, useState } from "react";
 import styles from '@/styles/notice.module.css';
 import Gnb from '../components/gnb.jsx';
 import Dropdown from '@/components/dropdown.jsx';
+import Bestpostcard from '@/components/bestpostcard.jsx';
 
 export default function Notice() {
+  const [bestPosts, setBestPosts] = useState([]);
+  const [limit, setLimit] = useState(3);
+
+  useEffect(() => {
+    function handleResize() {
+      const width = window.innerWidth;
+      if (width >= 1200) {
+        setLimit(3);
+      } else if (width >= 744) {
+        setLimit(2);
+      } else {
+        setLimit(1);
+      }
+    }
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    async function fetchBestPosts() {
+      try {
+        const res = await fetch(`/api/notice?page=1&limit=${limit}&sort=likes`);
+        const data = await res.json();
+        setBestPosts(data.data);
+      } catch (error) {
+        console.error("Failed to fetch best posts:", error);
+      }
+    }
+    fetchBestPosts();
+  }, [limit]);
+
   return (
     <>
       <Gnb />
@@ -12,10 +47,15 @@ export default function Notice() {
           <div className={styles.content_wrap}>
             <div className={styles.bestpost}>
               <span>베스트 게시글</span>
-              <div className={styles.bestpost_wrap}>
-                <p>게시글1</p>
-                <p>게시글2</p>
-                <p>게시글3</p>
+               <div className={styles.bestpost_wrap}>
+                {bestPosts.map((post) => (
+                  <Bestpostcard
+                    title={post.title}
+                    author={post.author}
+                    likes={post.likes}
+                    date={post.postedAt}
+                  />
+                ))}
               </div>
             </div>
             <div className={styles.postlist}>

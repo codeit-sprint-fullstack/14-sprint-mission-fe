@@ -78,6 +78,15 @@
   background: var(--Secondary-100);
 }
 
+.bestpost_wrap {
+  display: grid !important;
+  gap: 16px;
+}
+
+.bestpost_wrap > * {
+  display: block; /* flex 덮어쓰기 */
+}
+
 /* PC: 1200px 이상 */
 @media screen and (min-width: 1200px)  {
   .content_wrap {
@@ -97,6 +106,11 @@
   .postlist {
     gap: 24px;
   }
+
+  .bestpost_wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 큰 화면: 3개 */
+  }
 }
 
 /* Tablet: 744px ~ 1199px */
@@ -113,6 +127,11 @@
 
   .postlist {
     gap: 48px;
+  }
+
+  .bestpost_wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 중간 화면: 2개 */
   }
 }
 
@@ -134,5 +153,10 @@
 
   .postlist {
     gap: 16px;
+  }
+
+  .bestpost_wrap {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
   }
 }

@@ -8,8 +8,26 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "16.3.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
-  }
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "express": "^5.2.1",
+    "next": "^16.3.0",
+    "prisma": "^7.9.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "description": "========= 스프린트 미션 7 =========",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Happy-DCS/14-sprint-mission-fe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Happy-DCS/14-sprint-mission-fe/issues"
+  },
+  "homepage": "https://github.com/Happy-DCS/14-sprint-mission-fe#readme"
 }
