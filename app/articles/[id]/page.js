@@ -1,18 +1,7 @@
 import { deleteArticle } from "@/app/actions/articleActions";
 import { createComment, deleteComment } from "@/app/actions/commentActions";
 import styles from "./page.module.css";
-import Link from "next/link";
-
-function ActionMenu({ editContent, deleteAction }) {
-  return (
-    <div className={styles.actionMenu}>
-      <Link href={editContent}>수정하기</Link>
-      <form action={deleteAction}>
-        <button type="submit">삭제하기</button>
-      </form>
-    </div>
-  );
-}
+import ActionMenu from "./ActionMenu";
 
 export default async function ArticleDetail({ params }) {
   const { id } = await params;

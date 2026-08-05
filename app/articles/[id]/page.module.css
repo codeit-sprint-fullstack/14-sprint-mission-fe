@@ -1,6 +1,7 @@
 .articleInfo {
   display: flex;
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   align-items: flex-start;
   gap: 16px;
 }
@@ -54,12 +55,12 @@
 
 .commentItem {
   display: flex;
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   padding-bottom: 12px;
   align-items: flex-start;
   align-content: flex-start;
   gap: 9px 4px;
-  flex-wrap: wrap;
 
   border-bottom: 1px solid var(--Secondary-300, #e5e7eb);
   background: #fcfcfc;
@@ -76,4 +77,48 @@
 
   border-radius: 40px;
   background: #3692ff;
+}
+
+/* ActionMenu.js */
+
+.actionMenuWrapper {
+  position: relative;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.moreButton {
+  display: flex;
+
+  padding: 0;
+  border: 0;
+
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.actionItem {
+  display: flex;
+  height: 46px;
+  padding: 16px 0 12px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+
+  border-radius: 8px 8px 0 0;
+  border-top: 1px solid var(--Cool-Gray-300, #d1d5db);
+  border-right: 1px solid var(--Cool-Gray-300, #d1d5db);
+  border-left: 1px solid var(--Cool-Gray-300, #d1d5db);
+  background: #fff;
+
+  color: var(--Secondary-500, #6b7280);
+  text-align: center;
+
+  /* pretendard/lg-16px-regular */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
 }
