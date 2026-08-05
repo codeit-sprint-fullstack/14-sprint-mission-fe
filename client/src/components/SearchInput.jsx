@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import searchIcon from '@/assets/ic_search.png'
+import searchIcon from '@/assets/ic_search.png';
+import styles from './SearchInput.module.css';
 
 export default function SearchInput({ type = 'text', placeholder}) {
   const router = useRouter();
@@ -22,17 +23,18 @@ export default function SearchInput({ type = 'text', placeholder}) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button>
+    <form onSubmit={handleSubmit} className={styles.inputForm}>
+      <button className={styles.inputIcon}>
         <Image
           src={searchIcon}
-          width={15}
-          height={15}
+          width={24}
+          height={24}
           loading='eager'
-          alt='검색 인풋'
+          alt='검색 아이콘'
         />
       </button>
-      <input 
+      <input
+        className={styles.input}
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}

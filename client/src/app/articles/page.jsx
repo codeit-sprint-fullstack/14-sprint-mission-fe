@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import ArticleList from '@/components/article/ArticleList';
+import BestArticleList from '@/components/article/BestArticleList';
 import Dropdown from '@/components/Dropdown';
 import Input from '@/components/SearchInput';
-import Link from 'next/link';
+import styles from './page.module.css';
 
 export default async function Articles({ searchParams }) {
   // 베스트 게시글 가져오기
@@ -30,16 +32,26 @@ export default async function Articles({ searchParams }) {
   const articles = data.list;
 
   return (
-    <div>
-      <section>
-        <h1>베스트 게시글</h1>
-        <ArticleList articles={bestArticles} />
+    <div className={styles.pageWrapper}>
+      <section className={styles.section}>
+        <h1 className={styles.bestSectionTitle}>
+          베스트 게시글
+        </h1>
+        <BestArticleList articles={bestArticles} />
       </section>
-      <section>
-        <h2>게시글</h2>
-        <Link href='/articles/new'>글쓰기</Link>
-        <Input placeholder='검색어를 입력해주세요'/>
-        <Dropdown />
+      <section className={styles.section}>
+        <div className={styles.articleSectionHeader}>
+          <h2 className={styles.articleSectionTitle}>
+            게시글
+          </h2>
+          <Link href='/articles/new' className={styles.createArticleLink}>
+            글쓰기
+          </Link>
+        </div>
+        <div className={styles.controllers}>
+          <Input placeholder='검색어를 입력해주세요'/>
+          <Dropdown />
+        </div>
         <ArticleList articles={articles}/>
       </section>
     </div>

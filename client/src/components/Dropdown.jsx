@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter,  useSearchParams } from 'next/navigation';
+import Image from 'next/image';
+import caretIcon from '@/assets/ic_caret.png';
+import styles from './Dropdown.module.css';
 
 export default function Dropdown() {
   const router = useRouter();
@@ -21,20 +24,41 @@ export default function Dropdown() {
   }
 
   return (
-    <div>
-      <button type='button' onClick={() => setIsOpen(!isOpen)}>
-        {currentSort === 'recent' ? '최신순' : '좋아요순'}
+    <div className={styles.dropdownWrapper}>
+      <button
+        className={styles.dropdownBtn} 
+        type='button' 
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <p className={styles.btnText}>
+          {currentSort === 'recent' ? '최신순' : '좋아요순'}
+        </p>
+        <Image
+          src={caretIcon}
+          width={24}
+          height={24}
+          loading='eager'
+          alt='드롭다운 아이콘'
+        />
       </button>
 
       {isOpen && 
-        <ul>
+        <ul className={styles.dropdownMenu}>
           <li>
-            <button type='button' onClick={() => handleSort('recent')}>
+            <button 
+              className={styles.menuBtn}
+              type='button' 
+              onClick={() => handleSort('recent')}
+            >
               최신순
             </button>
           </li>
           <li>
-            <button type='button' disabled>
+            <button 
+              className={styles.menuBtn}
+              type='button' 
+              disabled
+            >
               좋아요순
             </button>
           </li>

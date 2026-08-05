@@ -1,23 +1,45 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import defaultIcon from '@/assets/img_default.svg';
-import heart from '@/assets/ic_heart.png'
+import profileIcon from '@/assets/ic_profile.png';
+import heart from '@/assets/ic_heart.png';
 import formatDate from '@/utils/formatDate';
+import styles from './ArticleCard.module.css';
 
 export default function ArticleCard({ article }) {
   return (
-    <Link href={`/articles/${article.id}`}>
-      <p>{article.title}</p>
-      <div>
-        <Image
-          src={defaultIcon} 
-          width={72}
-          height={72}
-          loading='eager'
-          alt={article.title}
-        />
-        <p>{article.nickname || '총명한 판다'}</p>
-        <div>
+    <Link href={`/articles/${article.id}`} className={styles.card}>
+      <div className={styles.content}>
+        <p className={styles.title}>
+          {article.title}
+        </p>
+        <div className={styles.img}>
+          <Image
+            src={defaultIcon} 
+            width={48}
+            height={48}
+            loading='eager'
+            alt={article.title}
+          />
+        </div>
+      </div>
+      <div className={styles.info}>
+        <div className={styles.infoLeft}>
+          <Image
+            src={profileIcon}
+            width={24}
+            height={24}
+            loading='eager'
+            alt='프로필 아이콘'
+          />
+          <p className={styles.nickname}>
+            {article.nickname || '총명한 판다'}
+          </p>
+          <p className={styles.date}>
+            {formatDate(article.createdAt)}
+          </p>
+        </div>
+        <div className={styles.heart}>
           <Image 
             src={heart}
             width={20}
@@ -25,9 +47,10 @@ export default function ArticleCard({ article }) {
             loading='eager'
             alt='좋아요 수'
           />
-          <p>{article.fav || 0}</p>
+          <p className={styles.heartCount}>
+            {article.fav || 0}
+          </p>
         </div>
-        <p>{formatDate(article.createdAt)}</p>
       </div>
     </Link>
   )

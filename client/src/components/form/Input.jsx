@@ -4,7 +4,7 @@ export default function Input({ label, type, id, placeholder, value, onChange })
       <label htmlFor={id}>
         {label}
       </label>
-      <input 
+      <input
         type={type} 
         id={id} 
         name={id} 
