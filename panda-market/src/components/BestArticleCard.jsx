@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import formatDate from '@/utils/formatDate'
 import styles from '@/components/BestArticleCard.module.css'
 
 function BestArticleCard({ article }) {
@@ -32,7 +33,7 @@ function BestArticleCard({ article }) {
         </div>
         <div className={styles.bestArticleCardBottomRight}>
           <span className={styles.bestArticleCreatdeAt}>
-            {new Date(article.createdAt).toLocaleDateString()}
+            {formatDate(article.createdAt)}
           </span>
         </div>
       </div>

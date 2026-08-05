@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import formatDate from '@/utils/formatDate'
 import styles from '@/components/ArticleCard.module.css'
 
 function ArticleCard({ article }) {
@@ -30,7 +31,7 @@ function ArticleCard({ article }) {
             일찍일어난새가졸리다
           </span>
           <span className={styles.articleCreatdeAt}>
-            {new Date(article.createdAt).toLocaleDateString()}
+            {formatDate(article.createdAt)}
           </span>
         </div>
         <div className={styles.articleCardBottomRight}>
