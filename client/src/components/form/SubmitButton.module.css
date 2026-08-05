@@ -1,0 +1,14 @@
+.submitBtn {
+  height: 42px;
+  padding: 12px 23px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-100);
+  color: var(--secondary-100);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.submitBtn:disabled {
+  background: var(--secondary-400);
+}

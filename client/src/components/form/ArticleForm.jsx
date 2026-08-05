@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SubmitButton from '@/components/form/SubmitButton';
 import Input from '@/components/form/Input';
 import Textarea from '@/components/form/Textarea';
+import styles from './ArticleForm.module.css';
 
 export default function ArticleForm({ action, initialTitle = '', initialContent = '', submitText = '등록' }) {
   const [title, setTitle] = useState(initialTitle);
@@ -15,12 +16,16 @@ export default function ArticleForm({ action, initialTitle = '', initialContent 
     content.trim() === '';
 
   return (
-    <div>
-      <form action={action}>
-        <h1>게시글 쓰기</h1>
+    <form action={action} className={styles.wrapper}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>
+          게시글 쓰기
+        </h1>
         <SubmitButton disabled={isFormEmpty}>
           {submitText}
         </SubmitButton>
+      </div>
+      <div className={styles.formInput}>
         <Input 
           label='*제목' 
           type='text' 
@@ -36,7 +41,7 @@ export default function ArticleForm({ action, initialTitle = '', initialContent 
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-      </form>
-    </div>
+      </div>
+    </form>
   )
 }
