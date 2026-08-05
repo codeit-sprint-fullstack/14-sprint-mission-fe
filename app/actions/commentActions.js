@@ -31,7 +31,7 @@ export async function createComment(articleId, formData) {
 
 export async function deleteComment(articleId, commentId) {
   const res = await fetch(
-    `https://one4-sprint-mission-prisma.onrender.com/articles/${articleId}/comments/${commentId}`,
+    `https://one4-sprint-mission-prisma.onrender.com/comments/${commentId}`,
     {
       method: "DELETE",
     },

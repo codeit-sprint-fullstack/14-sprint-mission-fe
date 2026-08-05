@@ -1,3 +1,20 @@
+.articleInfo {
+  display: flex;
+  width: 1200px;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.commentSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 9px;
+  align-self: stretch;
+  margin-bottom: 40px;
+}
+
 .commentTextArea {
   display: flex;
   width: 1200px;
@@ -6,6 +23,7 @@
   align-items: flex-start;
   gap: 10px;
 
+  border: 0;
   border-radius: 12px;
   background: #f3f4f6;
 }
@@ -18,6 +36,7 @@
   align-items: center;
   gap: 10px;
 
+  border: 0;
   border-radius: 8px;
   background: #9ca3af;
 }
@@ -33,7 +52,7 @@
   line-height: 26px; /* 162.5% */
 }
 
-.commentIdBox {
+.commentItem {
   display: flex;
   width: 1200px;
   padding-bottom: 12px;
