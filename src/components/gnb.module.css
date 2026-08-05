@@ -85,7 +85,7 @@
 .loginButton span {
   color: var(--Cool-Gray-100);
   font-family: Pretendard;
-  font-size: 1rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   white-space: nowrap;
