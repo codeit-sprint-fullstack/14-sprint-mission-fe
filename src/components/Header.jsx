@@ -1,24 +1,35 @@
-import { Link, NavLink } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 function Header() {
+  const pathname = usePathname();
+
   return (
     <div className="header">
       <div className="inner">
-        <Link className="logoLink" to="/home">
+        <Link className="logoLink" href="/">
           <img src="/img/panda_logo.png" alt="판다마켓 로고" />
           <span>판다마켓</span>
         </Link>
         <nav className="headerNav">
-          <Link className="navLink" to="/board">자유게시판</Link>
-          <NavLink
-            style={({ isActive }) => ({ color: isActive ? '#3692FF' : '' })}
+          <Link
             className="navLink"
-            to="/items"
+            href="/board"
+            style={{ color: pathname.startsWith('/board') ? '#3692FF' : '' }}
+          >
+            자유게시판
+          </Link>
+          <Link
+            className="navLink"
+            href="/items"
+            style={{ color: pathname.startsWith('/items') ? '#3692FF' : '' }}
           >
             중고마켓
-          </NavLink>
+          </Link>
         </nav>
-        <Link className="loginButton" to="/login">로그인</Link>
+        <Link className="loginButton" href="/login">로그인</Link>
       </div>
     </div>
   );

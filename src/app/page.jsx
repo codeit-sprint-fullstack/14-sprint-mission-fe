@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Footer from '../components/Footer';
 import FeatureRow from '../components/FeatureRow';
 
@@ -24,8 +26,8 @@ const FEATURES = [
   },
 ];
 
-function Home() {
-  const navigate = useNavigate();
+export default function Home() {
+  const router = useRouter();
 
   return (
     <>
@@ -34,7 +36,7 @@ function Home() {
         <div className="inner">
           <div className="heroText">
             <h1>일상의 모든 물건을<br />거래해 보세요</h1>
-            <button className="shopButton" onClick={() => navigate('/items')}>구경해보러 가기</button>
+            <button className="shopButton" onClick={() => router.push('/items')}>구경해보러 가기</button>
           </div>
           <img className="heroImage" src="/img/panda_home.png" alt="판다 홈 이미지" />
         </div>
@@ -60,5 +62,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

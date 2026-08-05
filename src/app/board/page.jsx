@@ -1,19 +1,20 @@
+'use client';
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useArticleList from '../../models/useArticleList.js';
-import BestArticleCard from '../components/BestArticleCard';
-import ArticleCard from '../components/ArticleCard';
-import SortDropdown from '../components/SortDropdown';
-import Pagination from '../components/Pagination';
-import Footer from '../components/Footer';
-import '../styles/board.css';
+import Link from 'next/link';
+import useArticleList from '../../../models/useArticleList.js';
+import BestArticleCard from '../../components/BestArticleCard';
+import ArticleCard from '../../components/ArticleCard';
+import SortDropdown from '../../components/SortDropdown';
+import Pagination from '../../components/Pagination';
+import Footer from '../../components/Footer';
 
 const PAGE_SIZE = 10;
 const BEST_COUNT = 3;
 
 const SORT_OPTIONS = [{ value: 'recent', label: '최신순' }];
 
-function Board() {
+export default function BoardPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState('');
   const [searchInput, setSearchInput] = useState('');
@@ -55,14 +56,14 @@ function Board() {
           <section className="articleSection">
             <div className="articleSectionHeader">
               <h2 className="sectionTitle">게시글</h2>
-              <Link to="/board/registration" className="addItemBtn">글쓰기</Link>
+              <Link href="/board/registration" className="addItemBtn">글쓰기</Link>
             </div>
 
             <div className="articleToolbar">
               <input
                 className="searchInput"
                 type="text"
-                placeholder="검색할 상품을 입력해주세요"
+                placeholder="검색할 게시글을 입력해주세요"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 onKeyDown={handleSearch}
@@ -105,5 +106,3 @@ function Board() {
     </>
   );
 }
-
-export default Board;

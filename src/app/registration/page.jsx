@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createProduct } from '../../services/ProductService.js';
-import FormGroup from '../components/FormGroup';
-import TagInput from '../components/TagInput';
-import '../styles/registration.css';
+'use client';
 
-function Registration() {
-  const navigate = useNavigate();
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createProduct } from '../../../services/ProductService.js';
+import FormGroup from '../../components/FormGroup';
+import TagInput from '../../components/TagInput';
+
+export default function RegistrationPage() {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -20,7 +21,7 @@ function Registration() {
 
   const handleSubmit = async () => {
     await createProduct(name, description, Number(price), [], tags, []);
-    navigate('/items');
+    router.push('/items');
   };
 
   return (
@@ -64,5 +65,3 @@ function Registration() {
     </div>
   );
 }
-
-export default Registration;

@@ -1,15 +1,16 @@
+'use client';
+
 import { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { deleteArticle, getArticle } from '../../services/ArticleService.js';
 import { formatDate, getLikeCount, getNickname } from '../utils/articleDisplay.js';
-import KebabMenu from '../components/KebabMenu';
-import CommentSection from '../components/CommentSection';
-import Footer from '../components/Footer';
-import '../styles/board.css';
+import KebabMenu from './KebabMenu';
+import CommentSection from './CommentSection';
+import Footer from './Footer';
 
-function ArticleDetail() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+function ArticleDetail({ articleId }) {
+  const router = useRouter();
 
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ function ArticleDetail() {
     setLoading(true);
     setError(null);
 
-    getArticle(id)
+    getArticle(articleId)
       .then((data) => {
         if (!ignore) setArticle(data);
       })
@@ -35,14 +36,14 @@ function ArticleDetail() {
     return () => {
       ignore = true;
     };
-  }, [id]);
+  }, [articleId]);
 
   const handleDelete = async () => {
     if (!window.confirm('게시글을 삭제하시겠습니까?')) return;
 
     try {
-      await deleteArticle(id);
-      navigate('/board');
+      await deleteArticle(articleId);
+      router.push('/board');
     } catch {
       window.alert('삭제에 실패했습니다. 잠시 후 다시 시도해주세요.');
     }
@@ -64,7 +65,7 @@ function ArticleDetail() {
                 <div className="articleDetailHeader">
                   <h1 className="articleDetailTitle">{article.title}</h1>
                   <KebabMenu
-                    onEdit={() => navigate(`/board/${article.id}/edit`)}
+                    onEdit={() => router.push(`/board/${article.id}/edit`)}
                     onDelete={handleDelete}
                   />
                 </div>
@@ -82,7 +83,7 @@ function ArticleDetail() {
               <CommentSection articleId={article.id} />
 
               <div className="backToListRow">
-                <Link className="backToListBtn" to="/board">목록으로 돌아가기 ↩</Link>
+                <Link className="backToListBtn" href="/board">목록으로 돌아가기 ↩</Link>
               </div>
             </>
           )}

@@ -1,20 +1,18 @@
+'use client';
+
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { createArticle, getArticle, patchArticle } from '../../services/ArticleService.js';
-import FormGroup from '../components/FormGroup';
-import Footer from '../components/Footer';
-// formGroup / submitBtn 스타일을 상품 등록 페이지와 공유한다
-import '../styles/registration.css';
-import '../styles/board.css';
+import FormGroup from './FormGroup';
+import Footer from './Footer';
 
 /**
- * 게시글 등록/수정 페이지.
- * URL에 :id가 있으면 수정 모드로 동작한다. (UI는 등록과 동일)
+ * 게시글 등록/수정 폼.
+ * articleId가 주어지면 수정 모드로 동작한다. (UI는 등록과 동일)
  */
-function ArticleForm() {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const isEditMode = Boolean(id);
+function ArticleForm({ articleId }) {
+  const router = useRouter();
+  const isEditMode = Boolean(articleId);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -29,7 +27,7 @@ function ArticleForm() {
     let ignore = false;
     setLoading(true);
 
-    getArticle(id)
+    getArticle(articleId)
       .then((data) => {
         if (ignore) return;
         setTitle(data.title);
@@ -45,7 +43,7 @@ function ArticleForm() {
     return () => {
       ignore = true;
     };
-  }, [id, isEditMode]);
+  }, [articleId, isEditMode]);
 
   // 모든 필드가 채워져야 등록 버튼이 활성화된다
   const isValid = title.trim() !== '' && content.trim() !== '';
@@ -58,10 +56,10 @@ function ArticleForm() {
 
     try {
       const article = isEditMode
-        ? await patchArticle(id, title, content)
+        ? await patchArticle(articleId, title, content)
         : await createArticle(title, content);
 
-      navigate(`/board/${article.id}`);
+      router.push(`/board/${article.id}`);
     } catch (err) {
       setError(err);
       setSubmitting(false);

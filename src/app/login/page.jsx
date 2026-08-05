@@ -1,12 +1,15 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import AuthLogo from '../components/AuthLogo';
-import AuthInput from '../components/AuthInput';
-import SnsLogin from '../components/SnsLogin';
-import Modal from '../components/Modal';
+'use client';
 
-function Login() {
-  const navigate = useNavigate();
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import AuthLogo from '../../components/AuthLogo';
+import AuthInput from '../../components/AuthInput';
+import SnsLogin from '../../components/SnsLogin';
+import Modal from '../../components/Modal';
+
+export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -29,7 +32,7 @@ function Login() {
   const isValid = !validateEmail(email) && !validatePassword(password);
 
   function handleLogin() {
-    navigate('/items');
+    router.push('/items');
   }
 
   return (
@@ -64,7 +67,7 @@ function Login() {
         <SnsLogin />
 
         <p className="signup-text">
-          판다마켓이 처음이신가요? <Link to="/signup">회원가입</Link>
+          판다마켓이 처음이신가요? <Link href="/signup">회원가입</Link>
         </p>
       </div>
 
@@ -73,5 +76,3 @@ function Login() {
     </>
   );
 }
-
-export default Login;

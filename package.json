@@ -4,12 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "next dev --port 3001",
+    "build": "next build",
     "lint": "eslint .",
-    "preview": "vite preview",
     "server": "node --env-file=.env server/app.js",
-    "start": "node server/app.js"
+    "start": "next start --port 3001"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
@@ -17,6 +16,7 @@
     "axios": "^1.18.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
+    "next": "^16.3.0",
     "prisma": "^7.8.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
@@ -26,13 +26,10 @@
     "@eslint/js": "^10.0.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^10.3.0",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
-    "nodemon": "^3.1.14",
-    "vite": "^8.0.12"
+    "nodemon": "^3.1.14"
   },
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
   "main": "main.js",

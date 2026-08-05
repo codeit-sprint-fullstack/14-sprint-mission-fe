@@ -1,17 +1,19 @@
+'use client';
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useProductList from '../../models/useProductList.js';
-import Footer from '../components/Footer';
-import ProductCard from '../components/ProductCard';
-import SortDropdown from '../components/SortDropdown';
-import Pagination from '../components/Pagination';
+import Link from 'next/link';
+import useProductList from '../../../models/useProductList.js';
+import Footer from '../../components/Footer';
+import ProductCard from '../../components/ProductCard';
+import SortDropdown from '../../components/SortDropdown';
+import Pagination from '../../components/Pagination';
 
 const SORT_OPTIONS = [
   { value: 'recent', label: '최신순' },
   { value: 'favorite', label: '좋아요순' },
 ];
 
-function Items() {
+export default function ItemsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState('');
   const [searchInput, setSearchInput] = useState('');
@@ -46,7 +48,7 @@ function Items() {
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleSearch}
             />
-            <Link to="/registration" className="addItemBtn">상품 등록하기</Link>
+            <Link href="/registration" className="addItemBtn">상품 등록하기</Link>
             <SortDropdown options={SORT_OPTIONS} value={orderBy} onChange={handleSortChange} />
           </div>
 
@@ -73,5 +75,3 @@ function Items() {
     </>
   );
 }
-
-export default Items;

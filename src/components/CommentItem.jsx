@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import KebabMenu from './KebabMenu';
 import { formatRelativeTime, getNickname } from '../utils/articleDisplay.js';

@@ -1,12 +1,15 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import AuthLogo from '../components/AuthLogo';
-import AuthInput from '../components/AuthInput';
-import SnsLogin from '../components/SnsLogin';
-import Modal from '../components/Modal';
+'use client';
 
-function Signup() {
-  const navigate = useNavigate();
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import AuthLogo from '../../components/AuthLogo';
+import AuthInput from '../../components/AuthInput';
+import SnsLogin from '../../components/SnsLogin';
+import Modal from '../../components/Modal';
+
+export default function SignupPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
@@ -51,7 +54,7 @@ function Signup() {
     setModalMessage('회원가입이 완료되었습니다!');
     setShowModal(true);
     setTimeout(() => {
-      navigate('/login');
+      router.push('/login');
     }, 1000);
   }
 
@@ -109,7 +112,7 @@ function Signup() {
         <SnsLogin />
 
         <p className="login-text">
-          이미 회원이신가요? <Link to="/login">로그인</Link>
+          이미 회원이신가요? <Link href="/login">로그인</Link>
         </p>
       </div>
 
@@ -117,5 +120,3 @@ function Signup() {
     </>
   );
 }
-
-export default Signup;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import {
   DEFAULT_ARTICLE_IMAGE,
   formatDate,
@@ -8,7 +8,7 @@ import {
 
 function ArticleCard({ article }) {
   return (
-    <Link className="articleCard" to={`/board/${article.id}`}>
+    <Link className="articleCard" href={`/board/${article.id}`}>
       <div className="articleCardTop">
         <p className="articleTitle">{article.title}</p>
         <img className="articleImage" src={DEFAULT_ARTICLE_IMAGE} alt="" />

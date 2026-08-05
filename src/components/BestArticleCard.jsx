@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import {
   DEFAULT_ARTICLE_IMAGE,
   formatDate,
@@ -8,7 +8,7 @@ import {
 
 function BestArticleCard({ article }) {
   return (
-    <Link className="bestArticleCard" to={`/board/${article.id}`}>
+    <Link className="bestArticleCard" href={`/board/${article.id}`}>
       <span className="bestBadge">🏅 Best</span>
 
       <div className="bestArticleBody">
