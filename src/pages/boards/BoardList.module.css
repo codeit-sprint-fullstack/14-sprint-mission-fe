@@ -1,0 +1,18 @@
+.page {
+  max-width: 770px;
+  margin: 20px auto 150px;
+}
+
+.sectionTitle {
+  margin: 0 0 14px;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.bestCardList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
