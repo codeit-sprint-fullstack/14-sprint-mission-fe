@@ -1,4 +1,6 @@
 import prisma from '@/lib/prisma'
+import { assert } from 'superstruct'
+import { CreateArticle } from '@/validators/articleValidator'
 
 export async function GET(req) {
   try {
@@ -55,6 +57,53 @@ export async function GET(req) {
       },
       {
         status: 500,
+      },
+    )
+  }
+}
+
+export async function POST(req) {
+  try {
+    const body = await req.json()
+
+    assert(body, CreateArticle)
+
+    const { title, content } = body
+
+    const article = await prisma.article.create({
+      data: {
+        title,
+        content,
+      },
+    })
+
+    const responseArticle = {
+      id: article.id,
+      title: article.title,
+      content: article.content,
+      createdAt: article.createdAt,
+    }
+
+    return Response.json(
+      {
+        message: 'Article created successfully.',
+        code: 'CREATE_ARTICLE_SUCCESS',
+        article: responseArticle,
+      },
+      {
+        status: 201,
+      },
+    )
+  } catch (error) {
+    console.error(error)
+
+    return Response.json(
+      {
+        message: 'Failed to create article.',
+        code: 'CREATE_ARTICLE_FAILED',
+      },
+      {
+        status: 400,
       },
     )
   }

@@ -1,0 +1,93 @@
+.writePage {
+  width: 100%;
+  min-width: 0;
+  padding-top: 24px;
+}
+
+.writeForm {
+  width: calc(100% - 400px);
+  min-width: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 744px) {
+  .writeForm {
+    width: calc(100% - 48px);
+  }
+}
+
+.writePageHeaderBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.writePageHeader {
+  color: var(--Secondary-800);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.writeButton {
+  height: 42px;
+  padding: 12px 23px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.writeButton:disabled {
+  background-color: var(--Cool-Gray-400);
+  color: var(--Cool-Gray-100);
+  cursor: not-allowed;
+}
+
+.writeArticleTitle {
+  margin-bottom: 24px;
+}
+
+.writeArticleTitleHeader,
+.writeArticleContentsHeader {
+  margin-bottom: 12px;
+  color: var(--Secondary-800);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.articleTitleInput,
+.articleContentTextarea {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-800);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  outline: none;
+}
+
+.articleTitleInput {
+  height: 56px;
+  padding: 16px 24px;
+}
+
+.articleContentTextarea {
+  height: 282px;
+  padding: 16px 24px;
+  resize: none;
+}
+
+.articleTitleInput::placeholder,
+.articleContentTextarea::placeholder {
+  color: var(--Secondary-400);
+}

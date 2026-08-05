@@ -8,7 +8,7 @@
   width: 100%;
   height: 70px;
   display: flex;
-  padding: 0 200px;
+  padding: 0 clamp(24px, calc((100vw - 1200px) / 2), 200px);
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--line-gray);
@@ -88,11 +88,7 @@
 }
 
 @media (max-width: 1024px) {
-  .header {
-    padding: 0 24px;
-  }
-
-   .headerLeft {
+  .headerLeft {
     gap: 20px;
   }
 }
