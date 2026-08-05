@@ -62,6 +62,10 @@
   --warm-skyblue: #E6F2FF;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 html,
 body {
   width: 100%;

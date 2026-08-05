@@ -7,10 +7,11 @@ function BestArticleCard({ article }) {
     <Link href={`/boards/${article.id}`} className={styles.bestArticleCard}>
       <div className={styles.bestArticleCardTop}>
         <Image src="/ic_medal.svg" alt="" width={12.391} height={14.906} />
-        <span>Best</span>
+        <span className={styles.chipContents}>Best</span>
       </div>
       <div className={styles.bestArticleCardCenter}>
-        article.title 데이터자리 (데스크탑은 2줄/태블릿,모바일은 3줄)
+        {/* 데스크탑은 2줄/태블릿,모바일은 3줄 */}
+        <p className={styles.bestArticleTitle}>{article.title}</p>
         {/* article 데이터 모델에 사진, 닉네임, 종아요수 필드이 없으므로 프론트엔드에서 처리 */}
         <div className={styles.bestArticleImage}>
           <Image
@@ -23,14 +24,16 @@ function BestArticleCard({ article }) {
       </div>
       <div className={styles.bestArticleCardBottom}>
         <div className={styles.bestArticleCardBottomLeft}>
-          <span>userNickname</span>
-          <div className={styles.bestArticleFavoriteCount}>
+          <span className={styles.bestArticleUserNickname}>서당개만10년째</span>
+          <div className={styles.bestArticleFavoriteCountView}>
             <Image src="/ic_empty_heart.svg" alt="" width={16} height={16} />
-            <span>articleFavoriteCount</span>
+            <span className={styles.bestArticleFavoriteCount}>196</span>
           </div>
         </div>
         <div className={styles.bestArticleCardBottomRight}>
-          article.createdAt 데이터자리
+          <span className={styles.bestArticleCreatdeAt}>
+            {new Date(article.createdAt).toLocaleDateString()}
+          </span>
         </div>
       </div>
     </Link>

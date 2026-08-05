@@ -6,7 +6,8 @@ function ArticleCard({ article }) {
   return (
     <Link href={`/boards/${article.id}`} className={styles.articleCard}>
       <div className={styles.articleCardTop}>
-        article.title 데이터자리 (데스크탑은 2줄/태블릿,모바일은 3줄)
+        {/* 데스크탑은 2줄/태블릿,모바일은 3줄 */}
+        <p className={styles.articleTitle}>{article.title}</p>
         {/* article 데이터 모델에 사진, 닉네임, 종아요수 필드이 없으므로 프론트엔드에서 처리 */}
         <div className={styles.articleImage}>
           <Image
@@ -25,13 +26,17 @@ function ArticleCard({ article }) {
             width={24}
             height={24}
           />
-          <span>userNickname</span>
-          article.createdAt 데이터자리
+          <span className={styles.articleUserNickname}>
+            일찍일어난새가졸리다
+          </span>
+          <span className={styles.articleCreatdeAt}>
+            {new Date(article.createdAt).toLocaleDateString()}
+          </span>
         </div>
         <div className={styles.articleCardBottomRight}>
-          <div className={styles.articleFavoriteCount}>
+          <div className={styles.articleFavoriteCountView}>
             <Image src="/ic_empty_heart.svg" alt="" width={16} height={16} />
-            <span>articleFavoriteCount</span>
+            <span className={styles.articleFavoriteCount}>999+</span>
           </div>
         </div>
       </div>
