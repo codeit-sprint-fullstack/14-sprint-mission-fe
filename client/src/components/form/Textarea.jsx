@@ -1,9 +1,9 @@
 import styles from './Textarea.module.css';
 
-export default function Textarea({ label, id, placeholder, value, onChange, varient = 'default' }) {
+export default function Textarea({ label, id, placeholder, value, onChange, variant = 'default' }) {
   const inputClassName = `
     ${styles.input}
-    ${varient === 'comment' ? styles.commentInput : ''}
+    ${variant === 'comment' ? styles.commentInput : ''}
   `;
 
   return (

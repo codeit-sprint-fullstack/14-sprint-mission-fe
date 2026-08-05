@@ -2,7 +2,7 @@ import Image from 'next/image';
 import formatTime from '@/utils/formatTime';
 import EditDeleteMenu from '../EditDeleteMenu';
 import profileIcon from '@/assets/ic_profile.png';
-import styles from './CommentCard.module.css'
+import styles from './CommentCard.module.css';
 
 export default function CommentCard({ comment }) {
   return (

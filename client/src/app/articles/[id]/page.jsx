@@ -1,32 +1,43 @@
 import Image from 'next/image';
+import { createComment } from '@/actions/commentActions';
+import { deleteArticle } from '@/actions/articleActions';
 import formatDate from '@/utils/formatDate';
-import ArticleMenu from '@/components/EditDeleteMenu';
+import EditDeleteMenu from '@/components/EditDeleteMenu';
 import CommentForm from '@/components/form/CommentForm';
+import CommentList from '@/components/comment/CommentList';
 import profileIcon from '@/assets/ic_profile.png';
+import BackLink from '@/components/BackLink';
 import heartIcon from '@/assets/ic_heart.png';
 import styles from './page.module.css';
-import CommentList from '@/components/comment/CommentList';
-import BackLink from '@/components/BackLink';
 
 export default async function ArticleDetail({ params }) {
   const { id } = await params;
 
+  // 게시글 불러오기 API 요청
   const articleRes = await fetch(`${process.env.API_BASE_URL}/articles/${id}`, 
     { cache: 'no-store'}
   )
-  const commentRes = await fetch(`${process.env.API_BASE_URL}/articles/${id}/comments`,
-    { cache: 'no-store'}
-  )
-
   if (!articleRes.ok) {
     throw new Error('게시글을 불러오는 데 실패했습니다');
   }
+  const article = await articleRes.json();
+
+  // 댓글 불러오기 API 요청
+  const commentRes = await fetch(`${process.env.API_BASE_URL}/articles/${id}/comments`,
+    { cache: 'no-store'}
+  )
   if (!commentRes.ok) {
     throw new Error('댓글을 불러오는 데 실패했습니다');
   }
-
-  const article = await articleRes.json();
   const comments = await commentRes.json();
+
+  // 댓글 생성할 게시글 ID를 Server Action에 미리 전달
+  const createCommentWithArticleId =
+    createComment.bind(null, id);
+
+  // 삭제할 게시글 ID를 Server Action에 미리 전달
+  const deleteArticleWithId =
+    deleteArticle.bind(null, id);
 
   return (
     <div className={styles.wrapper}>
@@ -35,7 +46,10 @@ export default async function ArticleDetail({ params }) {
           <h1 className={styles.title}>
             {article.title}
           </h1>
-          <ArticleMenu articleId={article.id}/>
+          <EditDeleteMenu 
+            editHref={`/articles/${article.id}/edit`}
+            onDelete={deleteArticleWithId}
+          />
         </div>
         <div className={styles.info}>
           <div className={styles.infoLeft}>
@@ -72,7 +86,7 @@ export default async function ArticleDetail({ params }) {
       </section>
 
       <section className={styles.commentFormSection}>
-        <CommentForm />
+        <CommentForm action={createCommentWithArticleId}/>
       </section>
 
       <section className={styles.commentListSection}>
