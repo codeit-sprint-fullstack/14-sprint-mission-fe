@@ -6,6 +6,11 @@ import ProductCard from '../components/ProductCard';
 import SortDropdown from '../components/SortDropdown';
 import Pagination from '../components/Pagination';
 
+const SORT_OPTIONS = [
+  { value: 'recent', label: '최신순' },
+  { value: 'favorite', label: '좋아요순' },
+];
+
 function Items() {
   const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState('');
@@ -42,7 +47,7 @@ function Items() {
               onKeyDown={handleSearch}
             />
             <Link to="/registration" className="addItemBtn">상품 등록하기</Link>
-            <SortDropdown orderBy={orderBy} onChange={handleSortChange} />
+            <SortDropdown options={SORT_OPTIONS} value={orderBy} onChange={handleSortChange} />
           </div>
 
           {loading ? (

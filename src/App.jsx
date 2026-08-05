@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Registration from './pages/Registration';
 import ItemDetail from './pages/ItemDetail';
+import Board from './pages/Board';
+import ArticleDetail from './pages/ArticleDetail';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/registration" element={<Registration/>}/>
         <Route path="/items/:id" element={<ItemDetail />} />
+        <Route path="/board" element={<Board />} />
+        <Route path="/board/:id" element={<ArticleDetail />} />
       </Routes>
     </BrowserRouter>
   );

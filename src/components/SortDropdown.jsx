@@ -1,16 +1,18 @@
 import { useState } from 'react';
 
-const SORT_OPTIONS = [
-  { value: 'recent', label: '최신순' },
-  { value: 'favorite', label: '좋아요순' },
-];
-
-function SortDropdown({ orderBy, onChange }) {
+/**
+ * 정렬 드롭다운.
+ *
+ * @param options  [{ value, label }] 형태의 정렬 옵션 목록
+ * @param value    현재 선택된 정렬 값
+ * @param onChange 옵션을 고르면 해당 value로 호출된다
+ */
+function SortDropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
-  const selected = SORT_OPTIONS.find((option) => option.value === orderBy);
+  const selected = options.find((option) => option.value === value) ?? options[0];
 
-  const handleSelect = (value) => {
-    onChange(value);
+  const handleSelect = (nextValue) => {
+    onChange(nextValue);
     setIsOpen(false);
   };
 
@@ -21,8 +23,10 @@ function SortDropdown({ orderBy, onChange }) {
       </button>
       {isOpen && (
         <ul className="dropdownMenu">
-          {SORT_OPTIONS.map(({ value, label }) => (
-            <li key={value} onClick={() => handleSelect(value)}>{label}</li>
+          {options.map((option) => (
+            <li key={option.value} onClick={() => handleSelect(option.value)}>
+              {option.label}
+            </li>
           ))}
         </ul>
       )}
