@@ -1,17 +1,44 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import styles from '@/app/(with-layout)/boards/write/writePage.module.css'
 
 function WritePage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const articleId = searchParams.get('id')
 
   const [articleTitle, setArticleTitle] = useState('')
-  const [articleContents, setArticleContents] = useState('')
+  const [articleContent, setArticleContent] = useState('')
+
+  useEffect(() => {
+    if (!articleId) {
+      return
+    }
+
+    async function getArticle() {
+      try {
+        const res = await fetch(`/api/articles/${articleId}`)
+        const article = await res.json()
+
+        if (!res.ok) {
+          throw new Error(article.message)
+        }
+
+        setArticleTitle(article.title)
+        setArticleContent(article.content)
+      } catch (error) {
+        console.error(error)
+        alert('게시글을 불러오지 못했습니다.')
+      }
+    }
+
+    getArticle()
+  }, [articleId])
 
   const canSubmitArticle =
-    articleTitle.trim() !== '' && articleContents.trim() !== ''
+    articleTitle.trim() !== '' && articleContent.trim() !== ''
 
   async function onArticleSubmit(e) {
     e.preventDefault()
@@ -21,14 +48,17 @@ function WritePage() {
     }
 
     try {
-      const res = await fetch('/api/articles', {
-        method: 'POST',
+      const url = articleId ? `/api/articles/${articleId}` : '/api/articles'
+      const method = articleId ? 'PATCH' : 'POST'
+
+      const res = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           title: articleTitle.trim(),
-          content: articleContents.trim(),
+          content: articleContent.trim(),
         }),
       })
 
@@ -41,7 +71,11 @@ function WritePage() {
       router.push(`/boards/${result.article.id}`)
     } catch (error) {
       console.error(error)
-      alert('게시글 등록에 실패했습니다.')
+      alert(
+        articleId
+          ? '게시글 수정에 실패했습니다.'
+          : '게시글 등록에 실패했습니다.',
+      )
     }
   }
 
@@ -75,8 +109,8 @@ function WritePage() {
           <h3 className={styles.writeArticleContentsHeader}>*내용</h3>
           <textarea
             className={styles.articleContentTextarea}
-            value={articleContents}
-            onChange={(e) => setArticleContents(e.target.value)}
+            value={articleContent}
+            onChange={(e) => setArticleContent(e.target.value)}
             placeholder="내용을 입력해주세요."
           />
         </div>
