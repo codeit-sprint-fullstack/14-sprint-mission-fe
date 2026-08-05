@@ -12,22 +12,28 @@ export default async function handler(req, res) {
       const skip = (page - 1) * limit;
 
       const sort = req.query.sort || 'latest'; // 'latest' 또는 'likes'
+      const keyword = req.query.keyword || ''; // 검색어
 
       let orderBy;
       if (sort === 'latest') {
-        orderBy = { postedAt: 'desc' }; // 스키마에 맞는 필드 사용
+        orderBy = { postedAt: 'desc' };
       } else if (sort === 'likes') {
         orderBy = { likes: 'desc' };
       } else {
         orderBy = { postedAt: 'desc' };
       }
 
-      const totalCount = await prisma.notice.count();
+      // 제목만 검색 조건
+      const where = keyword
+        ? { title: { contains: keyword, mode: 'insensitive' } }
+        : {};
+
+      const totalCount = await prisma.notice.count({ where });
 
       const notices = await prisma.notice.findMany({
         skip,
         take: limit,
-        include: { comments: false },
+        where,
         orderBy,
       });
 
@@ -37,6 +43,7 @@ export default async function handler(req, res) {
         totalCount,
         totalPages: Math.ceil(totalCount / limit),
         sort,
+        keyword,
         data: notices,
       });
     } catch (error) {

@@ -60,15 +60,33 @@
   line-height: normal;
 }
 
+.postlist_content {
+  flex-direction: column;
+  gap: 24px;
+}
+
 .search_wrap {
   width: 100%;
   justify-content: space-between;
 }
 
+.input_wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input_wrap .icon {
+  position: absolute;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+}
+
 .search_wrap input {
   width: 1054px;
   height: 42px;
-  padding: 9px 20px 9px 16px;
+  padding: 9px 20px 9px 36px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
