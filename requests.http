@@ -1,0 +1,65 @@
+@baseUrl = https://one4-sprint-mission-prisma.onrender.com
+
+
+// ARTICLES
+###
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "title": "맥북 16인치 64기가 1테라 정도 사양이면 얼마에 팔아야하나요?",
+  "content": "맥북 16인치 16기가 1테라 정도 사양이면 얼마에 팔아야하나요?",
+  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317"
+}
+
+###
+GET {{baseUrl}}/articles
+
+###
+GET {{baseUrl}}/articles?sort=recent&count=10
+
+###
+PATCH {{baseUrl}}/articles/87350587-f132-4342-a4da-48a107801085
+Content-Type: application/json
+
+{
+  "title": "PATCH 게시글 제목입니다",
+  "content": "PATCH 테스트 본문입니다."
+}
+
+###
+DELETE {{baseUrl}}/articles/5ab3b753-5545-4a44-a990-28d8bfa9d11f
+
+
+// COMMENTS
+
+###
+GET {{baseUrl}}/comments
+
+
+###
+GET {{baseUrl}}/comments/10
+
+
+###
+GET {{baseUrl}}/articles/10eff9c0-51f8-4e04-b7c8-44d1ec58f09b/comments
+
+###
+POST {{baseUrl}}/articles/10eff9c0-51f8-4e04-b7c8-44d1ec58f09b/comments
+Content-Type: application/json
+
+{
+  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317",
+  "content": "코멘트 테스트입니다."
+}
+
+###
+PATCH {{baseUrl}}/comments/8
+Content-Type: application/json
+
+{
+  "content": "PATCH 코멘트 테스트입니다"
+}
+
+###
+DELETE {{baseUrl}}/comments/12
