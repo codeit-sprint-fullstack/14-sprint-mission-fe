@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from '@/lib/axios';
+import { formatDate } from '@/lib/formatDate';
 
 // 서버에 없는 값들은 프론트에서 대충 채운다
 const DUMMY_IMAGE = '/images/default-thumbnail.png';
@@ -61,7 +62,7 @@ export default function BoardList() {
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
-
+      <button><Link href="/boards/write">글쓰기</Link></button>
       <ul>
         {articles.map((article) => (
           <li key={article.id}>
@@ -70,6 +71,7 @@ export default function BoardList() {
               <p>{article.title}</p>
               <span>{getDummyNickname()}</span>
               <span>좋아요 {getDummyLikes()}</span>
+              <span>{formatDate(article.createdAt)}</span>
             </Link>
           </li>
         ))}
