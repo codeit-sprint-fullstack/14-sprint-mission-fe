@@ -1,3 +1,4 @@
+import styles from './index.module.css';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from '@/lib/axios';
@@ -41,7 +42,7 @@ export default function BoardList() {
   }, [sort, keyword]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2>베스트 게시글</h2>
       <ul>
         {bestArticles.map((article) => (
