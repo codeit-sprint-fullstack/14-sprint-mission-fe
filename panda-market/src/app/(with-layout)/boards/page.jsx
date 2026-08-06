@@ -31,7 +31,7 @@ function BoardsPage() {
         setArticlesError('')
 
         const res = await fetch(
-          `/api/articles?sort=${sort}&keyword=${encodeURIComponent(submittedKeyword)}`,
+          `/api/articles?sort=${sort}&keyword=${encodeURIComponent(submittedKeyword)}&pageSize=4`,
         )
 
         if (!res.ok) {

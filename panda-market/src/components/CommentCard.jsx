@@ -109,38 +109,38 @@ function CommentCard({ comment, getComments }) {
           </div>
         </div>
 
-        <div className={styles.commentMenu}>
-          <button
-            className={styles.commentMenuButton}
-            type="button"
-            onClick={isEditing ? undefined : handleMenuToggle}
-            aria-label={isEditing ? '댓글 수정 메뉴' : '댓글 메뉴 열기'}
-            aria-expanded={isEditing || isMenuOpen}
-          >
-            <Image src="/ic_kebab.svg" alt="" width={24} height={24} />
-          </button>
+        {isEditing ? (
+          <div className={styles.commentEditActions}>
+            <button
+              className={styles.commentCancelButton}
+              type="button"
+              onClick={onCancelEditComment}
+            >
+              취소
+            </button>
 
-          {isEditing ? (
-            <div className={styles.commentMenuDropdown}>
-              <button
-                className={styles.commentEditButton}
-                type="button"
-                onClick={onUpdateComment}
-                disabled={!editedContent.trim()}
-              >
-                저장
-              </button>
+            <button
+              className={styles.commentUpdateButton}
+              type="button"
+              onClick={onUpdateComment}
+              disabled={!editedContent.trim()}
+            >
+              수정 완료
+            </button>
+          </div>
+        ) : (
+          <div className={styles.commentMenu}>
+            <button
+              className={styles.commentMenuButton}
+              type="button"
+              onClick={handleMenuToggle}
+              aria-label="댓글 메뉴 열기"
+              aria-expanded={isMenuOpen}
+            >
+              <Image src="/ic_kebab.svg" alt="" width={24} height={24} />
+            </button>
 
-              <button
-                className={styles.commentDeleteButton}
-                type="button"
-                onClick={onCancelEditComment}
-              >
-                취소
-              </button>
-            </div>
-          ) : (
-            isMenuOpen && (
+            {isMenuOpen && (
               <div className={styles.commentMenuDropdown}>
                 <button
                   className={styles.commentEditButton}
@@ -161,9 +161,9 @@ function CommentCard({ comment, getComments }) {
                   삭제하기
                 </button>
               </div>
-            )
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )
