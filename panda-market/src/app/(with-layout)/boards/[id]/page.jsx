@@ -123,8 +123,8 @@ function ArticleDetailPage() {
   return (
     <main className={styles.articleDetailPage}>
       <article className={styles.articleSection}>
-        <div className={styles.articleHandler}>
-          <p className={styles.articleTitle}>{article?.title}</p>
+        <header className={styles.articleHeader}>
+          <h1 className={styles.articleTitle}>{article?.title}</h1>
           <div className={styles.articleMenu}>
             <button
               className={styles.articleMenuButton}
@@ -139,13 +139,13 @@ function ArticleDetailPage() {
             {isMenuOpen && (
               <div className={styles.articleMenuDropdown}>
                 <Link
-                  className={styles.updateArticleButton}
+                  className={styles.articleUpdateButton}
                   href={`/boards/write?id=${articleId}`}
                 >
                   수정하기
                 </Link>
                 <button
-                  className={styles.deleteArticleButton}
+                  className={styles.articleDeleteButton}
                   type="button"
                   onClick={onDeleteArticle}
                 >
@@ -154,7 +154,7 @@ function ArticleDetailPage() {
               </div>
             )}
           </div>
-        </div>
+        </header>
         <div className={styles.articleMeta}>
           <div className={styles.articleUser}>
             <Image
@@ -168,14 +168,17 @@ function ArticleDetailPage() {
               <span className={styles.articleUserNickname}>
                 둥근해저거또떴네
               </span>
-              <span className={styles.articleCreatedAt}>
+              <time
+                className={styles.articleCreatedAt}
+                dateTime={article?.createdAt}
+              >
                 {article?.createdAt ? formatDate(article.createdAt) : ''}
-              </span>
+              </time>
             </div>
           </div>
           <div className={styles.articleFavoriteChip}>
             <Image
-              className={styles.emptyHeartIcon}
+              className={styles.articleFavoriteIcon}
               src="/ic_empty_heart.svg"
               alt=""
               width={32}
@@ -187,18 +190,18 @@ function ArticleDetailPage() {
         </div>
       </article>
       <form
-        className={styles.commentRegistrationSection}
+        className={styles.commentRegistrationForm}
         onSubmit={onSubmitComment}
       >
-        <h3 className={styles.commentRegistrationSectionLabel}>댓글달기</h3>
+        <h2 className={styles.commentFormTitle}>댓글달기</h2>
         <textarea
-          className={styles.commentRegistrationcontent}
+          className={styles.commentRegistrationTextarea}
           value={commentContent}
           onChange={(e) => setCommentContent(e.target.value)}
           placeholder="댓글을 입력해주세요."
         />
         <button
-          className={styles.commentRegistrationButton}
+          className={styles.commentSubmitButton}
           type="submit"
           disabled={!commentContent.trim()}
         >
@@ -206,22 +209,22 @@ function ArticleDetailPage() {
         </button>
       </form>
       {comments.length === 0 ? (
-        <section className={styles.emptyCommentSection}>
+        <section className={styles.commentEmptySection}>
           <Image
-            className={styles.emptyCommentImg}
+            className={styles.commentEmptyImage}
             src="/img_reply_empty.png"
             alt=""
             width={140}
             height={140}
           />
-          <p className={styles.emptyCommentMessage}>
+          <p className={styles.commentEmptyMessage}>
             아직 댓글이 없어요, <br />
             지금 댓글을 달아보세요!
           </p>
         </section>
       ) : (
-        <section className={styles.commentsSection}>
-          <div className={styles.commentsList}>
+        <section className={styles.commentListSection}>
+          <div className={styles.commentList}>
             {comments.map((comment) => (
               <CommentCard
                 key={comment.id}
@@ -232,10 +235,10 @@ function ArticleDetailPage() {
           </div>
         </section>
       )}
-      <Link className={styles.goBackBoardButton} href="/boards">
-        <span className={styles.goBackBoardText}>목록으로 돌아가기</span>
+      <Link className={styles.boardBackLink} href="/boards">
+        <span className={styles.boardBackText}>목록으로 돌아가기</span>
         <Image
-          className={styles.backIcon}
+          className={styles.boardBackIcon}
           src="/ic_back.svg"
           alt=""
           width={24}

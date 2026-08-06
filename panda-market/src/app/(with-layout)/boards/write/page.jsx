@@ -78,20 +78,20 @@ function WritePage() {
   return (
     <main className={styles.writePage}>
       <form className={styles.writeForm} onSubmit={onArticleSubmit}>
-        <div className={styles.writePageHeaderBar}>
-          <h2 className={styles.writePageHeader}>게시글 쓰기</h2>
+        <header className={styles.articleWriteHeader}>
+          <h1 className={styles.articleWriteTitle}>게시글 쓰기</h1>
 
           <button
-            className={styles.writeButton}
+            className={styles.articleSubmitButton}
             type="submit"
             disabled={!canSubmitArticle}
           >
             등록
           </button>
-        </div>
+        </header>
 
-        <div className={styles.writeArticleTitle}>
-          <h3 className={styles.writeArticleTitleHeader}>*제목</h3>
+        <div className={styles.articleTitleField}>
+          <h2 className={styles.articleTitleLabel}>*제목</h2>
           <input
             className={styles.articleTitleInput}
             type="text"
@@ -101,8 +101,8 @@ function WritePage() {
           />
         </div>
 
-        <div className={styles.writeArticleContents}>
-          <h3 className={styles.writeArticleContentsHeader}>*내용</h3>
+        <div className={styles.articleContentField}>
+          <h2 className={styles.articleContentLabel}>*내용</h2>
           <textarea
             className={styles.articleContentTextarea}
             value={articleContent}

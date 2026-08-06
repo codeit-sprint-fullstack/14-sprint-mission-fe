@@ -17,21 +17,21 @@
   }
 }
 
-.writePageHeaderBar {
+.articleWriteHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
 }
 
-.writePageHeader {
+.articleWriteTitle {
   color: var(--Secondary-800);
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
 }
 
-.writeButton {
+.articleSubmitButton {
   height: 42px;
   padding: 12px 23px;
   border: none;
@@ -44,18 +44,21 @@
   cursor: pointer;
 }
 
-.writeButton:disabled {
+.articleSubmitButton:disabled {
   background-color: var(--Cool-Gray-400);
   color: var(--Cool-Gray-100);
   cursor: not-allowed;
 }
 
-.writeArticleTitle {
+.articleTitleField {
   margin-bottom: 24px;
 }
 
-.writeArticleTitleHeader,
-.writeArticleContentsHeader {
+.articleContentField {
+}
+
+.articleTitleLabel,
+.articleContentLabel {
   margin-bottom: 12px;
   color: var(--Secondary-800);
   font-size: 18px;

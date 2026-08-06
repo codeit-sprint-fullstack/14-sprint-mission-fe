@@ -10,6 +10,9 @@
   width: 100%;
 }
 
+.articleHeader {
+}
+
 .articleTitle {
   margin: 0;
   padding-bottom: 16px;
@@ -72,7 +75,7 @@
   border-radius: 999px;
 }
 
-.emptyHeartIcon {
+.articleFavoriteIcon {
   width: 24px;
   height: 24px;
 }
@@ -100,14 +103,14 @@
   overflow-wrap: anywhere;
 }
 
-.commentRegistrationSection {
+.commentRegistrationForm {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin-top: 40px;
 }
 
-.commentRegistrationSectionLabel {
+.commentFormTitle {
   align-self: flex-start;
 
   margin: 0 0 16px;
@@ -117,7 +120,7 @@
   line-height: 24px;
 }
 
-.commentRegistrationcontent {
+.commentRegistrationTextarea {
   width: 100%;
   min-height: 104px;
   padding: 16px 24px;
@@ -135,15 +138,15 @@
   line-height: 24px;
 }
 
-.commentRegistrationcontent::placeholder {
+.commentRegistrationTextarea::placeholder {
   color: var(--Cool-Gray-400);
 }
 
-.commentRegistrationcontent:focus {
+.commentRegistrationTextarea:focus {
   outline: 1px solid var(--Primary-100);
 }
 
-.commentRegistrationButton {
+.commentSubmitButton {
   min-width: 74px;
   height: 42px;
   margin-top: 16px;
@@ -161,13 +164,13 @@
   line-height: 24px;
 }
 
-.commentRegistrationButton:disabled {
+.commentSubmitButton:disabled {
   cursor: default;
   background: var(--Cool-Gray-400);
   color: var(--Cool-Gray-100);
 }
 
-.emptyCommentSection {
+.commentEmptySection {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,13 +180,13 @@
   padding: 56px 0;
 }
 
-.emptyCommentImg {
+.commentEmptyImage {
   width: 140px;
   height: 140px;
   object-fit: contain;
 }
 
-.emptyCommentMessage {
+.commentEmptyMessage {
   margin: 24px 0 0;
 
   color: var(--Cool-Gray-400);
@@ -193,12 +196,12 @@
   text-align: center;
 }
 
-.commentsSection {
+.commentListSection {
   width: 100%;
   margin-top: 24px;
 }
 
-.commentsList {
+.commentList {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -207,7 +210,7 @@
   color: var(--Cool-Gray-500);
 }
 
-.goBackBoardButton {
+.boardBackLink {
   display: block;
   width: fit-content;
   min-width: 240px;
@@ -224,4 +227,25 @@
   line-height: 24px;
   text-align: center;
   text-decoration: none;
+}
+
+.articleMenu {
+}
+
+.articleMenuButton {
+}
+
+.articleMenuDropdown {
+}
+
+.articleUpdateButton {
+}
+
+.articleDeleteButton {
+}
+
+.boardBackText {
+}
+
+.boardBackIcon {
 }

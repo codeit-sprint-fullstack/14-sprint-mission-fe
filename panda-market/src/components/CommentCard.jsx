@@ -77,7 +77,7 @@ function CommentCard({ comment, getComments }) {
 
           <div className={styles.commentEditActions}>
             <button
-              className={styles.updateCommentButton}
+              className={styles.commentUpdateButton}
               type="button"
               onClick={onUpdateComment}
               disabled={!editedContent.trim()}
@@ -86,7 +86,7 @@ function CommentCard({ comment, getComments }) {
             </button>
 
             <button
-              className={styles.cancelEditCommentButton}
+              className={styles.commentEditCancelButton}
               type="button"
               onClick={() => {
                 setEditedContent(comment.content)
@@ -115,9 +115,12 @@ function CommentCard({ comment, getComments }) {
             <span className={styles.commentUserNickname}>
               생갈치1호의행방불명
             </span>
-            <span className={styles.commentCreatedAt}>
+            <time
+              className={styles.commentCreatedAt}
+              dateTime={comment.createdAt}
+            >
               {formatDate(comment.createdAt)}
-            </span>
+            </time>
           </div>
         </div>
 
@@ -135,7 +138,7 @@ function CommentCard({ comment, getComments }) {
           {isMenuOpen && (
             <div className={styles.commentMenuDropdown}>
               <button
-                className={styles.editComment}
+                className={styles.commentEditButton}
                 type="button"
                 onClick={() => {
                   setIsEditing(true)
@@ -146,7 +149,7 @@ function CommentCard({ comment, getComments }) {
               </button>
 
               <button
-                className={styles.deleteComment}
+                className={styles.commentDeleteButton}
                 type="button"
                 onClick={onDeleteComment}
               >
