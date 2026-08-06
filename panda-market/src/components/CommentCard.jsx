@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import formatDate from '@/utils/formatDate'
+import formatRelativeTime from '@/utils/formatRelativeTime'
 import styles from './CommentCard.module.css'
 
 function CommentCard({ comment, getComments }) {
@@ -12,6 +12,11 @@ function CommentCard({ comment, getComments }) {
 
   function handleMenuToggle() {
     setIsMenuOpen((prev) => !prev)
+  }
+
+  function onCancelEditComment() {
+    setEditedContent(comment.content)
+    setIsEditing(false)
   }
 
   async function onUpdateComment() {
@@ -73,29 +78,8 @@ function CommentCard({ comment, getComments }) {
             className={styles.commentEditTextarea}
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
+            aria-label="댓글 수정 내용"
           />
-
-          <div className={styles.commentEditActions}>
-            <button
-              className={styles.commentUpdateButton}
-              type="button"
-              onClick={onUpdateComment}
-              disabled={!editedContent.trim()}
-            >
-              저장
-            </button>
-
-            <button
-              className={styles.commentEditCancelButton}
-              type="button"
-              onClick={() => {
-                setEditedContent(comment.content)
-                setIsEditing(false)
-              }}
-            >
-              취소
-            </button>
-          </div>
         </div>
       ) : (
         <p className={styles.commentContent}>{comment.content}</p>
@@ -115,11 +99,12 @@ function CommentCard({ comment, getComments }) {
             <span className={styles.commentUserNickname}>
               생갈치1호의행방불명
             </span>
+
             <time
               className={styles.commentCreatedAt}
               dateTime={comment.createdAt}
             >
-              {formatDate(comment.createdAt)}
+              {formatRelativeTime(comment.createdAt)}
             </time>
           </div>
         </div>
@@ -128,34 +113,55 @@ function CommentCard({ comment, getComments }) {
           <button
             className={styles.commentMenuButton}
             type="button"
-            onClick={handleMenuToggle}
-            aria-label="댓글 메뉴 열기"
-            aria-expanded={isMenuOpen}
+            onClick={isEditing ? undefined : handleMenuToggle}
+            aria-label={isEditing ? '댓글 수정 메뉴' : '댓글 메뉴 열기'}
+            aria-expanded={isEditing || isMenuOpen}
           >
             <Image src="/ic_kebab.svg" alt="" width={24} height={24} />
           </button>
 
-          {isMenuOpen && (
+          {isEditing ? (
             <div className={styles.commentMenuDropdown}>
               <button
                 className={styles.commentEditButton}
                 type="button"
-                onClick={() => {
-                  setIsEditing(true)
-                  setIsMenuOpen(false)
-                }}
+                onClick={onUpdateComment}
+                disabled={!editedContent.trim()}
               >
-                수정하기
+                저장
               </button>
 
               <button
                 className={styles.commentDeleteButton}
                 type="button"
-                onClick={onDeleteComment}
+                onClick={onCancelEditComment}
               >
-                삭제하기
+                취소
               </button>
             </div>
+          ) : (
+            isMenuOpen && (
+              <div className={styles.commentMenuDropdown}>
+                <button
+                  className={styles.commentEditButton}
+                  type="button"
+                  onClick={() => {
+                    setIsEditing(true)
+                    setIsMenuOpen(false)
+                  }}
+                >
+                  수정하기
+                </button>
+
+                <button
+                  className={styles.commentDeleteButton}
+                  type="button"
+                  onClick={onDeleteComment}
+                >
+                  삭제하기
+                </button>
+              </div>
+            )
           )}
         </div>
       </div>
