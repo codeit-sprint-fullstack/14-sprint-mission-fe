@@ -15,6 +15,7 @@ model Notice {
   id        Int       @id @default(autoincrement())
   title     String
   author    String
+  content   String
   likes     Int       @default(0)
   postedAt  DateTime  @default(now())
   updatedAt DateTime @updatedAt

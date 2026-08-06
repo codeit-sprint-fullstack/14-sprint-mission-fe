@@ -22,12 +22,12 @@ function Gnb( type ) {
           {router.pathname !== '/' && (
             <div className={style.navigate}>
               <Link href="/notice" className={style.navigate_box}>
-                <span className={router.pathname === '/notice' ? style.active : style.none_active}>
+                <span className={router.pathname.startsWith('/notice') ? style.active : style.none_active}>
                   자유게시판
                 </span>
               </Link>
               <Link href="/mall" className={style.navigate_box}>
-                <span className={router.pathname === '/mall' ? style.active : style.none_active}>
+                <span className={router.pathname.startsWith('/mall') ? style.active : style.none_active}>
                   중고마켓
                 </span>
               </Link>

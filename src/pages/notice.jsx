@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useEffect, useState } from "react";
 import styles from '@/styles/notice.module.css';
 import Gnb from '../components/gnb.jsx';
@@ -16,7 +17,6 @@ export default function Notice() {
   const [totalPages, setTotalPages] = useState(1);
   const [keyword, setKeyword] = useState("");
 
-  // 화면 크기에 따라 limit 조정
   useEffect(() => {
     function handleResize() {
       const width = window.innerWidth;
@@ -33,7 +33,6 @@ export default function Notice() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 베스트 게시글
   useEffect(() => {
     async function fetchBestPosts() {
       try {
@@ -47,7 +46,6 @@ export default function Notice() {
     fetchBestPosts();
   }, [limit]);
 
-  // 일반 게시글 (검색/정렬/페이지네이션 반영)
   useEffect(() => {
     async function fetchPosts() {
       try {
@@ -70,7 +68,6 @@ export default function Notice() {
       <main>
         <div className={styles.wrap}>
           <div className={styles.content_wrap}>
-            {/* 베스트 게시글 */}
             <div className={styles.bestpost}>
               <span>베스트 게시글</span>
               <div className={styles.bestpost_wrap}>
@@ -86,13 +83,14 @@ export default function Notice() {
               </div>
             </div>
 
-            {/* 게시글 리스트 */}
             <div className={styles.postlist}>
               <div className={styles.postlist_head}>
                 <span>게시글</span>
-                <button>
-                  <span>글쓰기</span>
-                </button>
+                <Link href="/notice/create">
+                  <button>
+                    <span>글쓰기</span>
+                  </button>
+                </Link>
               </div>
               <div className={styles.postlist_content}>
                 <div className={styles.search_wrap}>
@@ -104,7 +102,7 @@ export default function Notice() {
                       value={keyword}
                       onChange={(e) => {
                         setKeyword(e.target.value);
-                        setCurrentPage(1); // 검색어 바뀌면 첫 페이지로 이동
+                        setCurrentPage(1);
                       }}
                     />
                   </div>

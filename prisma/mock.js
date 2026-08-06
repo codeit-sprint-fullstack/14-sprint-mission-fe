@@ -3,60 +3,70 @@ const Notice = [
     "title": "중고 노트북 팝니다",
     "author": "철수",
     "postedAt": "2026-08-01T10:15:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 12
   },
   {
     "title": "자유게시판 규칙 안내",
     "author": "관리자",
     "postedAt": "2026-08-02T09:00:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 30
   },
   {
     "title": "오늘 판다마켓 첫 가입했어요!",
     "author": "민지",
     "postedAt": "2026-08-02T14:22:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 8
   },
   {
     "title": "중고 자전거 추천 좀 해주세요",
     "author": "영호",
     "postedAt": "2026-08-03T11:45:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 5
   },
   {
     "title": "판다마켓 거래 후기 공유합니다",
     "author": "수진",
     "postedAt": "2026-08-03T20:10:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 18
   },
   {
     "title": "중고책 나눔합니다",
     "author": "지훈",
     "postedAt": "2026-08-04T08:30:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 22
   },
   {
     "title": "판다마켓 앱 업데이트 소식",
     "author": "운영팀",
     "postedAt": "2026-08-04T15:00:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 40
   },
   {
     "title": "중고 거래 사기 조심하세요",
     "author": "혜진",
     "postedAt": "2026-08-05T09:20:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 33
   },
   {
     "title": "판다마켓에서 가장 많이 팔린 물건은?",
     "author": "동현",
     "postedAt": "2026-08-05T12:00:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 15
   },
   {
     "title": "중고 가전제품 팁 공유",
     "author": "은지",
     "postedAt": "2026-08-05T18:45:00.000Z",
+    "content": "테스트중입니다!",
     "likes": 27
   }
 ]

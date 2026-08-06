@@ -1,0 +1,130 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  width: 100%;
+  height: 100%;
+}
+
+.wrap * {
+  display: flex;
+}
+
+.content_wrap {
+  flex-direction: column;
+  height: 1000px; /* 임시용 */
+}
+
+.content_wrap span {
+  color: var(--Secondary-800);
+  /* pretendard/xl-20px-bold */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 160% */
+}
+
+.content_wrap button {
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 8px;
+  background: var(--brand-blue);
+  cursor: pointer;
+}
+
+.content_wrap button:disabled {
+  background: var(--Cool-Gray-400);
+  cursor: not-allowed;
+}
+
+.content_wrap button span {
+  color: var(--Cool-Gray-100);
+  /* pretendard/lg-16px-semibold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px; /* 162.5% */
+}
+
+.content_head {
+  justify-content: space-between;
+}
+
+.content_wrap form {
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+}
+
+.form_wrap {
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form_wrap input {
+  height: 56px;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border: 0;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+}
+
+.form_wrap textarea {
+  width: 100%;
+  height: 282px;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+  font-family: Pretendard;
+  resize: none;
+}
+
+.form_wrap span {
+  color: var(--Secondary-800);
+  /* pretendard/2lg-18px-bold */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+}
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px)  {
+  .content_wrap {
+    width: 1200px;
+    margin-top: 24px;
+    gap: 32px;
+  }
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px){
+  .content_wrap {
+    width: 696px;
+    margin-top: 16px;
+    gap: 32px;
+  }
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px){
+  .content_wrap {
+    width: 343px;
+    margin-top: 16px;
+    gap: 24px;
+  }
+}
