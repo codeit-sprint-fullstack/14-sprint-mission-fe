@@ -134,7 +134,11 @@ function BoardsPage() {
         <div className={styles.articlesList}>
           {/* 데스크탑:4개/태블릿:6개/모바일:3개 */}
           {isArticlesLoading ? (
-            <p>게시글을 불러오는 중입니다.</p>
+            <p>
+              {submittedKeyword
+                ? '검색 결과를 불러오는 중입니다.'
+                : '게시글을 불러오는 중입니다.'}
+            </p>
           ) : articlesError ? (
             <p>{articlesError}</p>
           ) : articles.length === 0 ? (
