@@ -1,102 +1,166 @@
 .articleDetailPage {
   width: 100%;
   max-width: 1200px;
-  min-height: 100vh;
   margin: 0 auto;
-  padding: 80px 20px 160px;
+  padding-top: 34px;
 }
 
 .articleSection {
   width: 100%;
+  margin-bottom: 32px;
 }
 
 .articleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .articleTitle {
   margin: 0;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--Cool-Gray-200);
-
   color: var(--Cool-Gray-800);
   font-size: 20px;
+  font-style: normal;
   font-weight: 700;
   line-height: 32px;
 }
 
-.articleMeta {
-  display: grid;
-  grid-template-columns: 1fr auto;
+.articleMenu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.articleMenuButton {
+  display: flex;
   align-items: center;
-  row-gap: 24px;
-  padding-top: 16px;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.articleMenuDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 139px;
+}
+
+.articleUpdateButton,
+.articleDeleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  color: var(--Secondary-500);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: nowrap;
+  background: var(--pure-white);
+  cursor: pointer;
+}
+
+.articleUpdateButton {
+  width: 100%;
+  padding: 16px 0 12px;
+  border-top: 1px solid var(--Cool-Gray-300);
+  border-right: 1px solid var(--Cool-Gray-300);
+  border-left: 1px solid var(--Cool-Gray-300);
+  border-radius: 8px 8px 0 0;
+  text-decoration: none;
+}
+
+.articleDeleteButton {
+  padding: 12px 17px 16px;
+  border-top: 0;
+  border-top: 1px solid var(--Cool-Gray-300);
+  border-right: 1px solid var(--Cool-Gray-300);
+  border-bottom: 1px solid var(--Cool-Gray-300);
+  border-left: 1px solid var(--Cool-Gray-300);
+  border-radius: 0 0 8px 8px;
+}
+
+.articleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .articleUser {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  padding-right: 32px;
+  border-right: 1px solid var(--Cool-Gray-200);
 }
 
 .articleUserProfile {
   flex-shrink: 0;
-  border-radius: 50%;
 }
 
 .articleUserInfo {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: center;
+  gap: 8px;
 }
 
 .articleUserNickname {
-  color: var(--Cool-Gray-600);
+  color: var(--Secondary-600);
   font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
 }
 
 .articleCreatedAt {
   color: var(--Cool-Gray-400);
-  font-size: 12px;
+  font-size: 14px;
+  font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 24px;
 }
 
 .articleFavoriteChip {
   display: flex;
   align-items: center;
-  gap: 4px;
-  min-width: 70px;
   height: 40px;
+  margin-left: 32px;
   padding: 4px 12px;
-
-  border: 1px solid var(--Cool-Gray-200);
-  border-radius: 999px;
+  box-sizing: border-box;
+  border: 1px solid var(--Secondary-200);
+  border-radius: 35px;
+  background: var(--pure-white);
 }
 
 .articleFavoriteIcon {
-  width: 24px;
-  height: 24px;
+  flex-shrink: 0;
 }
 
 .articleFavoriteCount {
   color: var(--Cool-Gray-500);
-  font-size: 14px;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 26px;
 }
 
 .articleContent {
-  grid-column: 1 / -1;
-
-  min-height: 160px;
-  margin: 0;
-  padding: 24px 0 32px;
-  border-bottom: 1px solid var(--Cool-Gray-200);
-
-  color: var(--Cool-Gray-700);
-  font-size: 16px;
+  width: 100%;
+  margin: 24px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--Cool-Gray-200);
+  color: var(--Secondary-800);
+  font-size: 18px;
+  font-style: normal;
   font-weight: 400;
   line-height: 26px;
   white-space: pre-wrap;
@@ -107,67 +171,69 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-top: 40px;
+  width: 100%;
+  margin-bottom: 40px;
 }
 
 .commentFormTitle {
   align-self: flex-start;
-
-  margin: 0 0 16px;
-  color: var(--Cool-Gray-800);
+  margin: 0 0 9px;
+  color: var(--Cool-Gray-900);
   font-size: 16px;
+  font-style: normal;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 26px;
 }
 
 .commentRegistrationTextarea {
   width: 100%;
-  min-height: 104px;
+  height: 104px;
   padding: 16px 24px;
-
-  border: none;
+  box-sizing: border-box;
+  border: 0;
   border-radius: 12px;
-  outline: none;
-  resize: none;
-
   background: var(--Cool-Gray-100);
-  color: var(--Cool-Gray-800);
+  color: var(--Secondary-800);
   font-family: inherit;
   font-size: 16px;
+  font-style: normal;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
+  resize: none;
+  outline: none;
 }
 
 .commentRegistrationTextarea::placeholder {
-  color: var(--Cool-Gray-400);
-}
-
-.commentRegistrationTextarea:focus {
-  outline: 1px solid var(--Primary-100);
+  color: var(--Secondary-400);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
 }
 
 .commentSubmitButton {
-  min-width: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 42px;
   margin-top: 16px;
-  padding: 0 20px;
-
-  border: none;
+  padding: 12px 23px;
+  box-sizing: border-box;
+  border: 0;
   border-radius: 8px;
-  cursor: pointer;
-
   background: var(--brand-blue);
   color: var(--Cool-Gray-100);
   font-family: inherit;
   font-size: 16px;
+  font-style: normal;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 26px;
+  cursor: pointer;
 }
 
 .commentSubmitButton:disabled {
-  cursor: default;
   background: var(--Cool-Gray-400);
-  color: var(--Cool-Gray-100);
+  cursor: default;
 }
 
 .commentEmptySection {
@@ -175,77 +241,63 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  min-height: 360px;
-  padding: 56px 0;
+  width: 100%;
+  height: 445px;
+  margin-bottom: 64px;
 }
 
 .commentEmptyImage {
-  width: 140px;
-  height: 140px;
-  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .commentEmptyMessage {
-  margin: 24px 0 0;
-
-  color: var(--Cool-Gray-400);
+  margin: 16px 0 0;
+  color: var(--Secondary-400);
+  text-align: center;
   font-size: 16px;
+  font-style: normal;
   font-weight: 400;
   line-height: 26px;
-  text-align: center;
 }
 
 .commentListSection {
   width: 100%;
-  margin-top: 24px;
+  margin-bottom: 64px;
 }
 
 .commentList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-
-  min-height: 240px;
-  color: var(--Cool-Gray-500);
+  width: 100%;
+  gap: 24px;
 }
 
 .boardBackLink {
-  display: block;
-  width: fit-content;
-  min-width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
   height: 48px;
-  margin: 48px auto 0;
-  padding: 12px 24px;
-
+  margin: 0 auto;
+  padding: 12px 64px;
+  box-sizing: border-box;
+  gap: 8px;
   border-radius: 40px;
-
   background: var(--brand-blue);
   color: var(--Cool-Gray-100);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
   text-align: center;
   text-decoration: none;
-}
-
-.articleMenu {
-}
-
-.articleMenuButton {
-}
-
-.articleMenuDropdown {
-}
-
-.articleUpdateButton {
-}
-
-.articleDeleteButton {
+  white-space: nowrap;
 }
 
 .boardBackText {
+  color: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
 }
 
 .boardBackIcon {
+  flex-shrink: 0;
 }
