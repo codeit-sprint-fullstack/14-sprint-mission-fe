@@ -1,0 +1,17 @@
+PATCH http://localhost:3000/products/6a4205f17a91a3b4149bd38b
+Content-Type: application/json
+
+{
+  "name": "무어아허",
+  "price": 1234567,
+  "description": "이?건뭘까요",
+  "tags": ["듭듭듭듭", "음ㄱ향"]
+}
+
+###
+
+GET  http://localhost:3000/products?keyword=test
+
+###
+
+DELETE http://localhost:3000/products/6a4205f17a91a3b4149bd38b
