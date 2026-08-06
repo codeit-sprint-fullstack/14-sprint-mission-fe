@@ -1,0 +1,116 @@
+.registrationPage {
+  padding: 40px 0;
+  width: 100%;
+}
+
+.registrationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.registrationHeader h1 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #374151;
+}
+
+.submitBtn {
+  background-color: #3692FF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.formGroup label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.formGroup input,
+.formGroup textarea {
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 14px;
+  background-color: #f3f4f6;
+  color: #374151;
+  outline: none;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #9ca3af;
+}
+
+.formGroup textarea {
+  height: 200px;
+  resize: none;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.tag button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ===== 태블릿 (768px ~ 1199px) ===== */
+@media (max-width: 1199px) {
+  .formGroup textarea { height: 160px; }
+}
+
+/* ===== 모바일 (~ 767px) ===== */
+@media (max-width: 767px) {
+  .registrationPage { padding: 24px 0; }
+  .registrationHeader { margin-bottom: 24px; }
+  .registrationHeader h1 { font-size: 18px; }
+  .submitBtn { padding: 8px 16px; font-size: 13px; }
+
+  .formGroup { gap: 6px; margin-bottom: 20px; }
+  .formGroup input,
+  .formGroup textarea { padding: 12px; border-radius: 8px; }
+  .formGroup textarea { height: 140px; }
+}
+
+/* ===== 소형 모바일 (~ 479px) ===== */
+@media (max-width: 479px) {
+  .registrationHeader h1 { font-size: 16px; }
+  .formGroup label { font-size: 13px; }
+  .formGroup input,
+  .formGroup textarea { font-size: 13px; }
+  .tag { font-size: 13px; padding: 6px 10px; }
+}

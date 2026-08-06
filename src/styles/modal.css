@@ -1,0 +1,56 @@
+/* login.html, login.js - 에러 메시지 팝업 모달 스타일 */
+
+/* 모달 기본 상태 (숨김) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 모달 활성화 상태 (중앙 정렬) */
+.modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 모달 팝업 박스 */
+.modal-content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 모달 메시지 텍스트 */
+.modal-content p {
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 모달 확인 버튼 */
+.modal-btn {
+  background-color: #3692FF;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 버튼 호버 상태 */
+.modal-btn:hover {
+  background-color: #2980ff;
+}

@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Article {
+  id        String    @id @default(uuid())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  comments  Comment[]
+
+  @@index([createdAt])
+}
+
+model Product {
+  id            String    @id @default(uuid())
+  name          String
+  description   String
+  price         Int
+  tags          String[]  @default([])
+  images        String[]  @default([])
+  favoriteCount Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  comments      Comment[]
+
+  @@index([createdAt])
+  @@index([favoriteCount])
+}
+
+// 자유게시판(article)과 중고마켓(product) 댓글을 함께 담되,
+// 둘 중 하나에만 연결되도록 라우트에서 보장한다.
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  articleId String?
+  article   Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([articleId, createdAt])
+  @@index([productId, createdAt])
+}
