@@ -1,9 +1,16 @@
-import logo from '@/assets/ic_logo.png';
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import logo from '@/assets/ic_logo.png';
 import styles from './Header.module.css';
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHomePage =
+    pathname === '/';
+  
   return (
     <header className={styles.headerWrapper}>
       <div className={styles.headerLeft}>
@@ -17,14 +24,16 @@ export default function Header() {
           />
           <span className={styles.logoTitle}>판다마켓</span>
         </Link>
-        <nav className={styles.nav}>
-          <Link href='/articles' className={styles.navLink}>
-            자유게시판
-          </Link>
-          <Link href='/products' className={styles.navLink}>
-            중고마켓
-          </Link>
-        </nav>
+        {!isHomePage && (
+          <nav className={styles.nav}>
+            <Link href='/articles' className={styles.navLink}>
+              자유게시판
+            </Link>
+            <Link href='/products' className={styles.navLink}>
+              중고마켓
+            </Link>
+          </nav>
+        )}
       </div>
       <Link href='/signin' className={styles.signinLink}>
         로그인

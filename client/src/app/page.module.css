@@ -1,0 +1,101 @@
+.wrapper {
+  white-space: nowrap;
+}
+
+.heroTop {
+  height: 540px;
+  padding-top: 200px;
+  background-color: #CFE5FF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+.heroTopContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.heroTopTitle {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--secondary-700);
+  line-height: 140%;
+}
+
+.heroTopLink {
+  height: 56px;
+  padding: 16px 124px;
+  margin-bottom: 60px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600px;
+  color: #FFF;
+  background-color: var(--primary-100);
+  border-radius: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 998px;
+  padding: 138px 0;
+  margin: 0 auto;
+}
+
+.cardContent {
+  height: 444px;
+  background-color: #FCFCFC;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+}
+
+.cardLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-100);
+}
+
+.cardTitle {
+  margin: 12px 0 24px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 0.8px;
+  color: var(--secondary-700);
+}
+
+.cardDesc {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  color: var(--secondary-700);
+}
+
+.search {
+  text-align: right;
+}
+
+.heroBottom {
+  padding-top: 143px;
+  background-color: #CFE5FF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 69px;
+}
+
+.heroBottomTitle {
+  padding-bottom: 60px;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--secondary-700);
+  line-height: 140%;
+}

@@ -19,7 +19,11 @@ export default function RootLayout({ children }) {
     <html lang='ko'>
       <body className={pretendard.variable}>
         <Header />
-        <main className='main'>{children}</main>
+        <main className='main'>
+          <div>
+            {children}
+          </div>
+        </main>
         <Footer />
       </body>
     </html>

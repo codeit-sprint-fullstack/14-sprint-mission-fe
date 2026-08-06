@@ -35,7 +35,5 @@ body {
 }
 
 .main {
-  width: 1200px;
-  height: 1200px;
-  margin: 90px auto 0;
+  margin-top: 70px;
 }
