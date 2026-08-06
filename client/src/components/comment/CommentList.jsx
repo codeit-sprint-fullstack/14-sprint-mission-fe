@@ -3,7 +3,7 @@ import CommentCard from './CommentCard';
 import commentEmptyImg from '@/assets/img_reply_empty.png';
 import styles from './CommentList.module.css';
 
-export default function CommentList({ comments = [] }) {
+export default function CommentList({ articleId, comments = [] }) {
   if (comments.length === 0) {
     return (
       <div className={styles.emptyComment}>
@@ -27,7 +27,7 @@ export default function CommentList({ comments = [] }) {
     <ul className={styles.commentList}>
       {comments.map((comment) => (
         <li key={comment.id}>
-          <CommentCard comment={comment} />
+          <CommentCard articleId={articleId} comment={comment} />
         </li>
       ))}
     </ul>

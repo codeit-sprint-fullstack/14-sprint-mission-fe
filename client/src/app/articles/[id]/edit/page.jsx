@@ -1,4 +1,4 @@
-import ArticleForm from '@/components/form/ArticleForm';
+import ArticleForm from '@/components/article/ArticleForm';
 import { updateArticle } from '@/actions/articleActions';
 
 export default async function EditArticle({ params }) {
@@ -14,8 +14,10 @@ export default async function EditArticle({ params }) {
 
   const article = await res.json();
 
-  // AI로 문제 해결: updateArticle을 바로 호출해 FormData가 전달되지 않던 문제
-  // Server Action에 id만 미리 전달하도록 bind 사용
+  // AI로 문제 해결
+  // 문제: 게시글 수정 함수는 articleId, formData 두 가지 값이 필요
+  //      formData는 form이 자동적으로 전달, articleId는 미리 연결해야 함
+  // 해결: Server Action에 articleId를 미리 전달하도록 bind 사용
   const updateArticleWithId = updateArticle.bind(null, id);
 
   return (

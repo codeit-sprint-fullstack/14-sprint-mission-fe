@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Textarea from './Textarea';
-import SubmitButton from './SubmitButton';
+import Textarea from '../form/Textarea';
+import SubmitButton from '../form/SubmitButton';
 import styles from './CommentForm.module.css';
 
 export default function CommentForm({ action }) {

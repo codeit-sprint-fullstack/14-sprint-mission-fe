@@ -3,10 +3,10 @@ import { createComment } from '@/actions/commentActions';
 import { deleteArticle } from '@/actions/articleActions';
 import formatDate from '@/utils/formatDate';
 import EditDeleteMenu from '@/components/EditDeleteMenu';
-import CommentForm from '@/components/form/CommentForm';
+import CommentForm from '@/components/comment/CommentForm';
 import CommentList from '@/components/comment/CommentList';
-import profileIcon from '@/assets/ic_profile.png';
 import BackLink from '@/components/BackLink';
+import profileIcon from '@/assets/ic_profile.png';
 import heartIcon from '@/assets/ic_heart.png';
 import styles from './page.module.css';
 
@@ -31,12 +31,13 @@ export default async function ArticleDetail({ params }) {
   }
   const comments = await commentRes.json();
 
-  // 댓글 생성할 게시글 ID를 Server Action에 미리 전달
+  // 문제: 
   const createCommentWithArticleId =
     createComment.bind(null, id);
 
-  // 삭제할 게시글 ID를 Server Action에 미리 전달
-  const deleteArticleWithId =
+  // 문제: onDelete?.() 전달받은 함수를 실행하는 구조 (articleId는 모른채)
+  // 해결: Server Action에 articleId를 미리 전달하도록 bind 사용
+  const deleteArticleWithArticleId =
     deleteArticle.bind(null, id);
 
   return (
@@ -48,7 +49,7 @@ export default async function ArticleDetail({ params }) {
           </h1>
           <EditDeleteMenu 
             editHref={`/articles/${article.id}/edit`}
-            onDelete={deleteArticleWithId}
+            onDelete={deleteArticleWithArticleId}
           />
         </div>
         <div className={styles.info}>
@@ -90,7 +91,7 @@ export default async function ArticleDetail({ params }) {
       </section>
 
       <section className={styles.commentListSection}>
-        <CommentList comments={comments} />
+        <CommentList articleId={id} comments={comments} />
         <div className={styles.backLink}>
           <BackLink />
         </div>
