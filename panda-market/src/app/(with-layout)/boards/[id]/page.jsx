@@ -1,6 +1,6 @@
 'use client'
 
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,17 +9,22 @@ import CommentCard from '@/components/CommentCard'
 import styles from '@/app/(with-layout)/boards/[id]/articleDetailPage.module.css'
 
 function ArticleDetailPage() {
+  const router = useRouter()
   const { id: articleId } = useParams()
+
   const [article, setArticle] = useState(null)
   const [comments, setComments] = useState([])
-  const [commentContent, setCommnetContent] = useState('')
+  const [commentContent, setCommentContent] = useState('')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const articleURL = `/api/articles/${articleId}`
 
   useEffect(() => {
     if (!articleId) return
 
     async function getArticle() {
       try {
-        const res = await fetch(`/api/articles/${articleId}`)
+        const res = await fetch(articleURL)
         const data = await res.json()
 
         if (!res.ok) {
@@ -36,32 +41,120 @@ function ArticleDetailPage() {
     getArticle()
   }, [articleId])
 
+  function handleMenuToggle() {
+    setIsMenuOpen((prev) => !prev)
+  }
+
+  async function getComments() {
+    try {
+      const res = await fetch(`${articleURL}/comments`)
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.message)
+      }
+
+      setComments(data.list)
+    } catch (error) {
+      console.error(error)
+      alert('댓글을 불러오지 못했습니다.')
+    }
+  }
+
   useEffect(() => {
     if (!articleId) return
-
-    async function getComments() {
-      try {
-        const res = await fetch(`/api/articles/${articleId}/comments`)
-        const data = await res.json()
-
-        if (!res.ok) {
-          throw new Error(data.message)
-        }
-
-        setComments(data.list)
-      } catch (error) {
-        console.error(error)
-        alert('댓글을 불러오지 못했습니다.')
-      }
-    }
 
     getComments()
   }, [articleId])
 
+  async function onDeleteArticle() {
+    const isConfirmed = window.confirm('게시글을 삭제하시겠습니까?')
+
+    if (!isConfirmed) return
+
+    try {
+      const res = await fetch(articleURL, {
+        method: 'DELETE',
+      })
+
+      const result = await res.json()
+
+      if (!res.ok) {
+        throw new Error(result.message)
+      }
+
+      router.push('/boards')
+    } catch (error) {
+      console.error(error)
+      alert('게시글 삭제에 실패했습니다.')
+    }
+  }
+
+  async function onSubmitComment(e) {
+    e.preventDefault()
+
+    if (!commentContent.trim()) return
+
+    try {
+      const res = await fetch(`${articleURL}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: commentContent.trim(),
+        }),
+      })
+
+      const result = await res.json()
+
+      if (!res.ok) {
+        throw new Error(result.message)
+      }
+
+      setCommentContent('')
+      await getComments()
+    } catch (error) {
+      console.error(error)
+      alert('댓글 등록에 실패했습니다.')
+    }
+  }
+
   return (
     <main className={styles.articleDetailPage}>
       <article className={styles.articleSection}>
-        <p className={styles.articleTitle}>{article?.title}</p>
+        <div className={styles.articleHandler}>
+          <p className={styles.articleTitle}>{article?.title}</p>
+          <div className={styles.articleMenu}>
+            <button
+              className={styles.articleMenuButton}
+              type="button"
+              onClick={handleMenuToggle}
+              aria-label="게시글 메뉴 열기"
+              aria-expanded={isMenuOpen}
+            >
+              <Image src="/ic_kebab.svg" alt="" width={24} height={24} />
+            </button>
+
+            {isMenuOpen && (
+              <div className={styles.articleMenuDropdown}>
+                <Link
+                  className={styles.updateArticleButton}
+                  href={`/boards/write?id=${articleId}`}
+                >
+                  수정하기
+                </Link>
+                <button
+                  className={styles.deleteArticleButton}
+                  type="button"
+                  onClick={onDeleteArticle}
+                >
+                  삭제하기
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
         <div className={styles.articleMeta}>
           <div className={styles.articleUser}>
             <Image
@@ -93,21 +186,25 @@ function ArticleDetailPage() {
           <p className={styles.articleContent}>{article?.content}</p>
         </div>
       </article>
-      <section className={styles.commentRegistrationSection}>
+      <form
+        className={styles.commentRegistrationSection}
+        onSubmit={onSubmitComment}
+      >
         <h3 className={styles.commentRegistrationSectionLabel}>댓글달기</h3>
         <textarea
           className={styles.commentRegistrationcontent}
           value={commentContent}
-          onChange={(e) => setCommnetContent(e.target.value)}
+          onChange={(e) => setCommentContent(e.target.value)}
           placeholder="댓글을 입력해주세요."
         />
         <button
           className={styles.commentRegistrationButton}
+          type="submit"
           disabled={!commentContent.trim()}
         >
           등록
         </button>
-      </section>
+      </form>
       {comments.length === 0 ? (
         <section className={styles.emptyCommentSection}>
           <Image
@@ -126,7 +223,11 @@ function ArticleDetailPage() {
         <section className={styles.commentsSection}>
           <div className={styles.commentsList}>
             {comments.map((comment) => (
-              <CommentCard key={comment.id} comment={comment} />
+              <CommentCard
+                key={comment.id}
+                comment={comment}
+                getComments={getComments}
+              />
             ))}
           </div>
         </section>

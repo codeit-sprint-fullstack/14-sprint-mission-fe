@@ -97,3 +97,46 @@ export async function PATCH(req, { params }) {
     )
   }
 }
+
+export async function DELETE(req, { params }) {
+  try {
+    const { id } = await params
+
+    const targetArticle = await prisma.article.findUnique({
+      where: { id },
+    })
+
+    if (!targetArticle) {
+      return Response.json(
+        {
+          message: 'Article not found.',
+          code: 'ARTICLE_NOT_FOUND',
+        },
+        {
+          status: 404,
+        },
+      )
+    }
+
+    await prisma.article.delete({
+      where: { id },
+    })
+
+    return Response.json({
+      message: 'Article deleted successfully.',
+      code: 'DELETE_ARTICLE_SUCCESS',
+    })
+  } catch (error) {
+    console.error(error)
+
+    return Response.json(
+      {
+        message: 'Failed to delete article.',
+        code: 'DELETE_ARTICLE_FAILED',
+      },
+      {
+        status: 500,
+      },
+    )
+  }
+}
