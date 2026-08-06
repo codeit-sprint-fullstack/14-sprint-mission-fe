@@ -3,3 +3,83 @@
   margin: 0 auto;
   padding: 24px 16px;
 }
+
+.articleList {
+  list-style: none;  
+  padding: 0;
+  margin: 0;
+}
+
+.articleItem {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e7eb;   
+}
+
+.articleItem a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-decoration: none; 
+  color: inherit;       
+}
+
+.articleTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.articleMeta {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: #6b7280; 
+}
+
+.thumbnail {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;  
+}
+
+.bestList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  display: flex;
+  gap: 16px;  
+}
+
+.bestItem {
+  flex: 1;   
+  background-color: #f0f4fc;   
+  border-radius: 8px;
+  padding: 16px 24px;
+}
+
+.bestItem a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.bestBadge {
+  display: inline-block;
+  background-color: #3b82f6; 
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 0 0 12px 12px;
+  margin-bottom: 16px;
+}
+
+.bestTitle {
+  font-size: 18px;
+  font-weight: 600;
+}

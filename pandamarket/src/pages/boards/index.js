@@ -44,10 +44,13 @@ export default function BoardList() {
   return (
     <div className={styles.container}>
       <h2>베스트 게시글</h2>
-      <ul>
+      <ul className={styles.bestList}>
         {bestArticles.map((article) => (
-          <li key={article.id}>
-            <Link href={`/boards/${article.id}`}>{article.title}</Link>
+          <li key={article.id} className={styles.bestItem}>
+            <Link href={`/boards/${article.id}`}>
+              <span className={styles.bestBadge}>🏆 Best</span>
+              <p className={styles.bestTitle}>{article.title}</p>
+            </Link>
           </li>
         ))}
       </ul>
@@ -64,15 +67,19 @@ export default function BoardList() {
         onChange={(e) => setKeyword(e.target.value)}
       />
       <button><Link href="/boards/write">글쓰기</Link></button>
-      <ul>
+      <ul className={styles.articleList}>
         {articles.map((article) => (
-          <li key={article.id}>
+          <li key={article.id} className={styles.articleItem}>
             <Link href={`/boards/${article.id}`}>
-              <img src={DUMMY_IMAGE} width="80" height="80" alt="" />
-              <p>{article.title}</p>
-              <span>{getDummyNickname()}</span>
-              <span>좋아요 {getDummyLikes()}</span>
-              <span>{formatDate(article.createdAt)}</span>
+              <div>
+                <p className={styles.articleTitle}>{article.title}</p>
+                <div className={styles.articleMeta}>
+                  <span>{getDummyNickname()}</span>
+                  <span>{formatDate(article.createdAt)}</span>
+                  <span>♡ {getDummyLikes()}</span>
+                </div>
+              </div>
+              <img className={styles.thumbnail} src={DUMMY_IMAGE} alt="" />
             </Link>
           </li>
         ))}
