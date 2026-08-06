@@ -1,0 +1,452 @@
+.main {
+  width: min(100% - 48px, 1200px);
+  flex: 1;
+  margin: 0 auto;
+  padding: 40px 0 96px;
+}
+
+.article {
+  position: relative;
+}
+
+.header {
+  position: relative;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  margin: 0 56px 16px 0;
+  color: var(--Cool-Gray-800, #1f2937);
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.articleMenu,
+.commentMenu {
+  position: absolute;
+  z-index: 2;
+}
+
+.articleMenu {
+  top: -8px;
+  right: 0;
+}
+
+.articleMenu summary,
+.commentMenu summary {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.articleMenu summary::-webkit-details-marker,
+.commentMenu summary::-webkit-details-marker {
+  display: none;
+}
+
+.menuPanel {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  overflow: hidden;
+  width: 144px;
+  border: 1px solid var(--Cool-Gray-300, #d1d5db);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(17 24 39 / 8%);
+}
+
+.menuPanel a,
+.menuPanel button {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: #fff;
+  color: var(--Secondary-500, #6b7280);
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.menuPanel a + button,
+.menuPanel button + button {
+  border-top: 1px solid #f3f4f6;
+}
+
+.metadataRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.author {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+}
+
+.authorDetails {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nickname {
+  color: var(--Secondary-600, #4b5563);
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.date {
+  color: var(--Cool-Gray-400, #9ca3af);
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.metadataDivider {
+  width: 1px;
+  height: 34px;
+  flex: 0 0 1px;
+}
+
+.like {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-left: 0;
+  padding: 4px 12px;
+  border: 1px solid var(--Secondary-200, #e5e7eb);
+  border-radius: 35px;
+  background: #fff;
+  color: var(--Cool-Gray-500, #6b7280);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.content {
+  min-height: 120px;
+  margin: 0;
+  padding: 32px 0;
+  color: var(--Secondary-800, #1f2937);
+  font-family: "Pretendard", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.commentsSection {
+  margin-top: 8px;
+}
+
+.commentsHeading {
+  margin: 0 0 16px;
+  color: var(--Cool-Gray-900, #111827);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.commentForm textarea,
+.editForm textarea {
+  width: 100%;
+  min-height: 104px;
+  border: 0;
+  border-radius: 8px;
+  background: #f3f4f6;
+  padding: 16px;
+  color: #111827;
+  outline-color: #3692ff;
+  resize: vertical;
+}
+
+.commentForm textarea {
+  max-width: 1200px;
+  height: 104px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100, #f3f4f6);
+  color: var(--Secondary-800, #1f2937);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  resize: none;
+}
+
+.commentForm textarea::placeholder {
+  color: var(--Secondary-400, #9ca3af);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  opacity: 1;
+}
+
+.commentForm button,
+.editActions button {
+  min-width: 88px;
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: #3692ff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.commentForm button {
+  display: flex;
+  height: 42px;
+  min-width: 0;
+  min-height: 0;
+  padding: 12px 23px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--brand-blue, #3692ff);
+  color: var(--Cool-Gray-100, #f3f4f6);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.commentForm button:disabled,
+.editActions button:disabled {
+  background: var(--Cool-Gray-400, #9ca3af);
+  cursor: not-allowed;
+}
+
+.error {
+  margin: 16px 0 0;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.commentItem {
+  position: relative;
+  min-height: 0;
+  padding: 0 52px 12px 0;
+  border-bottom: 1px solid var(--Secondary-300, #e5e7eb);
+  background: #fcfcfc;
+}
+
+.commentContent {
+  margin: 0 0 24px;
+  color: var(--Secondary-800, #1f2937);
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.commentMetadata {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.commentAuthorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.commentMetadata span {
+  color: var(--Secondary-600, #4b5563);
+}
+
+.commentMetadata time {
+  color: var(--Secondary-400, #9ca3af);
+}
+
+.commentAvatar {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+}
+
+.commentMenu {
+  top: 8px;
+  right: 0;
+}
+
+.editForm {
+  display: grid;
+  gap: 12px;
+}
+
+.editActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.editActions button:first-child {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #4b5563;
+}
+
+.emptyComments {
+  display: flex;
+  min-height: 260px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--Secondary-400, #9ca3af);
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.emptyComments p {
+  margin: 0;
+}
+
+.emptyImage {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 16px;
+  object-fit: contain;
+}
+
+.backLink {
+  display: flex;
+  width: 240px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 48px auto 0;
+  padding: 12px 24px;
+  border-radius: 40px;
+  background: var(--Primary-100, #3692ff);
+  color: var(--Cool-Gray-100, #f3f4f6);
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+@media (max-width: 767px) {
+  .main {
+    width: calc(100% - 32px);
+    padding-top: 32px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .menuPanel a,
+  .menuPanel button {
+    display: flex;
+    min-height: 0;
+    padding: 16px 0 12px;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    gap: 10px;
+    color: var(--Secondary-500, #6b7280);
+    text-align: center;
+    font-family: "Pretendard", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .metadataRow {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .like {
+    height: 32px;
+    padding: 4px 12px;
+    align-items: center;
+    gap: 4px;
+    margin-left: 0;
+  }
+
+  .like svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .commentItem {
+    padding-right: 44px;
+  }
+
+  .menuPanel {
+    width: 120px;
+  }
+}
