@@ -5,12 +5,14 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import formatDate from '@/utils/formatDate'
+import CommentCard from '@/components/CommentCard'
 import styles from '@/app/(with-layout)/boards/[id]/articleDetailPage.module.css'
 
 function ArticleDetailPage() {
   const { id: articleId } = useParams()
   const [article, setArticle] = useState(null)
   const [comments, setComments] = useState([])
+  const [commentContent, setCommnetContent] = useState('')
 
   useEffect(() => {
     if (!articleId) return
@@ -58,7 +60,7 @@ function ArticleDetailPage() {
 
   return (
     <main className={styles.articleDetailPage}>
-      <section className={styles.articleSection}>
+      <article className={styles.articleSection}>
         <p className={styles.articleTitle}>{article?.title}</p>
         <div className={styles.articleMeta}>
           <div className={styles.articleUser}>
@@ -82,6 +84,7 @@ function ArticleDetailPage() {
             <Image
               className={styles.emptyHeartIcon}
               src="/ic_empty_heart.svg"
+              alt=""
               width={32}
               height={32}
             />
@@ -89,36 +92,50 @@ function ArticleDetailPage() {
           </div>
           <p className={styles.articleContent}>{article?.content}</p>
         </div>
-      </section>
+      </article>
       <section className={styles.commentRegistrationSection}>
         <h3 className={styles.commentRegistrationSectionLabel}>댓글달기</h3>
         <textarea
           className={styles.commentRegistrationcontent}
+          value={commentContent}
+          onChange={(e) => setCommnetContent(e.target.value)}
           placeholder="댓글을 입력해주세요."
         />
-        <button className={styles.commentRegistrationButton}>등록</button>
+        <button
+          className={styles.commentRegistrationButton}
+          disabled={!commentContent.trim()}
+        >
+          등록
+        </button>
       </section>
-      <section className={styles.emptyCommentSection}>
-        <Image
-          className={styles.emptyCommentImg}
-          src="/img_reply_empty.png"
-          alt=""
-          width={140}
-          height={140}
-        />
-        <p className={styles.emptyCommentMessage}>
-          아직 댓글이 없어요, <br />
-          지금 댓글을 달아보세요!
-        </p>
-      </section>
-      <section className={styles.commentsSection}>
-        <div className={styles.commentsList}>댓글카드 컴포넌트 자리</div>
-      </section>
+      {comments.length === 0 ? (
+        <section className={styles.emptyCommentSection}>
+          <Image
+            className={styles.emptyCommentImg}
+            src="/img_reply_empty.png"
+            alt=""
+            width={140}
+            height={140}
+          />
+          <p className={styles.emptyCommentMessage}>
+            아직 댓글이 없어요, <br />
+            지금 댓글을 달아보세요!
+          </p>
+        </section>
+      ) : (
+        <section className={styles.commentsSection}>
+          <div className={styles.commentsList}>
+            {comments.map((comment) => (
+              <CommentCard key={comment.id} comment={comment} />
+            ))}
+          </div>
+        </section>
+      )}
       <Link className={styles.goBackBoardButton} href="/boards">
-        <span className={styles.goBackBoeardText}>목록으로 돌아가기</span>
+        <span className={styles.goBackBoardText}>목록으로 돌아가기</span>
         <Image
           className={styles.backIcon}
-          src="ic_back.svg"
+          src="/ic_back.svg"
           alt=""
           width={24}
           height={24}

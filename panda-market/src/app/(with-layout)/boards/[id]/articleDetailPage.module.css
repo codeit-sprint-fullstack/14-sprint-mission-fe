@@ -153,7 +153,7 @@
   border-radius: 8px;
   cursor: pointer;
 
-  background: var(--Primary-100);
+  background: var(--brand-blue);
   color: var(--Cool-Gray-100);
   font-family: inherit;
   font-size: 16px;
@@ -217,15 +217,11 @@
 
   border-radius: 40px;
 
-  background: var(--Primary-100);
+  background: var(--brand-blue);
   color: var(--Cool-Gray-100);
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
   text-align: center;
   text-decoration: none;
-}
-
-.goBackBoardButton::after {
-  content: '목록으로 돌아가기';
 }
