@@ -1,4 +1,3 @@
-// pages/boards/index.js
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from '@/lib/axios';
