@@ -1,0 +1,231 @@
+.articleDetailPage {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 80px 20px 160px;
+}
+
+.articleSection {
+  width: 100%;
+}
+
+.articleTitle {
+  margin: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--Cool-Gray-200);
+
+  color: var(--Cool-Gray-800);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.articleMeta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  row-gap: 24px;
+  padding-top: 16px;
+}
+
+.articleUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.articleUserProfile {
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.articleUserInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.articleUserNickname {
+  color: var(--Cool-Gray-600);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.articleCreatedAt {
+  color: var(--Cool-Gray-400);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.articleFavoriteChip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 70px;
+  height: 40px;
+  padding: 4px 12px;
+
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 999px;
+}
+
+.emptyHeartIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.articleFavoriteCount {
+  color: var(--Cool-Gray-500);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.articleContent {
+  grid-column: 1 / -1;
+
+  min-height: 160px;
+  margin: 0;
+  padding: 24px 0 32px;
+  border-bottom: 1px solid var(--Cool-Gray-200);
+
+  color: var(--Cool-Gray-700);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.commentRegistrationSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+.commentRegistrationSectionLabel {
+  align-self: flex-start;
+
+  margin: 0 0 16px;
+  color: var(--Cool-Gray-800);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.commentRegistrationcontent {
+  width: 100%;
+  min-height: 104px;
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  resize: none;
+
+  background: var(--Cool-Gray-100);
+  color: var(--Cool-Gray-800);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.commentRegistrationcontent::placeholder {
+  color: var(--Cool-Gray-400);
+}
+
+.commentRegistrationcontent:focus {
+  outline: 1px solid var(--Primary-100);
+}
+
+.commentRegistrationButton {
+  min-width: 74px;
+  height: 42px;
+  margin-top: 16px;
+  padding: 0 20px;
+
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  background: var(--Primary-100);
+  color: var(--Cool-Gray-100);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.commentRegistrationButton:disabled {
+  cursor: default;
+  background: var(--Cool-Gray-400);
+  color: var(--Cool-Gray-100);
+}
+
+.emptyCommentSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 360px;
+  padding: 56px 0;
+}
+
+.emptyCommentImg {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.emptyCommentMessage {
+  margin: 24px 0 0;
+
+  color: var(--Cool-Gray-400);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: center;
+}
+
+.commentsSection {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  min-height: 240px;
+  color: var(--Cool-Gray-500);
+}
+
+.goBackBoardButton {
+  display: block;
+  width: fit-content;
+  min-width: 240px;
+  height: 48px;
+  margin: 48px auto 0;
+  padding: 12px 24px;
+
+  border-radius: 40px;
+
+  background: var(--Primary-100);
+  color: var(--Cool-Gray-100);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.goBackBoardButton::after {
+  content: '목록으로 돌아가기';
+}
