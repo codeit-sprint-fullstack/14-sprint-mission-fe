@@ -22,8 +22,8 @@ export default function BoardListItem({ id, title, nickname, createdAt }) {
             <Image
               src="/images/default_profile.png"
               alt="작성자 기본 프로필 이미지"
-              width={10}
-              height={10}
+              width={18}
+              height={18}
             />
 
             <span className={styles.nickname}>{nickname}</span>
@@ -38,7 +38,7 @@ export default function BoardListItem({ id, title, nickname, createdAt }) {
               height={15}
             />
 
-            <span>9999+</span>
+            <span className={styles.likeCount}>9999+</span>
           </div>
         </div>
       </article>

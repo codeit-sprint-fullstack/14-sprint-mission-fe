@@ -1,3 +1,10 @@
+.boardList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 500px;
+}
+
 .page {
   max-width: 770px;
   margin: 20px auto 150px;
@@ -15,4 +22,81 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+}
+
+.normalBoardSection {
+  margin-top: 30px;
+}
+
+.boardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.boardTitle {
+  margin: 0;
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.writeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 28px;
+  border-radius: 6px;
+  background-color: #3692ff;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.searchArea {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.searchBox {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 20px;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+}
+
+.searchInput {
+  flex: 1;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #1f2937;
+  font-size: 10px;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.sortSelect {
+  width: 90px;
+  height: 30px;
+  padding: 5px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1f2937;
+  font-size: 12px;
+  cursor: pointer;
 }
