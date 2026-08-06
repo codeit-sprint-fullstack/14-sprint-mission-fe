@@ -13,21 +13,19 @@ function WritePage() {
   const [articleContent, setArticleContent] = useState('')
 
   useEffect(() => {
-    if (!articleId) {
-      return
-    }
+    if (!articleId) return
 
     async function getArticle() {
       try {
         const res = await fetch(`/api/articles/${articleId}`)
-        const article = await res.json()
+        const data = await res.json()
 
         if (!res.ok) {
-          throw new Error(article.message)
+          throw new Error(data.message)
         }
 
-        setArticleTitle(article.title)
-        setArticleContent(article.content)
+        setArticleTitle(data.title)
+        setArticleContent(data.content)
       } catch (error) {
         console.error(error)
         alert('게시글을 불러오지 못했습니다.')
