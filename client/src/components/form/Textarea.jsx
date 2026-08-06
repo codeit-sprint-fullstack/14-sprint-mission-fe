@@ -1,16 +1,22 @@
 import styles from './Textarea.module.css';
 
 export default function Textarea({ label, id, placeholder, value, onChange, variant = 'default' }) {
+  const labelClassName = `
+   ${styles.label}
+   ${variant === 'editComment' ? styles.editLabel : ''}
+  `;
+  
   const inputClassName = `
     ${styles.input}
-    ${variant === 'comment' ? styles.commentInput : ''}
+    ${variant === 'createComment' ? styles.createComment : '' }
+    ${variant === 'editComment' ? styles.editComment : '' }
   `;
 
   return (
     <div className={styles.wrapper}>
       <label 
         htmlFor={id} 
-        className={styles.label}
+        className={labelClassName}
       >
         {label}
       </label>

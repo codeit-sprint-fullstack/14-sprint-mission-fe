@@ -10,6 +10,10 @@
   font-weight: 700;
 }
 
+.editLabel {
+  font-size: 16px;
+}
+
 .input {
   height: 282px;
   padding: 16px 24px;
@@ -31,7 +35,14 @@
   border: 1px solid var(--primary-100);
 }
 
-.commentInput {
+.createComment {
   height: 104px;
   margin-bottom: 16px;
+}
+
+.editComment {
+  height: 80px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--secondary-800)
 }

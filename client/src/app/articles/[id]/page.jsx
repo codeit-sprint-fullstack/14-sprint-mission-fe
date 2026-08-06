@@ -87,11 +87,18 @@ export default async function ArticleDetail({ params }) {
       </section>
 
       <section className={styles.commentFormSection}>
-        <CommentForm action={createCommentWithArticleId}/>
+        <CommentForm 
+          action={createCommentWithArticleId}
+          label='댓글 달기'
+          variant='createComment'
+        />
       </section>
 
-      <section className={styles.commentListSection}>
-        <CommentList articleId={id} comments={comments} />
+      <section>
+        <CommentList 
+          articleId={id} 
+          comments={comments}
+        />
         <div className={styles.backLink}>
           <BackLink />
         </div>

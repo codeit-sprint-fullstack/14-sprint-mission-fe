@@ -7,59 +7,42 @@ import formatTime from '@/utils/formatTime';
 import EditDeleteMenu from '../EditDeleteMenu';
 import profileIcon from '@/assets/ic_profile.png';
 import styles from './CommentCard.module.css';
+import CommentForm from './CommentForm';
 
 export default function CommentCard({ articleId, comment }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedComment, setEditedComment] = useState(comment.content);
-  const updateCommentWithIds =
-    updateComment.bind(null, articleId, comment.id);
 
   async function handleDeleteComment() {
     await deleteComment(articleId, comment.id);
   }
 
-  async function handleUpdateComment(formData) {
-    await updateCommentWithIds(formData);
-    setIsEditing(false);
-  }
-
-  function handleEditCancle() {
-    setEditedComment(comment.content);
-    setIsEditing(false);
-  }
+  // 수정할 댓글에 해당하는 게시글 ID, 댓글 ID 미리 전달
+  const updateCommentWithIds =
+    updateComment.bind(null, articleId, comment.id);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         {isEditing ? (
-          <form action={handleUpdateComment}>
-            <textarea 
-              name='content'
-              value={editedComment}
-              onChange={(e) => setEditedComment(e.target.value)}
-            />
-            <button 
-              type='button'
-              onClick={handleEditCancle}
-            >
-              취소
-            </button>
-            <button 
-              type='submit'
-              disabled={!editedComment.trim()}
-            >
-              등록
-            </button>
-          </form>
+          <CommentForm
+            action={updateCommentWithIds}
+            initialContent={comment.content}
+            submitBtnText='수정 완료'
+            onSuccess={() => setIsEditing(false)}
+            onCancel={() => setIsEditing(false)}
+            variant='editComment'
+          />
         ) : (
           <p className={styles.content}>
             {comment.content}
           </p>
         )}
-        <EditDeleteMenu
-          onEdit={() => setIsEditing(true)}
-          onDelete={handleDeleteComment}
-        />
+        {!isEditing && (
+          <EditDeleteMenu
+            onEdit={() => setIsEditing(true)}
+            onDelete={handleDeleteComment}
+          />
+        )}
       </div>
       <div className={styles.info}>
         <Image
