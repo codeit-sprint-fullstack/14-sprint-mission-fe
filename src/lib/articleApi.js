@@ -35,6 +35,38 @@ export async function getArticle(id) {
   return res.json();
 }
 
+export async function createArticle(title, content) {
+  const res = await fetch(`${API_BASE_URL}/articles`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title, content }),
+  });
+
+  if (!res.ok) {
+    throw new Error("게시글을 등록하지 못했습니다.");
+  }
+
+  return res.json();
+}
+
+export async function updateArticle(articleId, title, content) {
+  const res = await fetch(`${API_BASE_URL}/articles/${articleId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title, content }),
+  });
+
+  if (!res.ok) {
+    throw new Error("게시글을 수정하지 못했습니다.");
+  }
+
+  return res.json();
+}
+
 export async function deleteArticle(articleId) {
   const res = await fetch(`${API_BASE_URL}/articles/${articleId}`, {
     method: "DELETE",
