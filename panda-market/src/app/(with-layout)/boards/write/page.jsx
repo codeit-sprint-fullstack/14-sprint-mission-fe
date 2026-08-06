@@ -41,9 +41,7 @@ function WritePage() {
   async function onArticleSubmit(e) {
     e.preventDefault()
 
-    if (!canSubmitArticle) {
-      return
-    }
+    if (!canSubmitArticle) return
 
     try {
       const url = articleId ? `/api/articles/${articleId}` : '/api/articles'
