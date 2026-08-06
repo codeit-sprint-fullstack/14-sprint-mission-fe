@@ -1,39 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Footer from "@/components/Footer";
-import Gnb from "@/components/gnb";
+import Footer from "@/components/Footer.jsx";
+import Gnb from "@/components/gnb.jsx";
 import style from "@/styles/create.module.css";
 
-export default function CreateNotice() {
+export default function EditNotice() {
   const router = useRouter();
+  const { id } = router.query;
+
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const isDisabled = title.trim() === "" || content.trim() === "" || author.trim() === "";
 
+  useEffect(() => {
+    if (id) {
+      fetch(`/api/notice/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setAuthor(data.author);
+          setTitle(data.title);
+          setContent(data.content);
+        });
+    }
+  }, [id]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/notice/create", {
-        method: "POST",
+      const res = await fetch(`/api/notice/${id}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ author, title, content }),
       });
 
       if (res.ok) {
-        const newNotice = await res.json();
-        alert("게시글이 등록되었습니다!");
-        router.push(`/notice/${newNotice.id}`);
+        alert("게시글이 수정되었습니다!");
+        router.push(`/notice/${id}`);
       } else {
         const err = await res.json();
-        alert("등록 실패: " + err.error);
+        alert("수정 실패: " + err.error);
       }
     } catch (error) {
-      console.error("등록 에러:", error);
+      console.error("수정 에러:", error);
     }
   };
-
 
   return (
     <>
@@ -42,9 +54,9 @@ export default function CreateNotice() {
         <div className={style.wrap}>
           <div className={style.content_wrap}>
             <div className={style.content_head}>
-              <span>게시글 쓰기</span>
+              <span>게시글 수정</span>
               <button disabled={isDisabled} onClick={handleSubmit}>
-                <span>등록</span>
+                <span>저장</span>
               </button>
             </div>
             <form onSubmit={handleSubmit}>
@@ -82,4 +94,3 @@ export default function CreateNotice() {
     </>
   );
 }
-

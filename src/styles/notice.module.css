@@ -8,6 +8,7 @@
 
 .wrap * {
   display: flex;
+  text-decoration: none;
 }
 
 .content_wrap {
@@ -40,6 +41,7 @@
   align-items: center;
   width: 100%;
 }
+
 
 .postlist_head button {
   height: 42px;

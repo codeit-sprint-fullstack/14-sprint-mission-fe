@@ -74,6 +74,7 @@ export default function Notice() {
                 {bestPosts.map((post) => (
                   <Bestpostcard
                     key={post.id}
+                    id={post.id}
                     title={post.title}
                     author={post.author}
                     likes={post.likes}
@@ -120,6 +121,7 @@ export default function Notice() {
                 {posts.map((post) => (
                   <Postcard
                     key={post.id}
+                    id={post.id}
                     title={post.title}
                     author={post.author}
                     likes={post.likes}

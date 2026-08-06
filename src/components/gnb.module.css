@@ -9,6 +9,7 @@
   height: 70px;
   background: #fff;
   border-bottom: 1px solid #DFDFDF;
+  z-index: 1000;
 }
 
 .logo_navigate_wrap {
