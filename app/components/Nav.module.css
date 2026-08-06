@@ -1,0 +1,33 @@
+.menu {
+  display: flex;
+}
+.menu li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.8rem;
+}
+.menu li a {
+  color: #4b5563;
+  padding: 2.1rem 1.5rem;
+  font-weight: 700;
+}
+.menu li a.active {
+  color: #3692ff;
+}
+
+@media (max-width: 480px) {
+  .menu {
+    gap: 0.8rem;
+  }
+  .menu {
+    gap: 0.8rem;
+  }
+  .menu li {
+    font-size: 1.6rem;
+  }
+  .menu li a {
+    padding: 2.1rem 0;
+  }
+}

@@ -1,0 +1,193 @@
+:root {
+  --color-primary: #3692ff;
+  --color-secondary: #cfe5ff;
+  --color-tertiary: #e6f2ff;
+
+  --color-bg-sub: #ffffff;
+  --color-bg-dark: #111827;
+  --color-bg-grey: #fcfcfc;
+
+  --color-text-point: #3692ff;
+  --color-text-base: #374151;
+  --color-text-dark: #1f2937;
+  --color-text-footer: #e5e7eb;
+  --color-text-inactive: #9ca3af;
+  --color-text-button: #f3f4f6;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+input,
+form,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Pretendard, sans-serif;
+  scrollbar-gutter: stable;
+}
+body {
+  color: var(--color-text-base);
+  font-size: 1.6rem;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+a {
+  text-decoration: none;
+}
+button,
+input {
+  border: 0 none;
+  background-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+textarea {
+  font-family: inherit;
+}
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 94px 0;
+  flex: 1;
+}
+.btStyle {
+  padding: 11px 23px;
+  background-color: #3692ff;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.btStyle.inActive {
+  background-color: #9ca3af;
+}

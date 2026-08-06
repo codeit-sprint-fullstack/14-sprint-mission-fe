@@ -1,0 +1,38 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--color-bg-sub);
+  border-bottom: 1px solid #dfdfdf;
+  z-index: 999;
+}
+.header nav {
+  display: flex;
+  max-width: 1920px;
+  height: 68px;
+  padding: 0 4rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+.header .leftZone {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+@media (max-width: 1024px) {
+  .header nav {
+    padding: 0 2.4rem;
+  }
+}
+@media (max-width: 480px) {
+  .header nav {
+    padding: 0 1.6rem;
+  }
+
+  .header .leftZone h1 img {
+    height: 2.7rem;
+  }
+}
