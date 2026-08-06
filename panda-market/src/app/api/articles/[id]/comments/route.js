@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { parseBoundedInteger, PaginationQueryError } from '@/lib/pagination'
 import { assert } from 'superstruct'
 import { CreateComment } from '@/validators/commentValidator'
 
@@ -9,7 +10,13 @@ export async function GET(req, { params }) {
 
     const cursor = searchParams.get('cursor')
     const limit = searchParams.get('limit')
-    const take = Number(limit) || 10
+
+    const take = parseBoundedInteger(limit, {
+      defaultValue: 10,
+      min: 1,
+      max: 100,
+      parameterName: 'limit',
+    })
 
     const comments = await prisma.comment.findMany({
       where: { articleId },
@@ -18,9 +25,14 @@ export async function GET(req, { params }) {
         content: true,
         createdAt: true,
       },
-      orderBy: {
-        createdAt: 'desc',
-      },
+      orderBy: [
+        {
+          createdAt: 'desc',
+        },
+        {
+          id: 'desc',
+        },
+      ],
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,
       take: take + 1,
@@ -36,6 +48,18 @@ export async function GET(req, { params }) {
     })
   } catch (error) {
     console.error(error)
+
+    if (error instanceof PaginationQueryError) {
+      return Response.json(
+        {
+          message: error.message,
+          code: 'INVALID_PAGINATION_QUERY',
+        },
+        {
+          status: 400,
+        },
+      )
+    }
 
     return Response.json(
       {

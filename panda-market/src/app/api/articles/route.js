@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { parseBoundedInteger, PaginationQueryError } from '@/lib/pagination'
 import { assert } from 'superstruct'
 import { CreateArticle } from '@/validators/articleValidator'
 
@@ -11,15 +12,36 @@ export async function GET(req) {
     const offset = searchParams.get('offset')
     const pageSize = searchParams.get('pageSize')
 
-    const skip = Number(offset) || 0
-    const take = Number(pageSize) || 10
+    const skip = parseBoundedInteger(offset, {
+      defaultValue: 0,
+      min: 0,
+      max: 10000,
+      parameterName: 'offset',
+    })
+
+    const take = parseBoundedInteger(pageSize, {
+      defaultValue: 10,
+      min: 1,
+      max: 100,
+      parameterName: 'pageSize',
+    })
 
     const filter = keyword
       ? {
-          title: {
-            contains: keyword,
-            mode: 'insensitive',
-          },
+          OR: [
+            {
+              title: {
+                contains: keyword,
+                mode: 'insensitive',
+              },
+            },
+            {
+              content: {
+                contains: keyword,
+                mode: 'insensitive',
+              },
+            },
+          ],
         }
       : {}
 
@@ -49,6 +71,18 @@ export async function GET(req) {
     })
   } catch (error) {
     console.error(error)
+
+    if (error instanceof PaginationQueryError) {
+      return Response.json(
+        {
+          message: error.message,
+          code: 'INVALID_PAGINATION_QUERY',
+        },
+        {
+          status: 400,
+        },
+      )
+    }
 
     return Response.json(
       {
