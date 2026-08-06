@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+const tailwindConfig = {
+  content: [
+    './app/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -13,7 +16,7 @@ export default {
       },
       fontFamily: {
         sans: ['Pretendard', 'Inter', 'system-ui', 'sans-serif'],
-        logo: ['RokafSans', 'Pretendard', 'system-ui', 'sans-serif'],
+        logo: ['var(--font-rokaf)', 'Pretendard', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         modal: '0 1.5rem 3rem rgba(17, 24, 39, 0.2)',
@@ -22,3 +25,5 @@ export default {
   },
   plugins: [],
 };
+
+export default tailwindConfig;

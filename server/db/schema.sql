@@ -20,9 +20,13 @@ CREATE TABLE IF NOT EXISTS articles (
   title VARCHAR(100) NOT NULL CHECK (char_length(trim(title)) >= 1),
   content TEXT NOT NULL CHECK (char_length(trim(content)) >= 1),
   image TEXT,
+  likes_count INTEGER NOT NULL DEFAULT 0 CHECK (likes_count >= 0),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+ALTER TABLE articles
+ADD COLUMN IF NOT EXISTS likes_count INTEGER NOT NULL DEFAULT 0;
 
 CREATE TABLE IF NOT EXISTS comments (
   id SERIAL PRIMARY KEY,
@@ -39,6 +43,7 @@ CREATE TABLE IF NOT EXISTS comments (
 
 CREATE INDEX IF NOT EXISTS idx_products_created_at ON products(created_at DESC, id DESC);
 CREATE INDEX IF NOT EXISTS idx_articles_created_at ON articles(created_at DESC, id DESC);
+CREATE INDEX IF NOT EXISTS idx_articles_likes ON articles(likes_count DESC, created_at DESC, id DESC);
 CREATE INDEX IF NOT EXISTS idx_product_comments_cursor ON comments(product_id, id DESC);
 CREATE INDEX IF NOT EXISTS idx_article_comments_cursor ON comments(article_id, id DESC);
 

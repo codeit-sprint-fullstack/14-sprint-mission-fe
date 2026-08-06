@@ -32,16 +32,19 @@ const articles = [
     title: '맥북 16인치 16기가 1테라 정도 사양이면 얼마에 팔아야하나요?',
     content: '맥북 16인치 16기가 1테라 정도 사양이면 얼마에 팔아야하나요?',
     image: '/images/Img_home_01.png',
+    likeCount: 123,
   },
   {
     title: '중고 거래할 때 확인할 점 공유합니다',
     content: '직거래 장소와 제품 상태, 구성품을 꼭 확인해보세요.',
     image: null,
+    likeCount: 37,
   },
   {
     title: '판다마켓 사용 후기',
     content: '검색과 등록 흐름이 간단해서 쓰기 편했습니다.',
     image: null,
+    likeCount: 16,
   },
 ];
 
@@ -65,10 +68,10 @@ async function seed() {
   const articleIds = [];
   for (const article of articles) {
     const result = await pool.query(
-      `INSERT INTO articles (title, content, image)
-       VALUES ($1, $2, $3)
+      `INSERT INTO articles (title, content, image, likes_count)
+       VALUES ($1, $2, $3, $4)
        RETURNING id`,
-      [article.title, article.content, article.image],
+      [article.title, article.content, article.image, article.likeCount],
     );
     articleIds.push(result.rows[0].id);
   }
