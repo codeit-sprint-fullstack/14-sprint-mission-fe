@@ -49,8 +49,11 @@ export default async function Articles({ searchParams }) {
           </Link>
         </div>
         <div className={styles.controllers}>
-          <Input placeholder='검색어를 입력해주세요'/>
-          <Dropdown />
+          <Input 
+            placeholder='검색어를 입력해주세요'
+            route='/articles'
+          />
+          <Dropdown route='/articles' />
         </div>
         <ArticleList articles={articles}/>
       </section>

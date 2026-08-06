@@ -1,5 +1,5 @@
 #/*********** products ***********/
-GET http://localhost:3000/products?sort=oldest
+GET http://localhost:3001/products?sort=oldest
 
 ###
 GET http://localhost:3000/products/3a7e9f21-b4c8-4df5-9a2e-6c0f8d31b572

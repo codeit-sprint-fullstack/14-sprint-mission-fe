@@ -1,0 +1,10 @@
+.wrapper {
+  width: 1200px;
+  height: 993px;
+  padding-top: 26px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+}

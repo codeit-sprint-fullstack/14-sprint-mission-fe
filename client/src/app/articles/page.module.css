@@ -1,4 +1,9 @@
 .pageWrapper {
+  width: 1200px;
+  height: 1330px;
+  padding-top: 24px;
+  margin: 0px auto;
+
   display: flex;
   flex-direction: column;
   gap: 40px;

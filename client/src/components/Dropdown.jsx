@@ -6,7 +6,7 @@ import Image from 'next/image';
 import caretIcon from '@/assets/ic_caret.png';
 import styles from './Dropdown.module.css';
 
-export default function Dropdown() {
+export default function Dropdown({ route }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -17,7 +17,7 @@ export default function Dropdown() {
     // 기존 검색 조건을 유지하면서 정렬 조건만 변경
     const params = new URLSearchParams(searchParams.toString());
     params.set('sort', sort)
-    router.push(`/articles?${params.toString()}`);
+    router.push(`${route}?${params.toString()}`);
     
     // 드롭다운 닫기
     setIsOpen(false)

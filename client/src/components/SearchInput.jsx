@@ -6,7 +6,12 @@ import Image from 'next/image';
 import searchIcon from '@/assets/ic_search.png';
 import styles from './SearchInput.module.css';
 
-export default function SearchInput({ type = 'text', placeholder}) {
+export default function SearchInput({ type = 'text', placeholder, route, variant}) {
+  const className = `
+    ${styles.input}
+    ${variant === 'product' ? styles.product : ''}
+  `;
+  
   const router = useRouter();
   const [value, setValue] = useState('');
 
@@ -14,12 +19,12 @@ export default function SearchInput({ type = 'text', placeholder}) {
     e.preventDefault();
 
     if (!value) {
-      router.push('/articles')
+      router.push(route)
       return;
     }
 
     const encodedValue = encodeURIComponent(value);
-    router.push(`/articles?keyword=${encodedValue}`)
+    router.push(`${route}?keyword=${encodedValue}`)
   }
 
   return (
@@ -34,7 +39,7 @@ export default function SearchInput({ type = 'text', placeholder}) {
         />
       </button>
       <input
-        className={styles.input}
+        className={className}
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
