@@ -164,7 +164,7 @@ export default function BoardDetailPage({ initialArticle, initialComments }) {
               height={15}
             />
 
-            <span>999+</span>
+            <span>9999+</span>
           </div>
         </div>
 
