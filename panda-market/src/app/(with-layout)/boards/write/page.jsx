@@ -1,10 +1,10 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import styles from '@/app/(with-layout)/boards/write/writePage.module.css'
 
-function WritePage() {
+function WritePageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const articleId = searchParams.get('id')
@@ -112,6 +112,14 @@ function WritePage() {
         </div>
       </form>
     </main>
+  )
+}
+
+function WritePage() {
+  return (
+    <Suspense fallback={<div>로딩 중...</div>}>
+      <WritePageContent />
+    </Suspense>
   )
 }
 
