@@ -6,29 +6,41 @@ export default function BoardCreatePage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const response = await fetch("/api/articles", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        content,
-      }),
-    });
-
-    const article = await response.json();
-
-    if (!response.ok) {
-      alert(article.message);
+    if (!title.trim() || !content.trim() || isSubmitting) {
       return;
     }
 
-    router.push(`/boards/${article.id}`);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/articles", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title.trim(),
+          content: content.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("게시글 등록에 실패했습니다.");
+      }
+
+      const article = await response.json();
+      router.push(`/boards/${article.id}`);
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -40,9 +52,9 @@ export default function BoardCreatePage() {
           <button
             className={styles.submitButton}
             type="submit"
-            disabled={!title.trim() || !content.trim()}
+            disabled={!title.trim() || !content.trim() || isSubmitting}
           >
-            등록
+            {isSubmitting ? "등록 중..." : "등록"}
           </button>
         </div>
 

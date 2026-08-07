@@ -4,14 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BestBoardCard from "@/components/boards/BestBoardCard";
 import BoardListItem from "@/components/boards/BoardListItem";
-
-const nicknames = [
-  "인생이 난리자베스",
-  "월급통장 스루패스",
-  "퇴사욕구 최고조",
-  "영혼 빼고 출근 완료",
-  "점심은 언제먹지",
-];
+import getNickname from "@/lib/getNickname";
 
 export default function BoardListPage() {
   const [bestArticles, setBestArticles] = useState([]);
@@ -67,12 +60,12 @@ export default function BoardListPage() {
         <h1 className={styles.sectionTitle}>베스트 게시글</h1>
 
         <div className={styles.bestCardList}>
-          {bestArticles.map((article, index) => (
+          {bestArticles.map((article) => (
             <BestBoardCard
               key={article.id}
               id={article.id}
               title={article.title}
-              nickname={nicknames[index]}
+              nickname={getNickname(article.id)}
               createdAt={new Date(article.createdAt).toLocaleDateString(
                 "ko-KR",
               )}
@@ -119,12 +112,12 @@ export default function BoardListPage() {
         </div>
 
         <div className={styles.boardList}>
-          {articles.map((article, index) => (
+          {articles.map((article) => (
             <BoardListItem
               key={article.id}
               id={article.id}
               title={article.title}
-              nickname={nicknames[index % nicknames.length]}
+              nickname={getNickname(article.id)}
               createdAt={new Date(article.createdAt).toLocaleDateString(
                 "ko-KR",
               )}
