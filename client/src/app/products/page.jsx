@@ -24,16 +24,23 @@ export default async function Products({ searchParams }) {
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
-        <h1>판매 중인 상품</h1>
-        <SearchInput
-          placeholder='검색할 상품을 입력해주세요'
-          route='/products'
-          variant='product'
-        />
-        <Link href='/registration'>
-          상품 등록하기
-        </Link>
-        <Dropdown route='/products'/>
+        <h1 className={styles.title}>
+          판매 중인 상품
+        </h1>
+        <div className={styles.headerRight}>
+          <SearchInput
+            placeholder='검색할 상품을 입력해주세요'
+            route='/products'
+            variant='product'
+          />
+          <Link
+            className={styles.link}
+            href='/registration'
+          >
+            상품 등록하기
+          </Link>
+          <Dropdown route='/products'/>
+        </div>
       </header>
       <ProductList products={products}/>
     </div>

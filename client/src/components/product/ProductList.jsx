@@ -6,11 +6,14 @@ export default function ProductList({ products = [] }) {
   return (
     <ul className={styles.productList}>
       {products.map((product) => (
-        <Link href={`products/${product.id}`}>
-          <li key={product.id}>
+        <li key={product.id}>
+          <Link 
+            className={styles.productCard}
+            href={`products/${product.id}`}
+          >
             <ProductCard product={product}/>
-          </li>
-        </Link>
+          </Link>
+        </li>
       ))}
     </ul>
   )
