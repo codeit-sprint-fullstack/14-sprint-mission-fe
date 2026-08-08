@@ -1,0 +1,100 @@
+.comment {
+  background-color: var(--color-bg-main);
+  border-bottom: 1px solid var(--color-text-light);
+  padding-bottom: 0.75rem;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.editTextarea {
+  width: 100%;
+  min-height: 5rem;
+  padding: 1rem 1.5rem;
+  border: 0;
+  border-radius: 0.75rem;
+  outline: none;
+  resize: none;
+  field-sizing: content;
+  background-color: var(--color-Secondary-100);
+  color: var(--color-Secondary-800);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.content {
+  min-width: 0;
+  color: var(--color-Secondary-800);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.errorMessage {
+  margin-top: 8px;
+  color: var(--color-error-red);
+  font-size: 14px;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nickname,
+.date {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+}
+
+.nickname {
+  color: var(--color-secondary-600);
+}
+
+.date {
+  color: var(--color-text-muted);
+}
+
+.editActions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.cancelButton {
+  padding: 0.4375rem 1.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-Gray-500);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .comment {
+    padding-bottom: 0.5rem;
+  }
+}

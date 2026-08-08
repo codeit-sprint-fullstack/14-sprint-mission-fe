@@ -1,0 +1,74 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  color: var(--color-Secondary-800);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.label {
+  color: var(--color-Secondary-800);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: none;
+  border-radius: 0.75rem;
+  outline: none;
+  background-color: var(--color-Secondary-100);
+  color: var(--color-Secondary-800);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input {
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+}
+
+.textarea {
+  min-height: 17.625rem;
+  padding: 1rem 1.5rem;
+  resize: none;
+  field-sizing: content;
+}
+
+.errorMessage {
+  margin-top: 8px;
+  color: var(--color-error-red);
+  font-size: 14px;
+}

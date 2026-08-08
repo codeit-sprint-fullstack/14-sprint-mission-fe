@@ -1,0 +1,42 @@
+.commentForm {
+  margin-top: 32px;
+}
+
+.title {
+  margin-bottom: 9px;
+  color: var(--color-bg-footer);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 104px;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 12px;
+  outline: none;
+  resize: none;
+  field-sizing: content;
+  background-color: var(--color-Secondary-100);
+  color: var(--color-Secondary-800);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.errorMessage {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--color-error-red);
+}

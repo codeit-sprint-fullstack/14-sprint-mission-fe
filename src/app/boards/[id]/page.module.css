@@ -1,0 +1,133 @@
+.page {
+  padding: 1.5rem 0;
+}
+
+.article {
+  color: var(--color-Secondary-800);
+}
+
+.articleHeader {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-text-light);
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.title {
+  min-width: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.profileImage {
+  margin-right: 0.5rem;
+}
+
+.nickname {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-secondary-600);
+}
+
+.date {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.divider {
+  width: 0.0625rem;
+  height: 2.125rem;
+  margin: 0 2rem;
+  background-color: var(--color-text-light);
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-text-light);
+  border-radius: 9999px;
+  background-color: transparent;
+  color: var(--color-Gray-500);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.content {
+  margin-top: 1.5rem;
+  color: var(--color-Secondary-800);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.emptyComments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.5rem;
+  gap: 1rem;
+}
+
+.emptyText {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+  text-align: center;
+}
+
+.backButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.backButtonContent {
+  gap: 0.5rem;
+  border-radius: 2.5rem;
+  padding: 0.75rem 2.5rem;
+}
+
+@media (max-width: 480px) {
+  .meta {
+    gap: 0.125rem;
+    margin-top: 1rem;
+  }
+
+  .divider {
+    margin: 0 1rem;
+  }
+
+  .commentList {
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .backButton {
+    margin-top: 2.5rem;
+  }
+}
