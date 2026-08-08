@@ -1,15 +1,16 @@
-import ArticleForm from '@/components/article/ArticleForm';
-import { updateArticle } from '@/actions/articleActions';
+import { updateArticle } from "@/actions/articleActions";
+import ArticleForm from "@/app/articles/_components/ArticleForm";
+import styles from "./page.module.css";
 
 export default async function EditArticle({ params }) {
   const { id } = await params;
 
-  const res = await fetch(`${process.env.API_BASE_URL}/articles/${id}`,
-    { cache: 'no-store' }
-  );
+  const res = await fetch(`${process.env.API_BASE_URL}/articles/${id}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
-    throw new Error('게시글을 불러오지 못했습니다.');
+    throw new Error("게시글을 불러오지 못했습니다.");
   }
 
   const article = await res.json();
@@ -21,13 +22,13 @@ export default async function EditArticle({ params }) {
   const updateArticleWithId = updateArticle.bind(null, id);
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <ArticleForm
         action={updateArticleWithId}
         initialTitle={article.title}
         initialContent={article.content}
-        submitText='수정'
+        submitText="수정"
       />
     </div>
-  )
+  );
 }

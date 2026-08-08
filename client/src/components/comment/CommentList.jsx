@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import CommentCard from './CommentCard';
-import commentEmptyImg from '@/assets/img_reply_empty.png';
-import styles from './CommentList.module.css';
+import commentEmptyImg from "@/assets/img_reply_empty.png";
+import Image from "next/image";
+import CommentCard from "./CommentCard";
+import styles from "./CommentList.module.css";
 
 export default function CommentList({ articleId, comments = [] }) {
   if (comments.length === 0) {
@@ -11,16 +11,16 @@ export default function CommentList({ articleId, comments = [] }) {
           src={commentEmptyImg}
           width={140}
           height={140}
-          loading='eager'
-          alt=''
+          loading="eager"
+          alt=""
         />
         <p>
-          아직 댓글이 없어요, 
+          아직 댓글이 없어요,
           <br />
           지금 댓글을 달아보세요!
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -31,5 +31,5 @@ export default function CommentList({ articleId, comments = [] }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }

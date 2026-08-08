@@ -1,26 +1,26 @@
 @font-face {
-  font-family: 'ROKAF Sans';
-  src: url("../assets/fonts/ROKAF Sans Bold.ttf") format('truetype');
+  font-family: "ROKAF Sans";
+  src: url("../assets/fonts/ROKAF Sans Bold.ttf") format("truetype");
   font-weight: 700;
   font-display: swap;
 }
 
 :root {
-  --primary-100: #3692FF;
-  --primary-200: #1967DF;
-  --primary-300: #1251AA;
+  --primary-100: #3692ff;
+  --primary-200: #1967df;
+  --primary-300: #1251aa;
 
-  --secondary-50: #F9FAFB;
-  --secondary-100: #F3F4F6;
-  --secondary-200: #E5E7EB;
-  --secondary-400: #9CA3AF;
-  --secondary-500: #6B7280;
-  --secondary-600: #4B5563;
+  --secondary-50: #f9fafb;
+  --secondary-100: #f3f4f6;
+  --secondary-200: #e5e7eb;
+  --secondary-400: #9ca3af;
+  --secondary-500: #6b7280;
+  --secondary-600: #4b5563;
   --secondary-700: #374151;
-  --secondary-800: #1F2937;
+  --secondary-800: #1f2937;
   --secondary-900: #111827;
-  
-  --error: #F74747;
+
+  --error: #f74747;
 }
 
 * {

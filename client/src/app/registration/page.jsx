@@ -11,7 +11,7 @@ import styles from "./page.module.css";
 // useActionState를 위한 초기 설정
 const initialState = {
   errors: {},
-  message: '',
+  message: "",
 };
 
 export default function Registration() {
@@ -20,10 +20,16 @@ export default function Registration() {
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
 
-  const [state, formAction, isPending] = useActionState(createProduct, initialState)
+  const [state, formAction, isPending] = useActionState(
+    createProduct,
+    initialState
+  );
 
   const isFormEmpty =
-    name.trim() === "" || description.trim() === "" || price === "" || tags.length === 0;
+    name.trim() === "" ||
+    description.trim() === "" ||
+    price === "" ||
+    tags.length === 0;
 
   return (
     <form action={formAction} className={styles.wrapper}>

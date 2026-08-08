@@ -1,39 +1,40 @@
-import styles from './Textarea.module.css';
+import styles from "./Textarea.module.css";
 
-export default function Textarea({ label, id, placeholder, value, onChange, variant = 'default', error }) {
+export default function Textarea({
+  label,
+  id,
+  placeholder,
+  value,
+  onChange,
+  variant = "default",
+  error,
+}) {
   const labelClassName = `
    ${styles.label}
-   ${variant === 'editComment' ? styles.editLabel : ''}
+   ${variant === "editComment" ? styles.editLabel : ""}
   `;
-  
+
   const inputClassName = `
     ${styles.input}
-    ${variant === 'createComment' ? styles.createComment : '' }
-    ${variant === 'editComment' ? styles.editComment : '' }
-    ${error ? styles.error : ''}
+    ${variant === "createComment" ? styles.createComment : ""}
+    ${variant === "editComment" ? styles.editComment : ""}
+    ${error ? styles.error : ""}
   `;
 
   return (
     <div className={styles.wrapper}>
-      <label 
-        htmlFor={id} 
-        className={labelClassName}
-      >
+      <label htmlFor={id} className={labelClassName}>
         {label}
       </label>
-      <textarea 
+      <textarea
         className={inputClassName}
-        id={id} 
-        name={id} 
+        id={id}
+        name={id}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
-      {error && (
-        <p className={styles.errorText}>
-          {error}
-        </p>
-      )}
+      {error && <p className={styles.errorText}>{error}</p>}
     </div>
-  )
+  );
 }

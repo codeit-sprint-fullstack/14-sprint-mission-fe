@@ -1,10 +1,11 @@
-import ArticleForm from '@/components/article/ArticleForm';
-import { createArticle } from '@/actions/articleActions';
+import { createArticle } from "@/actions/articleActions";
+import ArticleForm from "@/app/articles/_components/ArticleForm";
+import styles from "./page.module.css";
 
 export default function ArticleCreate() {
   return (
-    <ArticleForm 
-      action={createArticle} 
-    />
-  )
+    <div className={styles.wrapper}>
+      <ArticleForm action={createArticle} />
+    </div>
+  );
 }

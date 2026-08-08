@@ -16,14 +16,14 @@
   padding: 2px 24px;
   border-radius: 0 0 16px 16px;
   background: var(--primary-100);
-  
+
   display: flex;
   justify-content: center;
   gap: 4px;
 }
 
 .badgeText {
-  color: #FFF;
+  color: #fff;
   font-size: 16px;
   font-weight: 600;
 }
@@ -48,7 +48,7 @@
   height: 72px;
   border-radius: 6px;
   border: 1px solid var(--secondary-200);
-  background: #FFF;
+  background: #fff;
 
   display: flex;
   align-items: center;

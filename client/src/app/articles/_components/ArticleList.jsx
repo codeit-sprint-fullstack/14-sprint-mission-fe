@@ -1,7 +1,7 @@
-import BestArticleCard from './BestArticleCard';
-import styles from './BestArticleList.module.css';
+import ArticleCard from "./ArticleCard";
+import styles from "./ArticleList.module.css";
 
-export default function BestArticleList({ articles = [] }) {
+export default function ArticleList({ articles = [] }) {
   if (articles.length === 0) {
     return <p>게시글이 없습니다.</p>;
   }
@@ -10,9 +10,9 @@ export default function BestArticleList({ articles = [] }) {
     <ul className={styles.articleList}>
       {articles.map((article) => (
         <li key={article.id}>
-          <BestArticleCard article={article}/>
+          <ArticleCard article={article} />
         </li>
       ))}
     </ul>
-  )
+  );
 }

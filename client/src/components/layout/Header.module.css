@@ -48,6 +48,10 @@
   text-decoration: none;
 }
 
+.active {
+  color: var(--primary-100);
+}
+
 .signinLink {
   height: 42px;
   padding: 12px 23px;
