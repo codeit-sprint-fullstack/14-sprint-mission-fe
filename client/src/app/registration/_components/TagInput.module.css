@@ -1,0 +1,57 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  color: var(--secondary-800);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.input {
+  height: 56px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--secondary-100);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.input::placeholder {
+  color: var(--secondary-400);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--primary-100);
+}
+
+.tagChips {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chip {
+  height: 36px;
+  padding: 6px 12px 6px 16px;
+  border-radius: 26px;
+  background: var(--secondary-100);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deleteBtn {
+  width: 22px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
