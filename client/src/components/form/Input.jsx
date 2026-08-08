@@ -1,6 +1,6 @@
 import styles from './Input.module.css';
 
-export default function Input({ label, type, id, placeholder, value, onChange }) {
+export default function Input({ label, type, id, placeholder, value, onChange, error }) {
   return (
     <div className={styles.wrapper}>
       <label 
@@ -10,7 +10,7 @@ export default function Input({ label, type, id, placeholder, value, onChange })
         {label}
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error ? styles.error : ''}`}
         type={type} 
         id={id} 
         name={id} 
@@ -18,6 +18,11 @@ export default function Input({ label, type, id, placeholder, value, onChange })
         value={value}
         onChange={onChange}
       />
+      {error && (
+        <p className={styles.errorText}>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

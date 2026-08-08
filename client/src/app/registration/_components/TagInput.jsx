@@ -7,6 +7,20 @@ import styles from './TagInput.module.css';
 
 export default function TagInput({ label, type, id, tags, setTags, placeholder }) {
   const [inputValue, setInputValue] = useState('');
+  const [inputError, setInputError] = useState('');
+
+   // 에러 처리
+  function handleChange(e) {
+    const nextValue = e.target.value;
+
+    if (nextValue.length > 5) {
+      setInputError('5글자 이내로 입력해주세요');
+      return;
+    }
+
+    setInputValue(nextValue);
+    setInputError('');
+  }
 
   // 엔터 키 눌렀을 때 인풋 값이 쌓이도록 설정
   function handleEnter(e) {
@@ -14,7 +28,7 @@ export default function TagInput({ label, type, id, tags, setTags, placeholder }
     if (e.key !== 'Enter') return;
     e.preventDefault();
 
-    // 유효성 검사
+    // 예외 처리
     const value = inputValue.trim()
     if (!value) return;
     if (value.length > 5) return;
@@ -37,14 +51,19 @@ export default function TagInput({ label, type, id, tags, setTags, placeholder }
         {label}
       </label>
       <input 
-        className={styles.input}
+        className={`${styles.input} ${inputError ? styles.error : ''}`}
         type={type} 
         id={id}
         placeholder={placeholder}
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleEnter}
       />
+      {inputError && (
+        <p className={styles.errorText}>
+          {inputError}
+        </p>
+      )}
       {tags.map((tag) => (
         <input
           key={tag}

@@ -46,3 +46,18 @@
   font-size: 14px;
   color: var(--secondary-800)
 }
+
+.error {
+  border: 1px solid var(--error);
+}
+
+.error:focus {
+  border: 1px solid var(--error);
+}
+
+.errorText {
+  padding-left: 16px;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+}

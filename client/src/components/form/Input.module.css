@@ -30,3 +30,18 @@
   outline: none;
   border: 1px solid var(--primary-100);
 }
+
+.error {
+  border: 1px solid var(--error);
+}
+
+.error:focus {
+  border: 1px solid var(--error);
+}
+
+.errorText {
+  padding-left: 16px;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+}

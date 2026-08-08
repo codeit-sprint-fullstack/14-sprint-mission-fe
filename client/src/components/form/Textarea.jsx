@@ -1,6 +1,6 @@
 import styles from './Textarea.module.css';
 
-export default function Textarea({ label, id, placeholder, value, onChange, variant = 'default' }) {
+export default function Textarea({ label, id, placeholder, value, onChange, variant = 'default', error }) {
   const labelClassName = `
    ${styles.label}
    ${variant === 'editComment' ? styles.editLabel : ''}
@@ -10,6 +10,7 @@ export default function Textarea({ label, id, placeholder, value, onChange, vari
     ${styles.input}
     ${variant === 'createComment' ? styles.createComment : '' }
     ${variant === 'editComment' ? styles.editComment : '' }
+    ${error ? styles.error : ''}
   `;
 
   return (
@@ -28,6 +29,11 @@ export default function Textarea({ label, id, placeholder, value, onChange, vari
         value={value}
         onChange={onChange}
       />
+      {error && (
+        <p className={styles.errorText}>
+          {error}
+        </p>
+      )}
     </div>
   )
 }
