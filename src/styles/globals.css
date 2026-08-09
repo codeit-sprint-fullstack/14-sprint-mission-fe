@@ -1,0 +1,41 @@
+/* 모든 HTML 요소의 크기 계산 방식을 통일 */
+* {
+  box-sizing: border-box;
+}
+
+/* 브라우저가 기본으로 적용하는 바깥 여백을 제거 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* 판다마켓 전체 페이지에 공통으로 적용할 기본 스타일 */
+body {
+  min-height: 100vh;
+
+  /* 공통 팔레트의 기본 텍스트 색상 사용 */
+  color: var(--Secondary-800);
+
+  /* 공통 팔레트의 흰색 배경 사용 */
+  background-color: var(--White-color);
+
+  font-family:
+    Arial,
+    "Noto Sans KR",
+    sans-serif;
+}
+
+/* 링크가 브라우저 기본 파란색과 밑줄로 표시되지 않도록 함 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 버튼과 입력창이 body의 글꼴을 그대로 사용하도록 함 */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

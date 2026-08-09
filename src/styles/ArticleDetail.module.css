@@ -1,0 +1,407 @@
+/* 게시글 상세 페이지의 전체 너비와 여백 관리 */
+.page {
+  width: min(calc(100% - 48px), 1200px);
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+/* 게시글 상세 내용을 감싸는 영역 */
+.article {
+  padding: 0;
+  background-color: var(--White-color);
+}
+
+/* 게시글 제목 */
+.title {
+  margin: 0;
+  color: var(--Secondary-900);
+  font-size: 28px;
+  line-height: 1.4;
+}
+
+/* 작성자, 작성일, 좋아요 정보 */
+.articleInfo {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--Secondary-200);
+  color: var(--Secondary-600);
+  font-size: 14px;
+}
+
+/* 작성자 프로필과 이름·작성일 배치 */
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 작성자 프로필 이미지 영역 */
+.profileImage {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 작성자 닉네임 */
+.nickname {
+  color: var(--Secondary-700);
+  font-weight: 600;
+}
+
+/* 게시글 작성일 */
+.date {
+  color: var(--Secondary-400);
+}
+
+/* 댓글 작성자 정보 배치 */
+.commentAuthorInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 댓글 작성자 프로필 이미지 */
+.commentProfileImage {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 댓글 닉네임과 작성일 세로 배치 */
+.commentAuthorText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 댓글 작성자 닉네임 */
+.commentNickname {
+  color: var(--Secondary-700);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+/* 댓글 작성일 */
+.commentDate {
+  color: var(--Secondary-400);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* 댓글 목록 */
+.commentList {
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 첫 번째 댓글 위쪽 불필요한 여백 제거 */
+.commentItem:first-child {
+  padding-top: 0;
+}
+
+/* 댓글 한 개 영역 */
+.commentItem {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--Secondary-200);
+}
+
+/* 댓글 내용과 메뉴 버튼 배치 */
+.commentContentRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* 댓글 내용 */
+.commentContent {
+  flex: 1;
+  margin: 0;
+  color: var(--Secondary-800);
+  font-size: 16px;
+  line-height: 24px;
+  white-space: pre-wrap;
+}
+
+/* 댓글 영역 */
+.commentSection {
+  margin-top: 40px;
+}
+
+/* 댓글 작성 제목 */
+.commentTitle {
+  margin: 0;
+  color: var(--Secondary-900);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+/* 새 댓글 작성 영역 */
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+/* 새 댓글 입력창 */
+.commentTextarea {
+  width: 100%;
+  min-height: 104px;
+  padding: 16px;
+  border: 0;
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-800);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* 새 댓글 입력창 안내 문구 */
+.commentTextarea::placeholder {
+  color: var(--Secondary-400);
+}
+
+/* 댓글 등록 버튼 */
+.commentSubmitButton {
+  align-self: flex-end;
+  min-width: 74px;
+  height: 42px;
+  margin-top: 12px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--brand-blue);
+  color: var(--White-color);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 댓글을 입력하지 않은 경우 버튼 비활성화 */
+.commentSubmitButton:disabled {
+  background-color: var(--Secondary-400);
+  cursor: default;
+}
+
+/* 댓글 등록 오류 메시지 */
+.commentSubmitError {
+  margin: 8px 0 0;
+  color: var(--error-red);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* 댓글 수정 영역 */
+.commentEditForm {
+  flex: 1;
+}
+
+/* 댓글 수정 입력창 */
+.commentEditTextarea {
+  width: 100%;
+  min-height: 104px;
+  padding: 16px;
+  border: 0;
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-800);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* 댓글 수정 버튼 영역 */
+.commentEditActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* 댓글 수정 취소 버튼 */
+.commentEditCancelButton {
+  height: 42px;
+  padding: 0 16px;
+  border: 0;
+  background-color: transparent;
+  color: var(--Secondary-600);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 댓글 수정 완료 버튼 */
+.commentEditSubmitButton {
+  width: 88px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--brand-blue);
+  color: var(--White-color);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 수정할 내용이 없는 경우 버튼 비활성화 */
+.commentEditSubmitButton:disabled {
+  background-color: var(--Secondary-400);
+  cursor: default;
+}
+
+/* 댓글 수정 오류 메시지 */
+.commentEditError {
+  margin: 8px 0 0;
+  color: var(--error-red);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* 댓글 작성자 정보와 수정 버튼 배치 */
+.commentBottomRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* 작성자 정보와 좋아요 사이 구분선 */
+.infoDivider {
+  width: 1px;
+  height: 16px;
+  margin: 0 12px;
+  background-color: var(--Secondary-200);
+}
+
+/* 좋아요 아이콘과 개수 배치 */
+.likeInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--Secondary-200);
+  border-radius: 999px;
+  background-color: var(--White-color);
+  color: var(--Secondary-600);
+}
+
+/* 좋아요 하트 아이콘 */
+.likeInfo span:first-child {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* 게시글 본문 */
+.content {
+  min-height: 240px;
+  margin: 0;
+  padding-top: 32px;
+  color: var(--Secondary-900);
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+/* 게시글 제목과 수정 버튼 배치 */
+.articleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+
+/* 게시글 메뉴 위치 기준 영역 */
+.articleActions {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* 게시글 삭제 오류 메시지 */
+.deleteErrorMessage {
+  margin: 16px 0 0;
+  color: var(--error-red);
+  font-size: 14px;
+}
+
+/* 점 3개 메뉴 버튼 */
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* 점 3개 메뉴 아이콘 */
+.menuButton img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* 수정·삭제 드롭다운 */
+.menuDropdown {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  overflow: hidden;
+  border: 1px solid var(--Secondary-200);
+  border-radius: 8px;
+  background-color: var(--White-color);
+}
+
+/* 드롭다운의 수정·삭제 항목 */
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background-color: var(--White-color);
+  color: var(--Secondary-600);
+  font-family: inherit;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 드롭다운 항목에 마우스를 올린 상태 */
+.menuItem:hover:not(:disabled) {
+  background-color: var(--Cool-Gray-50);
+}
+
+/* 삭제 요청 진행 중인 메뉴 항목 */
+.menuItem:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
