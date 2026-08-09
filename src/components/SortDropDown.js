@@ -11,7 +11,7 @@ export default function SortDropDown({ orderBy, setOrderBy }) {
         className={`${styles.btnDropDown} ${isOpen ? styles.open : ""}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {orderBy === "favorite" ? "좋아요순" : "최신순"}
+        {orderBy === "like" ? "좋아요순" : "최신순"}
       </button>
 
       {isOpen && (
@@ -27,7 +27,7 @@ export default function SortDropDown({ orderBy, setOrderBy }) {
 
           <li
             onClick={() => {
-              setOrderBy("favorite");
+              setOrderBy("like");
               setIsOpen(false);
             }}
           >

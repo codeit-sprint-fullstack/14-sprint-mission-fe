@@ -2,7 +2,7 @@ import SampleImg from "@/assets/sample.webp";
 import styles from "@/styles/Board.module.css";
 import Image from "next/image";
 
-export default function BoardItem({article}) {
+export default function BoardItem({ article }) {
   return (
     <div className={styles.boardContents}>
       <div className={styles.boardTop}>
@@ -11,10 +11,10 @@ export default function BoardItem({article}) {
         </div>
         <div className={styles.boardImgWrap}>
           <Image
-            src={SampleImg}
+            src={article.image || SampleImg}
+            alt={article.title || "게시글 이미지"}
             fill
-          >
-          </Image>
+          />
         </div>
       </div>
       <div className={styles.boardBottom}>
@@ -25,14 +25,14 @@ export default function BoardItem({article}) {
             </div>
             <div className={styles.boardNickText}>{article.nickname}</div>
             <div className={styles.boardDate}>
-              {article.createdAt}
+              {new Date(article.createdAt).toLocaleDateString("ko-KR")}
             </div>
           </div>
         </div>
         <div className={styles.right}>
           <div className={styles.boardFavWrap}>
             <img src="/assets/ic_fav.png" />
-            <p>{article.favCount}</p>
+            <p>{article.likeCount}</p>
           </div>
         </div>
       </div>
