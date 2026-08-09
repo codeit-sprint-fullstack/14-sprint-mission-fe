@@ -25,9 +25,15 @@ const prisma = new PrismaClient({
 // 게시글 목록 조회 API
 app.get("/api/articles", async (req, res) => {
   try {
-    const { orderBy = "recent" } = req.query;
+    const { orderBy = "recent", keyword = "" } = req.query;
 
     const articles = await prisma.article.findMany({
+      where: {
+        title: {
+          contains: keyword,
+          mode: "insensitive",
+        },
+      },
       orderBy:
         orderBy === "like"
           ? { likeCount: "desc" }
@@ -37,7 +43,10 @@ app.get("/api/articles", async (req, res) => {
     res.send(articles);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "게시글 목록을 불러오지 못했습니다." });
+
+    res.status(500).send({
+      message: "게시글 목록을 불러오지 못했습니다.",
+    });
   }
 });
 
