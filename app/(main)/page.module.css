@@ -1,0 +1,24 @@
+.moveItem {
+      margin-left: auto;
+  background: #4a90e2;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.moveItem:hover {
+  background: #357abd;
+}
+
+.hotItem {}
+
+.searchItem {
+
+}
+
+.registerItem {
+
+}
+

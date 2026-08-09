@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 16px 200px;
+  border: 1px solid #4a90e2;
+  background: white;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navLink {
+  margin-left: 24px;
+}
+
+.loginButton {
+  margin-left: auto;
+  background: #4a90e2;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.loginButton:hover {
+  background: #357abd;
+}
+
