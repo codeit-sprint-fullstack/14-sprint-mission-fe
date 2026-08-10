@@ -16,7 +16,7 @@ const ItemPage = async ({searchParams} : {searchParams: Promise<SearchParams>}) 
     
     return (
         <div>
-        <h4>베스트 상품</h4>
+        <h4>베스트상품</h4>
 
         <h4>판매 중인 상품</h4>
         <SearchProduct initialProducts={products}/>
