@@ -1,12 +1,18 @@
 const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
 
-export async function getArticles(keyword = "") {
-  let url = `${API_BASE_URL}/articles`;
+export async function getArticles({ keyword = "", limit } = {}) {
+  const params = new URLSearchParams();
 
   if (keyword) {
-    const encodedKeyword = encodeURIComponent(keyword);
-    url = `${url}?keyword=${encodedKeyword}`;
+    params.set("keyword", keyword);
   }
+
+  if (limit) {
+    params.set("limit", String(limit));
+  }
+
+  const queryString = params.toString();
+  const url = `${API_BASE_URL}/articles${queryString ? `?${queryString}` : ""}`;
 
   const res = await fetch(url, {
     cache: "no-store",

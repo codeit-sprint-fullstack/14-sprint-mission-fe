@@ -11,11 +11,12 @@ export function formatDate(dateString) {
 export function formatRelativeTime(dateString) {
   const diff = Date.now() - new Date(dateString).getTime();
 
+  if (diff < 1000 * 60) return "방금 전";
+
   const minutes = Math.floor(diff / (1000 * 60));
   const hours = Math.floor(diff / (1000 * 60 * 60));
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-  if (minutes < 1) return "방금 전";
   if (minutes < 60) return `${minutes}분 전`;
   if (hours < 24) return `${hours}시간 전`;
 

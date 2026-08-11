@@ -1,13 +1,14 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { getArticle } from "@/lib/articleApi";
-import { getArticleComments } from "@/lib/commentApi";
-import { formatDate } from "@/lib/dateUtils";
+import ArticleActionMenu from "@/components/boards/ArticleActionMenu/ArticleActionMenu";
 import CommentForm from "@/components/boards/CommentForm/CommentForm";
 import CommentItem from "@/components/boards/CommentItem/CommentItem";
 import Button from "@/components/Button/Button";
-import ArticleActionMenu from "@/components/boards/ArticleActionMenu/ArticleActionMenu";
+import { DEFAULT_LIKE_COUNT, DEFAULT_NICKNAME } from "@/constants/board";
+import { getArticle } from "@/lib/articleApi";
+import { getArticleComments } from "@/lib/commentApi";
+import { formatDate } from "@/lib/dateUtils";
+import Image from "next/image";
 import { notFound } from "next/navigation";
+import styles from "./page.module.css";
 
 export default async function BoardDetailPage({ params }) {
   const { id } = await params;
@@ -38,14 +39,14 @@ export default async function BoardDetailPage({ params }) {
               className={styles.profileImage}
             />
 
-            <span className={styles.nickname}>잘하고 싶다</span>
+            <span className={styles.nickname}>{DEFAULT_NICKNAME}</span>
             <time className={styles.date}>{formatDate(article.createdAt)}</time>
 
             <div className={styles.divider} />
 
             <button type="button" className={styles.likes} aria-label="좋아요">
               <Image src="/images/ic_heart.svg" alt="" width={24} height={24} />
-              <span>7777</span>
+              <span>{DEFAULT_LIKE_COUNT}</span>
             </button>
           </div>
         </div>

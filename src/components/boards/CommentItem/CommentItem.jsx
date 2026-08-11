@@ -1,14 +1,15 @@
 "use client";
 
-import Image from "next/image";
-import styles from "./CommentItem.module.css";
-import { formatRelativeTime } from "@/lib/dateUtils";
-import Dropdown from "@/components/Dropdown/Dropdown";
-import { useState } from "react";
 import Button from "@/components/Button/Button";
-import { deleteArticleComment, updateArticleComment } from "@/lib/commentApi";
-import { useRouter } from "next/navigation";
+import Dropdown from "@/components/Dropdown/Dropdown";
+import { DEFAULT_NICKNAME } from "@/constants/board";
 import useAsyncAction from "@/hooks/useAsyncAction";
+import { deleteArticleComment, updateArticleComment } from "@/lib/commentApi";
+import { formatRelativeTime } from "@/lib/dateUtils";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import styles from "./CommentItem.module.css";
 
 export default function CommentItem({ comment }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -120,7 +121,7 @@ export default function CommentItem({ comment }) {
           <Image src="/images/ic_profile.svg" alt="" width={32} height={32} />
 
           <div className={styles.author}>
-            <span className={styles.nickname}>잘하고 싶다</span>
+            <span className={styles.nickname}>{DEFAULT_NICKNAME}</span>
             <time className={styles.date}>
               {formatRelativeTime(comment.createdAt)}
             </time>
