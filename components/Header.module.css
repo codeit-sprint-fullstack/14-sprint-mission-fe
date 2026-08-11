@@ -1,0 +1,76 @@
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
+}
+
+.nav a {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--gray-800);
+}
+
+.nav a:hover {
+  color: var(--blue);
+}
+
+.nav a.active {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.logo {
+  display: flex;
+  width: 153px;
+  height: 51px;
+  padding: 5.017px 0 5.848px 0;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8.592px;
+}
+
+.logoText {
+  color: var(--blue, #3692ff);
+  font-family: "ROKAF Sans";
+  font-size: 25.633px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.loginButton {
+  display: inline-flex;
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  background: var(--blue, #3692ff);
+
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  outline: none;
+}
+
+.loginButton:hover {
+  background: #1967d6;
+}

@@ -1,0 +1,156 @@
+.banner {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+  align-items: center;
+}
+
+.hero {
+  overflow: hidden;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 69px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 100%;
+}
+
+.heroText,
+.bottomBannerText {
+  flex-shrink: 0;
+}
+
+.heroImg,
+.bottomBannerImg {
+  height: 100%;
+  width: auto;
+  max-width: 55%;
+  object-fit: contain;
+  object-position: bottom;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+.features {
+  padding-bottom: 138px;
+}
+
+.loginLinkButton {
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 11.5px 23px;
+}
+
+.banner :global(.pill-button) {
+  margin-top: 32px;
+}
+
+.feature {
+  padding: 138px 0;
+  display: flex;
+  align-items: center;
+  gap: 5%;
+
+  background-color: #ffffff;
+  border-radius: 16px;
+}
+
+.featureImg {
+  width: 50%;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.feature:nth-child(2) {
+  text-align: right;
+}
+
+.featureContent {
+  flex: 1;
+}
+
+.featureTag {
+  color: #3692ff;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.featureDescription {
+  color: var(--Secondary-700, #374151);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  margin-top: 24px;
+}
+
+/* Tablet: 744px ~ 1199px */
+@media (min-width: 744px) {
+  .inner {
+    padding: 0 24px;
+  }
+}
+
+/* Desktop: 1200px 이상 */
+@media (min-width: 1200px) {
+  .inner {
+    padding: 0;
+  }
+}
+
+/* Mobile: 375px 이상 ~ 743px 이하 */
+@media (max-width: 743px) {
+  .banner {
+    height: auto;
+    min-height: 400px;
+    padding: 40px 16px;
+  }
+
+  .inner {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 24px;
+    padding: 0 16px;
+  }
+
+  .heroImg,
+  .bottomBannerImg {
+    height: auto;
+    width: calc(100vw - 64px);
+    max-width: none;
+    align-self: center;
+  }
+
+  .banner :global(.pill-button) {
+    font-size: 16px;
+    padding: 16px 40px;
+    white-space: nowrap;
+  }
+
+  .feature {
+    flex-direction: column;
+    padding: 60px 0;
+  }
+
+  .feature:nth-child(2) {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .featureImg {
+    width: calc(100vw - 64px);
+    height: auto;
+    align-self: stretch;
+  }
+}
