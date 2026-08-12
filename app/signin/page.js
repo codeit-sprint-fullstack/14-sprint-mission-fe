@@ -1,8 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <main className={styles.container}>
       <div className={styles["login_area"]}>
@@ -24,6 +30,8 @@ export default function LoginPage() {
             id="email"
             type="email"
             placeholder="이메일을 입력해주세요"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             required
           />
 
@@ -36,6 +44,8 @@ export default function LoginPage() {
               id="password"
               type="password"
               placeholder="비밀번호를 입력해주세요"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               required
             />
             <button type="button" className={styles["eye-button"]}>
