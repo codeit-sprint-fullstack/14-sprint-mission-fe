@@ -1,11 +1,52 @@
 "use client";
 
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { signUp } from "@/lib/api/auth";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function SignupPage() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
+  const isPasswordMismatch =
+    passwordConfirmation !== "" && password !== passwordConfirmation;
+
+  const isFormValid =
+    email.trim() !== "" &&
+    nickname.trim() !== "" &&
+    password.trim() !== "" &&
+    passwordConfirmation.trim() !== "" &&
+    !isPasswordMismatch;
+
+  const signupMutation = useMutation({
+    mutationFn: signUp,
+
+    onSuccess: (data) => {
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+
+      router.push("/items");
+    },
+  });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!isFormValid || signupMutation.isPending) {
+      return;
+    }
+
+    signupMutation.mutate({ email, nickname, password, passwordConfirmation });
+  }
+
   return (
     <main className={styles["container"]}>
       <div className={styles["login_area"]}>
@@ -19,7 +60,7 @@ export default function SignupPage() {
           <span className={styles["panda-letters"]}>판다마켓</span>
         </Link>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="email" className={styles["input-title"]}>
             이메일
           </label>
@@ -28,6 +69,8 @@ export default function SignupPage() {
             id="email"
             type="email"
             placeholder="이메일을 입력해주세요"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             required
           />
 
@@ -39,6 +82,8 @@ export default function SignupPage() {
             id="nickname"
             type="text"
             placeholder="닉네임을 입력해주세요"
+            value={nickname}
+            onChange={(event) => setNickname(event.target.value)}
             required
           />
 
@@ -51,6 +96,8 @@ export default function SignupPage() {
               id="password"
               type="password"
               placeholder="비밀번호를 입력해주세요"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               required
             />
             <button type="button" className={styles["eye-button"]}>
@@ -71,6 +118,8 @@ export default function SignupPage() {
               id="password-check"
               type="password"
               placeholder="비밀번호를 다시 한 번 입력해주세요"
+              value={passwordConfirmation}
+              onChange={(event) => setPasswordConfirmation(event.target.value)}
               required
             />
             <button type="button" className={styles["eye-button"]}>
@@ -82,9 +131,16 @@ export default function SignupPage() {
               />
             </button>
           </div>
+          {isPasswordMismatch && (
+            <p className={styles.errorMessage}>비밀번호가 일치하지 않아요.</p>
+          )}
 
-          <button type="submit" className={styles["loginButton"]}>
-            로그인
+          <button
+            type="submit"
+            className={styles["loginButton"]}
+            disabled={!isFormValid || signupMutation.isPending}
+          >
+            회원가입
           </button>
         </form>
 
