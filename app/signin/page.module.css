@@ -125,6 +125,11 @@ body {
   font-size: 1.25rem;
 }
 
+.loginButton:not(:disabled) {
+  background: var(--Primary-100, #3692ff);
+  cursor: pointer;
+}
+
 .simple_login {
   display: flex;
   align-items: center;
@@ -160,4 +165,11 @@ body {
 .signup {
   justify-content: center;
   align-self: center;
+}
+
+.errorMessage {
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  color: #f74747;
+  font-size: 0.875rem;
 }

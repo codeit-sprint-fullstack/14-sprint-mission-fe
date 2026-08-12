@@ -1,13 +1,39 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { signIn } from "@/lib/api/auth";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const isFormValid = email.trim() !== "" && password.trim() !== "";
+
+  const loginMutation = useMutation({
+    mutationFn: signIn,
+
+    onSuccess: (data) => {
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+
+      router.push("/items");
+    },
+  });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!isFormValid || loginMutation.isPending) {
+      return;
+    }
+    loginMutation.mutate({ email, password });
+  }
 
   return (
     <main className={styles.container}>
@@ -21,7 +47,7 @@ export default function LoginPage() {
           />
           <span className={styles["panda-letters"]}>판다마켓</span>
         </Link>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="email" className={styles["input-title"]}>
             이메일
           </label>
@@ -34,6 +60,9 @@ export default function LoginPage() {
             onChange={(event) => setEmail(event.target.value)}
             required
           />
+          {loginMutation.isError && (
+            <p className={styles.errorMessage}>이메일을 확인해 주세요.</p>
+          )}
 
           <label htmlFor="password" className={styles["input-title"]}>
             비밀번호
@@ -48,6 +77,10 @@ export default function LoginPage() {
               onChange={(event) => setPassword(event.target.value)}
               required
             />
+            {loginMutation.isError && (
+              <p className={styles.errorMessage}>비밀번호를 확인해 주세요.</p>
+            )}
+
             <button type="button" className={styles["eye-button"]}>
               <Image
                 src="/images/btn_visibility_on_24px.png"
@@ -57,7 +90,11 @@ export default function LoginPage() {
               />
             </button>
           </div>
-          <button type="submit" className={styles["loginButton"]}>
+          <button
+            type="submit"
+            className={styles["loginButton"]}
+            disabled={!isFormValid || loginMutation.isPending}
+          >
             로그인
           </button>
         </form>

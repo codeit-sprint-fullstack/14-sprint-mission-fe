@@ -1,3 +1,6 @@
+"use client";
+
+import { signUp } from "@/lib/api/auth";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -111,7 +114,7 @@ export default function SignupPage() {
 
         <div className={styles["signup"]}>
           이미 회원이신가요?
-          <Link href="signin">로그인</Link>
+          <Link href="/signin">로그인</Link>
         </div>
       </div>
     </main>
