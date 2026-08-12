@@ -6,6 +6,7 @@ import style from "@/styles/[id].module.css"
 import Pagination from '@/components/Pagination.jsx';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { formatDate } from '@/utils/time.js';
 
 export default function NoticeDetail() {
   const router = useRouter();
@@ -38,16 +39,14 @@ export default function NoticeDetail() {
   }
 
   useEffect(() => {
-    if (id) {
-      fetch(`/api/notice/${id}`)
-        .then((res) => res.json())
-        .then((data) => setNotice(data));
+  if (id) {
+    fetch(`/api/notice/${id}`)
+      .then((res) => res.json())
+      .then((data) => setNotice(data));
 
-      fetch(`/api/notice/${id}/comment`)
-        .then((res) => res.json())
-        .then((data) => setComments(data));
-    }
-  }, [id]);
+    setComments([]);
+  }
+}, [id]);
 
   if (!notice) return <p>로딩 중...</p>;
 
@@ -102,8 +101,8 @@ export default function NoticeDetail() {
                 <div className={style.head_bottom}>
                   <div className={style.img_name_date}>
                     <img src="/assets/ic_profile.svg" alt="kebob"/>
-                    <span id={style.notice_author}>{notice.author}</span>
-                    <span id={style.notice_postedAt}>{notice.postedAt}</span>
+                    <span id={style.notice_author}>{notice.writer.nickname}</span>
+                    <span id={style.notice_postedAt}>{formatDate(notice.createdAt)}</span>
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="1" height="34" viewBox="0 0 1 34" fill="none">
                     <path d="M0.5 0V34" stroke="#E5E7EB"/>
@@ -111,7 +110,7 @@ export default function NoticeDetail() {
                   <div className={style.likearea}>
                     <div className={style.heart_likes}>
                       <img src="/assets/ic_heart.svg" alt="heart"/>
-                      <span>{notice.likes}</span>
+                      <span>{notice.likeCount}</span>
                     </div>
                   </div>
                 </div>

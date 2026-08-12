@@ -1,29 +1,30 @@
-import { PrismaClient } from '@prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
-
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
-
 export default async function handler(req, res) {
+  const BASE_URL = process.env.API_BASE_URL;
+
   if (req.method === 'POST') {
     try {
-      const { author, title, content } = req.body;
+      const { image, content, title } = req.body;
 
-      if (!author || !title || !content) {
+      if (!image || !title || !content) {
         return res.status(400).json({ error: '모든 필드를 입력해주세요' });
       }
 
-      const newNotice = await prisma.notice.create({
-        data: {
-          author,
-          title,
-          content,
-          postedAt: new Date(),
-          likes: 0,
+      // 외부 API로 POST 요청
+      const response = await fetch(`${BASE_URL}/articles`, {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ image, content, title }),
       });
 
-      res.status(201).json(newNotice);
+      if (!response.ok) {
+        return res.status(response.status).json({ error: '외부 API 오류' });
+      }
+
+      const data = await response.json();
+      res.status(201).json(data);
     } catch (error) {
       console.error("Create API Error:", error);
       res.status(500).json({ error: '서버 오류', detail: error.message });

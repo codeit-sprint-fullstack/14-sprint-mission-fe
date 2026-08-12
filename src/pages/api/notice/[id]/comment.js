@@ -1,8 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
-
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
+// api에서 현재 comment는 구현되어있지 않아 front에서 빈 배열으로 return 하게 구현해두었음
+// 추후 comment api 구현되면 fetch로 comment 가져오도록 수정 필요
 
 export default async function handler(req, res) {
   const { id, commentId } = req.query;

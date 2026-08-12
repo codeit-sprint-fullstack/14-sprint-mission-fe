@@ -1,0 +1,131 @@
+.main {
+  margin-top: 70px;
+  width: 100%;
+}
+
+.content {
+  width: 100%;
+}
+
+#heroImage {
+  background: #CFE5FF;
+}
+
+#mainSection {
+  display: flex;
+}
+
+#discriptionSection {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+#discriptionSection h2 {
+  color: var(--Secondary-700);
+    font-family: Pretendard;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+}
+
+#discriptionSection .button {
+  display: flex;
+  height: 56px;
+  padding: 16px 124px;
+  justify-content: center;
+  align-items: center;
+  background: var(--Primary-100);
+  border-radius: 40px;
+  cursor: pointer;
+  border-width: 0;
+  color: var(--Secondary-50);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* PC: 1200px ~ 1199px */
+@media screen and (min-width: 1200px)  {
+  #mainSection {
+    justify-content: center;
+    margin: 0 auto;
+    padding: 200px 0 0;
+    gap: 8px;
+  }
+
+  #mainSection img {
+    width: auto;
+    height: auto;
+    display: block;
+  }
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px){
+
+  #mainSection {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 84px 0 0;
+  }
+
+  #discriptionSection {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-bottom: 60px;
+  }
+
+  #discriptionSection br {
+    display: none;
+  }
+
+  #mainSection img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px){
+  
+  #mainSection {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 84px 0 0;
+  }
+
+  #discriptionSection {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-bottom: 60px;
+  }
+
+  #discriptionSection br {
+    display: none;
+  }
+
+  #mainSection img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}

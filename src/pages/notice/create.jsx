@@ -5,20 +5,24 @@ import Gnb from "@/components/gnb";
 import style from "@/styles/create.module.css";
 
 export default function CreateNotice() {
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
-  const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState("");
 
-  const isDisabled = title.trim() === "" || content.trim() === "" || author.trim() === "";
+  const isDisabled = title.trim() === "" || content.trim() === "" || image.trim() === "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/notice/create", {
+      const res = await fetch(`${BASE_URL}/articles`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ author, title, content }),
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image, content, title }),
       });
 
       if (res.ok) {
@@ -35,9 +39,10 @@ export default function CreateNotice() {
   };
 
 
+
   return (
     <>
-      <Gnb/>
+      <Gnb />
       <main>
         <div className={style.wrap}>
           <div className={style.content_wrap}>
@@ -48,15 +53,6 @@ export default function CreateNotice() {
               </button>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className={style.form_wrap}>
-                <span>*임시용 닉네임</span>
-                <input
-                  type="text"
-                  placeholder="닉네임을 입력해주세요"
-                  value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
-                />
-              </div>
               <div className={style.form_wrap}>
                 <span>*제목</span>
                 <input
@@ -74,11 +70,20 @@ export default function CreateNotice() {
                   onChange={(e) => setContent(e.target.value)}
                 />
               </div>
+              <div className={style.form_wrap}>
+                <span>*이미지 URL</span>
+                <input
+                  type="text"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  placeholder="https://example.com/image.png"
+                />
+              </div>
             </form>
           </div>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 }
