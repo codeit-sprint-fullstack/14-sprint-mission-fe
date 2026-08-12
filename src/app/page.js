@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BoardPage from "@/pages/boards/index";
+import BoardPage from "@/app/boards/page";
 export default function Home() {
   return (
     <>

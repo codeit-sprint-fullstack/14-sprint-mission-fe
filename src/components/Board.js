@@ -1,3 +1,4 @@
+"use client";
 import styles from "@/styles/Board.module.css";
 import { useEffect, useState } from "react";
 import BoardItem from "./BoardItem";

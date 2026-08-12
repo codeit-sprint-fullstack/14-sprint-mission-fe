@@ -32,10 +32,11 @@
 .boardContents .boardText {
   width: calc(100% - 87px);
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 600; 
   line-height: 1.2;
   display: -webkit-box;
   overflow: hidden;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical
 }
