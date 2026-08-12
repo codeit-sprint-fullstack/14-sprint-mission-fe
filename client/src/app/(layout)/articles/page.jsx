@@ -1,5 +1,5 @@
-import ArticleList from "@/app/articles/_components/ArticleList";
-import BestArticleList from "@/app/articles/_components/BestArticleList";
+import ArticleList from "./_components/ArticleList";
+import BestArticleList from "./_components/BestArticleList";
 import Dropdown from "@/components/Dropdown";
 import Input from "@/components/SearchInput";
 import Link from "next/link";

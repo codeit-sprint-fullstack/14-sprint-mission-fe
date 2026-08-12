@@ -7,16 +7,15 @@ import visibleIcon from '@/assets/ic_visibility_on.png';
 import invisibleIcon from '@/assets/ic_visibility_off.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './page.module.css';
 import { useState } from 'react';
+import styles from './page.module.css';
 
-export default function Singup() {
+export default function Login() {
   const [pwdVisible, setPwdVisible] = useState(false);
-  const [pwdConfVisible, setPwdConfVisible] = useState(false);
-
+  
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
+      <Link href='/' className={styles.header}>
         <Image
           src={logoIcon}
           width={103}
@@ -26,7 +25,7 @@ export default function Singup() {
         <h1 className={styles.title}>
           판다마켓
         </h1>
-      </header>
+      </Link>
 
       <form className={styles.form}>
         <div className={styles.section}>
@@ -38,31 +37,16 @@ export default function Singup() {
           </label>
           <input 
             className={styles.input}
-            type='email'
-            id='email'
-            name='email'
-            placeholder='이메일을 입력해주세요'
+            type='text' 
+            id='email' 
+            name='email' 
+            placeholder='이메일을 입력해주세요' 
           />
         </div>
         <div className={styles.section}>
           <label
-            className={styles.label} 
-            htmlFor='nickname'
-          >
-            닉네임
-          </label>
-          <input
-            className={styles.input}
-            type='text' 
-            id='nickname'
-            name='nickname'
-            placeholder='닉네임을 입력해주세요'
-          />
-        </div>
-        <div className={styles.section}>
-          <label 
             className={styles.label}
-            htmlFor='password'
+            htmlFor='password' 
           >
             비밀번호
           </label>
@@ -72,11 +56,11 @@ export default function Singup() {
               type={pwdVisible ? 'text' : 'password'}
               id='password'
               name='password'
-              placeholder='비밀번호를 입력해주세요'
+              placeholder='닉네임을 입력해주세요'
             />
             <button 
+              type='button' 
               className={styles.visibility}
-              type='button'
               onClick={() => setPwdVisible(!pwdVisible)}
             >
               <Image
@@ -88,44 +72,13 @@ export default function Singup() {
             </button>
           </div>
         </div>
-        <div className={styles.section}>
-          <label 
-            className={styles.label}
-            htmlFor='passwordConfirmation'
-          >
-            비밀번호 확인
-          </label>
-          <div className={styles.pwdInput}>
-            <input 
-              className={styles.input}
-              type={pwdConfVisible ? 'text' : 'password'}
-              id='passwordConfirmation'
-              name='passwordConfirmation'
-              placeholder='비밀번호를 다시 한 번 입력해주세요'
-            />
-            <button
-              className={styles.visibility}
-              type='button'
-              onClick={() => setPwdConfVisible(!pwdConfVisible)}
-            >
-              <Image
-                src={pwdConfVisible ? visibleIcon : invisibleIcon}
-                width={24}
-                height={24}
-                alt='비밀번호 보기'
-              />
-            </button>
-          </div>
-        </div>
         <button className={styles.submitBtn}>
-          회원가입
+          로그인
         </button>
       </form>
 
       <div className={styles.simpleLogin}>
-        <p>
-          간편 로그인하기
-        </p>
+        <p>간편 로그인하기</p>
         <div className={styles.socials}>
           <Link href='https://www.google.com' target='_blank' rel='noopener noreferrer' >
             <Image
@@ -146,13 +99,15 @@ export default function Singup() {
         </div>
       </div>
 
-      <div className={styles.login}>
-        <p>이미 회원이신가요?</p>
-        <Link href='/signin' className={styles.loginLink}>
-          로그인
+      <div className={styles.signup}>
+        <span>판다마켓이 처음이신가요?</span>
+        <Link 
+          href='/signup' 
+          className={styles.signupLink}
+        >
+          회원가입
         </Link>
       </div>
-      
     </div>
   )
 }
