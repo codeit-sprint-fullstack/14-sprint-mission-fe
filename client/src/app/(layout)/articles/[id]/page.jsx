@@ -71,7 +71,7 @@ export default async function ArticleDetail({ params }) {
               loading="eager"
               alt="좋아요 수"
             />
-            <p className={styles.heartCount}>{article.fav || 0}</p>
+            <p className={styles.heartCount}>{article.favoriteCount || 0}</p>
           </div>
         </div>
         <p className={styles.content}>{article.content}</p>

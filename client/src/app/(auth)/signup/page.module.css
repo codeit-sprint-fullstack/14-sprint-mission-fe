@@ -11,7 +11,7 @@
 
 .header {
   text-decoration: none;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,16 +80,28 @@
   transform: translateY(-50%);
 }
 
+.errorText {
+  margin-top: -8px;
+  padding-left: 16px;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .submitBtn {
   height: 56px;
   padding: 16px 124px;
   border: none;
   border-radius: 40px;
-  background: var(--secondary-400);
+  background: var(--primary-100);
 
   color: var(--secondary-100);
   font-size: 20px;
   font-weight: 600;
+}
+
+.submitBtn:disabled {
+  background: var(--secondary-400);
 }
 
 .simpleLogin {

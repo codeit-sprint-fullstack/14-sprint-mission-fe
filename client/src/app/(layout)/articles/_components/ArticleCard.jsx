@@ -30,7 +30,7 @@ export default function ArticleCard({ article }) {
             loading="eager"
             alt="프로필 아이콘"
           />
-          <p className={styles.nickname}>{article.nickname || "총명한 판다"}</p>
+          <p className={styles.nickname}>{article.writer.nickname || "총명한 판다"}</p>
           <p className={styles.date}>{formatDate(article.createdAt)}</p>
         </div>
         <div className={styles.heart}>
@@ -41,7 +41,7 @@ export default function ArticleCard({ article }) {
             loading="eager"
             alt="좋아요 수"
           />
-          <p className={styles.heartCount}>{article.fav || 0}</p>
+          <p className={styles.heartCount}>{article.likeCount || 0}</p>
         </div>
       </div>
     </Link>

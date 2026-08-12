@@ -33,7 +33,7 @@ export default function BestArticleCard({ article }) {
       </div>
       <div className={styles.info}>
         <div className={styles.infoLeft}>
-          <p className={styles.nickname}>{article.nickname || "총명한 판다"}</p>
+          <p className={styles.nickname}>{article.writer.nickname || "총명한 판다"}</p>
           <div className={styles.heart}>
             <Image
               src={heart}
@@ -42,7 +42,7 @@ export default function BestArticleCard({ article }) {
               loading="eager"
               alt="좋아요 수"
             />
-            <p className={styles.heartCount}>{article.heart || 0}</p>
+            <p className={styles.heartCount}>{article.likeCount || 0}</p>
           </div>
         </div>
         <p className={styles.date}>{formatDate(article.createdAt)}</p>

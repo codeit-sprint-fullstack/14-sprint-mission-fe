@@ -3,16 +3,95 @@
 import googleIcon from '@/assets/ic_google.png';
 import kakaotalkIcon from '@/assets/ic_kakaotalk.png';
 import logoIcon from '@/assets/ic_logo.png';
-import visibleIcon from '@/assets/ic_visibility_on.png';
 import invisibleIcon from '@/assets/ic_visibility_off.png';
+import visibleIcon from '@/assets/ic_visibility_on.png';
+import ErrorModal from '@/components/modal/ErrorModal';
+import axios from '@/lib/axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { useState } from 'react';
 
-export default function Singup() {
+export default function Signup() {
   const [pwdVisible, setPwdVisible] = useState(false);
   const [pwdConfVisible, setPwdConfVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [errorValue, setErrorValue] = useState({
+    emailError: '',
+    passwordError: '',
+    passwordConfirmationError: '',
+  })
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+
+  const router = useRouter();
+
+  const isEmpty =
+    email.trim() === '' ||
+    nickname.trim() === '' ||
+    password.trim() === '' ||
+    passwordConfirmation.trim() === '';
+
+  const emailPattern = 
+    /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  // 로컬스토리지에 AT 있는 경우
+    useEffect(() => {
+      const accessToken = localStorage.getItem('accessToken');
+      // 중고마켓 페이지로 이동
+      if (accessToken) {
+        router.push('/products');
+      }
+    }, [router]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    // 1. 회원가입 인풋 형식 검사
+    const nextErros = {
+      emailError: '',
+      passwordError: '',
+      passwordConfirmationError: '',
+    }
+    if (!emailPattern.test(email)) {
+      nextErros.emailError = '잘못된 이메일입니다';
+    }
+    if (password.length < 8) {
+      nextErros.passwordError = '비밀번호를 8자 이상 입력해주세요';
+    }
+    if (password !== passwordConfirmation) {
+      nextErros.passwordConfirmationError = '비밀번호가 일치하지 않습니다';
+    }
+    setErrorValue(nextErros);
+    // 하나라도 오류가 있으면 API 요청 중단
+    if (nextErros.emailError || nextErros.passwordError || nextErros.passwordConfirmationError ) {
+      return;
+    }
+
+    // 2. 형식 검사를 통과한 경우, 회원가입 API 요청
+    try {
+      const res = await axios.post('/auth/signUp', {
+        email,
+        nickname,
+        password,
+        passwordConfirmation,
+      });
+      // 회원가입 성공하면 AT, RT 로컬스토리지에 저장 (자동으로 로그인?)
+      localStorage.setItem('accessToken', res.data.accessToken);
+      localStorage.setItem('refreshToken', res.data.refreshToken);
+      // 중고마켓 페이지로 이동
+      router.push('/products');
+    } catch (err) {
+      console.log(err.response?.data);
+      // 실패할 경우, 모달 열기
+      setModalMessage(err.response?.data?.message ?? '요청에 실패했습니다');
+      setIsErrorModalOpen(true);
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -28,7 +107,7 @@ export default function Singup() {
         </h1>
       </Link>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.section}>
           <label
             className={styles.label}
@@ -42,7 +121,13 @@ export default function Singup() {
             id='email'
             name='email'
             placeholder='이메일을 입력해주세요'
+            onChange={(e) => setEmail(e.target.value)}
           />
+          {errorValue.emailError && (
+            <p className={styles.errorText}>
+              {errorValue.emailError}
+            </p>
+          )}
         </div>
         <div className={styles.section}>
           <label
@@ -57,6 +142,7 @@ export default function Singup() {
             id='nickname'
             name='nickname'
             placeholder='닉네임을 입력해주세요'
+            onChange={(e) => setNickname(e.target.value)}
           />
         </div>
         <div className={styles.section}>
@@ -73,6 +159,7 @@ export default function Singup() {
               id='password'
               name='password'
               placeholder='비밀번호를 입력해주세요'
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button 
               className={styles.visibility}
@@ -87,6 +174,11 @@ export default function Singup() {
               />
             </button>
           </div>
+          {errorValue.passwordError && (
+            <p className={styles.errorText}>
+              {errorValue.passwordError}
+            </p>
+          )}
         </div>
         <div className={styles.section}>
           <label 
@@ -102,6 +194,7 @@ export default function Singup() {
               id='passwordConfirmation'
               name='passwordConfirmation'
               placeholder='비밀번호를 다시 한 번 입력해주세요'
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
             <button
               className={styles.visibility}
@@ -116,8 +209,16 @@ export default function Singup() {
               />
             </button>
           </div>
+          {errorValue.passwordConfirmationError && (
+            <p className={styles.errorText}>
+              {errorValue.passwordConfirmationError}
+            </p>
+          )}
         </div>
-        <button className={styles.submitBtn}>
+        <button 
+          className={styles.submitBtn}
+          disabled={isEmpty}
+        >
           회원가입
         </button>
       </form>
@@ -153,6 +254,12 @@ export default function Singup() {
         </Link>
       </div>
       
+      {isErrorModalOpen && (
+        <ErrorModal
+          message={modalMessage}
+          onClose={() => setIsErrorModalOpen(false)}
+        />
+      )}
     </div>
   )
 }
