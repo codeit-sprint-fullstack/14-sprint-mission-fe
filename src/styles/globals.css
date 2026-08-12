@@ -45,3 +45,13 @@ p {
 img {
   display: block;
 }
+
+Link {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  
+}

@@ -1,1 +1,134 @@
-.signWrapper {display: block;}
+.hidden {
+  display: none;
+  font-size: 0;
+}
+
+.signSection {
+  min-height: 100vh;
+  position: relative;
+}
+
+.signWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 640px;
+  padding: 24px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.signWrapper .logoWrap {
+  margin-bottom: 40px;
+}
+
+.signWrapper img {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signInput {
+  margin-bottom: 24px;
+}
+
+.signInput:last-child {
+  margin-bottom: 0;
+}
+
+.signInput .inputTit {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.signInput input {
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  padding: 0 24px;
+  border-radius: 12px;
+}
+
+.paswordWrap {
+  position: relative;
+}
+
+.paswordWrap .passwordInput {
+  padding-right: 60px;
+}
+
+.paswordWrap .btnVisible {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-image: url(../assets/btn_visibility_off.png);
+  transform: translateY(-50%);
+}
+
+.btnLogin {
+  width: 100%;
+  background-color: #9CA3AF;
+  color: #fff;
+  border-radius: 40px;
+  height: 56px;
+  font-size: 18px;
+}
+
+.easyLoginWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  background-color: #E6F2FF;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.easyLoginWrap .easyLogin {
+  display: flex;
+
+}
+
+.easyLoginWrap .btnEasy {
+  display: block;
+  width: 42px;
+  height: 42px;
+  ;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 99px;
+  background-size: 42px;
+}
+
+.easyLoginWrap a.google {
+  background-image: url(../assets/ic_google.png);
+  margin-right: 10px;
+}
+
+.easyLoginWrap a.kakao {
+  background-image: url(../assets/ic_kakao.png);
+}
+
+.infoSignup {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+}
+
+.infoSignup p {
+  display: inline-block;
+}
+
+.infoSignup a {
+  margin-left: 5px;
+  color: #3692FF;
+  text-decoration: underline;
+}
