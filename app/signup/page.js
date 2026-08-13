@@ -32,10 +32,18 @@ export default function SignupPage() {
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
-
-      router.push("/items");
     },
   });
+
+  const signupErrorMessage =
+    signupMutation.error?.response?.data?.message ||
+    "회원가입에 실패했습니다. 다시 시도해 주세요.";
+
+  const isModalOpen = signupMutation.isSuccess || signupMutation.isError;
+
+  const modalMessage = signupMutation.isSuccess
+    ? "가입 완료되었습니다."
+    : signupErrorMessage;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -45,6 +53,14 @@ export default function SignupPage() {
     }
 
     signupMutation.mutate({ email, nickname, password, passwordConfirmation });
+  }
+
+  function handleModalConfirm() {
+    if (signupMutation.isSuccess) {
+      router.push("/items");
+      return;
+    }
+    signupMutation.reset();
   }
 
   return (
@@ -173,6 +189,22 @@ export default function SignupPage() {
           <Link href="/signin">로그인</Link>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className={styles.modalBackdrop}>
+          <div className={styles.modal}>
+            <p className={styles.modalMessage}>{modalMessage}</p>
+
+            <button
+              type="button"
+              className={styles.modalButton}
+              onClick={handleModalConfirm}
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

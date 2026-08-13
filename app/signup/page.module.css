@@ -173,3 +173,56 @@ body {
   color: #f74747;
   font-size: 0.875rem;
 }
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+
+  background-color: rgb(0 0 0 / 65%);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 33.75rem;
+  min-height: 15.625rem;
+  padding: 3rem;
+  border-radius: 12px;
+
+  background-color: #ffffff;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 20%);
+}
+
+.modalMessage {
+  margin: 0 0 2.5rem;
+
+  color: #1f2937;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.modalButton {
+  min-width: 7.5rem;
+  height: 3rem;
+  padding: 0 1.5rem;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
