@@ -1,0 +1,176 @@
+.wrapper {
+  width: 1200px;
+  height: 1558px;
+  padding-top: 26px;
+  margin: 0 auto;
+}
+
+.productSection {
+  height: 536px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--secondary-200);
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.productImg {
+  border-radius: 16px;
+}
+
+.productInfo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.name {
+  padding-bottom: 16px;
+  color: var(--secondary-800);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.price {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--secondary-200);
+  color: var(--secondary-800);
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.title {
+  padding-bottom: 16px;
+  color: var(--secondary-600);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.description {
+  color: var(--secondary-600);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  padding: 6px 16px;
+  border-radius: 26px;
+  background: var(--secondary-100);
+}
+
+.userSection {
+  height: 50px;
+  margin-top: auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.userInfoRight {
+  display:flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nickname {
+  color: var(--secondary-600);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.date {
+  color: var(--secondary-400);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.favorite {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.favorite {
+  height: 40px;
+  padding: 4px 12px;
+  border-radius: 35px;
+  border: 1px solid var(--secondary-200);
+  background: #FFF;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.favoriteCount {
+  color: var(--secondary-500);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.formSection {
+  margin-top: 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.label {
+  color: var(--secondary-900);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.input {
+  height: 104px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--secondary-100);
+}
+
+.input::placeholder {
+  color: var(--secondary-400);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--primary-100);
+}
+
+.submitBtn {
+  width: fit-content;
+  height: 42px;
+  padding: 12px 23px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 8px;
+  background: var(--secondary-400);
+  color: var(--secondary-100);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.commentSection {
+  margin-top: 24px;
+}

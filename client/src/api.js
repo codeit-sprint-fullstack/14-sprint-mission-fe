@@ -2,6 +2,7 @@
 
 import axios from './lib/axios';
 
+// 인증
 export async function getMe() {
   const accessToken = localStorage.getItem('accessToken');
   const res = await axios.get('/users/me', {
@@ -18,4 +19,41 @@ export async function register(data) {
 export async function login(data) {
   const res = await axios.post('/auth/signIn', data);
   return res.data;
+}
+
+// products
+export async function getProducts({ page, pageSize, orderBy, keyword }) {
+  const res = await axios.get('/products', {
+    params: {
+      page,
+      pageSize,
+      orderBy,
+      keyword,
+    }
+  });
+  const data = res.data;
+  return {
+    totalCount: data.totalCount,
+    products: data.list
+  };
+}
+
+export async function getProduct(productId) {
+  const accessToken = localStorage.getItem('accessToken');
+  const res = await axios.get(`/products/${productId}`, {
+    headers: { 'Authorization': `Bearer ${accessToken}`},
+  });
+  const product = res.data;
+  return product;
+}
+
+export async function getProductComments(productId, limit) {
+  const res = await axios.get(`/products/${productId}/comments`, {
+    params: {
+      productId,
+      limit,
+    }
+  })
+  const comments = res.data.list;
+  return comments;
 }

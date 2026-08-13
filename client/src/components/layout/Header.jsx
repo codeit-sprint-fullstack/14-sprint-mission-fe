@@ -62,7 +62,6 @@ export default function Header() {
             {user.nickname}
           </p>
         </div>
-        
       ) : (
         <Link href="/signin" className={styles.signinLink}>
           로그인

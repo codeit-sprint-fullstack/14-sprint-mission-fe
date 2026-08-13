@@ -8,3 +8,12 @@ Content-Type: application/json
   "email": "kimcoding@gmail.com",
   "password": "12341234"
 }
+
+###
+POST https://panda-market-api.vercel.app/products/1026/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyMywic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3ODY2MTgyMzksImV4cCI6MTc4NjYyMDAzOSwiaXNzIjoic3AtcGFuZGEtbWFya2V0In0.CcROgSA4fRVy_1b9Qtl6OLhIOD5ynKM9wOErIqWZ704
+
+{
+  "content": "거래 가능한가요?"
+}

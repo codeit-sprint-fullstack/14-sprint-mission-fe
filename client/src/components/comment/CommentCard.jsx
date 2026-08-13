@@ -50,7 +50,7 @@ export default function CommentCard({ articleId, comment }) {
           alt="프로필 아이콘"
         />
         <div className={styles.infoRight}>
-          <p className={styles.nickname}>{comment.nickname || "똑똑한판다"}</p>
+          <p className={styles.nickname}>{comment.writer.nickname || "똑똑한판다"}</p>
           <p className={styles.date}>{formatTime(comment.createdAt)}</p>
         </div>
       </div>

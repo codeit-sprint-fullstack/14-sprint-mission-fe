@@ -6,7 +6,13 @@ import styles from "./ProductCard.module.css";
 export default function ProductCard({ product }) {
   return (
     <div className={styles.card}>
-      <Image src={defaultImg} width={220} height={220} alt={product.name} />
+      <Image 
+        src={defaultImg} 
+        width={220} 
+        height={220} 
+        loading='eager'
+        alt={product.name} 
+      />
       <div className={styles.info}>
         <p className={styles.name}>{product.name}</p>
         <p className={styles.price}>{product.price.toLocaleString()}원</p>

@@ -1,25 +1,29 @@
+'use client';
+
 import Dropdown from "@/components/Dropdown";
 import SearchInput from "@/components/SearchInput";
+import { useGetProducts } from "@/queries/products";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import ProductList from "./_components/ProductList";
 import styles from "./page.module.css";
 
-export default async function Products({ searchParams }) {
+export default function Products() {
   // searchParams로 url의 keyword, sort 꺼내기
-  const params = await searchParams;
-  const keyword = params.keyword ?? "";
-  const sort = params.sort ?? "recent";
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get('keyword') ?? '';
+  const orderBy = searchParams.get('orderBy') ?? 'recent';
 
-  // 상품 가져오기
-  const res = await fetch(
-    `${process.env.API_BASE_URL}/products?keyword=${keyword}&sort=${sort}`,
-    { cache: "no-store" }
+  // 상품 가져오기(react query 사용)
+  const { data, isPending, isError, error } = useGetProducts(
+    { page: 1, pageSize: 10, orderBy, keyword }
   );
-  if (!res.ok) {
-    throw new Error("상품을 불러오는 데 실패했습니다");
-  }
-  const data = await res.json();
-  const products = data.list;
+
+  if (isPending) return <p>로딩 중...</p>
+  if (isError) return <p>{error.message}</p>
+
+  const totalCount = data.totalCount;
+  const products = data.products;
 
   return (
     <div className={styles.wrapper}>
