@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import "./NavBar.css";
 import Button from "@/components/Button/Button";
+import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import "./NavBar.css";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -39,7 +39,7 @@ export default function NavBar() {
           </div>
         </div>
         <div className="button-group">
-          <Button href="/login">로그인</Button>
+          <Button href="/signin">로그인</Button>
         </div>
       </div>
     </nav>
