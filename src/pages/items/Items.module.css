@@ -1,0 +1,136 @@
+.itemsPage {
+  width: 100%;
+  max-width: 1200px;
+  min-height: calc(100vh - 230px);
+  margin: 0 auto;
+  padding: 0 0 72px;
+}
+
+.productSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.listTitle {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchBox {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 9px;
+  left: 14px;
+  width: 24px;
+  height: 24px;
+}
+
+.searchInput {
+  width: 325px;
+  height: 42px;
+  padding: 9px 20px 9px 44px;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  background-color: #f3f4f6;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.searchInput:focus {
+  border: 1px solid #3692ff;
+}
+
+.registerButton {
+  display: flex;
+  width: 133px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #3692ff;
+  color: #f3f4f6;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  text-decoration: none;
+}
+
+.orderSelect {
+  width: 130px;
+  height: 42px;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: #ffffff;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  gap: 40px 24px;
+  width: 100%;
+  min-height: 676px;
+}
+
+.message {
+  padding: 80px 0;
+  color: #6b7280;
+  text-align: center;
+  font-size: 16px;
+}
+
+.pagination {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.pageButton,
+.activePageButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.activePageButton {
+  border-color: #3692ff;
+  background-color: #3692ff;
+  color: #ffffff;
+}
+
+.pageButton:disabled {
+  background-color: #f3f4f6;
+  color: #d1d5db;
+  cursor: not-allowed;
+}

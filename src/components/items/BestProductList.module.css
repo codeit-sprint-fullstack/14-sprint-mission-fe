@@ -1,0 +1,24 @@
+.bestSection {
+  width: 100%;
+}
+
+.bestTitle {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.bestGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  width: 100%;
+}
+
+.message {
+  padding: 80px 0;
+  color: #6b7280;
+  text-align: center;
+  font-size: 16px;
+}
