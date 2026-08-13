@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import formatDate from '@/utils/formatDate'
-import styles from '@/components/BestArticleCard.module.css'
+import styles from '@/components/boards/BestArticleCard.module.css'
 
 function BestArticleCard({ article }) {
   return (

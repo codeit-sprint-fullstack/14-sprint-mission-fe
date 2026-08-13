@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import formatRelativeTime from '@/utils/formatRelativeTime'
-import styles from './CommentCard.module.css'
+import styles from '@/components/boards/CommentCard.module.css'
 
 function CommentCard({ comment, getComments }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

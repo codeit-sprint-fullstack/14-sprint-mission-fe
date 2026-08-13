@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import formatDate from '@/utils/formatDate'
-import CommentCard from '@/components/CommentCard'
+import CommentCard from '@/components/boards/CommentCard'
 import styles from '@/app/(with-layout)/boards/[id]/articleDetailPage.module.css'
 
 function ArticleDetailClient({ article }) {

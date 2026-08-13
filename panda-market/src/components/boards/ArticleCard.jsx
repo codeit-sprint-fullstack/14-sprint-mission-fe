@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import formatDate from '@/utils/formatDate'
-import styles from '@/components/ArticleCard.module.css'
+import styles from '@/components/boards/ArticleCard.module.css'
 
 function ArticleCard({ article }) {
   return (

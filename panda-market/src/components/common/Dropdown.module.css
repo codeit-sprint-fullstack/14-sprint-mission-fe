@@ -86,7 +86,6 @@
 
 @media (max-width: 767px) {
   .dropdown {
-    order: 4;
     width: 42px;
     height: 42px;
   }

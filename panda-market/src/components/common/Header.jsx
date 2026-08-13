@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import styles from '@/components/Header.module.css'
+import styles from '@/components/common/Header.module.css'
 
 function Header() {
   const pathname = usePathname()

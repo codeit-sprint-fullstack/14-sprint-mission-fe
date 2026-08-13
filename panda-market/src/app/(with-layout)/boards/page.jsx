@@ -3,10 +3,15 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Dropdown from '@/components/Dropdown'
-import ArticleCard from '@/components/ArticleCard'
-import BestArticleCard from '@/components/BestArticleCard'
+import Dropdown from '@/components/common/Dropdown'
+import ArticleCard from '@/components/boards/ArticleCard'
+import BestArticleCard from '@/components/boards/BestArticleCard'
 import styles from '@/app/(with-layout)/boards/boardPage.module.css'
+
+const SORT_OPTIONS = [
+  { value: 'recent', label: '최신순' },
+  { value: 'oldest', label: '등록순' },
+]
 
 function BoardsPage() {
   const [sort, setSort] = useState('recent')
@@ -129,7 +134,7 @@ function BoardsPage() {
               placeholder="검색어를 입력해주세요"
             />
           </form>
-          <Dropdown value={sort} onChange={setSort} />
+          <Dropdown options={SORT_OPTIONS} value={sort} onChange={setSort} />
         </div>
         <div className={styles.articlesList}>
           {/* 데스크탑:4개/태블릿:6개/모바일:3개 */}

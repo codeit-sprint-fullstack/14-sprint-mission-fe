@@ -2,17 +2,12 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import styles from '@/components/Dropdown.module.css'
+import styles from '@/components/common/Dropdown.module.css'
 
-const SORT_OPTIONS = [
-  { value: 'recent', label: '최신순' },
-  { value: 'oldest', label: '등록순' },
-]
-
-function Dropdown({ value, onChange }) {
+function Dropdown({ options, value, onChange, className = '' }) {
   const [isOpen, setIsOpen] = useState(false)
   const selectedOption =
-    SORT_OPTIONS.find((option) => option.value === value) ?? SORT_OPTIONS[0]
+    options.find((option) => option.value === value) ?? options[0]
 
   const handleSelect = (nextValue) => {
     onChange(nextValue)
@@ -20,7 +15,7 @@ function Dropdown({ value, onChange }) {
   }
 
   return (
-    <div className={styles.dropdown}>
+    <div className={`${styles.dropdown} ${className}`.trim()}>
       <button
         className={styles.dropdownToggle}
         type="button"
@@ -51,7 +46,7 @@ function Dropdown({ value, onChange }) {
           role="listbox"
           aria-label="정렬 순서"
         >
-          {SORT_OPTIONS.map((option) => {
+          {options.map((option) => {
             const isSelected = option.value === value
 
             return (
