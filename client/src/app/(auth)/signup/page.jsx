@@ -5,91 +5,69 @@ import kakaotalkIcon from '@/assets/ic_kakaotalk.png';
 import logoIcon from '@/assets/ic_logo.png';
 import invisibleIcon from '@/assets/ic_visibility_off.png';
 import visibleIcon from '@/assets/ic_visibility_on.png';
-import ErrorModal from '@/components/modal/ErrorModal';
-import axios from '@/lib/axios';
+import Modal from '@/components/Modal';
+import { useRegister } from '@/queries/auth';
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import styles from './page.module.css';
 
 export default function Signup() {
+  const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm({ mode: 'onChange'});
   const [pwdVisible, setPwdVisible] = useState(false);
   const [pwdConfVisible, setPwdConfVisible] = useState(false);
-  const [email, setEmail] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [errorValue, setErrorValue] = useState({
-    emailError: '',
-    passwordError: '',
-    passwordConfirmationError: '',
-  })
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(null); // null: 닫힘, success: 성공 모달, error: 실패 모달
   const [modalMessage, setModalMessage] = useState('');
 
+  const queryClient = useQueryClient();
+  const registerMutation = useRegister();
   const router = useRouter();
 
-  const isEmpty =
-    email.trim() === '' ||
-    nickname.trim() === '' ||
-    password.trim() === '' ||
-    passwordConfirmation.trim() === '';
-
-  const emailPattern = 
-    /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
   // 로컬스토리지에 AT 있는 경우
-    useEffect(() => {
-      const accessToken = localStorage.getItem('accessToken');
-      // 중고마켓 페이지로 이동
-      if (accessToken) {
-        router.push('/products');
-      }
-    }, [router]);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    // 1. 회원가입 인풋 형식 검사
-    const nextErros = {
-      emailError: '',
-      passwordError: '',
-      passwordConfirmationError: '',
-    }
-    if (!emailPattern.test(email)) {
-      nextErros.emailError = '잘못된 이메일입니다';
-    }
-    if (password.length < 8) {
-      nextErros.passwordError = '비밀번호를 8자 이상 입력해주세요';
-    }
-    if (password !== passwordConfirmation) {
-      nextErros.passwordConfirmationError = '비밀번호가 일치하지 않습니다';
-    }
-    setErrorValue(nextErros);
-    // 하나라도 오류가 있으면 API 요청 중단
-    if (nextErros.emailError || nextErros.passwordError || nextErros.passwordConfirmationError ) {
-      return;
-    }
-
-    // 2. 형식 검사를 통과한 경우, 회원가입 API 요청
-    try {
-      const res = await axios.post('/auth/signUp', {
-        email,
-        nickname,
-        password,
-        passwordConfirmation,
-      });
-      // 회원가입 성공하면 AT, RT 로컬스토리지에 저장 (자동으로 로그인?)
-      localStorage.setItem('accessToken', res.data.accessToken);
-      localStorage.setItem('refreshToken', res.data.refreshToken);
-      // 중고마켓 페이지로 이동
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    // 중고마켓 페이지로 이동
+    if (accessToken) {
       router.push('/products');
-    } catch (err) {
-      console.log(err.response?.data);
-      // 실패할 경우, 모달 열기
-      setModalMessage(err.response?.data?.message ?? '요청에 실패했습니다');
-      setIsErrorModalOpen(true);
+    }
+  }, [router]);
+
+  // useForm: e.preventDefault 자동으로 수행
+  function onSubmit(data) {
+    registerMutation.mutate(data, {
+      // 회원가입 성공하면
+      onSuccess: (resData) => {
+        // AT, RT 로컬스토리지에 저장
+        localStorage.setItem('accessToken', resData.accessToken);
+        localStorage.setItem('refreshToken', resData.refreshToken);
+        // 캐시 무효화 
+        // (mutate는 서버에 요청을 보낼 뿐, 관련 쿼리 캐시를 자동으로 갱신하지 않음)
+        // (쿼리를 무효화해서 가장 최신의 데이터가 보이도록 함)
+        queryClient.invalidateQueries({ queryKey: ['me'] });
+        // 회원가입 성공 모달 열기
+        setModalMessage('가입 완료되었습니다');
+        setModalType('success');
+      },
+      // 실패하면
+      onError: (err) => {
+        // 실패 모달 열기
+        setModalMessage(err.response?.data?.message ?? '요청에 실패했습니다');
+        setModalType('error');
+      },
+    });
+  }
+
+  function handleModalClose() {
+    const isSuccess = 
+      modalType === 'success';
+    
+    setModalType(null);
+
+    if (isSuccess) {
+      router.push('/products');
     }
   }
 
@@ -107,7 +85,7 @@ export default function Signup() {
         </h1>
       </Link>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.section}>
           <label
             className={styles.label}
@@ -119,13 +97,18 @@ export default function Signup() {
             className={styles.input}
             type='email'
             id='email'
-            name='email'
             placeholder='이메일을 입력해주세요'
-            onChange={(e) => setEmail(e.target.value)}
+            {...register('email', {
+              required: true,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: '잘못된 이메일입니다'
+              }
+            })}
           />
-          {errorValue.emailError && (
+          {errors.email && (
             <p className={styles.errorText}>
-              {errorValue.emailError}
+              {errors.email.message}
             </p>
           )}
         </div>
@@ -140,9 +123,10 @@ export default function Signup() {
             className={styles.input}
             type='text' 
             id='nickname'
-            name='nickname'
             placeholder='닉네임을 입력해주세요'
-            onChange={(e) => setNickname(e.target.value)}
+            {...register('nickname', {
+              required: true,
+            })}
           />
         </div>
         <div className={styles.section}>
@@ -157,9 +141,14 @@ export default function Signup() {
               className={styles.input}
               type={pwdVisible ? 'text' : 'password'}
               id='password'
-              name='password'
               placeholder='비밀번호를 입력해주세요'
-              onChange={(e) => setPassword(e.target.value)}
+              {...register('password', {
+                required: true,
+                minLength: {
+                  value: 8,
+                  message: '비밀번호를 8자 이상 입력해주세요'
+                }
+              })}
             />
             <button 
               className={styles.visibility}
@@ -174,9 +163,9 @@ export default function Signup() {
               />
             </button>
           </div>
-          {errorValue.passwordError && (
+          {errors.password && (
             <p className={styles.errorText}>
-              {errorValue.passwordError}
+              {errors.password.message}
             </p>
           )}
         </div>
@@ -192,9 +181,17 @@ export default function Signup() {
               className={styles.input}
               type={pwdConfVisible ? 'text' : 'password'}
               id='passwordConfirmation'
-              name='passwordConfirmation'
               placeholder='비밀번호를 다시 한 번 입력해주세요'
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
+              {...register('passwordConfirmation', {
+                required: true,
+                validate: (value) => {
+                  if (watch('password') !== value) {
+                    return '비밀번호가 일치하지 않습니다';
+                  } else {
+                    return true;
+                  }
+                }
+              })}
             />
             <button
               className={styles.visibility}
@@ -209,17 +206,17 @@ export default function Signup() {
               />
             </button>
           </div>
-          {errorValue.passwordConfirmationError && (
+          {errors.passwordConfirmation && (
             <p className={styles.errorText}>
-              {errorValue.passwordConfirmationError}
+              {errors.passwordConfirmation.message}
             </p>
           )}
         </div>
         <button 
           className={styles.submitBtn}
-          disabled={isEmpty}
+          disabled={!isValid || registerMutation.isPending}
         >
-          회원가입
+          {registerMutation.isPending ? '회원가입 중...' : '회원가입'}
         </button>
       </form>
 
@@ -254,10 +251,10 @@ export default function Signup() {
         </Link>
       </div>
       
-      {isErrorModalOpen && (
-        <ErrorModal
+      {modalType && (
+        <Modal
           message={modalMessage}
-          onClose={() => setIsErrorModalOpen(false)}
+          onClose={handleModalClose}
         />
       )}
     </div>

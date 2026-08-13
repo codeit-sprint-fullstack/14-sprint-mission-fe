@@ -52,6 +52,18 @@
   color: var(--primary-100);
 }
 
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.userNickname {
+  color: var(--secondary-600);
+  font-size: 18px;
+  font-weight: 400;
+}
+
 .signinLink {
   height: 42px;
   padding: 12px 23px;

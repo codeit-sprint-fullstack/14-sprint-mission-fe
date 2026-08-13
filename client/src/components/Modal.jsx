@@ -1,6 +1,6 @@
-import styles from './ErrorModal.module.css';
+import styles from './Modal.module.css';
 
-export default function ErrorModal({ onClose, message }) {
+export default function Modal({ onClose, message }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>

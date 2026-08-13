@@ -1,3 +1,4 @@
+import QueryProvider from "@/providers/QueryProvider";
 import localfont from "next/font/local";
 import "./globals.css";
 
@@ -15,11 +16,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko">
-      <body className={pretendard.variable}>
-        <main className="main">
-          <div>{children}</div>
-        </main>
-      </body>
+        <body className={pretendard.variable}>
+          <QueryProvider>
+            <main className="main">
+              <div>{children}</div>
+            </main>
+          </QueryProvider>
+        </body>
     </html>
   );
 }

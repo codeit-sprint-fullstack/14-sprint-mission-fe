@@ -1,16 +1,20 @@
 "use client";
 
 import logo from "@/assets/ic_logo.png";
+import profile from '@/assets/ic_profile.png';
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
+import { useUser } from "@/queries/auth";
 
 export default function Header() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const isArticlesPage = pathname.startsWith("/articles");
   const isProductsPage = pathname.startsWith("/products");
+
+  const { data: user } = useUser();
 
   return (
     <header className={styles.headerWrapper}>
@@ -46,9 +50,24 @@ export default function Header() {
           </nav>
         )}
       </div>
-      <Link href="/signin" className={styles.signinLink}>
-        로그인
-      </Link>
+      { user ? (
+        <div className={styles.userProfile}>
+          <Image
+            src={profile}
+            width={40}
+            height={40}
+            alt=''
+          />
+          <p className={styles.userNickname}>
+            {user.nickname}
+          </p>
+        </div>
+        
+      ) : (
+        <Link href="/signin" className={styles.signinLink}>
+          로그인
+        </Link>
+      )}
     </header>
   );
 }
