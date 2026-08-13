@@ -1,0 +1,233 @@
+@font-face {
+  font-family: "ROKAF Sans";
+  src: url('/fonts/ROKAF\ Sans\ Bold.ttf');
+}
+
+.signupPage {
+  min-height: 100vh;
+  background: var(--soft-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.signupPage p {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  width: 640px;
+  height: 842px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.authHeader {
+  text-align: center;
+  display: flex;
+  width: 396px;
+  height: 132px;
+  align-items: center;
+  justify-content: center;
+}
+
+.pandaFace {
+  display: flex;
+  align-items: center;
+  width: 103.529px;
+  height: 103.88px;
+  text-decoration: none;
+}
+
+.pandaFaceLogo {
+  color: var(--brand-blue);
+  font-family: "ROKAF Sans", sans-serif;
+  font-size: 66.344px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.authForm label {
+  color: var(--Secondary-800);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.authForm input {
+  color: var(--Secondary-400);
+  background: var(--Cool-Gray-100);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  display: flex;
+  width: 640px;
+  height: 56px;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.authForm input:focus {
+  border: 1px solid var(--brand-blue);
+}
+
+.labelInput {
+  display: flex;
+  width: 640px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.inputError {
+  display: none;
+  color: var(--error-red);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 4px;
+}
+
+.inputError.active {
+  display: block;
+}
+
+.authForm input.inputInvalid,
+.passwordWrapper.inputInvalid {
+  border-radius: 12px;
+  border: 1px solid var(--error-red);
+  background: var(--Cool-Gray-100);
+}
+
+.signupButton {
+  color: var(--pure-white);
+  background: var(--brand-blue);
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  display: flex;
+  width: 640px;
+  height: 56px;
+  padding: 16px 124px;
+  margin-bottom: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.signupButton:disabled {
+  background: var(--Secondary-400);
+  cursor: not-allowed;
+}
+
+.passwordWrapper {
+  position: relative;
+  width: 640px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+
+.passwordWrapper input {
+  display: block;
+  width: 100%;
+  padding-right: 60px;
+}
+
+.passwordWrapper input:focus {
+  border: 1px solid var(--brand-blue);
+}
+
+.passwordWrapper.inputInvalid input:focus {
+  border-color: transparent;
+}
+
+.passwordToggleButton {
+  background: transparent;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  z-index: 10;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+}
+
+.passwordToggleButton img {
+  display: block;
+}
+
+.socialLoginSection {
+  color: var(--Secondary-800);
+  background: var(--warm-skyblue);
+  display: flex;
+  width: 640px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 16px 23px;
+  margin-bottom: 24px;
+}
+.socialLogin {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLogin a {
+  display: block;
+}
+
+.loginSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginGuide {
+  color: var(--Secondary-800);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.loginLink {
+  color: var(--brand-blue);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
