@@ -1,0 +1,176 @@
+.marketBackground {
+  background-color: var(--soft-gray);
+  min-height: calc(100vh - 70px);
+}
+
+.marketPage {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0 auto;
+  padding: 40px 0 120px;
+}
+
+.marketPage h2 {
+  color: var(--Secondary-900);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  margin: 0;
+}
+
+.bestProducts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.bestProductsCards {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.bestProductsCards > * {
+  flex: 1;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.productsFunction {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productsFunctionRight {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.searchBox {
+  background: var(--Cool-Gray-100);
+  width: 325px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 20px 9px 16px;
+  border-radius: 12px;
+}
+
+.searchInput {
+  color: var(--Secondary-400);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  width: 100%;
+  height: 24px;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.searchIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.registerButton {
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  height: 42px;
+  padding: 0 23px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.productsCards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 40px 24px;
+}
+
+.paginationWrapper {
+  align-self: center;
+}
+
+@media (max-width: 1199px) {
+  .marketPage {
+    max-width: 100%;
+    padding: 32px 24px 120px;
+  }
+
+  .searchBox {
+    width: 242px;
+  }
+
+  .productsCards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .marketPage {
+    padding: 24px 16px 80px;
+  }
+
+  .productsCards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 16px;
+  }
+
+  .productsFunction {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 12px;
+  }
+
+  .productsFunctionRight {
+    display: contents;
+  }
+
+  .productsFunction h2 {
+    order: 1;
+  }
+
+  .registerButton {
+    order: 2;
+    margin-left: auto;
+    margin-right: 54px;
+  }
+
+  .searchBox {
+    order: 3;
+    width: auto;
+    flex: 1 1 calc(100% - 54px);
+    min-width: 0;
+  }
+
+  .orderByBox {
+    order: 4;
+  }
+}
