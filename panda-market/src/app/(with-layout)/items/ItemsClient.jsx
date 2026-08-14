@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useQuery } from '@tanstack/react-query'
 import { getBestProducts, getProducts } from '@/api/productApi'
+import {
+  getBestProductQueryKey,
+  getProductListQueryKey,
+} from '@/constants/queryKeys'
 import Dropdown from '@/components/common/Dropdown'
 import Pagination from '@/components/common/Pagination'
 import ProductCard from '@/components/items/ProductCard'
@@ -14,15 +19,37 @@ const SORT_OPTIONS = [
 ]
 
 function ItemsClient() {
-  const [products, setProducts] = useState([])
-  const [bestProducts, setBestProducts] = useState([])
   const [orderBy, setOrderBy] = useState('recent')
   const [searchInput, setSearchInput] = useState('')
   const [keyword, setKeyword] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const [totalCount, setTotalCount] = useState(0)
   const [pageSize, setPageSize] = useState(10)
   const [bestPageSize, setBestPageSize] = useState(4)
+
+  const { data: productsData } = useQuery({
+    queryKey: getProductListQueryKey({
+      orderBy,
+      keyword,
+      page: currentPage,
+      pageSize,
+    }),
+    queryFn: () =>
+      getProducts({
+        orderBy,
+        keyword,
+        page: currentPage,
+        pageSize,
+      }),
+  })
+
+  const { data: bestProductsData } = useQuery({
+    queryKey: getBestProductQueryKey({ pageSize: bestPageSize }),
+    queryFn: () => getBestProducts({ pageSize: bestPageSize }),
+  })
+
+  const products = productsData?.list ?? []
+  const bestProducts = bestProductsData?.list ?? []
+  const totalCount = productsData?.totalCount ?? 0
 
   const pageGroupSize = 5
   const totalPages = Math.ceil(totalCount / pageSize)
@@ -31,7 +58,9 @@ function ItemsClient() {
   const endPage = Math.min(startPage + pageGroupSize - 1, totalPages)
   const pageNumbers = []
 
-  for (let i = startPage; i <= endPage; i += 1) pageNumbers.push(i)
+  for (let i = startPage; i <= endPage; i += 1) {
+    pageNumbers.push(i)
+  }
 
   function updatePageSize() {
     const width = window.innerWidth
@@ -50,37 +79,12 @@ function ItemsClient() {
     setCurrentPage(1)
   }
 
-  async function fetchProducts() {
-    const data = await getProducts({
-      orderBy,
-      pageSize,
-      keyword,
-      page: currentPage,
-    })
-
-    setProducts(data.list)
-    setTotalCount(data.totalCount)
-  }
-
-  async function fetchBestProducts() {
-    const data = await getBestProducts({ pageSize: bestPageSize })
-    setBestProducts(data.list)
-  }
-
   useEffect(() => {
     updatePageSize()
     window.addEventListener('resize', updatePageSize)
 
     return () => window.removeEventListener('resize', updatePageSize)
   }, [])
-
-  useEffect(() => {
-    fetchBestProducts()
-  }, [bestPageSize])
-
-  useEffect(() => {
-    fetchProducts()
-  }, [orderBy, keyword, currentPage, pageSize])
 
   return (
     <main className={styles.marketBackground}>
