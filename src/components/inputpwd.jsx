@@ -9,7 +9,7 @@ function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd, name }) {
   const [allow, setAllow] = useState(true);
   const [error1, setError1] = useState(false);
   const [error2, setError2] = useState(false);
-  const [showPwd, setShowPwd] = useState(false);  
+  const [showPwd, setShowPwd] = useState(false);
 
   useEffect(() => {
     if (first) return;
@@ -50,7 +50,7 @@ function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd, name }) {
 
   return (
     <>
-      <div className={ allow ? style.show_word : `${style.show_word} ${style.notAllow}`}>
+      <div className={allow ? style.show_word : `${style.show_word} ${style.notAllow}`}>
         <input
           name={name}
           type={showPwd ? "text" : "password"}
@@ -61,7 +61,10 @@ function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd, name }) {
           onFocus={() => setFirst(false)}
         />
         <img
-          src="/assets/btn_visibility_on_24px.png"
+          src={showPwd
+            ? "/assets/btn_visibility_on_24px.svg" // ✅ 비밀번호 표시 해제 아이콘
+            : "/assets/btn_visibility_off_24px.svg"
+          }
           alt="비밀번호 표시"
           onMouseDown={() => setShowPwd(true)}
           onMouseUp={() => setShowPwd(false)}
@@ -75,13 +78,13 @@ function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd, name }) {
       )}
       {error2 && !first && (
         <p className={style.failure_message}>
-          {type === "password" 
-            ? "비밀번호를 8자 이상 입력해주세요." 
+          {type === "password"
+            ? "비밀번호를 8자 이상 입력해주세요."
             : "비밀번호가 일치하지 않습니다."}
         </p>
       )}
     </>
   )
-} 
+}
 
 export default InputPwd;
