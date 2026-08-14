@@ -1,5 +1,10 @@
+"use client";
+
+import useCurrentUser from "@/hooks/useCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import styles from "./AuthPageLayout.module.css";
 
 export default function AuthPageLayout({
@@ -8,6 +13,21 @@ export default function AuthPageLayout({
   linkText,
   linkHref,
 }) {
+  const router = useRouter();
+  const { data: currentUser, isCheckingAuth } = useCurrentUser();
+
+  useEffect(() => {
+    if (isCheckingAuth || !currentUser) {
+      return;
+    }
+
+    router.replace("/items");
+  }, [currentUser, isCheckingAuth, router]);
+
+  if (isCheckingAuth || currentUser) {
+    return null;
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.box}>

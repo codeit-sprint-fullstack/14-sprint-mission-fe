@@ -1,103 +1,125 @@
-.nav-container {
+.nav {
   position: sticky;
   top: 0;
-  left: 0;
   z-index: 1000;
-  background-color: var(--color-bg-white);
   width: 100%;
   min-height: 3.25rem;
   box-sizing: border-box;
+  background-color: var(--color-bg-white);
   border-bottom: 1px solid var(--color-border-light);
 }
 
-.nav-wrapper {
+.inner {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 120rem;
-  padding: 0 12.5rem;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
   margin: 0 auto;
+  padding: 0 12.5rem;
+  box-sizing: border-box;
 }
 
-.logo-wrapper {
+.left {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
-.logo-group {
+.brand {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   height: 2.5rem;
+  text-decoration: none;
 }
 
-.panda-logo {
+.logo {
   width: 2.5rem;
   height: 2.5rem;
 }
 
-.logo-text {
-  text-decoration-line: none;
+.brandName {
   color: var(--color-primary);
   font-family: var(--font-rokaf), sans-serif;
   font-size: 1.625rem;
   font-weight: 700;
 }
 
-.nav-texts {
+.links {
   display: flex;
   align-items: center;
 }
 
-.nav-text {
+.link {
   padding: 1.3125rem 0.9375rem;
   color: var(--color-secondary-600);
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.625rem;
+  text-decoration: none;
 }
 
-.nav-text-active {
+.active {
   color: var(--color-primary);
 }
 
-@media (max-width: 768px) {
-  .nav-wrapper {
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.nickname {
+  color: var(--color-secondary-600);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 1199px) {
+  .inner {
     padding: 0 1.5rem;
   }
 
-  .logo-wrapper {
+  .left {
     gap: 1.25rem;
   }
 }
 
-@media (max-width: 480px) {
-  .nav-wrapper {
+@media (max-width: 743px) {
+  .inner {
     padding: 0 1rem;
   }
 
-  .logo-wrapper {
+  .left {
     gap: 0.5rem;
   }
 
-  .logo-group img {
+  .logo {
     display: none;
   }
 
-  .logo-text {
+  .brandName {
     font-size: 1.25rem;
   }
 
-  .nav-texts {
+  .links {
     gap: 0.5rem;
   }
 
-  .nav-text {
+  .link {
     padding: 1.5625rem 0;
     font-size: 1rem;
+  }
+
+  .nickname {
+    display: none;
   }
 }

@@ -1,18 +1,25 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { setAccessToken } from "@/lib/authToken";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function useAuthMutation({ mutationFn, fallbackErrorMessage }) {
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn,
 
     onSuccess: (response) => {
-      localStorage.setItem("accessToken", response.accessToken);
+      setAccessToken(response.accessToken);
+
+      queryClient.invalidateQueries({
+        queryKey: ["currentUser"],
+      });
+
       router.push("/items");
     },
 
