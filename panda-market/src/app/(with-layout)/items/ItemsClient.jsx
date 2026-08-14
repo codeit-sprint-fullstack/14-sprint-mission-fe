@@ -26,7 +26,12 @@ function ItemsClient() {
   const [pageSize, setPageSize] = useState(10)
   const [bestPageSize, setBestPageSize] = useState(4)
 
-  const { data: productsData } = useQuery({
+  const {
+    data: productsData,
+    isPending: isProductsPending,
+    isError: isProductsError,
+    isFetching: isProductsFetching,
+  } = useQuery({
     queryKey: getProductListQueryKey({
       orderBy,
       keyword,
@@ -42,7 +47,12 @@ function ItemsClient() {
       }),
   })
 
-  const { data: bestProductsData } = useQuery({
+  const {
+    data: bestProductsData,
+    isPending: isBestProductsPending,
+    isError: isBestProductsError,
+    isFetching: isBestProductsFetching,
+  } = useQuery({
     queryKey: getBestProductQueryKey({ pageSize: bestPageSize }),
     queryFn: () => getBestProducts({ pageSize: bestPageSize }),
   })
@@ -91,10 +101,23 @@ function ItemsClient() {
       <div className={styles.marketPage}>
         <section className={styles.bestProducts}>
           <h2>베스트 상품</h2>
+          {isBestProductsFetching && !isBestProductsPending && (
+            <p className={styles.refreshMessage}>
+              베스트 상품을 업데이트하는 중입니다.
+            </p>
+          )}
           <div className={styles.bestProductsCards}>
-            {bestProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {isBestProductsPending ? (
+              <p>베스트 상품을 불러오는 중입니다.</p>
+            ) : isBestProductsError ? (
+              <p>베스트 상품을 불러오지 못했습니다.</p>
+            ) : bestProducts.length === 0 ? (
+              <p>등록된 베스트 상품이 없습니다.</p>
+            ) : (
+              bestProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            )}
           </div>
         </section>
         <section className={styles.products}>
@@ -134,19 +157,46 @@ function ItemsClient() {
               />
             </div>
           </div>
+          {isProductsFetching && !isProductsPending && (
+            <p className={styles.refreshMessage}>
+              {keyword
+                ? '검색 결과를 업데이트하는 중입니다.'
+                : '상품 목록을 업데이트하는 중입니다.'}
+            </p>
+          )}
           <div className={styles.productsCards}>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {isProductsPending ? (
+              <p>
+                {keyword
+                  ? '검색 결과를 불러오는 중입니다.'
+                  : '상품을 불러오는 중입니다.'}
+              </p>
+            ) : isProductsError ? (
+              <p>
+                {keyword
+                  ? '검색 결과를 불러오지 못했습니다.'
+                  : '상품 목록을 불러오지 못했습니다.'}
+              </p>
+            ) : products.length === 0 ? (
+              <p>
+                {keyword ? '검색 결과가 없습니다.' : '등록된 상품이 없습니다.'}
+              </p>
+            ) : (
+              products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            )}
           </div>
-          <div className={styles.paginationWrapper}>
-            <Pagination
-              page={currentPage}
-              totalPages={totalPages}
-              pageNumbers={pageNumbers}
-              onChangePage={setCurrentPage}
-            />
-          </div>
+          {!isProductsPending && !isProductsError && products.length > 0 && (
+            <div className={styles.paginationWrapper}>
+              <Pagination
+                page={currentPage}
+                totalPages={totalPages}
+                pageNumbers={pageNumbers}
+                onChangePage={setCurrentPage}
+              />
+            </div>
+          )}
         </section>
       </div>
     </main>
