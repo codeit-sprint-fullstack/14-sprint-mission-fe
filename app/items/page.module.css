@@ -1,0 +1,34 @@
+.selling-line {
+  display: flex;
+}
+
+.register-button {
+  display: flex;
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--Primary-100, #3692ff);
+  border: none;
+}
+
+.general-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.ItemCard.general {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 220px;
+  height: 317px;
+
+  gap: 16px;
+  background: #fcfcfc;
+}
