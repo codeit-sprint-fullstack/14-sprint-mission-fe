@@ -10,6 +10,12 @@
   gap: 40px;
 }
 
+.form {
+  margin: 0;
+  padding: 0;
+  display: contents;
+}
+
 .container {
     display: flex;
     flex-direction: column;

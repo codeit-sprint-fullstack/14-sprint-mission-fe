@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import style from "./inputpwd.module.css";
 
-function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd }) {
+function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd, name }) {
 
   // 변수
   const [inputData, setInputData] = useState('');
@@ -52,6 +52,7 @@ function InputPwd({ pwdPass, placeholder, type, setPWD, originalPwd }) {
     <>
       <div className={ allow ? style.show_word : `${style.show_word} ${style.notAllow}`}>
         <input
+          name={name}
           type={showPwd ? "text" : "password"}
           className={style.Password_text}
           placeholder={placeholder}

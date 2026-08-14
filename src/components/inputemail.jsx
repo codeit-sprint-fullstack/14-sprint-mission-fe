@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import style from './inputemail.module.css'
 import { all } from "axios";
 
-function InputEmail({ emailPass, placeholder, type }) {
+function InputEmail({ emailPass, placeholder, type, name }) {
 
   // 변수
   const [inputData, setInputData] = useState("");
@@ -38,6 +38,7 @@ function InputEmail({ emailPass, placeholder, type }) {
     return (
       <>
         <input
+          name={name}
           type="text"
           className={ allow ? style.text_section : `${style.text_section} ${style.notAllow}`}
           placeholder={placeholder}
@@ -83,6 +84,7 @@ function InputEmail({ emailPass, placeholder, type }) {
     return (
       <>
         <input
+          name={name}
           type="text"
           className={ allow ? style.text_section : `${style.text_section} ${style.notAllow}`}
           placeholder={placeholder}
