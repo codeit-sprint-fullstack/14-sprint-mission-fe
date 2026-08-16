@@ -1,5 +1,9 @@
 "use client";
 
+import Modal from "@/app/components/Modal.jsx";
+import PasswordInput from "@/app/components/PasswordInput.jsx";
+import { signIn } from "@/app/lib/api/auth.js";
+import { getErrorMessage } from "@/app/lib/error.js";
 import IconGG from "@/public/ic_google.png";
 import IconKT from "@/public/ic_kakaotalk.png";
 import MainLogo from "@/public/logo_main_2x.png";
@@ -8,15 +12,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Modal from "../components/Modal.jsx";
-import PasswordInput from "../components/PasswordInput.jsx";
-import { signIn } from "../lib/api/auth.js";
-import { getErrorMessage } from "../lib/error.js";
 import {
   isValidEmail,
   isValidPassword,
   PASSWORD_MIN_LENGTH,
-} from "../lib/validation.js";
+} from "../../lib/validation.js";
 import styles from "./Signin.module.css";
 
 export default function Signin() {
