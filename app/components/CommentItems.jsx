@@ -4,10 +4,10 @@ import profileIc from "@/public/icon_profile.png";
 import Image from "next/image";
 import { useState } from "react";
 import { deleteComment } from "../actions";
+import { getRelativeTime } from "../utils/formatDate";
 import CommentForm from "./CommentForm";
 import styles from "./CommentItems.module.css";
 import KebabMenu from "./KebabMenu";
-import { getRelativeTime } from "../utils/formatDate";
 
 export default function CommentItems({ postId, comments }) {
   const [editingId, setEditingId] = useState(null);
