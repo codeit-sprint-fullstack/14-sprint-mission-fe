@@ -1,14 +1,14 @@
 import axios from "axios";
 
-const BASE_URL = process.env.API_BASE_URL; 
+const BASE_URL = process.env.API_BASE_URL;
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
-      const { page = 1, pageSize = 10, orderBy = "recent", keyword = "" } = req.query;
+      const { page = 1, size = 10, orderBy = "recent", keyword = "" } = req.query;
 
-      const { data } = await axios.get(`${BASE_URL}/articles`, {
-        params: { page, pageSize, orderBy, keyword },
+      const { data } = await axios.get(`${BASE_URL}/products`, {
+        params: { page, pageSize: size, orderBy, keyword },
       });
 
       res.status(200).json(data);

@@ -76,8 +76,7 @@ function Gnb(type) {
                   onClick={() => {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("nickname");
-                    router.push("/");
-                    router.reload();
+                    window.location.replace("/")
                   }}
                 >
                   로그아웃

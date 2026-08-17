@@ -47,7 +47,7 @@ export default function Notice() {
   useEffect(() => {
     async function fetchBestPosts() {
       try {
-        const res = await fetch(`${BASE_URL}/articles?page=1&pageSize=${pageSize}&orderBy=like`);
+        const res = await fetch(`/api/notice?page=1&pageSize=${pageSize}&orderBy=like`);
         const data = await res.json();
         setBestPosts(data.data);
       } catch (error) {
@@ -61,7 +61,7 @@ export default function Notice() {
     async function fetchPosts() {
       try {
         const res = await fetch(
-          `${BASE_URL}/articles?page=${currentPage}&pageSize=5&orderBy=${orderBy}&keyword=${keyword}`
+          `/api/notice?page=${currentPage}&pageSize=5&orderBy=${orderBy}&keyword=${keyword}`
         );
         const data = await res.json();
         setPosts(data.data);
@@ -77,7 +77,7 @@ export default function Notice() {
     async function fetchBestPosts() {
       try {
         const res = await fetch(
-          `${BASE_URL}/articles?page=1&pageSize=${pageSize}&orderBy=like`
+          `/api/notice?page=1&pageSize=${pageSize}&orderBy=like`
         );
         const data = await res.json();
 
@@ -94,7 +94,7 @@ export default function Notice() {
     async function fetchPosts() {
       try {
         const res = await fetch(
-          `${BASE_URL}/articles?page=${currentPage}&pageSize=5&orderBy=${orderBy}&keyword=${keyword}`
+          `/api/notice?page=${currentPage}&pageSize=5&orderBy=${orderBy}&keyword=${keyword}`
         );
         const data = await res.json();
 

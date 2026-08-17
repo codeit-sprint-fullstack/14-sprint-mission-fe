@@ -98,17 +98,23 @@
   background: var(--Secondary-100);
 }
 
+.input_wrap input:focus {
+  outline: none;
+  border: 2px solid var(--brand-blue);
+}
+
 .bestpost_wrap {
   display: grid !important;
   gap: 16px;
 }
 
-.bestpost_wrap > * {
-  display: block; /* flex 덮어쓰기 */
+.bestpost_wrap>* {
+  display: block;
+  /* flex 덮어쓰기 */
 }
 
 /* PC: 1200px 이상 */
-@media screen and (min-width: 1200px)  {
+@media screen and (min-width: 1200px) {
   .content_wrap {
     width: 1200px;
     margin-top: 24px;
@@ -129,12 +135,13 @@
 
   .bestpost_wrap {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 큰 화면: 3개 */
+    grid-template-columns: repeat(3, 1fr);
+    /* 큰 화면: 3개 */
   }
 }
 
 /* Tablet: 744px ~ 1199px */
-@media screen and (min-width: 744px) and (max-width: 1199px){
+@media screen and (min-width: 744px) and (max-width: 1199px) {
   .content_wrap {
     width: 696px;
     margin-top: 24px;
@@ -151,12 +158,13 @@
 
   .bestpost_wrap {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 중간 화면: 2개 */
+    grid-template-columns: repeat(2, 1fr);
+    /* 중간 화면: 2개 */
   }
 }
 
 /* Mobile: 375px ~ 743px */
-@media screen and (min-width: 375px) and (max-width: 743px){
+@media screen and (min-width: 375px) and (max-width: 743px) {
   .content_wrap {
     width: 343px;
     margin-top: 16px;
