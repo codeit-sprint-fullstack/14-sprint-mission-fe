@@ -1,113 +1,54 @@
 'use client'
 
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
   validateEmail,
+  validateNickname,
   validatePassword,
   validatePasswordConfirm,
 } from '@/validators/authValidator'
 import styles from './signupPage.module.css'
 
 function SignupPage() {
-  const [email, setEmail] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const [passwordConfirmError, setPasswordConfirmError] = useState('')
+  // getValues: 구독 없이 특정 input의 현재값을 가져옴
+  // trigger: 지정한 input의 유효성 검사를 다시 실행
+  const {
+    register,
+    handleSubmit,
+    watch,
+    getValues,
+    trigger,
+    formState: { errors },
+  } = useForm({
+    mode: 'onTouched',
+    defaultValues: {
+      email: '',
+      nickname: '',
+      password: '',
+      passwordConfirm: '',
+    },
+  })
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isPasswordConfirmVisible, setIsPasswordConfirmVisible] =
     useState(false)
 
+  const email = watch('email')
+  const nickname = watch('nickname')
+  const password = watch('password')
+  const passwordConfirm = watch('passwordConfirm')
+
   const canSignup =
     validateEmail(email.trim()).isValid &&
-    nickname.trim() !== '' &&
+    validateNickname(nickname.trim()).isValid &&
     validatePassword(password.trim()).isValid &&
     validatePasswordConfirm(password.trim(), passwordConfirm.trim()).isValid
 
-  function onEmailChange(e) {
-    const emailInput = e.target.value
-    setEmail(emailInput)
-
-    if (!emailError) return
-
-    const { message } = validateEmail(emailInput.trim())
-    setEmailError(message)
-  }
-
-  function onEmailBlur() {
-    const { message } = validateEmail(email.trim())
-    setEmailError(message)
-  }
-
-  function onPasswordChange(e) {
-    const passwordInput = e.target.value
-    setPassword(passwordInput)
-
-    if (passwordError) {
-      const { message } = validatePassword(passwordInput.trim())
-      setPasswordError(message)
-    }
-
-    // 비밀번호 변경 후 기존 비밀번호 확인과 재비교
-    if (passwordConfirm) {
-      const { message } = validatePasswordConfirm(
-        passwordInput.trim(),
-        passwordConfirm.trim(),
-      )
-      setPasswordConfirmError(message)
-    }
-  }
-
-  function onPasswordBlur() {
-    const { message } = validatePassword(password.trim())
-    setPasswordError(message)
-  }
-
-  function onPasswordConfirmChange(e) {
-    const passwordConfirmInput = e.target.value
-    setPasswordConfirm(passwordConfirmInput)
-
-    if (!passwordConfirmError) return
-
-    const { message } = validatePasswordConfirm(
-      password.trim(),
-      passwordConfirmInput.trim(),
-    )
-    setPasswordConfirmError(message)
-  }
-
-  function onPasswordConfirmBlur() {
-    const { message } = validatePasswordConfirm(
-      password.trim(),
-      passwordConfirm.trim(),
-    )
-    setPasswordConfirmError(message)
-  }
-
-  function onSignupSubmit(e) {
-    e.preventDefault()
-
-    const emailValidation = validateEmail(email.trim())
-    const passwordValidation = validatePassword(password.trim())
-    const passwordConfirmValidation = validatePasswordConfirm(
-      password.trim(),
-      passwordConfirm.trim(),
-    )
-
-    setEmailError(emailValidation.message)
-    setPasswordError(passwordValidation.message)
-    setPasswordConfirmError(passwordConfirmValidation.message)
-
-    if (
-      !emailValidation.isValid ||
-      !passwordValidation.isValid ||
-      !passwordConfirmValidation.isValid
-    )
-      return
+  function onSignupSubmit() {
+    // 회원가입 API 연결 단계에서 요청 로직 추가
   }
 
   return (
@@ -130,51 +71,73 @@ function SignupPage() {
           {/* noValidate: 브라우저의 기본 HTML 검증 UI 비활성화 */}
           <form
             className={styles.authForm}
-            onSubmit={onSignupSubmit}
+            onSubmit={handleSubmit(onSignupSubmit)}
             noValidate
           >
             <div className={styles.labelInput}>
               <label htmlFor="signup-email">이메일</label>
               <input
                 id="signup-email"
-                name="email"
                 type="email"
                 placeholder="이메일을 입력해주세요"
-                value={email}
-                onChange={onEmailChange}
-                onBlur={onEmailBlur}
-                className={emailError ? styles.inputInvalid : ''}
+                className={errors.email ? styles.inputInvalid : ''}
+                {...register('email', {
+                  validate: (value) => {
+                    const { isValid, message } = validateEmail(value.trim())
+                    return isValid || message
+                  },
+                })}
               />
               <div
-                className={`${styles.inputError} ${emailError ? styles.active : ''}`}
+                className={`${styles.inputError} ${errors.email ? styles.active : ''}`}
               >
-                {emailError}
+                {errors.email?.message}
               </div>
             </div>
             <div className={styles.labelInput}>
               <label htmlFor="signup-nickname">닉네임</label>
               <input
                 id="signup-nickname"
-                name="nickname"
                 type="text"
                 placeholder="닉네임을 입력해주세요"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
+                className={errors.nickname ? styles.inputInvalid : ''}
+                {...register('nickname', {
+                  validate: (value) => {
+                    const { isValid, message } = validateNickname(value.trim())
+                    return isValid || message
+                  },
+                })}
               />
+              <div
+                className={`${styles.inputError} ${errors.nickname ? styles.active : ''}`}
+              >
+                {errors.nickname?.message}
+              </div>
             </div>
             <div className={styles.labelInput}>
               <label htmlFor="signup-password">비밀번호</label>
               <div
-                className={`${styles.passwordWrapper} ${passwordError ? styles.inputInvalid : ''}`}
+                className={`${styles.passwordWrapper} ${errors.password ? styles.inputInvalid : ''}`}
               >
                 <input
                   id="signup-password"
-                  name="password"
                   type={isPasswordVisible ? 'text' : 'password'}
                   placeholder="비밀번호를 입력해주세요"
-                  value={password}
-                  onChange={onPasswordChange}
-                  onBlur={onPasswordBlur}
+                  {...register('password', {
+                    validate: (value) => {
+                      const { isValid, message } = validatePassword(
+                        value.trim(),
+                      )
+                      return isValid || message
+                    },
+                    onChange: () => {
+                      const passwordConfirmValue = getValues('passwordConfirm')
+
+                      if (!passwordConfirmValue) return
+
+                      trigger('passwordConfirm')
+                    },
+                  })}
                 />
                 <button
                   type="button"
@@ -194,24 +157,31 @@ function SignupPage() {
                 </button>
               </div>
               <div
-                className={`${styles.inputError} ${passwordError ? styles.active : ''}`}
+                className={`${styles.inputError} ${errors.password ? styles.active : ''}`}
               >
-                {passwordError}
+                {errors.password?.message}
               </div>
             </div>
             <div className={styles.labelInput}>
               <label htmlFor="signup-password-confirm">비밀번호 확인</label>
               <div
-                className={`${styles.passwordWrapper} ${passwordConfirmError ? styles.inputInvalid : ''}`}
+                className={`${styles.passwordWrapper} ${errors.passwordConfirm ? styles.inputInvalid : ''}`}
               >
                 <input
                   id="signup-password-confirm"
-                  name="password_confirm"
                   type={isPasswordConfirmVisible ? 'text' : 'password'}
                   placeholder="비밀번호를 다시 한 번 입력해주세요"
-                  value={passwordConfirm}
-                  onChange={onPasswordConfirmChange}
-                  onBlur={onPasswordConfirmBlur}
+                  {...register('passwordConfirm', {
+                    validate: (value) => {
+                      const passwordValue = getValues('password')
+                      const { isValid, message } = validatePasswordConfirm(
+                        passwordValue.trim(),
+                        value.trim(),
+                      )
+
+                      return isValid || message
+                    },
+                  })}
                 />
                 <button
                   type="button"
@@ -231,12 +201,16 @@ function SignupPage() {
                 </button>
               </div>
               <div
-                className={`${styles.inputError} ${passwordConfirmError ? styles.active : ''}`}
+                className={`${styles.inputError} ${errors.passwordConfirm ? styles.active : ''}`}
               >
-                {passwordConfirmError}
+                {errors.passwordConfirm?.message}
               </div>
             </div>
-            <button className={styles.signupButton} disabled={!canSignup}>
+            <button
+              type="submit"
+              className={styles.signupButton}
+              disabled={!canSignup}
+            >
               회원가입
             </button>
           </form>

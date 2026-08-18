@@ -12,6 +12,23 @@ function validateEmail(email) {
   return { isValid: true, message: '' }
 }
 
+function validateNickname(nickname) {
+  if (!nickname) {
+    return { isValid: false, message: '닉네임을 입력해주세요.' }
+  }
+
+  if (nickname.length > 20) {
+    return {
+      isValid: false,
+      message: '닉네임은 20자 이하로 입력해주세요.',
+    }
+  }
+
+  return { isValid: true, message: '' }
+}
+
+const PASSWORD_REGEX = /^([a-z]|[A-Z]|[0-9]|[!@#$%^&*])+$/
+
 function validatePassword(password) {
   if (!password) {
     return { isValid: false, message: '비밀번호를 입력해주세요.' }
@@ -19,6 +36,14 @@ function validatePassword(password) {
 
   if (password.length < 8) {
     return { isValid: false, message: '비밀번호를 8자 이상 입력해주세요.' }
+  }
+
+  if (!PASSWORD_REGEX.test(password)) {
+    return {
+      isValid: false,
+      message:
+        '비밀번호는 영문, 숫자, 특수문자(!@#$%^&*)만 사용할 수 있습니다.',
+    }
   }
 
   return { isValid: true, message: '' }
@@ -42,4 +67,9 @@ function validatePasswordConfirm(password, passwordConfirm) {
   return { isValid: true, message: '' }
 }
 
-export { validateEmail, validatePassword, validatePasswordConfirm }
+export {
+  validateEmail,
+  validateNickname,
+  validatePassword,
+  validatePasswordConfirm,
+}
