@@ -1,13 +1,43 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { getUserProfileQueryOptions } from '@/queries/userQueries'
 import styles from '@/components/common/Header.module.css'
 
 function Header() {
   const pathname = usePathname()
   const isLandingPage = pathname === '/'
+
+  // 초기값을 생략하여 아직 localStorage 확인 전에는 undefined로 구분
+  const [accessToken, setAccessToken] = useState()
+
+  // 최초 마운트 시 실행
+  useEffect(() => {
+    const storedAccessToken = localStorage.getItem('accessToken')
+
+    setAccessToken(storedAccessToken)
+  }, [])
+
+  const { data: user, isError: isUserError } = useQuery({
+    ...getUserProfileQueryOptions(),
+    enabled: Boolean(accessToken),
+  })
+
+  // user 정보 요청 실패 후 실행
+  useEffect(() => {
+    if (!isUserError) return
+
+    const storedAccessToken = localStorage.getItem('accessToken')
+
+    if (!storedAccessToken) {
+      setAccessToken(null)
+    }
+  }, [isUserError])
+
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
@@ -46,10 +76,25 @@ function Header() {
           </nav>
         )}
       </div>
-
-      <Link href="/login" className={styles.loginButton}>
-        로그인
-      </Link>
+      {accessToken !== undefined &&
+        (accessToken ? (
+          <div className={styles.userProfile}>
+            <Image
+              className={styles.profileImage}
+              src={user?.image || '/ic_profile.svg'}
+              alt={user?.nickname ? `${user.nickname} 프로필` : '기본 프로필'}
+              width={40}
+              height={40}
+            />
+            {user?.nickname && (
+              <span className={styles.nickname}>{user.nickname}</span>
+            )}
+          </div>
+        ) : (
+          <Link href="/signin" className={styles.loginButton}>
+            로그인
+          </Link>
+        ))}
     </header>
   )
 }

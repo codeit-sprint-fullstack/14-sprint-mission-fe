@@ -87,13 +87,42 @@
   cursor: pointer;
 }
 
+.userProfile {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nickname {
+  padding-left: 6px;
+  color: var(--Cool-Gray-600);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+@media (max-width: 1199px) {
+  .nickname {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 1024px) {
   .headerLeft {
     gap: 20px;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 743px) {
   .header {
     padding: 0 16px;
   }
@@ -122,12 +151,16 @@
   .headerMenu a {
     font-size: 16px;
     line-height: 24px;
-    padding: 16px 8px 12px 8px;  /* 링크 크기 = 텍스트 + padding 이기 때문에 */
+    padding: 16px 8px 12px 8px;
   }
 
   .loginButton {
     height: 38px;
     padding: 8px 16px;
     white-space: nowrap; /* 줄바꿈 방지*/
+  }
+
+  .nickname {
+  display: none;
   }
 }
