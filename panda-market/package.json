@@ -16,6 +16,7 @@
     "prisma": "^7.8.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-hook-form": "^7.85.0",
     "superstruct": "^2.0.2"
   },
   "devDependencies": {
