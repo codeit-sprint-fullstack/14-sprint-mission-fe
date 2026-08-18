@@ -1,9 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { signin } from '@/api/authApi'
+import AlertModal from '@/components/common/AlertModal'
 import { validateEmail, validatePassword } from '@/validators/authValidator'
 import styles from './signinPage.module.css'
 
@@ -17,6 +21,7 @@ function SigninPage() {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors },
   } = useForm({
     // 최초 Blur에서 검사하고 이후 입력 중 다시 검사
@@ -29,6 +34,30 @@ function SigninPage() {
   })
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [modalMessage, setModalMessage] = useState('')
+
+  const router = useRouter()
+
+  const signinMutation = useMutation({
+    mutationFn: signin,
+    onSuccess: (data) => {
+      localStorage.setItem('accessToken', data.accessToken)
+      router.push('/items')
+    },
+    onError: (error) => {
+      setError('email', {
+        type: 'server',
+        message: '이메일을 확인해 주세요.',
+      })
+
+      setError('password', {
+        type: 'server',
+        message: '비밀번호를 확인해 주세요.',
+      })
+
+      setModalMessage(error.message)
+    },
+  })
 
   const email = watch('email')
   const password = watch('password')
@@ -37,8 +66,8 @@ function SigninPage() {
     validateEmail(email.trim()).isValid &&
     validatePassword(password.trim()).isValid
 
-  function onSigninSubmit() {
-    // 로그인 API 연결 단계에서 요청 로직 추가
+  function onSigninSubmit(data) {
+    signinMutation.mutate(data)
   }
 
   return (
@@ -127,9 +156,9 @@ function SigninPage() {
             <button
               type="submit"
               className={styles.signinButton}
-              disabled={!canSignin}
+              disabled={!canSignin || signinMutation.isPending}
             >
-              로그인
+              {signinMutation.isPending ? '로그인 중...' : '로그인'}
             </button>
           </form>
           <div className={styles.socialLoginSection}>
@@ -169,6 +198,12 @@ function SigninPage() {
           </div>
         </div>
       </div>
+      {modalMessage && (
+        <AlertModal
+          message={modalMessage}
+          onClose={() => setModalMessage('')}
+        />
+      )}
     </main>
   )
 }

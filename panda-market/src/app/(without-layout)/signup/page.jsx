@@ -1,9 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { signup } from '@/api/authApi'
+import AlertModal from '@/components/common/AlertModal'
 import {
   validateEmail,
   validateNickname,
@@ -35,6 +39,23 @@ function SignupPage() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isPasswordConfirmVisible, setIsPasswordConfirmVisible] =
     useState(false)
+  const [modalMessage, setModalMessage] = useState('')
+  const [isSignupSuccess, setIsSignupSuccess] = useState(false)
+
+  const router = useRouter()
+
+  const signupMutation = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      localStorage.setItem('accessToken', data.accessToken)
+      setIsSignupSuccess(true)
+      setModalMessage('가입 완료되었습니다.')
+    },
+    onError: (error) => {
+      setIsSignupSuccess(false)
+      setModalMessage(error.message)
+    },
+  })
 
   const email = watch('email')
   const nickname = watch('nickname')
@@ -47,8 +68,21 @@ function SignupPage() {
     validatePassword(password.trim()).isValid &&
     validatePasswordConfirm(password.trim(), passwordConfirm.trim()).isValid
 
-  function onSignupSubmit() {
-    // 회원가입 API 연결 단계에서 요청 로직 추가
+  function onSignupSubmit(data) {
+    const { passwordConfirm, ...signupData } = data
+
+    signupMutation.mutate({
+      ...signupData,
+      passwordConfirmation: passwordConfirm,
+    })
+  }
+
+  function handleModalClose() {
+    setModalMessage('')
+
+    if (isSignupSuccess) {
+      router.push('/items')
+    }
   }
 
   return (
@@ -209,9 +243,9 @@ function SignupPage() {
             <button
               type="submit"
               className={styles.signupButton}
-              disabled={!canSignup}
+              disabled={!canSignup || signupMutation.isPending}
             >
-              회원가입
+              {signupMutation.isPending ? '가입 중...' : '회원가입'}
             </button>
           </form>
           <div className={styles.socialLoginSection}>
@@ -251,6 +285,9 @@ function SignupPage() {
           </div>
         </div>
       </div>
+      {modalMessage && (
+        <AlertModal message={modalMessage} onClose={handleModalClose} />
+      )}
     </main>
   )
 }
