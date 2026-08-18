@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useQuery } from '@tanstack/react-query'
 import {
+  INITIAL_PRODUCT_LIST_PARAMS,
+  INITIAL_BEST_PRODUCT_PARAMS,
+} from '@/constants/productConfig'
+import {
   getBestProductQueryOptions,
   getProductListQueryOptions,
 } from '@/queries/productQueries'
@@ -18,12 +22,18 @@ const SORT_OPTIONS = [
 ]
 
 function ItemsClient() {
-  const [orderBy, setOrderBy] = useState('recent')
-  const [searchInput, setSearchInput] = useState('')
-  const [keyword, setKeyword] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
-  const [bestPageSize, setBestPageSize] = useState(4)
+  const [orderBy, setOrderBy] = useState(INITIAL_PRODUCT_LIST_PARAMS.orderBy)
+  const [searchInput, setSearchInput] = useState(
+    INITIAL_PRODUCT_LIST_PARAMS.keyword,
+  )
+  const [keyword, setKeyword] = useState(INITIAL_PRODUCT_LIST_PARAMS.keyword)
+  const [currentPage, setCurrentPage] = useState(
+    INITIAL_PRODUCT_LIST_PARAMS.page,
+  )
+  const [pageSize, setPageSize] = useState(INITIAL_PRODUCT_LIST_PARAMS.pageSize)
+  const [bestPageSize, setBestPageSize] = useState(
+    INITIAL_BEST_PRODUCT_PARAMS.pageSize,
+  )
 
   // Query Options Factory를 사용하여 queryKey, queryFn, 캐시 정책을 하나로 묶음
   const {
