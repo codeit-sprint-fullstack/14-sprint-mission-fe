@@ -1,7 +1,14 @@
 "use client";
 
-import { getProduct, getProductComments } from "@/lib/api/products";
-import { useQuery } from "@tanstack/react-query";
+import {
+  getProduct,
+  getProductComments,
+  createProductComment,
+  deleteComment,
+  updateComment,
+} from "@/lib/api/products";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import styles from "./page.module.css";
 import Image from "next/image";
@@ -9,6 +16,13 @@ import Image from "next/image";
 export default function ProductDetailPage() {
   const params = useParams();
   const productId = Number(params.id);
+
+  const [commentContent, setCommentContent] = useState("");
+
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editingContent, setEditingContent] = useState("");
+
+  const queryClient = useQueryClient();
 
   const productQuery = useQuery({
     queryKey: ["product", productId],
@@ -19,6 +33,83 @@ export default function ProductDetailPage() {
     queryKey: ["productComments", productId],
     queryFn: () => getProductComments({ productId, limit: 10 }),
   });
+
+  const createCommentMutation = useMutation({
+    mutationFn: createProductComment,
+
+    onSuccess: () => {
+      setCommentContent("");
+
+      queryClient.invalidateQueries({
+        queryKey: ["productComments", productId],
+      });
+    },
+  });
+
+  const deleteCommentMutation = useMutation({
+    mutationFn: deleteComment,
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["productComments", productId],
+      });
+    },
+  });
+
+  const updateCommentMutation = useMutation({
+    mutationFn: updateComment,
+    onSuccess: () => {
+      setEditingCommentId(null);
+      setEditingContent("");
+      queryClient.invalidateQueries({
+        queryKey: ["productComments", productId],
+      });
+    },
+  });
+
+  function handleCommentSubmit(event) {
+    event.preventDefault();
+
+    const trimmedContent = commentContent.trim();
+
+    if (!trimmedContent || createCommentMutation.isPending) {
+      return;
+    }
+
+    createCommentMutation.mutate({
+      productId,
+      content: trimmedContent,
+    });
+  }
+
+  function handleEditStart(comment) {
+    setEditingCommentId(comment.id);
+    setEditingContent(comment.content);
+  }
+
+  function handleEditCancel() {
+    setEditingCommentId(null);
+    setEditingContent("");
+  }
+
+  function handleEditSubmit(event) {
+    event.preventDefault();
+
+    const trimmedContent = editingContent.trim();
+
+    if (
+      editingCommentId === null ||
+      !trimmedContent ||
+      updateCommentMutation.isPending
+    ) {
+      return;
+    }
+
+    updateCommentMutation.mutate({
+      commentId: editingCommentId,
+      content: trimmedContent,
+    });
+  }
 
   if (productQuery.isPending) {
     return <p>상품 정보를 불러오는 중입니다.</p>;
@@ -71,14 +162,75 @@ export default function ProductDetailPage() {
         <section>
           <h2>문의하기</h2>
 
+          <form onSubmit={handleCommentSubmit}>
+            <textarea
+              value={commentContent}
+              onChange={(event) => setCommentContent(event.target.value)}
+              placeholder="댓글을 입력해주세요."
+            />
+            <button
+              type="submit"
+              disabled={
+                !commentContent.trim() || createCommentMutation.isPending
+              }
+            >
+              {createCommentMutation.isPending ? "등록 중..." : "등록"}
+            </button>
+          </form>
+
           {commentsQuery.isPending && <p>댓글을 불러오는 중입니다.</p>}
 
           {commentsQuery.isError && <p>{commentsQuery.error.message}</p>}
 
           {comments.map((comment) => (
             <div key={comment.id}>
-              <p>{comment.content}</p>
-              <span>{comment.writer.nickname}</span>
+              {editingCommentId === comment.id ? (
+                <form onSubmit={handleEditSubmit}>
+                  <textarea
+                    value={editingContent}
+                    onChange={(event) => setEditingContent(event.target.value)}
+                  />
+
+                  <button
+                    type="submit"
+                    disabled={
+                      !editingContent.trim() || updateCommentMutation.isPending
+                    }
+                  >
+                    {updateCommentMutation.isPending
+                      ? "수정 중..."
+                      : "수정 완료"}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleEditCancel}
+                    disabled={updateCommentMutation.isPending}
+                  >
+                    취소
+                  </button>
+                </form>
+              ) : (
+                <>
+                  <p>{comment.content}</p>
+                  <span>{comment.writer.nickname}</span>
+
+                  <button
+                    type="button"
+                    onClick={() => handleEditStart(comment)}
+                  >
+                    수정
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => deleteCommentMutation.mutate(comment.id)}
+                    disabled={deleteCommentMutation.isPending}
+                  >
+                    {deleteCommentMutation.isPending ? "삭제 중" : "삭제"}
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </section>
