@@ -1,6 +1,6 @@
 "use client";
 
-import { getProduct } from "@/lib/api/products";
+import { getProduct, getProductComments } from "@/lib/api/products";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import styles from "./page.module.css";
@@ -15,6 +15,11 @@ export default function ProductDetailPage() {
     queryFn: () => getProduct(productId),
   });
 
+  const commentsQuery = useQuery({
+    queryKey: ["productComments", productId],
+    queryFn: () => getProductComments({ productId, limit: 10 }),
+  });
+
   if (productQuery.isPending) {
     return <p>상품 정보를 불러오는 중입니다.</p>;
   }
@@ -24,6 +29,7 @@ export default function ProductDetailPage() {
   }
 
   const product = productQuery.data;
+  const comments = commentsQuery.data?.list ?? [];
 
   const imageUrl = product.images?.[0];
 
@@ -60,6 +66,21 @@ export default function ProductDetailPage() {
               ))}
             </div>
           </div>
+        </section>
+
+        <section>
+          <h2>문의하기</h2>
+
+          {commentsQuery.isPending && <p>댓글을 불러오는 중입니다.</p>}
+
+          {commentsQuery.isError && <p>{commentsQuery.error.message}</p>}
+
+          {comments.map((comment) => (
+            <div key={comment.id}>
+              <p>{comment.content}</p>
+              <span>{comment.writer.nickname}</span>
+            </div>
+          ))}
         </section>
       </div>
     </main>
