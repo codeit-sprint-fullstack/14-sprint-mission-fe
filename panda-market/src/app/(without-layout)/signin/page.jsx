@@ -1,62 +1,44 @@
 'use client'
 
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import Link from 'next/link'
 import { validateEmail, validatePassword } from '@/validators/authValidator'
 import styles from './signinPage.module.css'
 
 function SigninPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
+  // register: input을 React Hook Form에 등록하고 값·이벤트·검증 규칙 연결
+  // handleSubmit: preventDefault와 전체 유효성 검사
+  // watch: React Hook Form이 관리 중인 현재 입력값을 구독해서 기존 버튼 활성화 조건을 보존하기 위해 사용
+  // errors: emailError, passwordError를 대신하는 에러 객체
+  // defaultValues: useState('')처럼 input의 최초값 설정
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    // 최초 Blur에서 검사하고 이후 입력 중 다시 검사
+    mode: 'onTouched',
+    // 기존 useState('')처럼 input의 최초값 설정
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+
+  const email = watch('email')
+  const password = watch('password')
 
   const canSignin =
     validateEmail(email.trim()).isValid &&
     validatePassword(password.trim()).isValid
 
-  function onEmailChange(e) {
-    const emailInput = e.target.value
-    setEmail(emailInput)
-
-    if (!emailError) return
-
-    const { message } = validateEmail(emailInput.trim())
-    setEmailError(message)
-  }
-
-  function onEmailBlur() {
-    const { message } = validateEmail(email.trim())
-    setEmailError(message)
-  }
-
-  function onPasswordChange(e) {
-    const passwordInput = e.target.value
-    setPassword(passwordInput)
-
-    if (!passwordError) return
-
-    const { message } = validatePassword(passwordInput.trim())
-    setPasswordError(message)
-  }
-
-  function onPasswordBlur() {
-    const { message } = validatePassword(password.trim())
-    setPasswordError(message)
-  }
-
-  function onSigninSubmit(e) {
-    e.preventDefault()
-
-    const emailValidation = validateEmail(email.trim())
-    const passwordValidation = validatePassword(password.trim())
-
-    setEmailError(emailValidation.message)
-    setPasswordError(passwordValidation.message)
-
-    if (!emailValidation.isValid || !passwordValidation.isValid) return
+  function onSigninSubmit() {
+    // 로그인 API 연결 단계에서 요청 로직 추가
   }
 
   return (
@@ -79,25 +61,27 @@ function SigninPage() {
           {/* noValidate: 브라우저의 기본 HTML 검증 UI 비활성화 */}
           <form
             className={styles.authForm}
-            onSubmit={onSigninSubmit}
+            onSubmit={handleSubmit(onSigninSubmit)}
             noValidate
           >
             <div className={styles.labelInput}>
               <label htmlFor="signin-email">이메일</label>
               <input
                 id="signin-email"
-                name="email"
                 type="email"
                 placeholder="이메일을 입력해주세요"
-                value={email}
-                onChange={onEmailChange}
-                onBlur={onEmailBlur}
-                className={emailError ? styles.inputInvalid : ''}
+                className={errors.email ? styles.inputInvalid : ''}
+                {...register('email', {
+                  validate: (value) => {
+                    const { isValid, message } = validateEmail(value.trim())
+                    return isValid || message
+                  },
+                })}
               />
               <div
-                className={`${styles.inputError} ${emailError ? styles.active : ''}`}
+                className={`${styles.inputError} ${errors.email ? styles.active : ''}`}
               >
-                {emailError}
+                {errors.email?.message}
               </div>
             </div>
             <div className={styles.labelInput}>
@@ -105,13 +89,17 @@ function SigninPage() {
               <div className={styles.passwordWrapper}>
                 <input
                   id="signin-password"
-                  name="password"
                   type={isPasswordVisible ? 'text' : 'password'}
                   placeholder="비밀번호를 입력해주세요"
-                  value={password}
-                  onChange={onPasswordChange}
-                  onBlur={onPasswordBlur}
-                  className={passwordError ? styles.inputInvalid : ''}
+                  className={errors.password ? styles.inputInvalid : ''}
+                  {...register('password', {
+                    validate: (value) => {
+                      const { isValid, message } = validatePassword(
+                        value.trim(),
+                      )
+                      return isValid || message
+                    },
+                  })}
                 />
                 <button
                   type="button"
@@ -131,12 +119,16 @@ function SigninPage() {
                 </button>
               </div>
               <div
-                className={`${styles.inputError} ${passwordError ? styles.active : ''}`}
+                className={`${styles.inputError} ${errors.password ? styles.active : ''}`}
               >
-                {passwordError}
+                {errors.password?.message}
               </div>
             </div>
-            <button className={styles.signinButton} disabled={!canSignin}>
+            <button
+              type="submit"
+              className={styles.signinButton}
+              disabled={!canSignin}
+            >
               로그인
             </button>
           </form>
