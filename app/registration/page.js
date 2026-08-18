@@ -1,3 +1,5 @@
+"use client";
+
 import axios from "axios";
 import style from "./page.module.css";
 import { useState } from "react";
@@ -32,8 +34,8 @@ function Registration() {
   return (
     <>
       <div className="register-head">
-        <h2 className="title">상품 등록하기</h2>
-        <button className="registerButton" onClick={postItems}>
+        <h2 className={style.title}>상품 등록하기</h2>
+        <button className={style.registerButton} onClick={postItems}>
           등록
         </button>
       </div>
