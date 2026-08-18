@@ -88,7 +88,7 @@ export default async function ArticleDetail({ params }) {
       <section>
         <CommentList articleId={id} comments={comments} />
         <div className={styles.backLink}>
-          <BackLink />
+          <BackLink href={'/articles'}/>
         </div>
       </section>
     </div>

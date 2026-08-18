@@ -18,7 +18,7 @@ export default function ProductCard({ product }) {
         <p className={styles.price}>{product.price.toLocaleString()}원</p>
         <div className={styles.heart}>
           <Image src={heartIcon} width={16} height={16} alt="좋아요 수" />
-          <p className={styles.heartCount}>{product.fav || 0}</p>
+          <p className={styles.heartCount}>{product.favoriteCount || 0}</p>
         </div>
       </div>
     </div>

@@ -27,11 +27,56 @@
   gap: 24px;
 }
 
+.infoTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menuWrapper {
+  position: relative;
+}
+
+.menuList {
+  width: 139px;
+  list-style: none;
+  border: 1px solid var(--secondary-200);
+  border-radius: 8px;
+  background: #FFF;
+
+  position: absolute;
+  right: 0;
+}
+
+.menuList li:first-child .menuBtn {
+  border-bottom: 1px solid var(--secondary-200);
+}
+
+.menuBtn {
+  width: 100%;
+  height: 46px;
+  border: none;
+  background: transparent;
+  color: var(--secondary-500);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.menuBtn:hover {
+  background-color: var(--secondary-100);
+}
+
 .name {
   padding-bottom: 16px;
   color: var(--secondary-800);
   font-size: 24px;
   font-weight: 600;
+}
+
+.menuIcon {
+  border: none;
+  background: transparent;
 }
 
 .price {
@@ -101,12 +146,6 @@
 }
 
 .favorite {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.favorite {
   height: 40px;
   padding: 4px 12px;
   border-radius: 35px;
@@ -116,6 +155,14 @@
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.heartIcon {
+  width: 26px;
+  height: 23px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .favoriteCount {
@@ -160,17 +207,28 @@
 .submitBtn {
   width: fit-content;
   height: 42px;
+  margin-left: auto;
   padding: 12px 23px;
   margin-top: 6px;
   border: none;
   border-radius: 8px;
-  background: var(--secondary-400);
+  background: var(--primary-100);
   color: var(--secondary-100);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 }
 
+.submitBtn:disabled {
+  background: var(--secondary-400);
+}
+
 .commentSection {
   margin-top: 24px;
+}
+
+.backlink {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
 }

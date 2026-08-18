@@ -3,9 +3,9 @@
 import { createProduct } from "@/actions/productActions";
 import Input from "@/components/form/Input";
 import SubmitButton from "@/components/form/SubmitButton";
+import TagInput from "@/components/form/TagInput";
 import Textarea from "@/components/form/Textarea";
 import { useActionState, useState } from "react";
-import TagInput from "./_components/TagInput";
 import styles from "./page.module.css";
 
 // useActionState를 위한 초기 설정
@@ -35,7 +35,7 @@ export default function Registration() {
     <form action={formAction} className={styles.wrapper}>
       <div className={styles.header}>
         <h1 className={styles.title}>상품 등록하기</h1>
-        <SubmitButton disabled={isFormEmpty} />
+        <SubmitButton disabled={isFormEmpty || isPending} />
       </div>
       <Input
         label="상품명"
