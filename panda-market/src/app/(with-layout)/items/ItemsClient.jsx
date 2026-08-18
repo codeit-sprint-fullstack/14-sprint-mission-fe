@@ -3,11 +3,10 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useQuery } from '@tanstack/react-query'
-import { getBestProducts, getProducts } from '@/api/productApi'
 import {
-  getBestProductQueryKey,
-  getProductListQueryKey,
-} from '@/constants/queryKeys'
+  getBestProductQueryOptions,
+  getProductListQueryOptions,
+} from '@/queries/productQueries'
 import Dropdown from '@/components/common/Dropdown'
 import Pagination from '@/components/common/Pagination'
 import ProductCard from '@/components/items/ProductCard'
@@ -26,36 +25,31 @@ function ItemsClient() {
   const [pageSize, setPageSize] = useState(10)
   const [bestPageSize, setBestPageSize] = useState(4)
 
+  // Query Options Factory를 사용하여 queryKey, queryFn, 캐시 정책을 하나로 묶음
   const {
     data: productsData,
     isPending: isProductsPending,
     isError: isProductsError,
     isFetching: isProductsFetching,
-  } = useQuery({
-    queryKey: getProductListQueryKey({
+  } = useQuery(
+    getProductListQueryOptions({
       orderBy,
       keyword,
       page: currentPage,
       pageSize,
     }),
-    queryFn: () =>
-      getProducts({
-        orderBy,
-        keyword,
-        page: currentPage,
-        pageSize,
-      }),
-  })
+  )
 
   const {
     data: bestProductsData,
     isPending: isBestProductsPending,
     isError: isBestProductsError,
     isFetching: isBestProductsFetching,
-  } = useQuery({
-    queryKey: getBestProductQueryKey({ pageSize: bestPageSize }),
-    queryFn: () => getBestProducts({ pageSize: bestPageSize }),
-  })
+  } = useQuery(
+    getBestProductQueryOptions({
+      pageSize: bestPageSize,
+    }),
+  )
 
   const products = productsData?.list ?? []
   const bestProducts = bestProductsData?.list ?? []
