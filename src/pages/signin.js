@@ -30,10 +30,10 @@ export default function SigninPage() {
       localStorage.setItem("accessToken", data.accessToken);
       router.replace("/items");
     },
-    onError: (error) => {
+    onError: () => {
       setEmailError("이메일을 확인해 주세요.");
       setPasswordError("비밀번호를 확인해 주세요.");
-      setLoginError(error.message);
+      setLoginError("비밀번호가 일치하지 않습니다.");
     },
   });
 
@@ -79,7 +79,7 @@ export default function SigninPage() {
               id="email"
               type="email"
               className={emailError ? styles.invalidInput : ""}
-              placeholder="이메일을 입력해주세요"
+              placeholder="이메일을 입력해주세요."
               value={email}
               onFocus={() => setEmailError("")}
               onChange={(event) => {
