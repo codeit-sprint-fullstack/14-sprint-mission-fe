@@ -1,0 +1,13 @@
+.commentArea {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.emptyComment {
+  text-align: center;
+}
+.emptyComment p {
+  color: #9ca3af;
+  font-size: 16px;
+  line-height: 2.6rem;
+}

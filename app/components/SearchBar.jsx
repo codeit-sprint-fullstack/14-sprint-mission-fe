@@ -1,14 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import searchIc from "@/public/icon_search.png";
 import styles from "./SearchBar.module.css";
 import Image from "next/image";
 
-export default function SearchBar({ initialValue = "" }) {
+export default function SearchBar() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState("");
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const [keyword, setKeyword] = useState(searchParams.get("keyword") ?? "");
 
   function handleChange(e) {
     setKeyword(e.target.value);
@@ -16,14 +19,14 @@ export default function SearchBar({ initialValue = "" }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const params = new URLSearchParams(searchParams);
 
+    params.set("page", "1");
+    params.set("keyword", keyword);
     if (!keyword) {
-      router.push("/posts");
-      return;
+      params.delete("keyword");
     }
-
-    const encodedValue = encodeURIComponent(keyword);
-    router.push(`/posts?q=${encodedValue}`);
+    router.push(`${pathname}?${params.toString()}`);
   }
 
   return (
@@ -31,7 +34,7 @@ export default function SearchBar({ initialValue = "" }) {
       <form onSubmit={handleSubmit}>
         <Image src={searchIc} alt="" width={24} height={24} />
         <input
-          name="q"
+          name="keyword"
           value={keyword}
           onChange={handleChange}
           placeholder="검색할 키워드를 입력해주세요"

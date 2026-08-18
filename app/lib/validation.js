@@ -9,3 +9,15 @@ export function isValidPassword(password) {
 
   return isLongEnough;
 }
+
+export function parseEnum(value, { allowed, defaultValue }) {
+  return allowed.includes(value) ? value : defaultValue;
+}
+
+export function parseNumberParam(value, defaultValue) {
+  const parsed = Number(value);
+  const isValid =
+    !Number.isNaN(parsed) && Number.isInteger(parsed) && parsed > 0;
+
+  return isValid ? parsed : defaultValue;
+}

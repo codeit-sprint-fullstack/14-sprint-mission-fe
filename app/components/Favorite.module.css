@@ -1,0 +1,15 @@
+.favorite {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  color: #6b7280;
+  font-size: 32px;
+  font-weight: 300;
+}
+.favorite span {
+  font-size: 16px;
+  font-weight: 400;
+}

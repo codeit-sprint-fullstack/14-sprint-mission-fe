@@ -1,0 +1,44 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.content div {
+  display: flex;
+  flex-direction: column;
+}
+.content label {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #1f2937;
+  font-weight: 600;
+}
+.content textarea {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  color: #1f2937;
+}
+.content textarea {
+  border: 0 none;
+  color: #1f2937;
+  font-size: 16px;
+  min-height: 104px;
+}
+.content textarea::placeholder {
+  color: #9ca3af;
+}
+.content .btnsArea {
+  display: flex;
+  align-items: end;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.content button {
+  max-width: 74px;
+}

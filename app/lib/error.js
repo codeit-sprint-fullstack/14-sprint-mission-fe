@@ -7,10 +7,9 @@ const SIGNIN_ERROR_MESSAGE = {
 //errorCode에 맞는 에러를 던짐
 //네트워크가 응답이 없는 경우에는 해결이 안됌.
 export function getErrorMessage(error) {
-  const errorResponse = error.response;
+  const errorResponse = error?.response;
   const errorMessage = errorResponse?.data?.message;
-  const errorCode = errorResponse?.data?.status;
-
+  const errorCode = errorResponse?.status;
   if (!errorResponse) {
     return SIGNIN_ERROR_MESSAGE.CHECK_NETWORK_SETTING;
   } else if (errorMessage) {

@@ -1,38 +1,30 @@
-"use client";
-
-import { getProducts } from "@/app/lib/api/products";
-import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
+import FilterList from "@/app/components/FilterList";
+import SearchBar from "@/app/components/SearchBar";
+import styles from "./Items.module.css";
+import AllProductList from "@/app/components/AllProductList";
+import BestProductList from "@/app/components/BestProductList";
+import Link from "next/link";
 
 export default function Items() {
-  const searchParams = useSearchParams();
-  const page = searchParams.get("page") ?? "1";
-  const pageSize = searchParams.get("pageSize") ?? "10";
-  const orderBy = searchParams.get("orderBy") ?? "recent";
-  const keyword = searchParams.get("keyword") ?? "";
-  // const params = new URLSearchParams(searchParams);
-  const { data, isPending } = useQuery({
-    queryKey: ["items", page, pageSize, orderBy, keyword],
-    queryFn: () =>
-      getProducts({
-        page,
-        pageSize,
-        orderBy,
-        keyword,
-      }),
-  });
-  if (isPending) {
-    return null;
-  }
-  const { list, totalCount } = data;
   return (
     <>
-      <ul>
-        {list?.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-      {totalCount}
+      <section className={styles.bestProductsList}>
+        <h2 className={styles.sectionTitle}>베스트 상품</h2>
+        <BestProductList />
+      </section>
+      <section className={styles.productsList}>
+        <div className={styles.sectionTitleHeader}>
+          <h2 className={styles.sectionTitle}>판매 중인 상품</h2>
+          <Link href="/registration" className="btStyle">
+            상품 등록하기
+          </Link>
+          <div className={styles.productsSearch}>
+            <SearchBar />
+            <FilterList />
+          </div>
+        </div>
+        <AllProductList />
+      </section>
     </>
   );
 }
