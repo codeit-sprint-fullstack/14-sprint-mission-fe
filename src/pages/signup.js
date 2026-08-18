@@ -54,7 +54,7 @@ export default function SignupPage() {
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const isEmailValid = emailPattern.test(email.trim());
-  const isPasswordValid = password.length >= 8;
+  const isPasswordValid = password.trim().length >= 8;
   const isPasswordConfirmationValid = password === passwordConfirmation;
 
   const isFormValid =

@@ -37,19 +37,28 @@ export default function SigninPage() {
     },
   });
 
-  const isFormValid = email.trim() !== "" && password.trim() !== "";
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const isEmailValid = emailPattern.test(email.trim());
+  const isPasswordValid = password.trim().length >= 8;
+
+  const isFormValid = isEmailValid && isPasswordValid;
 
   function handleSubmit(event) {
     event.preventDefault();
 
     if (email.trim() === "") {
       setEmailError("이메일을 확인해 주세요.");
+    } else if (!isEmailValid) {
+      setEmailError("잘못된 이메일입니다.");
     } else {
       setEmailError("");
     }
 
     if (password.trim() === "") {
       setPasswordError("비밀번호를 확인해 주세요.");
+    } else if (!isPasswordValid) {
+      setPasswordError("비밀번호를 8자 이상 입력해주세요.");
     } else {
       setPasswordError("");
     }
@@ -71,7 +80,7 @@ export default function SigninPage() {
           <img className={styles.logo} src="/images/logo.png" alt="판다마켓" />
         </Link>
 
-        <form className={styles.authForm} onSubmit={handleSubmit}>
+        <form className={styles.authForm} onSubmit={handleSubmit} noValidate>
           <div className={styles.inputGroup}>
             <label htmlFor="email">이메일</label>
 
@@ -89,6 +98,8 @@ export default function SigninPage() {
               onBlur={() => {
                 if (email.trim() === "") {
                   setEmailError("이메일을 입력해 주세요.");
+                } else if (!isEmailValid) {
+                  setEmailError("잘못된 이메일입니다.");
                 } else {
                   setEmailError("");
                 }
@@ -116,6 +127,8 @@ export default function SigninPage() {
                 onBlur={() => {
                   if (password.trim() === "") {
                     setPasswordError("비밀번호를 입력해 주세요.");
+                  } else if (!isPasswordValid) {
+                    setPasswordError("비밀번호를 8자 이상 입력해주세요.");
                   } else {
                     setPasswordError("");
                   }
