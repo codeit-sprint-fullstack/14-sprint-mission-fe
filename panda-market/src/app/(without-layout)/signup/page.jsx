@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signup } from '@/api/authApi'
+import useRedirectIfAuthenticated from '@/hooks/useRedirectIfAuthenticated'
 import AlertModal from '@/components/common/AlertModal'
 import {
   validateEmail,
@@ -39,6 +40,7 @@ function SignupPage() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isPasswordConfirmVisible, setIsPasswordConfirmVisible] =
     useState(false)
+  const isCheckingAuth = useRedirectIfAuthenticated()
   const [modalMessage, setModalMessage] = useState('')
   const [isSignupSuccess, setIsSignupSuccess] = useState(false)
 
@@ -83,6 +85,10 @@ function SignupPage() {
     if (isSignupSuccess) {
       router.push('/items')
     }
+  }
+
+  if (isCheckingAuth) {
+    return null
   }
 
   return (

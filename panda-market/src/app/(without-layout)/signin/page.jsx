@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signin } from '@/api/authApi'
+import useRedirectIfAuthenticated from '@/hooks/useRedirectIfAuthenticated'
 import AlertModal from '@/components/common/AlertModal'
 import { validateEmail, validatePassword } from '@/validators/authValidator'
 import styles from './signinPage.module.css'
@@ -34,6 +35,7 @@ function SigninPage() {
   })
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const isCheckingAuth = useRedirectIfAuthenticated()
   const [modalMessage, setModalMessage] = useState('')
 
   const router = useRouter()
@@ -68,6 +70,10 @@ function SigninPage() {
 
   function onSigninSubmit(data) {
     signinMutation.mutate(data)
+  }
+
+  if (isCheckingAuth) {
+    return null
   }
 
   return (
