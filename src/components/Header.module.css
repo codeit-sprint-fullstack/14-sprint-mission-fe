@@ -43,6 +43,67 @@
   color: #3692ff;
 }
 
+.authArea {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 120px;
+  height: 28px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.profileMenu {
+  position: relative;
+}
+
+.logoutMenu {
+  position: absolute;
+  top: 28px;
+  right: 0;
+  z-index: 10;
+  width: 90px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: #ffffff;
+}
+
+.logoutButton {
+  width: 100%;
+  height: 38px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #6b7280;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background-color: #f3f4f6;
+}
+
+.profileImage {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.nickname {
+  color: #4b5563;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
 .loginButton {
   display: flex;
   align-items: center;
@@ -54,6 +115,7 @@
   border-radius: 6px;
   background-color: #3692ff;
   color: #ffffff;
+  text-decoration: none;
   font-size: 10px;
   font-weight: 600;
   cursor: pointer;
