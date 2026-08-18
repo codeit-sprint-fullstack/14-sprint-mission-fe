@@ -57,10 +57,10 @@
 .articleList {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1199px) {
   .page {
     gap: 1.5rem;
   }
@@ -74,7 +74,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .articleSection {
     gap: 1rem;
   }

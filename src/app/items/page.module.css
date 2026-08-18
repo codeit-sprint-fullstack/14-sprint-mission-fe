@@ -1,0 +1,19 @@
+.page {
+  width: 100%;
+  padding: 1.625rem 0 7.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+@media (max-width: 1199px) {
+  .page {
+    padding: 1.5rem 0 6.25rem;
+  }
+}
+
+@media (max-width: 743px) {
+  .page {
+    padding: 1.5rem 0 5rem;
+  }
+}

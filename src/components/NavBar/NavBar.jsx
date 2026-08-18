@@ -14,6 +14,8 @@ export default function NavBar() {
   const isBoardsActive =
     pathname === "/boards" || pathname.startsWith("/boards/");
 
+  const isItemsActive = pathname === "/items" || pathname.startsWith("/items/");
+
   return (
     <nav className={styles.nav}>
       <div className={styles.inner}>
@@ -39,7 +41,10 @@ export default function NavBar() {
               자유게시판
             </Link>
 
-            <Link href="/items" className={styles.link}>
+            <Link
+              href="/items"
+              className={`${styles.link} ${isItemsActive ? styles.active : ""}`}
+            >
               중고마켓
             </Link>
           </div>

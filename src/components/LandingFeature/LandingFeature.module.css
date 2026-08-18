@@ -58,7 +58,7 @@
   line-height: 2rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
   .section {
     padding: 3.75rem 1.5rem;
   }
@@ -85,7 +85,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .section {
     padding: 2.5rem 1rem;
   }
