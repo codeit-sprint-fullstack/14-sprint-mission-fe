@@ -1,7 +1,7 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getProductDetail } from "../lib/api/products";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteProduct, getProductDetail } from "../lib/api/products";
 import Link from "next/link";
 import { getErrorMessage } from "../lib/error";
 import Image from "next/image";
@@ -11,11 +11,27 @@ import KebabMenu from "./KebabMenu";
 import styles from "./ItemDetail.module.css";
 import Favorite from "./Favorite";
 import ProductCommentList from "./ProductCommentList";
+import { useRouter } from "next/navigation";
+import { getMe } from "../lib/api/auth";
 
 export default function ItemDetail({ id }) {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["item", id],
     queryFn: () => getProductDetail(id),
+  });
+  const { data: me } = useQuery({
+    queryKey: ["users", "me"],
+    queryFn: () => getMe(),
+  });
+  const { mutate } = useMutation({
+    mutationFn: (productId) => deleteProduct(productId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["item"] });
+      router.replace("/items");
+    },
   });
 
   if (isError) {
@@ -46,6 +62,7 @@ export default function ItemDetail({ id }) {
     price,
     tags,
     images,
+    ownerId,
     favoriteCount,
     createdAt,
     ownerNickname,
@@ -61,7 +78,13 @@ export default function ItemDetail({ id }) {
         <div className={styles.content}>
           <div className={styles.titleRow}>
             <h2 className={styles.title}>{name}</h2>
-            <KebabMenu />
+            {ownerId === me?.id && (
+              <KebabMenu
+                confirmMessage="게시글을 삭제하시겠습니까?"
+                onDelete={() => mutate(id)}
+                editHref={`/items/${id}/edit`}
+              />
+            )}
           </div>
           <h2 className={styles.price}>{price.toLocaleString()}원</h2>
           <div className={styles.section}>
