@@ -8,21 +8,25 @@ import {
   updateComment,
   favoriteProduct,
   unfavoriteProduct,
+  deleteProduct,
 } from "@/lib/api/products";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Image from "next/image";
 
 export default function ProductDetailPage() {
   const params = useParams();
+  const router = useRouter();
+
   const productId = Number(params.id);
 
   const [commentContent, setCommentContent] = useState("");
-
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingContent, setEditingContent] = useState("");
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -82,6 +86,20 @@ export default function ProductDetailPage() {
       queryClient.invalidateQueries({
         queryKey: ["product", productId],
       });
+    },
+  });
+
+  const deleteProductMutation = useMutation({
+    mutationFn: deleteProduct,
+
+    onSuccess: () => {
+      queryClient.removeQueries({
+        queryKey: ["product", productId],
+        exact: true,
+      });
+
+      setIsDeleteModalOpen(false);
+      router.replace("/items");
     },
   });
 
@@ -158,6 +176,10 @@ export default function ProductDetailPage() {
         <section className={styles.productInfo}>
           <h1>{product.name}</h1>
           <strong>{product.price.toLocaleString()}원</strong>
+
+          <button type="button" onClick={() => setIsDeleteModalOpen(true)}>
+            삭제하기
+          </button>
 
           <div className={styles.infoDivider} />
 
@@ -268,6 +290,21 @@ export default function ProductDetailPage() {
           ))}
         </section>
       </div>
+      {isDeleteModalOpen && (
+        <div>
+          <h2>상품을 삭제하시겠습니까?</h2>
+          <button type="button" onClick={() => setIsDeleteModalOpen(false)}>
+            취소
+          </button>
+          <button
+            type="button"
+            onClick={() => deleteProductMutation.mutate(productId)}
+            disabled={deleteProductMutation.isPending}
+          >
+            {deleteProductMutation.isPending ? "삭제 중" : "삭제"}
+          </button>
+        </div>
+      )}
     </main>
   );
 }
