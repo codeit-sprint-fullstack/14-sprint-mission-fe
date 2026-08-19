@@ -7,6 +7,7 @@ import { getProductComments } from "../lib/api/comments";
 import Image from "next/image";
 import ProductCommentItems from "./ProductCommentsItems";
 import ProductCommentForm from "./ProductCommentForm";
+import { getErrorMessage } from "../lib/error";
 
 const LIMIT = 3;
 
@@ -42,7 +43,7 @@ export default function ProductCommentList({ id }) {
       <div className={styles.commentArea}>
         {comments.length > 0 ? (
           <>
-            <ProductCommentItems postId={id} comments={comments} />
+            <ProductCommentItems productId={id} comments={comments} />
             {hasNextPage && (
               <button
                 type="button"

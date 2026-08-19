@@ -2,8 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { updateComment } from "../actions";
-import { createProductComment } from "../lib/api/comments";
+import { createProductComment, updateComment } from "../lib/api/comments";
 import styles from "./ProductCommentForm.module.css";
 
 export default function ProductCommentForm({
@@ -22,7 +21,11 @@ export default function ProductCommentForm({
         : createProductComment({ productId, content }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", productId] });
-      setValue("");
+      if (isEditMode) {
+        onClose();
+      } else {
+        setValue("");
+      }
     },
   });
 

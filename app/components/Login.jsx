@@ -12,7 +12,6 @@ export default function Login() {
     queryFn: getMe,
   });
   const showUser = !isPending && data;
-
   return (
     <>
       {showUser ? (
