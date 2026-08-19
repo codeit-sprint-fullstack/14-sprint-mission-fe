@@ -6,6 +6,8 @@ import {
   createProductComment,
   deleteComment,
   updateComment,
+  favoriteProduct,
+  unfavoriteProduct,
 } from "@/lib/api/products";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
@@ -63,6 +65,22 @@ export default function ProductDetailPage() {
       setEditingContent("");
       queryClient.invalidateQueries({
         queryKey: ["productComments", productId],
+      });
+    },
+  });
+
+  const favoriteMutation = useMutation({
+    mutationFn: ({ productId, isFavorite }) => {
+      if (isFavorite) {
+        return unfavoriteProduct(productId);
+      }
+
+      return favoriteProduct(productId);
+    },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["product", productId],
       });
     },
   });
@@ -156,6 +174,21 @@ export default function ProductDetailPage() {
                 <span key={tag}>#{tag}</span>
               ))}
             </div>
+
+            <button
+              type="button"
+              onClick={() =>
+                favoriteMutation.mutate({
+                  productId,
+                  isFavorite: product.isFavorite,
+                })
+              }
+              disabled={favoriteMutation.isPending}
+            >
+              {favoriteMutation.isPending
+                ? "처리 중..."
+                : `${product.isFavorite ? "♥" : "♡"} ${product.favoriteCount}`}
+            </button>
           </div>
         </section>
 
