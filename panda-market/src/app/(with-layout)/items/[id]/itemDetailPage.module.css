@@ -1,0 +1,347 @@
+.itemDetailPage {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 860px;
+  margin: 0 auto;
+  padding-top: 32px;
+}
+
+.itemDetailProductSection {
+  display: grid;
+  grid-template-columns: 486px minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto auto;
+  column-gap: 24px;
+  width: 100%;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--Cool-Gray-200);
+}
+
+.itemDetailImageArea {
+  grid-column: 1;
+  grid-row: 1 / 5;
+  width: 486px;
+  height: 486px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+}
+
+.itemDetailProductImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemDetailProductSummary {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.itemDetailProductHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  width: 100%;
+}
+
+.itemDetailTitleGroup {
+  min-width: 0;
+}
+
+.itemDetailProductName {
+  margin: 0 0 8px;
+  color: var(--Cool-Gray-800);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  overflow-wrap: anywhere;
+}
+
+.itemDetailProductPrice {
+  display: block;
+  color: var(--Cool-Gray-800);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.itemDetailMenuArea {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.itemDetailMenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.itemDetailHeaderSpacer {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--Cool-Gray-200);
+}
+
+.itemDetailDescriptionArea {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+}
+
+.itemDetailDescriptionSpacer {
+  width: 100%;
+  height: 4px;
+}
+
+.itemDetailDescriptionTitle,
+.itemDetailTagTitle,
+.itemDetailInquiryTitle {
+  margin: 0;
+  color: var(--Cool-Gray-900);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.itemDetailDescriptionText {
+  margin: 8px 0 24px;
+  color: var(--Secondary-600);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.itemDetailTagSection {
+  width: 100%;
+}
+
+.itemDetailTagList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.itemDetailTag {
+  padding: 6px 12px;
+  border-radius: 26px;
+  background: var(--Cool-Gray-100);
+  color: var(--Secondary-600);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.itemDetailProductMeta {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.itemDetailSellerArea {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  font-style: normal;
+}
+
+.itemDetailSellerProfile {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.itemDetailSellerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemDetailSellerNickname {
+  color: var(--Secondary-600);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.itemDetailCreatedAt {
+  color: var(--Cool-Gray-400);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.itemDetailFavoriteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  height: 40px;
+  padding: 4px 12px;
+  border: 1px solid var(--Secondary-200);
+  border-radius: 35px;
+  background: var(--pure-white);
+  cursor: pointer;
+}
+
+.itemDetailFavoriteIcon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.itemDetailFavoriteCount {
+  color: var(--Cool-Gray-500);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.itemDetailProductSpacer {
+  grid-column: 2;
+  grid-row: 4;
+  width: 100%;
+  height: 8px;
+}
+
+.itemDetailInquirySection {
+  width: 100%;
+  padding-top: 40px;
+}
+
+.itemDetailInquiryForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  margin: 0;
+}
+
+.itemDetailInquiryTitle {
+  align-self: flex-start;
+  margin-bottom: 9px;
+}
+
+.itemDetailInquiryTextarea {
+  width: 100%;
+  height: 104px;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 12px;
+  outline: none;
+  background: var(--Cool-Gray-100);
+  color: var(--Secondary-800);
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  resize: none;
+}
+
+.itemDetailInquiryTextarea::placeholder {
+  color: var(--Secondary-400);
+}
+
+.itemDetailInquirySubmitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  margin-top: 16px;
+  padding: 12px 23px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--Cool-Gray-400);
+  color: var(--Cool-Gray-100);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.itemDetailInquiryEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 24px;
+}
+
+.itemDetailInquiryEmptyImage {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.itemDetailInquiryEmptyText {
+  margin: 16px 0 0;
+  color: var(--Secondary-400);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.itemDetailInquiryList {
+  width: 100%;
+  min-height: 300px;
+  margin-bottom: 24px;
+}
+
+.itemDetailBackLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 48px;
+  margin: 0 auto 40px;
+  padding: 12px 40px;
+  gap: 8px;
+  border-radius: 40px;
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.itemDetailBackText {
+  color: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.itemDetailBackIcon {
+  display: block;
+  flex-shrink: 0;
+}
