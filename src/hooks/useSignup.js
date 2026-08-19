@@ -20,6 +20,7 @@ export function useSignup() {
     onSuccess: (data) => {
       console.log(data);
       localStorage.setItem('accessToken', data.accessToken); // ✅ 토큰 저장
+      localStorage.setItem('refreshToken', data.refreshToken);
       localStorage.setItem('nickname', data.user.nickname); // ✅ 닉네임 저장
       router.push('/notice'); // ✅ 회원가입 성공 시 자동 로그인 상태로 중고마켓 페이지 이동
     },

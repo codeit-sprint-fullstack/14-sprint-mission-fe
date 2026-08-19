@@ -1,7 +1,7 @@
 import style from "./bestpostcard.module.css";
 import Link from "next/link";
 
-function Bestpostcard({ id, title, author, likes, date }) {
+function Bestpostcard({ id, title, author, likes, date, image }) {
   return (
     <Link href={`/notice/${id}`}>
       <div className={style.bestpostcard_wrap}>
@@ -12,7 +12,7 @@ function Bestpostcard({ id, title, author, likes, date }) {
           </div>
           <div className={style.content_wrap}>
             <span>{title}</span>
-            <img src="/assets/default.jpg" alt="default"/>
+            <img src={image} alt="default"/>
           </div>
           <div className={style.explane_wrap}>
             <div className={style.namelike_wrap}>

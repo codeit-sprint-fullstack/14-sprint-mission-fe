@@ -8,6 +8,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+  text-decoration: none;
 }
 
 .product_card {
@@ -71,7 +72,7 @@
   }
 
   .sublist {
-    width: 221px;
+    width: 227px;
     height: 317px;
   }
 

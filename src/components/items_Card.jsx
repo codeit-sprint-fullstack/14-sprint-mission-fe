@@ -1,3 +1,4 @@
+import Link from "next/link";
 import style from "./items_Card.module.css";
 import React from "react";
 
@@ -5,7 +6,7 @@ function Items_Card({ products = [], index }) {
   return (
     <>
       {products.map((item) => (
-        <div key={item.id} className={style.ItemList}>
+        <Link key={item.id} href={`/items/${item.id}`} className={style.ItemList}>
           <div
             className={
               index
@@ -29,7 +30,7 @@ function Items_Card({ products = [], index }) {
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </>
   );

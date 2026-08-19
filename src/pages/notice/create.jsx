@@ -3,42 +3,42 @@ import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
 import Gnb from "@/components/gnb";
 import style from "@/styles/create.module.css";
+import api from "@/utils/api"; 
+import { uploadImage } from "@/utils/imageupload";
 
 export default function CreateNotice() {
-  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState("");
+  const [file, setFile] = useState(null);
 
-  const isDisabled = title.trim() === "" || content.trim() === "" || image.trim() === "";
+  const isDisabled = title.trim() === "" || content.trim() === "" || !file;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${BASE_URL}/articles`, {
-        method: "POST",
-        headers: {
-          "accept": "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ image, content, title }),
+      // 1. 이미지 업로드
+      const uploadUrl = await uploadImage(file);
+
+      // 2. 게시글 등록
+      const res = await api.post("/notice", {
+        image: uploadUrl,
+        content,
+        title,
       });
 
-      if (res.ok) {
-        const newNotice = await res.json();
+      if (res.status === 200 || res.status === 201) {
+        const newNotice = res.data;
         alert("게시글이 등록되었습니다!");
         router.push(`/notice/${newNotice.id}`);
       } else {
-        const err = await res.json();
-        alert("등록 실패: " + err.error);
+        alert("등록 실패: " + (res.data?.error || "알 수 없는 오류"));
       }
     } catch (error) {
       console.error("등록 에러:", error);
+      alert("등록 중 문제가 발생했습니다.");
     }
   };
-
-
 
   return (
     <>
@@ -71,12 +71,11 @@ export default function CreateNotice() {
                 />
               </div>
               <div className={style.form_wrap}>
-                <span>*이미지 URL</span>
+                <span>*이미지 파일</span>
                 <input
-                  type="text"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  placeholder="https://example.com/image.png"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setFile(e.target.files[0])}
                 />
               </div>
             </form>
@@ -87,4 +86,3 @@ export default function CreateNotice() {
     </>
   );
 }
-

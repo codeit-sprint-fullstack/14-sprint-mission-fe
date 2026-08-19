@@ -11,16 +11,21 @@ export function useLogin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+
+      const result = await res.json();
+
       if (!res.ok) {
-        const data = await res.json();
-        throw data; // ✅ Error 객체 대신 서버 응답 JSON 던지기
+        throw new Error(result.message || '로그인에 실패했습니다.');
       }
-      return res.json();
+
+      return result;
     },
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
       localStorage.setItem('nickname', data.user.nickname);
       router.push('/notice');
     },
   });
 }
+

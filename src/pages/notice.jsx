@@ -10,7 +10,6 @@ import Footer from "@/components/Footer.jsx";
 import { formatDate } from '@/utils/time.js';
 
 export default function Notice() {
-  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [bestPosts, setBestPosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [orderBy, setOrderBy] = useState("recent");
@@ -123,6 +122,7 @@ export default function Notice() {
                     id={post.id}
                     title={post.title}
                     author={post.writer.nickname}
+                    image={post.image}
                     likes={post.likeCount}
                     date={formatDate(post.createdAt)}
                   />
@@ -169,6 +169,7 @@ export default function Notice() {
                     id={post.id}
                     title={post.title}
                     author={post.writer.nickname}
+                    image={post.image}
                     likes={post.likeCount}
                     date={formatDate(post.createdAt)}
                   />

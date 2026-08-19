@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Footer from "@/components/Footer.jsx";
 import Gnb from "@/components/gnb";
 import Items_Card from "@/components/items_Card.jsx";
@@ -113,9 +114,9 @@ function Items() {
                             <div className={style.sellTitle}>
                                 <h2>판매 중인 상품</h2>
                                 {isPhone && (
-                                    <button onClick={() => navigate("/")}>
+                                    <Link href="/" className={style.registerButton}>
                                         <span>상품 등록하기</span>
-                                    </button>
+                                    </Link>
                                 )}
                             </div>
                             <div className={style.search_Button}>
@@ -132,9 +133,9 @@ function Items() {
                                     />
                                 </div>
                                 {!isPhone && (
-                                    <button onClick={() => navigate("/")}>
+                                    <Link href="/items/create" className={style.registerButton}>
                                         <span>상품 등록하기</span>
-                                    </button>
+                                    </Link>
                                 )}
                                 <Dropdown
                                     size="medium"
