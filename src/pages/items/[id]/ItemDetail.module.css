@@ -441,3 +441,82 @@
 .menuItem:hover {
   background-color: #f3f4f6;
 }
+
+/* 상품 삭제 모달*/
+.deleteModalBackground {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.deleteModal {
+  display: flex;
+  width: 400px;
+  min-height: 260px;
+  padding: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.deleteModalIcon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f74747;
+}
+
+.deleteModalIcon img {
+  width: 20px;
+  height: 16px;
+}
+
+.deleteModalMessage {
+  margin: 32px 0 40px;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+}
+
+.deleteModalButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.deleteCancelButton,
+.deleteConfirmButton {
+  width: 150px;
+  height: 48px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteCancelButton {
+  border: 1px solid #f74747;
+  background-color: #ffffff;
+  color: #f74747;
+}
+
+.deleteConfirmButton {
+  border: 1px solid #f74747;
+  background-color: #f74747;
+  color: #ffffff;
+}

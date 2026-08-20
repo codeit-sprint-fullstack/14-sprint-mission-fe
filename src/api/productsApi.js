@@ -84,3 +84,20 @@ export async function removeProductFavorite(productId, accessToken) {
 
   return data;
 }
+
+export async function deleteProduct(productId, accessToken) {
+  const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    const error = new Error(data.message || "상품을 삭제하지 못했습니다.");
+
+    error.status = response.status;
+    throw error;
+  }
+}

@@ -1,5 +1,6 @@
 import {
   getProductDetail,
+  deleteProduct,
   addProductFavorite,
   removeProductFavorite,
 } from "@/api/productsApi";
@@ -23,6 +24,8 @@ export default function ItemDetailPage() {
   const queryClient = useQueryClient();
 
   const [accessToken, setAccessToken] = useState(null);
+  const [isProductDeleteModalOpen, setIsProductDeleteModalOpen] =
+    useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [openCommentMenuId, setOpenCommentMenuId] = useState(null);
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
@@ -121,6 +124,27 @@ export default function ItemDetailPage() {
     },
   });
 
+  const deleteProductMutation = useMutation({
+    mutationFn: (productId) => deleteProduct(productId, accessToken),
+
+    onSuccess: () => {
+      setIsProductDeleteModalOpen(false);
+
+      queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
+
+      router.push("/items");
+    },
+
+    onError: (mutationError) => {
+      if (mutationError.status === 401) {
+        localStorage.removeItem("accessToken");
+        router.replace("/signin");
+      }
+    },
+  });
+
   const deleteCommentMutation = useMutation({
     mutationFn: (commentId) =>
       deleteComment({
@@ -181,6 +205,15 @@ export default function ItemDetailPage() {
     event.currentTarget.src = DEFAULT_IMAGE;
   }
 
+  function handleOpenProductDeleteModal() {
+    setIsProductDeleteModalOpen(true);
+    setIsProductMenuOpen(false);
+  }
+
+  function handleCloseProductDeleteModal() {
+    setIsProductDeleteModalOpen(false);
+  }
+
   function handleCreateComment() {
     const trimmedComment = commentContent.trim();
 
@@ -217,6 +250,14 @@ export default function ItemDetailPage() {
   function handleCancelEdit() {
     setEditingCommentId(null);
     setEditContent("");
+  }
+
+  function handleConfirmProductDelete() {
+    if (deleteProductMutation.isPending) {
+      return;
+    }
+
+    deleteProductMutation.mutate(id);
   }
 
   function handleDeleteComment(commentId) {
@@ -283,7 +324,11 @@ export default function ItemDetailPage() {
                         수정하기
                       </Link>
 
-                      <button className={styles.menuItem} type="button">
+                      <button
+                        className={styles.menuItem}
+                        type="button"
+                        onClick={handleOpenProductDeleteModal}
+                      >
                         삭제하기
                       </button>
                     </div>
@@ -532,6 +577,39 @@ export default function ItemDetailPage() {
         <span>목록으로 돌아가기</span>
         <img src="/images/ic_back.png" alt="" />
       </Link>
+
+      {isProductDeleteModalOpen && (
+        <div className={styles.deleteModalBackground}>
+          <div className={styles.deleteModal}>
+            <span className={styles.deleteModalIcon}>
+              <img src="/images/check.png" alt="" />
+            </span>
+
+            <p className={styles.deleteModalMessage}>
+              정말로 상품을 삭제하시겠어요?
+            </p>
+
+            <div className={styles.deleteModalButtons}>
+              <button
+                className={styles.deleteCancelButton}
+                type="button"
+                onClick={handleCloseProductDeleteModal}
+              >
+                취소
+              </button>
+
+              <button
+                className={styles.deleteConfirmButton}
+                type="button"
+                onClick={handleConfirmProductDelete}
+                disabled={deleteProductMutation.isPending}
+              >
+                {deleteProductMutation.isPending ? "삭제 중..." : "네"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
