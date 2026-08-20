@@ -3,42 +3,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { DEFAULT_PRODUCT_IMAGE, getProductImage } from '@/utils/productImage'
 import styles from '@/components/items/productCard.module.css'
-
-const DEFAULT_PRODUCT_IMAGE = '/img_product_default.png'
-
-// Next Image에 허용된 외부 이미지 호스트
-const ALLOWED_IMAGE_HOSTS = new Set([
-  'example.com',
-  'placecats.com',
-  'sprint-fe-project.s3.ap-northeast-2.amazonaws.com',
-  'loremflickr.com',
-  'i.imgur.com',
-  'no-cdn.shortpixel.ai',
-])
-
-// 이미지 URL 형식과 허용 호스트를 검사하고, 사용할 수 없으면 기본 이미지 반환
-function getProductImage(images) {
-  const imageUrl = images?.[0]?.trim()
-
-  if (!imageUrl) {
-    return DEFAULT_PRODUCT_IMAGE
-  }
-
-  try {
-    const url = new URL(imageUrl)
-    const isAllowedProtocol = url.protocol === 'https:'
-    const isAllowedHost = ALLOWED_IMAGE_HOSTS.has(url.hostname)
-
-    if (!isAllowedProtocol || !isAllowedHost) {
-      return DEFAULT_PRODUCT_IMAGE
-    }
-
-    return imageUrl
-  } catch {
-    return DEFAULT_PRODUCT_IMAGE
-  }
-}
 
 function ProductCard({ product }) {
   const { id, name, price, images, favoriteCount } = product
@@ -55,7 +21,7 @@ function ProductCard({ product }) {
   return (
     <Link href={`/items/${id}`} className={styles.productCard}>
       <div className={styles.productInfo}>
-        {/* 외부 이미지는 Next 서버 최적화를 거치지 않고 브라우저에서 직접 요청 */}
+        {/* next/image의 unoptimized prop으로 외부 이미지는 최적화를 건너뛰고 원본 URL을 직접 요청 */}
         <Image
           className={styles.productImage}
           src={productImage}

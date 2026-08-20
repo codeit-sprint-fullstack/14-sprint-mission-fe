@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
+import { DEFAULT_PRODUCT_IMAGE, getProductImage } from '@/utils/productImage'
 import formatDate from '@/utils/formatDate'
 import styles from '@/app/(with-layout)/items/[id]/itemDetailPage.module.css'
 
@@ -12,6 +13,7 @@ const TEMP_COMMENTS = []
 
 function ItemDetailClient({ itemId }) {
   const [accessToken, setAccessToken] = useState(undefined)
+  const [failedProductImage, setFailedProductImage] = useState(null)
 
   useEffect(() => {
     setAccessToken(localStorage.getItem('accessToken'))
@@ -27,6 +29,18 @@ function ItemDetailClient({ itemId }) {
     ...getProductDetailQueryOptions(itemId),
     enabled: Boolean(accessToken),
   })
+
+  const validatedProductImage = getProductImage(item?.images)
+  const productImage =
+    failedProductImage === validatedProductImage
+      ? DEFAULT_PRODUCT_IMAGE
+      : validatedProductImage
+
+  function onProductImageError() {
+    if (productImage === DEFAULT_PRODUCT_IMAGE) return
+
+    setFailedProductImage(productImage)
+  }
 
   if (accessToken === undefined) {
     return (
@@ -100,12 +114,15 @@ function ItemDetailClient({ itemId }) {
     <article className={styles.itemDetailPage}>
       <section className={styles.itemDetailProductSection}>
         <div className={styles.itemDetailImageArea}>
+          {/* next/image의 unoptimized prop으로 외부 이미지는 최적화를 건너뛰고 원본 URL을 직접 요청 */}
           <Image
             className={styles.itemDetailProductImage}
-            src="/img_product_default.png"
-            alt="상품 이미지"
+            src={productImage}
+            alt={item.name}
             width={819.529}
             height={547.941}
+            unoptimized={productImage !== DEFAULT_PRODUCT_IMAGE}
+            onError={onProductImageError}
           />
         </div>
         <div className={styles.itemDetailProductSummary}>

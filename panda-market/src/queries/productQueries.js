@@ -35,7 +35,7 @@ function getBestProductQueryOptions(params) {
 
 function getProductDetailQueryOptions(itemId) {
   return queryOptions({
-    queryKey: getProductDetialQueryKey(itemId),
+    queryKey: getProductDetailQueryKey(itemId),
     queryFn: () => getProductDetail(itemId),
     staleTime: PRODUCT_STALE_TIME,
     gcTime: PRODUCT_GC_TIME,
