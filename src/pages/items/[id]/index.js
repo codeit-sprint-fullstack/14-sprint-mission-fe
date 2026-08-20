@@ -7,7 +7,12 @@ import { getCurrentUser } from "@/api/usersApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { createProductComment, getProductComments } from "@/api/commentsApi";
+import {
+  createProductComment,
+  getProductComments,
+  updateComment,
+  deleteComment,
+} from "@/api/commentsApi";
 import Link from "next/link";
 import styles from "./ItemDetail.module.css";
 
@@ -21,6 +26,8 @@ export default function ItemDetailPage() {
   const [commentContent, setCommentContent] = useState("");
   const [openCommentMenuId, setOpenCommentMenuId] = useState(null);
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editContent, setEditContent] = useState("");
 
   useEffect(() => {
     const savedAccessToken = localStorage.getItem("accessToken");
@@ -89,6 +96,54 @@ export default function ItemDetailPage() {
     },
   });
 
+  const updateCommentMutation = useMutation({
+    mutationFn: ({ commentId, content }) =>
+      updateComment({
+        commentId,
+        content,
+        accessToken,
+      }),
+
+    onSuccess: () => {
+      setEditingCommentId(null);
+      setEditContent("");
+
+      queryClient.invalidateQueries({
+        queryKey: ["productComments", id],
+      });
+    },
+
+    onError: (mutationError) => {
+      if (mutationError.status === 401) {
+        localStorage.removeItem("accessToken");
+        router.replace("/signin");
+      }
+    },
+  });
+
+  const deleteCommentMutation = useMutation({
+    mutationFn: (commentId) =>
+      deleteComment({
+        commentId,
+        accessToken,
+      }),
+
+    onSuccess: () => {
+      setOpenCommentMenuId(null);
+
+      queryClient.invalidateQueries({
+        queryKey: ["productComments", id],
+      });
+    },
+
+    onError: (mutationError) => {
+      if (mutationError.status === 401) {
+        localStorage.removeItem("accessToken");
+        router.replace("/signin");
+      }
+    },
+  });
+
   const favoriteMutation = useMutation({
     mutationFn: () => {
       if (product.isFavorite) {
@@ -134,6 +189,42 @@ export default function ItemDetailPage() {
     }
 
     createCommentMutation.mutate(trimmedComment);
+  }
+
+  function handleUpdateComment() {
+    const trimmedContent = editContent.trim();
+
+    if (
+      editingCommentId === null ||
+      trimmedContent.length === 0 ||
+      updateCommentMutation.isPending
+    ) {
+      return;
+    }
+
+    updateCommentMutation.mutate({
+      commentId: editingCommentId,
+      content: trimmedContent,
+    });
+  }
+
+  function handleStartEdit(comment) {
+    setEditingCommentId(comment.id);
+    setEditContent(comment.content);
+    setOpenCommentMenuId(null);
+  }
+
+  function handleCancelEdit() {
+    setEditingCommentId(null);
+    setEditContent("");
+  }
+
+  function handleDeleteComment(commentId) {
+    if (deleteCommentMutation.isPending) {
+      return;
+    }
+
+    deleteCommentMutation.mutate(commentId);
   }
 
   useEffect(() => {
@@ -217,7 +308,7 @@ export default function ItemDetailPage() {
                 </span>
               ))}
             </div>
-
+            {/* 판매 글 작성자 영역*/}
             <div className={styles.ownerArea}>
               <div className={styles.ownerInfo}>
                 <img
@@ -227,7 +318,7 @@ export default function ItemDetailPage() {
                 />
 
                 <div>
-                  <p className={styles.ownerName}>
+                  <p className={styles.productOwnerNickname}>
                     {product.ownerNickname || "판매자"}
                   </p>
                   <p className={styles.createdAt}>
@@ -282,7 +373,7 @@ export default function ItemDetailPage() {
             {createCommentMutation.isPending ? "등록 중..." : "등록"}
           </button>
         </div>
-
+        {/* 댓글 작성자 영역 */}
         <div className={styles.commentList}>
           {isCommentsLoading && (
             <p className={styles.commentMessage}>댓글을 불러오는 중입니다.</p>
@@ -303,57 +394,135 @@ export default function ItemDetailPage() {
             !isCommentsError &&
             comments.map((comment) => (
               <div className={styles.commentItem} key={comment.id}>
-                <div className={styles.commentTop}>
-                  <p className={styles.commentContent}>{comment.content}</p>
+                {editingCommentId === comment.id ? (
+                  <div className={styles.editContent}>
+                    <textarea
+                      className={styles.editInput}
+                      value={editContent}
+                      onChange={(event) => setEditContent(event.target.value)}
+                    />
 
-                  {currentUser?.id === comment.writer.id && (
-                    <div className={styles.commentMenuArea}>
-                      <button
-                        className={styles.commentMenuButton}
-                        type="button"
-                        aria-label="댓글 메뉴 열기"
-                        onClick={() => {
-                          setOpenCommentMenuId((currentMenuId) =>
-                            currentMenuId === comment.id ? null : comment.id,
-                          );
-                        }}
-                      >
-                        <img src="/images/menu_button.png" alt="" />
-                      </button>
+                    <div className={styles.editBottom}>
+                      <div className={styles.commentWriter}>
+                        <img
+                          className={styles.commentProfile}
+                          src={
+                            comment.writer.image ||
+                            "/images/default_profile.png"
+                          }
+                          alt=""
+                        />
 
-                      {/* 같은 댓글 메뉴를 다시 누르면 닫고, 다른 댓글을 누르면 그 댓글 메뉴를 연다는 의미 */}
-                      {openCommentMenuId === comment.id && (
-                        <div className={styles.commentMenu}>
-                          <button className={styles.menuItem} type="button">
-                            수정하기
+                        <div>
+                          <p className={styles.commentWriterNickname}>
+                            {comment.writer.nickname}
+                          </p>
+
+                          <p className={styles.commentDate}>
+                            {new Date(comment.createdAt).toLocaleDateString(
+                              "ko-KR",
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className={styles.editButtons}>
+                        <button
+                          className={styles.editCancelButton}
+                          type="button"
+                          onClick={handleCancelEdit}
+                        >
+                          취소
+                        </button>
+
+                        <button
+                          className={styles.editSubmitButton}
+                          type="button"
+                          onClick={handleUpdateComment}
+                          disabled={
+                            editContent.trim().length === 0 ||
+                            updateCommentMutation.isPending
+                          }
+                        >
+                          {updateCommentMutation.isPending
+                            ? "수정 중..."
+                            : "수정 완료"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className={styles.commentTop}>
+                      <p className={styles.commentContent}>{comment.content}</p>
+
+                      {currentUser?.id === comment.writer.id && (
+                        <div className={styles.commentMenuArea}>
+                          <button
+                            className={styles.commentMenuButton}
+                            type="button"
+                            aria-label="댓글 메뉴 열기"
+                            onClick={() => {
+                              setOpenCommentMenuId((currentMenuId) =>
+                                currentMenuId === comment.id
+                                  ? null
+                                  : comment.id,
+                              );
+                            }}
+                          >
+                            <img src="/images/menu_button.png" alt="" />
                           </button>
 
-                          <button className={styles.menuItem} type="button">
-                            삭제하기
-                          </button>
+                          {/* 같은 댓글 메뉴를 다시 누르면 닫고, 다른 댓글을 누르면 그 댓글 메뉴를 연다는 의미 */}
+                          {openCommentMenuId === comment.id && (
+                            <div className={styles.commentMenu}>
+                              <button
+                                className={styles.menuItem}
+                                type="button"
+                                onClick={() => handleStartEdit(comment)}
+                              >
+                                수정하기
+                              </button>
+
+                              <button
+                                className={styles.menuItem}
+                                type="button"
+                                onClick={() => handleDeleteComment(comment.id)}
+                                disabled={deleteCommentMutation.isPending}
+                              >
+                                {deleteCommentMutation.isPending
+                                  ? "삭제 중..."
+                                  : "삭제하기"}
+                              </button>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
-                  )}
-                </div>
 
-                <div className={styles.commentWriter}>
-                  <img
-                    className={styles.commentProfile}
-                    src={comment.writer.image || "/images/default_profile.png"}
-                    alt=""
-                  />
+                    <div className={styles.commentWriter}>
+                      <img
+                        className={styles.commentProfile}
+                        src={
+                          comment.writer.image || "/images/default_profile.png"
+                        }
+                        alt=""
+                      />
 
-                  <div>
-                    <p className={styles.commentNickname}>
-                      {comment.writer.nickname}
-                    </p>
+                      <div>
+                        <p className={styles.commentWriterNickname}>
+                          {comment.writer.nickname}
+                        </p>
 
-                    <p className={styles.commentDate}>
-                      {new Date(comment.createdAt).toLocaleDateString("ko-KR")}
-                    </p>
-                  </div>
-                </div>
+                        <p className={styles.commentDate}>
+                          {new Date(comment.createdAt).toLocaleDateString(
+                            "ko-KR",
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
         </div>

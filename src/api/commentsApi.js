@@ -49,3 +49,44 @@ export async function createProductComment({
 
   return data;
 }
+
+export async function updateComment({ commentId, content, accessToken }) {
+  const response = await fetch(`${BASE_URL}/comments/${commentId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      content,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(data.message || "댓글을 수정하지 못했습니다.");
+
+    error.status = response.status;
+    throw error;
+  }
+
+  return data;
+}
+
+export async function deleteComment({ commentId, accessToken }) {
+  const response = await fetch(`${BASE_URL}/comments/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    const error = new Error(data.message || "댓글을 삭제하지 못했습니다.");
+
+    error.status = response.status;
+    throw error;
+  }
+}
