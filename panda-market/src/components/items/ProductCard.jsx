@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '@/components/items/productCard.module.css'
 
 const DEFAULT_PRODUCT_IMAGE = '/img_product_default.png'
@@ -40,7 +41,7 @@ function getProductImage(images) {
 }
 
 function ProductCard({ product }) {
-  const { name, price, images, favoriteCount } = product
+  const { id, name, price, images, favoriteCount } = product
   const initialProductImage = getProductImage(images)
   const [productImage, setProductImage] = useState(initialProductImage)
 
@@ -52,7 +53,7 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className={styles.productCard}>
+    <Link href={`/items/${id}`} className={styles.productCard}>
       <div className={styles.productInfo}>
         {/* 외부 이미지는 Next 서버 최적화를 거치지 않고 브라우저에서 직접 요청 */}
         <Image
@@ -77,7 +78,7 @@ function ProductCard({ product }) {
           {favoriteCount}
         </p>
       </div>
-    </div>
+    </Link>
   )
 }
 
