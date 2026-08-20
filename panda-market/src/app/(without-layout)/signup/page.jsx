@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { getProductDetailRootQueryKey } from '@/constants/queryKeys'
 import { signup } from '@/api/authApi'
 import useRedirectIfAuthenticated from '@/hooks/useRedirectIfAuthenticated'
 import AlertModal from '@/components/common/AlertModal'
@@ -45,11 +46,15 @@ function SignupPage() {
   const [isSignupSuccess, setIsSignupSuccess] = useState(false)
 
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const signupMutation = useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.accessToken)
+      queryClient.removeQueries({
+        queryKey: getProductDetailRootQueryKey(),
+      })
       setIsSignupSuccess(true)
       setModalMessage('가입 완료되었습니다.')
     },

@@ -1,3 +1,5 @@
+import { fetchWithAuth } from './fetchWithAuth'
+
 const PRODUCT_API_URL = 'https://panda-market-api.vercel.app/products'
 
 async function requestProducts(params) {
@@ -30,4 +32,21 @@ async function getBestProducts({ pageSize }) {
   })
 }
 
-export { getProducts, getBestProducts }
+async function getProductDetail(productId) {
+  const res = await fetchWithAuth(`${PRODUCT_API_URL}/${productId}`)
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => null)
+    const error = new Error(
+      errorData?.message ||
+        `상품 상세 정보를 불러오지 못했습니다. (${res.status})`,
+    )
+
+    error.status = res.status
+    throw error
+  }
+
+  return res.json()
+}
+
+export { getProducts, getBestProducts, getProductDetail }

@@ -1,28 +1,100 @@
 'use client'
 
-import formatDate from '@/utils/formatDate'
+import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getProductDetailQueryOptions } from '@/queries/productQueries'
+import formatDate from '@/utils/formatDate'
 import styles from '@/app/(with-layout)/items/[id]/itemDetailPage.module.css'
-
-const TEMP_ITEM = {
-  id: 1,
-  name: '아이패드 미니 팔아요',
-  price: 500000,
-  description:
-    '역정이 긴지스랑 주변부 스크래치있습니다만 메인화면보시면 전혀 신경쓰이지않을정도입니다.\n박스 보관중입니다.\n메모리랑 네트워크상으로문제없던거라 뭘 해보질 않아 기능이나 문제점을 못느꼈네요\n잘 안써서 싸게정리합니다 택배거래안합니다.',
-  createdAt: '2024-01-02T00:00:00.000Z',
-  favoriteCount: 123,
-  ownerId: 1,
-  ownerNickname: '곰발바닥',
-  tags: ['아이패드미니', '애플', '가성비'],
-  isFavorite: true,
-}
 
 const TEMP_COMMENTS = []
 
 function ItemDetailClient({ itemId }) {
-  void itemId
+  const [accessToken, setAccessToken] = useState(undefined)
+
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('accessToken'))
+  }, [])
+
+  const {
+    data: item,
+    error,
+    isPending,
+    isError,
+    refetch,
+  } = useQuery({
+    ...getProductDetailQueryOptions(itemId),
+    enabled: Boolean(accessToken),
+  })
+
+  if (accessToken === undefined) {
+    return (
+      <article className={styles.itemDetailPage}>
+        <p role="status" aria-live="polite">
+          로그인 상태를 확인하고 있습니다.
+        </p>
+      </article>
+    )
+  }
+
+  if (!accessToken) {
+    return (
+      <article className={styles.itemDetailPage}>
+        <p>상품 상세 정보를 확인하려면 로그인이 필요합니다.</p>
+        <Link className={styles.itemDetailSigninLink} href="/signin">
+          로그인하러 가기
+        </Link>
+      </article>
+    )
+  }
+
+  if (isPending) {
+    return (
+      <article className={styles.itemDetailPage}>
+        <p role="status" aria-live="polite">
+          상품 정보를 불러오고 있습니다.
+        </p>
+      </article>
+    )
+  }
+
+  if (isError && error.status === 401) {
+    return (
+      <article className={styles.itemDetailPage}>
+        <p>{error.message}</p>
+        <Link className={styles.itemDetailSigninLink} href="/signin">
+          다시 로그인하기
+        </Link>
+      </article>
+    )
+  }
+
+  if (isError && error.status === 404) {
+    return (
+      <article className={styles.itemDetailPage}>
+        <p>{error.message}</p>
+        <Link className={styles.itemDetailErrorBackLink} href="/items">
+          상품목록으로 가기
+        </Link>
+      </article>
+    )
+  }
+
+  if (isError) {
+    return (
+      <article className={styles.itemDetailPage}>
+        <p>{error.message}</p>
+        <button
+          className={styles.itemDetailErrorRetryButton}
+          type="button"
+          onClick={() => refetch()}
+        >
+          다시 시도
+        </button>
+      </article>
+    )
+  }
 
   return (
     <article className={styles.itemDetailPage}>
@@ -39,9 +111,9 @@ function ItemDetailClient({ itemId }) {
         <div className={styles.itemDetailProductSummary}>
           <header className={styles.itemDetailProductHeader}>
             <div className={styles.itemDetailTitleGroup}>
-              <h1 className={styles.itemDetailProductName}>{TEMP_ITEM.name}</h1>
+              <h1 className={styles.itemDetailProductName}>{item.name}</h1>
               <span className={styles.itemDetailProductPrice}>
-                {TEMP_ITEM.price.toLocaleString('ko-KR')}원
+                {item.price.toLocaleString('ko-KR')}원
               </span>
             </div>
             <div className={styles.itemDetailMenuArea}>
@@ -59,13 +131,11 @@ function ItemDetailClient({ itemId }) {
         <section className={styles.itemDetailDescriptionArea}>
           <div className={styles.itemDetailDescriptionSpacer} />
           <h2 className={styles.itemDetailDescriptionTitle}>상품 소개</h2>
-          <p className={styles.itemDetailDescriptionText}>
-            {TEMP_ITEM.description}
-          </p>
+          <p className={styles.itemDetailDescriptionText}>{item.description}</p>
           <section className={styles.itemDetailTagSection}>
             <h2 className={styles.itemDetailTagTitle}>상품 태그</h2>
             <div className={styles.itemDetailTagList}>
-              {TEMP_ITEM.tags.map((tag) => (
+              {item.tags.map((tag) => (
                 <span className={styles.itemDetailTag} key={tag}>
                   #{tag}
                 </span>
@@ -85,20 +155,20 @@ function ItemDetailClient({ itemId }) {
             />
             <div className={styles.itemDetailSellerInfo}>
               <span className={styles.itemDetailSellerNickname}>
-                {TEMP_ITEM.ownerNickname}
+                {item.ownerNickname}
               </span>
               <time
                 className={styles.itemDetailCreatedAt}
-                dateTime={TEMP_ITEM.createdAt}
+                dateTime={item.createdAt}
               >
-                {formatDate(TEMP_ITEM.createdAt)}
+                {formatDate(item.createdAt)}
               </time>
             </div>
           </div>
           <button
             className={styles.itemDetailFavoriteButton}
             type="button"
-            aria-label={`좋아요 ${TEMP_ITEM.favoriteCount}개`}
+            aria-label={`좋아요 ${item.favoriteCount}개`}
           >
             {/* 임시 구현으로 현재 좋아요 클릭한 상태로 UI 구현, 미선택시 빈 하트로 전환해야함 */}
             <Image
@@ -109,7 +179,7 @@ function ItemDetailClient({ itemId }) {
               height={23.3}
             />
             <span className={styles.itemDetailFavoriteCount}>
-              {TEMP_ITEM.favoriteCount}
+              {item.favoriteCount}
             </span>
           </button>
         </footer>

@@ -1,9 +1,9 @@
 import ItemDetailClient from './ItemDetailClient'
 
 async function ItemDetailPage({ params }) {
-  const { itemId } = await params
+  const { id } = await params
 
-  return <ItemDetailClient itemId={itemId} />
+  return <ItemDetailClient itemId={id} />
 }
 
 export default ItemDetailPage

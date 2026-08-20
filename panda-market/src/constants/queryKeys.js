@@ -18,6 +18,14 @@ function getBestProductQueryKey({ pageSize }) {
   return [PRODUCT_QUERY_KEY, 'best', { pageSize }]
 }
 
+function getProductDetailRootQueryKey() {
+  return [PRODUCT_QUERY_KEY, 'detail']
+}
+
+function getProductDetailQueryKey(itemId) {
+  return [...getProductDetailRootQueryKey(), itemId]
+}
+
 function getUserProfileQueryKey() {
   return [USER_QUERY_KEY, 'profile']
 }
@@ -25,5 +33,7 @@ function getUserProfileQueryKey() {
 export {
   getProductListQueryKey,
   getBestProductQueryKey,
+  getProductDetailRootQueryKey,
+  getProductDetailQueryKey,
   getUserProfileQueryKey,
 }
