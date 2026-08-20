@@ -4,10 +4,21 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
+import ProductTagChip from '@/components/items/ProductTagChip'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
 import { DEFAULT_PRODUCT_IMAGE, getProductImage } from '@/utils/productImage'
 import formatDate from '@/utils/formatDate'
 import styles from '@/app/(with-layout)/items/[id]/itemDetailPage.module.css'
+
+function splitTagsIntoRows(tags, tagsPerRow) {
+  const rows = []
+
+  for (let index = 0; index < tags.length; index += tagsPerRow) {
+    rows.push(tags.slice(index, index + tagsPerRow))
+  }
+
+  return rows
+}
 
 const TEMP_COMMENTS = []
 
@@ -151,11 +162,38 @@ function ItemDetailClient({ itemId }) {
           <p className={styles.itemDetailDescriptionText}>{item.description}</p>
           <section className={styles.itemDetailTagSection}>
             <h2 className={styles.itemDetailTagTitle}>상품 태그</h2>
-            <div className={styles.itemDetailTagList}>
-              {item.tags.map((tag) => (
-                <span className={styles.itemDetailTag} key={tag}>
-                  #{tag}
-                </span>
+            <div
+              className={`${styles.itemDetailTagList} ${styles.itemDetailTagListDesktop}`}
+            >
+              {splitTagsIntoRows(item.tags, 5).map((tagRow, rowIndex) => (
+                <div
+                  className={styles.itemDetailTagRow}
+                  key={`desktop-tag-row-${rowIndex}`}
+                >
+                  {tagRow.map((tag, tagIndex) => (
+                    <ProductTagChip
+                      key={`${tag}-${rowIndex * 5 + tagIndex}`}
+                      tag={tag}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div
+              className={`${styles.itemDetailTagList} ${styles.itemDetailTagListCompact}`}
+            >
+              {splitTagsIntoRows(item.tags, 3).map((tagRow, rowIndex) => (
+                <div
+                  className={styles.itemDetailTagRow}
+                  key={`compact-tag-row-${rowIndex}`}
+                >
+                  {tagRow.map((tag, tagIndex) => (
+                    <ProductTagChip
+                      key={`${tag}-${rowIndex * 3 + tagIndex}`}
+                      tag={tag}
+                    />
+                  ))}
+                </div>
               ))}
             </div>
           </section>
