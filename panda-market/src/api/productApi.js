@@ -49,4 +49,38 @@ async function getProductDetail(productId) {
   return res.json()
 }
 
-export { getProducts, getBestProducts, getProductDetail }
+async function requestProductFavorite(productId, method) {
+  const res = await fetchWithAuth(`${PRODUCT_API_URL}/${productId}/favorite`, {
+    method,
+  })
+
+  const responseData =
+    res.status === 204 ? null : await res.json().catch(() => null)
+
+  if (!res.ok) {
+    const error = new Error(
+      responseData?.message ?? '상품 좋아요 요청에 실패했습니다.',
+    )
+
+    error.status = res.status
+    throw error
+  }
+
+  return responseData
+}
+
+function addProductFavorite(productId) {
+  return requestProductFavorite(productId, 'POST')
+}
+
+function removeProductFavorite(productId) {
+  return requestProductFavorite(productId, 'DELETE')
+}
+
+export {
+  getProducts,
+  getBestProducts,
+  getProductDetail,
+  addProductFavorite,
+  removeProductFavorite,
+}

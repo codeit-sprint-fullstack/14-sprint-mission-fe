@@ -204,32 +204,6 @@
   line-height: 24px;
 }
 
-.itemDetailFavoriteButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 74px;
-  height: 40px;
-  padding: 4px 12px;
-  border: 1px solid var(--Secondary-200);
-  border-radius: 35px;
-  background: var(--pure-white);
-  cursor: pointer;
-}
-
-.itemDetailFavoriteIcon {
-  display: block;
-  flex-shrink: 0;
-}
-
-.itemDetailFavoriteCount {
-  color: var(--Cool-Gray-500);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 26px;
-}
-
 .itemDetailProductSpacer {
   grid-column: 2;
   grid-row: 4;

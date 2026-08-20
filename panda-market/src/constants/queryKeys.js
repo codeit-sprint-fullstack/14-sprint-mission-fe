@@ -1,10 +1,13 @@
 const PRODUCT_QUERY_KEY = 'products'
 const USER_QUERY_KEY = 'user'
 
+function getProductListRootQueryKey() {
+  return [PRODUCT_QUERY_KEY, 'list']
+}
+
 function getProductListQueryKey({ orderBy, keyword, page, pageSize }) {
   return [
-    PRODUCT_QUERY_KEY,
-    'list',
+    ...getProductListRootQueryKey(),
     {
       orderBy,
       keyword,
@@ -14,8 +17,12 @@ function getProductListQueryKey({ orderBy, keyword, page, pageSize }) {
   ]
 }
 
+function getBestProductRootQueryKey() {
+  return [PRODUCT_QUERY_KEY, 'best']
+}
+
 function getBestProductQueryKey({ pageSize }) {
-  return [PRODUCT_QUERY_KEY, 'best', { pageSize }]
+  return [...getBestProductRootQueryKey(), { pageSize }]
 }
 
 function getProductDetailRootQueryKey() {
@@ -31,7 +38,9 @@ function getUserProfileQueryKey() {
 }
 
 export {
+  getProductListRootQueryKey,
   getProductListQueryKey,
+  getBestProductRootQueryKey,
   getBestProductQueryKey,
   getProductDetailRootQueryKey,
   getProductDetailQueryKey,

@@ -1,9 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
+import { addProductFavorite, removeProductFavorite } from '@/api/productApi'
+import {
+  getBestProductRootQueryKey,
+  getProductDetailQueryKey,
+  getProductListRootQueryKey,
+} from '@/constants/queryKeys'
+import FavoriteChip from '@/components/common/FavoriteChip'
 import ProductTagChip from '@/components/items/ProductTagChip'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
 import { DEFAULT_PRODUCT_IMAGE, getProductImage } from '@/utils/productImage'
@@ -23,6 +30,7 @@ function splitTagsIntoRows(tags, tagsPerRow) {
 const TEMP_COMMENTS = []
 
 function ItemDetailClient({ itemId }) {
+  const queryClient = useQueryClient()
   const [accessToken, setAccessToken] = useState(undefined)
   const [failedProductImage, setFailedProductImage] = useState(null)
 
@@ -41,6 +49,29 @@ function ItemDetailClient({ itemId }) {
     enabled: Boolean(accessToken),
   })
 
+  const favoriteMutation = useMutation({
+    mutationFn: (isCurrentlyFavorite) => {
+      if (isCurrentlyFavorite) {
+        return removeProductFavorite(itemId)
+      }
+
+      return addProductFavorite(itemId)
+    },
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: getProductDetailQueryKey(itemId),
+        }),
+        queryClient.invalidateQueries({
+          queryKey: getProductListRootQueryKey(),
+        }),
+        queryClient.invalidateQueries({
+          queryKey: getBestProductRootQueryKey(),
+        }),
+      ])
+    },
+  })
+
   const validatedProductImage = getProductImage(item?.images)
   const productImage =
     failedProductImage === validatedProductImage
@@ -51,6 +82,12 @@ function ItemDetailClient({ itemId }) {
     if (productImage === DEFAULT_PRODUCT_IMAGE) return
 
     setFailedProductImage(productImage)
+  }
+
+  function handleToggleFavorite() {
+    if (favoriteMutation.isPending) return
+
+    favoriteMutation.mutate(item.isFavorite === true)
   }
 
   if (accessToken === undefined) {
@@ -187,6 +224,7 @@ function ItemDetailClient({ itemId }) {
                   className={styles.itemDetailTagRow}
                   key={`compact-tag-row-${rowIndex}`}
                 >
+                  {/* 같은 이름의 태그도 전체 인덱스를 포함해 서로 다른 key로 구분 */}
                   {tagRow.map((tag, tagIndex) => (
                     <ProductTagChip
                       key={`${tag}-${rowIndex * 3 + tagIndex}`}
@@ -220,23 +258,12 @@ function ItemDetailClient({ itemId }) {
               </time>
             </div>
           </div>
-          <button
-            className={styles.itemDetailFavoriteButton}
-            type="button"
-            aria-label={`좋아요 ${item.favoriteCount}개`}
-          >
-            {/* 임시 구현으로 현재 좋아요 클릭한 상태로 UI 구현, 미선택시 빈 하트로 전환해야함 */}
-            <Image
-              className={styles.itemDetailFavoriteIcon}
-              src="/ic_full_heart.svg"
-              alt=""
-              width={26.8}
-              height={23.3}
-            />
-            <span className={styles.itemDetailFavoriteCount}>
-              {item.favoriteCount}
-            </span>
-          </button>
+          <FavoriteChip
+            isFavorite={item.isFavorite}
+            favoriteCount={item.favoriteCount}
+            onToggleFavorite={handleToggleFavorite}
+            disabled={favoriteMutation.isPending}
+          />
         </footer>
         <div className={styles.itemDetailProductSpacer} aria-hidden="true" />
       </section>
