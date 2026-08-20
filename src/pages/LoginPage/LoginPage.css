@@ -1,0 +1,252 @@
+.auth-page {
+  width: 100%;
+  min-height: auto;
+  background-color: var(--color-bg-main);
+  font-family: "Pretendard";
+  display: flex;
+  justify-content: center;
+}
+
+.auth-box {
+  width: calc(100% - 2rem);
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3.75rem auto 7.5rem;
+}
+
+.auth-logo-box {
+  margin-bottom: 2.5rem;
+}
+
+.auth-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 1.375rem;
+}
+
+.auth-logo-img {
+  width: 6.5rem;
+  height: 6.5rem;
+}
+
+.auth-logo-text {
+  color: var(--color-primary);
+  font-family: "ROKAF Sans", sans-serif;
+  font-size: 4.2rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auth-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth-label {
+  color: var(--color-Secondary-800);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.auth-input {
+  width: 100%;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--color-Secondary-100);
+  border: none;
+  color: var(--color-Secondary-800);
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+}
+
+.auth-input:focus {
+  outline-color: var(--color-primary);
+}
+
+.auth-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.auth-password-container {
+  position: relative;
+  width: 100%;
+}
+
+.auth-password-container .auth-input {
+  padding-right: 4rem;
+}
+
+.auth-toggle-button {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.auth-toggle-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.auth-error {
+  color: var(--color-error-red);
+  font-family: "Pretendard";
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  margin-left: 1rem;
+}
+
+.auth-input-error {
+  border: 1px solid var(--color-error-red);
+}
+
+.auth-input-error:focus {
+  outline-color: var(--color-error-red);
+}
+
+.auth-submit-button {
+  width: 100%;
+  height: 3.5rem;
+  padding: 1rem 7.75rem;
+  border-radius: 2.5rem;
+  border: none;
+  background-color: var(--color-text-muted);
+  color: var(--color-Secondary-100);
+  font-family: "Pretendard";
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto;
+  cursor: default;
+}
+
+.auth-submit-button.active {
+  background-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.auth-social-box {
+  width: 100%;
+  height: 4.625rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-bg-brand-light);
+  display: flex;
+  align-items: center;
+  margin: 1.5rem auto;
+}
+
+.auth-social-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-social-text {
+  color: var(--color-Secondary-800);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.625rem;
+}
+
+.auth-social-links {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.auth-social-button {
+  position: relative;
+  width: 2.625rem;
+  height: 2.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.auth-social-bg {
+  position: absolute;
+  inset: 0;
+  width: 2.625rem;
+  height: 2.625rem;
+}
+
+.auth-social-logo {
+  position: relative;
+  z-index: 1;
+  width: 1.375rem;
+  height: 1.375rem;
+  display: block;
+}
+
+.auth-link-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.auth-link-text {
+  color: var(--color-Secondary-800);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.auth-link {
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration-line: underline;
+}
+
+@media (max-width: 768px) {
+  .auth-box {
+    margin: 3rem auto 7.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-box {
+    margin: 2rem auto 6rem;
+  }
+
+  .auth-logo-img {
+    width: 3.125rem;
+    height: 3.125rem;
+  }
+
+  .auth-logo-text {
+    font-size: 2.25rem;
+  }
+
+  .auth-submit-button {
+    padding: 1rem 2rem;
+  }
+}

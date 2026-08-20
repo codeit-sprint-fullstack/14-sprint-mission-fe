@@ -1,0 +1,42 @@
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "뉴질랜드 공기",
+  "description": "비닐봉지에 담아드립니다.",
+  "price": 300000,
+  "tags": ["공기", "포장", "해외직구"],
+  "image": "https://example.com/product-image.png"
+}
+
+###
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products?keyword=Test
+
+###
+GET http://localhost:3000/products?keyword=강아지
+
+###
+GET http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
+
+###
+PATCH http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
+Content-Type: application/json
+
+{
+  "price": 250000,
+  "tags": ["공기", "포장", "세일"]
+}
+
+###
+DELETE http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
+
+### 상품 가격 수정 테스트
+PATCH http://localhost:3000/products/e2142da8-6512-4223-a8fd-d2723c55ce7b
+Content-Type: application/json
+
+{
+  "price": "19900"
+}

@@ -1,0 +1,182 @@
+.registration-page {
+  width: calc(100% - 3rem);
+  max-width: 75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin: 2rem auto 10rem;
+}
+
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.registration-title {
+  color: var(--color-Secondary-800);
+  font-family: "Pretendard";
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.registration-button {
+  display: flex;
+  height: 2.625rem;
+  padding: .75rem 1.4375rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: .5rem;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-Secondary-100);
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.625rem;
+  cursor: pointer;
+}
+
+.registration-button:disabled {
+  background-color: var(--color-text-muted);
+  cursor: default;
+}
+
+.registration-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 2rem;
+}
+
+.registration-name,
+.registration-description,
+.registration-price,
+.registration-tags {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.name-title,
+.description-title,
+.price-title,
+.tags-title {
+  color: var(--color-Secondary-800);
+  font-family: "Pretendard";
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.name-input,
+.description-input,
+.price-input,
+.tags-input {
+  width: 100%;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: .75rem;
+  background: var(--color-Secondary-100);
+  border: none;
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+  color: var(--color-Secondary-800);
+}
+
+.name-input:focus,
+.description-input:focus,
+.price-input:focus,
+.tags-input:focus {
+  outline-color: var(--color-primary);
+}
+
+.name-input::placeholder,
+.description-input::placeholder,
+.price-input::placeholder,
+.tags-input::placeholder {
+  color: var(--color-text-muted);
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+}
+
+.description-input {
+  height: 17.625rem;
+  resize: none;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.tag-chip {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  height: 2.25rem;
+  padding: .375rem .75rem .375rem 1rem;
+  border-radius: 1.625rem;
+  background: var(--color-Secondary-100);
+  color: var(--color-Secondary-800);
+  font-family: "Pretendard";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+}
+
+.tag-remove {
+  width: 1.375rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.input-error-message {
+  color: var(--color-error-red);
+  font-family: "Pretendard";
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.input-error {
+  border: 1px solid var(--color-error-red);
+}
+
+.input-error:focus {
+  outline-color: var(--color-error-red);
+}
+
+@media (max-width: 768px) {
+  .registration-page {
+    max-width: 45.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-page {
+    width: calc(100% - 2rem);
+    max-width: 24.5rem;
+  }
+}

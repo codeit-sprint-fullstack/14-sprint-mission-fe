@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import facebook from "../../assets/ic_facebook.png";
 import twitter from "../../assets/ic_twitter.png";
 import youtube from "../../assets/ic_youtube.png";
@@ -15,12 +16,12 @@ function Footer() {
           </div>
 
           <div className="footer-links">
-            <a href="privacy.html" className="footer-link">
+            <Link to="privacy.html" className="footer-link">
               Privacy Policy
-            </a>
-            <a href="faq.html" className="footer-link">
+            </Link>
+            <Link to="faq.html" className="footer-link">
               FAQ
-            </a>
+            </Link>
           </div>
 
           <div className="footer-logo">

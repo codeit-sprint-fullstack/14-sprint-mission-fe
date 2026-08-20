@@ -1,27 +1,43 @@
-import pandaLogo from "../../assets/판다 얼굴.png";
+import { Link, useLocation } from "react-router-dom";
+import pandaLogo from "../../assets/panda-logo.svg";
 import "./NavBar.css";
 
 function NavBar() {
+  const location = useLocation();
+
+  const isItemsPage = location.pathname === "/items";
+  const isLandingPage = location.pathname === "/";
+
   return (
     <>
       <nav className="nav-container">
         <div className="nav-wrapper">
           <div className="logo-wrapper">
-            <a href="index.html" className="logo-group">
-              <img src={pandaLogo} alt="판다 얼굴" />
+            <Link to="/" className="logo-group">
+              <img className="panda-logo" src={pandaLogo} alt="판다 얼굴" />
               <span className="logo-text">
                 판다마켓
               </span>
-            </a>
-            <div className="nav-texts">
-              <a href="#" className="nav-text">자유게시판</a>
-              <a href="#" className="nav-text">중고마켓</a>
-            </div>
+            </Link>
+
+            {!isLandingPage && (
+              <div className="nav-texts">
+                <Link to="#" className="nav-text">
+                  자유게시판
+                </Link>
+                <Link
+                  to="/items"
+                  className={isItemsPage ? "nav-text active" : "nav-text"}
+                >
+                  중고마켓
+                </Link>
+              </div>
+            )}
           </div>
           <div className="button-group">
-            <a href="login.html" className="login-button">
+            <Link to="/login" className="login-button">
               로그인
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
