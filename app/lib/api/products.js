@@ -17,8 +17,9 @@ export async function getProductDetail(id) {
   return res.data;
 }
 
-export async function patchProductDetail({ id, content }) {
-  const res = await axios.patch(`/products/${id}`);
+export async function patchProductDetail({ id, ...productData }) {
+  const res = await axios.patch(`/products/${id}`, productData);
+  return res.data;
 }
 
 export async function deleteProduct(id) {
