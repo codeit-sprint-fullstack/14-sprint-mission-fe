@@ -1,0 +1,120 @@
+.authContainer {
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logoHomeButtonWrapper {
+  display: block;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.inputItem {
+  margin-bottom: 24px;
+}
+
+.inputItem label {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.inputItem input {
+  padding: 16px 24px;
+  background-color: var(--input-bg, #f3f4f6);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  line-height: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.inputItem input::placeholder {
+  color: var(--input-placeholder, #9ca3af);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.inputItem input:focus {
+  outline-color: var(--blue, #3692ff);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordToggleButton {
+  position: absolute;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.socialLoginContainer {
+  background-color: var(--social-login-bg, #e6f2ff);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 23px;
+  margin: 24px 0;
+}
+
+.socialLoginContainer h3 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.socialLoginButtonsContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.authSwitch {
+  font-weight: 500;
+  font-size: 15px;
+  text-align: center;
+}
+
+.authSwitch a {
+  color: var(--blue, #3692ff);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.authContainer :global(.pill-button) {
+  font-size: 16px;
+  padding: 16px 24px;
+}
+
+/*
+  반응형 브레이크포인트
+  - PC: 1200px 이상 / Tablet: 744~1199px → 위 기본 스타일 그대로 (내부 디자인 동일)
+  - Mobile: 375~743px → 좌우 16px 여백, 내부 요소는 뷰포트에 따라 커지되 최대 400px
+*/
+@media (max-width: 743px) {
+  .authContainer {
+    max-width: 400px;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .logoHomeButtonWrapper {
+    margin-top: 40px;
+    margin-bottom: 32px;
+  }
+
+  .logoHomeButtonWrapper img {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+  }
+}

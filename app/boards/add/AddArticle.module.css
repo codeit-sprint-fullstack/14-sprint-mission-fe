@@ -1,0 +1,204 @@
+.articleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 120rem;
+  width: 100%;
+  padding: 2.4rem 0;
+  margin: 0 auto;
+}
+
+.articleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+}
+
+.articleTitle {
+  color: var(--Secondary-800, #1f2937);
+
+  /* pretendard/xl-20px-bold */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 160% */
+}
+
+.articleSubmitButton {
+  display: flex;
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  background: var(--Cool-Gray-400, #9ca3af);
+
+  color: var(--Cool-Gray-100, #f3f4f6);
+
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+
+  border: none;
+  cursor: not-allowed;
+}
+
+.articleSubmitButton:enabled {
+  background: var(--brand-blue, #3692ff);
+  cursor: pointer;
+}
+
+.articleInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.articleInput label {
+  color: var(--Secondary-800, #1f2937);
+
+  /* pretendard/2lg-18px-bold */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 144.444% */
+}
+
+.articleInput input {
+  display: flex;
+  height: 56px;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  width: 100%;
+
+  border-radius: 12px;
+  background: var(--Cool-Gray-100, #f3f4f6);
+
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.articleInput input:focus,
+.articleInput textarea:focus {
+  border: 2px solid var(--Secondary-800, #1f2937);
+}
+
+.articleInput textarea {
+  display: flex;
+  width: 100%;
+  height: 282px;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+
+  border-radius: 12px;
+  background: var(--Cool-Gray-100, #f3f4f6);
+
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  outline: none;
+
+  /* 글씨(내용을 입력하세요) */
+  color: var(--Secondary-400, #9ca3af);
+
+  /* pretendard/lg-16px-regular */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+}
+
+.articleImgButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 282px;
+  height: 282px;
+
+  border-radius: 12px;
+  background: var(--Secondary-200, #f3f4f6);
+
+  border: none;
+  cursor: pointer;
+}
+
+.imageUploadIconWrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.imageUploadIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.articleImgButton span {
+  color: var(--Cool-Gray-400, #9ca3af);
+
+  /* pretendard/lg-16px-regular */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+}
+
+.imagePreviewWrapper {
+  position: relative;
+  width: 282px;
+  height: 282px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageRemoveButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.imageRemoveButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.articleImgButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
