@@ -25,6 +25,7 @@ export default function Home() {
             width={746}
             height={340}
             alt="판다마켓 중고 거래"
+            loading="eager"
           />
         </div>
       </section>

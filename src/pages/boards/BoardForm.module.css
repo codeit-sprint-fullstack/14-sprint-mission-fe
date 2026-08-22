@@ -34,7 +34,7 @@
 
 .submitButton:disabled {
   background-color: #9ca3af;
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .field {

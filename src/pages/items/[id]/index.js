@@ -7,7 +7,7 @@ import {
 import { getCurrentUser } from "@/api/usersApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   createProductComment,
   getProductComments,
@@ -22,15 +22,22 @@ export default function ItemDetailPage() {
   const { id } = router.query;
   const DEFAULT_IMAGE = "/images/default_product.png";
   const queryClient = useQueryClient();
+  const tagWidthRef = useRef(null);
 
   const [accessToken, setAccessToken] = useState(null);
   const [isProductDeleteModalOpen, setIsProductDeleteModalOpen] =
     useState(false);
+  const [visibleTagCount, setVisibleTagCount] = useState(null);
+  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [openCommentMenuId, setOpenCommentMenuId] = useState(null);
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editContent, setEditContent] = useState("");
+
+  const MAX_VISIBLE_TAG_ROWS = 2;
+  const TAG_GAP = 8;
+  const MORE_TAG_BUTTON_WIDTH = 104;
 
   useEffect(() => {
     const savedAccessToken = localStorage.getItem("accessToken");
@@ -53,6 +60,68 @@ export default function ItemDetailPage() {
     enabled: router.isReady && Boolean(id) && Boolean(accessToken),
     retry: false,
   });
+
+  useEffect(() => {
+    if (!product?.tags?.length || !tagWidthRef.current) {
+      return;
+    }
+
+    function calculateVisibleTagCount() {
+      const containerWidth = tagWidthRef.current.clientWidth;
+
+      const tagElements =
+        tagWidthRef.current.querySelectorAll("[data-tag-width]");
+
+      const tagWidths = Array.from(tagElements).map(
+        (tagElement) => tagElement.offsetWidth,
+      );
+
+      function getRowCount(widths) {
+        let rowCount = 1;
+        let currentRowWidth = 0;
+
+        for (const width of widths) {
+          const nextWidth =
+            currentRowWidth === 0 ? width : currentRowWidth + TAG_GAP + width;
+
+          if (nextWidth <= containerWidth) {
+            currentRowWidth = nextWidth;
+          } else {
+            rowCount += 1;
+            currentRowWidth = width;
+          }
+        }
+
+        return rowCount;
+      }
+
+      let count = tagWidths.length;
+
+      while (count > 0) {
+        const widthsToShow = tagWidths.slice(0, count);
+
+        if (count < tagWidths.length) {
+          widthsToShow.push(MORE_TAG_BUTTON_WIDTH);
+        }
+
+        if (getRowCount(widthsToShow) <= MAX_VISIBLE_TAG_ROWS) {
+          break;
+        }
+
+        count -= 1;
+      }
+
+      setVisibleTagCount(count);
+    }
+
+    calculateVisibleTagCount();
+
+    window.addEventListener("resize", calculateVisibleTagCount);
+
+    return () => {
+      window.removeEventListener("resize", calculateVisibleTagCount);
+    };
+  }, [product]);
 
   const {
     data: commentsData,
@@ -287,6 +356,11 @@ export default function ItemDetailPage() {
     return null;
   }
 
+  const currentVisibleTagCount = visibleTagCount ?? product.tags.length;
+
+  const visibleTags = product.tags.slice(0, currentVisibleTagCount);
+  const hiddenTagCount = product.tags.length - currentVisibleTagCount;
+
   return (
     <div className={styles.detailPage}>
       <section className={styles.productSection}>
@@ -345,13 +419,67 @@ export default function ItemDetailPage() {
             <h2 className={styles.infoTitle}>상품소개</h2>
             <p className={styles.description}>{product.description}</p>
 
-            <h2 className={styles.infoTitle}>상품태그</h2>
-            <div className={styles.tagList}>
-              {product.tags?.map((tag) => (
-                <span className={styles.tag} key={tag}>
-                  #{tag}
-                </span>
-              ))}
+            <div className={styles.tagArea}>
+              <h2 className={styles.infoTitle}>상품태그</h2>
+
+              <div className={styles.tagList}>
+                {visibleTags.map((tag) => (
+                  <span className={styles.tag} key={tag}>
+                    #{tag}
+                  </span>
+                ))}
+
+                {hiddenTagCount > 0 && (
+                  <button
+                    className={styles.moreTagButton}
+                    type="button"
+                    onClick={() => {
+                      setIsTagModalOpen(true);
+                    }}
+                  >
+                    +{hiddenTagCount} 더보기
+                  </button>
+                )}
+              </div>
+
+              <div
+                className={styles.tagWidthMeasure}
+                ref={tagWidthRef}
+                aria-hidden="true"
+              >
+                {product.tags.map((tag) => (
+                  <span className={styles.tag} data-tag-width key={tag}>
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+
+              {isTagModalOpen && (
+                <div className={styles.tagModal}>
+                  <div className={styles.tagModalHeader}>
+                    <p>전체 태그</p>
+
+                    <button
+                      className={styles.tagModalCloseButton}
+                      type="button"
+                      onClick={() => {
+                        setIsTagModalOpen(false);
+                      }}
+                      aria-label="전체 태그 창 닫기"
+                    >
+                      x
+                    </button>
+                  </div>
+
+                  <div className={styles.tagModalList}>
+                    {product.tags.map((tag) => (
+                      <span className={styles.tag} key={tag}>
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
             {/* 판매 글 작성자 영역*/}
             <div className={styles.ownerArea}>
