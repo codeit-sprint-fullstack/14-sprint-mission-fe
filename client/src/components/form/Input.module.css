@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  color: var(--secondary-800);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.input {
+  height: 56px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--secondary-100);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.input::placeholder {
+  color: var(--secondary-400);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--primary-100);
+}
+
+.error {
+  border: 1px solid var(--error);
+}
+
+.error:focus {
+  border: 1px solid var(--error);
+}
+
+.errorText {
+  padding-left: 16px;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+}

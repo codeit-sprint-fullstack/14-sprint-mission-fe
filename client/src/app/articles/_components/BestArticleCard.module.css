@@ -1,0 +1,92 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  width: 384px;
+  height: 169px;
+  padding: 0 24px 16px;
+  border-radius: 8px;
+  background: var(--secondary-50);
+  text-decoration: none;
+}
+
+.badge {
+  width: 102px;
+  padding: 2px 24px;
+  border-radius: 0 0 16px 16px;
+  background: var(--primary-100);
+
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.badgeText {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  width: 256px;
+  color: var(--secondary-800);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  word-break: keep-all;
+}
+
+.img {
+  width: 72px;
+  height: 72px;
+  border-radius: 6px;
+  border: 1px solid var(--secondary-200);
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.infoLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nickname {
+  color: var(--secondary-600);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.heart {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.heartCount {
+  color: var(--secondary-500);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.date {
+  color: var(--secondary-400);
+  font-size: 14px;
+  font-weight: 400;
+}

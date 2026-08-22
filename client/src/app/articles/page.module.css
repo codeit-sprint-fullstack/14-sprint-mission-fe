@@ -1,0 +1,51 @@
+.pageWrapper {
+  width: 1200px;
+  height: 1330px;
+  padding-top: 24px;
+  margin: 0px auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bestSectionTitle {
+  color: var(--secondary-900);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.articleSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.articleSectionTitle {
+  color: var(--secondary-800);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.createArticleLink {
+  height: 42px;
+  padding: 12px 23px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  background: var(--primary-100);
+}
+
+.controllers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

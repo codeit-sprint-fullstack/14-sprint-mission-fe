@@ -1,0 +1,88 @@
+#/*********** products ***********/
+GET http://localhost:3001/products?sort=oldest
+
+###
+GET http://localhost:3001/products/3a7e9f21-b4c8-4df5-9a2e-6c0f8d31b572
+
+###
+POST http://localhost:3001/products
+Content-Type: application/json
+
+{
+  "name": "아이폰 미니 13",
+  "description": "아이폰 미니 13 팔아요! 사용감 있습니다.",
+  "price": 1000000,
+  "tags": ["애플", "아이폰"]
+}
+
+###
+PATCH http://localhost:3000/products/d8ac25ff-7e45-473c-a3f1-b629f70708ef
+Content-Type: application/json
+
+{
+  "price": 1200000
+}
+
+###
+DELETE http://localhost:3000/products/d8ac25ff-7e45-473c-a3f1-b629f70708ef
+
+#/*********** articles ***********/
+###
+GET http://localhost:3001/articles?sort=recent&limit=3
+
+###
+GET http://localhost:3001/articles/6a1d9e7c-3b58-4f20-8c94-1e5b7a2d6039
+
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+  "title": "대학생 필기용 아이패드 추천해주세요!",
+  "content": "가성비 아이패드 추천해주세요! 필기, 영상보는 용도로 사용할 거예용"
+}
+
+###
+PATCH http://localhost:3000/articles/2f5838ec-bec1-49cc-b7bf-02b82ed3f2a9
+Content-Type: application/json
+
+{
+  "title": "아이패드 추천"
+}
+
+###
+DELETE http://localhost:3000/articles/2f5838ec-bec1-49cc-b7bf-02b82ed3f2a9
+
+#/*********** comments ***********/
+###
+GET http://localhost:3001/products/6a1d9e7c-3b58-4f20-8c94-1e5b7a2d6039/comments
+
+###
+GET http://localhost:3001/articles/bbfa4762-2fcd-4eca-97cf-62a589798987/comments
+
+###
+POST http://localhost:3001/articles/bbfa4762-2fcd-4eca-97cf-62a589798987/comments
+Content-Type: application/json
+
+{
+  "content": "저는 역 앞에서 주로 거래해요!"
+}
+
+###
+POST http://localhost:3000/articles/1f6e9c2a-8d74-4b53-a7c0-5e3d9f1b6248/comments
+Content-Type: application/json
+
+{
+  "content": "저는 지하철 역 앞에서 거래 많이해요!"
+}
+
+###
+PATCH http://localhost:3000/comments/0e2a6d5f-7c91-4b38-a6e2-9f1c3d8b4270
+Content-Type: application/json
+
+{
+  "content": "거래 가능할까요?"
+}
+
+###
+DELETE http://localhost:3000/comments/0e2a6d5f-7c91-4b38-a6e2-9f1c3d8b4270

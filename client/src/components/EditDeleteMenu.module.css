@@ -1,0 +1,48 @@
+.wrapper {
+  position: relative;
+}
+
+.menuBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu {
+  overflow: hidden;
+  list-style: none;
+  border: 1px solid var(--secondary-200);
+  border-radius: 8px;
+  background: #FFF;
+
+  position: absolute;
+  right: 0;
+}
+
+.listBtn {
+  width: 139px;
+  height: 46px;
+  background: transparent;
+  border: none;
+  color: var(--secondary-500);
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listBtn:hover {
+  background: var(--secondary-200);
+}
+
+.menu li:first-child .listBtn {
+  border-bottom: 1px solid var(--secondary-200);
+}
+
+.editLink {
+  color: var(--secondary-500);
+  text-decoration: none;
+}
