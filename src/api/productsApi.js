@@ -25,6 +25,28 @@ export async function getProducts({
   return response.json();
 }
 
+export async function createProduct(productData, accessToken) {
+  const response = await fetch(`${BASE_URL}/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(productData),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(data.message || "상품을 등록하지 못했습니다.");
+
+    error.status = response.status;
+    throw error;
+  }
+
+  return data;
+}
+
 export async function getProductDetail(productId, accessToken) {
   const response = await fetch(`${BASE_URL}/products/${productId}`, {
     method: "GET",
@@ -43,6 +65,37 @@ export async function getProductDetail(productId, accessToken) {
   }
 
   return data;
+}
+
+export async function uploadProductImage(imageFile, accessToken) {
+  const extension = imageFile.name.split(".").pop();
+  const safeFileName = `product-image-${Date.now()}.${extension}`;
+  const renamedImageFile = new File([imageFile], safeFileName, {
+    type: imageFile.type,
+  });
+
+  const formData = new FormData();
+
+  formData.append("image", renamedImageFile);
+
+  const response = await fetch(`${BASE_URL}/images/upload`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(data.message || "이미지를 업로드하지 못했습니다.");
+
+    error.status = response.status;
+    throw error;
+  }
+
+  return data.url;
 }
 
 export async function addProductFavorite(productId, accessToken) {
