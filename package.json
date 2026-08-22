@@ -1,0 +1,33 @@
+{
+  "name": "sprint-mission-06",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "db:migrate": "node server/db/migrate.js",
+    "db:seed": "node server/db/seed.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "next": "^16.0.0",
+    "pg": "^8.22.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.0.0",
+    "postcss": "^8.5.25",
+    "tailwindcss": "^3.4.17"
+  },
+  "overrides": {
+    "postcss": "^8.5.25",
+    "sharp": "^0.35.3"
+  }
+}
