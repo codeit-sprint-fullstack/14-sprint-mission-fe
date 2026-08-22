@@ -3,14 +3,14 @@
 import IconGG from "@/public/ic_google.png";
 import IconKT from "@/public/ic_kakaotalk.png";
 import MainLogo from "@/public/logo_main_2x.png";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "@/app/components/Modal";
 import PasswordInput from "@/app/components/PasswordInput";
-import { signUp } from "@/app/lib/api/auth";
+import { getMe, signUp } from "@/app/lib/api/auth";
 import { getErrorMessage } from "@/app/lib/error.js";
 import {
   isValidEmail,
@@ -21,6 +21,8 @@ import styles from "./Signup.module.css";
 
 export default function Signup() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const [form, setForm] = useState({
     email: "",
     nickname: "",
@@ -40,6 +42,12 @@ export default function Signup() {
     nickname: form.nickname.trim(),
   };
 
+  const { data: user, isPending } = useQuery({
+    queryKey: ["users", "me"],
+    queryFn: () => getMe(),
+    retry: false,
+  });
+
   const {
     mutate,
     isPending: isSubmitting,
@@ -48,12 +56,23 @@ export default function Signup() {
     reset,
   } = useMutation({
     mutationFn: signUp,
-    onSuccess: ({ accessToken }) => {
+    onSuccess: ({ accessToken, user: signedUser }) => {
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
       }
+      queryClient.setQueryData(["users", "me"], signedUser);
     },
   });
+
+  useEffect(() => {
+    if (user && !isSuccess) {
+      router.replace("/items");
+    }
+  }, [user, router, isSuccess]);
+
+  if (isPending || (user && !isSuccess)) {
+    return <p>로딩중입니다...</p>;
+  }
 
   const emailInvalid = !isValidEmail(cleanForm.email);
   const nicknameInvalid = cleanForm.nickname === "";
