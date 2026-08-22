@@ -43,7 +43,7 @@ export default function ProductCommentForm({
     <>
       <form onSubmit={handleSubmit} className={styles.content}>
         <div>
-          <label htmlFor="content">{comment ? "댓글 수정" : "댓글달기"}</label>
+          <label htmlFor="content">{comment ? "문의 수정" : "문의하기"}</label>
           <textarea
             id="content"
             name="content"

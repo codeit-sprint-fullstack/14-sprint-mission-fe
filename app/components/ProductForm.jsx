@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { patchProductDetail } from "../lib/api/products";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./PostForm.module.css";
+import styles from "./ProductForm.module.css";
 
 export default function ProductForm({ product, id }) {
   const queryClient = useQueryClient();
@@ -116,34 +116,40 @@ export default function ProductForm({ product, id }) {
               required
             />
           </div>
-          <label htmlFor="price">판매가격</label>
-          <input
-            type="text"
-            id="price"
-            name="price"
-            placeholder="판매 가격을 입력해주세요"
-            onChange={handleChange}
-            value={form.price}
-            required
-          />
-          <label htmlFor="tags">태그</label>
-          <input
-            type="text"
-            id="tags"
-            name="tags"
-            placeholder="태그를 입력해주세요. 엔터나 쉼표로 구분할 수 있습니다."
-            onChange={handleTag}
-            onKeyDown={handleKeyDown}
-            value={tagInput}
-          />
-          {form.tags?.map((tag) => (
-            <p key={tag}>
-              #{tag}
-              <button type="button" onClick={() => removeTag(tag)}>
-                X
-              </button>
-            </p>
-          ))}
+          <div>
+            <label htmlFor="price">판매가격</label>
+            <input
+              type="text"
+              id="price"
+              name="price"
+              placeholder="판매 가격을 입력해주세요"
+              onChange={handleChange}
+              value={form.price}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="tags">태그</label>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              placeholder="태그를 입력해주세요. 엔터나 쉼표로 구분할 수 있습니다."
+              onChange={handleTag}
+              onKeyDown={handleKeyDown}
+              value={tagInput}
+            />
+            <div className={styles.tags}>
+              {form.tags?.map((tag) => (
+                <p key={tag} className={styles.tag}>
+                  #{tag}
+                  <button type="button" onClick={() => removeTag(tag)}>
+                    X
+                  </button>
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </form>
     </>
