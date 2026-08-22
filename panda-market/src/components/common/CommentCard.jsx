@@ -8,13 +8,15 @@ import styles from '@/components/common/CommentCard.module.css'
 function CommentCard({
   comment,
   isAuthor,
+  isEditing,
+  onStartEdit,
+  onCancelEdit,
   onUpdate,
   onDelete,
   isUpdating = false,
   isDeleting = false,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isEditing, setIsEditing] = useState(false)
   const [editedContent, setEditedContent] = useState(comment.content)
 
   function handleMenuToggle() {
@@ -23,14 +25,13 @@ function CommentCard({
 
   function onCancelEditComment() {
     setEditedContent(comment.content)
-    setIsEditing(false)
+    onCancelEdit()
   }
 
-  async function onUpdateComment() {
+  function onUpdateComment() {
     if (!editedContent.trim() || isUpdating) return
 
-    await onUpdate(comment.id, editedContent.trim())
-    setIsEditing(false)
+    onUpdate(comment.id, editedContent.trim())
   }
 
   function onDeleteComment() {
@@ -44,7 +45,11 @@ function CommentCard({
   }
 
   return (
-    <article className={styles.commentCard}>
+    <article
+      className={`${styles.commentCard} ${
+        isEditing ? styles.commentCardEditing : ''
+      }`}
+    >
       {isEditing ? (
         <div className={styles.commentEditArea}>
           <textarea
@@ -99,7 +104,7 @@ function CommentCard({
               onClick={onUpdateComment}
               disabled={!editedContent.trim() || isUpdating}
             >
-              수정 완료
+              {isUpdating ? '수정 중...' : '수정 완료'}
             </button>
           </div>
         ) : (
@@ -122,7 +127,8 @@ function CommentCard({
                     className={styles.commentEditButton}
                     type="button"
                     onClick={() => {
-                      setIsEditing(true)
+                      setEditedContent(comment.content)
+                      onStartEdit(comment.id)
                       setIsMenuOpen(false)
                     }}
                     disabled={isDeleting}

@@ -1,4 +1,7 @@
+import { fetchWithAuth } from '@/api/fetchWithAuth'
+
 const PRODUCT_API_URL = 'https://panda-market-api.vercel.app/products'
+const COMMENT_API_URL = 'https://panda-market-api.vercel.app/comments'
 
 async function getProductComments({ productId, limit, cursor }) {
   const url = new URL(`${PRODUCT_API_URL}/${productId}/comments`)
@@ -22,4 +25,65 @@ async function getProductComments({ productId, limit, cursor }) {
   return res.json()
 }
 
-export { getProductComments }
+async function createProductComment({ productId, content }) {
+  const res = await fetchWithAuth(`${PRODUCT_API_URL}/${productId}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content }),
+  })
+
+  if (!res.ok) {
+    const error = new Error(`댓글을 등록하지 못했습니다 (${res.status})`)
+
+    error.status = res.status
+
+    throw error
+  }
+
+  return res.json()
+}
+
+async function updateComment({ commentId, content }) {
+  const res = await fetchWithAuth(`${COMMENT_API_URL}/${commentId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content }),
+  })
+
+  if (!res.ok) {
+    const error = new Error(`댓글을 수정하지 못했습니다 (${res.status})`)
+
+    error.status = res.status
+
+    throw error
+  }
+
+  return res.json()
+}
+
+async function deleteComment(commentId) {
+  const res = await fetchWithAuth(`${COMMENT_API_URL}/${commentId}`, {
+    method: 'DELETE',
+  })
+
+  if (!res.ok) {
+    const error = new Error(`댓글을 삭제하지 못했습니다 (${res.status})`)
+
+    error.status = res.status
+
+    throw error
+  }
+
+  return res.json()
+}
+
+export {
+  getProductComments,
+  createProductComment,
+  updateComment,
+  deleteComment,
+}

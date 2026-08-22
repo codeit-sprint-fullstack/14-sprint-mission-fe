@@ -9,6 +9,11 @@ import {
 } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
+import {
+  createProductComment,
+  updateComment,
+  deleteComment,
+} from '@/api/commentApi'
 import { addProductFavorite, removeProductFavorite } from '@/api/productApi'
 import {
   getBestProductRootQueryKey,
@@ -21,6 +26,7 @@ import ProductTagChip from '@/components/items/ProductTagChip'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
 import { getProductCommentsQueryOptions } from '@/queries/commentQueries'
 import { DEFAULT_PRODUCT_IMAGE, getProductImage } from '@/utils/productImage'
+import { getUserProfileQueryOptions } from '@/queries/userQueries'
 import formatDate from '@/utils/formatDate'
 import styles from '@/app/(with-layout)/items/[id]/itemDetailPage.module.css'
 
@@ -40,6 +46,8 @@ function ItemDetailClient({ itemId }) {
   const queryClient = useQueryClient()
   const [accessToken, setAccessToken] = useState(undefined)
   const [failedProductImage, setFailedProductImage] = useState(null)
+  const [commentContent, setCommentContent] = useState('')
+  const [editingCommentId, setEditingCommentId] = useState(null)
   const commentListRef = useRef(null)
   const loadMoreRef = useRef(null)
 
@@ -58,6 +66,16 @@ function ItemDetailClient({ itemId }) {
     enabled: Boolean(accessToken),
   })
 
+  const { data: user } = useQuery({
+    ...getUserProfileQueryOptions(),
+    enabled: Boolean(accessToken),
+  })
+
+  const commentsQueryOptions = getProductCommentsQueryOptions({
+    productId: itemId,
+    limit: COMMENT_PAGE_SIZE,
+  })
+
   const {
     data: commentsData,
     error: commentsError,
@@ -69,14 +87,42 @@ function ItemDetailClient({ itemId }) {
     hasNextPage,
     refetch: refetchComments,
   } = useInfiniteQuery({
-    ...getProductCommentsQueryOptions({
-      productId: itemId,
-      limit: COMMENT_PAGE_SIZE,
-    }),
+    ...commentsQueryOptions,
     enabled: Boolean(item),
   })
 
   const comments = commentsData?.pages.flatMap((page) => page.list) ?? []
+
+  const createCommentMutation = useMutation({
+    mutationFn: createProductComment,
+    onSuccess: async () => {
+      setCommentContent('')
+
+      await queryClient.invalidateQueries({
+        queryKey: commentsQueryOptions.queryKey,
+      })
+    },
+  })
+
+  const updateCommentMutation = useMutation({
+    mutationFn: updateComment,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: commentsQueryOptions.queryKey,
+      })
+
+      setEditingCommentId(null)
+    },
+  })
+
+  const deleteCommentMutation = useMutation({
+    mutationFn: deleteComment,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: commentsQueryOptions.queryKey,
+      })
+    },
+  })
 
   useEffect(() => {
     const commentListElement = commentListRef.current
@@ -154,6 +200,46 @@ function ItemDetailClient({ itemId }) {
     if (favoriteMutation.isPending) return
 
     favoriteMutation.mutate(item.isFavorite === true)
+  }
+
+  function handleCommentSubmit(e) {
+    e.preventDefault()
+
+    const content = commentContent.trim()
+
+    if (!content || createCommentMutation.isPending) return
+
+    createCommentMutation.mutate({
+      productId: itemId,
+      content,
+    })
+  }
+
+  function handleStartEditComment(commentId) {
+    if (updateCommentMutation.isPending) return
+
+    setEditingCommentId(commentId)
+  }
+
+  function handleCancelEditComment() {
+    if (updateCommentMutation.isPending) return
+
+    setEditingCommentId(null)
+  }
+
+  function handleUpdateComment(commentId, content) {
+    if (updateCommentMutation.isPending) return
+
+    updateCommentMutation.mutate({
+      commentId,
+      content,
+    })
+  }
+
+  function handleDeleteComment(commentId) {
+    if (deleteCommentMutation.isPending) return
+
+    deleteCommentMutation.mutate(commentId)
   }
 
   if (accessToken === undefined) {
@@ -334,19 +420,35 @@ function ItemDetailClient({ itemId }) {
         <div className={styles.itemDetailProductSpacer} aria-hidden="true" />
       </section>
       <section className={styles.itemDetailInquirySection}>
-        <form className={styles.itemDetailInquiryForm}>
+        <form
+          className={styles.itemDetailInquiryForm}
+          onSubmit={handleCommentSubmit}
+        >
           <h2 className={styles.itemDetailInquiryTitle}>문의하기</h2>
           <textarea
             className={styles.itemDetailInquiryTextarea}
             placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+            value={commentContent}
+            onChange={(e) => setCommentContent(e.target.value)}
+            disabled={createCommentMutation.isPending}
           />
           <button
             className={styles.itemDetailInquirySubmitButton}
             type="submit"
+            disabled={!commentContent.trim() || createCommentMutation.isPending}
           >
-            등록
+            {createCommentMutation.isPending ? '등록 중...' : '등록'}
           </button>
+          {createCommentMutation.isError && (
+            <p role="alert">{createCommentMutation.error.message}</p>
+          )}
         </form>
+        {deleteCommentMutation.isError && (
+          <p role="alert">{deleteCommentMutation.error.message}</p>
+        )}
+        {updateCommentMutation.isError && (
+          <p role="alert">{updateCommentMutation.error.message}</p>
+        )}
         {isCommentsPending ? (
           <div className={styles.itemDetailInquiryList}>
             <p role="status" aria-live="polite">
@@ -386,7 +488,14 @@ function ItemDetailClient({ itemId }) {
               <CommentCard
                 key={comment.id}
                 comment={comment}
-                isAuthor={false}
+                isAuthor={user?.id === comment.writer.id}
+                isEditing={editingCommentId === comment.id}
+                onStartEdit={handleStartEditComment}
+                onCancelEdit={handleCancelEditComment}
+                onUpdate={handleUpdateComment}
+                onDelete={handleDeleteComment}
+                isUpdating={updateCommentMutation.isPending}
+                isDeleting={deleteCommentMutation.isPending}
               />
             ))}
             {hasNextPage && (
