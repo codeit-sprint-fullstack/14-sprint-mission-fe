@@ -58,7 +58,8 @@ export default function Signup() {
   const emailInvalid = !isValidEmail(cleanForm.email);
   const nicknameInvalid = cleanForm.nickname === "";
   const passwordInvalid = !isValidPassword(cleanForm.password);
-  const passwordMismatch = cleanForm.password !== cleanForm.passwordConfirmation;
+  const passwordMismatch =
+    cleanForm.password !== cleanForm.passwordConfirmation;
 
   const showEmailError = touched.email && form.email !== "" && emailInvalid;
   const showPasswordError =
@@ -94,9 +95,7 @@ export default function Signup() {
 
   return (
     <>
-      {error && (
-        <Modal message={getErrorMessage(error)} onConfirm={reset} />
-      )}
+      {error && <Modal message={getErrorMessage(error)} onConfirm={reset} />}
       {isSuccess && (
         <Modal
           message="가입 완료되었습니다."
@@ -161,7 +160,11 @@ export default function Signup() {
                 required
               />
               {showPasswordError && (
-                <p id="password-error" role="alert" className={styles.errorText}>
+                <p
+                  id="password-error"
+                  role="alert"
+                  className={styles.errorText}
+                >
                   비밀번호는 {PASSWORD_MIN_LENGTH}자 이상 입력해주세요.
                 </p>
               )}
@@ -190,7 +193,7 @@ export default function Signup() {
                   role="alert"
                   className={styles.errorText}
                 >
-                  비밀번호가 일치하지 않습니다.
+                  비밀번호가 일치하지 않아요.
                 </p>
               )}
             </div>

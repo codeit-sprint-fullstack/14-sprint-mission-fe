@@ -22,10 +22,13 @@ export default function ItemDetail({ id }) {
     queryKey: ["item", id],
     queryFn: () => getProductDetail(id),
   });
+
   const { data: me } = useQuery({
     queryKey: ["users", "me"],
     queryFn: () => getMe(),
+    retry: false,
   });
+
   const { mutate } = useMutation({
     mutationFn: (productId) => deleteProduct(productId),
     onSuccess: () => {
@@ -122,6 +125,7 @@ export default function ItemDetail({ id }) {
         </div>
       </section>
       <ProductCommentList id={id} />
+      <Link href={"/items"}>목록으로 돌아가기</Link>
     </>
   );
 }

@@ -2,16 +2,16 @@
 
 import Modal from "@/app/components/Modal.jsx";
 import PasswordInput from "@/app/components/PasswordInput.jsx";
-import { signIn } from "@/app/lib/api/auth.js";
+import { getMe, signIn } from "@/app/lib/api/auth.js";
 import { getErrorMessage } from "@/app/lib/error.js";
 import IconGG from "@/public/ic_google.png";
 import IconKT from "@/public/ic_kakaotalk.png";
 import MainLogo from "@/public/logo_main_2x.png";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   isValidEmail,
   isValidPassword,
@@ -21,6 +21,7 @@ import styles from "./Signin.module.css";
 
 export default function Signin() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -30,6 +31,11 @@ export default function Signin() {
     password: false,
   });
 
+  const { data: user, isPending } = useQuery({
+    queryKey: ["users", "me"],
+    queryFn: () => getMe(),
+    retry: false,
+  });
   const {
     mutate,
     isPending: isSubmitting,
@@ -37,13 +43,23 @@ export default function Signin() {
     reset,
   } = useMutation({
     mutationFn: signIn,
-    onSuccess: ({ accessToken }) => {
+    onSuccess: ({ accessToken, user: signedUser }) => {
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
       }
-      router.push("/items");
+      queryClient.setQueryData(["users", "me"], signedUser);
     },
   });
+
+  useEffect(() => {
+    if (user) {
+      router.replace("/items");
+    }
+  }, [user, router]);
+
+  if (isPending || user) {
+    return <p>로딩중입니다...</p>;
+  }
 
   const emailInvalid = !isValidEmail(form.email);
   const passwordInvalid = !isValidPassword(form.password);
