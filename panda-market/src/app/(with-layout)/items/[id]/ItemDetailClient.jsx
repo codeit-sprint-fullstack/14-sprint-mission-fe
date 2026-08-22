@@ -1,7 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useEffect, useState, useRef } from 'react'
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  useInfiniteQuery,
+} from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { addProductFavorite, removeProductFavorite } from '@/api/productApi'
@@ -10,9 +15,11 @@ import {
   getProductDetailQueryKey,
   getProductListRootQueryKey,
 } from '@/constants/queryKeys'
+import CommentCard from '@/components/common/CommentCard'
 import FavoriteChip from '@/components/common/FavoriteChip'
 import ProductTagChip from '@/components/items/ProductTagChip'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
+import { getProductCommentsQueryOptions } from '@/queries/commentQueries'
 import { DEFAULT_PRODUCT_IMAGE, getProductImage } from '@/utils/productImage'
 import formatDate from '@/utils/formatDate'
 import styles from '@/app/(with-layout)/items/[id]/itemDetailPage.module.css'
@@ -27,12 +34,14 @@ function splitTagsIntoRows(tags, tagsPerRow) {
   return rows
 }
 
-const TEMP_COMMENTS = []
+const COMMENT_PAGE_SIZE = 5
 
 function ItemDetailClient({ itemId }) {
   const queryClient = useQueryClient()
   const [accessToken, setAccessToken] = useState(undefined)
   const [failedProductImage, setFailedProductImage] = useState(null)
+  const commentListRef = useRef(null)
+  const loadMoreRef = useRef(null)
 
   useEffect(() => {
     setAccessToken(localStorage.getItem('accessToken'))
@@ -48,6 +57,63 @@ function ItemDetailClient({ itemId }) {
     ...getProductDetailQueryOptions(itemId),
     enabled: Boolean(accessToken),
   })
+
+  const {
+    data: commentsData,
+    error: commentsError,
+    isPending: isCommentsPending,
+    isError: isCommentsError,
+    isFetchingNextPage,
+    isFetchNextPageError,
+    fetchNextPage,
+    hasNextPage,
+    refetch: refetchComments,
+  } = useInfiniteQuery({
+    ...getProductCommentsQueryOptions({
+      productId: itemId,
+      limit: COMMENT_PAGE_SIZE,
+    }),
+    enabled: Boolean(item),
+  })
+
+  const comments = commentsData?.pages.flatMap((page) => page.list) ?? []
+
+  useEffect(() => {
+    const commentListElement = commentListRef.current
+    const loadMoreElement = loadMoreRef.current
+
+    if (
+      !commentListElement ||
+      !loadMoreElement ||
+      !hasNextPage ||
+      isFetchNextPageError
+    ) {
+      return
+    }
+
+    // IntersectionObserver: 특정 요소가 지정된 화면 영역에 들어오는지 감지하도록 하는 브라우저 기능
+    const loadMoreObserver = new IntersectionObserver(
+      // Observer는 여러 요소를 동시에 감시할 수 있어서 결과를 배열(entries)로 전달
+      // 현재는 감시할 요소가 하나뿐이므로 entry
+      ([entry]) => {
+        if (entry.isIntersecting && !isFetchingNextPage) {
+          fetchNextPage()
+        }
+      },
+      {
+        root: commentListElement,
+        rootMargin: '0px 0px 200px 0px',
+      },
+    )
+
+    // .observe(): 어떤 요소를 감시할지 등록
+    loadMoreObserver.observe(loadMoreElement)
+
+    // 오래된 Observer가 계속 DOM을 감시할 수 있으므로, 의존성이 바뀌어서 effect가 다시 실행되거나 컴포넌트가 사라질 때 기존 Observer를 끊음
+    return () => {
+      loadMoreObserver.disconnect()
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, isFetchNextPageError])
 
   const favoriteMutation = useMutation({
     mutationFn: (isCurrentlyFavorite) => {
@@ -281,7 +347,24 @@ function ItemDetailClient({ itemId }) {
             등록
           </button>
         </form>
-        {TEMP_COMMENTS.length === 0 ? (
+        {isCommentsPending ? (
+          <div className={styles.itemDetailInquiryList}>
+            <p role="status" aria-live="polite">
+              문의 목록을 불러오고 있습니다.
+            </p>
+          </div>
+        ) : isCommentsError && !commentsData ? (
+          <div className={styles.itemDetailInquiryList}>
+            <p role="alert">{commentsError.message}</p>
+            <button
+              className={styles.itemDetailErrorRetryButton}
+              type="button"
+              onClick={() => refetchComments()}
+            >
+              다시 시도
+            </button>
+          </div>
+        ) : comments.length === 0 ? (
           <div className={styles.itemDetailInquiryEmpty}>
             <Image
               className={styles.itemDetailInquiryEmptyImage}
@@ -295,8 +378,41 @@ function ItemDetailClient({ itemId }) {
             </p>
           </div>
         ) : (
-          <div className={styles.itemDetailInquiryList}>
-            {/* 상품 문의 목록 영역 */}
+          <div
+            ref={commentListRef}
+            className={`${styles.itemDetailInquiryList} ${styles.itemDetailInquiryScrollList}`}
+          >
+            {comments.map((comment) => (
+              <CommentCard
+                key={comment.id}
+                comment={comment}
+                isAuthor={false}
+              />
+            ))}
+            {hasNextPage && (
+              <div
+                ref={loadMoreRef}
+                className={styles.itemDetailInquiryLoadMore}
+              >
+                {isFetchingNextPage && (
+                  <p role="status" aria-live="polite">
+                    다음 문의를 불러오고 있습니다.
+                  </p>
+                )}
+                {isFetchNextPageError && (
+                  <>
+                    <p role="alert">{commentsError.message}</p>
+                    <button
+                      className={styles.itemDetailErrorRetryButton}
+                      type="button"
+                      onClick={() => fetchNextPage()}
+                    >
+                      다시 시도
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         )}
       </section>

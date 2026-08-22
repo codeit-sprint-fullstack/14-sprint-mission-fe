@@ -1,4 +1,5 @@
 const PRODUCT_QUERY_KEY = 'products'
+const COMMENT_QUERY_KEY = 'comments'
 const USER_QUERY_KEY = 'user'
 
 function getProductListRootQueryKey() {
@@ -33,6 +34,19 @@ function getProductDetailQueryKey(itemId) {
   return [...getProductDetailRootQueryKey(), itemId]
 }
 
+function getProductCommentsRootQueryKey(productId) {
+  return [COMMENT_QUERY_KEY, 'product', productId]
+}
+
+function getProductCommentsQueryKey({ productId, limit }) {
+  return [
+    ...getProductCommentsRootQueryKey(productId),
+    {
+      limit,
+    },
+  ]
+}
+
 function getUserProfileQueryKey() {
   return [USER_QUERY_KEY, 'profile']
 }
@@ -44,5 +58,7 @@ export {
   getBestProductQueryKey,
   getProductDetailRootQueryKey,
   getProductDetailQueryKey,
+  getProductCommentsRootQueryKey,
+  getProductCommentsQueryKey,
   getUserProfileQueryKey,
 }

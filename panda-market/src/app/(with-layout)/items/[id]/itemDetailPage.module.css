@@ -300,6 +300,11 @@
   margin-bottom: 24px;
 }
 
+.itemDetailInquiryScrollList {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
 .itemDetailBackLink {
   display: flex;
   align-items: center;
@@ -328,6 +333,10 @@
 .itemDetailBackIcon {
   display: block;
   flex-shrink: 0;
+}
+
+.itemDetailInquiryLoadMore {
+  min-height: 1px;
 }
 
 @media (max-width: 1199px) {
