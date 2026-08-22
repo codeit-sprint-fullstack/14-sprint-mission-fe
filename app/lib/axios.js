@@ -8,6 +8,7 @@ if (!baseURL) {
 
 const instance = axios.create({ baseURL });
 
+//요청 interceptor
 instance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem("accessToken");

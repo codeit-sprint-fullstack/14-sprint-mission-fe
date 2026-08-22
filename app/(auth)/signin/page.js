@@ -43,10 +43,9 @@ export default function Signin() {
     reset,
   } = useMutation({
     mutationFn: signIn,
-    onSuccess: ({ accessToken, user: signedUser }) => {
-      if (accessToken) {
-        localStorage.setItem("accessToken", accessToken);
-      }
+    onSuccess: ({ accessToken, refreshToken, user: signedUser }) => {
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
       queryClient.setQueryData(["users", "me"], signedUser);
     },
   });
