@@ -69,21 +69,6 @@
   line-height: 48px;
 }
 
-.itemDetailMenuArea {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.itemDetailMenuButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
 .itemDetailHeaderSpacer {
   grid-column: 1 / -1;
   width: 100%;

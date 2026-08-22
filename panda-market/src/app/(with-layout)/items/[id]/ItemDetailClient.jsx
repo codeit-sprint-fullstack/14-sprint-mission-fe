@@ -21,6 +21,7 @@ import {
   getProductListRootQueryKey,
 } from '@/constants/queryKeys'
 import CommentCard from '@/components/common/CommentCard'
+import EditDeleteMenu from '@/components/common/EditDeleteMenu'
 import FavoriteChip from '@/components/common/FavoriteChip'
 import ProductTagChip from '@/components/items/ProductTagChip'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
@@ -242,6 +243,14 @@ function ItemDetailClient({ itemId }) {
     deleteCommentMutation.mutate(commentId)
   }
 
+  function handleEditProduct() {
+    // 상품 수정 기능 구현 시 연결
+  }
+
+  function handleDeleteProduct() {
+    // 상품 삭제 기능 구현 시 연결
+  }
+
   if (accessToken === undefined) {
     return (
       <article className={styles.itemDetailPage}>
@@ -334,13 +343,11 @@ function ItemDetailClient({ itemId }) {
               </span>
             </div>
             <div className={styles.itemDetailMenuArea}>
-              <button
-                className={styles.itemDetailMenuButton}
-                type="button"
-                aria-label="상품 메뉴 열기"
-              >
-                <Image src="/ic_kebab.svg" alt="" width={24} height={24} />
-              </button>
+              <EditDeleteMenu
+                onEdit={handleEditProduct}
+                onDelete={handleDeleteProduct}
+                menuButtonAriaLabel="상품 메뉴 열기"
+              />
             </div>
             <div className={styles.itemDetailHeaderSpacer} aria-hidden="true" />
           </header>

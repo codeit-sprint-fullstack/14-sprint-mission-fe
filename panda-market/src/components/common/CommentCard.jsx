@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import EditDeleteMenu from '@/components/common/EditDeleteMenu'
 import formatRelativeTime from '@/utils/formatRelativeTime'
 import styles from '@/components/common/CommentCard.module.css'
 
@@ -16,12 +17,7 @@ function CommentCard({
   isUpdating = false,
   isDeleting = false,
 }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [editedContent, setEditedContent] = useState(comment.content)
-
-  function handleMenuToggle() {
-    setIsMenuOpen((prev) => !prev)
-  }
 
   function onCancelEditComment() {
     setEditedContent(comment.content)
@@ -110,42 +106,15 @@ function CommentCard({
         ) : (
           isAuthor && (
             <div className={styles.commentMenu}>
-              <button
-                className={styles.commentMenuButton}
-                type="button"
-                onClick={handleMenuToggle}
-                aria-label="댓글 메뉴 열기"
-                aria-expanded={isMenuOpen}
+              <EditDeleteMenu
+                onEdit={() => {
+                  setEditedContent(comment.content)
+                  onStartEdit(comment.id)
+                }}
+                onDelete={onDeleteComment}
                 disabled={isDeleting}
-              >
-                <Image src="/ic_kebab.svg" alt="" width={24} height={24} />
-              </button>
-
-              {isMenuOpen && (
-                <div className={styles.commentMenuDropdown}>
-                  <button
-                    className={styles.commentEditButton}
-                    type="button"
-                    onClick={() => {
-                      setEditedContent(comment.content)
-                      onStartEdit(comment.id)
-                      setIsMenuOpen(false)
-                    }}
-                    disabled={isDeleting}
-                  >
-                    수정하기
-                  </button>
-
-                  <button
-                    className={styles.commentDeleteButton}
-                    type="button"
-                    onClick={onDeleteComment}
-                    disabled={isDeleting}
-                  >
-                    삭제하기
-                  </button>
-                </div>
-              )}
+                menuButtonAriaLabel="댓글 메뉴 열기"
+              />
             </div>
           )
         )}
