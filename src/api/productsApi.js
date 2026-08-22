@@ -47,6 +47,28 @@ export async function createProduct(productData, accessToken) {
   return data;
 }
 
+export async function updateProduct(productId, productData, accessToken) {
+  const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(productData),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(data.message || "상품을 수정하지 못했습니다.");
+
+    error.status = response.status;
+    throw error;
+  }
+
+  return data;
+}
+
 export async function getProductDetail(productId, accessToken) {
   const response = await fetch(`${BASE_URL}/products/${productId}`, {
     method: "GET",
