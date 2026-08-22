@@ -79,7 +79,7 @@ export default function Signin() {
 
   return (
     <>
-      {error && <Modal message={getErrorMessage(error)} reset={reset} />}
+      {error && <Modal message={getErrorMessage(error)} onConfirm={reset} />}
       <section className={styles.login}>
         <h1>
           <Link href="/">

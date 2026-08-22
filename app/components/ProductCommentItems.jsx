@@ -19,8 +19,6 @@ export default function ProductCommentItems({ productId, comments }) {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (commentId) => deleteComment({ commentId }),
     onSuccess: () => {
-      queryClient.removeQueries({ queryKey: ["item", id] });
-      queryClient.removeQueries({ queryKey: ["comments", id] });
       queryClient.invalidateQueries({ queryKey: ["comments", productId] });
     },
   });

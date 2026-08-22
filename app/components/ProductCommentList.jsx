@@ -5,7 +5,7 @@ import emptyImg from "@/public/img_reply_empty.png";
 import styles from "./ProductCommentList.module.css";
 import { getProductComments } from "../lib/api/comments";
 import Image from "next/image";
-import ProductCommentItems from "./ProductCommentsItems";
+import ProductCommentItems from "./ProductCommentItems";
 import ProductCommentForm from "./ProductCommentForm";
 import { getErrorMessage } from "../lib/error";
 

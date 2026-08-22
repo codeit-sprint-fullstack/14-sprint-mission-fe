@@ -17,7 +17,7 @@ export default function Login() {
       {showUser ? (
         <span>
           <Image src={profileIc} alt="" width={40} />
-          <Link href="/signin">{data?.nickname}</Link>
+          {data?.nickname}
         </span>
       ) : (
         <Link href="/signin" className="btStyle">
