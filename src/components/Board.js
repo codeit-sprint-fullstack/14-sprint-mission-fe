@@ -1,26 +1,33 @@
 "use client";
+
 import styles from "@/styles/Board.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import BoardItem from "./BoardItem";
 import Input from "./Input";
 import SortDropDown from "./SortDropDown";
 
-export default function board() {
-  const [articles, setArticles] = useState([]);
+export default function Board() {
   const [orderBy, setOrderBy] = useState("recent");
   const [keyword, setKeyword] = useState("");
-  useEffect(() => {
-    const getArticles = async () => {
+
+  const { data } = useQuery({
+    queryKey: ["articles", orderBy, keyword],
+
+    queryFn: async () => {
       const response = await fetch(
-        `http://localhost:3001/api/articles?orderBy=${orderBy}&keyword=${encodeURIComponent(keyword)}`
+        `https://panda-market-api.vercel.app/articles?orderBy=${orderBy}&keyword=${encodeURIComponent(keyword)}`
       );
+
       const data = await response.json();
 
-      setArticles(data);
-    };
+      console.log(data);
 
-    getArticles();
-  }, [orderBy, keyword]);
+      return data;
+    },
+  });
+
+  const articles = data?.list ?? [];
 
   return (
     <>
@@ -33,11 +40,13 @@ export default function board() {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
+
           <SortDropDown
             orderBy={orderBy}
             setOrderBy={setOrderBy}
           />
         </div>
+
         <div className={styles.boardCont}>
           {articles.map((article) => (
             <BoardItem
@@ -45,9 +54,8 @@ export default function board() {
               article={article}
             />
           ))}
-
         </div>
       </div>
     </>
-  )
+  );
 }

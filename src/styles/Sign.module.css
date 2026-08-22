@@ -6,16 +6,16 @@
 .signSection {
   min-height: 100vh;
   position: relative;
+  padding: 40px 0;
+  overflow: auto;
+  box-sizing: border-box;
 }
 
 .signWrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
+  height: 100%;
   max-width: 640px;
-  padding: 24px;
+  padding: 60px 24px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -32,6 +32,7 @@
 .signInput {
   margin-bottom: 24px;
 }
+.signInput
 
 .signInput:last-child {
   margin-bottom: 0;
@@ -50,12 +51,22 @@
   padding: 0 24px;
   border-radius: 12px;
 }
-
+.signInput .inputError {
+  border: 1px solid #F74747;
+  box-sizing: border-box;
+}
+.errorMessage {
+ color: #F74747; 
+ margin-left: 16px;
+ margin-top: 8px;
+ font-size: 14px;
+ font-weight: 600;
+}
 .paswordWrap {
   position: relative;
 }
 
-.paswordWrap .passwordInput {
+.paswordWrap input {
   padding-right: 60px;
 }
 
@@ -74,13 +85,16 @@
 
 .btnLogin {
   width: 100%;
-  background-color: #9CA3AF;
+  background-color: #3692FF;
   color: #fff;
   border-radius: 40px;
   height: 56px;
   font-size: 18px;
 }
-
+.btnLogin:disabled {
+  background-color: #9CA3AF;
+  cursor:not-allowed;
+}
 .easyLoginWrap {
   display: flex;
   align-items: center;
@@ -117,17 +131,17 @@
   background-image: url(../assets/ic_kakao.png);
 }
 
-.infoSignup {
+.infoWrap {
   text-align: center;
   margin-top: 24px;
   font-size: 14px;
 }
 
-.infoSignup p {
+.infoWrap p {
   display: inline-block;
 }
 
-.infoSignup a {
+.infoWrap a {
   margin-left: 5px;
   color: #3692FF;
   text-decoration: underline;

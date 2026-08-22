@@ -4,9 +4,9 @@ import BoardPage from "@/app/boards/page";
 export default function Home() {
   return (
     <>
-      <Header/>
+      
       <BoardPage />
-      <Footer/>
+      
     </>
   );
 }

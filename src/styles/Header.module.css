@@ -50,7 +50,7 @@
   box-sizing: border-box;
 }
 
-.headerInner .login a {
+.headerInner .login a,.headerInner .login button  {
   display: inline-block;
   color: #fff;
   background-color: #3692FF;
@@ -58,6 +58,7 @@
   line-height: 26px;
   box-sizing: border-box;
   border-radius: 8px;
+  font-size: 16px;
 }
 
 @media (max-width :480px) {
@@ -81,7 +82,7 @@
     width: 80px;
   }
 
-  .headerMenu a {
+  .headerMenu a, .headerMenu button {
     padding: 0 5px;
   }
 
