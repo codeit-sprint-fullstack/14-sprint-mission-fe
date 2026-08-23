@@ -146,7 +146,8 @@ function ProductWritePageContent() {
   }
 
   function handleTagInputKeyDown(e) {
-    if (e.key !== 'Enter') return
+    // 한글 조합 중 발생하는 Enter가 태그 등록으로 처리되는 것을 방지
+    if (e.key !== 'Enter' || e.nativeEvent.isComposing) return
 
     e.preventDefault()
     handleAddTag()
