@@ -12,7 +12,6 @@ export default function Pagination({ totalCount }) {
   const page = parseNumberParam(searchParams.get("page"), 1);
   const totalPage = Math.ceil(totalCount / pageSize);
 
-  //페이지넘버 설정
   function paginationSetting() {
     const pageGroupSize = 5;
     const half = Math.floor(pageGroupSize / 2);
@@ -22,12 +21,10 @@ export default function Pagination({ totalCount }) {
     if (end - start + 1 < pageGroupSize) {
       start = end - pageGroupSize + 1;
     }
-    //i는 Index
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
   const pageNumbers = paginationSetting();
 
-  //페이지 이동 설정
   function handlePagination(page) {
     const params = new URLSearchParams(searchParams);
     params.set("page", page);
