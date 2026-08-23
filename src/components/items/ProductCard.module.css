@@ -1,0 +1,65 @@
+.productCard,
+.bestProductCard {
+  display: block;
+  width: 100%;
+  color: #1f2937;
+  text-decoration: none;
+}
+
+.productCard {
+  max-width: 220px;
+}
+
+.bestProductCard {
+  max-width: 285px;
+}
+
+.productImage,
+.bestProductImage {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+}
+
+.productImage {
+  height: 220px;
+}
+
+.bestProductImage {
+  height: 282px;
+}
+
+.productInfo {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.productName {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.productPrice {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.favoriteCount {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  color: #4b5563;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.heartIcon {
+  width: 16px;
+  height: 16px;
+}

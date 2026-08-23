@@ -1,0 +1,135 @@
+.landingMain {
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.landingMain img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.smallTitle {
+  margin: 0 0 12px;
+  color: #3692ff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.bigTitle {
+  margin: 0 0 24px;
+  color: #1f2937;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 56px;
+}
+
+.description {
+  margin: 0;
+  color: #374151;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.watchSection {
+  display: flex;
+  min-height: 540px;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: #cfe5ff;
+}
+
+.watchContent {
+  display: grid;
+  grid-template-columns: 357px 746px;
+  gap: 32px;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 24px;
+}
+
+.watchText {
+  padding-bottom: 28px;
+}
+
+.watchImage {
+  width: 100%;
+  max-width: 746px;
+}
+
+.visitButton {
+  display: flex;
+  width: 357px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  background-color: #3692ff;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  text-decoration: none;
+}
+
+.itemSection {
+  display: flex;
+  min-height: 720px;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  background-color: #ffffff;
+}
+
+.hotItemContent,
+.searchContent,
+.registerContent {
+  display: grid;
+  align-items: center;
+  gap: 64px;
+  width: 100%;
+  max-width: 988px;
+  background-color: #fcfcfc;
+}
+
+.hotItemContent,
+.registerContent {
+  grid-template-columns: 588px 1fr;
+}
+
+.searchContent {
+  grid-template-columns: 1fr 588px;
+}
+
+.imageBox {
+  width: 588px;
+}
+
+.itemImage {
+  width: 100%;
+}
+
+.searchText {
+  text-align: right;
+}
+
+.trustSection {
+  display: flex;
+  min-height: 540px;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 69px;
+  padding: 0 24px;
+  background-color: #cfe5ff;
+}
+
+.trustText {
+  padding-bottom: 172px;
+}
+
+.trustImage {
+  width: 746px;
+}

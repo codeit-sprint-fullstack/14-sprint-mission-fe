@@ -1,0 +1,226 @@
+.authPage {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.authContainer {
+  display: flex;
+  width: 640px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoLink {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.logoArea {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.logo {
+  display: block;
+  width: 306px;
+  height: 102px;
+}
+
+.authForm {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup .invalidInput {
+  border-color: #f74747;
+}
+
+.inputGroup label {
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.inputGroup input {
+  width: 100%;
+  height: 56px;
+  margin-top: 16px;
+  padding: 15px 24px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  outline: none;
+  background-color: #f3f4f6;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.inputGroup input:focus {
+  border-color: #3692ff;
+}
+
+.passwordBox {
+  position: relative;
+  width: 100%;
+}
+
+.eyeButton {
+  position: absolute;
+  top: 32px;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.eyeButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.errorMessage {
+  min-height: 18px;
+  margin: 8px 0 0 16px;
+  color: #f74747;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.submitButton {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3692ff;
+  color: #f3f4f6;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.socialBox {
+  display: flex;
+  width: 100%;
+  height: 74px;
+  margin-top: 24px;
+  padding: 16px 23px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  background-color: #e6f2ff;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.socialBox p {
+  margin: 0;
+}
+
+.socialIcons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.socialIcons a,
+.socialIcons img {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 42px;
+  height: 42px;
+}
+
+.socialIcons img {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+.kakaoButton {
+  background-color: #f5e14b;
+  border-radius: 50%;
+}
+
+.googleButton {
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.bottomText {
+  display: flex;
+  margin: 24px 0 0;
+  justify-content: center;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.bottomText a {
+  color: #3692ff;
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.modalBox {
+  display: flex;
+  width: 540px;
+  min-height: 250px;
+  padding: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.modalMessage {
+  margin-bottom: 40px;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: center;
+}
+
+.modalButton {
+  width: 120px;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3692ff;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

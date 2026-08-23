@@ -1,0 +1,217 @@
+.registrationPage {
+  width: 100%;
+  max-width: 740px;
+  min-height: calc(100vh - 152px);
+  margin: 0 auto;
+  padding: 20px 0 80px;
+}
+
+.registrationForm {
+  width: 100%;
+}
+
+.registrationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.pageTitle {
+  margin: 0;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.submitButton {
+  width: 48px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #3692ff;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.submitError {
+  margin: 0 0 12px;
+  color: #f74747;
+  font-size: 12px;
+}
+
+.imageSection {
+  margin-bottom: 22px;
+}
+
+.imageSection h2 {
+  margin: 0 0 12px;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.imageList {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.imageButton {
+  display: flex;
+  width: 170px;
+  height: 170px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.plusIcon {
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 38px;
+}
+
+.imageInput {
+  display: none;
+}
+
+.previewBox {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.removeImageButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #9ca3af;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.imageError {
+  margin: 10px 0 0;
+  color: #f74747;
+  font-size: 12px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  margin-bottom: 10px;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.inputGroup input {
+  height: 36px;
+  padding: 8px 16px;
+}
+
+.inputGroup textarea {
+  height: 180px;
+  padding: 12px 16px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #3692ff;
+}
+
+.inputGroup input::placeholder,
+.inputGroup textarea::placeholder {
+  color: #9ca3af;
+}
+
+.tagError {
+  margin: 8px 0 0;
+  color: #f74747;
+  font-size: 12px;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 100px;
+  margin-top: 10px;
+  overflow-y: auto;
+}
+
+.tagChip {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 16px;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  font-size: 12px;
+}
+
+.tagRemoveButton {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #9ca3af;
+  color: #ffffff;
+  font-size: 10px;
+  cursor: pointer;
+}

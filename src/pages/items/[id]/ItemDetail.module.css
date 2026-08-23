@@ -1,0 +1,610 @@
+.detailPage {
+  width: 100%;
+  max-width: 1200px;
+  min-height: calc(100vh - 230px);
+  margin: 0 auto;
+  padding: 32px 0 96px;
+}
+
+.productSection {
+  width: 100%;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.productInfo {
+  display: flex;
+  gap: 24px;
+}
+
+.productImage {
+  width: 486px;
+  height: 486px;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+}
+
+.productContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.titleArea {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.productName {
+  margin: 0;
+  color: #1f2937;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.menuButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.menuButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.productPrice {
+  margin: 16px 0 24px;
+  color: #1f2937;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 24px;
+  background-color: #e5e7eb;
+}
+
+.infoTitle {
+  margin: 0 0 12px;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.description {
+  width: 100%;
+  height: 168px;
+  margin: 0 0 24px;
+  padding-right: 8px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  color: #4b5563;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.tagArea {
+  position: relative;
+}
+
+.tagList {
+  display: flex;
+  max-height: 84px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.tag {
+  padding: 6px 16px;
+  border-radius: 26px;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.moreTagButton {
+  width: 104px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 26px;
+  background-color: #e6f2ff;
+  color: #3692ff;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.tagWidthMeasure {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  gap: 8px;
+}
+
+.tagWidthMeasure .tag {
+  flex-shrink: 0;
+}
+
+.tagModal {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  width: 400px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.16);
+}
+
+.tagModalHeader {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tagModalHeader p {
+  margin: 0;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tagModalCloseButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #6b7280;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.tagModalList {
+  display: flex;
+  max-height: 130px;
+  padding-right: 4px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.tagModalList .tag {
+  flex-shrink: 0;
+}
+
+.ownerArea {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.ownerInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profileImage {
+  width: 48px;
+  height: 48px;
+}
+
+.productOwnerNickname {
+  margin: 0 0 4px;
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.createdAt {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.favoriteArea {
+  display: flex;
+  height: 56px;
+  padding-left: 32px;
+  align-items: center;
+  border-left: 1px solid #e5e7eb;
+}
+
+.favoriteButton {
+  display: flex;
+  height: 40px;
+  padding: 8px 16px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  background-color: #ffffff;
+  color: #6b7280;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.favoriteButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.commentSection {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.commentTitle {
+  margin: 0 0 16px;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.commentInput {
+  width: 100%;
+  height: 104px;
+  padding: 16px 24px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.commentInput:focus {
+  border-color: #3692ff;
+}
+
+.commentButtonArea {
+  display: flex;
+  justify-content: flex-end;
+  margin: 12px 0 24px;
+}
+
+.commentSubmitButton {
+  width: 74px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3692ff;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.commentSubmitButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.commentList {
+  width: 100%;
+  height: 288px;
+  overflow-y: auto;
+}
+
+.commentItem {
+  min-height: 96px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.commentTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.commentContent {
+  margin: 0;
+  color: #1f2937;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.commentMenuButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.commentMenuButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.editContent {
+  width: 100%;
+}
+
+.editInput {
+  width: 100%;
+  height: 84px;
+  padding: 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  font-size: 14px;
+  line-height: 20px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.editInput:focus {
+  border-color: #3692ff;
+  outline: none;
+}
+
+.editBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 12px;
+}
+
+.editButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.editCancelButton {
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.editSubmitButton {
+  width: 104px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3692ff;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.editSubmitButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.commentWriter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.commentProfile {
+  width: 32px;
+  height: 32px;
+}
+
+.commentWriterNickname {
+  margin: 0;
+  color: #4b5563;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.commentDate {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.commentMessage {
+  margin: 0;
+  padding-top: 100px;
+  color: #6b7280;
+  text-align: center;
+}
+
+.emptyComments {
+  display: flex;
+  height: 288px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.emptyComments img {
+  width: 120px;
+  height: 120px;
+}
+
+.emptyComments p {
+  margin: 0;
+}
+
+.backButton {
+  display: flex;
+  width: 240px;
+  height: 48px;
+  margin: 64px auto 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 40px;
+  background-color: #3692ff;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.backButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.productMenuArea,
+.commentMenuArea {
+  position: relative;
+}
+
+.productMenu,
+.commentMenu {
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  width: 120px;
+  padding: 8px 0;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.productMenu {
+  top: 32px;
+}
+
+.commentMenu {
+  top: 28px;
+}
+
+.menuItem {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #ffffff;
+  color: #4b5563;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background-color: #f3f4f6;
+}
+
+/* 상품 삭제 모달*/
+.deleteModalBackground {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.deleteModal {
+  display: flex;
+  width: 400px;
+  min-height: 260px;
+  padding: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.deleteModalIcon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f74747;
+}
+
+.deleteModalIcon img {
+  width: 20px;
+  height: 16px;
+}
+
+.deleteModalMessage {
+  margin: 32px 0 40px;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+}
+
+.deleteModalButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.deleteCancelButton,
+.deleteConfirmButton {
+  width: 150px;
+  height: 48px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteCancelButton {
+  border: 1px solid #f74747;
+  background-color: #ffffff;
+  color: #f74747;
+}
+
+.deleteConfirmButton {
+  border: 1px solid #f74747;
+  background-color: #f74747;
+  color: #ffffff;
+}
