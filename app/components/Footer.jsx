@@ -12,19 +12,19 @@ function Footer() {
       <div className={styles.footInfo}>
         <p>©codeit - 2026</p>
         <p>
-          <Link href="">Privacy Policy</Link>
-          <Link href="">FAQ</Link>
+          <Link href="#">Privacy Policy</Link>
+          <Link href="#">FAQ</Link>
         </p>
         <p>
           <Link
-            href="https://www.fLinkcebook.com/"
+            href="https://www.facebook.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image src={IconFB} alt="페이스북" width={20} />
           </Link>
           <Link
-            href="https://x.com/?lLinkng=ko"
+            href="https://x.com/?lang=ko"
             target="_blank"
             rel="noopener noreferrer"
           >
