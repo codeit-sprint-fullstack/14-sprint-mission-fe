@@ -4,6 +4,7 @@ import styles from "./Items.module.css";
 import AllProductList from "@/app/components/AllProductList";
 import BestProductList from "@/app/components/BestProductList";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Items() {
   return (
@@ -15,15 +16,19 @@ export default function Items() {
       <section className={styles.productsList}>
         <div className={styles.sectionTitleHeader}>
           <h2 className={styles.sectionTitle}>판매 중인 상품</h2>
-          <Link href="/registration" className="btStyle">
+          <Link href="/items/new" className="btStyle">
             상품 등록하기
           </Link>
           <div className={styles.productsSearch}>
-            <SearchBar />
-            <FilterList />
+            <Suspense fallback={<p>불러오는 중...</p>}>
+              <SearchBar />
+              <FilterList />
+            </Suspense>
           </div>
         </div>
-        <AllProductList />
+        <Suspense fallback={<p>불러오는 중...</p>}>
+          <AllProductList />
+        </Suspense>
       </section>
     </>
   );
