@@ -1,0 +1,40 @@
+/* 모든 페이지의 위쪽에 표시되는 공통 Header. */
+.header {
+  width: 100%;
+
+  /* 공통 팔레트의 회색 테두리 색상을 사용 */
+  border-bottom: 1px solid var(--Secondary-200);
+
+  /* 공통 팔레트의 흰색 배경을 사용 */
+  background-color: var(--White-color);
+}
+
+/* Header 안의 콘텐츠 너비와 정렬을 담당 */
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(calc(100% - 48px), 1200px);
+  height: 70px;
+  margin: 0 auto;
+}
+
+/* 메인 페이지로 이동하는 판다마켓 로고 영역 */
+.logo {
+  color: var(--brand-blue);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* 자유게시판으로 이동하는 메뉴 링크 */
+.navigationLink {
+  color: var(--Secondary-600);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* 키보드 또는 마우스로 링크를 가리켰을 때 강조 */
+.navigationLink:hover,
+.navigationLink:focus-visible {
+  color: var(--brand-blue);
+}

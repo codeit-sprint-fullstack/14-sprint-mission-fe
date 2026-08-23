@@ -1,0 +1,121 @@
+/* 게시글 등록 페이지의 전체 너비와 여백 관리 */
+.page {
+  width: min(calc(100% - 48px), 1200px);
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+/* 게시글 등록 폼 */
+.form {
+  width: 100%;
+}
+
+/* 페이지 제목과 등록 버튼 배치 */
+.formHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* 게시글 등록 페이지 제목 */
+.title {
+  margin: 0;
+  color: var(--Secondary-900);
+  font-size: 28px;
+  line-height: 1.4;
+}
+
+/* 제목과 내용 입력 영역 */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 입력 영역 사이 간격 적용 */
+.field + .field {
+  margin-top: 32px;
+}
+
+/* 제목과 내용 입력란의 라벨 */
+.label {
+  color: var(--Secondary-900);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* 필수 입력 표시 */
+.required {
+  color: var(--error-red);
+}
+
+/* 제목 입력란 */
+.input {
+  width: 100%;
+  min-height: 56px;
+  padding: 16px 24px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-900);
+  font: inherit;
+  box-sizing: border-box;
+}
+
+/* 내용 입력란 */
+.textarea {
+  width: 100%;
+  min-height: 280px;
+  padding: 16px 24px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-900);
+  font: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* 입력 안내 문구 */
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--Secondary-400);
+}
+
+/* 입력란 선택 상태 */
+.input:focus,
+.textarea:focus {
+  border-color: var(--brand-blue);
+  background-color: var(--White-color);
+  outline: none;
+}
+
+/* 게시글 등록 오류 메시지 */
+.errorMessage {
+  margin: 16px 0 0;
+  color: var(--error-red);
+  font-size: 14px;
+}
+
+/* 게시글 등록 버튼 */
+.submitButton {
+  min-width: 104px;
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--brand-blue);
+  color: var(--White-color);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 등록할 수 없는 버튼 상태 */
+.submitButton:disabled {
+  background-color: var(--Secondary-400);
+  cursor: not-allowed;
+}

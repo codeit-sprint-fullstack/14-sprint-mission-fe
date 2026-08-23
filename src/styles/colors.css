@@ -1,0 +1,24 @@
+:root {
+  --Secondary-900: #111827;
+  --Secondary-800: #1f2937;
+  --Secondary-700: #374151;
+  --Secondary-600: #4b5563;
+  --Secondary-400: #9ca3af;
+  --Secondary-200: #e5e7eb;
+
+  --WhiteGray-color: #fcfcfc;
+  --White-color: #ffffff;
+
+  --Cool-Gray-50: #f9fafb;
+  --Cool-Gray-100: #f3f4f6;
+  --Cool-Gray-200: #e5e7eb;
+  --Cool-Gray-600: #4b5563;
+
+  --brand-blue: #3692ff;
+  --Light-blue: #e6f2ff;
+  --Powder-Blue: #cfe5ff;
+
+  --error-red: #f74747;
+  --modal-background: #00000099;
+  --border-line: #dfdfdf;
+}
