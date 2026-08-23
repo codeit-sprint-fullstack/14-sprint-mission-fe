@@ -1,0 +1,83 @@
+.bestBoardWrap {
+  display: flex;
+}
+
+.bestBoardCont {
+  position: relative;
+  width: calc((100% - 48px)/3);
+  margin-right: 24px;
+  padding: 64px 24px 24px 24px;
+  background-color: #F9FAFB;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.bestBoardCont:last-child {
+  margin-right: 0;
+}
+
+.bestBoardCont .bestMark {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  max-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  background-color: #3692FF;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 0 0 16px 16px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.bestBoardCont .bestTop { 
+  display: flex;
+  align-items: center;
+}
+.bestBoardCont .bestText { 
+  width: calc(100% - 87px);
+  font-size: 20px; 
+  font-weight: 600;
+  line-height: 1.2;
+  display: -webkit-box;
+  overflow: hidden;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical
+ }
+.bestBoardCont .bestImgWrap { 
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin-left: 15px;
+  background-color: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 5px;
+  box-sizing:border-box ;
+  overflow: hidden;
+ }
+ .bestBoardCont .bestImgWrap img { 
+  width: 100%;
+  object-fit: cover;
+  object-position: center;;
+  }
+
+.bestBottom { 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px
+}
+.bestBottom .favWrap {
+  display: flex; 
+  align-items: center;
+ }
+
+.bestBottom .favWrap img { 
+  width: 18px;
+  margin-right: 5px;
+  
+}

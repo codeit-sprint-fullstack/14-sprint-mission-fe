@@ -1,0 +1,27 @@
+.subWrapper { 
+  max-width:1200px ;
+  padding: 94px 24px 24px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.subTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.subContents {
+  margin-bottom: 40px;  
+}
+
+.btn { 
+  background-color: #3692ff;
+  color: #fff; 
+  font-size: 16px;
+  padding: 8px 23px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
