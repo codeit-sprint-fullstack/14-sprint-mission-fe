@@ -1,0 +1,108 @@
+/* ==================================================== */
+/* 푸터 전체 영역 */
+/* ==================================================== */
+.footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 160px;
+  padding: 32px 200px 0;
+
+  background: var(--Secondary-900);
+  box-sizing: border-box;
+}
+
+/* ==================================================== */
+/* 저작권 문구 */
+/* ==================================================== */
+.copyright {
+  margin: 0;
+
+  color: var(--Secondary-400);
+  text-align: center;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* ==================================================== */
+/* 정책 링크 그룹 */
+/* ==================================================== */
+.linkGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+/* ==================================================== */
+/* 정책 링크 */
+/* ==================================================== */
+.link {
+  color: var(--Secondary-200);
+  text-align: center;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+/* ==================================================== */
+/* SNS 링크 그룹 */
+/* ==================================================== */
+.sns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+
+  gap: 12px;
+}
+
+/* ==================================================== */
+/* SNS 아이콘 */
+/* ==================================================== */
+.icon {
+  width: 20px;
+  height: 20px;
+
+  flex-shrink: 0;
+}
+
+/* ==================================================== */
+/* 태블릿 */
+/* ==================================================== */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .footer {
+    padding: 32px 24px 0;
+  }
+}
+
+/* ==================================================== */
+/* 모바일 */
+/* ==================================================== */
+@media (max-width: 743px) {
+  .footer {
+    position: relative;
+
+    height: 160px;
+    padding: 32px 16px;
+  }
+
+  .copyright {
+    position: absolute;
+    bottom: 32px;
+    left: 16px;
+  }
+
+  .linkGroup {
+    gap: 16px;
+  }
+}

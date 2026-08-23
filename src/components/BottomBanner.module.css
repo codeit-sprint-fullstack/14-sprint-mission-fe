@@ -1,0 +1,88 @@
+/* ==================================================== */
+/* 하단 판다 배너 영역 */
+/* ==================================================== */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 540px;
+
+  background: var(--Powder-Blue);
+}
+
+/* ==================================================== */
+/* 하단 배너 제목 */
+/* ==================================================== */
+.title {
+  margin: 0;
+
+  color: var(--Secondary-700);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+/* ==================================================== */
+/* 판다 말풍선 이미지 */
+/* ==================================================== */
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 746px;
+  height: 397px;
+  padding: 143px 0 0;
+
+  box-sizing: content-box;
+}
+
+/* ==================================================== */
+/* 태블릿 */
+/* ==================================================== */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .banner {
+    height: auto;
+    padding: 48px 24px 0;
+  }
+
+  .image {
+    width: 344px;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ==================================================== */
+/* 모바일 */
+/* ==================================================== */
+@media (max-width: 743px) {
+  .banner {
+    flex-direction: column;
+
+    height: auto;
+    padding: 48px 16px 0;
+    gap: 24px;
+
+    box-sizing: border-box;
+  }
+
+  .title {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .image {
+    width: calc(100vw - 32px);
+    max-width: 100%;
+    height: auto;
+
+    padding: 0;
+  }
+}

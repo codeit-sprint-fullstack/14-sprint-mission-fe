@@ -1,0 +1,290 @@
+/* ====================================================================== */
+/* 회원가입 페이지 전체 */
+/* ====================================================================== */
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 16px 80px;
+
+  background-color: var(--White-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 640px;
+}
+
+/* ====================================================================== */
+/* 로고 */
+/* ====================================================================== */
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 40px;
+
+  text-decoration: none;
+}
+
+.logoImage {
+  width: 104px;
+  height: 104px;
+
+  border-radius: 29px;
+}
+
+.logoText {
+  margin: 0 0 0 22px;
+
+  color: var(--brand-blue);
+
+  font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
+  font-size: 66px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ====================================================================== */
+/* 회원가입 폼 */
+/* ====================================================================== */
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.label {
+  margin-bottom: 16px;
+
+  color: var(--Secondary-800);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.input {
+  width: 100%;
+  height: 58px;
+  padding: 16px 24px;
+
+  border: 1px solid var(--Cool-Gray-100);
+  border-radius: 12px;
+  outline: none;
+
+  color: var(--Secondary-800);
+  background-color: var(--Cool-Gray-100);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.input::placeholder {
+  color: var(--Secondary-400);
+}
+
+.input:focus {
+  border-color: var(--brand-blue);
+}
+
+/* ====================================================================== */
+/* 비밀번호 */
+/* ====================================================================== */
+
+.passwordBox {
+  position: relative;
+
+  width: 100%;
+}
+
+.passwordInput {
+  padding-right: 60px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  border: none;
+  background: none;
+
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.passwordIcon {
+  display: block;
+
+  width: 24px;
+  height: 24px;
+}
+
+/* ====================================================================== */
+/* 회원가입 버튼 */
+/* ====================================================================== */
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 56px;
+  margin-bottom: 24px;
+
+  border: none;
+  border-radius: 40px;
+
+  color: var(--Cool-Gray-100);
+  background-color: var(--Secondary-400);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+
+  cursor: not-allowed;
+}
+
+.submitButtonActive {
+  background-color: var(--brand-blue);
+  cursor: pointer;
+}
+
+/* ====================================================================== */
+/* 로그인 이동 */
+/* ====================================================================== */
+
+.signinGuide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  gap: 4px;
+}
+
+.signinText {
+  margin: 0;
+
+  color: var(--Secondary-800);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.signinLink {
+  color: var(--brand-blue);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: underline;
+}
+
+/* ====================================================================== */
+/* 에러 메시지 */
+/* ====================================================================== */
+.errorMessage {
+  margin: 8px 0 0;
+
+  color: var(--error-red);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/* ====================================================================== */
+/* 회원가입 실패 모달 */
+/* ====================================================================== */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--modal-background);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 540px;
+  padding: 40px;
+
+  border-radius: 12px;
+
+  background-color: var(--White-color);
+}
+
+.modalMessage {
+  margin: 0 0 32px;
+
+  color: var(--Secondary-800);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: center;
+}
+
+.modalButton {
+  width: 100%;
+  height: 56px;
+
+  border: none;
+  border-radius: 40px;
+
+  color: var(--White-color);
+  background-color: var(--brand-blue);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  cursor: pointer;
+}

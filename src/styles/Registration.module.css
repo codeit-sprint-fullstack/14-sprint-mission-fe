@@ -1,0 +1,237 @@
+.registrationPage {
+  min-height: calc(100vh - 180px);
+  padding-top: 32px;
+
+  background-color: var(--White-color);
+}
+
+.registrationForm {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+
+  box-sizing: border-box;
+}
+
+.registrationFormHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 32px;
+}
+
+.registrationTitle {
+  margin: 0;
+
+  color: var(--Secondary-900);
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.registrationSubmitButton {
+  min-width: 86px;
+  height: 44px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--brand-blue);
+  color: var(--White-color);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.registrationSubmitButton:disabled {
+  background-color: var(--Secondary-400);
+
+  cursor: not-allowed;
+}
+
+.registrationField {
+  margin-bottom: 32px;
+}
+
+.registrationLabel {
+  display: block;
+
+  margin-bottom: 16px;
+
+  color: var(--Secondary-800);
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.registrationInput,
+.registrationTextarea {
+  width: 100%;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-900);
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+  outline: none;
+}
+
+.registrationInput {
+  height: 56px;
+  padding: 0 24px;
+}
+
+.registrationTextarea {
+  min-height: 180px;
+  padding: 24px;
+
+  resize: none;
+}
+
+.registrationInput::placeholder,
+.registrationTextarea::placeholder {
+  color: var(--Secondary-400);
+}
+
+.registrationInputError {
+  border: 1px solid var(--error-red);
+}
+
+.registrationErrorMessage {
+  margin-top: 8px;
+
+  color: var(--error-red);
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.registrationTagList {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.registrationTag {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 32px;
+  padding: 0 12px;
+
+  border-radius: 999px;
+
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-700);
+
+  font-size: 14px;
+}
+
+.registrationTagDeleteButton {
+  margin-left: 6px;
+  padding: 0;
+
+  border: none;
+  background: none;
+  color: var(--Secondary-600);
+
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+/* 태블릿 */
+@media (max-width: 1199px) {
+  .registrationPage {
+    padding: 32px 24px 96px;
+  }
+
+  .registrationForm {
+    max-width: 696px;
+  }
+
+  .registrationFormHeader {
+    margin-bottom: 28px;
+  }
+
+  .registrationTitle {
+    font-size: 18px;
+  }
+
+  .registrationSubmitButton {
+    min-width: 80px;
+    height: 44px;
+  }
+
+  .registrationField {
+    margin-bottom: 28px;
+  }
+
+  .registrationTextarea {
+    min-height: 220px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 743px) {
+  .registrationPage {
+    padding: 28px 16px 80px;
+  }
+
+  .registrationForm {
+    max-width: 100%;
+  }
+
+  .registrationFormHeader {
+    margin-bottom: 24px;
+  }
+
+  .registrationTitle {
+    font-size: 16px;
+  }
+
+  .registrationSubmitButton {
+    min-width: 74px;
+    height: 42px;
+
+    font-size: 14px;
+  }
+
+  .registrationField {
+    margin-bottom: 28px;
+  }
+
+  .registrationLabel {
+    margin-bottom: 12px;
+
+    font-size: 14px;
+  }
+
+  .registrationInput {
+    height: 56px;
+    padding: 0 20px;
+  }
+
+  .registrationTextarea {
+    min-height: 180px;
+    padding: 20px;
+  }
+
+  .registrationTag {
+    min-height: 30px;
+
+    font-size: 13px;
+  }
+}
