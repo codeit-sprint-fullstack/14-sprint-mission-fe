@@ -88,6 +88,11 @@ function ItemDetailClient({ itemId }) {
     item?.ownerId != null &&
     String(user.id) === String(item.ownerId)
 
+  // 상품 상세 응답에는 판매자 이미지가 없어 본인 상품일 때만 /users/me의 이미지를 사용할 수 있음
+  const sellerProfileImageSrc = getProfileImageSrc(
+    isOwner ? user?.image : undefined,
+  )
+
   const commentsQueryOptions = getProductCommentsQueryOptions({
     itemId,
     limit: COMMENT_PAGE_SIZE,
@@ -457,7 +462,7 @@ function ItemDetailClient({ itemId }) {
           <div className={styles.itemDetailSellerArea}>
             <Image
               className={styles.itemDetailSellerProfile}
-              src={getProfileImageSrc()}
+              src={sellerProfileImageSrc}
               alt="판매자 프로필"
               width={40}
               height={40}
