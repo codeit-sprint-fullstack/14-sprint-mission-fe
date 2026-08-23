@@ -14,6 +14,8 @@ import ProductCommentList from "./ProductCommentList";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
 import { useEffect } from "react";
+import { formatDate } from "@/app/utils/formatDate";
+import { formatPrice } from "@/app/utils/formatPrice";
 
 export default function ItemDetail({ id }) {
   const queryClient = useQueryClient();
@@ -90,7 +92,7 @@ export default function ItemDetail({ id }) {
               />
             )}
           </div>
-          <h2 className={styles.price}>{price.toLocaleString()}원</h2>
+          <h2 className={styles.price}>{formatPrice(price)}원</h2>
           <div className={styles.section}>
             <h3 className={styles.sectionTitle}>상품 소개</h3>
             <p className={styles.description}>{description}</p>
@@ -117,7 +119,7 @@ export default function ItemDetail({ id }) {
               <span className={styles.ownerInfo}>
                 <span className={styles.nickname}>{ownerNickname}</span>
                 <time className={styles.date} dateTime={createdAt}>
-                  {createdAt.slice(0, 10).replaceAll("-", ". ")}
+                  {formatDate(createdAt)}
                 </time>
               </span>
             </span>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import defaultImg from "@/public/default_image.png";
 import badgeIc from "@/public/icon_badge.png";
+import { formatDate } from "@/app/utils/formatDate";
 
 export default async function BestPosts({ className }) {
   const res = await fetch(
@@ -38,7 +39,7 @@ export default async function BestPosts({ className }) {
                   <span>말랑판다</span>
                   <span>♡ 9999+</span>
                   <time dateTime={post.createdAt}>
-                    {post.createdAt.slice(0, 10).replaceAll("-", ". ")}
+                    {formatDate(post.createdAt)}
                   </time>
                 </footer>
               </article>

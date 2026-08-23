@@ -14,7 +14,7 @@ export default function ProductCommentForm({
   const [value, setValue] = useState(comment?.content ?? "");
   const queryClient = useQueryClient();
 
-  const { mutate, isPending, isError } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (content) =>
       isEditMode
         ? updateComment({ commentId: comment.id, content })
@@ -55,19 +55,11 @@ export default function ProductCommentForm({
         </div>
         <div className={styles.btnsArea}>
           {onClose && (
-            <button
-              className="btStyle inActive"
-              type="button"
-              onClick={() => onClose()}
-            >
+            <button className="btStyle" type="button" onClick={() => onClose()}>
               취소
             </button>
           )}
-          <button
-            type="submit"
-            className={`btStyle ${!canSubmit && `inActive`}`}
-            disabled={!canSubmit}
-          >
+          <button type="submit" className="btStyle" disabled={!canSubmit}>
             등록
           </button>
         </div>

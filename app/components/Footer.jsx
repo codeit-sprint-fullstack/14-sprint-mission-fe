@@ -38,7 +38,7 @@ function Footer() {
             <Image src={IconYT} alt="유튜브" width={20} />
           </Link>
           <Link
-            href="https://www.instLinkgrLinkm.com/"
+            href="https://www.instagram.com/"
             target="_blank"
             rel="noopener noreferrer"
           >

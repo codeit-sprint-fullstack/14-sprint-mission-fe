@@ -1,6 +1,7 @@
 import styles from "./Item.module.css";
 import Thumbnail from "./Thumbnail";
 import Link from "next/link";
+import { formatPrice } from "@/app/utils/formatPrice";
 
 export default function Item({ item }) {
   const { name, price, images, favoriteCount } = item;
@@ -12,7 +13,7 @@ export default function Item({ item }) {
         </div>
         <div className={styles.description}>
           <h3>{name}</h3>
-          <p className={styles.price}>{price}원</p>
+          <p className={styles.price}>{formatPrice(price)}원</p>
           <p className={styles.favorite}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path

@@ -6,8 +6,9 @@ import defaultImg from "@/public/default_image.png";
 import profileIc from "@/public/icon_profile.png";
 import styles from "./Posts.module.css";
 import Image from "next/image";
+import { formatDate } from "@/app/utils/formatDate";
 
-export default async function postListPage({ searchParams }) {
+export default async function PostListPage({ searchParams }) {
   const { q, orderBy } = await searchParams;
   const params = new URLSearchParams();
   if (q) params.set("keyword", q);
@@ -62,7 +63,7 @@ export default async function postListPage({ searchParams }) {
                     말랑판다
                   </span>
                   <time dateTime={post.createdAt}>
-                    {post.createdAt.slice(0, 10).replaceAll("-", ". ")}
+                    {formatDate(post.createdAt)}
                   </time>
                   <span>♡ 9999+</span>
                 </footer>
