@@ -72,7 +72,7 @@ Mobile: 375px 이상 ~ 743px 이하
 
 # 유저 기능
 
-- [] 리퀘스트 헤더에 인증 토큰을 첨부할 때 axios interceptors를 활용해 주세요. (axios를 사용하지 않는다면 이와 유사한 기능을 활용해 주세요.)
+- [x] 리퀘스트 헤더에 인증 토큰을 첨부할 때 axios interceptors를 활용해 주세요. (axios를 사용하지 않는다면 이와 유사한 기능을 활용해 주세요.)
 
 # React-Query로 마이그레이션
 

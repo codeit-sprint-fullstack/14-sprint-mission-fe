@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Footer from "@/components/Footer.jsx";
 import Gnb from "@/components/gnb.jsx";
 import style from "@/styles/items/[id]/edit.module.css";
 import api from "@/utils/api";
-import { uploadImage } from "@/utils/imageupload"; // 이미지 업로드 유틸
+import { uploadImage } from "@/utils/imageupload";
+import { toast } from "react-toastify";
 
 export default function EditItem() {
   const router = useRouter();
   const { id } = router.query;
+  const queryClient = useQueryClient();
 
   const [file, setFile] = useState(null);
   const [name, setName] = useState("");
@@ -17,57 +20,67 @@ export default function EditItem() {
   const [tags, setTags] = useState([]);
   const [tagsFirst, setTagsFirst] = useState(true);
   const [inputValue, setInputValue] = useState("");
+  const [existingImage, setExistingImage] = useState(null);
 
-  const isDisabled = name.trim() === "" || description.trim() === "" || price.trim() === "" || !file || tags.length === 0;
+  // 상품 조회
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["item", id],
+    queryFn: async () => {
+      const res = await api.get(`/items/${id}`);
+      return res.data;
+    },
+    enabled: router.isReady && !!id,
+    onSuccess: (data) => {
+      setName(data.name);
+      setDescription(data.description);
+      setPrice(String(data.price));
+      console.log("서버 응답 tags:", data.tags);
+      setTags(data.tags || []);
+      setExistingImage(data.images?.[0] || null);
+    },
+  });
 
-
-  useEffect(() => {
-    if (id) {
-      api.get(`/items/${id}`)
-        .then((res) => {
-          setName(res.data.name);
-          setDescription(res.data.description);
-          setPrice(String(res.data.price)); // 숫자를 문자열로 변환
-          setTags(res.data.tags || []);
-        })
-        .catch((err) => {
-          console.error("상품 불러오기 에러:", err);
-          alert("상품을 불러오지 못했습니다.");
-        });
-    }
-  }, [id]);
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
+  // 상품 수정 Mutation
+  const mutation = useMutation({
+    mutationFn: async () => {
       let uploadUrl = null;
-
-      // 1. 이미지 업로드 (파일 선택 시)
       if (file) {
         uploadUrl = await uploadImage(file);
       }
+      const images = uploadUrl
+        ? [uploadUrl]
+        : existingImage
+          ? [existingImage]
+          : [];
 
-      // 2. 상품 수정 (PATCH)
-      const res = await api.patch(`/items/${id}`, {
+      return api.patch(`/items/${id}`, {
         name,
         description,
-        price: Number(price), // 서버에 보낼 때 숫자로 변환
+        price: Number(price),
         tags,
-        images: uploadUrl ? [uploadUrl] : undefined,
+        images,
       });
+    },
+    onSuccess: () => {
+      toast.success("상품이 수정되었습니다!");
+      queryClient.invalidateQueries(["item", id]); // 캐시 갱신
+      router.replace(`/items/${id}`);
+    },
+    onError: (err) => {
+      console.error("수정 에러:", err);
+      toast.error("수정 중 문제가 발생했습니다.");
+    },
+  });
 
-      if (res.status === 200) {
-        alert("상품이 수정되었습니다!");
-        router.push(`/items/${id}`);
-      } else {
-        alert("수정 실패: " + (res.data?.error || "알 수 없는 오류"));
-      }
-    } catch (error) {
-      console.error("수정 에러:", error);
-      alert("수정 중 문제가 발생했습니다.");
-    }
+  const isDisabled =
+    name.trim() === "" ||
+    description.trim() === "" ||
+    String(price).trim() === "" ||
+    tags.length === 0;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate();
   };
 
   const handleKeyDown = (e) => {
@@ -88,6 +101,24 @@ export default function EditItem() {
   const removeTag = (removeIndex) => {
     setTags(tags.filter((_, index) => index !== removeIndex));
   };
+
+
+  useEffect(() => {
+    if (data) {
+      setName(data.name || "");
+      setDescription(data.description || "");
+      setPrice(String(data.price || ""));
+      setTags(data.tags || []);
+      setExistingImage(data.images?.[0] || null);
+    }
+  }, [data]);
+
+
+
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (error) return <div>상품을 불러오지 못했습니다.</div>;
+
 
   return (
     <>
@@ -148,7 +179,7 @@ export default function EditItem() {
                   onFocus={() => setTagsFirst(false)}
                   onBlur={() => setTagsFirst(true)}
                 />
-                {tags.length > 0 && (
+                {Array.isArray(tags) && tags.length > 0 && (
                   <div className={style.tagList}>
                     {tags.map((tag, index) => (
                       <span key={index} className={style.tag}>

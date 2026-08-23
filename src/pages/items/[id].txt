@@ -5,11 +5,6 @@ import style from "@/styles/items/[id].module.css"
 import api from "@/utils/api";
 import { toast } from "react-toastify";
 import Gnb from "@/components/gnb";
-import Link from "next/link";
-import Footer from "@/components/Footer";
-import { formatDate } from "@/utils/time";
-import Commentcard from "@/components/commentcard";
-import WarningModal from "@/components/warningmodal";
 
 export default function ItemDetail() {
     const router = useRouter();
@@ -19,16 +14,6 @@ export default function ItemDetail() {
     const [comment, setComment] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [like, setLike] = useState(false);
-
-    const handleDeleteClick = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
 
     // 상품 상세 조회
     const {
@@ -59,6 +44,7 @@ export default function ItemDetail() {
     });
 
     const comments = commentsData?.list || [];
+    const totalPages = Math.ceil(comments.length / 10);
     const currentComments = comments.slice((currentPage - 1) * 10, currentPage * 10);
 
     // 댓글 등록 Mutation
@@ -79,44 +65,20 @@ export default function ItemDetail() {
     const toggleLike = useMutation({
         mutationFn: async (liked) => {
             if (!liked) {
-                // 좋아요 등록
                 const res = await api.post(`/items/${id}/favorite`);
                 return res.data;
             } else {
-                // 좋아요 취소
                 const res = await api.delete(`/items/${id}/favorite`);
                 return res.data;
             }
         },
-        onMutate: async (liked) => {
-            // Optimistic Update: 클릭 즉시 UI 반영
-            await queryClient.cancelQueries(["item", id]);
-            const prevItem = queryClient.getQueryData(["item", id]);
-
-            queryClient.setQueryData(["item", id], (old) => ({
-                ...old,
-                isFavorite: !liked,
-                favoriteCount: liked ? old.favoriteCount - 1 : old.favoriteCount + 1,
-            }));
-
-            return { prevItem };
-        },
-        onError: (err, variables, context) => {
-            // 실패 시 롤백
-            queryClient.setQueryData(["item", id], context.prevItem);
-            toast.error("백엔드 curl에 auth 인증 과정이 없어 favorite 갱신이 불가합니다.");
-        },
         onSuccess: (updated) => {
             queryClient.setQueryData(["item", id], (prev) => ({
                 ...prev,
-                isFavorite: updated.isFavorite,
-                favoriteCount: updated.favoriteCount,
+                favoriteCount: updated.favoriteCount ?? prev.favoriteCount,
             }));
         },
-        onSettled: () => {
-            // 서버와 최종 동기화
-            queryClient.invalidateQueries(["item", id]);
-        },
+        onError: () => toast("좋아요 토글 중 오류 발생"),
     });
 
     // 삭제 Mutation
@@ -131,39 +93,6 @@ export default function ItemDetail() {
         },
         onError: () => toast("삭제 중 오류 발생"),
     });
-
-    // 게시글 수정
-    const handleEdit = async () => {
-        try {
-            const res = await api.patch(`/items/${id}`, {});
-            if (res.status === 403) {
-                toast("본인이 작성한 글만 수정할 수 있습니다.");
-            } else if (res.status === 200) {
-                router.push(`/items/${id}/edit`);
-            } else {
-                toast("수정 권한 확인 중 오류");
-            }
-        } catch (error) {
-            console.error("수정 권한 확인 에러:", error);
-            toast.error("수정 권한 확인 중 문제가 발생했습니다.");
-        }
-    };
-
-    // 게시글 삭제
-    const handlePermit = async () => {
-        try {
-            await api.delete(`/items/${id}`); // 실제 삭제 API 호출
-            toast("상품이 삭제되었습니다.");
-            setIsModalOpen(false);
-            router.push("/items"); // 목록 페이지로 이동
-        } catch (error) {
-            console.error("삭제 에러:", error);
-            toast.error("상품 삭제 중 문제가 발생했습니다.");
-            setIsModalOpen(false);
-        }
-    };
-
-
 
     if (itemLoading || commentsLoading) return <p>로딩중...</p>;
     if (itemError || commentsError) return <p>에러 발생</p>;
@@ -185,13 +114,14 @@ export default function ItemDetail() {
                                     <img src="/assets/default.jpg" alt="기본 이미지" />
                                 )}
                             </div>
+
                             <div className={style.info}>
                                 <div className={style.info_head}>
                                     <div className={style.head_top}>
                                         <div className={style.withkebob}>
                                             <div className={style.name_price}>
-                                                <h1>{item?.name}</h1>
-                                                <p>{item?.price}원</p>
+                                                <h1>{item.name}</h1>
+                                                <p>{item.price}원</p>
                                             </div>
                                             <div className={style.kebob_dropdown}>
                                                 <img
@@ -222,30 +152,27 @@ export default function ItemDetail() {
                                     <div className={style.head_body}>
                                         <div className={style.discripton}>
                                             <span>상품 소개</span>
-                                            <p>{item?.description}</p>
+                                            <p>{item.description}</p>
                                         </div>
                                         <div className={style.taginfo}>
                                             <span>상품 태그</span>
                                             <div className={style.taglist}>
-                                                {Array.isArray(item?.tags) && item.tags.length > 0 ? (
-                                                    item.tags.map((tag, idx) => (
-                                                        <div key={idx} className={style.tags}>
-                                                            <span>#{tag}</span>
-                                                        </div>
-                                                    ))
-                                                ) : (
-                                                    <span>태그 없음</span>
-                                                )}
+                                                {item.tags.map((tag, idx) => (
+                                                    <div key={idx} className={style.tags}>
+                                                        <span>#{tag}</span>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div className={style.info_bottom}>
                                     <div className={style.userprofile}>
                                         <img src="/assets/ic_profile.svg" alt="profile" />
                                         <div className={style.user_createat}>
-                                            <span>{item?.ownerNickname}</span>
-                                            <p>{item?.createdAt ? formatDate(item.createdAt) : ""}</p>
+                                            <span>{item.ownerNickname}</span>
+                                            <p>{formatDate(item.createdAt)}</p>
                                         </div>
                                     </div>
                                     <div style={style.likearea}>
@@ -253,29 +180,23 @@ export default function ItemDetail() {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="1" height="34" viewBox="0 0 1 34" fill="none">
                                                 <path d="M0.5 0V34" stroke="#E5E7EB" />
                                             </svg>
-                                            <button
-                                                className={style.likebutton}
-                                                onClick={() => toggleLike.mutate(item.isFavorite)}
+                                            <button className={style.likebutton}
+                                                onClick={handleLike}
                                             >
                                                 <div className={style.heart_likes}>
-                                                    <img
-                                                        src={item?.isFavorite ? "/assets/ic_heart_on.svg" : "/assets/ic_heart.svg"}
-                                                        alt="heart"
-                                                    />
-                                                    <span>{item?.favoriteCount ?? 0}</span>
+                                                    <img src={liked ? "/assets/ic_heart_on.svg" : "/assets/ic_heart.svg"} alt="heart" />
+                                                    <span>{item.favoriteCount}</span>
                                                 </div>
                                             </button>
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="1" viewBox="0 0 100 1" preserveAspectRatio="none">
                             <path d="M0 0.5H100" stroke="#E5E7EB" />
                         </svg>
+
 
                         <div className={style.comment_wrap}>
                             <div className={style.comment_input_wrap}>
@@ -292,14 +213,13 @@ export default function ItemDetail() {
                                 <button
                                     className={`${style.registerButton} ${comment !== "" ? style.active : ""}`}
                                     disabled={comment === ""}
-                                    onClick={() => registerComment.mutate()}
+                                    onClick={handleRegister}
                                 >
                                     <span>등록</span>
                                 </button>
 
                             </div>
-
-                            {Array.isArray(comments) && comments.length > 0 ? (
+                            {comments.length > 0 ? (
                                 <div className={style.comment_list_wrap}>
                                     {currentComments.map((c) => (
                                         <Commentcard
@@ -311,30 +231,27 @@ export default function ItemDetail() {
                                             date={c.createdAt}
                                             parentId={id}
                                             onUpdated={(commentId, newContent) => {
-                                                queryClient.setQueryData(["comments", id], (old) => {
-                                                    if (!old) return old;
-                                                    return {
-                                                        ...old,
-                                                        list: old.list.map((comment) =>
-                                                            comment.id === commentId ? { ...comment, content: newContent } : comment
-                                                        ),
-                                                    };
-                                                });
+                                                setComments((prev) =>
+                                                    prev.map((comment) =>
+                                                        comment.id === commentId ? { ...comment, content: newContent } : comment
+                                                    )
+                                                );
                                             }}
-
-                                            onDeleted={() => queryClient.invalidateQueries(["comments", id])}
+                                            onDeleted={(commentId) => {
+                                                fetchComments();
+                                            }}
                                         />
                                     ))}
+
                                 </div>
                             ) : (
                                 <div className={style.empty_comment}>
-                                    <img src="/assets/img_inquiry_empty.svg" alt="empty" />
+                                    <img src="/assets/img_inquiry_empty.svg" alt='empty' />
                                     <span>아직 문의가 없어요</span>
                                 </div>
                             )}
                         </div>
                     </div>
-
                     <Link href="/items" className={style.link}>
                         <button id={style.framebutton}>
                             <div className={style.backlist}>

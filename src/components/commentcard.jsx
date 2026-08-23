@@ -12,41 +12,49 @@ function Commentcard({ id, title, author, date, type, parentId, onUpdated, onDel
   // 삭제
   async function handleDelete() {
     try {
-      const res = await api.delete(`/${type}/${parentId}/comment`, {
+      await api.delete(`/${type}/${parentId}/comment`, {
         params: { commentId: id },
       });
-      alert("댓글이 삭제되었습니다.");
-      if (onDeleted) onDeleted(id);
+      toast("댓글이 삭제되었습니다.");
+      if (onDeleted) onDeleted(id); // 부모 캐시 갱신
     } catch (err) {
       if (err.response?.status === 403) {
         toast.error("권한이 없습니다. 본인 댓글만 삭제할 수 있습니다.");
+      } else if (err.response?.status === 400) {
+        toast.error("잘못된 요청입니다.");
+      } else if (err.response?.status === 500) {
+        toast.error("서버 오류가 발생했습니다.");
       } else {
-        toast.error("댓글 삭제 중 오류가 발생했습니다.");
+        toast.error("댓글 수정 중 알 수 없는 오류가 발생했습니다.");
       }
-      console.error("댓글 삭제 에러:", err);
     }
   }
 
   // 수정
   async function handleSave() {
     try {
-      const res = await api.patch(`/${type}/${parentId}/comment`,
+      await api.patch(
+        `/${type}/${parentId}/comment`,
         { content: editContent },
         { params: { commentId: id } }
       );
-      alert("댓글이 수정되었습니다.");
+      toast("댓글이 수정되었습니다.");
       setIsEditing(false);
       setIsDropdownOpen(false);
-      if (onUpdated) onUpdated(id, editContent);
+      if (onUpdated) onUpdated(id, editContent); // 부모 캐시 갱신
     } catch (err) {
       if (err.response?.status === 403) {
         toast.error("권한이 없습니다. 본인 댓글만 수정할 수 있습니다.");
+      } else if (err.response?.status === 400) {
+        toast.error("잘못된 요청입니다.");
+      } else if (err.response?.status === 500) {
+        toast.error("서버 오류가 발생했습니다.");
       } else {
-        toast.error("댓글 수정 중 오류가 발생했습니다.");
+        toast.error("댓글 수정 중 알 수 없는 오류가 발생했습니다.");
       }
-      console.error("댓글 삭제 에러:", err);
     }
   }
+
 
   return (
     <div className={style.commentcard_wrap}>

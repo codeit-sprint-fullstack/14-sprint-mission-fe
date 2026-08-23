@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const api = axios.create({
   baseURL: "/api", // 내부 API 라우트만 바라보도록 설정
@@ -29,19 +30,29 @@ api.interceptors.response.use(
         if (refreshRes.status === 200) {
           const { accessToken } = refreshRes.data;
           localStorage.setItem("accessToken", accessToken);
-          console.log("🔄 Refresh 성공! 새 accessToken:", accessToken);
-
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           return api(originalRequest); // 원래 요청 재시도
         }
       } catch (err) {
         localStorage.clear();
+        toast.error("세션이 만료되었습니다. 다시 로그인해주세요.");
         window.location.href = "/";
-        console.log(err);
         return Promise.reject(err);
       }
     }
-
+    switch (error.response?.status) {
+      case 403:
+        toast.error(`${error.response?.status} ` + "권한이 없습니다.");
+        break;
+      case 404:
+        toast.error(`${error.response?.status} ` + "요청한 리소스를 찾을 수 없습니다.");
+        break;
+      case 500:
+        toast.error(`${error.response?.status} ` + "서버 오류가 발생했습니다.");
+        break;
+      default:
+        toast.error(`${error.response?.status} ` + "알 수 없는 오류가 발생했습니다.");
+    }
     return Promise.reject(error);
   }
 );
