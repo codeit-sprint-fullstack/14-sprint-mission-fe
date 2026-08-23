@@ -1,0 +1,73 @@
+.postDetailArea {
+  padding-bottom: 32px;
+}
+
+.postHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.postHeader div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.postHeader h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+.postDetailArea .content {
+  margin-top: 24px;
+  color: #1f2937;
+  font-size: 18px;
+}
+.postHeader footer {
+  display: flex;
+  font-size: 14px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 16px;
+}
+.postHeader footer span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 8px;
+  color: #4b5563;
+}
+.postHeader footer span:nth-of-type(2) {
+  color: #6b7280;
+  font-size: 16px;
+  padding: 4px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 99px;
+  margin-left: 32px;
+}
+.postHeader footer time {
+  color: #9ca3af;
+  border-right: 1px solid #e5e7eb;
+  padding-right: 32px;
+}
+.backBtArea {
+  min-width: 240px;
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+  padding-bottom: 100px;
+}
+.backBt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 40px;
+  background-color: #3692ff;
+  border-radius: 99px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  justify-content: center;
+}

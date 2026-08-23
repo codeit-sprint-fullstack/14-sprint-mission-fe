@@ -1,0 +1,18 @@
+.search {
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  padding: 9px 24px;
+  flex: 1;
+}
+.search form {
+  height: 24px;
+  width: 100%;
+  display: flex;
+  gap: 4px;
+}
+.search img {
+  display: block;
+}
+.search input {
+  flex: 1;
+}

@@ -1,0 +1,23 @@
+.kebabMenuArea {
+  position: relative;
+  z-index: 2;
+}
+.list {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  width: 130px;
+  border-radius: 12px;
+  gap: 0 !important;
+  background-color: #fff;
+}
+
+.list li {
+  padding: 9px 20px;
+  border-radius: 12px;
+  line-height: 2.4rem;
+  color: #1f2937;
+}

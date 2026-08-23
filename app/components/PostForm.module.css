@@ -1,0 +1,46 @@
+.head {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.head h2 {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 20px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.content div {
+  display: flex;
+  flex-direction: column;
+}
+.content label {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #1f2937;
+  font-weight: 700;
+}
+.content input,
+.content textarea {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  color: #1f2937;
+}
+.content textarea {
+  border: 0 none;
+  color: #1f2937;
+  font-size: 16px;
+  min-height: 282px;
+}
+.content input::placeholder,
+.content textarea::placeholder {
+  color: #9ca3af;
+}
