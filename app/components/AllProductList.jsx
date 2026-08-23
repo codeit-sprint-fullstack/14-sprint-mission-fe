@@ -7,6 +7,7 @@ import EachItem from "@/app/components/Item";
 import styles from "./AllProductList.module.css";
 import { parseEnum, parseNumberParam } from "../lib/validation";
 import Pagination from "./Pagination";
+import { productKeys } from "../lib/queryKeys";
 
 export default function AllProductList() {
   const searchParams = useSearchParams();
@@ -19,7 +20,7 @@ export default function AllProductList() {
   const keyword = searchParams.get("keyword") ?? "";
 
   const { data, isPending } = useQuery({
-    queryKey: ["items", { page, pageSize, orderBy, keyword }],
+    queryKey: productKeys.list({ page, pageSize, orderBy, keyword }),
     queryFn: () =>
       getProducts({
         page,
@@ -31,7 +32,7 @@ export default function AllProductList() {
   });
 
   if (isPending) {
-    return null;
+    return <p>로딩중입니다...</p>;
   }
 
   return data.list.length === 0 ? (

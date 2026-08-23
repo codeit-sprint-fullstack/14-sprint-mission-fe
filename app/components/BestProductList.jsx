@@ -4,6 +4,7 @@ import { getProducts } from "@/app/lib/api/products";
 import { useQuery } from "@tanstack/react-query";
 import styles from "./BestProductList.module.css";
 import Item from "@/app/components/Item";
+import { productKeys } from "@/app/lib/queryKeys";
 
 export default function BestProductList() {
   const BestProductQuery = {
@@ -13,12 +14,12 @@ export default function BestProductList() {
     keyword: "",
   };
   const { data, isPending } = useQuery({
-    queryKey: ["items", BestProductQuery],
+    queryKey: productKeys.list(BestProductQuery),
     queryFn: () => getProducts(BestProductQuery),
     throwOnError: true,
   });
   if (isPending) {
-    return null;
+    return <p>로딩중입니다...</p>;
   }
   const { list } = data;
 

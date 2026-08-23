@@ -8,6 +8,7 @@ import Image from "next/image";
 import ProductCommentItems from "./ProductCommentItems";
 import ProductCommentForm from "./ProductCommentForm";
 import { getErrorMessage } from "../lib/error";
+import { commentKeys } from "../lib/queryKeys";
 
 const LIMIT = 3;
 
@@ -21,7 +22,7 @@ export default function ProductCommentList({ id }) {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["comments", id],
+    queryKey: commentKeys.list(id),
     queryFn: ({ pageParam }) =>
       getProductComments({
         productId: id,

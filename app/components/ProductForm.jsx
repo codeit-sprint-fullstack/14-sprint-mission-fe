@@ -5,6 +5,7 @@ import { patchProductDetail } from "../lib/api/products";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./ProductForm.module.css";
+import { productKeys } from "../lib/queryKeys";
 
 export default function ProductForm({ product, id }) {
   const queryClient = useQueryClient();
@@ -26,8 +27,8 @@ export default function ProductForm({ product, id }) {
   const { mutate } = useMutation({
     mutationFn: (formValues) => patchProductDetail({ id, ...formValues }),
     onSuccess: (updated) => {
-      queryClient.setQueryData(["item", id], updated);
-      queryClient.invalidateQueries({ queryKey: ["items"] });
+      queryClient.setQueryData(productKeys.detail(id), updated);
+      queryClient.invalidateQueries({ queryKey: productKeys.lists() });
       router.push(`/items/${id}`);
     },
   });

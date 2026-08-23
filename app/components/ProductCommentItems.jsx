@@ -10,6 +10,7 @@ import KebabMenu from "./KebabMenu";
 import ProductCommentForm from "./ProductCommentForm";
 import styles from "./ProductCommentItems.module.css";
 import { useAuth } from "../hooks/useAuth";
+import { commentKeys } from "../lib/queryKeys";
 
 //댓글 목록. 케밥- 삭제는 모달처리 후 삭제
 export default function ProductCommentItems({ productId, comments }) {
@@ -20,7 +21,7 @@ export default function ProductCommentItems({ productId, comments }) {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (commentId) => deleteComment({ commentId }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comments", productId] });
+      queryClient.invalidateQueries({ queryKey: commentKeys.list(productId) });
     },
   });
 

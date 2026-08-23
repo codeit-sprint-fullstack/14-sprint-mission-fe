@@ -17,6 +17,7 @@ import {
 } from "../../lib/validation.js";
 import styles from "./Signin.module.css";
 import { useAuth } from "@/app/hooks/useAuth.js";
+import { userKeys } from "@/app/lib/queryKeys";
 
 export default function Signin() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function Signin() {
     onSuccess: ({ accessToken, refreshToken, user: signedUser }) => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      queryClient.setQueryData(["users", "me"], signedUser);
+      queryClient.setQueryData(userKeys.me(), signedUser);
     },
   });
 

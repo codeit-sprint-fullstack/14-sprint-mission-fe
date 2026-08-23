@@ -18,6 +18,7 @@ import {
 } from "@/app/lib/validation.js";
 import styles from "./Signup.module.css";
 import { useAuth } from "@/app/hooks/useAuth";
+import { userKeys } from "@/app/lib/queryKeys";
 
 export default function Signup() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function Signup() {
     onSuccess: ({ accessToken, refreshToken, user: signedUser }) => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      queryClient.setQueryData(["users", "me"], signedUser);
+      queryClient.setQueryData(userKeys.me(), signedUser);
     },
   });
 

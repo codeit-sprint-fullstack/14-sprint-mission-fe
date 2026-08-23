@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { createProductComment, updateComment } from "../lib/api/comments";
 import styles from "./ProductCommentForm.module.css";
+import { commentKeys } from "../lib/queryKeys";
 
 export default function ProductCommentForm({
   id: productId,
@@ -20,7 +21,7 @@ export default function ProductCommentForm({
         ? updateComment({ commentId: comment.id, content })
         : createProductComment({ productId, content }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comments", productId] });
+      queryClient.invalidateQueries({ queryKey: commentKeys.list(productId) });
       if (isEditMode) {
         onClose();
       } else {
