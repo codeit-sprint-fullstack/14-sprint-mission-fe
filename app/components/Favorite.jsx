@@ -6,13 +6,17 @@ import {
   postProductFavorite,
 } from "../lib/api/products";
 import styles from "./Favorite.module.css";
+import { productKeys } from "../lib/queryKeys";
 
 export default function Favorite({ id, isFavorite, count }) {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: () =>
       isFavorite ? deleteProductFavorite(id) : postProductFavorite(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["item", id] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: productKeys.detail(id) });
+      queryClient.invalidateQueries({ queryKey: productKeys.lists() });
+    },
   });
 
   function handleClick() {
