@@ -14,13 +14,13 @@ export default async function postListPage({ searchParams }) {
   if (orderBy) params.set("orderBy", orderBy);
 
   const res = await fetch(
-    `${process.env.API_URL}/articles?${params.toString()}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/articles?${params.toString()}`,
     { cache: "no-store" },
   );
 
   if (!res.ok) throw new Error("결과를 불러오는데 실패했습니다.");
 
-  const postList = await res.json();
+  const { list: postList } = await res.json();
 
   return (
     <div className={styles.posts}>

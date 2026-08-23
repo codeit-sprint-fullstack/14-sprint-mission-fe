@@ -5,9 +5,9 @@ import badgeIc from "@/public/icon_badge.png";
 
 export default async function BestPosts({ className }) {
   const res = await fetch(
-    `${process.env.API_URL}/articles?limit=3&orderBy=recent`,
+    `${process.env.NEXT_PUBLIC_API_URL}/articles?page=1&pageSize=3&orderBy=recent`,
   );
-  const bestPostList = await res.json();
+  const { list: bestPostList } = await res.json();
   return (
     <section className={className}>
       <h2>베스트 게시글</h2>
