@@ -29,7 +29,7 @@
 
 .desktopLogo {
   display: block;
-  width: 153px;
+  width: 120px;
   height: auto;
 }
 
@@ -66,6 +66,56 @@
   font-weight: 600;
 }
 
+.profile,
+.profileSkeleton {
+  min-width: 128px;
+  height: 42px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  color: var(--Secondary-700);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 50%;
+  background: var(--Secondary-300);
+  object-fit: cover;
+}
+
+.nickname {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profileSkeleton {
+  border-radius: 21px;
+  background: linear-gradient(
+    90deg,
+    var(--Secondary-100) 25%,
+    var(--Secondary-200) 50%,
+    var(--Secondary-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: profile-loading 1.2s infinite;
+}
+
+@keyframes profile-loading {
+  to {
+    background-position: -200% 0;
+  }
+}
+
 @media (max-width: 767px) {
   .inner {
     width: calc(100% - 32px);
@@ -93,6 +143,17 @@
   .loginButton {
     min-width: 72px;
     min-height: 40px;
+    font-size: 14px;
+  }
+
+  .profile,
+  .profileSkeleton {
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .nickname {
+    max-width: 96px;
     font-size: 14px;
   }
 }

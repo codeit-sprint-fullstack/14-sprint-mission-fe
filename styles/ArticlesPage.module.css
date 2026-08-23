@@ -9,6 +9,12 @@
   margin-top: 40px;
 }
 
+.state {
+  margin: 0 0 24px;
+  color: var(--Secondary-500, #6b7280);
+  text-align: center;
+}
+
 .heading {
   margin: 0 0 24px;
   color: #111827;

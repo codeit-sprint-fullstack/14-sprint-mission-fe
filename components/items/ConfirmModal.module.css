@@ -1,0 +1,9 @@
+.backdrop { position: fixed; z-index: 1000; inset: 0; display: grid; padding: 24px; background: rgb(17 24 39 / 50%); place-items: center; }
+.modal { width: min(100%, 420px); padding: 32px; border-radius: 16px; background: #fff; box-shadow: 0 20px 50px rgb(17 24 39 / 20%); text-align: center; }
+.modal h2 { margin: 0; font-size: 20px; }
+.modal p { margin: 12px 0 0; color: var(--Secondary-500); font-size: 14px; }
+.actions { display: flex; gap: 12px; margin-top: 28px; }
+.actions button { flex: 1; height: 48px; border: 0; border-radius: 24px; font-weight: 600; cursor: pointer; }
+.cancel { background: var(--Secondary-100); color: var(--Secondary-700); }
+.confirm { background: var(--Primary-100); color: #fff; }
+.actions button:disabled { opacity: .6; cursor: not-allowed; }

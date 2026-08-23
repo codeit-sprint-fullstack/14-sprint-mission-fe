@@ -1,8 +1,11 @@
 // 자유게시판 목록 페이지(/articles)
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useQuery } from "@tanstack/react-query";
 import ArticleList from "@/components/articles/ArticleList";
 import { getArticles } from "@/lib/api/articles";
+import { queryKeys } from "@/lib/queryKeys";
 import styles from "@/styles/ArticlesPage.module.css";
 
 function getStringQuery(value) {
@@ -11,48 +14,34 @@ function getStringQuery(value) {
 
 //페이지 렌더링 전 서버에서 실행하는 함수
 // /articles 접속 -> 서버 실행 -> 데이터 가져오기 -> HTML 생성 -> 브라우저 전송
-export async function getServerSideProps({ query }) {
-  const keyword = getStringQuery(query.keyword).trim();
-  const orderBy = getStringQuery(query.orderBy);
+export default function ArticlesPage() {
+  const router = useRouter();
+  const keyword = getStringQuery(router.query.keyword).trim();
+  const orderBy = getStringQuery(router.query.orderBy) || "recent";
+  const listParams = { offset: 0, limit: 10, keyword, orderBy };
+  const bestParams = { offset: 0, limit: 3, orderBy: "recent" };
+  const articlesQuery = useQuery({
+    queryKey: queryKeys.articles.list(listParams),
+    queryFn: () => getArticles(listParams),
+    enabled: router.isReady,
+  });
+  const bestArticlesQuery = useQuery({
+    queryKey: queryKeys.articles.list(bestParams),
+    queryFn: () => getArticles(bestParams),
+  });
+  const articles = articlesQuery.data?.list ?? [];
+  const bestArticles = bestArticlesQuery.data?.list ?? [];
+  const isLoading = articlesQuery.isPending || bestArticlesQuery.isPending;
+  const error = articlesQuery.error ?? bestArticlesQuery.error;
 
-  //Promise.all -> 독립적인 비동기 작업을 동시에 실행
-  const [articlesData, bestArticlesData] = await Promise.all([
-    getArticles({
-      offset: 0,
-      limit: 10,
-      keyword,
-      orderBy,
-    }),
-    getArticles({
-      offset: 0,
-      limit: 3,
-      orderBy: "recent",
-    }),
-  ]);
-
-  //props 반환
-  return {
-    props: {
-      articles: articlesData.list ?? [],
-      bestArticles: bestArticlesData.list ?? [],
-      keyword,
-      orderBy,
-    },
-  };
-}
-
-export default function ArticlesPage({
-  articles,
-  bestArticles,
-  keyword,
-  orderBy,
-}) {
   return (
     <>
       <Head>
         <title>자유게시판 | 판다마켓</title>
       </Head>
       <main className={styles.main}>
+        {isLoading && <p className={styles.state}>게시글을 불러오는 중입니다.</p>}
+        {error && <p className={styles.state}>게시글을 불러오지 못했습니다.</p>}
         <section className={styles.section}>
           <h1 className={`${styles.heading} ${styles.bestHeading}`}>
             베스트 게시글

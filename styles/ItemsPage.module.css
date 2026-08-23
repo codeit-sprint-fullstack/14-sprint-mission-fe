@@ -1,0 +1,241 @@
+.main {
+  width: min(100% - 48px, 1200px);
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+.section {
+  min-width: 0;
+}
+
+.productHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--Secondary-900);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+.refreshing {
+  color: var(--Primary-100);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchBox {
+  display: flex;
+  width: 325px;
+  height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: var(--Secondary-100);
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  fill: none;
+  stroke: var(--Secondary-400);
+  stroke-linecap: round;
+  stroke-width: 1.8;
+}
+
+.searchInput {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--Secondary-900);
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.searchInput::placeholder {
+  color: var(--Secondary-400);
+}
+
+.registerButton {
+  display: inline-flex;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 23px;
+  border-radius: 8px;
+  background: var(--Primary-100);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sortSelect {
+  width: 130px;
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--Secondary-300);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--Secondary-800);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.mobileSortButton {
+  display: none;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 40px 24px;
+  transition: opacity 0.2s;
+}
+
+.transitioning {
+  opacity: 0.5;
+}
+
+.state {
+  display: flex;
+  min-height: 320px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--Secondary-500);
+  text-align: center;
+}
+
+.state strong {
+  color: var(--Secondary-800);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--Secondary-200);
+  border-top-color: var(--Primary-100);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1199px) {
+  .main {
+    width: min(100% - 48px, 768px);
+    padding-top: 32px;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .productHeader {
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .controls {
+    margin-left: auto;
+  }
+
+  .searchBox {
+    width: 242px;
+  }
+}
+
+@media (max-width: 743px) {
+  .main {
+    width: calc(100% - 32px);
+    padding: 24px 0 56px;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 8px;
+  }
+
+  .productHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 16px;
+    column-gap: 12px;
+  }
+
+  .title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .controls {
+    display: contents;
+  }
+
+  .registerButton {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .searchBox {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+  }
+
+  .sortSelect {
+    display: none;
+  }
+
+  .mobileSortButton {
+    display: flex;
+    grid-column: 2;
+    grid-row: 2;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    padding: 0;
+    border: 1px solid var(--Secondary-300);
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .mobileSortButton svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: var(--Secondary-800);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+}

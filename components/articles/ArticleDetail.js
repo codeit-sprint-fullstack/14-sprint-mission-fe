@@ -3,16 +3,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { deleteArticle } from "@/lib/api/articles";
 import { formatDate, getMockMetadata } from "@/lib/articles/presentation";
+import { queryKeys } from "@/lib/queryKeys";
 import styles from "@/styles/ArticleDetailPage.module.css";
 import HeartIcon from "./HeartIcon";
 
 export default function ArticleDetail({ article }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { nickname, likeCount } = getMockMetadata(article.id);
   const [error, setError] = useState("");
+  const deleteMutation = useMutation({
+    mutationFn: () => deleteArticle(article.id),
+    onSuccess: async () => {
+      queryClient.removeQueries({
+        queryKey: queryKeys.articles.detail(article.id),
+      });
+      await queryClient.invalidateQueries({ queryKey: queryKeys.articles.all });
+      await router.push("/articles");
+    },
+    onError: (deleteError) => setError(deleteError.message),
+  });
 
   async function handleDeleteArticle() {
     if (!window.confirm("게시글을 삭제하시겠습니까?")) {
@@ -21,12 +35,7 @@ export default function ArticleDetail({ article }) {
 
     setError("");
 
-    try {
-      await deleteArticle(article.id);
-      await router.push("/articles");
-    } catch (deleteError) {
-      setError(deleteError.message);
-    }
+    deleteMutation.mutate();
   }
 
   return (
