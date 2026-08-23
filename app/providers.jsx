@@ -3,13 +3,28 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
+import { getErrorMessage } from "./lib/error";
+import Modal from "./components/Modal";
 
 export default function Providers({ children }) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          mutations: {
+            onError: (error) => setErrorMessage(getErrorMessage(error)),
+          },
+        },
+      }),
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
       {children}
+      {errorMessage && (
+        <Modal message={errorMessage} onConfirm={() => setErrorMessage(null)} />
+      )}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

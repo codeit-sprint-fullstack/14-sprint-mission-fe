@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import Modal from "@/app/components/Modal";
 import PasswordInput from "@/app/components/PasswordInput";
 import { signUp } from "@/app/lib/api/auth";
-import { getErrorMessage } from "@/app/lib/error.js";
 import {
   isValidEmail,
   isValidPassword,
@@ -48,8 +47,6 @@ export default function Signup() {
     mutate,
     isPending: isSubmitting,
     isSuccess,
-    error,
-    reset,
   } = useMutation({
     mutationFn: signUp,
     onSuccess: ({ accessToken, refreshToken, user: signedUser }) => {
@@ -109,7 +106,6 @@ export default function Signup() {
 
   return (
     <>
-      {error && <Modal message={getErrorMessage(error)} onConfirm={reset} />}
       {isSuccess && (
         <Modal
           message="가입 완료되었습니다."

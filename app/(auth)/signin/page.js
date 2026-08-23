@@ -1,9 +1,7 @@
 "use client";
 
-import Modal from "@/app/components/Modal.jsx";
 import PasswordInput from "@/app/components/PasswordInput.jsx";
 import { signIn } from "@/app/lib/api/auth.js";
-import { getErrorMessage } from "@/app/lib/error.js";
 import IconGG from "@/public/ic_google.png";
 import IconKT from "@/public/ic_kakaotalk.png";
 import MainLogo from "@/public/logo_main_2x.png";
@@ -33,12 +31,7 @@ export default function Signin() {
     password: false,
   });
 
-  const {
-    mutate,
-    isPending: isSubmitting,
-    error,
-    reset,
-  } = useMutation({
+  const { mutate, isPending: isSubmitting } = useMutation({
     mutationFn: signIn,
     onSuccess: ({ accessToken, refreshToken, user: signedUser }) => {
       localStorage.setItem("accessToken", accessToken);
@@ -91,7 +84,6 @@ export default function Signin() {
 
   return (
     <>
-      {error && <Modal message={getErrorMessage(error)} onConfirm={reset} />}
       <section className={styles.login}>
         <h1>
           <Link href="/">
