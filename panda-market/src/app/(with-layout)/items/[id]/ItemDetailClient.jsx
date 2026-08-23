@@ -50,7 +50,7 @@ function splitTagsIntoRows(tags, tagsPerRow) {
   return rows
 }
 
-const COMMENT_PAGE_SIZE = 5
+const COMMENT_PAGE_SIZE = 4
 
 function ItemDetailClient({ itemId }) {
   const router = useRouter()
@@ -480,12 +480,14 @@ function ItemDetailClient({ itemId }) {
               </time>
             </div>
           </div>
-          <FavoriteChip
-            isFavorite={item.isFavorite}
-            favoriteCount={item.favoriteCount}
-            onToggleFavorite={handleToggleFavorite}
-            disabled={favoriteMutation.isPending}
-          />
+          <div className={styles.itemDetailFavoriteArea}>
+            <FavoriteChip
+              isFavorite={item.isFavorite}
+              favoriteCount={item.favoriteCount}
+              onToggleFavorite={handleToggleFavorite}
+              disabled={favoriteMutation.isPending}
+            />
+          </div>
         </footer>
         <div className={styles.itemDetailProductSpacer} aria-hidden="true" />
       </section>

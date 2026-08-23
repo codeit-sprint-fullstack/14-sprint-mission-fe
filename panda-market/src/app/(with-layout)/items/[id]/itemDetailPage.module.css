@@ -1,9 +1,10 @@
 .itemDetailPage {
+  box-sizing: border-box;
   width: 100%;
   max-width: 1200px;
   min-height: 860px;
   margin: 0 auto;
-  padding-top: 32px;
+  padding-top: 24px;
 }
 
 .itemDetailProductSection {
@@ -51,22 +52,22 @@
 }
 
 .itemDetailProductName {
-  margin: 0 0 8px;
-  color: var(--Cool-Gray-800);
+  margin: 0 0 16px;
+  color: var(--Secondary-800);
   font-size: 24px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 32px;
   overflow-wrap: anywhere;
 }
 
 .itemDetailProductPrice {
   display: block;
-  color: var(--Cool-Gray-800);
+  color: var(--Secondary-800);
   font-size: 40px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 48px;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .itemDetailHeaderSpacer {
@@ -89,7 +90,15 @@
 }
 
 .itemDetailDescriptionTitle,
-.itemDetailTagTitle,
+.itemDetailTagTitle {
+  margin: 0;
+  color: var(--Secondary-600);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
 .itemDetailInquiryTitle {
   margin: 0;
   color: var(--Cool-Gray-900);
@@ -100,7 +109,7 @@
 }
 
 .itemDetailDescriptionText {
-  margin: 8px 0 24px;
+  margin: 16px 0 24px;
   color: var(--Secondary-600);
   font-size: 16px;
   font-style: normal;
@@ -122,7 +131,7 @@
   align-items: flex-start;
   width: 100%;
   max-width: 100%;
-  margin-top: 8px;
+  margin-top: 16px;
   row-gap: 16px;
 }
 
@@ -150,8 +159,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  align-self: end;
   width: 100%;
-  margin-top: 24px;
+  margin-top: 62px;
+}
+
+.itemDetailFavoriteArea {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  border-left: 1px solid var(--Cool-Gray-200);
 }
 
 .itemDetailSellerArea {
@@ -216,8 +234,9 @@
 }
 
 .itemDetailInquiryTextarea {
+  box-sizing: border-box;
   width: 100%;
-  height: 104px;
+  min-height: 104px;
   padding: 16px 24px;
   border: 0;
   border-radius: 12px;
@@ -237,6 +256,7 @@
 }
 
 .itemDetailInquirySubmitButton {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,6 +267,7 @@
   border-radius: 8px;
   background: var(--brand-blue);
   color: var(--Cool-Gray-100);
+  font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -266,7 +287,8 @@
   justify-content: center;
   width: 100%;
   height: 300px;
-  margin-bottom: 24px;
+  margin-top: 24px;
+  margin-bottom: 64px;
 }
 
 .itemDetailInquiryEmptyImage {
@@ -286,17 +308,23 @@
 }
 
 .itemDetailInquiryList {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 300px;
-  margin-bottom: 24px;
+  margin-top: 24px;
+  margin-bottom: 64px;
+  gap: 24px;
 }
 
 .itemDetailInquiryScrollList {
-  max-height: 600px;
+  height: 442px;
+  max-height: none;
   overflow-y: auto;
 }
 
 .itemDetailBackLink {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -430,17 +458,199 @@
   padding-inline: 6px;
 }
 
-@media (max-width: 1199px) {
+@media (min-width: 744px) and (max-width: 1199px) {
+  .itemDetailPage {
+    max-width: none;
+    padding: 24px 32px 0;
+  }
+
+  .itemDetailProductSection {
+    grid-template-columns: 340px minmax(0, 1fr);
+    column-gap: 16px;
+  }
+
+  .itemDetailImageArea {
+    width: 340px;
+    height: 340px;
+  }
+
+  .itemDetailProductName {
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+
+  .itemDetailProductPrice {
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  .itemDetailHeaderSpacer {
+    height: 8px;
+    margin-top: 8px;
+  }
+
+  .itemDetailDescriptionSpacer {
+    height: 0;
+  }
+
+  .itemDetailDescriptionTitle,
+  .itemDetailTagTitle {
+    font-size: 14px;
+  }
+
+  .itemDetailDescriptionText {
+    margin-top: 8px;
+  }
+
+  .itemDetailTagList {
+    margin-top: 8px;
+    row-gap: 8px;
+  }
+
   .itemDetailTagListDesktop {
     display: none;
   }
 
   .itemDetailTagListCompact {
     display: flex;
-    row-gap: 8px;
   }
 
   .itemDetailTagRow {
     row-gap: 8px;
+  }
+
+  .itemDetailProductMeta {
+    margin-top: 40px;
+  }
+
+  .itemDetailInquiryEmpty,
+  .itemDetailInquiryList {
+    margin-top: 40px;
+    margin-bottom: 56px;
+  }
+
+  .itemDetailInquiryScrollList {
+    height: 418px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 743px) {
+  .itemDetailPage {
+    max-width: none;
+    min-height: 0;
+    padding: 4.33px 16px 0;
+  }
+
+  .itemDetailProductSection {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    column-gap: 0;
+    padding-bottom: 24px;
+  }
+
+  .itemDetailImageArea {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .itemDetailProductSummary {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 16px;
+  }
+
+  .itemDetailProductName {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .itemDetailProductPrice {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .itemDetailHeaderSpacer {
+    height: 8px;
+    margin-top: 8px;
+  }
+
+  .itemDetailDescriptionArea {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .itemDetailDescriptionSpacer {
+    height: 0;
+  }
+
+  .itemDetailDescriptionTitle,
+  .itemDetailTagTitle {
+    font-size: 14px;
+  }
+
+  .itemDetailDescriptionText {
+    margin-top: 8px;
+  }
+
+  .itemDetailTagList {
+    margin-top: 8px;
+    row-gap: 8px;
+  }
+
+  .itemDetailTagListDesktop {
+    display: none;
+  }
+
+  .itemDetailTagListCompact {
+    display: flex;
+  }
+
+  .itemDetailTagRow {
+    row-gap: 8px;
+  }
+
+  .itemDetailProductMeta {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 40px;
+  }
+
+  .itemDetailProductSpacer {
+    display: none;
+  }
+
+  .itemDetailInquirySection {
+    padding-top: 0;
+  }
+
+  .itemDetailInquiryTitle {
+    margin-bottom: 16px;
+  }
+
+  .itemDetailInquiryTextarea {
+    min-height: 129px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .itemDetailInquiryEmpty,
+  .itemDetailInquiryList {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .itemDetailInquiryList {
+    gap: 16px;
+  }
+
+  .itemDetailBackLink {
+    margin-bottom: 40px;
+  }
+
+  .itemDetailInquiryScrollList {
+    height: 394px;
   }
 }
