@@ -27,7 +27,7 @@ export default function SortDropDown({ orderBy, setOrderBy }) {
 
           <li
             onClick={() => {
-              setOrderBy("like");
+              setOrderBy("favorite");
               setIsOpen(false);
             }}
           >

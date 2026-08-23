@@ -32,7 +32,7 @@ export default function Board() {
   return (
     <>
       <div className={styles.boardWrap}>
-        <div className={styles.boardSearch}>
+        <div className={styles.boardSearch}> 
           <Input
             variant="board"
             className={styles.boardInput}
