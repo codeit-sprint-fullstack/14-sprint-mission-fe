@@ -1,0 +1,16 @@
+.status {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.backButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.backButtonContent {
+  gap: 8px;
+  padding: 12px 40px;
+  border-radius: 40px;
+}

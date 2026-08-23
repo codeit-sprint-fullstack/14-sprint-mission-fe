@@ -22,3 +22,15 @@ export async function getProducts({
 
   return response.data;
 }
+
+export async function getProduct(productId) {
+  const response = await apiClient.get(`/products/${productId}`);
+
+  return response.data;
+}
+
+export async function deleteProduct(productId) {
+  const response = await apiClient.delete(`/products/${productId}`);
+
+  return response.data;
+}
