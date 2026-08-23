@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import AuthProvider from './components/authProvider';
 import Header from './components/header';
 
 
@@ -12,8 +13,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="min-h-full flex flex-col">
-    <Header />
+    <AuthProvider>
+      <Header/>
     {children}
+    </AuthProvider>
       </body>
     </html>
    

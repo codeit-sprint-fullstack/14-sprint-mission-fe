@@ -26,6 +26,8 @@ const ArticlePage = async () =>{
             <Link href="/articles/registration">
             <button>게시물등록</button>
             </Link>
+
+            
         </div>
     )
     
