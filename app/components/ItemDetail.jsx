@@ -16,6 +16,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useEffect } from "react";
 import { formatDate } from "@/app/utils/formatDate";
 import { formatPrice } from "@/app/utils/formatPrice";
+import { productKeys } from "../lib/queryKeys";
 
 export default function ItemDetail({ id }) {
   const queryClient = useQueryClient();
@@ -34,14 +35,15 @@ export default function ItemDetail({ id }) {
     isError,
     error,
   } = useQuery({
-    queryKey: ["item", id],
+    queryKey: productKeys.detail(id),
     queryFn: () => getProductDetail(id),
   });
 
   const { mutate } = useMutation({
     mutationFn: (productId) => deleteProduct(productId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["item"] });
+    onSuccess: (_data, productId) => {
+      queryClient.removeQueries({ queryKey: productKeys.detail(productId) });
+      queryClient.invalidateQueries({ queryKey: productKeys.lists() });
       router.replace("/items");
     },
   });
