@@ -11,6 +11,11 @@ import {
 } from '@/constants/queryKeys'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
 import { getUserProfileQueryOptions } from '@/queries/userQueries'
+import {
+  MAX_PRODUCT_PRICE,
+  isValidProductForm,
+  isValidProductId,
+} from '@/validators/productValidator'
 
 function ProductWritePageContent() {
   const router = useRouter()
@@ -18,7 +23,7 @@ function ProductWritePageContent() {
   const queryClient = useQueryClient()
   const itemId = searchParams.get('id')
   const isEditMode = itemId !== null
-  const isValidItemId = /^\d+$/.test(itemId ?? '') && Number(itemId) > 0
+  const isValidItemId = isValidProductId(itemId ?? '')
 
   const [accessToken, setAccessToken] = useState(undefined)
   const [productName, setProductName] = useState('')
@@ -28,6 +33,7 @@ function ProductWritePageContent() {
   const [productImages, setProductImages] = useState([])
   const [tagInput, setTagInput] = useState('')
   const [tagError, setTagError] = useState('')
+  // 상품 재조회가 수정 중인 입력값을 덮지 않도록 폼을 초기화한 상품 ID를 기록
   const initializedItemIdRef = useRef(null)
 
   useEffect(() => {
@@ -35,6 +41,7 @@ function ProductWritePageContent() {
   }, [])
 
   useEffect(() => {
+    // 수정 대상이 바뀌면 새 상품 데이터로 폼을 다시 초기화할 수 있도록 리셋
     initializedItemIdRef.current = null
   }, [itemId])
 
@@ -76,26 +83,18 @@ function ProductWritePageContent() {
   const trimmedProductName = productName.trim()
   const trimmedProductDescription = productDescription.trim()
   const numericProductPrice = Number(productPrice)
-  const areTagsValid =
-    productTags.length > 0 &&
-    productTags.every((tag) => {
-      const trimmedTag = tag.trim()
-
-      return trimmedTag.length >= 1 && trimmedTag.length <= 20
-    })
-  const isProductFormValid =
-    trimmedProductName.length >= 1 &&
-    trimmedProductName.length <= 30 &&
-    trimmedProductDescription.length >= 1 &&
-    productPrice.trim() !== '' &&
-    Number.isInteger(numericProductPrice) &&
-    numericProductPrice >= 0 &&
-    productImages.length >= 1 &&
-    areTagsValid
+  const isProductFormValid = isValidProductForm({
+    name: productName,
+    description: productDescription,
+    price: productPrice,
+    images: productImages,
+    tags: productTags,
+  })
 
   const updateProductMutation = useMutation({
     mutationFn: updateProduct,
     onSuccess: async (updatedProduct) => {
+      // 수정 응답을 상세 캐시에 합치고 현재 사용자의 좋아요 상태는 기존 값으로 유지
       queryClient.setQueryData(getProductDetailQueryKey(itemId), (prev) => ({
         ...prev,
         ...updatedProduct,
@@ -284,6 +283,7 @@ function ProductWritePageContent() {
             name="price"
             type="number"
             min="0"
+            max={MAX_PRODUCT_PRICE}
             step="1"
             value={productPrice}
             onChange={(e) => setProductPrice(e.target.value)}
@@ -350,6 +350,7 @@ function ProductWritePageContent() {
 
 function ProductWritePage() {
   return (
+    // useSearchParams를 사용하는 Client Component를 Suspense 경계로 감쌈
     <Suspense fallback={<p role="status">페이지를 불러오고 있습니다.</p>}>
       <ProductWritePageContent />
     </Suspense>

@@ -37,6 +37,7 @@ import {
   handleProfileImageError,
 } from '@/utils/profileImage'
 import { getUserProfileQueryOptions } from '@/queries/userQueries'
+import { isValidProductId } from '@/validators/productValidator'
 import formatDate from '@/utils/formatDate'
 import styles from '@/app/(with-layout)/items/[id]/itemDetailPage.module.css'
 
@@ -55,6 +56,8 @@ const COMMENT_PAGE_SIZE = 4
 function ItemDetailClient({ itemId }) {
   const router = useRouter()
   const queryClient = useQueryClient()
+  const isValidItemId = isValidProductId(itemId)
+  // undefined는 localStorage 확인 전, null은 확인했지만 토큰이 없는 상태
   const [accessToken, setAccessToken] = useState(undefined)
   const [failedProductImage, setFailedProductImage] = useState(null)
   const [commentContent, setCommentContent] = useState('')
@@ -75,7 +78,7 @@ function ItemDetailClient({ itemId }) {
     refetch,
   } = useQuery({
     ...getProductDetailQueryOptions(itemId),
-    enabled: Boolean(accessToken),
+    enabled: isValidItemId && Boolean(accessToken),
   })
 
   const { data: user } = useQuery({
@@ -113,6 +116,7 @@ function ItemDetailClient({ itemId }) {
     enabled: Boolean(item),
   })
 
+  // useInfiniteQuery가 페이지별로 저장한 댓글 목록을 하나의 배열로 합침
   const comments = commentsData?.pages.flatMap((page) => page.list) ?? []
 
   const createCommentMutation = useMutation({
@@ -287,13 +291,13 @@ function ItemDetailClient({ itemId }) {
   }
 
   function handleEditProduct() {
-    if (!isOwner || deleteProductMutation.isPending) return
+    if (!isValidItemId || !isOwner || deleteProductMutation.isPending) return
 
     router.push(`/items/write?id=${itemId}`)
   }
 
   function handleDeleteProduct() {
-    if (!isOwner || deleteProductMutation.isPending) return
+    if (!isValidItemId || !isOwner || deleteProductMutation.isPending) return
 
     setIsDeleteModalOpen(true)
   }
@@ -306,9 +310,20 @@ function ItemDetailClient({ itemId }) {
   }
 
   function handleConfirmDeleteProduct() {
-    if (!isOwner || deleteProductMutation.isPending) return
+    if (!isValidItemId || !isOwner || deleteProductMutation.isPending) return
 
     deleteProductMutation.mutate(itemId)
+  }
+
+  if (!isValidItemId) {
+    return (
+      <article className={styles.itemDetailPage}>
+        <p role="alert">유효하지 않은 상품 ID입니다.</p>
+        <Link className={styles.itemDetailErrorBackLink} href="/items">
+          상품목록으로 가기
+        </Link>
+      </article>
+    )
   }
 
   if (accessToken === undefined) {

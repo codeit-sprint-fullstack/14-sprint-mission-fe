@@ -53,6 +53,8 @@ function SignupPage() {
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.accessToken)
       localStorage.setItem('refreshToken', data.refreshToken)
+
+      // 사용자별 좋아요 상태가 남지 않도록 기존 상품 상세 캐시 제거
       queryClient.removeQueries({
         queryKey: getProductDetailRootQueryKey(),
       })
@@ -73,14 +75,25 @@ function SignupPage() {
   const canSignup =
     validateEmail(email.trim()).isValid &&
     validateNickname(nickname.trim()).isValid &&
-    validatePassword(password.trim()).isValid &&
-    validatePasswordConfirm(password.trim(), passwordConfirm.trim()).isValid
+    validatePassword(password).isValid &&
+    validatePasswordConfirm(password, passwordConfirm).isValid
 
   function onSignupSubmit(data) {
     const { passwordConfirm, ...signupData } = data
 
+    // 버튼 활성화 상태와 별개로 실제 제출 시점의 데이터를 다시 검증
+    const isSignupDataValid =
+      validateEmail(signupData.email.trim()).isValid &&
+      validateNickname(signupData.nickname.trim()).isValid &&
+      validatePassword(signupData.password).isValid &&
+      validatePasswordConfirm(signupData.password, passwordConfirm).isValid
+
+    if (!isSignupDataValid || signupMutation.isPending) return
+
     signupMutation.mutate({
       ...signupData,
+      email: signupData.email.trim(),
+      nickname: signupData.nickname.trim(),
       passwordConfirmation: passwordConfirm,
     })
   }
@@ -171,9 +184,7 @@ function SignupPage() {
                   placeholder="비밀번호를 입력해주세요"
                   {...register('password', {
                     validate: (value) => {
-                      const { isValid, message } = validatePassword(
-                        value.trim(),
-                      )
+                      const { isValid, message } = validatePassword(value)
                       return isValid || message
                     },
                     onChange: () => {
@@ -181,6 +192,7 @@ function SignupPage() {
 
                       if (!passwordConfirmValue) return
 
+                      // 원본 비밀번호가 바뀌면 이미 입력한 비밀번호 확인 값도 다시 검증
                       trigger('passwordConfirm')
                     },
                   })}
@@ -221,8 +233,8 @@ function SignupPage() {
                     validate: (value) => {
                       const passwordValue = getValues('password')
                       const { isValid, message } = validatePasswordConfirm(
-                        passwordValue.trim(),
-                        value.trim(),
+                        passwordValue,
+                        value,
                       )
 
                       return isValid || message
