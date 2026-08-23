@@ -12,7 +12,13 @@ async function requestAuth(path, body) {
   const data = await res.json()
 
   if (!res.ok) {
-    throw new Error(data.message || `인증 요청에 실패했습니다. (${res.status})`)
+    const error = new Error(
+      data.message || `인증 요청에 실패했습니다. (${res.status})`,
+    )
+
+    error.status = res.status
+
+    throw error
   }
 
   return data
@@ -34,4 +40,10 @@ async function signup({ email, nickname, password, passwordConfirmation }) {
   })
 }
 
-export { signin, signup }
+async function refreshAccessToken(refreshToken) {
+  return requestAuth('refresh-token', {
+    refreshToken,
+  })
+}
+
+export { signin, signup, refreshAccessToken }

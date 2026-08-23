@@ -52,6 +52,7 @@ function SignupPage() {
     mutationFn: signup,
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
       queryClient.removeQueries({
         queryKey: getProductDetailRootQueryKey(),
       })

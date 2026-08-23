@@ -46,6 +46,7 @@ function SigninPage() {
     mutationFn: signin,
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
       queryClient.removeQueries({
         queryKey: getProductDetailRootQueryKey(),
       })
