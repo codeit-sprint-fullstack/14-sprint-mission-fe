@@ -330,6 +330,106 @@
   min-height: 1px;
 }
 
+.itemDetailDeleteModalOverlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000b3;
+}
+
+.itemDetailDeleteModal {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  min-height: 202px;
+  padding: 24px;
+  gap: 32px;
+  border-radius: 12px;
+  background: var(--pure-white);
+}
+
+.itemDetailDeleteModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.itemDetailDeleteModalIcon {
+  box-sizing: border-box;
+  display: block;
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--error-red, #f74747);
+}
+
+.itemDetailDeleteModalMessage {
+  margin: 0;
+  color: var(--Secondary-800);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  white-space: nowrap;
+}
+
+.itemDetailDeleteModalError {
+  margin: -16px 0 0;
+  color: var(--error-red, #f74747);
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.itemDetailDeleteModalActions {
+  display: flex;
+  gap: 8px;
+}
+
+.itemDetailDeleteModalCancelButton,
+.itemDetailDeleteModalConfirmButton {
+  box-sizing: border-box;
+  width: 88px;
+  height: 48px;
+  padding: 12px 23px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  white-space: nowrap;
+}
+
+.itemDetailDeleteModalCancelButton {
+  border: 1px solid var(--error-red, #f74747);
+  background: var(--Cool-Gray-50);
+  color: var(--error-red, #f74747);
+}
+
+.itemDetailDeleteModalConfirmButton {
+  border: 0;
+  background: var(--error-red, #f74747);
+  color: var(--Cool-Gray-100);
+}
+
+.itemDetailDeleteModalCancelButton:disabled,
+.itemDetailDeleteModalConfirmButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.itemDetailDeleteModalConfirmButton[data-pending='true'] {
+  padding-inline: 6px;
+}
+
 @media (max-width: 1199px) {
   .itemDetailTagListDesktop {
     display: none;

@@ -34,13 +34,13 @@ function getProductDetailQueryKey(itemId) {
   return [...getProductDetailRootQueryKey(), itemId]
 }
 
-function getProductCommentsRootQueryKey(productId) {
-  return [COMMENT_QUERY_KEY, 'product', productId]
+function getProductCommentsRootQueryKey(itemId) {
+  return [COMMENT_QUERY_KEY, 'product', itemId]
 }
 
-function getProductCommentsQueryKey({ productId, limit }) {
+function getProductCommentsQueryKey({ itemId, limit }) {
   return [
-    ...getProductCommentsRootQueryKey(productId),
+    ...getProductCommentsRootQueryKey(itemId),
     {
       limit,
     },

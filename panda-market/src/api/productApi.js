@@ -49,6 +49,46 @@ async function getProductDetail(productId) {
   return res.json()
 }
 
+async function updateProduct({ productId, product }) {
+  const res = await fetchWithAuth(`${PRODUCT_API_URL}/${productId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(product),
+  })
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => null)
+    const error = new Error(
+      errorData?.message || `상품을 수정하지 못했습니다. (${res.status})`,
+    )
+
+    error.status = res.status
+    throw error
+  }
+
+  return res.json()
+}
+
+async function deleteProduct(productId) {
+  const res = await fetchWithAuth(`${PRODUCT_API_URL}/${productId}`, {
+    method: 'DELETE',
+  })
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => null)
+    const error = new Error(
+      errorData?.message || `상품을 삭제하지 못했습니다. (${res.status})`,
+    )
+
+    error.status = res.status
+    throw error
+  }
+
+  return res.json()
+}
+
 async function requestProductFavorite(productId, method) {
   const res = await fetchWithAuth(`${PRODUCT_API_URL}/${productId}/favorite`, {
     method,
@@ -81,6 +121,8 @@ export {
   getProducts,
   getBestProducts,
   getProductDetail,
+  updateProduct,
+  deleteProduct,
   addProductFavorite,
   removeProductFavorite,
 }

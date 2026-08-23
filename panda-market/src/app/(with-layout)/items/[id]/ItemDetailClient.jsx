@@ -7,6 +7,7 @@ import {
   useQueryClient,
   useInfiniteQuery,
 } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -14,7 +15,11 @@ import {
   updateComment,
   deleteComment,
 } from '@/api/commentApi'
-import { addProductFavorite, removeProductFavorite } from '@/api/productApi'
+import {
+  addProductFavorite,
+  deleteProduct,
+  removeProductFavorite,
+} from '@/api/productApi'
 import {
   getBestProductRootQueryKey,
   getProductDetailQueryKey,
@@ -48,11 +53,13 @@ function splitTagsIntoRows(tags, tagsPerRow) {
 const COMMENT_PAGE_SIZE = 5
 
 function ItemDetailClient({ itemId }) {
+  const router = useRouter()
   const queryClient = useQueryClient()
   const [accessToken, setAccessToken] = useState(undefined)
   const [failedProductImage, setFailedProductImage] = useState(null)
   const [commentContent, setCommentContent] = useState('')
   const [editingCommentId, setEditingCommentId] = useState(null)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const commentListRef = useRef(null)
   const loadMoreRef = useRef(null)
 
@@ -76,8 +83,13 @@ function ItemDetailClient({ itemId }) {
     enabled: Boolean(accessToken),
   })
 
+  const isOwner =
+    user?.id != null &&
+    item?.ownerId != null &&
+    String(user.id) === String(item.ownerId)
+
   const commentsQueryOptions = getProductCommentsQueryOptions({
-    productId: itemId,
+    itemId,
     limit: COMMENT_PAGE_SIZE,
   })
 
@@ -189,6 +201,28 @@ function ItemDetailClient({ itemId }) {
     },
   })
 
+  const deleteProductMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: async () => {
+      queryClient.removeQueries({
+        queryKey: getProductDetailQueryKey(itemId),
+        exact: true,
+      })
+
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: getProductListRootQueryKey(),
+        }),
+        queryClient.invalidateQueries({
+          queryKey: getBestProductRootQueryKey(),
+        }),
+      ])
+
+      setIsDeleteModalOpen(false)
+      router.push('/items')
+    },
+  })
+
   const validatedProductImage = getProductImage(item?.images)
   const productImage =
     failedProductImage === validatedProductImage
@@ -248,11 +282,28 @@ function ItemDetailClient({ itemId }) {
   }
 
   function handleEditProduct() {
-    // 상품 수정 기능 구현 시 연결
+    if (!isOwner || deleteProductMutation.isPending) return
+
+    router.push(`/items/write?id=${itemId}`)
   }
 
   function handleDeleteProduct() {
-    // 상품 삭제 기능 구현 시 연결
+    if (!isOwner || deleteProductMutation.isPending) return
+
+    setIsDeleteModalOpen(true)
+  }
+
+  function handleCancelDeleteProduct() {
+    if (deleteProductMutation.isPending) return
+
+    setIsDeleteModalOpen(false)
+    deleteProductMutation.reset()
+  }
+
+  function handleConfirmDeleteProduct() {
+    if (!isOwner || deleteProductMutation.isPending) return
+
+    deleteProductMutation.mutate(itemId)
   }
 
   if (accessToken === undefined) {
@@ -346,13 +397,16 @@ function ItemDetailClient({ itemId }) {
                 {item.price.toLocaleString('ko-KR')}원
               </span>
             </div>
-            <div className={styles.itemDetailMenuArea}>
-              <EditDeleteMenu
-                onEdit={handleEditProduct}
-                onDelete={handleDeleteProduct}
-                menuButtonAriaLabel="상품 메뉴 열기"
-              />
-            </div>
+            {isOwner && (
+              <div className={styles.itemDetailMenuArea}>
+                <EditDeleteMenu
+                  onEdit={handleEditProduct}
+                  onDelete={handleDeleteProduct}
+                  disabled={deleteProductMutation.isPending}
+                  menuButtonAriaLabel="상품 메뉴 열기"
+                />
+              </div>
+            )}
             <div className={styles.itemDetailHeaderSpacer} aria-hidden="true" />
           </header>
         </div>
@@ -547,6 +601,69 @@ function ItemDetailClient({ itemId }) {
           height={24}
         />
       </Link>
+
+      {isDeleteModalOpen && (
+        <div
+          className={styles.itemDetailDeleteModalOverlay}
+          role="presentation"
+        >
+          <div
+            className={styles.itemDetailDeleteModal}
+            role="alertdialog"
+            aria-modal="true"
+            aria-label="상품 삭제 확인"
+            aria-describedby="delete-product-message"
+          >
+            <div className={styles.itemDetailDeleteModalContent}>
+              <Image
+                className={styles.itemDetailDeleteModalIcon}
+                src="/ic_check.svg"
+                alt=""
+                width={24}
+                height={24}
+              />
+
+              <p
+                id="delete-product-message"
+                className={styles.itemDetailDeleteModalMessage}
+              >
+                정말로 상품을 삭제하시겠어요?
+              </p>
+
+              {deleteProductMutation.isError && (
+                <p className={styles.itemDetailDeleteModalError} role="alert">
+                  {deleteProductMutation.error.status === 403
+                    ? '이 상품을 삭제할 권한이 없습니다.'
+                    : deleteProductMutation.error.status === 404
+                      ? '삭제할 상품을 찾을 수 없습니다.'
+                      : deleteProductMutation.error.message}
+                </p>
+              )}
+            </div>
+
+            <div className={styles.itemDetailDeleteModalActions}>
+              <button
+                className={styles.itemDetailDeleteModalCancelButton}
+                type="button"
+                onClick={handleCancelDeleteProduct}
+                disabled={deleteProductMutation.isPending}
+              >
+                취소
+              </button>
+
+              <button
+                className={styles.itemDetailDeleteModalConfirmButton}
+                type="button"
+                onClick={handleConfirmDeleteProduct}
+                disabled={deleteProductMutation.isPending}
+                data-pending={deleteProductMutation.isPending}
+              >
+                {deleteProductMutation.isPending ? '삭제 중...' : '네'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </article>
   )
 }

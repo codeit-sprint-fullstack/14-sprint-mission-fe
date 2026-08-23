@@ -5,15 +5,15 @@ import { getProductCommentsQueryKey } from '@/constants/queryKeys'
 const COMMENT_STALE_TIME = 60 * 1000
 const COMMENT_GC_TIME = 5 * 60 * 1000
 
-function getProductCommentsQueryOptions({ productId, limit }) {
+function getProductCommentsQueryOptions({ itemId, limit }) {
   return infiniteQueryOptions({
     queryKey: getProductCommentsQueryKey({
-      productId,
+      itemId,
       limit,
     }),
     queryFn: ({ pageParam }) =>
       getProductComments({
-        productId,
+        productId: itemId,
         limit,
         cursor: pageParam,
       }),
