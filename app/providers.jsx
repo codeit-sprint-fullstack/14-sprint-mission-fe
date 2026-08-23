@@ -15,6 +15,9 @@ export default function Providers({ children }) {
           mutations: {
             onError: (error) => setErrorMessage(getErrorMessage(error)),
           },
+          queries: {
+            retry: 1,
+          },
         },
       }),
   );
