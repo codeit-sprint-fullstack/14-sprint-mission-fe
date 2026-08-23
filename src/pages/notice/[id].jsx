@@ -188,12 +188,13 @@ export default function NoticeDetail() {
                 <div className={style.comment_wrap}>
                   {currentComments.map((c) => (
                     <Commentcard
+                    type={`notice`}
                       key={c.id}
                       id={c.id}
                       title={c.content}
                       author={c.author}
                       date={c.postedAt}
-                      noticeId={id}
+                      parentId={id}
                       onUpdated={(commentId, newContent) => {
                         setComments((prev) =>
                           prev.map((comment) =>

@@ -47,16 +47,16 @@
 - [x] PC, Tablet, Mobile 디자인에 해당하는 상품 상세 페이지를 만들어 주세요.
 - [x] 상품 상세 페이지 url path는 "/items/{itemId)"로 설정하세요.
 - [x] '목록으로 돌아가기' 버튼 클릭 시 중고마켓 페이지 "/items"로 이동합니다.
-- [] 상품 상세 데이터는 '/products/{productId}' GET 메서드 사용해 불러오세요. 이때, 상품 상세 조회는 인가된 사용자만 이용할 수 있도록 합니다.
-- [] 상품에 대한 댓글 조회도 가능합니다.
-- [] 상품 수정 및 삭제 기능을 API를 활용해 구현합니다. 이때, 인가된 사용자만 이용할 수 있도록 합니다.
-- [] 상품 수정은 '/products/{productId}' PATCH을 사용합니다.
-- [] 상품 삭제는 '/products/{productId}' DELETE를 사용합니다.
-- [] 상품 삭제 전, 확인 모달을 띄워주세요.
-- [] 상품에 대한 좋아요 및 좋아요 취소 기능을 https://panda-market-api.vercel.app/docs에 명세된 '/products/{productId}/favorite' POST & DELETE 활용해 구현합니다. 이때 인가된 사용자만 좋아요 기능을 이용할 수 있도록 합니다.
-- [] 댓글 생성 및 삭제 기능을 API를 활용해 구현합니다. 이때, 인가된 사용자만 이용할 수 있도록 합니다.
-- [] 댓글 수정은 https://panda-market-api.vercel.app/docs에 명세된 '/comments/{commentId}' PATCH을 사용합니다.
-- [] 댓글 삭제는 https://panda-market-api.vercel.app/docs에 명세된 '/comments/{commentId}' DELETE를 사용합니다.
+- [x] 상품 상세 데이터는 '/products/{productId}' GET 메서드 사용해 불러오세요. 이때, 상품 상세 조회는 인가된 사용자만 이용할 수 있도록 합니다.
+- [x] 상품에 대한 댓글 조회도 가능합니다.
+- [x] 상품 수정 및 삭제 기능을 API를 활용해 구현합니다. 이때, 인가된 사용자만 이용할 수 있도록 합니다.
+- [x] 상품 수정은 '/products/{productId}' PATCH을 사용합니다.
+- [x] 상품 삭제는 '/products/{productId}' DELETE를 사용합니다.
+- [x] 상품 삭제 전, 확인 모달을 띄워주세요.
+- [x] 상품에 대한 좋아요 및 좋아요 취소 기능을 https://panda-market-api.vercel.app/docs에 명세된 '/products/{productId}/favorite' POST & DELETE 활용해 구현합니다. 이때 인가된 사용자만 좋아요 기능을 이용할 수 있도록 합니다.
+- [x] 댓글 생성 및 삭제 기능을 API를 활용해 구현합니다. 이때, 인가된 사용자만 이용할 수 있도록 합니다. / 삭제기능을 위한 작성자 인증 방식 구현 불가능 (서버에서 제공하지 않음)
+- [x] 댓글 수정은 https://panda-market-api.vercel.app/docs에 명세된 '/comments/{commentId}' PATCH을 사용합니다.
+- [x] 댓글 삭제는 https://panda-market-api.vercel.app/docs에 명세된 '/comments/{commentId}' DELETE를 사용합니다.
 
 ## 심화 요구사항
 # 로그인 및 회원가입 페이지 공통
