@@ -7,6 +7,7 @@ import profileIc from "@/public/icon_profile.png";
 import styles from "./Posts.module.css";
 import Image from "next/image";
 import { formatDate } from "@/app/utils/formatDate";
+import { Suspense } from "react";
 
 export default async function PostListPage({ searchParams }) {
   const { q, orderBy } = await searchParams;
@@ -36,8 +37,10 @@ export default async function PostListPage({ searchParams }) {
           </Link>
         </div>
         <div className={styles.filter}>
-          <SearchBar />
-          <FilterList />
+          <Suspense fallback={<p>불러오는 중...</p>}>
+            <SearchBar />
+            <FilterList />
+          </Suspense>
         </div>
         <ul className={styles.lists}>
           {postList.map((post) => (
