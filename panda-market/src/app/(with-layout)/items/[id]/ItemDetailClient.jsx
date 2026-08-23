@@ -317,7 +317,7 @@ function ItemDetailClient({ itemId }) {
 
   if (!isValidItemId) {
     return (
-      <article className={styles.itemDetailPage}>
+      <article className={`${styles.itemDetailPage} ${styles.itemDetailState}`}>
         <p role="alert">유효하지 않은 상품 ID입니다.</p>
         <Link className={styles.itemDetailErrorBackLink} href="/items">
           상품목록으로 가기
@@ -328,7 +328,7 @@ function ItemDetailClient({ itemId }) {
 
   if (accessToken === undefined) {
     return (
-      <article className={styles.itemDetailPage}>
+      <article className={`${styles.itemDetailPage} ${styles.itemDetailState}`}>
         <p role="status" aria-live="polite">
           로그인 상태를 확인하고 있습니다.
         </p>
@@ -338,7 +338,7 @@ function ItemDetailClient({ itemId }) {
 
   if (!accessToken) {
     return (
-      <article className={styles.itemDetailPage}>
+      <article className={`${styles.itemDetailPage} ${styles.itemDetailState}`}>
         <p>상품 상세 정보를 확인하려면 로그인이 필요합니다.</p>
         <Link className={styles.itemDetailSigninLink} href="/signin">
           로그인하러 가기
@@ -349,7 +349,7 @@ function ItemDetailClient({ itemId }) {
 
   if (isPending) {
     return (
-      <article className={styles.itemDetailPage}>
+      <article className={`${styles.itemDetailPage} ${styles.itemDetailState}`}>
         <p role="status" aria-live="polite">
           상품 정보를 불러오고 있습니다.
         </p>
@@ -359,8 +359,8 @@ function ItemDetailClient({ itemId }) {
 
   if (isError && error.status === 401) {
     return (
-      <article className={styles.itemDetailPage}>
-        <p>{error.message}</p>
+      <article className={`${styles.itemDetailPage} ${styles.itemDetailState}`}>
+        <p role="alert">{error.message}</p>
         <Link className={styles.itemDetailSigninLink} href="/signin">
           다시 로그인하기
         </Link>
@@ -370,8 +370,8 @@ function ItemDetailClient({ itemId }) {
 
   if (isError && error.status === 404) {
     return (
-      <article className={styles.itemDetailPage}>
-        <p>{error.message}</p>
+      <article className={`${styles.itemDetailPage} ${styles.itemDetailState}`}>
+        <p role="alert">{error.message}</p>
         <Link className={styles.itemDetailErrorBackLink} href="/items">
           상품목록으로 가기
         </Link>
@@ -381,8 +381,8 @@ function ItemDetailClient({ itemId }) {
 
   if (isError) {
     return (
-      <article className={styles.itemDetailPage}>
-        <p>{error.message}</p>
+      <article className={`${styles.itemDetailPage} ${styles.itemDetailState}`}>
+        <p role="alert">{error.message}</p>
         <button
           className={styles.itemDetailErrorRetryButton}
           type="button"
@@ -393,7 +393,6 @@ function ItemDetailClient({ itemId }) {
       </article>
     )
   }
-
   return (
     <article className={styles.itemDetailPage}>
       <section className={styles.itemDetailProductSection}>
@@ -537,13 +536,17 @@ function ItemDetailClient({ itemId }) {
           <p role="alert">{updateCommentMutation.error.message}</p>
         )}
         {isCommentsPending ? (
-          <div className={styles.itemDetailInquiryList}>
+          <div
+            className={`${styles.itemDetailInquiryList} ${styles.itemDetailInquiryState}`}
+          >
             <p role="status" aria-live="polite">
               문의 목록을 불러오고 있습니다.
             </p>
           </div>
         ) : isCommentsError && !commentsData ? (
-          <div className={styles.itemDetailInquiryList}>
+          <div
+            className={`${styles.itemDetailInquiryList} ${styles.itemDetailInquiryState}`}
+          >
             <p role="alert">{commentsError.message}</p>
             <button
               className={styles.itemDetailErrorRetryButton}

@@ -7,6 +7,49 @@
   padding-top: 24px;
 }
 
+.itemDetailPage.itemDetailState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-top: 64px;
+}
+
+.itemDetailState > p,
+.itemDetailInquiryState > p,
+.itemDetailInquiryLoadMore > p {
+  width: 100%;
+  margin: 0;
+  color: var(--Secondary-500);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.itemDetailErrorRetryButton,
+.itemDetailErrorBackLink,
+.itemDetailSigninLink {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 104px;
+  height: 42px;
+  padding: 0 23px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
 .itemDetailProductSection {
   display: grid;
   grid-template-columns: 486px minmax(0, 1fr);
@@ -317,6 +360,12 @@
   gap: 24px;
 }
 
+.itemDetailInquiryState {
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
 .itemDetailInquiryScrollList {
   height: 442px;
   max-height: none;
@@ -355,7 +404,12 @@
 }
 
 .itemDetailInquiryLoadMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 1px;
+  gap: 8px;
 }
 
 .itemDetailDeleteModalOverlay {
@@ -365,7 +419,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000000b3;
+  background: var(--modal-overlay);
 }
 
 .itemDetailDeleteModal {
@@ -395,7 +449,7 @@
   height: 24px;
   padding: 5px;
   border-radius: 50%;
-  background: var(--error-red, #f74747);
+  background: var(--error-red);
 }
 
 .itemDetailDeleteModalMessage {
@@ -411,7 +465,7 @@
 
 .itemDetailDeleteModalError {
   margin: -16px 0 0;
-  color: var(--error-red, #f74747);
+  color: var(--error-red);
   text-align: center;
   font-size: 14px;
   line-height: 20px;
@@ -437,14 +491,14 @@
 }
 
 .itemDetailDeleteModalCancelButton {
-  border: 1px solid var(--error-red, #f74747);
+  border: 1px solid var(--error-red);
   background: var(--Cool-Gray-50);
-  color: var(--error-red, #f74747);
+  color: var(--error-red);
 }
 
 .itemDetailDeleteModalConfirmButton {
   border: 0;
-  background: var(--error-red, #f74747);
+  background: var(--error-red);
   color: var(--Cool-Gray-100);
 }
 

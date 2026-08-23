@@ -41,6 +41,7 @@ function ItemsClient() {
     isPending: isProductsPending,
     isError: isProductsError,
     isFetching: isProductsFetching,
+    refetch: refetchProducts,
   } = useQuery(
     getProductListQueryOptions({
       orderBy,
@@ -55,6 +56,7 @@ function ItemsClient() {
     isPending: isBestProductsPending,
     isError: isBestProductsError,
     isFetching: isBestProductsFetching,
+    refetch: refetchBestProducts,
   } = useQuery(
     getBestProductQueryOptions({
       pageSize: bestPageSize,
@@ -112,11 +114,26 @@ function ItemsClient() {
           )}
           <div className={styles.bestProductsCards}>
             {isBestProductsPending ? (
-              <p>베스트 상품을 불러오는 중입니다.</p>
+              <div className={styles.itemsState}>
+                <p role="status" aria-live="polite">
+                  베스트 상품을 불러오는 중입니다.
+                </p>
+              </div>
             ) : isBestProductsError ? (
-              <p>베스트 상품을 불러오지 못했습니다.</p>
+              <div className={styles.itemsState}>
+                <p role="alert">베스트 상품을 불러오지 못했습니다.</p>
+                <button
+                  className={styles.itemsRetryButton}
+                  type="button"
+                  onClick={() => refetchBestProducts()}
+                >
+                  다시 시도
+                </button>
+              </div>
             ) : bestProducts.length === 0 ? (
-              <p>등록된 베스트 상품이 없습니다.</p>
+              <div className={styles.itemsState}>
+                <p>등록된 베스트 상품이 없습니다.</p>
+              </div>
             ) : (
               bestProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
@@ -170,21 +187,36 @@ function ItemsClient() {
           )}
           <div className={styles.productsCards}>
             {isProductsPending ? (
-              <p>
-                {keyword
-                  ? '검색 결과를 불러오는 중입니다.'
-                  : '상품을 불러오는 중입니다.'}
-              </p>
+              <div className={styles.itemsState}>
+                <p role="status" aria-live="polite">
+                  {keyword
+                    ? '검색 결과를 불러오는 중입니다.'
+                    : '상품을 불러오는 중입니다.'}
+                </p>
+              </div>
             ) : isProductsError ? (
-              <p>
-                {keyword
-                  ? '검색 결과를 불러오지 못했습니다.'
-                  : '상품 목록을 불러오지 못했습니다.'}
-              </p>
+              <div className={styles.itemsState}>
+                <p role="alert">
+                  {keyword
+                    ? '검색 결과를 불러오지 못했습니다.'
+                    : '상품 목록을 불러오지 못했습니다.'}
+                </p>
+                <button
+                  className={styles.itemsRetryButton}
+                  type="button"
+                  onClick={() => refetchProducts()}
+                >
+                  다시 시도
+                </button>
+              </div>
             ) : products.length === 0 ? (
-              <p>
-                {keyword ? '검색 결과가 없습니다.' : '등록된 상품이 없습니다.'}
-              </p>
+              <div className={styles.itemsState}>
+                <p>
+                  {keyword
+                    ? '검색 결과가 없습니다.'
+                    : '등록된 상품이 없습니다.'}
+                </p>
+              </div>
             ) : (
               products.map((product) => (
                 <ProductCard key={product.id} product={product} />
