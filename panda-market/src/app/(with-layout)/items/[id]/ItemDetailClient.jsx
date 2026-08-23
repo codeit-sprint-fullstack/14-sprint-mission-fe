@@ -27,6 +27,10 @@ import ProductTagChip from '@/components/items/ProductTagChip'
 import { getProductDetailQueryOptions } from '@/queries/productQueries'
 import { getProductCommentsQueryOptions } from '@/queries/commentQueries'
 import { DEFAULT_PRODUCT_IMAGE, getProductImage } from '@/utils/productImage'
+import {
+  getProfileImageSrc,
+  handleProfileImageError,
+} from '@/utils/profileImage'
 import { getUserProfileQueryOptions } from '@/queries/userQueries'
 import formatDate from '@/utils/formatDate'
 import styles from '@/app/(with-layout)/items/[id]/itemDetailPage.module.css'
@@ -397,13 +401,13 @@ function ItemDetailClient({ itemId }) {
         </section>
         <footer className={styles.itemDetailProductMeta}>
           <div className={styles.itemDetailSellerArea}>
-            {/* 여러 페이지에서 프로필 사진이 재사용 되므로 프로필 디폴트 이미지 처리에 대한 로직 분리하기 */}
             <Image
               className={styles.itemDetailSellerProfile}
-              src="/ic_profile.svg"
+              src={getProfileImageSrc()}
               alt="판매자 프로필"
               width={40}
               height={40}
+              onError={handleProfileImageError}
             />
             <div className={styles.itemDetailSellerInfo}>
               <span className={styles.itemDetailSellerNickname}>

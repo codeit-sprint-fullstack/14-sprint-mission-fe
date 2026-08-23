@@ -4,6 +4,10 @@ import { useState } from 'react'
 import Image from 'next/image'
 import EditDeleteMenu from '@/components/common/EditDeleteMenu'
 import formatRelativeTime from '@/utils/formatRelativeTime'
+import {
+  getProfileImageSrc,
+  handleProfileImageError,
+} from '@/utils/profileImage'
 import styles from '@/components/common/CommentCard.module.css'
 
 function CommentCard({
@@ -63,10 +67,11 @@ function CommentCard({
         <div className={styles.commentUser}>
           <Image
             className={styles.commentUserProfile}
-            src={comment.writer.image || '/ic_profile.svg'}
+            src={getProfileImageSrc(comment.writer.image)}
             alt="프로필 사진"
             width={32}
             height={32}
+            onError={handleProfileImageError}
           />
 
           <div className={styles.commentUserInfo}>

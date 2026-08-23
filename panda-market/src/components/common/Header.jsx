@@ -5,6 +5,10 @@ import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import {
+  getProfileImageSrc,
+  handleProfileImageError,
+} from '@/utils/profileImage'
 import { getUserProfileQueryOptions } from '@/queries/userQueries'
 import styles from '@/components/common/Header.module.css'
 
@@ -81,10 +85,11 @@ function Header() {
           <div className={styles.userProfile}>
             <Image
               className={styles.profileImage}
-              src={user?.image || '/ic_profile.svg'}
+              src={getProfileImageSrc(user?.image)}
               alt={user?.nickname ? `${user.nickname} 프로필` : '기본 프로필'}
               width={40}
               height={40}
+              onError={handleProfileImageError}
             />
             {user?.nickname && (
               <span className={styles.nickname}>{user.nickname}</span>
