@@ -2,12 +2,12 @@
 
 import Modal from "@/app/components/Modal.jsx";
 import PasswordInput from "@/app/components/PasswordInput.jsx";
-import { getMe, signIn } from "@/app/lib/api/auth.js";
+import { signIn } from "@/app/lib/api/auth.js";
 import { getErrorMessage } from "@/app/lib/error.js";
 import IconGG from "@/public/ic_google.png";
 import IconKT from "@/public/ic_kakaotalk.png";
 import MainLogo from "@/public/logo_main_2x.png";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,10 +18,12 @@ import {
   PASSWORD_MIN_LENGTH,
 } from "../../lib/validation.js";
 import styles from "./Signin.module.css";
+import { useAuth } from "@/app/hooks/useAuth.js";
 
 export default function Signin() {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { user, isPending } = useAuth();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -31,11 +33,6 @@ export default function Signin() {
     password: false,
   });
 
-  const { data: user, isPending } = useQuery({
-    queryKey: ["users", "me"],
-    queryFn: () => getMe(),
-    retry: false,
-  });
   const {
     mutate,
     isPending: isSubmitting,

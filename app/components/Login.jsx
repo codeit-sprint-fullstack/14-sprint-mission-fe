@@ -1,23 +1,19 @@
 "use client";
 
 import profileIc from "@/public/icon_profile.png";
-import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-import { getMe } from "../lib/api/auth";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
-  const { data, isPending } = useQuery({
-    queryKey: ["users", "me"],
-    queryFn: getMe,
-  });
-  const showUser = !isPending && data;
+  const { user, isPending } = useAuth();
+  const showUser = !isPending && user;
   return (
     <>
       {showUser ? (
         <span>
           <Image src={profileIc} alt="" width={40} />
-          {data?.nickname}
+          {user?.nickname}
         </span>
       ) : (
         <Link href="/signin" className="btStyle">

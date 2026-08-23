@@ -12,21 +12,28 @@ import styles from "./ItemDetail.module.css";
 import Favorite from "./Favorite";
 import ProductCommentList from "./ProductCommentList";
 import { useRouter } from "next/navigation";
-import { getMe } from "../lib/api/auth";
+import { useAuth } from "../hooks/useAuth";
+import { useEffect } from "react";
 
 export default function ItemDetail({ id }) {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { user, isPending: isUserPending } = useAuth();
 
-  const { data, isPending, isError, error } = useQuery({
+  useEffect(() => {
+    if (!isUserPending && !user) {
+      router.replace("/signin");
+    }
+  }, [user, isUserPending, router]);
+
+  const {
+    data,
+    isPending: isProductPending,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["item", id],
     queryFn: () => getProductDetail(id),
-  });
-
-  const { data: me } = useQuery({
-    queryKey: ["users", "me"],
-    queryFn: () => getMe(),
-    retry: false,
   });
 
   const { mutate } = useMutation({
@@ -46,17 +53,11 @@ export default function ItemDetail({ id }) {
           <Link href={"/items"}>목록으로 돌아가기</Link>
         </>
       );
-    if (status === 401)
-      return (
-        <>
-          <p>로그인이 필요합니다.</p>
-          <Link href={"/signin"}>로그인하기</Link>
-        </>
-      );
     return <p>{getErrorMessage(error)}</p>;
   }
-  if (isPending) {
-    return null;
+
+  if (isUserPending || isProductPending || !user) {
+    return <p>로딩중입니다...</p>;
   }
 
   const {
@@ -81,7 +82,7 @@ export default function ItemDetail({ id }) {
         <div className={styles.content}>
           <div className={styles.titleRow}>
             <h2 className={styles.title}>{name}</h2>
-            {ownerId === me?.id && (
+            {ownerId === user?.id && (
               <KebabMenu
                 confirmMessage="게시글을 삭제하시겠습니까?"
                 onDelete={() => mutate(id)}

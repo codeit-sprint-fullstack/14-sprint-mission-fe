@@ -3,14 +3,14 @@
 import IconGG from "@/public/ic_google.png";
 import IconKT from "@/public/ic_kakaotalk.png";
 import MainLogo from "@/public/logo_main_2x.png";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Modal from "@/app/components/Modal";
 import PasswordInput from "@/app/components/PasswordInput";
-import { getMe, signUp } from "@/app/lib/api/auth";
+import { signUp } from "@/app/lib/api/auth";
 import { getErrorMessage } from "@/app/lib/error.js";
 import {
   isValidEmail,
@@ -18,10 +18,12 @@ import {
   PASSWORD_MIN_LENGTH,
 } from "@/app/lib/validation.js";
 import styles from "./Signup.module.css";
+import { useAuth } from "@/app/hooks/useAuth";
 
 export default function Signup() {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { user, isPending } = useAuth();
 
   const [form, setForm] = useState({
     email: "",
@@ -41,12 +43,6 @@ export default function Signup() {
     email: form.email.trim(),
     nickname: form.nickname.trim(),
   };
-
-  const { data: user, isPending } = useQuery({
-    queryKey: ["users", "me"],
-    queryFn: () => getMe(),
-    retry: false,
-  });
 
   const {
     mutate,
