@@ -35,3 +35,9 @@
   font-weight: 600;
   text-decoration: none;
 }
+
+.pagination {
+  margin-top: 43px;
+  display: flex;
+  justify-content: center;
+}

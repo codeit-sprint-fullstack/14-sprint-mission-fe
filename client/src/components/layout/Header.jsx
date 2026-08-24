@@ -17,7 +17,7 @@ export default function Header() {
   const { data: user } = useUser();
 
   return (
-    <header className={styles.headerWrapper}>
+    <header className={styles.wrapper}>
       <div className={styles.headerLeft}>
         <Link href="/" className={styles.logo}>
           <Image

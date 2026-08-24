@@ -30,7 +30,8 @@ export default async function ArticleDetail({ params }) {
   if (!commentRes.ok) {
     throw new Error("댓글을 불러오는 데 실패했습니다");
   }
-  const comments = await commentRes.json();
+  const commentData = await commentRes.json();
+  const comments = commentData.list;
 
   // 문제:
   const createCommentWithArticleId = createComment.bind(null, id);

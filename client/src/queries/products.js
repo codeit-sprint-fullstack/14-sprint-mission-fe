@@ -45,18 +45,3 @@ export function useDeleteProductFavorite() {
     mutationFn: (productId) => api.deleteProductFavorite(productId),
   });
 }
-
-// 상품 댓글 목록 가져오기
-export function useGetProductComments(productId, limit) {
-  return useQuery({
-    queryKey: ['comments', productId, limit],
-    queryFn: () => api.getProductComments(productId, limit),
-  });
-}
-
-// 상품 댓글 생성하기
-export function useCreateProductComment() {
-  return useMutation({
-    mutationFn: ({ productId, data}) => api.createProductComment(productId, data)
-  });
-}

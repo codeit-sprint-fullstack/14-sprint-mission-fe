@@ -8,14 +8,15 @@ import defaultImg from '@/assets/img_default.svg';
 import BackLink from '@/components/BackLink';
 import ConfirmModal from '@/components/ConfirmModal';
 import { useUser } from '@/queries/auth';
-import { useDeleteComment, useUpdateComment } from '@/queries/comment';
-import { useCreateProductComment, useCreateProductFavorite, useDeleteProduct, useDeleteProductFavorite, useGetProduct, useGetProductComments } from "@/queries/products";
+import { useCreateProductComment, useGetProductComments, useDeleteComment, useUpdateComment } from '@/queries/comment';
+import { useCreateProductFavorite, useDeleteProduct, useDeleteProductFavorite, useGetProduct } from "@/queries/products";
 import formatDate from '@/utils/formatDate';
 import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useInView } from 'react-intersection-observer';
 import CommentList from '../_components/CommentList';
 import styles from './page.module.css';
 
@@ -28,7 +29,8 @@ export default function ProductDetail() {
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState('정말로 상품을 삭제하시겠어요?')
+  const [modalMessage, setModalMessage] = useState('정말로 상품을 삭제하시겠어요?');
+  const { ref, inView } = useInView();
 
   // 인증
   const { 
@@ -91,13 +93,25 @@ export default function ProductDetail() {
     }
   }
 
-  // 상품 댓글 가져오기
+  // 상품 댓글 가져오기 (무한 스크롤)
   const {
-    data: comments,
+    data: commentsData,
     isPending: isCommentPending,
     isError: isCommentError,
     error: commentError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   } = useGetProductComments(id, CommentLimit);
+
+  const comments = 
+    commentsData?.pages.flatMap((commentPage) => commentPage.list) ?? [];
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   // 상품 댓글 생성하기
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm({ mode: 'onChange' });
@@ -323,13 +337,28 @@ export default function ProductDetail() {
             {commentError.response?.data?.message ?? '댓글을 불러오지 못했습니다'}
           </p>
         ) : (
-          <CommentList 
-            comments={comments}
-            currentUserId={user?.id} // 댓글 수정 및 삭제 메뉴를 위한 prop
-            onDelete={handelDeleteComment}
-            onUpdate={handleUpdateComment}
-            isPending={updateCommentMutation.isPending}
-          />
+          <>
+            <CommentList 
+              comments={comments}
+              currentUserId={user?.id} // 댓글 수정 및 삭제 메뉴를 위한 prop
+              onDelete={handelDeleteComment}
+              onUpdate={handleUpdateComment}
+              isPending={updateCommentMutation.isPending}
+            />
+            {hasNextPage && (
+              <button
+                ref={ref}
+                type='button'
+                disabled={!hasNextPage || isFetchingNextPage}
+                onClick={() => fetchNextPage()}
+              >
+                {isFetchingNextPage
+                  ? '댓글 불러오는 중...'
+                  : '댓글 더 보기'
+                }
+              </button>
+            )}
+          </>
         )}
       </section>
       <div className={styles.backlink}>

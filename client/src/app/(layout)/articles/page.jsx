@@ -4,6 +4,7 @@ import Dropdown from "@/components/Dropdown";
 import Input from "@/components/SearchInput";
 import Link from "next/link";
 import styles from "./page.module.css";
+import Pagination from "@/components/Pagination";
 
 export default async function Articles({ searchParams }) {
   // 베스트 게시글 가져오기
@@ -17,14 +18,17 @@ export default async function Articles({ searchParams }) {
   const bestData = await bestRes.json();
   const bestArticles = bestData.list;
 
-  // searchParams로 url의 keyword, sort 꺼내기
+  // searchParams로 url의 쿼리스트링 꺼내기
   const params = await searchParams;
   const keyword = params.keyword ?? "";
-  const sort = params.sort ?? "recent";
+  const sort = params.orderBy ?? "recent";
+  const page = Number(params.page ?? 1);
+  const pageSize = 4;
+  const offset = (page - 1) * pageSize;
 
   // 일반 게시글 가져오기
   const res = await fetch(
-    `${process.env.API_BASE_URL}/articles?limit=4&keyword=${keyword}&sort=${sort}`,
+    `${process.env.API_BASE_URL}/articles?offset=${offset}&limit=${pageSize}&keyword=${keyword}&sort=${sort}`,
     { cache: "no-store" }
   );
   if (!res.ok) {
@@ -32,13 +36,18 @@ export default async function Articles({ searchParams }) {
   }
   const data = await res.json();
   const articles = data.list;
+  const totalCount = data.totalCount;
+
+  // 페이지네이션
+  const totalPages = Math.ceil(totalCount / pageSize); // 필요한 총 페이지 수 구하기
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1); // 페이지 배열 만들기 (1, 2... N)
 
   return (
     <div className={styles.pageWrapper}>
-      <section className={styles.section}>
+      <header className={styles.section}>
         <h1 className={styles.bestSectionTitle}>베스트 게시글</h1>
         <BestArticleList articles={bestArticles} />
-      </section>
+      </header>
       <section className={styles.section}>
         <div className={styles.articleSectionHeader}>
           <h2 className={styles.articleSectionTitle}>게시글</h2>
@@ -51,6 +60,14 @@ export default async function Articles({ searchParams }) {
           <Dropdown route="/articles" />
         </div>
         <ArticleList articles={articles} />
+        <div>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            pageNumbers={pageNumbers}
+            route='articles'
+          />
+        </div>
       </section>
     </div>
   );

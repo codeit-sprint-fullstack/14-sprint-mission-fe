@@ -17,6 +17,7 @@ export default function Dropdown({ route }) {
     // 기존 검색 조건을 유지하면서 정렬 조건만 변경
     const params = new URLSearchParams(searchParams.toString());
     params.set("orderBy", sort);
+    params.set('page', '1');
     router.push(`${route}?${params.toString()}`);
 
     // 드롭다운 닫기
