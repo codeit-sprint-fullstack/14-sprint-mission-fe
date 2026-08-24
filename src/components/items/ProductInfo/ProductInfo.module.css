@@ -7,6 +7,7 @@
 .imageBox {
   width: 30.375rem;
   aspect-ratio: 1 / 1;
+  align-self: flex-start;
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 0.75rem;
@@ -40,7 +41,7 @@
   margin: 0;
   color: var(--color-Secondary-800);
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 2rem;
 }
 
@@ -48,7 +49,7 @@
   margin: 0;
   color: var(--color-Secondary-800);
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 3rem;
 }
 
@@ -85,7 +86,7 @@
 .tagSection {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
@@ -109,7 +110,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 4rem;
 }
 
 .sellerInfo {
@@ -140,4 +141,77 @@
   align-items: center;
   padding-left: 1.5rem;
   border-left: 1px solid var(--color-border-light);
+}
+
+@media (max-width: 1199px) {
+  .productInfo {
+    gap: 1rem;
+  }
+
+  .imageBox {
+    width: calc((100% - 1rem) / 2);
+  }
+
+  .name {
+    font-size: 1.25rem;
+    line-height: 2rem;
+  }
+
+  .price {
+    font-size: 2rem;
+    line-height: 2.625rem;
+  }
+
+  .divider {
+    margin: 1rem 0;
+  }
+
+  .descriptionSection {
+    gap: 0.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+  }
+
+  .tagSection {
+    gap: 0.5rem;
+  }
+
+  .meta {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 743px) {
+  .productInfo {
+    flex-direction: column;
+  }
+
+  .imageBox {
+    width: 100%;
+  }
+
+  .info {
+    width: 100%;
+  }
+
+  .summary {
+    gap: 0.5rem;
+  }
+
+  .titleRow {
+    gap: 0.5rem;
+  }
+
+  .name {
+    font-size: 1rem;
+    line-height: 1.625rem;
+  }
+
+  .price {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
