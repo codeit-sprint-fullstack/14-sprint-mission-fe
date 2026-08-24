@@ -1,15 +1,8 @@
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import pkg from "@prisma/client";
-const { PrismaClient } = pkg;
-import { PrismaPg } from "@prisma/adapter-pg";
+import prisma from "./src/lib/prisma.js";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
-
-const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 3001;
 
 const app = express();
