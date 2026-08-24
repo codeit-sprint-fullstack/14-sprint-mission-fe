@@ -2,33 +2,27 @@
 
 import Button from "@/components/Button/Button";
 import Dropdown from "@/components/Dropdown/Dropdown";
-import { DEFAULT_NICKNAME } from "@/constants/board";
-import useAsyncAction from "@/hooks/useAsyncAction";
-import { deleteArticleComment, updateArticleComment } from "@/lib/commentApi";
 import { formatRelativeTime } from "@/lib/dateUtils";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./CommentItem.module.css";
 
-export default function CommentItem({ comment }) {
+const DEFAULT_PROFILE_IMAGE = "/images/ic_profile.svg";
+
+export default function CommentItem({
+  content,
+  createdAt,
+  nickname,
+  profileImageSrc = DEFAULT_PROFILE_IMAGE,
+  canManage = false,
+  onUpdate,
+  onDelete,
+  onEditStart,
+  isUpdating = false,
+  updateErrorMessage = "",
+  deleteErrorMessage = "",
+}) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editContent, setEditContent] = useState(comment.content);
-  const router = useRouter();
-
-  const {
-    execute: executeUpdate,
-    isLoading: isUpdating,
-    errorMessage: updateErrorMessage,
-    clearError: clearUpdateError,
-  } = useAsyncAction("댓글을 수정하지 못했습니다. 잠시 후 다시 시도해 주세요.");
-
-  const {
-    execute: executeDelete,
-    isLoading: isDeleting,
-    errorMessage: deleteErrorMessage,
-    clearError: clearDeleteError,
-  } = useAsyncAction("댓글을 삭제하지 못했습니다. 잠시 후 다시 시도해 주세요.");
+  const [editContent, setEditContent] = useState(content);
 
   const isEditEmpty = editContent.trim() === "";
 
@@ -37,49 +31,31 @@ export default function CommentItem({ comment }) {
     { label: "삭제하기", value: "delete" },
   ];
 
-  const handleDelete = async () => {
-    if (isDeleting) return;
-
-    const shouldDelete = window.confirm("댓글을 삭제하시겠습니까?");
-
-    if (!shouldDelete) return;
-
-    const result = await executeDelete(() => deleteArticleComment(comment.id));
-
-    if (!result.success) return;
-
-    router.refresh();
-  };
-
   const handleMenuChange = (value) => {
     if (value === "edit") {
-      clearUpdateError();
-      clearDeleteError();
-      setEditContent(comment.content);
+      onEditStart?.();
+      setEditContent(content);
       setIsEditing(true);
     }
 
     if (value === "delete") {
-      handleDelete();
+      onDelete?.();
     }
   };
 
   const handleCancel = () => {
-    setEditContent(comment.content);
+    setEditContent(content);
     setIsEditing(false);
   };
 
   const handleUpdate = async () => {
     if (isEditEmpty || isUpdating) return;
 
-    const result = await executeUpdate(() =>
-      updateArticleComment(comment.id, editContent.trim()),
-    );
+    const isSuccess = await onUpdate(editContent.trim());
 
-    if (!result.success) return;
+    if (!isSuccess) return;
 
     setIsEditing(false);
-    router.refresh();
   };
 
   return (
@@ -92,10 +68,10 @@ export default function CommentItem({ comment }) {
             onChange={(e) => setEditContent(e.target.value)}
           />
         ) : (
-          <p className={styles.content}>{comment.content}</p>
+          <p className={styles.content}>{content}</p>
         )}
 
-        {!isEditing && (
+        {!isEditing && canManage && (
           <Dropdown
             options={menuOptions}
             variant="menu"
@@ -118,13 +94,20 @@ export default function CommentItem({ comment }) {
 
       <div className={styles.bottom}>
         <div className={styles.meta}>
-          <Image src="/images/ic_profile.svg" alt="" width={32} height={32} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={profileImageSrc || DEFAULT_PROFILE_IMAGE}
+            alt=""
+            width={32}
+            height={32}
+            onError={(e) => {
+              e.currentTarget.src = DEFAULT_PROFILE_IMAGE;
+            }}
+          />
 
           <div className={styles.author}>
-            <span className={styles.nickname}>{DEFAULT_NICKNAME}</span>
-            <time className={styles.date}>
-              {formatRelativeTime(comment.createdAt)}
-            </time>
+            <span className={styles.nickname}>{nickname}</span>
+            <time className={styles.date}>{formatRelativeTime(createdAt)}</time>
           </div>
         </div>
 

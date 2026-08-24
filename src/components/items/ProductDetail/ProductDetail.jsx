@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import InquirySection from "../InquirySection/InquirySection";
 import ProductInfo from "../ProductInfo/ProductInfo";
 import styles from "./ProductDetail.module.css";
 
@@ -49,8 +50,12 @@ export default function ProductDetail({ itemId }) {
   const isOwner = currentUser?.id === product.ownerId;
 
   return (
-    <>
+    <div className={styles.detailPage}>
       <ProductInfo product={product} isOwner={isOwner} />
+
+      <hr className={styles.divider} />
+
+      <InquirySection productId={product.id} currentUserId={currentUser.id} />
 
       <div className={styles.backButton}>
         <Button href="/items" className={styles.backButtonContent}>
@@ -58,6 +63,6 @@ export default function ProductDetail({ itemId }) {
           <Image src="/images/ic_back.svg" alt="" width={24} height={24} />
         </Button>
       </div>
-    </>
+    </div>
   );
 }

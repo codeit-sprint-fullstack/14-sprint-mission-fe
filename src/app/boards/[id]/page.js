@@ -1,6 +1,6 @@
 import ArticleActionMenu from "@/components/boards/ArticleActionMenu/ArticleActionMenu";
-import CommentForm from "@/components/boards/CommentForm/CommentForm";
-import CommentItem from "@/components/boards/CommentItem/CommentItem";
+import ArticleCommentForm from "@/components/boards/ArticleCommentForm/ArticleCommentForm";
+import ArticleCommentItem from "@/components/boards/ArticleCommentItem/ArticleCommentItem";
 import Button from "@/components/Button/Button";
 import { DEFAULT_LIKE_COUNT, DEFAULT_NICKNAME } from "@/constants/board";
 import { getArticle } from "@/lib/articleApi";
@@ -54,12 +54,12 @@ export default async function BoardDetailPage({ params }) {
         <p className={styles.content}>{article.content}</p>
       </section>
 
-      <CommentForm articleId={id} />
+      <ArticleCommentForm articleId={id} />
 
       {comments.length > 0 ? (
         <div className={styles.commentList}>
           {comments.map((comment) => (
-            <CommentItem key={comment.id} comment={comment} />
+            <ArticleCommentItem key={comment.id} comment={comment} />
           ))}
         </div>
       ) : (
