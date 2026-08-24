@@ -62,7 +62,6 @@ export default function EditItem() {
       setName(data.name);
       setDescription(data.description);
       setPrice(String(data.price));
-      console.log("서버 응답 tags:", data.tags);
       setTags(data.tags || []);
       setExistingImages(data.images || []);
     },
@@ -144,20 +143,9 @@ export default function EditItem() {
       setDescription(data.description || "");
       setPrice(String(data.price || ""));
       setTags(data.tags || []);
-      setExistingImages(data.images?.[0] || null);
+      setExistingImages(data.images || null);
     }
   }, [data]);
-
-  useEffect(() => {
-    if (data?.images) {
-      setExistingImages(data.images); // 배열로 세팅
-    }
-  }, [data]);
-
-  useEffect(() => {
-    console.log("existingImages 변경됨:", existingImages);
-  }, [existingImages]);
-
 
   if (isLoading) return <div>로딩 중...</div>;
   if (error) return <div>상품을 불러오지 못했습니다.</div>;
@@ -206,17 +194,18 @@ export default function EditItem() {
                       />
                     </div>
                   </div>
-                  {existingImages.map((img, index) => (
-                    <div key={index} className={style.img_sample}>
-                      <img src={img} alt={`sample-${index}`} className={style.background} />
-                      <img
-                        src="/assets/ic_X.svg"
-                        alt="delete"
-                        className={style.delete}
-                        onClick={() => handleDeleteImage(index)}
-                      />
-                    </div>
-                  ))}
+                  {Array.isArray(existingImages) &&
+                    existingImages.map((img, index) => (
+                      <div key={index} className={style.img_sample}>
+                        <img src={img} alt={`sample-${index}`} className={style.background} />
+                        <img
+                          src="/assets/ic_X.svg"
+                          alt="delete"
+                          className={style.delete}
+                          onClick={() => handleDeleteImage(index)}
+                        />
+                      </div>
+                    ))}
                 </div>
               </div>
               <div className={style.form_wrap}>
