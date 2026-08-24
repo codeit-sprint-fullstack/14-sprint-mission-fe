@@ -6,102 +6,76 @@
   padding: 24px 0;
 }
 
-.btn_left,
-.btn_right {
+.pagination_wrap * {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--Secondary-700);
-  cursor: pointer;
 }
 
-.btn_left span,
-.btn_right span {
-  color:#fff;
+.btn_left,
+.btn_right {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 1px solid var(--Cool-Gray-200);
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .btn_left img,
 .btn_right img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 16px;
+  height: 16px;
+}
+
+.btn_right img {
+  transform: scaleX(-1);
 }
 
 .btn_left:disabled,
 .btn_right:disabled {
-  color: var(--Secondary-600);
   cursor: not-allowed;
 }
 
 .page {
-  display: flex;
   align-items: center;
   gap: 4px;
   list-style: none;
   padding: 0;
-  margin: 0; 
+  margin: 0;
 }
 
 .page_number {
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 40px;
   height: 40px;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--Secondary-400);
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
+  padding: 12.5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12.5px;
+  border-radius: 40px;
+  border: 1px solid var(--Cool-Gray-200);
+  background: #FFF;
+  color: var(--Cool-Gray-500);
   cursor: pointer;
+
+  /* pretendard/lg-16px-semibold */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  /* 162.5% */
 }
 
 .page_number_active {
   background-color: var(--brand-blue);
-  color: #fff;
+  color: var(--Secondary-100);
 }
 
 /* PC: 1200px 이상 */
-@media screen and (min-width: 1200px) {
-  .pagination_wrap {
-    gap: 2px;
-  }
-
-  .btn_left,
-  .btn_right,
-  .page_number {
-    width: 50px;
-    height: 50px;
-    font-size: 13px;
-  }
-
-  .page {
-    gap: 2px;
-  }
-}
+@media screen and (min-width: 1200px) {}
 
 /* Tablet & Mobile: 375px ~ 1199px */
-@media screen and (min-width: 375px) and (max-width: 1199px) {
-  .pagination_wrap {
-    gap: 2px;
-    padding: 16px 0;
-  }
-
-  .btn_left,
-  .btn_right,
-  .page_number {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    font-size: 12px;
-  }
-
-  .page {
-    gap: 2px;
-  }
-}
+@media screen and (min-width: 375px) and (max-width: 1199px) {}

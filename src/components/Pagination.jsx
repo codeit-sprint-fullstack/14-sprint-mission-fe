@@ -28,8 +28,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         disabled={currentPage === 1}
         onClick={handlePrev}
       >
-        {/* <img src="/assets/icon_btn_left.png" alt="이전 페이지" /> */}
-        <span>{"<"}</span>
+        <img src="/assets/ic_arrow.svg" alt="이전 페이지" />
       </button>
 
       <ul className={style.page}>
@@ -52,7 +51,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         disabled={currentPage === totalPages}
         onClick={handleNext}
       >
-        <span>{">"}</span>
+        <img src="/assets/ic_arrow.svg" alt="다음 페이지" />
       </button>
     </div>
   );
