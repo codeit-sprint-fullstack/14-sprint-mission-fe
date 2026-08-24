@@ -15,6 +15,7 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
@@ -30,7 +31,19 @@ export default function SignInForm() {
   });
 
   const handleSignIn = (data) => {
-    signInMutation.mutate(data);
+    signInMutation.mutate(data, {
+      onError: () => {
+        setError("email", {
+          type: "server",
+          message: "이메일을 확인해 주세요.",
+        });
+
+        setError("password", {
+          type: "server",
+          message: "비밀번호를 확인해 주세요.",
+        });
+      },
+    });
   };
 
   return (
