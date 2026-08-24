@@ -6,6 +6,7 @@ import Link from "next/link";
 import { DEFAULT_PROFILE_IMAGE } from "@/constant/board";
 import ActionDropdown from "./ActionDropdown";
 import styles from "./detail.module.css";
+import { getFallbackNickname } from "@/utils/nickname";
 
 function formatRelativeTime(dateString) {
   const now = new Date();
@@ -169,7 +170,7 @@ export default function CommentSection({ articleId, initialComments }) {
                         className={styles.profileImage}
                       />
                       <span className={styles.commentAuthor}>
-                        {comment.writer?.nickname ?? "초코비버"}
+                        {comment.writer?.nickname ?? getFallbackNickname(comment.id)}
                       </span>
                       <span className={styles.commentDate}>
                         {formatRelativeTime(comment.createdAt)}
@@ -214,7 +215,7 @@ export default function CommentSection({ articleId, initialComments }) {
                       className={styles.profileImage}
                     />
                     <span className={styles.commentAuthor}>
-                      {comment.writer?.nickname ?? "초코비버"}
+                      {comment.writer?.nickname ?? getFallbackNickname(comment.id)}
                     </span>
                     <span className={styles.commentDate}>
                       {formatRelativeTime(comment.createdAt)}
