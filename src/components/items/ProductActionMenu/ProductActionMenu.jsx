@@ -50,6 +50,11 @@ export default function ProductActionMenu({ productId }) {
   });
 
   const handleMenuChange = (value) => {
+    if (value === "edit") {
+      router.push(`/items/${productId}/edit`);
+      return;
+    }
+
     if (value === "delete") {
       setIsDeleteModalOpen(true);
     }

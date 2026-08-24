@@ -29,6 +29,12 @@ export async function getProduct(productId) {
   return response.data;
 }
 
+export async function updateProduct(productId, productData) {
+  const response = await apiClient.patch(`/products/${productId}`, productData);
+
+  return response.data;
+}
+
 export async function deleteProduct(productId) {
   const response = await apiClient.delete(`/products/${productId}`);
 
