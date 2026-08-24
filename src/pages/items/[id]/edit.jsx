@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Footer from "@/components/Footer.jsx";
@@ -13,14 +13,42 @@ export default function EditItem() {
   const { id } = router.query;
   const queryClient = useQueryClient();
 
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
   const [tagsFirst, setTagsFirst] = useState(true);
   const [inputValue, setInputValue] = useState("");
-  const [existingImage, setExistingImage] = useState(null);
+  const [existingImages, setExistingImages] = useState([]);
+  const fileInputRef = useRef(null);
+
+  // 숨겨진 input 클릭
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+
+  // 이미지 파일 확인
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    // 최대 3장 제한
+    if (existingImages.length + selectedFiles.length > 3) {
+      toast("이미지는 최대 3개까지 등록 가능합니다.");
+      return;
+    }
+    // 상태 업데이트
+    setFiles((prev) => [...prev, ...selectedFiles]);
+    // 미리보기 URL 추가
+    const previewUrls = selectedFiles.map((file) => URL.createObjectURL(file));
+    setExistingImages((prev) => [...prev, ...previewUrls]);
+  };
+
+  // 이미지 삭제
+  const handleDeleteImage = (index) => {
+    setExistingImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+
 
   // 상품 조회
   const { data, isLoading, error } = useQuery({
@@ -36,29 +64,33 @@ export default function EditItem() {
       setPrice(String(data.price));
       console.log("서버 응답 tags:", data.tags);
       setTags(data.tags || []);
-      setExistingImage(data.images?.[0] || null);
+      setExistingImages(data.images || []);
     },
   });
 
   // 상품 수정 Mutation
   const mutation = useMutation({
     mutationFn: async () => {
-      let uploadUrl = null;
-      if (file) {
-        uploadUrl = await uploadImage(file);
+      const uploadUrls = [];
+
+      // 여러 파일 업로드 처리
+      for (const f of files) {
+        const url = await uploadImage(f);
+        uploadUrls.push(url);
       }
-      const images = uploadUrl
-        ? [uploadUrl]
-        : existingImage
-          ? [existingImage]
-          : [];
+
+      // 최종 images 배열 구성
+      const images = [
+        ...existingImages.filter((img) => img.startsWith("http")), // 기존 서버 URL 유지
+        ...uploadUrls, // 새 업로드 URL 추가
+      ];
 
       return api.patch(`/items/${id}`, {
         name,
         description,
         price: Number(price),
         tags,
-        images,
+        images, // 배열 전체 전달
       });
     },
     onSuccess: () => {
@@ -72,11 +104,14 @@ export default function EditItem() {
     },
   });
 
+
+
   const isDisabled =
     name.trim() === "" ||
     description.trim() === "" ||
     String(price).trim() === "" ||
-    tags.length === 0;
+    tags.length === 0 ||
+    existingImages.length === 0;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,11 +144,19 @@ export default function EditItem() {
       setDescription(data.description || "");
       setPrice(String(data.price || ""));
       setTags(data.tags || []);
-      setExistingImage(data.images?.[0] || null);
+      setExistingImages(data.images?.[0] || null);
     }
   }, [data]);
 
+  useEffect(() => {
+    if (data?.images) {
+      setExistingImages(data.images); // 배열로 세팅
+    }
+  }, [data]);
 
+  useEffect(() => {
+    console.log("existingImages 변경됨:", existingImages);
+  }, [existingImages]);
 
 
   if (isLoading) return <div>로딩 중...</div>;
@@ -123,7 +166,7 @@ export default function EditItem() {
   return (
     <>
       <Gnb />
-      <main>
+      <main className={style.main}>
         <div className={style.wrap}>
           <div className={style.content_wrap}>
             <div className={style.content_head}>
@@ -133,6 +176,49 @@ export default function EditItem() {
               </button>
             </div>
             <form onSubmit={handleSubmit}>
+              <div className={style.form_wrap}>
+                <span>*이미지 파일 (최대 3개)</span>
+                <div className={style.img_wrap}>
+                  <div
+                    className={style.img_upload}
+                    onClick={() => {
+                      if (existingImages.length >= 3) {
+                        toast(
+                          <div>
+                            이미지는 최대 3장만 등록할 수 있습니다.<br />
+                            기존 이미지를 삭제하세요.
+                          </div>
+                        );
+                        return;
+                      }
+                      handleUploadClick();
+                    }}
+                  >
+                    <div className={style.upload_wrap}>
+                      <img src="/assets/ic_plus.svg" alt="plus" />
+                      <span>이미지 등록</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                  </div>
+                  {existingImages.map((img, index) => (
+                    <div key={index} className={style.img_sample}>
+                      <img src={img} alt={`sample-${index}`} className={style.background} />
+                      <img
+                        src="/assets/ic_X.svg"
+                        alt="delete"
+                        className={style.delete}
+                        onClick={() => handleDeleteImage(index)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
               <div className={style.form_wrap}>
                 <span>*상품명</span>
                 <input
@@ -157,13 +243,6 @@ export default function EditItem() {
                   placeholder="가격을 입력해주세요"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                />
-              </div>
-              <div className={style.form_wrap}>
-                <span>*이미지 파일</span>
-                <input
-                  type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
                 />
               </div>
               <div className={style.form_wrap}>

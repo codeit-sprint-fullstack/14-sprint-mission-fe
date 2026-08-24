@@ -178,13 +178,12 @@ export default function ItemDetail() {
                         <div className={style.content_wrap}>
                             <div className={style.item_images}>
                                 {Array.isArray(item?.images) && item.images.length > 0 ? (
-                                    item.images.map((img, idx) => (
-                                        <img key={idx} src={img} alt={item?.name || "상품 이미지"} />
-                                    ))
+                                    <img src={item?.images[0]} alt={item?.name || "상품 이미지"} />
                                 ) : (
                                     <img src="/assets/default.jpg" alt="기본 이미지" />
                                 )}
                             </div>
+
                             <div className={style.info}>
                                 <div className={style.info_head}>
                                     <div className={style.head_top}>

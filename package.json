@@ -1,5 +1,5 @@
 {
-  "name": "sprint_mission_8",
+  "name": "sprint_mission_9",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -18,7 +18,7 @@
     "react-dom": "^19.2.8",
     "react-toastify": "^11.1.0"
   },
-  "description": "========= 스프린트 미션 8 =========",
+  "description": "========= 스프린트 미션 9 =========",
   "main": "index.js",
   "repository": {
     "type": "git",
