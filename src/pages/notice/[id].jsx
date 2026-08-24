@@ -5,55 +5,169 @@ import Gnb from "@/components/gnb";
 import style from "@/styles/[id].module.css"
 import Pagination from '@/components/Pagination.jsx';
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { formatDate } from '@/utils/time.js';
+import api from '@/utils/api';
+import WarningModal from '@/components/warningmodal';
+import { toast } from 'react-toastify';
 
 export default function NoticeDetail() {
   const router = useRouter();
   const { id } = router.query;
-  const [notice, setNotice] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [nickname, setNickname] = useState("");
-  const [content, setContent] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const queryClient = useQueryClient();
 
-
+  const [comment, setComment] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const commentsPerPage = 5;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [like, setLike] = useState(false);
 
-  async function handleSubmit() {
-    if (!nickname.trim() || !content.trim()) return;
-    // 추후 api 명세 갱신 시 추가 개발 필요
-    await fetch(`/api/notice/${id}/comment`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ author: nickname, content }),
-    });
+  const handleDeleteClick = () => {
+    setIsModalOpen(true);
+  };
 
-    setNickname("");
-    setContent("");
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
-    const res = await fetch(`/api/notice/${id}/comment`);
-    setComments(await res.json());
-    setCurrentPage(1);
-  }
+  // 상품 상세 조회
+  const {
+    data: notice,
+    isLoading: noticeLoading,
+    error: noticeError,
+  } = useQuery({
+    queryKey: ["item", id],
+    queryFn: async () => {
+      const res = await api.get(`/notice/${id}`);
+      return res.data;
+    },
+    enabled: !!id,
+  });
 
-  useEffect(() => {
-    if (id) {
-      fetch(`/api/notice/${id}`)
-        .then((res) => res.json())
-        .then((data) => setNotice(data));
+  // 댓글 조회
+  const {
+    data: commentsData,
+    isLoading: commentsLoading,
+    error: commentsError,
+  } = useQuery({
+    queryKey: ["comments", id],
+    queryFn: async () => {
+      const res = await api.get(`/notice/${id}/comment?limit=10`);
+      return res.data;
+    },
+    enabled: !!id,
+  });
 
-      setComments([]);
+  const comments = commentsData?.list || [];
+  const currentComments = comments.slice((currentPage - 1) * 10, currentPage * 10);
+
+  // 댓글 등록 Mutation
+  const registerComment = useMutation({
+    mutationFn: async () => {
+      const res = await api.post(`/notice/${id}/comment`, { content: comment });
+      return res.data;
+    },
+    onSuccess: () => {
+      toast("댓글이 등록되었습니다!");
+      setComment("");
+      queryClient.invalidateQueries(["comments", id]); // 댓글 목록 갱신
+    },
+    onError: () => toast("댓글 등록 중 오류 발생"),
+  });
+
+  // 좋아요 Mutation
+  const toggleLike = useMutation({
+    mutationFn: async (liked) => {
+      if (!liked) {
+        // 좋아요 등록
+        const res = await api.post(`/notice/${id}/favorite`);
+        return res.data;
+      } else {
+        // 좋아요 취소
+        const res = await api.delete(`/notice/${id}/favorite`);
+        return res.data;
+      }
+    },
+    onMutate: async (liked) => {
+      // Optimistic Update: 클릭 즉시 UI 반영
+      await queryClient.cancelQueries(["item", id]);
+      const prevItem = queryClient.getQueryData(["item", id]);
+
+      queryClient.setQueryData(["item", id], (old) => ({
+        ...old,
+        isFavorite: !liked,
+        favoriteCount: liked ? old.favoriteCount - 1 : old.favoriteCount + 1,
+      }));
+
+      return { prevItem };
+    },
+    onError: (err, variables, context) => {
+      // 실패 시 롤백
+      queryClient.setQueryData(["item", id], context.prevItem);
+      toast.error("백엔드 curl에 auth 인증 과정이 없어 favorite 갱신이 불가합니다.");
+    },
+    onSuccess: (updated) => {
+      queryClient.setQueryData(["item", id], (prev) => ({
+        ...prev,
+        isFavorite: updated.isFavorite,
+        favoriteCount: updated.favoriteCount,
+      }));
+    },
+    onSettled: () => {
+      // 서버와 최종 동기화
+      queryClient.invalidateQueries(["item", id]);
+    },
+  });
+
+  // 삭제 Mutation
+  const deleteItem = useMutation({
+    mutationFn: async () => {
+      const res = await api.delete(`/notice/${id}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      toast("게시글이 삭제되었습니다.");
+      router.push("/notice");
+    },
+    onError: () => toast("삭제 중 오류 발생"),
+  });
+
+  // 게시글 수정
+  const handleEdit = async () => {
+    try {
+      const res = await api.patch(`/notice/${id}`, {});
+      if (res.status === 403) {
+        toast("본인이 작성한 글만 수정할 수 있습니다.");
+      } else if (res.status === 200) {
+        router.push(`/notice/${id}/edit`);
+      } else {
+        toast("수정 권한 확인 중 오류");
+      }
+    } catch (error) {
+      console.error("수정 권한 확인 에러:", error);
+      toast.error("수정 권한 확인 중 문제가 발생했습니다.");
     }
-  }, [id]);
+  };
 
-  if (!notice) return <p>로딩 중...</p>;
+  // 게시글 삭제
+  const handlePermit = async () => {
+    try {
+      await api.delete(`/notice/${id}`); // 실제 삭제 API 호출
+      toast("상품이 삭제되었습니다.");
+      setIsModalOpen(false);
+      router.push("/notice"); // 목록 페이지로 이동
+    } catch (error) {
+      console.error("삭제 에러:", error);
+      toast.error("상품 삭제 중 문제가 발생했습니다.");
+      setIsModalOpen(false);
+    }
+  };
 
-  const indexOfLastComment = currentPage * commentsPerPage;
-  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
-  const totalPages = Math.ceil(comments.length / commentsPerPage);
+
+
+  if (noticeLoading || commentsLoading) return <p>로딩중...</p>;
+  if (noticeError || commentsError) return <p>에러 발생</p>;
 
   return (
     <>
@@ -64,7 +178,7 @@ export default function NoticeDetail() {
             <div className={style.notice_wrap}>
               <div className={style.notice_head}>
                 <div className={style.head_top}>
-                  <span>{notice.title}</span>
+                  <span>{notice?.title}</span>
                   <img
                     src="/assets/ic_kebab.svg"
                     alt="kebob"
@@ -73,82 +187,41 @@ export default function NoticeDetail() {
                   />
                   {isDropdownOpen && (
                     <ul className={style.dropdown}>
-                      <li
-                        onClick={async () => {
-                          try {
-                            const token = localStorage.getItem("accessToken");
-                            const res = await fetch(`/api/notice/${id}`, {
-                              method: "PATCH", // 수정 요청 대신 권한 체크용으로 호출
-                              headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${token}`,
-                              },
-                              body: JSON.stringify({}), // 실제 수정은 edit 페이지에서 진행
-                            });
-
-                            if (res.status === 403) {
-                              alert("본인이 작성한 글만 수정할 수 있습니다.");
-                            } else if (res.ok) {
-                              // 권한 통과 → 수정 페이지로 이동
-                              router.push(`/notice/${id}/edit`);
-                            } else {
-                              const err = await res.json();
-                              alert("수정 권한 확인 중 오류: " + err.error);
-                            }
-                          } catch (error) {
-                            console.error("수정 권한 확인 에러:", error);
-                            alert("수정 권한 확인 중 문제가 발생했습니다.");
-                          }
-                        }}
-                      >
-                        수정
-                      </li>
-                      <li
-                        onClick={async () => {
-                          try {
-                            const token = localStorage.getItem("accessToken"); // 로그인 시 저장한 토큰
-                            const res = await fetch(`/api/notice/${id}`, {
-                              method: "DELETE",
-                              headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${token}`,
-                              },
-                            });
-                            if (res.ok) {
-                              alert("게시글이 삭제되었습니다.");
-                              router.push("/notice");
-                            } else if (res.status === 401) {
-                              alert("로그인이 필요합니다.");
-                            } else if (res.status === 403) {
-                              alert("본인이 작성한 글만 삭제할 수 있습니다.");
-                            } else {
-                              const err = await res.json();
-                              alert("삭제 중 오류: " + err.error);
-                            }
-                          } catch (error) {
-                            console.error("삭제 에러:", error);
-                            alert("삭제 중 문제가 발생했습니다.");
-                          }
-                        }}
-                      >
-                        삭제
-                      </li>
+                      <li onClick={handleEdit}>수정</li>
+                      <li onClick={handleDeleteClick}>삭제</li>
                     </ul>
+                  )}
+                  {isModalOpen && (
+                    <WarningModal
+                      message="정말로 상품을 삭제하시겠어요?"
+                      onPermit={handlePermit}
+                      onClose={handleCloseModal}
+                    />
                   )}
                 </div>
                 <div className={style.head_bottom}>
                   <div className={style.img_name_date}>
                     <img src="/assets/ic_profile.svg" alt="kebob" />
-                    <span id={style.notice_author}>{notice.writer.nickname}</span>
-                    <span id={style.notice_postedAt}>{formatDate(notice.createdAt)}</span>
+                    <span id={style.notice_author}>{notice?.writer.nickname}</span>
+                    <span id={style.notice_postedAt}>{formatDate(notice?.createdAt)}</span>
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="1" height="34" viewBox="0 0 1 34" fill="none">
                     <path d="M0.5 0V34" stroke="#E5E7EB" />
                   </svg>
-                  <div className={style.likearea}>
-                    <div className={style.heart_likes}>
-                      <img src="/assets/ic_heart.svg" alt="heart" />
-                      <span>{notice.likeCount}</span>
+                  <div>
+                    <div className={style.line_button}>
+                      <button
+                        className={style.likebutton}
+                        onClick={() => toggleLike.mutate(notice.isFavorite)}
+                      >
+                        <div className={style.heart_likes}>
+                          <img
+                            src={notice?.isFavorite ? "/assets/ic_heart_on.svg" : "/assets/ic_heart.svg"}
+                            alt="heart"
+                          />
+                          <span>{notice?.likeCount ?? 0}</span>
+                        </div>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -157,7 +230,7 @@ export default function NoticeDetail() {
                 </svg>
               </div>
               <div className={style.notice_content}>
-                <span>{notice.content}</span>
+                <span>{notice?.content}</span>
               </div>
             </div>
             <div className={style.body_comment}>
@@ -165,21 +238,16 @@ export default function NoticeDetail() {
                 <div className={style.span_textarea}>
                   <span>댓글달기</span>
                   <form>
-                    <input
-                      placeholder="닉네임을 입력해주세요"
-                      value={nickname}
-                      onChange={(e) => setNickname(e.target.value)}
-                    />
                     <textarea
                       placeholder="내용을 입력해주세요"
-                      value={content}
-                      onChange={(e) => setContent(e.target.value)}
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
                     />
                   </form>
                 </div>
                 <button
-                  onClick={handleSubmit}
-                  disabled={!nickname.trim() || !content.trim()}
+                  onClick={() => registerComment.mutate(comment)}
+                  disabled={!comment.trim()}
                 >
                   <span>등록</span>
                 </button>
@@ -188,27 +256,28 @@ export default function NoticeDetail() {
                 <div className={style.comment_wrap}>
                   {currentComments.map((c) => (
                     <Commentcard
-                    type={`notice`}
                       key={c.id}
                       id={c.id}
+                      type="notice"
                       title={c.content}
-                      author={c.author}
-                      date={c.postedAt}
+                      author={c.writer.nickname}
+                      date={c.createdAt}
                       parentId={id}
                       onUpdated={(commentId, newContent) => {
-                        setComments((prev) =>
-                          prev.map((comment) =>
-                            comment.id === commentId ? { ...comment, content: newContent } : comment
-                          )
-                        );
+                        queryClient.setQueryData(["comments", id], (old) => {
+                          if (!old) return old;
+                          return {
+                            ...old,
+                            list: old.list.map((comment) =>
+                              comment.id === commentId ? { ...comment, content: newContent } : comment
+                            ),
+                          };
+                        });
                       }}
+
+                      onDeleted={() => queryClient.invalidateQueries(["comments", id])}
                     />
                   ))}
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={setCurrentPage}
-                  />
                 </div>
               ) : (
                 <div className={style.empty_comment}>

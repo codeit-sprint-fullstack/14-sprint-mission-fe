@@ -176,24 +176,37 @@
   background: #FFF;
 }
 
+.likebutton {
+    height: 40px;
+    padding: 4px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 35px;
+    border: 1px solid var(--Secondary-200, #E5E7EB);
+    background: #FFF;
+}
+
 .heart_likes {
-  align-items: center;
-  gap: 4px;
+    height: 100%;
+    align-items: center;
+    gap: 4px;
 }
 
 .heart_likes img {
-  width: 32px;
-  height: 32px;
+    width: auto;
+    height: 100%;
 }
 
 .heart_likes span {
-  color: var(--Cool-Gray-500);
-  /* pretendard/lg-16px-medium */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 26px; /* 162.5% */
+    color: var(--Cool-Gray-500, #6B7280);
+    /* pretendard/lg-16px-medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    /* 162.5% */
 }
 
 .notice_content span {

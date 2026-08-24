@@ -247,7 +247,7 @@ export default function ItemDetail() {
                                             <p>{item?.createdAt ? formatDate(item.createdAt) : ""}</p>
                                         </div>
                                     </div>
-                                    <div style={style.likearea}>
+                                    <div>
                                         <div className={style.line_button}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="1" height="34" viewBox="0 0 1 34" fill="none">
                                                 <path d="M0.5 0V34" stroke="#E5E7EB" />

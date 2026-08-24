@@ -70,7 +70,7 @@
 
 .close span {
     color: var(--error-red, #F74747);
-
+    flex: none;
     /* pretendard/lg-16px-semibold */
     font-family: Pretendard;
     font-size: 16px;
@@ -94,8 +94,8 @@
 }
 
 .permit span {
+    flex: none;
     color: var(--Cool-Gray-100, #F3F4F6);
-
     /* pretendard/lg-16px-semibold */
     font-family: Pretendard;
     font-size: 16px;
