@@ -1,5 +1,6 @@
 import { formatDate } from "@/lib/dateUtils";
 import Image from "next/image";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import ProductActionMenu from "../ProductActionMenu/ProductActionMenu";
 import styles from "./ProductInfo.module.css";
 
@@ -62,6 +63,14 @@ export default function ProductInfo({ product, isOwner }) {
                 {formatDate(product.createdAt)}
               </time>
             </div>
+          </div>
+
+          <div className={styles.favoriteArea}>
+            <FavoriteButton
+              productId={product.id}
+              isFavorite={product.isFavorite}
+              favoriteCount={product.favoriteCount}
+            />
           </div>
         </div>
       </div>
