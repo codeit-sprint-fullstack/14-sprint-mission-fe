@@ -119,3 +119,24 @@ Content-Type: application/json
   "nickname": "테스트",
   "password": "password1234"
 }
+
+
+// 로그인
+
+### 로그인 실패 - 잘못된 비밀번호
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "wrongpassword"
+}
+
+###
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password1234"
+}
