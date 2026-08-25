@@ -96,3 +96,26 @@ Content-Type: application/json
 
 ###
 DELETE {{baseUrl}}/comments/12
+
+
+// 회원가입
+
+### 잘못된 이메일 형식
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "email": "wrong-email",
+  "nickname": "gildong",
+  "password": "12345678"
+}
+
+### 정상 회원가입
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "nickname": "테스트",
+  "password": "password1234"
+}
