@@ -1,1 +1,27 @@
-GET http://localhost:3001/hello
+### 회원가입
+POST http://localhost:3001/auth/signUp
+Content-Type: application/json
+
+{
+  "email": "leecoding@gmail.com",
+  "password": "12341234",
+  "passwordConfirmation": "12341234",
+  "nickname": "이코딩"
+}
+
+### 로그인
+POST http://localhost:3001/auth/signIn
+Content-Type: application/json
+
+{
+  "email": "leecoding@gmail.com",
+  "password": "12341234"
+}
+
+### 토큰 refresh
+POST http://localhost:3001/auth/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzYzMDAxNywiZXhwIjoxNzg4ODM5NjE3fQ.SfAf0Lo6jM2e36LcomX2PaoJ--LgF07Pn0J5Rc6oDl8"
+}
