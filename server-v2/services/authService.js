@@ -54,7 +54,7 @@ async function verifyPassword(inputPassword, savedPassword) {
 async function getUser(email, password) {
   // 1. 이메일로 유저 조회
   const user = await authRepository.findByEmail(email);
-  if (!user) {
+  if (!user || !user.encryptedPassword) {
     const error = new Error('Unauthorized');
     error.code = 401;
     throw error;
@@ -98,6 +98,18 @@ async function updateRefreshToken(userId, refreshToken) {
   await authRepository.updateRefreshToken(userId, refreshToken);
 }
 
+// Passport JWT 검증 후 사용자 조회
+async function getUserById(userId) {
+  const user = await authRepository.findById(userId);
+  return user ? filterSensitiveUserData(user) : null;
+}
+
+// Google oauth
+async function upsertOAuthUser(provider, providerId, email, nickname) {
+  const user = await authRepository.upsertOAuthUser(provider, providerId, email, nickname);
+  return filterSensitiveUserData(user);
+}
+
 
 export default {
   createUser,
@@ -105,4 +117,6 @@ export default {
   createToken,
   refreshToken,
   updateRefreshToken,
+  getUserById,
+  upsertOAuthUser,
 }

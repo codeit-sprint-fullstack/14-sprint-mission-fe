@@ -41,9 +41,19 @@ async function updateRefreshToken(userId, refreshToken) {
   });
 }
 
+// Google oauth
+async function upsertOAuthUser(provider, providerId, email, nickname) {
+  return await prisma.user.upsert({
+    where: { provider, providerId },
+    update: { email, nickname }, // where 조건의 데이터가 존재할 때 변경할 데이터
+    create: { provider, providerId, email, nickname } // where 조건의 데이터가 없을 때 새로 생성할 전체 데이터 
+  });
+}
+
 export default {
   findById,
   findByEmail,
   save,
   updateRefreshToken,
+  upsertOAuthUser,
 }

@@ -35,7 +35,7 @@ async function getUser(req, res, next) {
 // 토큰 refresh
 async function refreshToken(req, res, next) {
   try {
-    const { userId } = req.auth;
+    const userId = req.user.id; // passport strategy에 맞게 수정 
     const { refreshToken } = req.body;
     const { accessToken, newRefreshToken } = await authService.refreshToken(userId, refreshToken); // AT, RT refresh (슬라이딩)
     await authService.updateRefreshToken(userId, newRefreshToken); // 새 RT DB에 저장
@@ -48,8 +48,26 @@ async function refreshToken(req, res, next) {
   }
 }
 
+// google oauth 후, token 발급
+async function issueOAuthTokens(req, res, next) {
+  try {
+    const { id } = req.user;
+    const accessToken = authService.createToken({ id }, 'access'); // AT 발급
+    const refreshToken = authService.createToken({ id }, 'refresh'); // RT 발급
+    await authService.updateRefreshToken(id, refreshToken); // RT, DB에 저장
+    return res.json({ 
+      accessToken, 
+      refreshToken,
+      user: req.user,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 export default {
   createUser,
   getUser,
   refreshToken,
+  issueOAuthTokens,
 }
