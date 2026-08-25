@@ -6,10 +6,10 @@ POST {{baseUrl}}/auth/signUp
 Content-Type: application/json
 
 {
-  "email": "yama@hell.com",
-  "nickname": "염라",
-  "password": "wldhr444",
-  "passwordConfirmation": "wldhr444"
+  "email": "jinho@hong.com",
+  "nickname": "콩진호",
+  "password": "second222",
+  "passwordConfirmation": "second222"
 }
 
 ### 로그인
@@ -17,8 +17,8 @@ POST {{baseUrl}}/auth/signIn
 Content-Type: application/json
 
 {
-  "email": "yama@hell.com",
-  "password": "wldhr444"
+  "email": "jinho@hong.com",
+  "password": "second222"
 }
 
 ### 내 정보 조회

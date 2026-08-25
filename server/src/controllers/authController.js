@@ -1,9 +1,6 @@
-import express from "express";
 import { signIn, signUp } from "../services/authService.js";
 
-const router = express.Router();
-
-router.post("/signUp", async (req, res, next) => {
+export async function signUpController(req, res, next) {
   try {
     const result = await signUp(req.body);
 
@@ -11,9 +8,9 @@ router.post("/signUp", async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
+}
 
-router.post("/signIn", async (req, res, next) => {
+export async function signInController(req, res, next) {
   try {
     const result = await signIn(req.body);
 
@@ -21,6 +18,4 @@ router.post("/signIn", async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
-
-export default router;
+}

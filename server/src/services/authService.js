@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import prisma from "../lib/prisma.js";
+import userRepository from "../repositories/userRepository.js";
+import createHttpError from "../utils/createHttpError.js";
 
 const SALT_ROUNDS = 10;
 
@@ -12,28 +13,8 @@ async function verifyPassword(password, encryptedPassword) {
   return bcrypt.compare(password, encryptedPassword);
 }
 
-function createHttpError(status, message) {
-  const error = new Error(message);
-  error.status = status;
-  return error;
-}
-
 function createAccessToken(userId) {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "1h" });
-}
-
-async function findExistingUser(email, nickname) {
-  return prisma.user.findFirst({
-    where: {
-      OR: [{ email }, { nickname }],
-    },
-  });
-}
-
-async function findUserByEmail(email) {
-  return prisma.user.findUnique({
-    where: { email },
-  });
 }
 
 function validateExistingUser(existingUser, email, nickname) {
@@ -75,7 +56,7 @@ export async function signUp({
     throw createHttpError(400, "비밀번호가 일치하지 않습니다.");
   }
 
-  const existingUser = await findExistingUser(
+  const existingUser = await userRepository.findExistingUser(
     normalizedEmail,
     normalizedNickname,
   );
@@ -84,12 +65,10 @@ export async function signUp({
 
   const encryptedPassword = await hashPassword(password);
 
-  const user = await prisma.user.create({
-    data: {
-      email: normalizedEmail,
-      nickname: normalizedNickname,
-      encryptedPassword,
-    },
+  const user = await userRepository.createUser({
+    email: normalizedEmail,
+    nickname: normalizedNickname,
+    encryptedPassword,
   });
 
   const accessToken = createAccessToken(user.id);
@@ -108,7 +87,7 @@ export async function signIn({ email, password }) {
     throw createHttpError(400, "비밀번호를 입력해 주세요.");
   }
 
-  const user = await findUserByEmail(normalizedEmail);
+  const user = await userRepository.findUserByEmail(normalizedEmail);
 
   if (!user) {
     throw createHttpError(401, "이메일 또는 비밀번호가 올바르지 않습니다.");

@@ -1,10 +1,6 @@
-import express from "express";
-import auth from "../middlewares/auth.js";
 import { getUserById } from "../services/userService.js";
 
-const router = express.Router();
-
-router.get("/me", auth.verifyAccessToken, async (req, res, next) => {
+export async function getMeController(req, res, next) {
   try {
     const userId = req.user.userId;
     const user = await getUserById(userId);
@@ -19,6 +15,4 @@ router.get("/me", auth.verifyAccessToken, async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
-
-export default router;
+}
