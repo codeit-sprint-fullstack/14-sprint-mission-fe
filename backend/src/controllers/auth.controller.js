@@ -1,6 +1,7 @@
 import {
   signUp as signUpService,
   login as loginService,
+  getCurrentUser as getCurrentUserService,
 } from "../services/auth.service.js";
 
 export async function signUp(req, res, next) {
@@ -18,6 +19,16 @@ export async function login(req, res, next) {
     const result = await loginService(req.body);
 
     return res.status(200).json(result);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getMe(req, res, next) {
+  try {
+    const user = await getCurrentUserService(req.auth.userId);
+
+    return res.status(200).json(user);
   } catch (error) {
     return next(error);
   }

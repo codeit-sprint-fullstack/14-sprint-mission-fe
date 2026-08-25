@@ -61,3 +61,13 @@ export async function login({ email, password }) {
     user: filterSensitiveUserData(user),
   };
 }
+
+export async function getCurrentUser(userId) {
+  const user = await userRepository.findById(userId);
+
+  if (!user) {
+    throw new AppError(401, "사용자 정보를 확인할 수 없습니다.");
+  }
+
+  return filterSensitiveUserData(user);
+}

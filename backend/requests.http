@@ -132,7 +132,8 @@ Content-Type: application/json
   "password": "wrongpassword"
 }
 
-###
+### 로그인 성공
+# @name login
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -140,3 +141,10 @@ Content-Type: application/json
   "email": "test@example.com",
   "password": "password1234"
 }
+
+### 현재 사용자 조회 실패 - 토큰 없음
+GET {{baseUrl}}/auth/me
+
+### 현재 사용자 조회 성공
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{login.response.body.$.accessToken}}
