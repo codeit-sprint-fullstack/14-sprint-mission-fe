@@ -1,0 +1,40 @@
+### 게시글 생성
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+  "title": "사라질 제목!",
+  "content": "사라질 본문!"
+}
+
+### 게시글 목록 조회
+GET http://localhost:3000/articles
+
+### 게시글 검색
+GET http://localhost:3000/articles?keyword=1빠
+
+### 게시글 상세 조회
+GET http://localhost:3000/articles/192426ba-5306-4743-9038-d5ad4860d9f0
+
+### 존재하지 않는 게시글 상세 조회
+GET http://localhost:3000/articles/00000000-0000-0000-0000-000000000000
+
+### 게시글 수정
+PATCH http://localhost:3000/articles/8a3cce41-115f-4bac-8902-1dc4af2f3a18
+Content-Type: application/json
+
+{
+  "title": "수정된 2등 게시글입니다!",
+  "content": "한 발 늦고 수정도 되었습니다!"
+}
+
+### 존재하지 않는 게시글 수정
+PATCH http://localhost:3000/articles/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "title": "없는 게시글 수정 시도"
+}
+
+### 게시글 삭제
+DELETE http://localhost:3000/articles/14f98dcd-c41a-4759-9332-d81d7b5af4c9

@@ -1,0 +1,46 @@
+### 상품 댓글 생성
+POST http://localhost:3000/products/91ba6d3b-c12a-4316-a645-b321cf3d7e5d/comments
+Content-Type: application/json
+
+{
+  "content": "재밌는데 왜 그래요~"
+}
+
+###
+GET http://localhost:3000/products/e2142da8-6512-4223-a8fd-d2723c55ce7b/comments
+
+### 상품 댓글 목록 조회
+GET http://localhost:3000/products/91ba6d3b-c12a-4316-a645-b321cf3d7e5d/comments?limit=2
+
+### 상품 댓글 목록 조회 - cursor 사용
+GET http://localhost:3000/products/91ba6d3b-c12a-4316-a645-b321cf3d7e5d/comments?limit=2&cursor=f8da0e12-a9a7-47ea-81e4-2db01389e4b6
+
+
+### 게시글 댓글 생성
+POST http://localhost:3000/articles/192426ba-5306-4743-9038-d5ad4860d9f0/comments
+Content-Type: application/json
+
+{
+  "content": "제로만 먹음 ㅈㅅ"
+}
+
+###
+GET http://localhost:3000/articles/192426ba-5306-4743-9038-d5ad4860d9f0/comments
+
+### 게시글 댓글 목록 조회
+GET http://localhost:3000/articles/192426ba-5306-4743-9038-d5ad4860d9f0/comments?limit=2
+
+### 게시글 댓글 목록 조회 - cursor 사용
+GET http://localhost:3000/articles/192426ba-5306-4743-9038-d5ad4860d9f0/comments?limit=2&cursor=ffebff32-e209-4af7-80fc-dce93eb4c479
+
+
+### 댓글 수정
+PATCH http://localhost:3000/comments/429f2853-459f-490d-81e2-6330c2cbc2d3
+Content-Type: application/json
+
+{
+  "content": "스프라이트는 없어요?"
+}
+
+### 댓글 삭제
+DELETE http://localhost:3000/comments/429f2853-459f-490d-81e2-6330c2cbc2d3
