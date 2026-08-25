@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import prisma from "./src/lib/prisma.js";
 import authRouter from "./src/routes/auth.routes.js";
+import productRouter from "./src/routes/product.routes.js";
 import errorHandler from "./src/middlewares/errorHandler.js";
 
 const PORT = process.env.PORT || 3001;
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/auth", authRouter);
+app.use("/products", productRouter);
 
 app.get("/", (req, res) => {
   res.send("API server is running");

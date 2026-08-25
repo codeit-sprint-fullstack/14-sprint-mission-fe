@@ -148,3 +148,31 @@ GET {{baseUrl}}/auth/me
 ### 현재 사용자 조회 성공
 GET {{baseUrl}}/auth/me
 Authorization: Bearer {{login.response.body.$.accessToken}}
+
+
+// 상품 등록
+
+### 상품 등록 실패 - 토큰 없음
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "맥북 에어",
+  "description": "깨끗하게 사용했습니다.",
+  "price": 800000,
+  "tags": ["노트북", "애플"],
+  "images": []
+}
+
+### 상품 등록 성공
+POST {{baseUrl}}/products
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "name": "맥북 에어",
+  "description": "깨끗하게 사용했습니다.",
+  "price": 800000,
+  "tags": ["노트북", "애플"],
+  "images": []
+}
