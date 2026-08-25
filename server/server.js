@@ -1,10 +1,12 @@
-import express from "express";
+import { Prisma } from "@prisma/client";
 import cors from "cors";
 import "dotenv/config";
-import { Prisma } from "@prisma/client";
-import productsRouter from "./routes/products.js";
+import express from "express";
 import articlesRouter from "./routes/articles.js";
+import authRouter from "./routes/auth.js";
 import commentsRouter from "./routes/comments.js";
+import productsRouter from "./routes/products.js";
+import usersRouter from "./routes/users.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +21,8 @@ app.get("/", (req, res) => {
 app.use("/products", productsRouter);
 app.use("/articles", articlesRouter);
 app.use("/comments", commentsRouter);
+app.use("/auth", authRouter);
+app.use("/users", usersRouter);
 
 app.use((err, req, res, next) => {
   if (
@@ -48,10 +52,16 @@ app.use((err, req, res, next) => {
     });
   }
 
+  if (err.status) {
+    return res.status(err.status).json({
+      message: err.message,
+    });
+  }
+
   console.error(err);
 
   res.status(500).json({
-    message: err.message,
+    message: "서버 오류가 발생했습니다.",
   });
 });
 
