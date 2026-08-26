@@ -16,7 +16,7 @@ POST http://localhost:3001/auth/signIn
 Content-Type: application/json
 
 {
-  "email": "parkcoding@gmail.com",
+  "email": "kimcoding@gmail.com",
   "password": "12341234"
 }
 
@@ -109,3 +109,42 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhd
 ### 게시글 좋아요 삭제하기
 DELETE http://localhost:3001/articles/2/like
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+############################ comment ############################
+
+### 상품 댓글 생성하기
+POST http://localhost:3001/products/1/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyNzAwNSwiZXhwIjoxNzg3NzMwNjA1fQ.4xg9w4ZMhQLvQBrk8Tzhrq7xN4un4WCtFViSZez2Rw0
+
+{
+  "content": "거래 가능할까요?"
+}
+
+### 상품 댓글 가져오기
+GET http://localhost:3001/products/1/comments
+
+### 게시글 댓글 생성하기
+POST http://localhost:3001/articles/4/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzczMjAyNywiZXhwIjoxNzg3NzM1NjI3fQ.dgg3kEtuq4VtfcBYlAIafukI42uHXASZm89f0a6Z2v4
+
+{
+  "content": "반갑습니다!"
+}
+
+### 게시글 댓글 가져오기
+GET http://localhost:3001/articles/4/comments?cursor=11
+
+### 댓글 수정하기
+PATCH http://localhost:3001/comments/8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzczNDg2NiwiZXhwIjoxNzg3NzM4NDY2fQ.Dbx7Tz0JFAxx2bjxIGX3E7UswydsollyxIH_29EzmfI
+
+{
+  "content": "반가워용"
+}
+
+### 댓글 삭제하기
+DELETE http://localhost:3001/comments/14
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzczNDg2NiwiZXhwIjoxNzg3NzM4NDY2fQ.Dbx7Tz0JFAxx2bjxIGX3E7UswydsollyxIH_29EzmfI

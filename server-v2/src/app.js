@@ -5,6 +5,7 @@ import errorHandler from '../middlewares/errorHandler.js';
 import authRouter from '../routes/authRoute.js';
 import productRouter from '../routes/productRoute.js';
 import articleRouter from '../routes/articleRoute.js';
+import { productCommentRouter, articleCommentRouter, commentRouter } from '../routes/commentRoute.js';
 
 const app = express();
 
@@ -16,6 +17,9 @@ app.use(passport.initialize());
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
 app.use('/articles', articleRouter);
+app.use('/products/:productId/comments', productCommentRouter);
+app.use('/articles/:articleId/comments', articleCommentRouter);
+app.use('/comments/:commentId', commentRouter);
 
 /************* error *************/
 app.use(errorHandler);
