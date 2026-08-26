@@ -3,6 +3,7 @@ import express from 'express';
 import passport from '../config/passport.js';
 import errorHandler from '../middlewares/errorHandler.js';
 import authRouter from '../routes/authRoute.js';
+import productRouter from '../routes/productRoute.js';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(passport.initialize());
 
 /************* route *************/
 app.use('/auth', authRouter);
+app.use('/products', productRouter);
 
 
 /************* error *************/

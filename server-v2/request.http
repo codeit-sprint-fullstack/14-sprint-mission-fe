@@ -1,12 +1,14 @@
+####################### auth ############################
+
 ### 회원가입
 POST http://localhost:3001/auth/signUp
 Content-Type: application/json
 
 {
-  "email": "leecoding@gmail.com",
+  "email": "parkcoding@gmail.com",
   "password": "12341234",
   "passwordConfirmation": "12341234",
-  "nickname": "이코딩"
+  "nickname": "박코딩"
 }
 
 ### 로그인
@@ -14,7 +16,7 @@ POST http://localhost:3001/auth/signIn
 Content-Type: application/json
 
 {
-  "email": "leecoding@gmail.com",
+  "email": "parkcoding@gmail.com",
   "password": "12341234"
 }
 
@@ -25,3 +27,46 @@ Content-Type: application/json
 {
   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzYzNTYyOSwiZXhwIjoxNzg4ODQ1MjI5fQ.9091Tac83mAOJAt8NOJ135sdV0iAZ5eSAsLD6PzVCSI"
 }
+
+####################### product ############################
+
+### 상품 생성하기
+POST http://localhost:3001/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+
+{
+  "name": "아이폰 XR",
+  "description": "세컨폰으로 사용했습니다. 사용감 있지만 작동은 잘 됩니다!",
+  "price": 50000,
+  "tags": ["아이폰", "애플", "중고"]
+}
+
+### 상품 목록 가져오기
+GET http://localhost:3001/products
+
+### 상품 가져오기
+GET http://localhost:3001/products/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzY1MTEyMiwiZXhwIjoxNzg3NjU0NzIyfQ.coPN2x0T1niwG9LoBF3G7nSbG4jXc_Bn49kxeCJCHt0
+
+### 상품 수정하기
+PATCH http://localhost:3001/products/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+
+
+{
+  "price": 60000
+}
+
+### 상품 삭제하기
+DELETE http://localhost:3001/products/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzY1NTAwMywiZXhwIjoxNzg3NjU4NjAzfQ.3lieC_A8P46or5IeOrRWdjQG6MpUq9c5akcrgQV4gxI
+
+### 상품 좋아요 생성하기
+POST http://localhost:3001/products/7/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+
+### 상품 좋아요 삭제하기
+DELETE http://localhost:3001/products/1/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
