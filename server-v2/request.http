@@ -1,4 +1,4 @@
-####################### auth ############################
+############################ auth ############################
 
 ### 회원가입
 POST http://localhost:3001/auth/signUp
@@ -28,7 +28,7 @@ Content-Type: application/json
   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzYzNTYyOSwiZXhwIjoxNzg4ODQ1MjI5fQ.9091Tac83mAOJAt8NOJ135sdV0iAZ5eSAsLD6PzVCSI"
 }
 
-####################### product ############################
+############################ product ############################
 
 ### 상품 생성하기
 POST http://localhost:3001/products
@@ -54,7 +54,6 @@ PATCH http://localhost:3001/products/7
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
 
-
 {
   "price": 60000
 }
@@ -70,3 +69,43 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhd
 ### 상품 좋아요 삭제하기
 DELETE http://localhost:3001/products/1/favorite
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+
+############################ article ############################
+
+### 게시글 생성하기
+POST http://localhost:3001/articles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+{
+  "title": "중고거래가 처음인데요",
+  "content": "이번에 처음 중고거래를 하는데요! 보통 어디서 거래 하시나요?"
+}
+
+### 게시글 목록 가져오기
+GET http://localhost:3001/articles
+
+### 게시글 가져오기
+GET http://localhost:3001/articles/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+### 게시글 수정하기
+PATCH http://localhost:3001/articles/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+{
+  "content": "이번에 처음 중고거래를 하는데요! 보통 어디서 거래 하시나요?"
+}
+
+### 게시글 삭제하기
+DELETE http://localhost:3001/articles/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcxOTQ3NywiZXhwIjoxNzg3NzIzMDc3fQ.wVWrqBv4MDi9KoAN-XynN5PY1KNWWAvE0GHmXeX9ALQ
+
+### 게시글 좋아요 생성하기
+POST http://localhost:3001/articles/4/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+### 게시글 좋아요 삭제하기
+DELETE http://localhost:3001/articles/2/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
