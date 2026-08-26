@@ -1,25 +1,86 @@
-POST http://localhost:3000/products
+@baseUrl = http://localhost:3001
+@accessToken = 
+@productId = fc8fe453-1a13-4ae4-b22d-064a574816fb
+
+### 상품 목록 조회 - 비로그인
+GET {{baseUrl}}/products?page=1&pageSize=10&orderBy=recent
+
+### 상품 목록 조회 - 로그인
+GET {{baseUrl}}/products?page=1&pageSize=10&orderBy=recent
+Authorization: Bearer {{accessToken}}
+
+### 상품 등록 - 비로그인
+POST {{baseUrl}}/products
 Content-Type: application/json
 
 {
   "name": "뉴질랜드 공기",
   "description": "비닐봉지에 담아드립니다.",
   "price": 300000,
-  "tags": ["공기", "포장", "해외직구"],
-  "image": "https://example.com/product-image.png"
+  "tags": ["공기", "포장", "해외직구"]
 }
 
-###
-GET http://localhost:3000/products
+### 상품 등록 - 잘못된 데이터
+POST {{baseUrl}}/products
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
 
-###
-GET http://localhost:3000/products?keyword=Test
+{
+  "name": "",
+  "description": "상품 설명.",
+  "price": 30000
+}
 
-###
-GET http://localhost:3000/products?keyword=강아지
+### 상품 등록 - 정상
+POST {{baseUrl}}/products
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
 
-###
-GET http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
+{
+  "name": "무한한 용기",
+  "description": "용기를 드립니다!",
+  "price": 500000,
+  "tags": ["진품", "포장", "필수품"]
+}
+
+### 상품 목록 조회 - 검색
+GET {{baseUrl}}/products?page=1&pageSize=10&keyword=뉴질랜드&orderBy=recent
+
+### 상품 목록 조회 - 검색 결과 없음
+GET {{baseUrl}}/products?page=1&pageSize=10&keyword=호주&orderBy=recent
+
+### 상품 상세 조회 - 정상
+GET {{baseUrl}}/products/{{productId}}
+
+### 상품 상세 조회 - 존재하지 않는 상품
+GET {{baseUrl}}/products/111111
+
+### 상품 댓글 등록 - 비로그인
+POST {{baseUrl}}/products/{{productId}}/comments
+Content-Type: application/json
+
+{
+  "content": "진짜 뉴질랜드 공기인가요?"
+}
+
+### 상품 댓글 등록 - 빈 댓글
+POST {{baseUrl}}/products/{{productId}}/comments
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "content": "    "
+}
+
+### 상품 댓글 등록 - 정상
+POST {{baseUrl}}/products/{{productId}}/comments
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "content": "진짜 뉴질랜드 공기인가요?"
+}
+
 
 ###
 PATCH http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
