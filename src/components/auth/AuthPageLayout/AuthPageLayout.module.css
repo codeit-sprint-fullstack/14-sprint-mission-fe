@@ -1,0 +1,135 @@
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  width: 100%;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3.75rem auto 7.5rem;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 1.375rem;
+  margin-bottom: 2.5rem;
+}
+
+.logoImage {
+  width: 6.5rem;
+  height: 6.5rem;
+}
+
+.logoText {
+  color: var(--color-primary);
+  font-family: var(--font-rokaf), sans-serif;
+  font-size: 4.25rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.socialBox {
+  width: 100%;
+  height: 4.625rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  margin: 1.5rem auto;
+}
+
+.socialContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.socialText {
+  color: var(--color-Secondary-800);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.625rem;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.socialButton {
+  position: relative;
+  width: 2.625rem;
+  height: 2.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.socialBg {
+  position: absolute;
+  inset: 0;
+  width: 2.625rem;
+  height: 2.625rem;
+}
+
+.socialLogo {
+  position: relative;
+  z-index: 1;
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.linkBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.linkText {
+  color: var(--color-Secondary-800);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.link {
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+@media (max-width: 1199px) {
+  .box {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 743px) {
+  .box {
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+  }
+
+  .logoLink {
+    gap: 1rem;
+  }
+
+  .logoImage {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .logoText {
+    font-size: 2.25rem;
+  }
+}

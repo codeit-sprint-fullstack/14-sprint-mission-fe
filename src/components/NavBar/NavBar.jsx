@@ -1,45 +1,70 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import "./NavBar.css";
 import Button from "@/components/Button/Button";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import styles from "./NavBar.module.css";
 
 export default function NavBar() {
   const pathname = usePathname();
+  const { data: currentUser, isCheckingAuth } = useCurrentUser();
 
   const isBoardsActive =
     pathname === "/boards" || pathname.startsWith("/boards/");
 
+  const isItemsActive = pathname === "/items" || pathname.startsWith("/items/");
+
   return (
-    <nav className="nav-container">
-      <div className="nav-wrapper">
-        <div className="logo-wrapper">
-          <Link href="/" className="logo-group">
+    <nav className={styles.nav}>
+      <div className={styles.inner}>
+        <div className={styles.left}>
+          <Link href="/" className={styles.brand}>
             <Image
-              className="panda-logo"
+              className={styles.logo}
               src="/images/panda-logo.svg"
               alt="판다 얼굴"
               width={40}
               height={40}
             />
-            <span className="logo-text">판다마켓</span>
+            <span className={styles.brandName}>판다마켓</span>
           </Link>
-          <div className="nav-texts">
+
+          <div className={styles.links}>
             <Link
               href="/boards"
-              className={`nav-text ${isBoardsActive ? "nav-text-active" : ""}`}
+              className={`${styles.link} ${
+                isBoardsActive ? styles.active : ""
+              }`}
             >
               자유게시판
             </Link>
-            <Link href="/items" className="nav-text">
+
+            <Link
+              href="/items"
+              className={`${styles.link} ${isItemsActive ? styles.active : ""}`}
+            >
               중고마켓
             </Link>
           </div>
         </div>
-        <div className="button-group">
-          <Button href="/login">로그인</Button>
+
+        <div className={styles.actions}>
+          {!isCheckingAuth &&
+            (currentUser ? (
+              <Link href="/me" className={styles.profile}>
+                <Image
+                  src="/images/ic_profile.svg"
+                  alt="프로필"
+                  width={40}
+                  height={40}
+                />
+                <span className={styles.nickname}>{currentUser.nickname}</span>
+              </Link>
+            ) : (
+              <Button href="/signin">로그인</Button>
+            ))}
         </div>
       </div>
     </nav>

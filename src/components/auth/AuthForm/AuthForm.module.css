@@ -1,0 +1,89 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.label {
+  color: var(--color-Secondary-800);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+
+.input {
+  width: 100%;
+  height: 3.5rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: var(--color-Secondary-100);
+  color: var(--color-Secondary-800);
+  font-family: var(--font-pretendard);
+  font-size: 16px;
+  line-height: 1.625rem;
+}
+
+.input:focus {
+  outline-color: var(--color-primary);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.error {
+  margin-left: 1rem;
+  color: var(--color-error-red);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.inputError {
+  border: 1px solid var(--color-error-red);
+}
+
+.inputError:focus {
+  outline-color: var(--color-error-red);
+}
+
+.passwordBox {
+  position: relative;
+  width: 100%;
+}
+
+.passwordBox .input {
+  padding-right: 4rem;
+}
+
+.eyeButton {
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.form .submitButton {
+  width: 100%;
+  height: 3.5rem;
+  padding: 1rem 7.75rem;
+  border-radius: 2.5rem;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin: 1.5rem auto;
+}

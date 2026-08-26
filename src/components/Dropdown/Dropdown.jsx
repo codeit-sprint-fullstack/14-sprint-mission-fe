@@ -1,17 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Dropdown.module.css";
-import Image from "next/image";
 
 export default function Dropdown({
   options,
+  value,
   defaultValue,
   variant = "select",
   onChange,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+
+  const isControlled = value !== undefined;
+  const selectedValue = isControlled ? value : internalValue;
+
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +38,10 @@ export default function Dropdown({
   );
 
   const handleSelect = (option) => {
-    setSelectedValue(option.value);
+    if (!isControlled) {
+      setInternalValue(option.value);
+    }
+
     setIsOpen(false);
     onChange?.(option.value);
   };

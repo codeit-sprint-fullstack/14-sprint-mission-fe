@@ -106,7 +106,7 @@
   height: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
   .hero {
     height: 48rem;
     padding: 0;
@@ -152,7 +152,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .hero {
     height: 33.75rem;
   }

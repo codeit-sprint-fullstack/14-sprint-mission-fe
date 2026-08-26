@@ -1,0 +1,27 @@
+.status {
+  padding: 2.5rem 0;
+  text-align: center;
+}
+
+.detailPage {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.divider {
+  margin: 2.5rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.backButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.backButtonContent {
+  gap: 0.5rem;
+  padding: 0.75rem 2.5rem;
+  border-radius: 2.5rem;
+}

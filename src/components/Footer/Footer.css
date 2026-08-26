@@ -43,13 +43,13 @@
   gap: 0px 0.75rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
   .footer-contents {
     padding: 2rem 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .footer-contents {
     padding: 2rem 1rem;
     flex-wrap: wrap;

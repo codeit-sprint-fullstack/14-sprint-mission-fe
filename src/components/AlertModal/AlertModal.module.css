@@ -1,0 +1,52 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+  box-sizing: border-box;
+  width: 33.75rem;
+  height: 15.625rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.message {
+  margin: 0;
+  color: var(--color-Secondary-800);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.625rem;
+  text-align: center;
+}
+
+.modal .confirmButton {
+  width: 10.3125rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 743px) {
+  .modal {
+    width: 20.4375rem;
+    height: 13.75rem;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+
+  .modal .confirmButton {
+    width: 7.5rem;
+  }
+}

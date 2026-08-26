@@ -1,0 +1,35 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 2.5rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.7813rem;
+  border: 1px solid var(--color-text-light);
+  border-radius: 2.5rem;
+  background-color: var(--color-bg-white);
+  color: var(--color-Gray-500);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.625rem;
+  cursor: pointer;
+}
+
+.active {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-btn-hover);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
