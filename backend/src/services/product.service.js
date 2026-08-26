@@ -1,3 +1,4 @@
+import AppError from "../errors/AppError.js";
 import productRepository from "../repositories/product.repository.js";
 
 function formatProduct(product) {
@@ -14,6 +15,28 @@ export async function createProduct(productData, userId) {
   });
 
   return formatProduct(createdProduct);
+}
+
+export async function getProduct(productId) {
+  const product = await productRepository.findById(productId);
+
+  if (!product) {
+    throw new AppError(404, "상품을 찾을 수 없습니다.");
+  }
+
+  return formatProduct(product);
+}
+
+export async function updateProduct(productId, productData, userId) {
+  const product = await getProduct(productId);
+
+  if (product.userId !== userId) {
+    throw new AppError(403, "상품을 수정할 권한이 없습니다.");
+  }
+
+  const updatedProduct = await productRepository.update(productId, productData);
+
+  return formatProduct(updatedProduct);
 }
 
 export async function getProducts({

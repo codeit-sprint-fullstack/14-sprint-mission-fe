@@ -101,8 +101,102 @@ async function count(keyword) {
   });
 }
 
+async function findById(productId) {
+  return prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+    include: {
+      images: {
+        select: {
+          path: true,
+        },
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+      user: {
+        select: {
+          id: true,
+          nickname: true,
+          image: true,
+        },
+      },
+      comments: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        include: {
+          user: {
+            select: {
+              id: true,
+              nickname: true,
+              image: true,
+            },
+          },
+        },
+      },
+    },
+  });
+}
+
+async function update(productId, { name, description, price, tags, images }) {
+  const data = {};
+
+  if (name !== undefined) {
+    data.name = name;
+  }
+
+  if (description !== undefined) {
+    data.description = description;
+  }
+
+  if (price !== undefined) {
+    data.price = price;
+  }
+
+  if (tags !== undefined) {
+    data.tags = tags;
+  }
+
+  if (images !== undefined) {
+    data.images = {
+      deleteMany: {},
+      create: images.map((path) => ({
+        path,
+      })),
+    };
+  }
+
+  return prisma.product.update({
+    where: {
+      id: productId,
+    },
+    data,
+    include: {
+      images: {
+        select: {
+          path: true,
+        },
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+      user: {
+        select: {
+          id: true,
+          nickname: true,
+          image: true,
+        },
+      },
+    },
+  });
+}
+
 export default {
   save,
   findMany,
   count,
+  findById,
+  update,
 };
