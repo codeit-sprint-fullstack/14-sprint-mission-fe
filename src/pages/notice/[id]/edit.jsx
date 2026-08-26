@@ -170,7 +170,7 @@ export default function EditNotice() {
                 <input
                   type="text"
                   placeholder="상품명을 입력해주세요"
-                  value={data?.title}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -178,7 +178,7 @@ export default function EditNotice() {
                 <span>*설명</span>
                 <textarea
                   placeholder="상품 설명을 입력해주세요"
-                  value={data?.content}
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
