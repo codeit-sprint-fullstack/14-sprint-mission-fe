@@ -193,10 +193,19 @@ async function update(productId, { name, description, price, tags, images }) {
   });
 }
 
+async function remove(productId) {
+  return prisma.product.delete({
+    where: {
+      id: productId,
+    },
+  });
+}
+
 export default {
   save,
   findMany,
   count,
   findById,
   update,
+  remove,
 };

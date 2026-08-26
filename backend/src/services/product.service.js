@@ -39,6 +39,16 @@ export async function updateProduct(productId, productData, userId) {
   return formatProduct(updatedProduct);
 }
 
+export async function deleteProduct(productId, userId) {
+  const product = await getProduct(productId);
+
+  if (product.userId !== userId) {
+    throw new AppError(403, "상품을 삭제할 권한이 없습니다.");
+  }
+
+  await productRepository.remove(productId);
+}
+
 export async function getProducts({
   page = "1",
   pageSize = "10",

@@ -3,6 +3,7 @@ import {
   getProduct as getProductService,
   getProducts as getProductsService,
   updateProduct as updateProductService,
+  deleteProduct as deleteProductService,
 } from "../services/product.service.js";
 
 export async function createProduct(req, res, next) {
@@ -44,6 +45,16 @@ export async function updateProduct(req, res, next) {
     );
 
     return res.status(200).json(product);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function deleteProduct(req, res, next) {
+  try {
+    await deleteProductService(req.params.productId, req.auth.userId);
+
+    return res.status(204).send();
   } catch (error) {
     return next(error);
   }

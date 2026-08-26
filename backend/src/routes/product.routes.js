@@ -4,6 +4,7 @@ import {
   getProduct,
   getProducts,
   updateProduct,
+  deleteProduct,
 } from "../controllers/product.controller.js";
 import authenticate from "../middlewares/authenticate.js";
 import {
@@ -21,6 +22,6 @@ productRouter
 productRouter
   .route("/:productId")
   .get(getProduct)
-  .patch(authenticate, validateUpdateProduct, updateProduct);
-
+  .patch(authenticate, validateUpdateProduct, updateProduct)
+  .delete(authenticate, deleteProduct);
 export default productRouter;
