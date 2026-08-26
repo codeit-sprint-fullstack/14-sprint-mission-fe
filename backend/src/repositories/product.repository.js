@@ -201,6 +201,84 @@ async function remove(productId) {
   });
 }
 
+async function addLike(userId, productId) {
+  return prisma.$transaction(async (tx) => {
+    const existingLike = await tx.productLike.findUnique({
+      where: {
+        userId_productId: {
+          userId,
+          productId,
+        },
+      },
+    });
+
+    if (existingLike) {
+      return null;
+    }
+
+    await tx.productLike.create({
+      data: {
+        userId,
+        productId,
+      },
+    });
+
+    return tx.product.update({
+      where: {
+        id: productId,
+      },
+      data: {
+        favoriteCount: {
+          increment: 1,
+        },
+      },
+      select: {
+        favoriteCount: true,
+      },
+    });
+  });
+}
+
+async function removeLike(userId, productId) {
+  return prisma.$transaction(async (tx) => {
+    const existingLike = await tx.productLike.findUnique({
+      where: {
+        userId_productId: {
+          userId,
+          productId,
+        },
+      },
+    });
+
+    if (!existingLike) {
+      return null;
+    }
+
+    await tx.productLike.delete({
+      where: {
+        userId_productId: {
+          userId,
+          productId,
+        },
+      },
+    });
+
+    return tx.product.update({
+      where: {
+        id: productId,
+      },
+      data: {
+        favoriteCount: {
+          decrement: 1,
+        },
+      },
+      select: {
+        favoriteCount: true,
+      },
+    });
+  });
+}
+
 export default {
   save,
   findMany,
@@ -208,4 +286,6 @@ export default {
   findById,
   update,
   remove,
+  addLike,
+  removeLike,
 };

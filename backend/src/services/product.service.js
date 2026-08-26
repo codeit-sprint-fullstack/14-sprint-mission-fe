@@ -49,6 +49,36 @@ export async function deleteProduct(productId, userId) {
   await productRepository.remove(productId);
 }
 
+export async function addProductLike(productId, userId) {
+  await getProduct(productId);
+
+  const result = await productRepository.addLike(userId, productId);
+
+  if (!result) {
+    throw new AppError(409, "이미 좋아요한 상품입니다.");
+  }
+
+  return {
+    favoriteCount: result.favoriteCount,
+    isLiked: true,
+  };
+}
+
+export async function removeProductLike(productId, userId) {
+  await getProduct(productId);
+
+  const result = await productRepository.removeLike(userId, productId);
+
+  if (!result) {
+    throw new AppError(409, "좋아요하지 않은 상품입니다.");
+  }
+
+  return {
+    favoriteCount: result.favoriteCount,
+    isLiked: false,
+  };
+}
+
 export async function getProducts({
   page = "1",
   pageSize = "10",

@@ -4,6 +4,8 @@ import {
   getProducts as getProductsService,
   updateProduct as updateProductService,
   deleteProduct as deleteProductService,
+  addProductLike as addProductLikeService,
+  removeProductLike as removeProductLikeService,
 } from "../services/product.service.js";
 
 export async function createProduct(req, res, next) {
@@ -55,6 +57,32 @@ export async function deleteProduct(req, res, next) {
     await deleteProductService(req.params.productId, req.auth.userId);
 
     return res.status(204).send();
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function addProductLike(req, res, next) {
+  try {
+    const result = await addProductLikeService(
+      req.params.productId,
+      req.auth.userId,
+    );
+
+    return res.status(201).json(result);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function removeProductLike(req, res, next) {
+  try {
+    const result = await removeProductLikeService(
+      req.params.productId,
+      req.auth.userId,
+    );
+
+    return res.status(200).json(result);
   } catch (error) {
     return next(error);
   }

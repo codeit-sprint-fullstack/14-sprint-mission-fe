@@ -83,14 +83,6 @@ Content-Type: application/json
   "password": "password1234"
 }
 
-### 현재 사용자 조회 실패 - 토큰 없음
-GET {{baseUrl}}/auth/me
-
-### 현재 사용자 조회 성공
-GET {{baseUrl}}/auth/me
-Authorization: Bearer {{login.response.body.$.accessToken}}
-
-
 // 상품 등록
 ###
 POST {{baseUrl}}/products
@@ -130,4 +122,13 @@ Content-Type: application/json
 
 ### 상품 삭제
 DELETE {{baseUrl}}/products/3b3251ca-2a4a-4a82-81aa-f7fee03bb94e
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+
+### 상품 좋아요 추가
+POST {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318/likes
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+### 상품 좋아요 취소
+DELETE {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318/likes
 Authorization: Bearer {{login.response.body.$.accessToken}}
