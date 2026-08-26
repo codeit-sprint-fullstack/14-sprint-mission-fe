@@ -1,5 +1,8 @@
 import express from "express";
-import { createProductCommentController } from "../controllers/commentController.js";
+import {
+  createProductCommentController,
+  getProductCommentsController,
+} from "../controllers/commentController.js";
 import {
   createProductController,
   getProductController,
@@ -76,48 +79,9 @@ router.delete("/:id", async (req, res) => {
   res.sendStatus(204);
 });
 
-router.post(
-  "/:productId/comments",
-  auth.verifyAccessToken,
-  createProductCommentController,
-);
-
-router.get("/:productId/comments", async (req, res) => {
-  const { productId } = req.params;
-  const { cursor } = req.query;
-  const limit = Number(req.query.limit) || 10;
-
-  const queryOptions = {
-    where: {
-      productId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-    skip: cursor ? 1 : 0,
-    take: limit,
-    select: {
-      id: true,
-      content: true,
-      createdAt: true,
-    },
-  };
-
-  if (cursor) {
-    queryOptions.cursor = {
-      id: cursor,
-    };
-  }
-
-  const comments = await prisma.comment.findMany(queryOptions);
-
-  const nextCursor =
-    comments.length === limit ? comments[comments.length - 1].id : null;
-
-  res.status(200).json({
-    list: comments,
-    nextCursor,
-  });
-});
+router
+  .route("/:productId/comments")
+  .get(getProductCommentsController)
+  .post(auth.verifyAccessToken, createProductCommentController);
 
 export default router;

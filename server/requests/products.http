@@ -81,6 +81,14 @@ Content-Type: application/json
   "content": "진짜 뉴질랜드 공기인가요?"
 }
 
+### 상품 댓글 목록 - 기본 10개
+GET {{baseUrl}}/products/{{productId}}/comments
+
+### 상품 댓글 목록 - 1개씩 조회
+GET {{baseUrl}}/products/{{productId}}/comments?limit=1
+
+### 상품 댓글 목록 - 잘못된 limit
+GET {{baseUrl}}/products/{{productId}}/comments?limit=abc
 
 ###
 PATCH http://localhost:3000/products/6b57bce6-6ae6-4332-9e79-4ce7dfaab906
