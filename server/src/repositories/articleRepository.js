@@ -1,4 +1,21 @@
 import prisma from "../lib/prisma.js";
+import {
+  createCommentsSelect,
+  createLikeSelect,
+  ownerSelect,
+} from "./commonSelects.js";
+import { createOrderBy } from "./queryHelpers.js";
+
+const articleBaseSelect = {
+  id: true,
+  title: true,
+  content: true,
+  createdAt: true,
+  updatedAt: true,
+  owner: {
+    select: ownerSelect,
+  },
+};
 
 function createWhere(keyword) {
   return keyword
@@ -21,62 +38,15 @@ function createWhere(keyword) {
     : undefined;
 }
 
-function createOrderBy(orderBy) {
-  return orderBy === "likes"
-    ? [
-        {
-          articleLikes: {
-            _count: "desc",
-          },
-        },
-        {
-          createdAt: "desc",
-        },
-      ]
-    : [
-        {
-          createdAt: "desc",
-        },
-      ];
-}
-
 async function findAll({ skip, take, keyword, orderBy, userId }) {
   return prisma.article.findMany({
     skip,
     take,
     where: createWhere(keyword),
-    orderBy: createOrderBy(orderBy),
+    orderBy: createOrderBy(orderBy, "articleLikes"),
     select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-
-      _count: {
-        select: {
-          articleLikes: true,
-        },
-      },
-
-      ...(userId && {
-        articleLikes: {
-          where: {
-            userId,
-          },
-          select: {
-            userId: true,
-          },
-        },
-      }),
+      ...articleBaseSelect,
+      ...createLikeSelect("articleLikes", userId),
     },
   });
 }
@@ -94,20 +64,7 @@ async function create({ title, content, ownerId }) {
       content,
       ownerId,
     },
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-    },
+    select: articleBaseSelect,
   });
 }
 
@@ -117,56 +74,9 @@ async function findById(id, userId, commentLimit) {
       id,
     },
     select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-
-      _count: {
-        select: {
-          articleLikes: true,
-        },
-      },
-
-      comments: {
-        orderBy: {
-          createdAt: "desc",
-        },
-        take: commentLimit + 1,
-        select: {
-          id: true,
-          content: true,
-          createdAt: true,
-          updatedAt: true,
-          owner: {
-            select: {
-              id: true,
-              nickname: true,
-              image: true,
-            },
-          },
-        },
-      },
-
-      ...(userId && {
-        articleLikes: {
-          where: {
-            userId,
-          },
-          select: {
-            userId: true,
-          },
-        },
-      }),
+      ...articleBaseSelect,
+      ...createLikeSelect("articleLikes", userId),
+      comments: createCommentsSelect(commentLimit),
     },
   });
 }
@@ -188,20 +98,7 @@ async function updateById(id, data) {
       id,
     },
     data,
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-    },
+    select: articleBaseSelect,
   });
 }
 

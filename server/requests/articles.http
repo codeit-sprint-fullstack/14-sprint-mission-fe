@@ -13,7 +13,7 @@ GET {{baseUrl}}/articles/{{articleId}}
 Authorization: Bearer {{accessToken}}
 
 ### 게시글 등록 - 로그인 사용자
-POST {{baseUrl}}/articless
+POST {{baseUrl}}/articles
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 

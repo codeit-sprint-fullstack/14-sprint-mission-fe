@@ -1,4 +1,5 @@
 import prisma from "../lib/prisma.js";
+import { commentSelect } from "./commonSelects.js";
 
 async function createComment({ content, productId, articleId, ownerId }) {
   return prisma.comment.create({
@@ -8,19 +9,7 @@ async function createComment({ content, productId, articleId, ownerId }) {
       articleId,
       ownerId,
     },
-    select: {
-      id: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-    },
+    select: commentSelect,
   });
 }
 
@@ -40,19 +29,7 @@ async function findComments({ productId, articleId, cursor, take }) {
         id: cursor,
       },
     }),
-    select: {
-      id: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-    },
+    select: commentSelect,
   });
 }
 
@@ -75,19 +52,7 @@ async function updateById(id, content) {
     data: {
       content,
     },
-    select: {
-      id: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-    },
+    select: commentSelect,
   });
 }
 

@@ -1,4 +1,24 @@
 import prisma from "../lib/prisma.js";
+import {
+  createCommentsSelect,
+  createLikeSelect,
+  ownerSelect,
+} from "./commonSelects.js";
+import { createOrderBy } from "./queryHelpers.js";
+
+const productBaseSelect = {
+  id: true,
+  name: true,
+  description: true,
+  price: true,
+  tags: true,
+  images: true,
+  createdAt: true,
+  updatedAt: true,
+  owner: {
+    select: ownerSelect,
+  },
+};
 
 function createWhere(keyword) {
   return keyword
@@ -11,65 +31,15 @@ function createWhere(keyword) {
     : undefined;
 }
 
-function createOrderBy(orderBy) {
-  return orderBy === "likes"
-    ? [
-        {
-          productLikes: {
-            _count: "desc",
-          },
-        },
-        {
-          createdAt: "desc",
-        },
-      ]
-    : [
-        {
-          createdAt: "desc",
-        },
-      ];
-}
-
 async function findAll({ skip, take, keyword, orderBy, userId }) {
   return prisma.product.findMany({
     skip,
     take,
     where: createWhere(keyword),
-    orderBy: createOrderBy(orderBy),
+    orderBy: createOrderBy(orderBy, "productLikes"),
     select: {
-      id: true,
-      name: true,
-      description: true,
-      price: true,
-      tags: true,
-      images: true,
-      createdAt: true,
-      updatedAt: true,
-
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-
-      _count: {
-        select: {
-          productLikes: true,
-        },
-      },
-
-      ...(userId && {
-        productLikes: {
-          where: {
-            userId,
-          },
-          select: {
-            userId: true,
-          },
-        },
-      }),
+      ...productBaseSelect,
+      ...createLikeSelect("productLikes", userId),
     },
   });
 }
@@ -90,6 +60,7 @@ async function create({ name, description, price, tags, images, ownerId }) {
       images,
       ownerId,
     },
+    select: productBaseSelect,
   });
 }
 
@@ -99,59 +70,9 @@ async function findById(id, userId, commentLimit) {
       id,
     },
     select: {
-      id: true,
-      name: true,
-      description: true,
-      price: true,
-      tags: true,
-      images: true,
-      createdAt: true,
-      updatedAt: true,
-
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-
-      _count: {
-        select: {
-          productLikes: true,
-        },
-      },
-
-      comments: {
-        orderBy: {
-          createdAt: "desc",
-        },
-        take: commentLimit + 1,
-        select: {
-          id: true,
-          content: true,
-          createdAt: true,
-          updatedAt: true,
-          owner: {
-            select: {
-              id: true,
-              nickname: true,
-              image: true,
-            },
-          },
-        },
-      },
-
-      ...(userId && {
-        productLikes: {
-          where: {
-            userId,
-          },
-          select: {
-            userId: true,
-          },
-        },
-      }),
+      ...productBaseSelect,
+      ...createLikeSelect("productLikes", userId),
+      comments: createCommentsSelect(commentLimit),
     },
   });
 }
@@ -174,23 +95,7 @@ async function updateById(id, data) {
       id,
     },
     data,
-    select: {
-      id: true,
-      name: true,
-      description: true,
-      price: true,
-      tags: true,
-      images: true,
-      createdAt: true,
-      updatedAt: true,
-      owner: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
-      },
-    },
+    select: productBaseSelect,
   });
 }
 
