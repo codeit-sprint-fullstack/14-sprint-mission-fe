@@ -462,6 +462,43 @@
 
 /**
  * @swagger
+ * /auth/google:
+ *   post:
+ *     summary: 구글 로그인 / 회원가입
+ *     description: >
+ *       프론트(Google Identity Services)에서 받은 credential(ID 토큰)을 검증한다.
+ *       해당 이메일의 유저가 없으면 자동으로 회원가입(provider=google, 비밀번호 없음) 후 로그인 처리.
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - credential
+ *             properties:
+ *               credential:
+ *                 type: string
+ *                 description: Google Identity Services 가 발급한 ID 토큰
+ *     responses:
+ *       200:
+ *         description: 로그인 성공, 토큰 및 유저 정보 반환
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
+ *       400:
+ *         description: credential 누락
+ *       401:
+ *         description: 구글 인증 실패 / 이메일 미확인 계정
+ *       503:
+ *         description: 서버에 GOOGLE_CLIENT_ID 가 설정되지 않음
+ */
+
+/**
+ * @swagger
  * /auth/refresh-token:
  *   post:
  *     summary: 액세스 토큰 재발급

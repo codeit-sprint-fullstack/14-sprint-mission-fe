@@ -17,7 +17,8 @@ model User {
   id                Int       @id @default(autoincrement())
   email             String    @unique
   nickname          String    @unique
-  encryptedPassword String
+  encryptedPassword String?   // OAuth 가입 유저는 비밀번호 없음
+  provider          String    @default("local") // "local" | "google"
   image             String?
   refreshToken      String?
   createdAt         DateTime  @default(now())
