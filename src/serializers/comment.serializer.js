@@ -1,5 +1,5 @@
 // 댓글 조회 시 writer 를 함께 select
-export const writerSelect = {
+export const commentWriterSelect = {
   writer: { select: { id: true, nickname: true, image: true } },
 };
 
