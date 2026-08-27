@@ -12,13 +12,22 @@ Content-Type: application/json
   "passwordConfirmation": "second222"
 }
 
-### 로그인
+### 로그인 1
 POST {{baseUrl}}/auth/signIn
 Content-Type: application/json
 
 {
   "email": "jinho@hong.com",
   "password": "second222"
+}
+
+### 로그인 2
+POST {{baseUrl}}/auth/signIn
+Content-Type: application/json
+
+{
+  "email": "yama@hell.com",
+  "password": "wldhr444"
 }
 
 ### 내 정보 조회

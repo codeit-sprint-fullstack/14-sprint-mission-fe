@@ -2,6 +2,7 @@ import express from "express";
 import {
   createArticleController,
   deleteArticleController,
+  getArticlesController,
   updateArticleController,
 } from "../controllers/articleController.js";
 import prisma from "../lib/prisma.js";
@@ -9,56 +10,10 @@ import auth from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/", auth.verifyAccessToken, createArticleController);
-
-router.get("/", async (req, res) => {
-  const offset = Number(req.query.offset) || 0;
-  const limit = Number(req.query.limit) || 10;
-  const keyword = req.query.keyword || "";
-
-  const where = keyword
-    ? {
-        OR: [
-          {
-            title: {
-              contains: keyword,
-              mode: "insensitive",
-            },
-          },
-          {
-            content: {
-              contains: keyword,
-              mode: "insensitive",
-            },
-          },
-        ],
-      }
-    : {};
-
-  const totalCount = await prisma.article.count({
-    where,
-  });
-
-  const articles = await prisma.article.findMany({
-    where,
-    orderBy: {
-      createdAt: "desc",
-    },
-    skip: offset,
-    take: limit,
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-    },
-  });
-
-  res.status(200).json({
-    list: articles,
-    totalCount,
-  });
-});
+router
+  .route("/")
+  .get(auth.optionalAccessToken, getArticlesController)
+  .post(auth.verifyAccessToken, createArticleController);
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;

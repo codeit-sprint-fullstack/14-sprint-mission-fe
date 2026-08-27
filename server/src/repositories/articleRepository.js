@@ -1,5 +1,92 @@
 import prisma from "../lib/prisma.js";
 
+function createWhere(keyword) {
+  return keyword
+    ? {
+        OR: [
+          {
+            title: {
+              contains: keyword,
+              mode: "insensitive",
+            },
+          },
+          {
+            content: {
+              contains: keyword,
+              mode: "insensitive",
+            },
+          },
+        ],
+      }
+    : undefined;
+}
+
+function createOrderBy(orderBy) {
+  return orderBy === "likes"
+    ? [
+        {
+          articleLikes: {
+            _count: "desc",
+          },
+        },
+        {
+          createdAt: "desc",
+        },
+      ]
+    : [
+        {
+          createdAt: "desc",
+        },
+      ];
+}
+
+async function findAll({ skip, take, keyword, orderBy, userId }) {
+  return prisma.article.findMany({
+    skip,
+    take,
+    where: createWhere(keyword),
+    orderBy: createOrderBy(orderBy),
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      createdAt: true,
+      updatedAt: true,
+
+      owner: {
+        select: {
+          id: true,
+          nickname: true,
+          image: true,
+        },
+      },
+
+      _count: {
+        select: {
+          articleLikes: true,
+        },
+      },
+
+      ...(userId && {
+        articleLikes: {
+          where: {
+            userId,
+          },
+          select: {
+            userId: true,
+          },
+        },
+      }),
+    },
+  });
+}
+
+async function countAll({ keyword }) {
+  return prisma.article.count({
+    where: createWhere(keyword),
+  });
+}
+
 async function create({ title, content, ownerId }) {
   return prisma.article.create({
     data: {
@@ -67,6 +154,8 @@ async function deleteById(id) {
 }
 
 export default {
+  findAll,
+  countAll,
   create,
   findOwnerById,
   updateById,

@@ -1,6 +1,47 @@
 import articleRepository from "../repositories/articleRepository.js";
 import createHttpError from "../utils/createHttpError.js";
 
+export async function getArticles({
+  page = 1,
+  pageSize = 10,
+  keyword,
+  orderBy = "recent",
+  userId,
+}) {
+  const pageNumber = Number(page);
+  const pageSizeNumber = Number(pageSize);
+
+  const skip = (pageNumber - 1) * pageSizeNumber;
+
+  const [list, totalCount] = await Promise.all([
+    articleRepository.findAll({
+      skip,
+      take: pageSizeNumber,
+      keyword,
+      orderBy,
+      userId,
+    }),
+    articleRepository.countAll({
+      keyword,
+    }),
+  ]);
+
+  const formattedList = list.map((article) => {
+    const { _count, articleLikes = [], ...articleData } = article;
+
+    return {
+      ...articleData,
+      likeCount: _count.articleLikes,
+      isLiked: articleLikes.length > 0,
+    };
+  });
+
+  return {
+    list: formattedList,
+    totalCount,
+  };
+}
+
 export async function createArticle({ title, content, ownerId }) {
   return articleRepository.create({
     title,

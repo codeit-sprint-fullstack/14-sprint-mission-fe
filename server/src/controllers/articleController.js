@@ -1,8 +1,28 @@
 import {
   createArticle,
   deleteArticle,
+  getArticles,
   updateArticle,
 } from "../services/articleService.js";
+
+export async function getArticlesController(req, res, next) {
+  try {
+    const { page, pageSize, keyword, orderBy } = req.query;
+    const userId = req.user?.userId;
+
+    const result = await getArticles({
+      page,
+      pageSize,
+      keyword,
+      orderBy,
+      userId,
+    });
+
+    return res.json(result);
+  } catch (error) {
+    return next(error);
+  }
+}
 
 export async function createArticleController(req, res, next) {
   try {
