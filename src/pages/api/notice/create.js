@@ -1,15 +1,16 @@
+import { relay } from "@/utils/proxy";
+
 export default async function handler(req, res) {
   const BASE_URL = process.env.API_BASE_URL;
 
   if (req.method === "POST") {
     try {
-      const { image, content, title } = req.body;
+      const { images, content, title } = req.body;
 
-      if (!image || !title || !content) {
-        return res.status(400).json({ error: "모든 필드를 입력해주세요" });
+      if (!title || !content) {
+        return res.status(400).json({ message: "제목과 내용은 필수입니다." });
       }
 
-      // 외부 API로 POST 요청
       const response = await fetch(`${BASE_URL}/articles`, {
         method: "POST",
         headers: {
@@ -17,21 +18,13 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
           Authorization: req.headers.authorization || "",
         },
-        body: JSON.stringify({ image, content, title }),
+        body: JSON.stringify({ images: images ?? [], content, title }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        return res
-          .status(response.status)
-          .json({ error: "외부 API 오류", detail: errorData });
-      }
-
-      const data = await response.json();
-      res.status(201).json(data);
+      return relay(res, response);
     } catch (error) {
-      console.error("Create API Error:", error);
-      res.status(500).json({ error: "서버 오류", detail: error.message });
+      console.error("Create article API Error:", error);
+      res.status(502).json({ message: "백엔드 서버에 연결할 수 없습니다." });
     }
   } else {
     res.setHeader("Allow", ["POST"]);

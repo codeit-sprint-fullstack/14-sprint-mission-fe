@@ -73,18 +73,27 @@ export default function NoticeDetail() {
       setComment("");
       queryClient.invalidateQueries(["comments", id]); // 댓글 목록 갱신
     },
-    onError: () => toast("댓글 등록 중 오류 발생"),
+    onError: (err) => {
+      if (!err?.__toastShown) toast.error("댓글 등록 중 오류가 발생했습니다.");
+    },
   });
 
-  // 좋아요 Mutation
+  // 댓글 등록: 로그인(닉네임) 안 되어 있으면 막고 안내
+  const handleCommentSubmit = () => {
+    if (!localStorage.getItem("nickname")) {
+      toast.error("로그인 후 이용 가능합니다.");
+      return;
+    }
+    registerComment.mutate(comment);
+  };
+
+  // 좋아요 Mutation (게시글: isLiked / likeCount)
   const toggleLike = useMutation({
     mutationFn: async (liked) => {
       if (!liked) {
-        // 좋아요 등록
-        const res = await api.post(`/notice/${id}/favorite`);
+        const res = await api.post(`/notice/${id}/favorite`); // → /articles/:id/like
         return res.data;
       } else {
-        // 좋아요 취소
         const res = await api.delete(`/notice/${id}/favorite`);
         return res.data;
       }
@@ -96,29 +105,36 @@ export default function NoticeDetail() {
 
       queryClient.setQueryData(["item", id], (old) => ({
         ...old,
-        isFavorite: !liked,
-        favoriteCount: liked ? old.favoriteCount - 1 : old.favoriteCount + 1,
+        isLiked: !liked,
+        likeCount: liked ? old.likeCount - 1 : old.likeCount + 1,
       }));
 
       return { prevItem };
     },
     onError: (err, variables, context) => {
-      // 실패 시 롤백
       queryClient.setQueryData(["item", id], context.prevItem);
-      toast.error("백엔드 curl에 auth 인증 과정이 없어 favorite 갱신이 불가합니다.");
+      if (!err?.__toastShown) toast.error("좋아요 처리 중 오류가 발생했습니다.");
     },
     onSuccess: (updated) => {
       queryClient.setQueryData(["item", id], (prev) => ({
         ...prev,
-        isFavorite: updated.isFavorite,
-        favoriteCount: updated.favoriteCount,
+        isLiked: updated.isLiked,
+        likeCount: updated.likeCount,
       }));
     },
     onSettled: () => {
-      // 서버와 최종 동기화
       queryClient.invalidateQueries(["item", id]);
     },
   });
+
+  // 좋아요: 로그인(닉네임) 안 되어 있으면 막고 안내
+  const handleToggleLike = () => {
+    if (!localStorage.getItem("nickname")) {
+      toast.error("로그인 후 이용 가능합니다.");
+      return;
+    }
+    toggleLike.mutate(notice.isLiked);
+  };
 
   // 삭제 Mutation
   const deleteItem = useMutation({
@@ -130,7 +146,9 @@ export default function NoticeDetail() {
       toast("게시글이 삭제되었습니다.");
       router.push("/notice");
     },
-    onError: () => toast("삭제 중 오류 발생"),
+    onError: (err) => {
+      if (!err?.__toastShown) toast.error("삭제 중 오류가 발생했습니다.");
+    },
   });
 
   // 게시글 수정
@@ -212,11 +230,11 @@ export default function NoticeDetail() {
                     <div className={style.line_button}>
                       <button
                         className={style.likebutton}
-                        onClick={() => toggleLike.mutate(notice.isFavorite)}
+                        onClick={handleToggleLike}
                       >
                         <div className={style.heart_likes}>
                           <img
-                            src={notice?.isFavorite ? "/assets/ic_heart_on.svg" : "/assets/ic_heart.svg"}
+                            src={notice?.isLiked ? "/assets/ic_heart_on.svg" : "/assets/ic_heart.svg"}
                             alt="heart"
                           />
                           <span>{notice?.likeCount ?? 0}</span>
@@ -246,7 +264,7 @@ export default function NoticeDetail() {
                   </form>
                 </div>
                 <button
-                  onClick={() => registerComment.mutate(comment)}
+                  onClick={handleCommentSubmit}
                   disabled={!comment.trim()}
                 >
                   <span>등록</span>

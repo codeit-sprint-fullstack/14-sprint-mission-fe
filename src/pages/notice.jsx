@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { useEffect, useState } from "react";
 import styles from '@/styles/notice.module.css';
 import Gnb from '../components/gnb.jsx';
@@ -10,6 +12,18 @@ import Footer from "@/components/Footer.jsx";
 import { formatDate } from '@/utils/time.js';
 
 export default function Notice() {
+  const router = useRouter();
+
+  // 글쓰기: 로그인(닉네임) 안 되어 있으면 이동 막고 안내
+  const handleWriteClick = (e) => {
+    e.preventDefault();
+    if (!localStorage.getItem("nickname")) {
+      toast.error("로그인 후 이용 가능합니다.");
+      return;
+    }
+    router.push("/notice/create");
+  };
+
   const [bestPosts, setBestPosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [orderBy, setOrderBy] = useState("recent");
@@ -122,7 +136,7 @@ export default function Notice() {
                     id={post.id}
                     title={post.title}
                     author={post.writer.nickname}
-                    image={post.image}
+                    image={post.images?.[0] ?? null}
                     likes={post.likeCount}
                     date={formatDate(post.createdAt)}
                   />
@@ -133,7 +147,7 @@ export default function Notice() {
             <div className={styles.postlist}>
               <div className={styles.postlist_head}>
                 <span>게시글</span>
-                <Link href="/notice/create">
+                <Link href="/notice/create" onClick={handleWriteClick}>
                   <button>
                     <span>글쓰기</span>
                   </button>
@@ -169,7 +183,7 @@ export default function Notice() {
                     id={post.id}
                     title={post.title}
                     author={post.writer.nickname}
-                    image={post.image}
+                    image={post.images?.[0] ?? null}
                     likes={post.likeCount}
                     date={formatDate(post.createdAt)}
                   />

@@ -72,8 +72,19 @@ export default function ItemDetail() {
             setComment("");
             queryClient.invalidateQueries(["comments", id]); // 댓글 목록 갱신
         },
-        onError: () => toast("댓글 등록 중 오류 발생"),
+        onError: (err) => {
+            if (!err?.__toastShown) toast.error("댓글 등록 중 오류가 발생했습니다.");
+        },
     });
+
+    // 댓글 등록: 로그인(닉네임) 안 되어 있으면 막고 안내
+    const handleCommentSubmit = () => {
+        if (!localStorage.getItem("nickname")) {
+            toast.error("로그인 후 이용 가능합니다.");
+            return;
+        }
+        registerComment.mutate();
+    };
 
     // 좋아요 Mutation
     const toggleLike = useMutation({
@@ -104,7 +115,7 @@ export default function ItemDetail() {
         onError: (err, variables, context) => {
             // 실패 시 롤백
             queryClient.setQueryData(["item", id], context.prevItem);
-            toast.error("백엔드 curl에 auth 인증 과정이 없어 favorite 갱신이 불가합니다.");
+            if (!err?.__toastShown) toast.error("좋아요 처리 중 오류가 발생했습니다.");
         },
         onSuccess: (updated) => {
             queryClient.setQueryData(["item", id], (prev) => ({
@@ -119,6 +130,15 @@ export default function ItemDetail() {
         },
     });
 
+    // 좋아요: 로그인(닉네임) 안 되어 있으면 막고 안내 (비로그인 시 401 → 세션정리 → "/" 이동 방지)
+    const handleToggleLike = () => {
+        if (!localStorage.getItem("nickname")) {
+            toast.error("로그인 후 이용 가능합니다.");
+            return;
+        }
+        toggleLike.mutate(item.isFavorite);
+    };
+
     // 삭제 Mutation
     const deleteItem = useMutation({
         mutationFn: async () => {
@@ -126,10 +146,12 @@ export default function ItemDetail() {
             return res.data;
         },
         onSuccess: () => {
-            toast("게시글이 삭제되었습니다.");
+            toast("상품이 삭제되었습니다.");
             router.push("/items");
         },
-        onError: () => toast("삭제 중 오류 발생"),
+        onError: (err) => {
+            if (!err?.__toastShown) toast.error("삭제 중 오류가 발생했습니다.");
+        },
     });
 
     // 게시글 수정
@@ -254,7 +276,7 @@ export default function ItemDetail() {
                                             </svg>
                                             <button
                                                 className={style.likebutton}
-                                                onClick={() => toggleLike.mutate(item.isFavorite)}
+                                                onClick={handleToggleLike}
                                             >
                                                 <div className={style.heart_likes}>
                                                     <img
@@ -291,7 +313,7 @@ export default function ItemDetail() {
                                 <button
                                     className={`${style.registerButton} ${comment !== "" ? style.active : ""}`}
                                     disabled={comment === ""}
-                                    onClick={() => registerComment.mutate()}
+                                    onClick={handleCommentSubmit}
                                 >
                                     <span>등록</span>
                                 </button>

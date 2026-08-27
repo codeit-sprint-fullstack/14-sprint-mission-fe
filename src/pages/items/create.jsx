@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import Footer from "@/components/Footer";
 import Gnb from "@/components/gnb";
 import style from "@/styles/items/create.module.css";
@@ -7,12 +8,14 @@ import { uploadImage } from "@/utils/imageupload";
 import api from "@/utils/api";
 
 export default function CreateProduct() {
-  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
+  const MAX_IMAGES = 3;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  // { file, preview } 배열 (최대 3)
+  const [images, setImages] = useState([]);
+  const [imageError, setImageError] = useState("");
+  const fileInputRef = useRef(null);
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
   const [tagsFirst, setTagsFirst] = useState(true);
@@ -22,40 +25,73 @@ export default function CreateProduct() {
   const [priceFirst, setPriceFirst] = useState(true);
 
 
-  const isDisabled = title.trim() === "" || content.trim() === "" || price.trim() === "" || !file || tags.length === 0;
+  const imagesFull = images.length >= MAX_IMAGES;
+
+  const isDisabled =
+    title.trim() === "" ||
+    content.trim() === "" ||
+    price.trim() === "" ||
+    images.length === 0 ||
+    tags.length === 0;
+
+  // 파일 선택 → 미리보기 목록에 추가 (최대 3개)
+  const handleAddImages = (e) => {
+    const picked = Array.from(e.target.files || []);
+    e.target.value = ""; // 같은 파일 재선택 가능
+    if (picked.length === 0) return;
+
+    const room = MAX_IMAGES - images.length;
+    if (room <= 0) {
+      setImageError(`이미지는 최대 ${MAX_IMAGES}개까지 등록할 수 있습니다.`);
+      return;
+    }
+    const next = picked.slice(0, room).map((file) => ({
+      file,
+      preview: URL.createObjectURL(file),
+    }));
+    setImages((prev) => [...prev, ...next]);
+    setImageError(picked.length > room ? `이미지는 최대 ${MAX_IMAGES}개까지 등록할 수 있습니다.` : "");
+  };
+
+  const handleRemoveImage = (index) => {
+    setImages((prev) => {
+      URL.revokeObjectURL(prev[index]?.preview);
+      return prev.filter((_, i) => i !== index);
+    });
+    setImageError("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      if (!file) {
-        alert("이미지를 선택해주세요");
-        return;
-      }
+    if (!localStorage.getItem("nickname")) {
+      toast.error("로그인 후 이용 가능합니다.");
+      return;
+    }
+    if (images.length === 0) {
+      setImageError("이미지를 1개 이상 등록해주세요.");
+      return;
+    }
 
-      // 1. 이미지 업로드
-      const uploadUrl = await uploadImage(file);
-      setImageUrl(uploadUrl);
+    try {
+      // 1. 선택한 이미지 전부 업로드 → URL 배열
+      const uploadedUrls = await Promise.all(images.map(({ file }) => uploadImage(file)));
 
       // 2. 상품 등록
       const res = await api.post("/items/create", {
-        images: [uploadUrl],
+        images: uploadedUrls,
         tags,
         price: Number(price),
         description: content,
         name: title,
       });
 
-      if (res.status >= 200 && res.status < 300) {
-        const newProduct = res.data;
-        alert("상품이 등록되었습니다!");
-        router.push(`/items/${newProduct.id}`);
-      } else {
-        alert("등록 실패: " + (res.data?.error || "알 수 없는 오류"));
-      }
+      toast("상품이 등록되었습니다!");
+      router.push(`/items/${res.data.id}`);
     } catch (error) {
       console.error("등록 에러:", error);
-      alert("등록 중 문제가 발생했습니다.");
+      // 상태코드별 안내는 api 인터셉터가 이미 토스트로 처리
+      if (!error?.__toastShown) toast.error("등록 중 문제가 발생했습니다.");
     }
   };
 
@@ -90,6 +126,51 @@ export default function CreateProduct() {
 
             </div>
             <form onSubmit={handleSubmit}>
+              <div className={style.form_wrap}>
+                <span>*이미지 (최대 {MAX_IMAGES}개)</span>
+                <div className={style.img_wrap}>
+                  <div
+                    className={`${style.img_upload} ${imagesFull ? style.img_upload_disabled : ""}`}
+                    onClick={() => {
+                      if (imagesFull) {
+                        setImageError(`이미지는 최대 ${MAX_IMAGES}개까지 등록할 수 있습니다.`);
+                        return;
+                      }
+                      fileInputRef.current?.click();
+                    }}
+                  >
+                    <div className={style.upload_wrap}>
+                      <img src="/assets/ic_plus.svg" alt="plus" />
+                      <span>{`${images.length} / ${MAX_IMAGES}`}</span>
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      disabled={imagesFull}
+                      ref={fileInputRef}
+                      style={{ display: "none" }}
+                      onChange={handleAddImages}
+                    />
+                  </div>
+
+                  {images.map((img, index) => (
+                    <div key={img.preview} className={style.img_sample}>
+                      <img src={img.preview} alt={`미리보기 ${index + 1}`} className={style.background} />
+                      <img
+                        src="/assets/ic_X.svg"
+                        alt="삭제"
+                        className={style.delete}
+                        onClick={() => handleRemoveImage(index)}
+                      />
+                    </div>
+                  ))}
+                </div>
+                {imageError && <p className={style.errorMessage}>{imageError}</p>}
+                {!imageError && images.length === 0 && (
+                  <p className={style.errorMessage}>이미지를 1개 이상 등록해주세요</p>
+                )}
+              </div>
               <div className={style.form_wrap}>
                 <span>*제목</span>
                 <input
@@ -135,15 +216,6 @@ export default function CreateProduct() {
                 {!priceFirst && price == 0 && (
                   <p className={style.errorMessage}>가격을 입력해주세요</p>
                 )}
-              </div>
-              <div className={style.form_wrap}>
-                <span>*이미지 URL</span>
-                <input
-                  type="file"
-                  onChange={(e) => {
-                    setFile(e.target.files[0]);
-                  }}
-                />
               </div>
               <div className={style.form_wrap}>
                 <span>*태그</span>

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import Footer from "@/components/Footer.jsx";
 import Gnb from "@/components/gnb";
 import Items_Card from "@/components/items_Card.jsx";
@@ -8,6 +10,18 @@ import Dropdown from "@/components/dropdown";
 import Pagination from "@/components/Pagination";
 
 function Items() {
+    const router = useRouter();
+
+    // 상품 등록: 로그인(닉네임) 안 되어 있으면 이동 막고 안내
+    const handleRegisterClick = (e) => {
+        e.preventDefault();
+        if (!localStorage.getItem("nickname")) {
+            toast.error("로그인 후 이용 가능합니다.");
+            return;
+        }
+        router.push("/items/create");
+    };
+
     const [sortRule, setSortRule] = useState("recent");
     const [count, setCount] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
@@ -114,7 +128,7 @@ function Items() {
                             <div className={style.sellTitle}>
                                 <h2>판매 중인 상품</h2>
                                 {isPhone && (
-                                    <Link href="/" className={style.registerButton}>
+                                    <Link href="/items/create" onClick={handleRegisterClick} className={style.registerButton}>
                                         <span>상품 등록하기</span>
                                     </Link>
                                 )}
@@ -133,7 +147,7 @@ function Items() {
                                     />
                                 </div>
                                 {!isPhone && (
-                                    <Link href="/items/create" className={style.registerButton}>
+                                    <Link href="/items/create" onClick={handleRegisterClick} className={style.registerButton}>
                                         <span>상품 등록하기</span>
                                     </Link>
                                 )}

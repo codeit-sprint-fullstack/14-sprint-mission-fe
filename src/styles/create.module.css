@@ -12,7 +12,8 @@
 
 .content_wrap {
   flex-direction: column;
-  height: 1000px; /* 임시용 */
+  height: 100%;
+  margin-bottom: 50px;
 }
 
 .content_wrap span {
@@ -102,6 +103,82 @@
   line-height: 26px; /* 144.444% */
 }
 
+.errorMessage {
+  margin-left: 10px;
+  color: var(--error);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+/* 이미지 업로드 + 미리보기 — 업로드 박스 + 이미지 3 = 한 줄 4칸 */
+.img_wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.img_upload {
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100, #f3f4f6);
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.img_upload_disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.upload_wrap {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload_wrap img {
+  width: 48px;
+  height: 48px;
+}
+
+.upload_wrap span {
+  color: var(--Cool-Gray-400, #9ca3af);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.img_sample {
+  position: relative;
+  border-radius: 12px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.background {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delete {
+  width: 22px;
+  height: 24px;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  cursor: pointer;
+  z-index: 10;
+}
+
 /* PC: 1200px 이상 */
 @media screen and (min-width: 1200px)  {
   .content_wrap {
@@ -118,13 +195,23 @@
     margin-top: 16px;
     gap: 32px;
   }
+
+  .img_wrap {
+    gap: 14px;
+  }
 }
 
-/* Mobile: 375px ~ 743px */
+/* Mobile: 375px ~ 743px — 2x2 */
 @media screen and (min-width: 375px) and (max-width: 743px){
   .content_wrap {
     width: 343px;
     margin-top: 16px;
     gap: 24px;
+  }
+
+  .img_wrap {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    align-items: start;
   }
 }

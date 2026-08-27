@@ -31,11 +31,22 @@
   /* 160% */
 }
 
+/* 업로드 박스 + 이미지 최대 3개 = 한 줄에 4칸 */
+.img_wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
 .img_upload {
   justify-content: center;
   align-items: center;
   border-radius: 12px;
   background: var(--Secondary-200);
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
 .upload_wrap {
@@ -68,12 +79,15 @@
   gap: 12px;
   position: relative;
   border-radius: 12px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
 .background {
   border-radius: 12px;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .delete {
@@ -210,7 +224,7 @@
   /* 162.5% */
 }
 
-/* PC: 1200px 이상 */
+/* PC: 1200px 이상 — 한 줄 4칸 */
 @media screen and (min-width: 1200px) {
   .content_wrap {
     width: 1200px;
@@ -221,19 +235,9 @@
   .img_wrap {
     gap: 24px;
   }
-
-  .img_upload {
-    width: 282px;
-    height: 282px;
-  }
-
-  .img_sample {
-    width: 282px;
-    height: 282px;
-  }
 }
 
-/* Tablet: 744px ~ 1199px */
+/* Tablet: 744px ~ 1199px — 한 줄 4칸 */
 @media screen and (min-width: 744px) and (max-width: 1199px) {
   .content_wrap {
     width: 696px;
@@ -244,19 +248,9 @@
   .img_wrap {
     gap: 14px;
   }
-
-  .img_upload {
-    width: 168px;
-    height: 168px;
-  }
-
-  .img_sample {
-    width: 168px;
-    height: 168px;
-  }
 }
 
-/* Mobile: 375px ~ 743px */
+/* Mobile: 375px ~ 743px — 2x2 */
 @media screen and (min-width: 375px) and (max-width: 743px) {
   .content_wrap {
     width: 343px;
@@ -265,22 +259,7 @@
   }
 
   .img_wrap {
-    gap: 10px;
-  }
-
-  .img_upload {
-    width: 168px;
-    height: 168px;
-  }
-
-  .img_sample {
-    width: 168px;
-    height: 168px;
-  }
-
-  .img_wrap {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2열 */
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     align-items: start;
   }
