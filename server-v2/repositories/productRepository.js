@@ -36,12 +36,16 @@ async function save(product, userId) {
 
 // 상품 목록 가져오기
 async function findMany({ offset, limit, orderBy, keyword }) {
-  const where = {
-    OR: [
-      { name: { contains: keyword, mode: 'insensitive' } },
-      { description: { contains: keyword, mode: 'insensitive' } ,}
-    ]
-  };
+  const where = { 
+    ...(keyword 
+      ? {
+        OR: [
+          { name: { contains: keyword, mode: 'insensitive' } },
+          { description: { contains: keyword, mode: 'insensitive' } ,}
+        ]
+      }
+      : {}
+  )};
 
   const [ products, totalCount ] = await Promise.all([
     prisma.product.findMany({

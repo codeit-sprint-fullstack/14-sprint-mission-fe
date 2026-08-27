@@ -7,6 +7,7 @@ import authRouter from '../routes/authRoute.js';
 import { articleCommentRouter, commentRouter, productCommentRouter } from '../routes/commentRoute.js';
 import imageRouter from '../routes/imageRoute.js';
 import productRouter from '../routes/productRoute.js';
+import userRouter from '../routes/userRoute.js';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(passport.initialize());
 
 /************* route *************/
 app.use('/auth', authRouter);
+app.use('/users/me', userRouter);
 app.use('/products', productRouter);
 app.use('/articles', articleRouter);
 app.use('/products/:productId/comments', productCommentRouter);

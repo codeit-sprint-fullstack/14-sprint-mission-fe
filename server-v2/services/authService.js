@@ -54,7 +54,7 @@ async function verifyPassword(inputPassword, savedPassword) {
 async function getUser(email, password) {
   // 1. 이메일로 유저 조회
   const user = await authRepository.findByEmail(email);
-  if (!user || !user.encryptedPassword) {
+  if (!user || !user.encryptedPassword) {  // !user.encryptedPassword -> 소셜 로그인 관련
     const error = new Error('Unauthorized');
     error.code = 401;
     throw error;

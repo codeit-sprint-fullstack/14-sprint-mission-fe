@@ -33,12 +33,15 @@ async function save(article, userId) {
 
 // 게시글 목록 가져오기
 async function findMany({ offset, limit, orderBy, keyword }) {
-  const where = {
+  const where = { ...( keyword 
+    ? {
         OR: [
-      { title: { contains: keyword, mode: 'insensitive' } },
-      { content: { contains: keyword, mode: 'insensitive' } },
-    ],
-  };
+          { title: { contains: keyword, mode: 'insensitive' } },
+          { content: { contains: keyword, mode: 'insensitive' } },
+        ]
+      }
+    : {}
+  )};
 
   const [articles, totalCount] = await Promise.all([
     prisma.article.findMany({
