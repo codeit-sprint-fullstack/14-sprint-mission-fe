@@ -1,27 +1,15 @@
 import express from "express";
+import {
+  createArticleController,
+  deleteArticleController,
+  updateArticleController,
+} from "../controllers/articleController.js";
 import prisma from "../lib/prisma.js";
+import auth from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  const { title, content } = req.body;
-
-  const article = await prisma.article.create({
-    data: {
-      title,
-      content,
-    },
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
-
-  res.status(201).json(article);
-});
+router.post("/", auth.verifyAccessToken, createArticleController);
 
 router.get("/", async (req, res) => {
   const offset = Number(req.query.offset) || 0;
@@ -91,48 +79,9 @@ router.get("/:id", async (req, res) => {
   res.status(200).json(article);
 });
 
-router.patch("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { title, content } = req.body;
+router.patch("/:id", auth.verifyAccessToken, updateArticleController);
 
-  const data = {};
-
-  if (title !== undefined) {
-    data.title = title;
-  }
-
-  if (content !== undefined) {
-    data.content = content;
-  }
-
-  const updatedArticle = await prisma.article.update({
-    where: {
-      id,
-    },
-    data,
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
-
-  res.status(200).json(updatedArticle);
-});
-
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-
-  await prisma.article.delete({
-    where: {
-      id,
-    },
-  });
-
-  res.sendStatus(204);
-});
+router.delete("/:id", auth.verifyAccessToken, deleteArticleController);
 
 router.post("/:articleId/comments", async (req, res) => {
   const { articleId } = req.params;
