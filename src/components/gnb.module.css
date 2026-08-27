@@ -1,0 +1,207 @@
+.wrap {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  top: 0;
+  height: 70px;
+  background: #fff;
+  border-bottom: 1px solid #DFDFDF;
+  z-index: 1000;
+}
+
+.logo_navigate_wrap {
+  align-items: center;
+}
+
+.wrap * {
+  display: flex;
+}
+
+.logo {
+  align-items: center;
+  padding: 5px 0;
+  height: 50px;
+  gap: 9px;
+}
+
+.logo a {
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.logo .text {
+  color: var(--brand-blue);
+  font-family: 'BarunAirForce_Bold';
+  font-size: 1.6021rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.navigate {
+  gap: 8px;
+}
+
+.navigate_box {
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navigate span {
+  white-space: nowrap;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.active {
+  color: var(--Primary-100);
+}
+
+.none_active {
+  color: var(--Secondary-600);
+}
+
+.loginButton {
+  justify-content: center;
+  align-items: center;
+  width: 128px;
+  height: 48px;
+  padding: 12px 23px;
+  border-radius: 8px;
+  border-width: 0;
+  background: var(--Primary-100);
+  cursor: pointer;
+}
+
+.loginButton span {
+  color: var(--Cool-Gray-100);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.userBox {
+  position: relative;
+  gap: 6px;
+  align-items: center;
+  color: var(--Cool-Gray-600);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 00;
+  line-height: normal;
+}
+
+.userIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.dropdown {
+  flex-direction: column;
+  position: absolute;
+  top: 100%;   /* kebob 아이콘 바로 아래 */
+  right: 0;    /* 오른쪽 정렬 */
+  width: 139px;
+  justify-content: center;
+  background: white;
+  border: 1px solid var(--Cool-Gray-300);
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.dropdown li {
+  justify-content: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--Secondary-500, #6B7280);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.dropdown li:hover {
+  background: #f5f5f5;
+}
+
+.dropdown li:first-child {
+  border-radius: 10px 10px 0 0;
+}
+
+.dropdown li:last-child {
+  border-radius: 0 0 10px 10px;
+}
+
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px) {
+  .wrap {
+    padding: 0 200px;
+  }
+
+  .logo_navigate_wrap {
+    gap: 32px;
+  }
+
+  .navigate_box {
+    width: 109px;
+    height: 69px;
+    padding: 24px 16px 24px 15px;
+  }
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px) {
+  .wrap {
+    padding: 0 24px;
+  }
+
+  .logo_navigate_wrap {
+    gap: 20px;
+  }
+
+  .navigate_box {
+    width: 109px;
+    height: 69px;
+    padding: 24px 16px 24px 15px;
+  }
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px) {
+  .wrap {
+    padding: 0 16px;
+  }
+
+  .logo_navigate_wrap {
+    gap: 16px;
+  }
+
+  .navigate_box {
+    width: 69px;
+    height: 69px;
+    flex-shrink: 0;
+  }
+
+  .navigate span {
+    font-size: 16px;
+  }
+}

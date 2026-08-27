@@ -1,0 +1,39 @@
+.text_section {
+    display: flex;
+    width: 640px;
+    height: 56px;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    align-items: center;
+    border-radius: 14px;
+    background: var(--Cool-Gray-100);
+    border: 3px solid transparent;
+}
+
+.text_section:focus {
+  outline: none;
+  border: 2px solid var(--brand-blue);
+}
+
+.notAllow {
+  border: 2px solid red;
+}
+
+.failure_message {
+  color: var(--error);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-left: 16px;
+  margin-top: -6px;
+  margin-bottom: 0px;
+}
+
+@media screen and (min-width: 375px) and (max-width: 743px){
+  .text_section {
+    width: 343px;
+    gap: 10px;
+  }
+}

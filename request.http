@@ -1,0 +1,39 @@
+###
+GET http://localhost:4000/products?orderBy=favorite
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+  "images": ["https://example.com/..."],
+  "tags": ["전자제품"],
+  "price": 41515,
+  "description": "string",
+  "name": "상품 이름"
+}
+
+###
+PATCH http://localhost:4000/products/1
+Content-Type: application/json
+
+{
+  "images": ["https://example.com/..."],
+  "tags": ["전자제품"],
+  "price": 40,
+  "description": "string",
+  "name": "상품 이름"
+}
+
+
+###
+GET http://localhost:4000/products/3
+
+###
+DELETE http://localhost:4000/products/3
+
+###
+POST http://localhost:4000/products/3/favorite
+
+###
+DELETE http://localhost:4000/products/3/favorite

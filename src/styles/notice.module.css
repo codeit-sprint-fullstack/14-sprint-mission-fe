@@ -1,0 +1,190 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  width: 100%;
+  height: 100%;
+}
+
+.wrap * {
+  display: flex;
+  text-decoration: none;
+}
+
+.content_wrap {
+  flex-direction: column;
+}
+
+.content_wrap span {
+  color: var(--Cool-Gray-900, #111827);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.bestpost {
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.postlist {
+  flex-direction: column;
+  gap: 24px;
+}
+
+.postlist_head {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+.postlist_head button {
+  height: 42px;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  background: var(--brand-blue);
+}
+
+.postlist_head button span {
+  color: #FFF;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.postlist_content {
+  flex-direction: column;
+  gap: 24px;
+}
+
+.search_wrap {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.input_wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input_wrap .icon {
+  position: absolute;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+}
+
+.search_wrap input {
+  width: 1054px;
+  height: 42px;
+  padding: 9px 20px 9px 36px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: none;
+  background: var(--Secondary-100);
+}
+
+.input_wrap input:focus {
+  outline: none;
+  border: 2px solid var(--brand-blue);
+}
+
+.bestpost_wrap {
+  display: grid !important;
+  gap: 16px;
+}
+
+.bestpost_wrap>* {
+  display: block;
+  /* flex 덮어쓰기 */
+}
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px) {
+  .content_wrap {
+    width: 1200px;
+    margin-top: 24px;
+    gap: 40px;
+  }
+
+  .bestpost_wrap {
+    gap: 24px;
+  }
+
+  .search_wrap input {
+    width: 1054px;
+  }
+
+  .postlist {
+    gap: 24px;
+  }
+
+  .bestpost_wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 큰 화면: 3개 */
+  }
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px) {
+  .content_wrap {
+    width: 696px;
+    margin-top: 24px;
+    gap: 24px;
+  }
+
+  .search_wrap input {
+    width: 560px;
+  }
+
+  .postlist {
+    gap: 24px;
+  }
+
+  .bestpost_wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 중간 화면: 2개 */
+  }
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px) {
+  .content_wrap {
+    width: 343px;
+    margin-top: 16px;
+    gap: 24px;
+  }
+
+  .content_wrap span {
+    font-size: 18px;
+  }
+
+  .search_wrap input {
+    width: 288px;
+  }
+
+  .postlist {
+    gap: 16px;
+  }
+
+  .bestpost_wrap {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

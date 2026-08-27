@@ -1,0 +1,124 @@
+.ItemList {
+  display: flex;
+  gap: 24px;
+  color: var(--Secondary-800, #1F2937);
+  /* pretendard/md-14px-medium */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.product_card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mainlist img {
+  width: 282px;
+  height: 282px;
+  border-radius: 16px;
+}
+
+.sublist img {
+  width: 221px;
+  height: 221px;
+  border-radius: 16px;
+}
+
+.itemInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.itemInfo h3 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemInfo p {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#likeCount {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--Secondary-600);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+#likeCount img {
+  height: 16px;
+  width: 16px;
+  border-radius: 0px;
+  border: 0px #fff;
+}
+
+/* PC: 1200px 이상 */
+@media screen and (min-width: 1200px) {
+  .mainlist {
+    width: 282px;
+    height: 378px;
+  }
+
+  .sublist {
+    width: 227px;
+    height: 317px;
+  }
+
+}
+
+/* Tablet: 744px ~ 1199px */
+@media screen and (min-width: 744px) and (max-width: 1199px) {
+  .mainlist {
+    width: 343px;
+    height: 434px;
+  }
+
+  .sublist {
+    width: 221px;
+    height: 317px;
+  }
+
+  .mainlist img {
+    width: 343px;
+    height: 343px;
+    border-radius: 16px;
+  }
+}
+
+/* Mobile: 375px ~ 743px */
+@media screen and (min-width: 375px) and (max-width: 743px) {
+  .mainlist {
+    width: 343px;
+    height: 434px;
+  }
+
+  .sublist {
+    gap: 8px;
+    width: 168px;
+    height: 264px;
+  }
+
+  .mainlist img {
+    width: 343px;
+    height: 343px;
+    border-radius: 16px;
+  }
+
+  .sublist img {
+    width: 167px;
+    height: 167px;
+    border-radius: 16px;
+  }
+}

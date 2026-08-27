@@ -1,0 +1,65 @@
+{
+  "name": "sprint_mission_9",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "concurrently -k -n server,web -c green,cyan \"npm:server\" \"npm:dev\"",
+    "dev": "next dev",
+    "server": "node server.js",
+    "build": "next build",
+    "start:next": "next start"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "@react-oauth/google": "^0.13.5",
+    "@tanstack/react-query": "^5.101.4",
+    "axios": "^1.19.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "form-data": "^4.0.6",
+    "formidable": "^3.5.4",
+    "glob": "^13.0.6",
+    "google-auth-library": "^11.0.2",
+    "hono": "^4.13.5",
+    "jsonwebtoken": "^9.0.3",
+    "lodash": "^4.18.1",
+    "multer": "^2.2.0",
+    "next": "^16.3.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-toastify": "^11.1.0",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1",
+    "valibot": "^1.4.2"
+  },
+  "description": "========= 스프린트 미션 9 =========",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Happy-DCS/14-sprint-mission-fe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Happy-DCS/14-sprint-mission-fe/issues"
+  },
+  "homepage": "https://github.com/Happy-DCS/14-sprint-mission-fe#readme",
+  "allowScripts": {
+    "@scarf/scarf@1.4.0": true,
+    "esbuild@0.28.2": true,
+    "msgpackr-extract@3.0.4": true,
+    "workerd@1.20260704.1": true,
+    "prisma@7.10.0": true,
+    "@prisma/engines@7.10.0": true,
+    "@prisma/client@7.10.0": true
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "prisma": "^7.10.0"
+  }
+}
