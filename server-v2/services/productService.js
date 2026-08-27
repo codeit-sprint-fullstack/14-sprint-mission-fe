@@ -8,6 +8,7 @@ function formatProductsItem(product) {
     description: product.description,
     price: product.price,
     tags: product.tags,
+    images: product.images,
     ownerNickname: product.user.nickname,
     ownerId: product.user.id,
     favoriteCount: product._count.favorites,

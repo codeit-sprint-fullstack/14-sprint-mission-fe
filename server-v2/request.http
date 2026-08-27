@@ -16,7 +16,7 @@ POST http://localhost:3001/auth/signIn
 Content-Type: application/json
 
 {
-  "email": "kimcoding@gmail.com",
+  "email": "leecoding@gmail.com",
   "password": "12341234"
 }
 
@@ -33,13 +33,14 @@ Content-Type: application/json
 ### 상품 생성하기
 POST http://localhost:3001/products
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzgwMzMxNiwiZXhwIjoxNzg3ODA2OTE2fQ.2swJFNluAi0eC0AwY5el3XFNULWhOlOyWyyMeK9lbUg
 
 {
-  "name": "아이폰 XR",
-  "description": "세컨폰으로 사용했습니다. 사용감 있지만 작동은 잘 됩니다!",
-  "price": 50000,
-  "tags": ["아이폰", "애플", "중고"]
+  "name": "아이폰 미니13",
+  "description": "약 3년 정도 사용했어요! 사용감 있지만 작동엔 문제 없습니다",
+  "price": 300000,
+  "tags": ["아이폰", "애플", "중고"],
+   "images": ["http://localhost:3001/uploads/1787802829520.jpeg"]
 }
 
 ### 상품 목록 가져오기
@@ -75,11 +76,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhd
 ### 게시글 생성하기
 POST http://localhost:3001/articles
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzgwMzMxNiwiZXhwIjoxNzg3ODA2OTE2fQ.2swJFNluAi0eC0AwY5el3XFNULWhOlOyWyyMeK9lbUg
 
 {
-  "title": "중고거래가 처음인데요",
-  "content": "이번에 처음 중고거래를 하는데요! 보통 어디서 거래 하시나요?"
+  "title": "거래 약속 후 구매자가 연락이 없으면 어떻게 하시나요?",
+  "content": "오늘 저녁에 직거래하기로 했는데 구매자가 몇 시간째 메시지를 확인하지 않고 있습니다. 다른 구매 희망자도 있는 상황인데 언제까지 기다리는 것이 적당할까요?",
+  "image": "http://localhost:3001/uploads/1787803694833.jpeg"
+
 }
 
 ### 게시글 목록 가져오기
@@ -148,3 +151,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhd
 ### 댓글 삭제하기
 DELETE http://localhost:3001/comments/14
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzczNDg2NiwiZXhwIjoxNzg3NzM4NDY2fQ.Dbx7Tz0JFAxx2bjxIGX3E7UswydsollyxIH_29EzmfI
+
+############################ uploads ############################
+
+### 이미지 업로드
+POST http://localhost:3001/images/upload
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzgwMzMxNiwiZXhwIjoxNzg3ODA2OTE2fQ.2swJFNluAi0eC0AwY5el3XFNULWhOlOyWyyMeK9lbUg
+Content-Type: multipart/form-data; boundary=Boundary01234567890123456789
+
+--Boundary01234567890123456789
+Content-Disposition: form-data; name="image"; filename="test.png"
+Content-Type: image/png
+
+< ./test.png
+--Boundary01234567890123456789--

@@ -1,5 +1,6 @@
 import prisma from '../config/prisma.js';
 
+// 상품 생성하기
 async function save(product, userId) {
   return await prisma.product.create({
     data: {
@@ -7,6 +8,7 @@ async function save(product, userId) {
       description: product.description,
       price: product.price,
       tags: product.tags,
+      images: product.images,
       userId,
     },
     select: {
@@ -15,6 +17,7 @@ async function save(product, userId) {
       description: true,
       price: true,
       tags: true,
+      images: true,
       createdAt: true,
       user: {
         select: {
@@ -31,6 +34,7 @@ async function save(product, userId) {
   });
 }
 
+// 상품 목록 가져오기
 async function findMany({ offset, limit, orderBy, keyword }) {
   const where = {
     OR: [
@@ -70,6 +74,7 @@ async function findMany({ offset, limit, orderBy, keyword }) {
   };
 }
 
+// 상품 가져오기
 async function findUnique(productId) {
   return await prisma.product.findUnique({
     where: {
@@ -91,6 +96,7 @@ async function findUnique(productId) {
   });
 }
 
+// 상품 수정하기
 async function update(productId, product) {
   return await prisma.product.update({
     where: {
@@ -101,6 +107,7 @@ async function update(productId, product) {
       description: product.description,
       price: product.price,
       tags: product.tags,
+      images: product.images,
     },
     include: {
       user: {
@@ -118,6 +125,7 @@ async function update(productId, product) {
   });
 }
 
+// 상품 삭제하기
 async function remove(productId) {
   return await prisma.product.delete({
     where: {
@@ -129,6 +137,7 @@ async function remove(productId) {
   });
 }
 
+// 상품 좋아요 가져오기
 async function findFavorite(productId, userId) {
   return await prisma.productFavorite.findUnique({
     where: {
@@ -140,6 +149,7 @@ async function findFavorite(productId, userId) {
   });
 }
 
+// 상품 좋아요 생성하기
 async function saveFavorite(productId, userId) {
   return await prisma.productFavorite.create({
     data: {
@@ -149,6 +159,7 @@ async function saveFavorite(productId, userId) {
   });
 }
 
+// 상품 좋아요 삭제하기
 async function removeFavorite(productId, userId) {
   return await prisma.productFavorite.delete({
     where: {

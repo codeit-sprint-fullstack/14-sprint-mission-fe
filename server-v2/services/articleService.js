@@ -6,6 +6,7 @@ function formatArticle(article) {
     id: article.id,
     title: article.title,
     content: article.content,
+    image: article.image,
     writer: {
       id: article.user.id,
       nickname: article.user.nickname,

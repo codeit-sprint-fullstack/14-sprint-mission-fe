@@ -6,12 +6,14 @@ async function save(article, userId) {
     data: {
       title: article.title,
       content: article.content,
+      image: article.image,
       userId,
     },
     select: {
       id: true,
       title: true,
       content: true,
+      image: true,
       createdAt: true,
       updatedAt: true,
       user: {
@@ -100,6 +102,7 @@ async function update(articleId, article) {
     data: {
       title: article.title,
       content: article.content,
+      image: article.image,
     },
     include: {
       user: {
