@@ -46,3 +46,7 @@ next-env.d.ts
 # uploaded files — 폴더는 유지하고 내부 파일만 제외
 /uploads/*
 !/uploads/.gitkeep
+
+# Next.js 가 next dev 실행 시 자동 생성하는 에이전트 안내 파일
+/AGENTS.md
+/CLAUDE.md
