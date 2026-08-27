@@ -1,8 +1,10 @@
 import {
+  addArticleLike,
   createArticle,
   deleteArticle,
   getArticleById,
   getArticles,
+  removeArticleLike,
   updateArticle,
 } from "../services/articleService.js";
 
@@ -82,6 +84,32 @@ export async function deleteArticleController(req, res, next) {
     await deleteArticle(id, userId);
 
     return res.sendStatus(204);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function addArticleLikeController(req, res, next) {
+  try {
+    const { articleId } = req.params;
+    const userId = req.user.userId;
+
+    const result = await addArticleLike(articleId, userId);
+
+    return res.json(result);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function removeArticleLikeController(req, res, next) {
+  try {
+    const { articleId } = req.params;
+    const userId = req.user.userId;
+
+    const result = await removeArticleLike(articleId, userId);
+
+    return res.json(result);
   } catch (error) {
     return next(error);
   }

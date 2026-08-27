@@ -1,9 +1,11 @@
 import express from "express";
 import {
+  addArticleLikeController,
   createArticleController,
   deleteArticleController,
   getArticleController,
   getArticlesController,
+  removeArticleLikeController,
   updateArticleController,
 } from "../controllers/articleController.js";
 import prisma from "../lib/prisma.js";
@@ -21,6 +23,11 @@ router
   .get(auth.optionalAccessToken, getArticleController)
   .patch(auth.verifyAccessToken, updateArticleController)
   .delete(auth.verifyAccessToken, deleteArticleController);
+
+router
+  .route("/:articleId/likes")
+  .post(auth.verifyAccessToken, addArticleLikeController)
+  .delete(auth.verifyAccessToken, removeArticleLikeController);
 
 router.post("/:articleId/comments", async (req, res) => {
   const { articleId } = req.params;

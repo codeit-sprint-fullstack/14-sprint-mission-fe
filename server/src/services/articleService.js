@@ -99,3 +99,29 @@ export async function deleteArticle(id, userId) {
 
   await articleRepository.deleteById(id);
 }
+
+export async function addArticleLike(articleId, userId) {
+  const result = await articleRepository.addLike(articleId, userId);
+
+  if (!result) {
+    throw createHttpError(404, "게시글을 찾을 수 없습니다.");
+  }
+
+  return {
+    ...result,
+    isLiked: true,
+  };
+}
+
+export async function removeArticleLike(articleId, userId) {
+  const result = await articleRepository.removeLike(articleId, userId);
+
+  if (!result) {
+    throw createHttpError(404, "게시글을 찾을 수 없습니다.");
+  }
+
+  return {
+    ...result,
+    isLiked: false,
+  };
+}

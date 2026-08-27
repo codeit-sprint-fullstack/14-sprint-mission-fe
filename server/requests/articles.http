@@ -57,3 +57,14 @@ Authorization: Bearer {{otherAccessToken}}
 ### 게시글 삭제 - 작성자
 DELETE {{baseUrl}}/articles/{{articleId}}
 Authorization: Bearer {{accessToken}}
+
+### 게시글 좋아요
+POST {{baseUrl}}/articles/{{articleId}}/likes
+Authorization: Bearer {{accessToken}}
+
+### 게시글 좋아요 취소
+DELETE {{baseUrl}}/articles/{{articleId}}/likes
+Authorization: Bearer {{accessToken}}
+
+### 게시글 좋아요 실패 - 비로그인
+POST {{baseUrl}}/articles/{{articleId}}/likes
