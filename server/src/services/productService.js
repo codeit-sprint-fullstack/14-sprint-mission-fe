@@ -125,8 +125,22 @@ export async function updateProduct({
   price,
   tags,
   images,
+  existingImages,
 }) {
   const existingProduct = await ensureProductOwner(id, userId);
+
+  if (existingImages !== undefined) {
+    const hasInvalidImage = existingImages.some(
+      (image) => !existingProduct.images.includes(image),
+    );
+
+    if (hasInvalidImage) {
+      throw createHttpError(
+        400,
+        "상품에 등록되지 않은 이미지가 포함되어 있습니다.",
+      );
+    }
+  }
 
   const data = {};
 

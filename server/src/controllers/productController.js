@@ -108,6 +108,7 @@ export async function updateProductController(req, res, next) {
       price,
       tags: tagList,
       images: imageList,
+      existingImages,
     });
 
     return res.json(product);
