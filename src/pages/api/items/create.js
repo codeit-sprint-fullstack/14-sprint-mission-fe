@@ -1,4 +1,5 @@
 import axios from "axios";
+import { relayAxiosError } from "@/utils/proxy";
 
 export default async function handler(req, res) {
   const BASE_URL = process.env.API_BASE_URL;
@@ -33,15 +34,7 @@ export default async function handler(req, res) {
 
       res.status(201).json(response.data);
     } catch (error) {
-      console.error("Create Product API Error:", error);
-
-      if (error.response) {
-        return res
-          .status(error.response.status)
-          .json({ error: error.response.data.error || "외부 API 오류" });
-      }
-
-      res.status(500).json({ error: "서버 오류", detail: error.message });
+      relayAxiosError(res, error);
     }
   } else {
     res.setHeader("Allow", ["POST"]);

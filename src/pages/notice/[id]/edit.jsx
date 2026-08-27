@@ -56,7 +56,7 @@ export default function EditNotice() {
     onSuccess: (data) => {
       setName(data.title || "");
       setDescription(data.content || "");
-      setExistingImage(data.image || ""); // ✅ 단일 문자열 세팅
+      setExistingImage(data.images?.[0] || ""); // images 배열 → 첫 이미지
     },
   });
 
@@ -72,7 +72,7 @@ export default function EditNotice() {
       const res = await api.patch(`/notice/${id}`, {
         title: name,
         content: description,
-        image: finalImage, // ✅ 문자열로 전달
+        images: finalImage ? [finalImage] : [],
       });
       return res.data;
     },
@@ -83,14 +83,13 @@ export default function EditNotice() {
     },
     onError: (err) => {
       console.error("수정 에러:", err);
-      toast.error("수정 중 문제가 발생했습니다.");
+      if (!err?.__toastShown) toast.error("수정 중 문제가 발생했습니다.");
     },
   });
 
   const isDisabled =
     name.trim() === "" ||
-    description.trim() === "" ||
-    !existingImage;
+    description.trim() === "";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -101,7 +100,7 @@ export default function EditNotice() {
     if (data) {
       setName(data.title || "");
       setDescription(data.content || "");
-      setExistingImage(data.image || ""); // ✅ 배열 대신 문자열
+      setExistingImage(data.images?.[0] || "");
     }
   }, [data]);
 

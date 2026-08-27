@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     res.status(405).end(`Method ${req.method} Not Allowed`);
   } catch (error) {
     console.error("Favorite API Error:", error);
-    res.status(500).json({ error: "서버 오류" });
+    res.status(502).json({ message: "백엔드 서버에 연결할 수 없습니다." });
   }
 }
 

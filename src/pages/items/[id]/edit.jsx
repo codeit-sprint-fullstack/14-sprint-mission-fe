@@ -99,7 +99,7 @@ export default function EditItem() {
     },
     onError: (err) => {
       console.error("수정 에러:", err);
-      toast.error("수정 중 문제가 발생했습니다.");
+      if (!err?.__toastShown) toast.error("수정 중 문제가 발생했습니다.");
     },
   });
 
