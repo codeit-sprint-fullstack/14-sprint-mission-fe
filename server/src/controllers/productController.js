@@ -29,14 +29,21 @@ export async function getProductsController(req, res, next) {
 
 export async function createProductController(req, res, next) {
   try {
-    const { name, description, price, tags, images } = req.body;
+    const { name, description, price, tags } = req.body;
+
+    const tagList = Array.isArray(tags) ? tags : tags ? [tags] : [];
+
+    const images = (req.files ?? []).map(
+      (file) => `/uploads/products/${file.filename}`,
+    );
+
     const ownerId = req.user.userId;
 
     const product = await createProduct({
       name,
       description,
       price,
-      tags,
+      tags: tagList,
       images,
       ownerId,
     });

@@ -13,6 +13,7 @@ import {
   updateProductController,
 } from "../controllers/productController.js";
 import auth from "../middlewares/auth.js";
+import upload from "../middlewares/productImageUpload.js";
 import {
   validateProductCreate,
   validateProductUpdate,
@@ -23,7 +24,12 @@ const router = express.Router();
 router
   .route("/")
   .get(auth.optionalAccessToken, getProductsController)
-  .post(auth.verifyAccessToken, validateProductCreate, createProductController);
+  .post(
+    auth.verifyAccessToken,
+    upload.array("images", 3),
+    validateProductCreate,
+    createProductController,
+  );
 
 router
   .route("/:id")
