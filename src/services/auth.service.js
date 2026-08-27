@@ -7,7 +7,7 @@ import {
   generateTokens,
   verifyRefreshToken,
 } from "../lib/auth.js";
-import { verifyGoogleIdToken } from "../lib/google.js";
+import { verifyGoogleIdToken, verifyGoogleAccessToken } from "../lib/google.js";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -73,16 +73,22 @@ export const authService = {
     return { ...tokens, user: serializeUser(user) };
   },
 
-  // 구글 로그인/회원가입 — 프론트에서 받은 credential(ID 토큰) 검증 후 처리
-  async loginWithGoogle(credential) {
+  // 구글 로그인/회원가입
+  // - credential : GIS <GoogleLogin> 의 ID 토큰
+  // - accessToken: useGoogleLogin(implicit) 의 access 토큰
+  async loginWithGoogle({ credential, accessToken }) {
     if (!process.env.GOOGLE_CLIENT_ID) {
       throw new HttpError(503, "구글 로그인이 설정되지 않았습니다. (GOOGLE_CLIENT_ID 미설정)");
     }
-    if (!credential) throw BadRequest("구글 인증 정보(credential)가 필요합니다.");
+    if (!credential && !accessToken) {
+      throw BadRequest("구글 인증 정보가 필요합니다.");
+    }
 
     let profile;
     try {
-      profile = await verifyGoogleIdToken(credential);
+      profile = credential
+        ? await verifyGoogleIdToken(credential)
+        : await verifyGoogleAccessToken(accessToken);
     } catch {
       throw Unauthorized("구글 인증에 실패했습니다.");
     }

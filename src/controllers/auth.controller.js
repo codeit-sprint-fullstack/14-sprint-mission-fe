@@ -13,8 +13,10 @@ export const authController = {
   }),
 
   google: asyncHandler(async (req, res) => {
-    // GIS 는 credential, 다른 라이브러리는 idToken 으로 넘길 수 있어 둘 다 허용
-    const result = await authService.loginWithGoogle(req.body.credential ?? req.body.idToken);
+    const result = await authService.loginWithGoogle({
+      credential: req.body.credential ?? req.body.idToken,
+      accessToken: req.body.accessToken,
+    });
     res.json(result);
   }),
 

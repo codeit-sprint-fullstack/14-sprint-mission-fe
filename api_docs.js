@@ -466,7 +466,7 @@
  *   post:
  *     summary: 구글 로그인 / 회원가입
  *     description: >
- *       프론트(Google Identity Services)에서 받은 credential(ID 토큰)을 검증한다.
+ *       프론트에서 받은 구글 토큰을 검증한다 (credential=ID토큰 또는 accessToken 중 하나).
  *       해당 이메일의 유저가 없으면 자동으로 회원가입(provider=google, 비밀번호 없음) 후 로그인 처리.
  *     tags:
  *       - Auth
@@ -476,12 +476,13 @@
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - credential
  *             properties:
  *               credential:
  *                 type: string
- *                 description: Google Identity Services 가 발급한 ID 토큰
+ *                 description: GIS <GoogleLogin> 이 발급한 ID 토큰
+ *               accessToken:
+ *                 type: string
+ *                 description: useGoogleLogin(implicit) 이 발급한 access 토큰
  *     responses:
  *       200:
  *         description: 로그인 성공, 토큰 및 유저 정보 반환
