@@ -111,7 +111,7 @@ async function create({ title, content, ownerId }) {
   });
 }
 
-async function findById(id, userId) {
+async function findById(id, userId, commentLimit) {
   return prisma.article.findUnique({
     where: {
       id,
@@ -134,6 +134,26 @@ async function findById(id, userId) {
       _count: {
         select: {
           articleLikes: true,
+        },
+      },
+
+      comments: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: commentLimit + 1,
+        select: {
+          id: true,
+          content: true,
+          createdAt: true,
+          updatedAt: true,
+          owner: {
+            select: {
+              id: true,
+              nickname: true,
+              image: true,
+            },
+          },
         },
       },
 

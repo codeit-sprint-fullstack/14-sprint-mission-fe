@@ -1,6 +1,8 @@
 import articleRepository from "../repositories/articleRepository.js";
 import createHttpError from "../utils/createHttpError.js";
 
+const ARTICLE_DETAIL_COMMENT_LIMIT = 10;
+
 export async function getArticles({
   page = 1,
   pageSize = 10,
@@ -43,18 +45,36 @@ export async function getArticles({
 }
 
 export async function getArticleById(id, userId) {
-  const article = await articleRepository.findById(id, userId);
+  const article = await articleRepository.findById(
+    id,
+    userId,
+    ARTICLE_DETAIL_COMMENT_LIMIT,
+  );
 
   if (!article) {
     throw createHttpError(404, "게시글을 찾을 수 없습니다.");
   }
 
-  const { _count, articleLikes = [], ...articleData } = article;
+  const { _count, articleLikes = [], comments, ...articleData } = article;
+
+  const hasMoreComments = comments.length > ARTICLE_DETAIL_COMMENT_LIMIT;
+
+  const commentList = hasMoreComments
+    ? comments.slice(0, ARTICLE_DETAIL_COMMENT_LIMIT)
+    : comments;
+
+  const nextCursor = hasMoreComments
+    ? commentList[commentList.length - 1].id
+    : null;
 
   return {
     ...articleData,
     likeCount: _count.articleLikes,
     isLiked: articleLikes.length > 0,
+    comments: {
+      list: commentList,
+      nextCursor,
+    },
   };
 }
 

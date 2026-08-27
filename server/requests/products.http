@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3001
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMGRkNGE3OC0yMDE0LTRiNTItODExNS0zZjhiYTFiMzcwNWQiLCJpYXQiOjE3ODc4MzIxMTMsImV4cCI6MTc4NzgzNTcxM30.JajfYXEY7UkPlIjmMNAOPAC9Ai4rn6gr87NQqy_uwUM
+@accessToken =
 @otherAccessToken = 
 @productId = fc8fe453-1a13-4ae4-b22d-064a574816fb
 @deleteProductId = 30198e48-f91b-4948-a675-196c6864ab9f
@@ -80,7 +80,7 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-  "content": "진짜 뉴질랜드 공기인가요?"
+  "content": "진짜 뉴질랜드 공기입니다!"
 }
 
 ### 상품 댓글 목록 - 기본 10개

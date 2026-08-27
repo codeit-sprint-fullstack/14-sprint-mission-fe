@@ -1,19 +1,42 @@
 import commentRepository from "../repositories/commentRepository.js";
 import createHttpError from "../utils/createHttpError.js";
 
-export async function createProductComment({ content, productId, ownerId }) {
+function validateCommentContent(content) {
   if (typeof content !== "string" || !content.trim()) {
     throw createHttpError(400, "댓글 내용을 입력해 주세요.");
   }
 
+  return content.trim();
+}
+
+async function createComment({ content, productId, articleId, ownerId }) {
+  const trimmedContent = validateCommentContent(content);
+
   return commentRepository.createComment({
-    content: content.trim(),
+    content: trimmedContent,
+    productId,
+    articleId,
+    ownerId,
+  });
+}
+
+export async function createProductComment({ content, productId, ownerId }) {
+  return createComment({
+    content,
     productId,
     ownerId,
   });
 }
 
-export async function getProductComments({ productId, cursor, limit = 10 }) {
+export async function createArticleComment({ content, articleId, ownerId }) {
+  return createComment({
+    content,
+    articleId,
+    ownerId,
+  });
+}
+
+async function getComments({ productId, articleId, cursor, limit = 10 }) {
   const limitNumber = Number(limit);
 
   if (!Number.isInteger(limitNumber) || limitNumber < 1) {
@@ -22,6 +45,7 @@ export async function getProductComments({ productId, cursor, limit = 10 }) {
 
   const comments = await commentRepository.findComments({
     productId,
+    articleId,
     cursor,
     take: limitNumber + 1,
   });
@@ -36,6 +60,22 @@ export async function getProductComments({ productId, cursor, limit = 10 }) {
     list,
     nextCursor,
   };
+}
+
+export async function getProductComments({ productId, cursor, limit = 10 }) {
+  return getComments({
+    productId,
+    cursor,
+    limit,
+  });
+}
+
+export async function getArticleComments({ articleId, cursor, limit = 10 }) {
+  return getComments({
+    articleId,
+    cursor,
+    limit,
+  });
 }
 
 async function ensureCommentOwner(id, userId) {
@@ -53,11 +93,9 @@ async function ensureCommentOwner(id, userId) {
 export async function updateComment({ id, userId, content }) {
   await ensureCommentOwner(id, userId);
 
-  if (typeof content !== "string" || !content.trim()) {
-    throw createHttpError(400, "댓글 내용을 입력해 주세요.");
-  }
+  const trimmedContent = validateCommentContent(content);
 
-  return commentRepository.updateById(id, content.trim());
+  return commentRepository.updateById(id, trimmedContent);
 }
 
 export async function deleteComment(id, userId) {
