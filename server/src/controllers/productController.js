@@ -70,8 +70,35 @@ export async function getProductController(req, res, next) {
 export async function updateProductController(req, res, next) {
   try {
     const { id } = req.params;
-    const { name, description, price, tags } = req.body;
+    const { name, description, price, tags, images } = req.body;
     const userId = req.user.userId;
+
+    const tagList =
+      tags === undefined
+        ? undefined
+        : Array.isArray(tags)
+          ? tags
+          : tags
+            ? [tags]
+            : [];
+
+    const existingImages =
+      images === undefined
+        ? undefined
+        : Array.isArray(images)
+          ? images
+          : images
+            ? [images]
+            : [];
+
+    const uploadedImages = (req.files ?? []).map(
+      (file) => `/uploads/products/${file.filename}`,
+    );
+
+    const imageList =
+      existingImages === undefined && uploadedImages.length === 0
+        ? undefined
+        : [...(existingImages ?? []), ...uploadedImages];
 
     const product = await updateProduct({
       id,
@@ -79,7 +106,8 @@ export async function updateProductController(req, res, next) {
       name,
       description,
       price,
-      tags,
+      tags: tagList,
+      images: imageList,
     });
 
     return res.json(product);

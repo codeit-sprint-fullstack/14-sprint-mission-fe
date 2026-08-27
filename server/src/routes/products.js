@@ -34,7 +34,12 @@ router
 router
   .route("/:id")
   .get(auth.optionalAccessToken, getProductController)
-  .patch(auth.verifyAccessToken, validateProductUpdate, updateProductController)
+  .patch(
+    auth.verifyAccessToken,
+    upload.array("images", 3),
+    validateProductUpdate,
+    updateProductController,
+  )
   .delete(auth.verifyAccessToken, deleteProductController);
 
 router

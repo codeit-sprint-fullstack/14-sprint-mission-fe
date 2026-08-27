@@ -1,3 +1,4 @@
+import fs from "fs";
 import productRepository from "../repositories/productRepository.js";
 import createHttpError from "../utils/createHttpError.js";
 
@@ -106,6 +107,14 @@ async function ensureProductOwner(id, userId) {
   if (product.ownerId !== userId) {
     throw createHttpError(403, "상품을 수정하거나 삭제할 권한이 없습니다.");
   }
+
+  return product;
+}
+
+function removeProductImages(images) {
+  for (const image of images) {
+    fs.unlink(image.slice(1), () => {});
+  }
 }
 
 export async function updateProduct({
@@ -115,8 +124,9 @@ export async function updateProduct({
   description,
   price,
   tags,
+  images,
 }) {
-  await ensureProductOwner(id, userId);
+  const existingProduct = await ensureProductOwner(id, userId);
 
   const data = {};
 
@@ -136,13 +146,29 @@ export async function updateProduct({
     data.tags = tags;
   }
 
-  return productRepository.updateById(id, data);
+  if (images !== undefined) {
+    data.images = images;
+  }
+
+  const product = await productRepository.updateById(id, data);
+
+  if (images !== undefined) {
+    const removedImages = existingProduct.images.filter(
+      (image) => !images.includes(image),
+    );
+
+    removeProductImages(removedImages);
+  }
+
+  return product;
 }
 
 export async function deleteProduct(id, userId) {
-  await ensureProductOwner(id, userId);
+  const product = await ensureProductOwner(id, userId);
 
   await productRepository.deleteById(id);
+
+  removeProductImages(product.images);
 }
 
 export async function addProductLike(productId, userId) {

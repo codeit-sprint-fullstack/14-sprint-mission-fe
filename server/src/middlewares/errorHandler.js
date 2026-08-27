@@ -1,10 +1,19 @@
 import { Prisma } from "@prisma/client";
+import fs from "fs";
 import multer from "multer";
 
+function removeUploadedFiles(files) {
+  for (const file of files ?? []) {
+    fs.unlink(file.path, () => {});
+  }
+}
+
 export default function errorHandler(err, req, res, next) {
+  removeUploadedFiles(req.files);
+
   if (err instanceof multer.MulterError) {
     return res.status(400).json({
-      message: "이미지는 최대 3개까지 업로드할 수 있습니다.",
+      message: "이미지는 최대 3개까지 등록할 수 있습니다.",
     });
   }
 

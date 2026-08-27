@@ -163,6 +163,7 @@ async function findOwnerById(id) {
     },
     select: {
       ownerId: true,
+      images: true,
     },
   });
 }
