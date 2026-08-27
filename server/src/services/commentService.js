@@ -6,7 +6,7 @@ export async function createProductComment({ content, productId, ownerId }) {
     throw createHttpError(400, "댓글 내용을 입력해 주세요.");
   }
 
-  return commentRepository.createProductComment({
+  return commentRepository.createComment({
     content: content.trim(),
     productId,
     ownerId,
@@ -20,7 +20,7 @@ export async function getProductComments({ productId, cursor, limit = 10 }) {
     throw createHttpError(400, "댓글 조회 요청이 올바르지 않습니다.");
   }
 
-  const comments = await commentRepository.findProductComments({
+  const comments = await commentRepository.findComments({
     productId,
     cursor,
     take: limitNumber + 1,

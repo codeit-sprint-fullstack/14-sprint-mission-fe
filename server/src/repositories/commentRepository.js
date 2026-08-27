@@ -1,10 +1,11 @@
 import prisma from "../lib/prisma.js";
 
-async function createProductComment({ content, productId, ownerId }) {
+async function createComment({ content, productId, articleId, ownerId }) {
   return prisma.comment.create({
     data: {
       content,
       productId,
+      articleId,
       ownerId,
     },
     select: {
@@ -23,10 +24,11 @@ async function createProductComment({ content, productId, ownerId }) {
   });
 }
 
-async function findProductComments({ productId, cursor, take }) {
+async function findComments({ productId, articleId, cursor, take }) {
   return prisma.comment.findMany({
     where: {
       productId,
+      articleId,
     },
     orderBy: {
       createdAt: "desc",
@@ -98,8 +100,8 @@ async function deleteById(id) {
 }
 
 export default {
-  createProductComment,
-  findProductComments,
+  createComment,
+  findComments,
   findOwnerById,
   updateById,
   deleteById,
