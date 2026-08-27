@@ -37,3 +37,31 @@ export async function getProductComments({ productId, cursor, limit = 10 }) {
     nextCursor,
   };
 }
+
+async function ensureCommentOwner(id, userId) {
+  const comment = await commentRepository.findOwnerById(id);
+
+  if (!comment) {
+    throw createHttpError(404, "댓글을 찾을 수 없습니다.");
+  }
+
+  if (comment.ownerId !== userId) {
+    throw createHttpError(403, "댓글을 수정하거나 삭제할 권한이 없습니다.");
+  }
+}
+
+export async function updateComment({ id, userId, content }) {
+  await ensureCommentOwner(id, userId);
+
+  if (typeof content !== "string" || !content.trim()) {
+    throw createHttpError(400, "댓글 내용을 입력해 주세요.");
+  }
+
+  return commentRepository.updateById(id, content.trim());
+}
+
+export async function deleteComment(id, userId) {
+  await ensureCommentOwner(id, userId);
+
+  await commentRepository.deleteById(id);
+}
