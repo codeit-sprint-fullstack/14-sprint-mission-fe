@@ -201,6 +201,81 @@ async function deleteById(id) {
   });
 }
 
+async function addLike(productId, userId) {
+  return prisma.$transaction(async (tx) => {
+    const product = await tx.product.findUnique({
+      where: {
+        id: productId,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!product) {
+      return null;
+    }
+
+    await tx.productLike.upsert({
+      where: {
+        userId_productId: {
+          userId,
+          productId,
+        },
+      },
+      create: {
+        userId,
+        productId,
+      },
+      update: {},
+    });
+
+    const likeCount = await tx.productLike.count({
+      where: {
+        productId,
+      },
+    });
+
+    return {
+      likeCount,
+    };
+  });
+}
+
+async function removeLike(productId, userId) {
+  return prisma.$transaction(async (tx) => {
+    const product = await tx.product.findUnique({
+      where: {
+        id: productId,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!product) {
+      return null;
+    }
+
+    await tx.productLike.deleteMany({
+      where: {
+        userId,
+        productId,
+      },
+    });
+
+    const likeCount = await tx.productLike.count({
+      where: {
+        productId,
+      },
+    });
+
+    return {
+      likeCount,
+    };
+  });
+}
+
 export default {
   findAll,
   countAll,
@@ -209,4 +284,6 @@ export default {
   findOwnerById,
   updateById,
   deleteById,
+  addLike,
+  removeLike,
 };

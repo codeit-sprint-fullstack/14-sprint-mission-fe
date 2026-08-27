@@ -144,3 +144,29 @@ export async function deleteProduct(id, userId) {
 
   await productRepository.deleteById(id);
 }
+
+export async function addProductLike(productId, userId) {
+  const result = await productRepository.addLike(productId, userId);
+
+  if (!result) {
+    throw createHttpError(404, "상품을 찾을 수 없습니다.");
+  }
+
+  return {
+    ...result,
+    isLiked: true,
+  };
+}
+
+export async function removeProductLike(productId, userId) {
+  const result = await productRepository.removeLike(productId, userId);
+
+  if (!result) {
+    throw createHttpError(404, "상품을 찾을 수 없습니다.");
+  }
+
+  return {
+    ...result,
+    isLiked: false,
+  };
+}

@@ -1,8 +1,10 @@
 import {
+  addProductLike,
   createProduct,
   deleteProduct,
   getProductById,
   getProducts,
+  removeProductLike,
   updateProduct,
 } from "../services/productService.js";
 
@@ -87,6 +89,32 @@ export async function deleteProductController(req, res, next) {
     await deleteProduct(id, userId);
 
     return res.sendStatus(204);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function addProductLikeController(req, res, next) {
+  try {
+    const { productId } = req.params;
+    const userId = req.user.userId;
+
+    const result = await addProductLike(productId, userId);
+
+    return res.json(result);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function removeProductLikeController(req, res, next) {
+  try {
+    const { productId } = req.params;
+    const userId = req.user.userId;
+
+    const result = await removeProductLike(productId, userId);
+
+    return res.json(result);
   } catch (error) {
     return next(error);
   }

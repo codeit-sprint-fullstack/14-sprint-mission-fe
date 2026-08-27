@@ -151,3 +151,25 @@ Authorization: Bearer {{accessToken}}
 ### 상품 삭제 - 작성자 본인
 DELETE {{baseUrl}}/products/{{deleteProductId}}
 Authorization: Bearer {{accessToken}}
+
+### 상품 좋아요 - 비로그인
+POST {{baseUrl}}/products/{{productId}}/likes
+
+### 상품 좋아요 - 존재하지 않는 상품
+POST {{baseUrl}}/products/111111/likes
+Authorization: Bearer {{accessToken}}
+
+### 상품 좋아요 - 정상
+POST {{baseUrl}}/products/{{productId}}/likes
+Authorization: Bearer {{accessToken}}
+
+### 상품 좋아요 취소 - 비로그인
+DELETE {{baseUrl}}/products/{{productId}}/likes
+
+### 상품 좋아요 취소 - 존재하지 않는 상품
+DELETE {{baseUrl}}/products/11111/likes
+Authorization: Bearer {{accessToken}}
+
+### 상품 좋아요 취소 - 정상
+DELETE {{baseUrl}}/products/{{productId}}/likes
+Authorization: Bearer {{accessToken}}

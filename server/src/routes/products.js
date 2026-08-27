@@ -4,10 +4,12 @@ import {
   getProductCommentsController,
 } from "../controllers/commentController.js";
 import {
+  addProductLikeController,
   createProductController,
   deleteProductController,
   getProductController,
   getProductsController,
+  removeProductLikeController,
   updateProductController,
 } from "../controllers/productController.js";
 import auth from "../middlewares/auth.js";
@@ -33,5 +35,10 @@ router
   .route("/:productId/comments")
   .get(getProductCommentsController)
   .post(auth.verifyAccessToken, createProductCommentController);
+
+router
+  .route("/:productId/likes")
+  .post(auth.verifyAccessToken, addProductLikeController)
+  .delete(auth.verifyAccessToken, removeProductLikeController);
 
 export default router;
