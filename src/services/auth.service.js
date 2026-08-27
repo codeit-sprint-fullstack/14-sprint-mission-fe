@@ -1,12 +1,13 @@
 import { userRepository } from "../repositories/user.repository.js";
 import { serializeUser } from "../serializers/user.serializer.js";
-import { BadRequest, Unauthorized, Unprocessable } from "../errors/HttpError.js";
+import { HttpError, BadRequest, Unauthorized, Unprocessable } from "../errors/HttpError.js";
 import {
   hashPassword,
   comparePassword,
   generateTokens,
   verifyRefreshToken,
 } from "../lib/auth.js";
+import { verifyGoogleIdToken } from "../lib/google.js";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -15,6 +16,16 @@ async function issueTokens(userId) {
   const tokens = generateTokens(userId);
   await userRepository.setRefreshToken(userId, tokens.refreshToken);
   return tokens;
+}
+
+// 닉네임 중복을 피해 유니크한 닉네임 생성
+async function uniqueNickname(base) {
+  let candidate = (base || "user").slice(0, 20);
+  for (let i = 0; i < 5; i++) {
+    if (!(await userRepository.findByNickname(candidate))) return candidate;
+    candidate = `${(base || "user").slice(0, 14)}_${Math.random().toString(36).slice(2, 6)}`;
+  }
+  return `user_${Date.now().toString(36)}`;
 }
 
 export const authService = {
@@ -51,8 +62,46 @@ export const authService = {
     if (!email || !password) throw BadRequest("이메일과 비밀번호를 입력해주세요.");
 
     const user = await userRepository.findByEmail(email);
+    if (user && !user.encryptedPassword) {
+      throw Unauthorized("소셜 로그인으로 가입한 계정입니다. 구글 로그인을 이용해주세요.");
+    }
     if (!user || !(await comparePassword(password, user.encryptedPassword))) {
       throw Unauthorized("이메일 또는 비밀번호가 올바르지 않습니다.");
+    }
+
+    const tokens = await issueTokens(user.id);
+    return { ...tokens, user: serializeUser(user) };
+  },
+
+  // 구글 로그인/회원가입 — 프론트에서 받은 credential(ID 토큰) 검증 후 처리
+  async loginWithGoogle(credential) {
+    if (!process.env.GOOGLE_CLIENT_ID) {
+      throw new HttpError(503, "구글 로그인이 설정되지 않았습니다. (GOOGLE_CLIENT_ID 미설정)");
+    }
+    if (!credential) throw BadRequest("구글 인증 정보(credential)가 필요합니다.");
+
+    let profile;
+    try {
+      profile = await verifyGoogleIdToken(credential);
+    } catch {
+      throw Unauthorized("구글 인증에 실패했습니다.");
+    }
+    if (!profile.email || !profile.emailVerified) {
+      throw Unauthorized("이메일이 확인되지 않은 구글 계정입니다.");
+    }
+
+    let user = await userRepository.findByEmail(profile.email);
+
+    // 신규 → 회원가입
+    if (!user) {
+      const nickname = await uniqueNickname(profile.name || profile.email.split("@")[0]);
+      user = await userRepository.create({
+        email: profile.email,
+        nickname,
+        provider: "google",
+        encryptedPassword: null,
+        image: profile.picture ?? null,
+      });
     }
 
     const tokens = await issueTokens(user.id);
