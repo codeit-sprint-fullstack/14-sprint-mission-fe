@@ -111,6 +111,46 @@ async function create({ title, content, ownerId }) {
   });
 }
 
+async function findById(id, userId) {
+  return prisma.article.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      createdAt: true,
+      updatedAt: true,
+
+      owner: {
+        select: {
+          id: true,
+          nickname: true,
+          image: true,
+        },
+      },
+
+      _count: {
+        select: {
+          articleLikes: true,
+        },
+      },
+
+      ...(userId && {
+        articleLikes: {
+          where: {
+            userId,
+          },
+          select: {
+            userId: true,
+          },
+        },
+      }),
+    },
+  });
+}
+
 async function findOwnerById(id) {
   return prisma.article.findUnique({
     where: {
@@ -157,6 +197,7 @@ export default {
   findAll,
   countAll,
   create,
+  findById,
   findOwnerById,
   updateById,
   deleteById,

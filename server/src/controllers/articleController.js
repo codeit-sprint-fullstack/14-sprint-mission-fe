@@ -1,6 +1,7 @@
 import {
   createArticle,
   deleteArticle,
+  getArticleById,
   getArticles,
   updateArticle,
 } from "../services/articleService.js";
@@ -19,6 +20,19 @@ export async function getArticlesController(req, res, next) {
     });
 
     return res.json(result);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getArticleController(req, res, next) {
+  try {
+    const { id } = req.params;
+    const userId = req.user?.userId;
+
+    const article = await getArticleById(id, userId);
+
+    return res.json(article);
   } catch (error) {
     return next(error);
   }

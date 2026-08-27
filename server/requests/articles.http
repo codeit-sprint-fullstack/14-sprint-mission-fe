@@ -1,11 +1,15 @@
 @baseUrl = http://localhost:3001
 @accessToken = 
 @otherAccessToken = 
-@articleId = 79b6ca2c-a1b4-4447-9fae-cdd16a4d2fa8
+@articleId = 9d48bddb-2aec-453d-8365-dc0acfbada8a
 @deleteArticleId = 
 
 ### 게시글 목록 조회
 GET {{baseUrl}}/articles?page=1&pageSize=10
+Authorization: Bearer {{accessToken}}
+
+### 게시글 상세 조회
+GET {{baseUrl}}/articles/{{articleId}}
 Authorization: Bearer {{accessToken}}
 
 ### 게시글 등록 - 로그인 사용자

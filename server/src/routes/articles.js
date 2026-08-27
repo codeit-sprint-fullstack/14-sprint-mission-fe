@@ -2,6 +2,7 @@ import express from "express";
 import {
   createArticleController,
   deleteArticleController,
+  getArticleController,
   getArticlesController,
   updateArticleController,
 } from "../controllers/articleController.js";
@@ -15,28 +16,11 @@ router
   .get(auth.optionalAccessToken, getArticlesController)
   .post(auth.verifyAccessToken, createArticleController);
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-
-  const article = await prisma.article.findUniqueOrThrow({
-    where: {
-      id,
-    },
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
-
-  res.status(200).json(article);
-});
-
-router.patch("/:id", auth.verifyAccessToken, updateArticleController);
-
-router.delete("/:id", auth.verifyAccessToken, deleteArticleController);
+router
+  .route("/:id")
+  .get(auth.optionalAccessToken, getArticleController)
+  .patch(auth.verifyAccessToken, updateArticleController)
+  .delete(auth.verifyAccessToken, deleteArticleController);
 
 router.post("/:articleId/comments", async (req, res) => {
   const { articleId } = req.params;

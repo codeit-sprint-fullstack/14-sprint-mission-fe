@@ -42,6 +42,22 @@ export async function getArticles({
   };
 }
 
+export async function getArticleById(id, userId) {
+  const article = await articleRepository.findById(id, userId);
+
+  if (!article) {
+    throw createHttpError(404, "게시글을 찾을 수 없습니다.");
+  }
+
+  const { _count, articleLikes = [], ...articleData } = article;
+
+  return {
+    ...articleData,
+    likeCount: _count.articleLikes,
+    isLiked: articleLikes.length > 0,
+  };
+}
+
 export async function createArticle({ title, content, ownerId }) {
   return articleRepository.create({
     title,
