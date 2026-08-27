@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "concurrently -k -n server,web -c green,cyan \"npm:server\" \"npm:dev\"",
     "dev": "next dev",
+    "server": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "server": "node server.js"
+    "start:next": "next start"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
@@ -56,6 +57,7 @@
     "@prisma/client@7.10.0": true
   },
   "devDependencies": {
+    "concurrently": "^10.0.5",
     "prisma": "^7.10.0"
   }
 }
