@@ -132,3 +132,30 @@ Authorization: Bearer {{login.response.body.$.accessToken}}
 ### 상품 좋아요 취소
 DELETE {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318/likes
 Authorization: Bearer {{login.response.body.$.accessToken}}
+
+### 상품 이미지 업로드
+POST {{baseUrl}}/uploads/images
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: multipart/form-data; boundary=UploadBoundary
+
+--UploadBoundary
+Content-Disposition: form-data; name="images"; filename="ic_heart.png"
+Content-Type: image/png
+
+< ../public/images/ic_heart.png
+--UploadBoundary--
+
+### 이미지가 포함된 상품 등록
+POST {{baseUrl}}/products
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "name": "이미지 테스트 상품",
+  "description": "업로드 이미지가 연결된 상품입니다.",
+  "price": 10000,
+  "tags": ["테스트"],
+  "images": [
+    "/uploads/5f8847fd-1b88-4faf-adbf-d67a53f3bda9.png"
+  ]
+}

@@ -4,6 +4,7 @@ import cors from "cors";
 import prisma from "./src/lib/prisma.js";
 import authRouter from "./src/routes/auth.routes.js";
 import productRouter from "./src/routes/product.routes.js";
+import uploadRouter from "./src/routes/upload.routes.js";
 import errorHandler from "./src/middlewares/errorHandler.js";
 
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/products", productRouter);
+app.use("/uploads", uploadRouter);
+app.use("/uploads", express.static("uploads"));
 
 app.get("/", (req, res) => {
   res.send("API server is running");
@@ -154,83 +157,6 @@ app.delete("/comments/:commentsId", async (req, res) => {
   await prisma.comment.delete({ where: { id: parseInt(commentsId) } });
   res.status(204).send();
 });
-
-//
-// // PRODUCTS //
-// //GET list
-// app.get("/products", async (req, res) => {
-//   try {
-//     const sort = req.query.sort;
-//     const page = Number(req.query.page) || 1;
-//     const limit = Number(req.query.count) || 10;
-
-//     const skipIndex = (page - 1) * limit;
-
-//     const sortOption = { _id: sort === "recent" ? "desc" : "asc" };
-
-//     const totalProducts = await Product.countDocuments();
-//     const totalPages = Math.ceil(totalProducts / limit);
-
-//     const products = await Product.find()
-//       .sort(sortOption)
-//       .skip(skipIndex)
-//       .limit(limit);
-
-//     res.send({
-//       products: products,
-//       currentPage: page,
-//       totalPages: totalPages,
-//     });
-//   } catch (e) {
-//     res.status(500).send({ message: "서버 오류가 발생했습니다" });
-//   }
-// });
-
-// //GET id
-// app.get("/products/:id", async (req, res) => {
-//   const product = await Product.findById(req.params.id);
-//   if (product) {
-//     res.send(product);
-//   } else {
-//     res.status(404).send({ message: "Cannot find given id." });
-//   }
-// });
-
-// //POST
-// app.post("/products", async (req, res) => {
-//   const newProduct = await Product.create(req.body);
-//   res.status(201).send(newProduct);
-// });
-
-// //PATCH
-// app.patch("/products/:id", async (req, res) => {
-//   const id = req.params.id;
-//   const product = await Product.findById(id);
-
-//   if (product) {
-//     Object.keys(req.body).forEach((key) => {
-//       product[key] = req.body[key];
-//     });
-
-//     // 이것 작성해야 mongoDB에 저장됨. 필수!
-//     await product.save();
-
-//     res.send(product);
-//   } else {
-//     res.status(404).send({ message: "Cannot find given id." });
-//   }
-// });
-
-// //DELETE
-// app.delete("/products/:id", async (req, res) => {
-//   const id = req.params.id;
-//   const product = await Product.findByIdAndDelete(id);
-//   if (product) {
-//     res.sendStatus(204);
-//   } else {
-//     res.status(404).send({ message: "Cannot find given id. " });
-//   }
-// });
 
 app.use(errorHandler);
 
