@@ -1,0 +1,119 @@
+.form {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.heading {
+  margin: 0;
+  color: var(--Secondary-800, #1f2937);
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.submitButton {
+  display: flex;
+  height: 42px;
+  padding: 12px 23px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--brand-blue, #3692ff);
+  color: var(--Cool-Gray-100, #f3f4f6);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background: var(--Cool-Gray-400, #9ca3af);
+  cursor: not-allowed;
+}
+
+.field {
+  display: block;
+}
+
+.field + .field {
+  margin-top: 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--Secondary-800, #1f2937);
+  font-family: "Pretendard", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.input,
+.textarea {
+  display: flex;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100, #f3f4f6);
+  color: var(--Secondary-800, #1f2937);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  outline-color: var(--brand-blue, #3692ff);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--Secondary-400, #9ca3af);
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  opacity: 1;
+}
+
+.input {
+  height: 56px;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.textarea {
+  max-width: 1200px;
+  height: 282px;
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 10px;
+  resize: none;
+}
+
+.error {
+  margin: 16px 0 0;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .label {
+    font-size: 14px;
+  }
+}

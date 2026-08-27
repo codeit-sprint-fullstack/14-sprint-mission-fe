@@ -1,0 +1,71 @@
+.card {
+  display: block;
+  min-width: 0;
+}
+
+.imageWrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  aspect-ratio: 1;
+  background: var(--Secondary-100);
+}
+
+.image,
+.placeholder,
+.placeholder svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+.info {
+  margin-top: 16px;
+}
+
+.name {
+  overflow: hidden;
+  margin: 0;
+  color: var(--Secondary-800);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  margin: 6px 0;
+  color: var(--Secondary-800);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.favorite {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--Secondary-600);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.favorite svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}

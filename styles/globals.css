@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --brand-blue: #3692ff;
+  --Primary-100: #3692ff;
+  --Primary-200: #1967d6;
+  --Primary-300: #1251aa;
+
+  --Secondary-900: #111827;
+  --Cool-Gray-900: #111827;
+  --Secondary-800: #1f2937;
+  --Cool-Gray-800: #1f2937;
+  --Secondary-700: #374151;
+  --Secondary-600: #4b5563;
+  --Secondary-500: #6b7280;
+  --Cool-Gray-500: #6b7280;
+  --Secondary-400: #9ca3af;
+  --Cool-Gray-400: #9ca3af;
+  --Cool-Gray-300: #d1d5db;
+  --Secondary-300: #e5e7eb;
+  --Secondary-200: #e5e7eb;
+  --Secondary-100: #f3f4f6;
+  --Secondary-50: #f9fafb;
+  --Cool-Gray-200: #e5e7eb;
+  --Cool-Gray-100: #f3f4f6;
+  --Cool-Gray-50: #f9fafb;
+
+  --Error-Red: #f74747;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--Cool-Gray-900);
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
