@@ -20,7 +20,10 @@ export async function createProduct(req, res, next) {
 
 export async function getProduct(req, res, next) {
   try {
-    const product = await getProductService(req.params.productId);
+    const product = await getProductService(
+      req.params.productId,
+      req.auth?.userId,
+    );
 
     return res.status(200).json(product);
   } catch (error) {

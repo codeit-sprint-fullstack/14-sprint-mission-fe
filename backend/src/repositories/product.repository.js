@@ -101,42 +101,55 @@ async function count(keyword) {
   });
 }
 
-async function findById(productId) {
-  return prisma.product.findUnique({
-    where: {
-      id: productId,
+async function findById(productId, userId) {
+  const include = {
+    images: {
+      select: {
+        path: true,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
     },
-    include: {
-      images: {
-        select: {
-          path: true,
-        },
-        orderBy: {
-          createdAt: "asc",
-        },
+    user: {
+      select: {
+        id: true,
+        nickname: true,
+        image: true,
       },
-      user: {
-        select: {
-          id: true,
-          nickname: true,
-          image: true,
-        },
+    },
+    comments: {
+      orderBy: {
+        createdAt: "desc",
       },
-      comments: {
-        orderBy: {
-          createdAt: "desc",
-        },
-        include: {
-          user: {
-            select: {
-              id: true,
-              nickname: true,
-              image: true,
-            },
+      include: {
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            image: true,
           },
         },
       },
     },
+  };
+
+  if (userId) {
+    include.likes = {
+      where: {
+        userId,
+      },
+      select: {
+        userId: true,
+      },
+    };
+  }
+
+  return prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+    include,
   });
 }
 

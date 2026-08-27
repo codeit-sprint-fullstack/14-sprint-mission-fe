@@ -8,7 +8,9 @@ import {
   addProductLike,
   removeProductLike,
 } from "../controllers/product.controller.js";
-import authenticate from "../middlewares/authenticate.js";
+import authenticate, {
+  optionalAuthenticate,
+} from "../middlewares/authenticate.js";
 import {
   validateCreateProduct,
   validateUpdateProduct,
@@ -23,7 +25,7 @@ productRouter
 
 productRouter
   .route("/:productId")
-  .get(getProduct)
+  .get(optionalAuthenticate, getProduct)
   .patch(authenticate, validateUpdateProduct, updateProduct)
   .delete(authenticate, deleteProduct);
 

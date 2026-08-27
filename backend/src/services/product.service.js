@@ -8,6 +8,15 @@ function formatProduct(product) {
   };
 }
 
+function formatProductDetail(product) {
+  const { likes, ...productWithoutLikes } = product;
+
+  return {
+    ...formatProduct(productWithoutLikes),
+    isLiked: Boolean(likes?.length),
+  };
+}
+
 export async function createProduct(productData, userId) {
   const createdProduct = await productRepository.save({
     ...productData,
@@ -17,14 +26,14 @@ export async function createProduct(productData, userId) {
   return formatProduct(createdProduct);
 }
 
-export async function getProduct(productId) {
-  const product = await productRepository.findById(productId);
+export async function getProduct(productId, userId) {
+  const product = await productRepository.findById(productId, userId);
 
   if (!product) {
     throw new AppError(404, "상품을 찾을 수 없습니다.");
   }
 
-  return formatProduct(product);
+  return formatProductDetail(product);
 }
 
 export async function updateProduct(productId, productData, userId) {
