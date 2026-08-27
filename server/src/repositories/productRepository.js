@@ -156,9 +156,57 @@ async function findById(id, userId, commentLimit) {
   });
 }
 
+async function findOwnerById(id) {
+  return prisma.product.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      ownerId: true,
+    },
+  });
+}
+
+async function updateById(id, data) {
+  return prisma.product.update({
+    where: {
+      id,
+    },
+    data,
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      price: true,
+      tags: true,
+      images: true,
+      createdAt: true,
+      updatedAt: true,
+      owner: {
+        select: {
+          id: true,
+          nickname: true,
+          image: true,
+        },
+      },
+    },
+  });
+}
+
+async function deleteById(id) {
+  return prisma.product.delete({
+    where: {
+      id,
+    },
+  });
+}
+
 export default {
   findAll,
   countAll,
   create,
   findById,
+  findOwnerById,
+  updateById,
+  deleteById,
 };

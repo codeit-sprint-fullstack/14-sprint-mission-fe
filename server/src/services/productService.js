@@ -95,3 +95,52 @@ export async function getProductById(id, userId) {
     },
   };
 }
+
+async function ensureProductOwner(id, userId) {
+  const product = await productRepository.findOwnerById(id);
+
+  if (!product) {
+    throw createHttpError(404, "상품을 찾을 수 없습니다.");
+  }
+
+  if (product.ownerId !== userId) {
+    throw createHttpError(403, "상품을 수정하거나 삭제할 권한이 없습니다.");
+  }
+}
+
+export async function updateProduct({
+  id,
+  userId,
+  name,
+  description,
+  price,
+  tags,
+}) {
+  await ensureProductOwner(id, userId);
+
+  const data = {};
+
+  if (name !== undefined) {
+    data.name = name;
+  }
+
+  if (description !== undefined) {
+    data.description = description;
+  }
+
+  if (price !== undefined) {
+    data.price = Number(price);
+  }
+
+  if (tags !== undefined) {
+    data.tags = tags;
+  }
+
+  return productRepository.updateById(id, data);
+}
+
+export async function deleteProduct(id, userId) {
+  await ensureProductOwner(id, userId);
+
+  await productRepository.deleteById(id);
+}

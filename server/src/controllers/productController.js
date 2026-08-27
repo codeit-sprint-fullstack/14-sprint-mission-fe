@@ -1,7 +1,9 @@
 import {
   createProduct,
+  deleteProduct,
   getProductById,
   getProducts,
+  updateProduct,
 } from "../services/productService.js";
 
 export async function getProductsController(req, res, next) {
@@ -51,6 +53,40 @@ export async function getProductController(req, res, next) {
     const product = await getProductById(id, userId);
 
     return res.json(product);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function updateProductController(req, res, next) {
+  try {
+    const { id } = req.params;
+    const { name, description, price, tags } = req.body;
+    const userId = req.user.userId;
+
+    const product = await updateProduct({
+      id,
+      userId,
+      name,
+      description,
+      price,
+      tags,
+    });
+
+    return res.json(product);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function deleteProductController(req, res, next) {
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    await deleteProduct(id, userId);
+
+    return res.sendStatus(204);
   } catch (error) {
     return next(error);
   }
