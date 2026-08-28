@@ -1,0 +1,30 @@
+.pagenation button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  background: #fff;
+  color: #6b7280;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pagenation button.active {
+  background: #2f80ed;
+  color: #fff;
+  border-color: #2f80ed;
+}
+
+.pagenation button.btnArrow {
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+}
+
+.pagenation .btnLeft {
+  background-image: url('../assets/arrow_left.svg');
+}
+
+.pagenation .btnRight {
+  background-image: url('../assets/arrow_right.svg');
+}

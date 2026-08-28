@@ -1,0 +1,107 @@
+/* 타이틀 영역 */
+.itemsTopWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemsTopWrap .subTitle {
+  margin-bottom: 0;
+}
+.itemsTopRight {
+  display: flex;
+  align-items: center;
+}
+.itemsSearch {
+  margin-right: 12px;
+}
+.itemsSearch input {
+  padding-left: 44px;
+  padding-right: 16px;
+  width: 100%;
+  height: 42px;
+  line-height: 42px;
+  background-color: #F3F4F6;
+  background-image: url(../assets/ic_search.svg);
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 16px center;
+  box-sizing: border-box;
+}
+
+/* 상품 이미지 */
+.itemContentsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.itemContents {
+  width: calc((100% - 96px)/5);
+  margin-right: 24px;
+}
+.itemContents:nth-child(5n) {
+  margin-right: 0;
+}
+.itemContents:nth-child(n + 6) {
+  margin-top: 40px;
+}
+.itemContents .itemImgWrap {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  border: 1px solid #F3F4F6;
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.itemContents .itemImgWrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.itemTextWrap{
+  margin-top: 16px;
+}
+.itemTit {
+  font-size: 14px;
+}
+.itemPrice {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 26px;
+  margin: 6px 0;
+}
+
+/* 상품 좋아요 */
+.itemFavWrap {
+  display: flex;
+  color: #6B7280;
+  align-items: center;
+  font-size: 16px;
+}
+.itemFavWrap img {
+  width: 16px;
+  margin-right: 8px;
+}
+
+/* 베스트 상품 */
+.bestItemContentsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.bestItemContentsWrap .itemContents {
+  width: calc((100% - 72px)/4);
+  margin-right: 24px;
+}
+.bestItemContentsWrap .itemContents:nth-child(4n) {
+  margin-right: 0;
+}
