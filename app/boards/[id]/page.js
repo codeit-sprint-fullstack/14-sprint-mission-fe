@@ -66,7 +66,7 @@ export default async function BoardPage({ params }) {
           <div className={styles.divider} />
           <div className={styles.likeCount}>
             <Image
-              src="/images/icons/ic_heart.svg"
+              src="/images/icons/ic_empty_heart.svg"
               alt=""
               width={16}
               height={16}

@@ -1,3 +1,4 @@
+import BestProducts from "./BestProducts";
 import ProductControls from "./ProductControls";
 import ProductGrid from "./ProductGrid";
 import Pagination from "./Pagination";
@@ -29,26 +30,30 @@ export default async function ItemsPage({ searchParams }) {
   const data = await getProducts({ page, pageSize, orderBy, keyword });
 
   return (
-    <section className={`wrapper ${styles.productsList}`}>
-      <div className={styles.productsHeader}>
-        <h2 className={styles.productsTitle}>판매 중인 상품</h2>
-        <ProductControls orderBy={orderBy} keyword={keyword} />
-      </div>
+    <>
+      <BestProducts />
 
-      <ProductGrid
-        initialProducts={data.list}
-        page={page}
-        orderBy={orderBy}
-        keyword={keyword}
-      />
+      <section className={`wrapper ${styles.productsList}`}>
+        <div className={styles.productsHeader}>
+          <h2 className={styles.productsTitle}>판매 중인 상품</h2>
+          <ProductControls orderBy={orderBy} keyword={keyword} />
+        </div>
 
-      <Pagination
-        page={page}
-        totalCount={data.totalCount}
-        pageSize={pageSize}
-        orderBy={orderBy}
-        keyword={keyword}
-      />
-    </section>
+        <ProductGrid
+          initialProducts={data.list}
+          page={page}
+          orderBy={orderBy}
+          keyword={keyword}
+        />
+
+        <Pagination
+          page={page}
+          totalCount={data.totalCount}
+          pageSize={pageSize}
+          orderBy={orderBy}
+          keyword={keyword}
+        />
+      </section>
+    </>
   );
 }

@@ -3,10 +3,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const pathname = usePathname();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+
+    setUser(null);
+  }
 
   return (
     <header className={styles.header}>
@@ -34,9 +51,23 @@ export default function Header() {
           )}
         </div>
 
-        <Link href="/login" className={styles.loginButton}>
-          로그인
-        </Link>
+        {user ? (
+          <div className={styles.userArea}>
+            <Image
+              src="/images/board/ic_profile.svg"
+              alt="프로필"
+              width={40}
+              height={40}
+              className={styles.profileImage}
+            />
+
+            <span className={styles.nickname}>{user.nickname}</span>
+          </div>
+        ) : (
+          <Link href="/login" className={styles.loginButton}>
+            로그인
+          </Link>
+        )}
       </div>
     </header>
   );

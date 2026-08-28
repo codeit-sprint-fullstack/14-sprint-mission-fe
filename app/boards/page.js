@@ -99,7 +99,7 @@ export default async function BoardsPage({ searchParams }) {
                       </span>
                       <span className={styles.bestlikeCount}>
                         <Image
-                          src="/images/icons/ic_heart.svg"
+                          src="/images/icons/ic_empty_heart.svg"
                           alt=""
                           width={16}
                           height={16}
@@ -162,7 +162,7 @@ export default async function BoardsPage({ searchParams }) {
                     </span>
                     <span className={styles.likeCount}>
                       <Image
-                        src="/images/icons/ic_heart.svg"
+                        src="/images/icons/ic_empty_heart.svg"
                         alt=""
                         width={16}
                         height={16}

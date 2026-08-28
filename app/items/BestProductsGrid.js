@@ -1,47 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { likeProduct } from "@/services/ProductService";
 import { useWindowWidth } from "@/utils/WindowWidth";
 import styles from "./items.module.css";
 
-export default function ProductGrid({
-  initialProducts,
-  page,
-  orderBy,
-  keyword,
-}) {
+export default function BestProductsGrid({ initialProducts }) {
   const [products, setProducts] = useState(initialProducts);
   const windowWidth = useWindowWidth();
-  const router = useRouter();
-  const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setProducts(initialProducts);
   }, [initialProducts]);
 
-  // 화면 너비에 맞는 pageSize와 서버가 내려준 개수가 다르면 재요청
   useEffect(() => {
-    const expectedPageSize =
-      windowWidth < 744 ? 4 : windowWidth < 1200 ? 6 : 10;
+    setMounted(true);
+  }, []);
 
-    if (expectedPageSize !== initialProducts.length && page === 1) {
-      const params = new URLSearchParams({
-        page: "1",
-        orderBy,
-        pageSize: String(expectedPageSize),
-      });
-
-      if (keyword) params.set("keyword", keyword);
-
-      router.replace(`${pathname}?${params.toString()}`);
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [windowWidth]);
+  const visibleCount = !mounted ? 4 : windowWidth < 1200 ? 2 : 4;
+  const visibleProducts = products.slice(0, visibleCount);
 
   const handleLike = async (productId) => {
     try {
@@ -60,8 +40,8 @@ export default function ProductGrid({
   };
 
   return (
-    <div className={styles.productsGrid}>
-      {products.map((product) => (
+    <div className={styles.bestGrid}>
+      {visibleProducts.map((product) => (
         <div key={product.id} className={styles.productCard}>
           <Link href={`/items/${product.id}`} className={styles.productLink}>
             <div className={styles.imageWrapper}>
@@ -69,7 +49,7 @@ export default function ProductGrid({
                 src={product.images?.[0] || "/images/logo/default-product.png"}
                 alt={product.name}
                 fill
-                sizes="(max-width: 743px) 50vw, (max-width: 1199px) 33vw, 20vw"
+                sizes="(max-width: 1199px) 50vw, 25vw"
                 className={styles.productImage}
               />
             </div>

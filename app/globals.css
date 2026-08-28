@@ -140,34 +140,6 @@ header {
   flex: 1;
 }
 
-footer {
-  background-color: #111827;
-  color: #9ca3af;
-  font-size: 16px;
-  padding: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 60px;
-}
-
-#copyright {
-  order: 3;
-  flex-basis: 100%;
-}
-
-#footerMenu {
-  display: flex;
-  gap: 30px;
-  color: var(--gray-200);
-}
-
-#socialMedia {
-  display: flex;
-  gap: 12px;
-}
-
 .wrapper {
   width: 100%;
   padding: 0 16px;
@@ -225,15 +197,6 @@ footer {
     font-weight: 700;
     padding: 16px 126px;
   }
-
-  footer {
-    padding: 32px 104px 108px 104px;
-  }
-
-  #copyright {
-    flex-basis: auto;
-    order: 0;
-  }
 }
 
 /* Desktop styles */
@@ -249,9 +212,5 @@ footer {
 
   .break-on-desktop {
     display: inline;
-  }
-
-  footer {
-    padding: 32px 200px 108px 200px;
   }
 }
