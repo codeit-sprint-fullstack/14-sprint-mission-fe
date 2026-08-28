@@ -29,6 +29,26 @@ export async function getProduct(productId) {
   return response.data;
 }
 
+export async function createProduct(productData) {
+  const formData = new FormData();
+
+  formData.append("name", productData.name);
+  formData.append("description", productData.description);
+  formData.append("price", String(productData.price));
+
+  productData.tags.forEach((tag) => {
+    formData.append("tags", tag);
+  });
+
+  productData.newImages.forEach((image) => {
+    formData.append("images", image);
+  });
+
+  const response = await apiClient.post("/products", formData);
+
+  return response.data;
+}
+
 export async function updateProduct(productId, productData) {
   const response = await apiClient.patch(`/products/${productId}`, productData);
 
