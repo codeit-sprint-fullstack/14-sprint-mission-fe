@@ -6,10 +6,9 @@ POST {{baseUrl}}/auth/signUp
 Content-Type: application/json
 
 {
-  "email": "jinho@hong.com",
-  "nickname": "콩진호",
-  "password": "second222",
-  "passwordConfirmation": "second222"
+  "email": "sam@sung.com",
+  "nickname": "삼성",
+  "password": "1234"
 }
 
 ### 로그인 1

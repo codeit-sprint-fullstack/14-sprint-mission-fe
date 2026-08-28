@@ -5,6 +5,9 @@ import createHttpError from "../utils/createHttpError.js";
 
 const SALT_ROUNDS = 10;
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_PASSWORD_LENGTH = 8;
+
 async function hashPassword(password) {
   return bcrypt.hash(password, SALT_ROUNDS);
 }
@@ -31,17 +34,24 @@ function validateExistingUser(existingUser, email, nickname) {
   }
 }
 
-export async function signUp({
-  email,
-  nickname,
-  password,
-  passwordConfirmation,
-}) {
-  const normalizedEmail = email?.trim().toLowerCase();
-  const normalizedNickname = nickname?.trim();
+export async function signUp({ email, nickname, password }) {
+  if (
+    typeof email !== "string" ||
+    typeof nickname !== "string" ||
+    typeof password !== "string"
+  ) {
+    throw createHttpError(400, "요청 형식이 올바르지 않습니다.");
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+  const normalizedNickname = nickname.trim();
 
   if (!normalizedEmail) {
     throw createHttpError(400, "이메일을 입력해 주세요.");
+  }
+
+  if (!EMAIL_PATTERN.test(normalizedEmail)) {
+    throw createHttpError(400, "잘못된 이메일입니다.");
   }
 
   if (!normalizedNickname) {
@@ -52,8 +62,8 @@ export async function signUp({
     throw createHttpError(400, "비밀번호를 입력해 주세요.");
   }
 
-  if (passwordConfirmation !== undefined && password !== passwordConfirmation) {
-    throw createHttpError(400, "비밀번호가 일치하지 않습니다.");
+  if (password.length < MIN_PASSWORD_LENGTH) {
+    throw createHttpError(400, "비밀번호를 8자 이상 입력해 주세요.");
   }
 
   const existingUser = await userRepository.findExistingUser(
@@ -77,14 +87,26 @@ export async function signUp({
 }
 
 export async function signIn({ email, password }) {
-  const normalizedEmail = email?.trim().toLowerCase();
+  if (typeof email !== "string" || typeof password !== "string") {
+    throw createHttpError(400, "요청 형식이 올바르지 않습니다.");
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
 
   if (!normalizedEmail) {
     throw createHttpError(400, "이메일을 입력해 주세요.");
   }
 
+  if (!EMAIL_PATTERN.test(normalizedEmail)) {
+    throw createHttpError(400, "잘못된 이메일입니다.");
+  }
+
   if (!password) {
     throw createHttpError(400, "비밀번호를 입력해 주세요.");
+  }
+
+  if (password.length < MIN_PASSWORD_LENGTH) {
+    throw createHttpError(400, "비밀번호를 8자 이상 입력해 주세요.");
   }
 
   const user = await userRepository.findUserByEmail(normalizedEmail);
