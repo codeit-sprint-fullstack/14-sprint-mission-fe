@@ -4,6 +4,7 @@ import cors from "cors";
 import prisma from "./src/lib/prisma.js";
 import authRouter from "./src/routes/auth.routes.js";
 import productRouter from "./src/routes/product.routes.js";
+import commentRouter from "./src/routes/comment.routes.js";
 import uploadRouter from "./src/routes/upload.routes.js";
 import errorHandler from "./src/middlewares/errorHandler.js";
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/products", productRouter);
+app.use("/comments", commentRouter);
 app.use("/uploads", uploadRouter);
 app.use("/uploads", express.static("uploads"));
 
@@ -141,21 +143,6 @@ app.post("/articles/:articleId/comments", async (req, res) => {
     },
   });
   res.status(201).send(comment);
-});
-
-app.patch("/comments/:commentsId", async (req, res) => {
-  const { commentsId } = req.params;
-  const updatedComment = await prisma.comment.update({
-    where: { id: parseInt(commentsId) },
-    data: req.body,
-  });
-  res.send(updatedComment);
-});
-
-app.delete("/comments/:commentsId", async (req, res) => {
-  const { commentsId } = req.params;
-  await prisma.comment.delete({ where: { id: parseInt(commentsId) } });
-  res.status(204).send();
 });
 
 app.use(errorHandler);

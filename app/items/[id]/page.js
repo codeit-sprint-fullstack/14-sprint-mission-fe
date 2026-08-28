@@ -2,7 +2,6 @@
 
 import {
   getProduct,
-  getProductComments,
   createProductComment,
   deleteComment,
   updateComment,
@@ -20,7 +19,7 @@ export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
 
-  const productId = Number(params.id);
+  const productId = params.id;
 
   const [commentContent, setCommentContent] = useState("");
   const [editingCommentId, setEditingCommentId] = useState(null);
@@ -35,11 +34,6 @@ export default function ProductDetailPage() {
     queryFn: () => getProduct(productId),
   });
 
-  const commentsQuery = useQuery({
-    queryKey: ["productComments", productId],
-    queryFn: () => getProductComments({ productId, limit: 10 }),
-  });
-
   const createCommentMutation = useMutation({
     mutationFn: createProductComment,
 
@@ -47,7 +41,7 @@ export default function ProductDetailPage() {
       setCommentContent("");
 
       queryClient.invalidateQueries({
-        queryKey: ["productComments", productId],
+        queryKey: ["product", productId],
       });
     },
   });
@@ -57,7 +51,7 @@ export default function ProductDetailPage() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["productComments", productId],
+        queryKey: ["product", productId],
       });
     },
   });
@@ -68,14 +62,14 @@ export default function ProductDetailPage() {
       setEditingCommentId(null);
       setEditingContent("");
       queryClient.invalidateQueries({
-        queryKey: ["productComments", productId],
+        queryKey: ["product", productId],
       });
     },
   });
 
   const favoriteMutation = useMutation({
-    mutationFn: ({ productId, isFavorite }) => {
-      if (isFavorite) {
+    mutationFn: ({ productId, isLiked }) => {
+      if (isLiked) {
         return unfavoriteProduct(productId);
       }
 
@@ -156,21 +150,27 @@ export default function ProductDetailPage() {
   }
 
   const product = productQuery.data;
-  const comments = commentsQuery.data?.list ?? [];
+  const comments = product.comments ?? [];
 
-  const imageUrl = product.images?.[0];
+  const imagePath = product.images?.[0];
+
+  const imageUrl = imagePath ? `http://localhost:3001${imagePath}` : null;
 
   return (
     <main className={styles.container}>
       <div className={styles.productLayout}>
         <div className={styles.imageArea}>
-          <Image
-            src={imageUrl}
-            alt="제품 이미지"
-            fill
-            sizes="486px"
-            className={styles.productImage}
-          />
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt="제품 이미지"
+              fill
+              sizes="486px"
+              className={styles.productImage}
+            />
+          ) : (
+            <span>이미지 없음</span>
+          )}{" "}
         </div>
 
         <section className={styles.productInfo}>
@@ -202,14 +202,14 @@ export default function ProductDetailPage() {
               onClick={() =>
                 favoriteMutation.mutate({
                   productId,
-                  isFavorite: product.isFavorite,
+                  isLiked: product.isLiked,
                 })
               }
               disabled={favoriteMutation.isPending}
             >
               {favoriteMutation.isPending
                 ? "처리 중..."
-                : `${product.isFavorite ? "♥" : "♡"} ${product.favoriteCount}`}
+                : `${product.isLiked ? "♥" : "♡"} ${product.favoriteCount}`}
             </button>
           </div>
         </section>
@@ -232,10 +232,6 @@ export default function ProductDetailPage() {
               {createCommentMutation.isPending ? "등록 중..." : "등록"}
             </button>
           </form>
-
-          {commentsQuery.isPending && <p>댓글을 불러오는 중입니다.</p>}
-
-          {commentsQuery.isError && <p>{commentsQuery.error.message}</p>}
 
           {comments.map((comment) => (
             <div key={comment.id}>
@@ -268,7 +264,7 @@ export default function ProductDetailPage() {
               ) : (
                 <>
                   <p>{comment.content}</p>
-                  <span>{comment.writer.nickname}</span>
+                  <span>{comment.user.nickname}</span>
 
                   <button
                     type="button"

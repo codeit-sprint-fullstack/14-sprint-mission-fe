@@ -1,65 +1,5 @@
 @baseUrl = http://localhost:3001
 
-// ARTICLES
-###
-POST {{baseUrl}}/articles
-Content-Type: application/json
-
-{
-  "title": "글 테스트입니다",
-  "content": "글 테스트입니다.",
-  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317"
-}
-
-###
-GET {{baseUrl}}/articles
-
-###
-GET {{baseUrl}}/articles?sort=recent&count=10
-
-###
-PATCH {{baseUrl}}/articles/87350587-f132-4342-a4da-48a107801085
-Content-Type: application/json
-
-{
-  "title": "PATCH 게시글 제목입니다",
-  "content": "PATCH 테스트 본문입니다."
-}
-
-###
-DELETE {{baseUrl}}/articles/5ab3b753-5545-4a44-a990-28d8bfa9d11f
-
-
-
-// COMMENTS
-
-###
-GET {{baseUrl}}/comments
-
-###
-GET {{baseUrl}}/comments/10
-
-###
-POST {{baseUrl}}/articles/1418fc5e-7ab9-4f06-8da1-9972f128f122/comments
-Content-Type: application/json
-
-{
-  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317",
-  "content": "코멘트 테스트입니다."
-}
-
-###
-PATCH {{baseUrl}}/comments/8
-Content-Type: application/json
-
-{
-  "content": "PATCH 코멘트 테스트입니다"
-}
-
-###
-DELETE {{baseUrl}}/comments/12
-
-
 // 회원가입
 ###
 POST {{baseUrl}}/auth/signup
@@ -159,3 +99,58 @@ Content-Type: application/json
     "/uploads/5f8847fd-1b88-4faf-adbf-d67a53f3bda9.png"
   ]
 }
+
+
+# 댓글
+### 상품 댓글 등록
+POST {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318/comments
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "content": "상품 댓글 등록 테스트입니다2."
+}
+
+### 상품 댓글 수정
+PATCH {{baseUrl}}/comments/4
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "content": "수정된 상품 댓글입니다."
+}
+
+### 상품 댓글 삭제
+DELETE {{baseUrl}}/comments/3
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+
+
+// ARTICLES
+###
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "title": "글 테스트입니다",
+  "content": "글 테스트입니다.",
+  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317"
+}
+
+###
+GET {{baseUrl}}/articles
+
+###
+GET {{baseUrl}}/articles?sort=recent&count=10
+
+###
+PATCH {{baseUrl}}/articles/87350587-f132-4342-a4da-48a107801085
+Content-Type: application/json
+
+{
+  "title": "PATCH 게시글 제목입니다",
+  "content": "PATCH 테스트 본문입니다."
+}
+
+###
+DELETE {{baseUrl}}/articles/5ab3b753-5545-4a44-a990-28d8bfa9d11f

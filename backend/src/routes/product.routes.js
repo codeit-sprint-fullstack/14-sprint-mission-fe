@@ -15,6 +15,7 @@ import {
   validateCreateProduct,
   validateUpdateProduct,
 } from "../middlewares/validateProduct.js";
+import { createProductComment } from "../controllers/comment.controller.js";
 
 const productRouter = Router();
 
@@ -33,5 +34,9 @@ productRouter
   .route("/:productId/likes")
   .post(authenticate, addProductLike)
   .delete(authenticate, removeProductLike);
+
+productRouter
+  .route("/:productId/comments")
+  .post(authenticate, createProductComment);
 
 export default productRouter;

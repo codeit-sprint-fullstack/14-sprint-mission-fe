@@ -9,6 +9,12 @@ const nextConfig = {
         pathname: "/Sprint_Mission/**",
         search: "",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3001",
+        pathname: "/uploads/**",
+      },
     ],
   },
 };
