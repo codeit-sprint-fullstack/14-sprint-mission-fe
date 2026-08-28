@@ -1,0 +1,59 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --background-blue: #cfe5ff;
+  --brand-blue: #3692ff;
+  --brand-yellow: #ffc117;
+  --Cool-Gray-50: #f9fafb;
+  --Cool-Gray-100: #f3f4f6;
+  --Cool-Gray-200: #e5e7eb;
+  --Cool-Gray-300: #d1d5db;
+  --Cool-Gray-400: #9ca3af;
+  --Cool-Gray-500: #6b7280;
+  --Cool-Gray-600: #4b5563;
+  --Cool-Gray-800: #1f2937;
+  --Cool-Gray-900: #111827;
+  --error-red: #f74747;
+  --gray-gray-500: #737373;
+  --line-gray: #dfdfdf;
+  --modal-overlay: #000000b3;
+  --pure-white: #ffffff;
+  --Secondary-100: #f9fafb;
+  --Secondary-200: #e5e7eb;
+  --Secondary-300: #e5e7eb;
+  --Secondary-400: #9ca3af;
+  --Secondary-500: #6b7280;
+  --Secondary-600: #4b5563;
+  --Secondary-800: #1f2937;
+  --Secondary-900: #111827;
+  --soft-gray: #fcfcfc;
+  --warm-skyblue: #e6f2ff;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}

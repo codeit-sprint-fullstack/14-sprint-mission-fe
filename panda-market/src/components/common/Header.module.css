@@ -1,0 +1,166 @@
+@font-face {
+  font-family: "ROKAF Sans";
+  src: url('/fonts/ROKAF\ Sans\ Bold.ttf');
+}
+
+.header {
+  background-color: var(--pure-white);
+  width: 100%;
+  height: 70px;
+  display: flex;
+  padding: 0 clamp(24px, calc((100vw - 1200px) / 2), 200px);
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line-gray);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.headerLogo {
+  width: 153px;
+  height: 51px;
+  display: flex;
+  padding: 5.017px 0 5.848px 0;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8.592px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.pandaFace {
+  width: 40px;
+  height: 40.135px;
+}
+
+.brandLogo {
+  color: var(--brand-blue);
+  font-family: "ROKAF Sans";
+  font-size: 25.633px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.headerMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerMenu a {
+  color: var(--Secondary-600);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+  padding: 21px 15px;
+  text-decoration: none;
+}
+
+.headerMenuLink.active {
+  color: var(--brand-blue);
+}
+
+.loginButton {
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  height: 42px;
+  display: flex;
+  padding: 12px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nickname {
+  padding-left: 6px;
+  color: var(--Cool-Gray-600);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+@media (max-width: 1199px) {
+  .nickname {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .headerLeft {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 743px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .headerLeft {
+    gap: 8px;
+  }
+
+  .headerLogo {
+    width: auto;
+  }
+
+   .pandaFace {
+    display: none;
+  }
+
+  .brandLogo {
+    font-size: 20.202px;
+    padding: 3.305px 0 3.695px 0;
+  }
+
+  .headerMenu {
+    gap: 0;
+  }
+
+  .headerMenu a {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 16px 8px 12px 8px;
+  }
+
+  .loginButton {
+    height: 38px;
+    padding: 8px 16px;
+    white-space: nowrap; /* 줄바꿈 방지*/
+  }
+
+  .nickname {
+  display: none;
+  }
+}

@@ -1,0 +1,710 @@
+.itemDetailPage {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 860px;
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+.itemDetailPage.itemDetailState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-top: 64px;
+}
+
+.itemDetailState > p,
+.itemDetailInquiryState > p,
+.itemDetailInquiryLoadMore > p {
+  width: 100%;
+  margin: 0;
+  color: var(--Secondary-500);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.itemDetailErrorRetryButton,
+.itemDetailErrorBackLink,
+.itemDetailSigninLink {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 104px;
+  height: 42px;
+  padding: 0 23px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.itemDetailProductSection {
+  display: grid;
+  grid-template-columns: 486px minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto auto;
+  column-gap: 24px;
+  width: 100%;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--Cool-Gray-200);
+}
+
+.itemDetailImageArea {
+  grid-column: 1;
+  grid-row: 1 / 5;
+  width: 486px;
+  height: 486px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+}
+
+.itemDetailProductImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemDetailProductSummary {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.itemDetailProductHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  width: 100%;
+}
+
+.itemDetailTitleGroup {
+  min-width: 0;
+}
+
+.itemDetailProductName {
+  margin: 0 0 16px;
+  color: var(--Secondary-800);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  overflow-wrap: anywhere;
+}
+
+.itemDetailProductPrice {
+  display: block;
+  color: var(--Secondary-800);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.itemDetailHeaderSpacer {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--Cool-Gray-200);
+}
+
+.itemDetailDescriptionArea {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+}
+
+.itemDetailDescriptionSpacer {
+  width: 100%;
+  height: 4px;
+}
+
+.itemDetailDescriptionTitle,
+.itemDetailTagTitle {
+  margin: 0;
+  color: var(--Secondary-600);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.itemDetailInquiryTitle {
+  margin: 0;
+  color: var(--Cool-Gray-900);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.itemDetailDescriptionText {
+  margin: 16px 0 24px;
+  color: var(--Secondary-600);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.itemDetailTagSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.itemDetailTagList {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 16px;
+  row-gap: 16px;
+}
+
+.itemDetailTagListDesktop {
+  display: flex;
+}
+
+.itemDetailTagListCompact {
+  display: none;
+}
+
+.itemDetailTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  column-gap: 8px;
+  row-gap: 16px;
+}
+
+.itemDetailProductMeta {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: end;
+  width: 100%;
+  margin-top: 62px;
+}
+
+.itemDetailFavoriteArea {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  border-left: 1px solid var(--Cool-Gray-200);
+}
+
+.itemDetailSellerArea {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  font-style: normal;
+}
+
+.itemDetailSellerProfile {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.itemDetailSellerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemDetailSellerNickname {
+  color: var(--Secondary-600);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.itemDetailCreatedAt {
+  color: var(--Cool-Gray-400);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.itemDetailProductSpacer {
+  grid-column: 2;
+  grid-row: 4;
+  width: 100%;
+  height: 8px;
+}
+
+.itemDetailInquirySection {
+  width: 100%;
+  padding-top: 40px;
+}
+
+.itemDetailInquiryForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  margin: 0;
+}
+
+.itemDetailInquiryTitle {
+  align-self: flex-start;
+  margin-bottom: 9px;
+}
+
+.itemDetailInquiryTextarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 104px;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 12px;
+  outline: none;
+  background: var(--Cool-Gray-100);
+  color: var(--Secondary-800);
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  resize: none;
+}
+
+.itemDetailInquiryTextarea::placeholder {
+  color: var(--Secondary-400);
+}
+
+.itemDetailInquirySubmitButton {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  margin-top: 16px;
+  padding: 12px 23px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.itemDetailInquirySubmitButton:disabled {
+  background: var(--Cool-Gray-400);
+  cursor: default;
+}
+
+.itemDetailInquiryEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  margin-top: 24px;
+  margin-bottom: 64px;
+}
+
+.itemDetailInquiryEmptyImage {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.itemDetailInquiryEmptyText {
+  margin: 16px 0 0;
+  color: var(--Secondary-400);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.itemDetailInquiryList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 300px;
+  margin-top: 24px;
+  margin-bottom: 64px;
+  gap: 24px;
+}
+
+.itemDetailInquiryState {
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.itemDetailInquiryScrollList {
+  height: 442px;
+  max-height: none;
+  overflow-y: auto;
+}
+
+.itemDetailBackLink {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 48px;
+  margin: 0 auto 40px;
+  padding: 12px 40px;
+  gap: 8px;
+  border-radius: 40px;
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.itemDetailBackText {
+  color: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.itemDetailBackIcon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.itemDetailInquiryLoadMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 1px;
+  gap: 8px;
+}
+
+.itemDetailDeleteModalOverlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--modal-overlay);
+}
+
+.itemDetailDeleteModal {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  min-height: 202px;
+  padding: 24px;
+  gap: 32px;
+  border-radius: 12px;
+  background: var(--pure-white);
+}
+
+.itemDetailDeleteModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.itemDetailDeleteModalIcon {
+  box-sizing: border-box;
+  display: block;
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--error-red);
+}
+
+.itemDetailDeleteModalMessage {
+  margin: 0;
+  color: var(--Secondary-800);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  white-space: nowrap;
+}
+
+.itemDetailDeleteModalError {
+  margin: -16px 0 0;
+  color: var(--error-red);
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.itemDetailDeleteModalActions {
+  display: flex;
+  gap: 8px;
+}
+
+.itemDetailDeleteModalCancelButton,
+.itemDetailDeleteModalConfirmButton {
+  box-sizing: border-box;
+  width: 88px;
+  height: 48px;
+  padding: 12px 23px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  white-space: nowrap;
+}
+
+.itemDetailDeleteModalCancelButton {
+  border: 1px solid var(--error-red);
+  background: var(--Cool-Gray-50);
+  color: var(--error-red);
+}
+
+.itemDetailDeleteModalConfirmButton {
+  border: 0;
+  background: var(--error-red);
+  color: var(--Cool-Gray-100);
+}
+
+.itemDetailDeleteModalCancelButton:disabled,
+.itemDetailDeleteModalConfirmButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.itemDetailDeleteModalConfirmButton[data-pending='true'] {
+  padding-inline: 6px;
+}
+
+@media (min-width: 744px) and (max-width: 1199px) {
+  .itemDetailPage {
+    max-width: none;
+    padding: 24px 32px 0;
+  }
+
+  .itemDetailProductSection {
+    grid-template-columns: 340px minmax(0, 1fr);
+    column-gap: 16px;
+  }
+
+  .itemDetailImageArea {
+    width: 340px;
+    height: 340px;
+  }
+
+  .itemDetailProductName {
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+
+  .itemDetailProductPrice {
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  .itemDetailHeaderSpacer {
+    height: 8px;
+    margin-top: 8px;
+  }
+
+  .itemDetailDescriptionSpacer {
+    height: 0;
+  }
+
+  .itemDetailDescriptionTitle,
+  .itemDetailTagTitle {
+    font-size: 14px;
+  }
+
+  .itemDetailDescriptionText {
+    margin-top: 8px;
+  }
+
+  .itemDetailTagList {
+    margin-top: 8px;
+    row-gap: 8px;
+  }
+
+  .itemDetailTagListDesktop {
+    display: none;
+  }
+
+  .itemDetailTagListCompact {
+    display: flex;
+  }
+
+  .itemDetailTagRow {
+    row-gap: 8px;
+  }
+
+  .itemDetailProductMeta {
+    margin-top: 40px;
+  }
+
+  .itemDetailInquiryEmpty,
+  .itemDetailInquiryList {
+    margin-top: 40px;
+    margin-bottom: 56px;
+  }
+
+  .itemDetailInquiryScrollList {
+    height: 418px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 743px) {
+  .itemDetailPage {
+    max-width: none;
+    min-height: 0;
+    padding: 4.33px 16px 0;
+  }
+
+  .itemDetailProductSection {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    column-gap: 0;
+    padding-bottom: 24px;
+  }
+
+  .itemDetailImageArea {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .itemDetailProductSummary {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 16px;
+  }
+
+  .itemDetailProductName {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .itemDetailProductPrice {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .itemDetailHeaderSpacer {
+    height: 8px;
+    margin-top: 8px;
+  }
+
+  .itemDetailDescriptionArea {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .itemDetailDescriptionSpacer {
+    height: 0;
+  }
+
+  .itemDetailDescriptionTitle,
+  .itemDetailTagTitle {
+    font-size: 14px;
+  }
+
+  .itemDetailDescriptionText {
+    margin-top: 8px;
+  }
+
+  .itemDetailTagList {
+    margin-top: 8px;
+    row-gap: 8px;
+  }
+
+  .itemDetailTagListDesktop {
+    display: none;
+  }
+
+  .itemDetailTagListCompact {
+    display: flex;
+  }
+
+  .itemDetailTagRow {
+    row-gap: 8px;
+  }
+
+  .itemDetailProductMeta {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 40px;
+  }
+
+  .itemDetailProductSpacer {
+    display: none;
+  }
+
+  .itemDetailInquirySection {
+    padding-top: 0;
+  }
+
+  .itemDetailInquiryTitle {
+    margin-bottom: 16px;
+  }
+
+  .itemDetailInquiryTextarea {
+    min-height: 129px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .itemDetailInquiryEmpty,
+  .itemDetailInquiryList {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .itemDetailInquiryList {
+    gap: 16px;
+  }
+
+  .itemDetailBackLink {
+    margin-bottom: 40px;
+  }
+
+  .itemDetailInquiryScrollList {
+    height: 394px;
+  }
+}

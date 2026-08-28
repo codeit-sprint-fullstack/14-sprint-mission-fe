@@ -1,0 +1,25 @@
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.paginationButton {
+  color: var(--Cool-Gray-600);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--Cool-Gray-200);
+  background: var(--pure-white);
+  cursor: pointer;
+}
+
+.paginationButton.active {
+  background: var(--brand-blue);
+  color: var(--pure-white);
+}
+
+.paginationButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

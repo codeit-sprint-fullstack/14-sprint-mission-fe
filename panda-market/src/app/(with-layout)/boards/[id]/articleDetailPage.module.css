@@ -1,0 +1,303 @@
+.articleDetailPage {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 34px;
+}
+
+.articleSection {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.articleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.articleTitle {
+  margin: 0;
+  color: var(--Cool-Gray-800);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.articleMenu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.articleMenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.articleMenuDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 139px;
+}
+
+.articleUpdateButton,
+.articleDeleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  color: var(--Secondary-500);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: nowrap;
+  background: var(--pure-white);
+  cursor: pointer;
+}
+
+.articleUpdateButton {
+  width: 100%;
+  padding: 16px 0 12px;
+  border-top: 1px solid var(--Cool-Gray-300);
+  border-right: 1px solid var(--Cool-Gray-300);
+  border-left: 1px solid var(--Cool-Gray-300);
+  border-radius: 8px 8px 0 0;
+  text-decoration: none;
+}
+
+.articleDeleteButton {
+  padding: 12px 17px 16px;
+  border-top: 0;
+  border-top: 1px solid var(--Cool-Gray-300);
+  border-right: 1px solid var(--Cool-Gray-300);
+  border-bottom: 1px solid var(--Cool-Gray-300);
+  border-left: 1px solid var(--Cool-Gray-300);
+  border-radius: 0 0 8px 8px;
+}
+
+.articleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.articleUser {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 32px;
+  border-right: 1px solid var(--Cool-Gray-200);
+}
+
+.articleUserProfile {
+  flex-shrink: 0;
+}
+
+.articleUserInfo {
+  display: flex;
+  flex-direction: center;
+  gap: 8px;
+}
+
+.articleUserNickname {
+  color: var(--Secondary-600);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.articleCreatedAt {
+  color: var(--Cool-Gray-400);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.articleFavoriteChip {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-left: 32px;
+  padding: 4px 12px;
+  box-sizing: border-box;
+  border: 1px solid var(--Secondary-200);
+  border-radius: 35px;
+  background: var(--pure-white);
+}
+
+.articleFavoriteIcon {
+  flex-shrink: 0;
+}
+
+.articleFavoriteCount {
+  color: var(--Cool-Gray-500);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.articleContent {
+  width: 100%;
+  margin: 24px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--Cool-Gray-200);
+  color: var(--Secondary-800);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.commentRegistrationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.commentFormTitle {
+  align-self: flex-start;
+  margin: 0 0 9px;
+  color: var(--Cool-Gray-900);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.commentRegistrationTextarea {
+  width: 100%;
+  height: 104px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 12px;
+  background: var(--Cool-Gray-100);
+  color: var(--Secondary-800);
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  resize: none;
+  outline: none;
+}
+
+.commentRegistrationTextarea::placeholder {
+  color: var(--Secondary-400);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.commentSubmitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  margin-top: 16px;
+  padding: 12px 23px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 8px;
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.commentSubmitButton:disabled {
+  background: var(--Cool-Gray-400);
+  cursor: default;
+}
+
+.commentEmptySection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 445px;
+  margin-bottom: 64px;
+}
+
+.commentEmptyImage {
+  flex-shrink: 0;
+}
+
+.commentEmptyMessage {
+  margin: 16px 0 0;
+  color: var(--Secondary-400);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.commentListSection {
+  width: 100%;
+  margin-bottom: 64px;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+}
+
+.boardBackLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 48px;
+  margin: 0 auto;
+  padding: 12px 64px;
+  box-sizing: border-box;
+  gap: 8px;
+  border-radius: 40px;
+  background: var(--brand-blue);
+  color: var(--Cool-Gray-100);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.boardBackText {
+  color: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.boardBackIcon {
+  flex-shrink: 0;
+}
