@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAccessToken, removeAccessToken } from "./authToken";
 
 const apiClient = axios.create({
-  baseURL: "https://panda-market-api.vercel.app",
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001",
 });
 
 apiClient.interceptors.request.use((config) => {

@@ -41,14 +41,14 @@ export async function deleteProduct(productId) {
   return response.data;
 }
 
-export async function favoriteProduct(productId) {
-  const response = await apiClient.post(`/products/${productId}/favorite`);
+export async function likeProduct(productId) {
+  const response = await apiClient.post(`/products/${productId}/likes`);
 
   return response.data;
 }
 
-export async function unfavoriteProduct(productId) {
-  const response = await apiClient.delete(`/products/${productId}/favorite`);
+export async function unlikeProduct(productId) {
+  const response = await apiClient.delete(`/products/${productId}/likes`);
 
   return response.data;
 }

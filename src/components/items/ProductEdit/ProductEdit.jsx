@@ -49,7 +49,7 @@ export default function ProductEdit({ itemId }) {
   }, [currentUser, isCheckingAuth, router]);
 
   useEffect(() => {
-    if (currentUser && product && currentUser.id !== product.ownerId) {
+    if (currentUser && product && currentUser.id !== product.owner.id) {
       router.replace(`/items/${itemId}`);
     }
   }, [currentUser, product, itemId, router]);
@@ -68,7 +68,7 @@ export default function ProductEdit({ itemId }) {
     return <p>상품을 불러오지 못했습니다.</p>;
   }
 
-  if (currentUser.id !== product.ownerId) return null;
+  if (currentUser.id !== product.owner.id) return null;
 
   const updateErrorMessage = updateError?.response?.data?.message;
 

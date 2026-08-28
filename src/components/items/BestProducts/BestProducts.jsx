@@ -19,7 +19,7 @@ export default function BestProducts() {
       getProducts({
         page: 1,
         pageSize,
-        orderBy: "favorite",
+        orderBy: "likes",
       }),
     enabled: pageSize !== null,
     placeholderData: keepPreviousData,

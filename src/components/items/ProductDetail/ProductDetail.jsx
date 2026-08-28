@@ -47,7 +47,7 @@ export default function ProductDetail({ itemId }) {
     return <p className={styles.status}>상품을 불러오지 못했습니다.</p>;
   }
 
-  const isOwner = currentUser?.id === product.ownerId;
+  const isOwner = currentUser.id === product.owner.id;
 
   return (
     <div className={styles.detailPage}>

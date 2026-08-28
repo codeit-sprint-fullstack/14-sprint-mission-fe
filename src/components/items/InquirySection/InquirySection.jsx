@@ -68,15 +68,15 @@ export default function InquirySection({ productId, currentUserId }) {
       {!isPending && !isError && comments.length > 0 && (
         <div className={styles.commentList}>
           {comments.map((comment) => {
-            const canManage = comment.writer.id === currentUserId;
+            const canManage = comment.owner.id === currentUserId;
 
             return (
               <CommentItem
                 key={comment.id}
                 content={comment.content}
                 createdAt={comment.createdAt}
-                nickname={comment.writer.nickname}
-                profileImageSrc={comment.writer.image}
+                nickname={comment.owner.nickname}
+                profileImageSrc={comment.owner.image}
                 canManage={canManage}
                 onUpdate={(content) => handleUpdateComment(comment.id, content)}
                 onDelete={() => setDeleteTargetId(comment.id)}
