@@ -1,6 +1,9 @@
 import fs from "fs";
 import productRepository from "../repositories/productRepository.js";
+import { assertOwner } from "../utils/authorization.js";
 import createHttpError from "../utils/createHttpError.js";
+import { createCursorPage, createPagePagination } from "../utils/pagination.js";
+import { formatLikeResource } from "../utils/resourceFormatters.js";
 
 const PRODUCT_DETAIL_COMMENT_LIMIT = 10;
 
@@ -11,15 +14,12 @@ export async function getProducts({
   orderBy = "recent",
   userId,
 }) {
-  const pageNumber = Number(page);
-  const pageSizeNumber = Number(pageSize);
-
-  const skip = (pageNumber - 1) * pageSizeNumber;
+  const { skip, take } = createPagePagination(page, pageSize);
 
   const [list, totalCount] = await Promise.all([
     productRepository.findAll({
       skip,
-      take: pageSizeNumber,
+      take,
       keyword,
       orderBy,
       userId,
@@ -29,15 +29,9 @@ export async function getProducts({
     }),
   ]);
 
-  const formattedList = list.map((product) => {
-    const { _count, productLikes = [], ...productData } = product;
-
-    return {
-      ...productData,
-      likeCount: _count.productLikes,
-      isLiked: productLikes.length > 0,
-    };
-  });
+  const formattedList = list.map((product) =>
+    formatLikeResource(product, "productLikes"),
+  );
 
   return {
     list: formattedList,
@@ -74,41 +68,26 @@ export async function getProductById(id, userId) {
     throw createHttpError(404, "상품을 찾을 수 없습니다.");
   }
 
-  const { _count, productLikes = [], comments, ...productData } = product;
-
-  const hasMoreComments = comments.length > PRODUCT_DETAIL_COMMENT_LIMIT;
-
-  const commentList = hasMoreComments
-    ? comments.slice(0, PRODUCT_DETAIL_COMMENT_LIMIT)
-    : comments;
-
-  const nextCursor = hasMoreComments
-    ? commentList[commentList.length - 1].id
-    : null;
+  const { comments, ...productData } = formatLikeResource(
+    product,
+    "productLikes",
+  );
 
   return {
     ...productData,
-    likeCount: _count.productLikes,
-    isLiked: productLikes.length > 0,
-    comments: {
-      list: commentList,
-      nextCursor,
-    },
+    comments: createCursorPage(comments, PRODUCT_DETAIL_COMMENT_LIMIT),
   };
 }
 
 async function ensureProductOwner(id, userId) {
   const product = await productRepository.findOwnerById(id);
 
-  if (!product) {
-    throw createHttpError(404, "상품을 찾을 수 없습니다.");
-  }
-
-  if (product.ownerId !== userId) {
-    throw createHttpError(403, "상품을 수정하거나 삭제할 권한이 없습니다.");
-  }
-
-  return product;
+  return assertOwner(
+    product,
+    userId,
+    "상품을 찾을 수 없습니다.",
+    "상품을 수정하거나 삭제할 권한이 없습니다.",
+  );
 }
 
 function removeProductImages(images) {

@@ -1,5 +1,7 @@
 import commentRepository from "../repositories/commentRepository.js";
+import { assertOwner } from "../utils/authorization.js";
 import createHttpError from "../utils/createHttpError.js";
+import { createCursorPage } from "../utils/pagination.js";
 
 function validateCommentContent(content) {
   if (typeof content !== "string" || !content.trim()) {
@@ -50,16 +52,7 @@ async function getComments({ productId, articleId, cursor, limit = 10 }) {
     take: limitNumber + 1,
   });
 
-  const hasMoreComments = comments.length > limitNumber;
-
-  const list = hasMoreComments ? comments.slice(0, limitNumber) : comments;
-
-  const nextCursor = hasMoreComments ? list[list.length - 1].id : null;
-
-  return {
-    list,
-    nextCursor,
-  };
+  return createCursorPage(comments, limitNumber);
 }
 
 export async function getProductComments({ productId, cursor, limit = 10 }) {
@@ -81,13 +74,12 @@ export async function getArticleComments({ articleId, cursor, limit = 10 }) {
 async function ensureCommentOwner(id, userId) {
   const comment = await commentRepository.findOwnerById(id);
 
-  if (!comment) {
-    throw createHttpError(404, "댓글을 찾을 수 없습니다.");
-  }
-
-  if (comment.ownerId !== userId) {
-    throw createHttpError(403, "댓글을 수정하거나 삭제할 권한이 없습니다.");
-  }
+  return assertOwner(
+    comment,
+    userId,
+    "댓글을 찾을 수 없습니다.",
+    "댓글을 수정하거나 삭제할 권한이 없습니다.",
+  );
 }
 
 export async function updateComment({ id, userId, content }) {

@@ -1,5 +1,8 @@
 import articleRepository from "../repositories/articleRepository.js";
+import { assertOwner } from "../utils/authorization.js";
 import createHttpError from "../utils/createHttpError.js";
+import { createCursorPage, createPagePagination } from "../utils/pagination.js";
+import { formatLikeResource } from "../utils/resourceFormatters.js";
 
 const ARTICLE_DETAIL_COMMENT_LIMIT = 10;
 
@@ -10,15 +13,12 @@ export async function getArticles({
   orderBy = "recent",
   userId,
 }) {
-  const pageNumber = Number(page);
-  const pageSizeNumber = Number(pageSize);
-
-  const skip = (pageNumber - 1) * pageSizeNumber;
+  const { skip, take } = createPagePagination(page, pageSize);
 
   const [list, totalCount] = await Promise.all([
     articleRepository.findAll({
       skip,
-      take: pageSizeNumber,
+      take,
       keyword,
       orderBy,
       userId,
@@ -28,15 +28,9 @@ export async function getArticles({
     }),
   ]);
 
-  const formattedList = list.map((article) => {
-    const { _count, articleLikes = [], ...articleData } = article;
-
-    return {
-      ...articleData,
-      likeCount: _count.articleLikes,
-      isLiked: articleLikes.length > 0,
-    };
-  });
+  const formattedList = list.map((article) =>
+    formatLikeResource(article, "articleLikes"),
+  );
 
   return {
     list: formattedList,
@@ -55,26 +49,14 @@ export async function getArticleById(id, userId) {
     throw createHttpError(404, "게시글을 찾을 수 없습니다.");
   }
 
-  const { _count, articleLikes = [], comments, ...articleData } = article;
-
-  const hasMoreComments = comments.length > ARTICLE_DETAIL_COMMENT_LIMIT;
-
-  const commentList = hasMoreComments
-    ? comments.slice(0, ARTICLE_DETAIL_COMMENT_LIMIT)
-    : comments;
-
-  const nextCursor = hasMoreComments
-    ? commentList[commentList.length - 1].id
-    : null;
+  const { comments, ...articleData } = formatLikeResource(
+    article,
+    "articleLikes",
+  );
 
   return {
     ...articleData,
-    likeCount: _count.articleLikes,
-    isLiked: articleLikes.length > 0,
-    comments: {
-      list: commentList,
-      nextCursor,
-    },
+    comments: createCursorPage(comments, ARTICLE_DETAIL_COMMENT_LIMIT),
   };
 }
 
@@ -89,13 +71,12 @@ export async function createArticle({ title, content, ownerId }) {
 async function ensureArticleOwner(id, userId) {
   const article = await articleRepository.findOwnerById(id);
 
-  if (!article) {
-    throw createHttpError(404, "게시글을 찾을 수 없습니다.");
-  }
-
-  if (article.ownerId !== userId) {
-    throw createHttpError(403, "게시글을 수정하거나 삭제할 권한이 없습니다.");
-  }
+  return assertOwner(
+    article,
+    userId,
+    "게시글을 찾을 수 없습니다.",
+    "게시글을 수정하거나 삭제할 권한이 없습니다.",
+  );
 }
 
 export async function updateArticle({ id, userId, title, content }) {

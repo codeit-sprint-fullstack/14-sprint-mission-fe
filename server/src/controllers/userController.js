@@ -1,18 +1,9 @@
 import { getUserById } from "../services/userService.js";
 
-export async function getMeController(req, res, next) {
-  try {
-    const userId = req.user.userId;
-    const user = await getUserById(userId);
+export async function getMeController(req, res) {
+  const userId = req.user.userId;
 
-    if (!user) {
-      return res.status(404).json({
-        message: "사용자를 찾을 수 없습니다.",
-      });
-    }
+  const user = await getUserById(userId);
 
-    return res.json(user);
-  } catch (error) {
-    return next(error);
-  }
+  return res.json(user);
 }
