@@ -2,6 +2,7 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import errorHandler from "./middlewares/errorHandler.js";
+import notFoundHandler from "./middlewares/notFoundHandler.js";
 import articlesRouter from "./routes/articles.js";
 import authRouter from "./routes/auth.js";
 import commentsRouter from "./routes/comments.js";
@@ -25,6 +26,7 @@ app.use("/comments", commentsRouter);
 app.use("/auth", authRouter);
 app.use("/users", usersRouter);
 
+app.use(notFoundHandler);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
