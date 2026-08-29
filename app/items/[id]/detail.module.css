@@ -1,0 +1,446 @@
+.page {
+  padding: 40px 0 80px;
+}
+
+.container {
+  display: flex;
+  gap: 48px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.imageBox {
+  flex: 0 0 500px;
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f3f4f6;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.label {
+  margin: 0 0 8px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.title {
+  margin: 0;
+  color: #1f2937;
+  font-family: Pretendard;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 36px;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100px;
+
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  overflow: hidden;
+  z-index: 100;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.menu button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+  padding: 0;
+
+  border: none;
+  background: #fff;
+
+  color: #1f2937;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: #f3f4f6;
+}
+
+.menu button + button {
+  border-top: 1px solid #e5e7eb;
+}
+
+.moreButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.moreButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.favorite {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.price {
+  color: #1f2937;
+  font-family: Pretendard;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.description {
+  padding: 24px 0;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.description h2 {
+  margin: 0 0 12px;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.description p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 16px;
+  line-height: 26px;
+  white-space: pre-wrap;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+/* 작성자 정보 */
+.author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authorImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f4f6;
+}
+
+.authorText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.authorName {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.createdAt {
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.authorLike {
+  display: flex;
+  align-items: center;
+}
+
+/* 문의하기 */
+
+.inquirySection {
+  max-width: 1200px;
+  margin: 60px auto 0;
+}
+
+.inquirySection h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.inquiryInput {
+  width: 100%;
+  height: 104px;
+
+  padding: 16px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #f3f4f6;
+
+  resize: none;
+}
+
+.inquiryButton {
+  width: 74px;
+  height: 42px;
+
+  margin-top: 16px;
+  margin-left: auto;
+
+  display: block;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #9ca3af;
+  color: white;
+}
+
+.inquiryList {
+  margin-top: 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.inquiryItem {
+  padding: 24px 0;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.inquiryTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inquiryContent {
+  flex: 1;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: var(--Secondary-800, #1f2937);
+
+  /* pretendard/md-14px-regular */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
+
+.inquiryWriter {
+  display: flex;
+  gap: 12px;
+
+  margin-top: 16px;
+
+  color: var(--Secondary-600, #4b5563);
+
+  /* pretendard/xs-12px-regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+}
+
+/* 문의 수정 */
+
+.inquiryEditContent {
+  margin-bottom: 4px;
+}
+
+.inquiryEditFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: 12px;
+}
+
+.inquiryEditActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inquiryEditActions button {
+  height: 36px;
+  padding: 0 16px;
+
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.inquiryEditActions button:first-child {
+  background: none;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+}
+
+.inquiryEditActions .inquiryButton {
+  width: auto;
+  height: 36px;
+  margin: 0;
+}
+
+/* 댓글이 없을 때 */
+.emptyCommentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emptyCommentWrapper {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 24px;
+
+  text-align: center;
+}
+
+.emptyIcon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.emptyComment {
+  margin: 12px 0 0;
+
+  font-size: 13px;
+  line-height: 1.6;
+  color: #9ca3af;
+}
+
+.backToListButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 48px;
+  padding: 10px 20px;
+
+  border-radius: 999px;
+  background: var(--Primary-100, #3692ff);
+
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+
+  text-decoration: none;
+}
+
+.backToListButton:hover {
+  background: #2f80ed;
+}
+
+@media (max-width: 743px) {
+  .page {
+    padding: 24px 0 48px;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .imageBox {
+    flex: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .price {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}

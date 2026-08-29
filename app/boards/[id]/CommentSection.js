@@ -4,8 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { DEFAULT_PROFILE_IMAGE } from "@/constant/board";
-import ActionDropdown from "./ActionDropdown";
+import ActionDropdown from "../../../components/ActionDropdown";
 import styles from "./detail.module.css";
+import { getFallbackNickname } from "@/utils/nickname";
 
 function formatRelativeTime(dateString) {
   const now = new Date();
@@ -20,6 +21,11 @@ function formatRelativeTime(dateString) {
   if (diffHour < 24) return `${diffHour}시간 전`;
 
   return date.toLocaleDateString("ko-KR");
+}
+
+function getAuthHeader() {
+  const token = localStorage.getItem("accessToken");
+  return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
 export default function CommentSection({ articleId, initialComments }) {
@@ -41,7 +47,7 @@ export default function CommentSection({ articleId, initialComments }) {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/articles/${articleId}/comments`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", ...getAuthHeader() },
           body: JSON.stringify({ content }),
         },
       );
@@ -62,7 +68,7 @@ export default function CommentSection({ articleId, initialComments }) {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/comments/${commentId}`,
-        { method: "DELETE" },
+        { method: "DELETE", headers: { ...getAuthHeader() } },
       );
       if (!res.ok) throw new Error("댓글 삭제 실패");
       setComments((prev) => prev.filter((c) => c.id !== commentId));
@@ -90,16 +96,14 @@ export default function CommentSection({ articleId, initialComments }) {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/comments/${commentId}`,
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", ...getAuthHeader() },
           body: JSON.stringify({ content: editContent }),
         },
       );
       if (!res.ok) throw new Error("댓글 수정 실패");
       const updatedComment = await res.json();
       setComments((prev) =>
-        prev.map((c) =>
-          c.id === commentId ? { ...c, ...updatedComment } : c,
-        ),
+        prev.map((c) => (c.id === commentId ? { ...c, ...updatedComment } : c)),
       );
       setEditingId(null);
       setEditContent("");
@@ -169,7 +173,8 @@ export default function CommentSection({ articleId, initialComments }) {
                         className={styles.profileImage}
                       />
                       <span className={styles.commentAuthor}>
-                        {comment.writer?.nickname ?? "초코비버"}
+                        {comment.writer?.nickname ??
+                          getFallbackNickname(comment.id)}
                       </span>
                       <span className={styles.commentDate}>
                         {formatRelativeTime(comment.createdAt)}
@@ -214,7 +219,8 @@ export default function CommentSection({ articleId, initialComments }) {
                       className={styles.profileImage}
                     />
                     <span className={styles.commentAuthor}>
-                      {comment.writer?.nickname ?? "초코비버"}
+                      {comment.writer?.nickname ??
+                        getFallbackNickname(comment.id)}
                     </span>
                     <span className={styles.commentDate}>
                       {formatRelativeTime(comment.createdAt)}

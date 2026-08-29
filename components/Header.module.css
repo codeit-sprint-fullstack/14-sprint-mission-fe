@@ -74,3 +74,67 @@
 .loginButton:hover {
   background: #1967d6;
 }
+
+.userArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+}
+
+.nickname {
+  color: var(--Cool-Gray-600, #4b5563);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media (max-width: 743px) {
+  .left {
+    gap: 16px;
+  }
+
+  .logo {
+    width: auto;
+    height: auto;
+    padding: 0;
+    gap: 4px;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+
+  .nav {
+    gap: 12px;
+  }
+
+  .nav a {
+    font-size: 14px;
+  }
+
+  .loginButton {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+
+  .userArea {
+    gap: 6px;
+  }
+
+  .profileImage {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nickname {
+    display: none;
+  }
+}

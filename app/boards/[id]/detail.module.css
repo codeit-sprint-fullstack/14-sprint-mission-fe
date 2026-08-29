@@ -353,6 +353,43 @@
   cursor: not-allowed;
 }
 
+.errorBox,
+.notFoundBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 120px 0;
+  text-align: center;
+}
+
+.errorBox p,
+.notFoundBox p {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+.retryButton {
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: var(--blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+.retryButton:hover {
+  background-color: #1967d6;
+}
+
+.backLink {
+  color: var(--blue);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+
 /* Mobile: 375px ~ 743px */
 @media (max-width: 743px) {
   .articleHeader {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "./detail.module.css";
+import styles from "./ActionDropdown.module.css";
 
 export default function ActionDropdown({ onEdit, onDelete }) {
   const [open, setOpen] = useState(false);

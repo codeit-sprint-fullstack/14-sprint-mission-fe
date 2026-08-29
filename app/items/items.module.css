@@ -1,3 +1,34 @@
+/* 베스트 상품 섹션 */
+.bestSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 24px auto 0;
+}
+
+.bestGrid {
+  display: grid;
+  width: 100%;
+  column-gap: 24px;
+  row-gap: 40px;
+  grid-template-columns: repeat(4, 1fr); /* Desktop: 4개 */
+  margin-top: 16px;
+}
+
+.bestTitle {
+  color: var(--Secondary-900, #111827);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+@media (max-width: 1199px) {
+  .bestGrid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet/Mobile: 2개 */
+  }
+}
+
 /* 판매중인 상품, 검색, 상품 등록하기, 최신순 줄 */
 .productsHeader {
   display: flex;
@@ -30,7 +61,7 @@
   gap: 12px;
 }
 
-/* 회색창(돋보기 + 검색 입력창) */
+/* 회색창(돋보기  검색 입력창) */
 .searchBox {
   display: flex;
   align-items: center;
@@ -181,6 +212,7 @@
 /* 판매 중인 상품 카드들 전체 */
 .productsGrid {
   display: grid;
+  width: 100%;
   column-gap: 24px;
   row-gap: 40px;
   grid-template-columns: repeat(5, 1fr); /* Desktop */
@@ -194,6 +226,9 @@
   gap: 16px;
 
   background: #fcfcfc;
+
+  text-decoration: none;
+  color: inherit;
 }
 
 /* 상품 정보 영역 */
@@ -205,9 +240,13 @@
 }
 
 /* 베스트 상품 사진 */
-.productImage {
+.imageWrapper {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
+}
+
+.productImage {
   object-fit: cover;
   border-radius: 16px;
 }
@@ -236,7 +275,7 @@
   line-height: 26px; /* 162.5% */
 }
 
-/* 하트 + 숫자를 감싸는 박스 */
+/* 하트  숫자를 감싸는 박스 */
 .productFavorite {
   display: flex;
   align-items: center;
@@ -319,6 +358,22 @@
   background-color: #fff;
 }
 
+.productLink {
+  display: contents;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.productFavorite button {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 @media (max-width: 1199px) {
   .productsHeader {
     flex-direction: column;
@@ -335,6 +390,13 @@
 
   .searchRegisterGroup {
     width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .searchBox {
+    width: 100%;
   }
 
   .productsGrid {
@@ -343,24 +405,81 @@
 }
 
 @media (max-width: 743px) {
+  .bestSection {
+    margin-top: 17px;
+  }
+
+  .bestGrid {
+    grid-template-columns: repeat(1, 1fr); /* Mobile: 1개 */
+  }
+
+  /* 2번째 이후 카드는 모바일에서 숨김 */
+  .bestGrid > *:nth-child(n + 2) {
+    display: none;
+  }
+
   .productsHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 42px;
+    grid-template-areas:
+      "title    register"
+      "search   sort";
+    align-items: center;
+    row-gap: 12px;
+    column-gap: 8px;
   }
 
-  .productsControls {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 12px;
-  }
-
+  /* 중간 래퍼들을 투명화해서 자식들이 productsHeader의 grid item이 되게 함 */
+  .productsControls,
   .searchRegisterGroup {
+    display: contents;
+  }
+
+  .productsTitle {
+    grid-area: title;
+  }
+
+  .registerButton {
+    grid-area: register;
+    grid-column: 1 / span 2;
+    height: 36px;
+    padding: 0 16px;
+    font-size: 14px;
+
+    white-space: nowrap;
+    justify-self: end;
+  }
+
+  .searchBox {
+    grid-area: search;
     width: 100%;
+  }
+
+  .sortWrapper {
+    grid-area: sort;
+    justify-self: end;
+  }
+
+  .sortButton {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .sortLabel {
+    display: none;
   }
 
   .productsGrid {
     grid-template-columns: repeat(2, 1fr); /* Mobile */
+  }
+
+  .sortIconDesktop {
+    display: none;
+  }
+
+  .sortIconMobile {
+    display: block;
   }
 }

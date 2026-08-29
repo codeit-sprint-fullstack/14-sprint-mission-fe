@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 160px;
   background-color: var(--gray-900, #1f2937);
-  color: var(--Secondary-400, #9CA3AF);
+  color: var(--Secondary-400, #9ca3af);
   font-size: 16px;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .copyright {
-  color: var(--Secondary-400, #9CA3AF);
+  color: var(--Secondary-400, #9ca3af);
   white-space: nowrap;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .footerMenu a {
-  color: var(--Secondary-200, #E5E7EB);
+  color: var(--Secondary-200, #e5e7eb);
   font-size: 18px;
   font-weight: 400;
   text-decoration: none;
@@ -44,4 +44,27 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+@media (max-width: 743px) {
+
+
+  .footerMenu {
+    order: 1;
+    gap: 20px;
+  }
+
+  .footerMenu a {
+    font-size: 14px;
+  }
+
+  .socialMedia {
+    order: 2;
+  }
+
+  .copyright {
+    order: 3;
+    width: 100%;
+    font-size: 14px;
+  }
 }

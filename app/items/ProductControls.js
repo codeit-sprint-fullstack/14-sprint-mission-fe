@@ -61,13 +61,24 @@ export default function ProductControls({ orderBy, keyword }) {
       </div>
 
       <div className={styles.sortWrapper}>
-        <button className={styles.sortButton} onClick={() => setIsOpen(!isOpen)}>
-          {sortLabel}
+        <button
+          className={styles.sortButton}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className={styles.sortLabel}>{sortLabel}</span>
           <Image
             src="/images/icons/ic_arrow_down.svg"
             alt=""
             width={24}
             height={24}
+            className={styles.sortIconDesktop}
+          />
+          <Image
+            src="/images/icons/ic_sort.svg" // 모바일 전용 아이콘
+            alt=""
+            width={20}
+            height={20}
+            className={styles.sortIconMobile}
           />
         </button>
 
