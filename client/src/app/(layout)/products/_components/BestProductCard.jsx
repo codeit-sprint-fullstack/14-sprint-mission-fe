@@ -1,15 +1,15 @@
-import heartIcon from "@/assets/ic_heart.png";
-import defaultImg from "@/assets/img_default.svg";
-import Image from "next/image";
-import styles from "./ProductCard.module.css";
+import heartIcon from '@/assets/ic_heart.png';
+import defaultImg from '@/assets/img_default.svg';
+import Image from 'next/image';
+import styles from './ProductCard.module.css';
 
-export default function ProductCard({ product }) {
+export default function BestProductCard({ product }) {
   return (
-    <div className={styles.card}>
+    <div>
       <Image 
-        src={product.images?.[0] || defaultImg} 
-        width={220} 
-        height={220} 
+        src={product.images[0] || defaultImg} 
+        width={282} 
+        height={282} 
         loading='eager'
         alt={product.name} 
       />
@@ -22,5 +22,5 @@ export default function ProductCard({ product }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

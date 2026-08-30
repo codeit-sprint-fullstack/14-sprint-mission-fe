@@ -110,13 +110,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhd
 ### 게시글 생성하기
 POST http://localhost:3001/articles
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzgwMzMxNiwiZXhwIjoxNzg3ODA2OTE2fQ.2swJFNluAi0eC0AwY5el3XFNULWhOlOyWyyMeK9lbUg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4ODEwMzE3NSwiZXhwIjoxNzg4MTA2Nzc1fQ.aMZMPz8gZeA8u-rCnKrkMW4XwzNdf5fKn877hfZodK8
 
 {
   "title": "거래 약속 후 구매자가 연락이 없으면 어떻게 하시나요?",
   "content": "오늘 저녁에 직거래하기로 했는데 구매자가 몇 시간째 메시지를 확인하지 않고 있습니다. 다른 구매 희망자도 있는 상황인데 언제까지 기다리는 것이 적당할까요?",
   "image": "http://localhost:3001/uploads/1787803694833.jpeg"
-
 }
 
 ### 게시글 목록 가져오기

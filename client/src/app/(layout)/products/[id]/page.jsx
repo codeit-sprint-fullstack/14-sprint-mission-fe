@@ -22,8 +22,7 @@ import styles from './page.module.css';
 
 export default function ProductDetail() {
   const CommentLimit = 4;
-  const params = useParams();
-  const { id } = params;
+  const { id } = useParams();
   const router = useRouter();
   const queryClient = useQueryClient();
   
@@ -107,7 +106,7 @@ export default function ProductDetail() {
   const comments = 
     commentsData?.pages.flatMap((commentPage) => commentPage.list) ?? [];
 
-  useEffect(() => {
+  useEffect(() => { // 댓글 무한 스크롤
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
@@ -119,7 +118,7 @@ export default function ProductDetail() {
   function onSubmit(data) {
     createCommentMutation.mutate({ productId:id, data }, { // mutate는 하나의 값만 전달 가능 -> 객체로 전달
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['comments', id, CommentLimit]} );
+        queryClient.invalidateQueries({ queryKey: ['productComments', id, CommentLimit]} );
         reset();
       },
       onError: (err) => {
@@ -134,7 +133,7 @@ export default function ProductDetail() {
   function handleUpdateComment(commentId, content) {
     updateCommentMutation.mutate({ commentId, data: { content }}, {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['comments', id, CommentLimit] });
+        queryClient.invalidateQueries({ queryKey: ['productComments', id, CommentLimit] });
       },
       onError: (err) => {
         console.error('댓글 수정 실패: ', err.message);
@@ -148,7 +147,7 @@ export default function ProductDetail() {
   function handelDeleteComment(commentId) {
     deleteCommentMutation.mutate(commentId, {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['comments', id, CommentLimit] });
+        queryClient.invalidateQueries({ queryKey: ['productComments', id, CommentLimit] });
       },
       onError: (err) => {
         console.error('댓글 삭제 싪패: ', err.message);
@@ -166,14 +165,14 @@ export default function ProductDetail() {
 
   if (isUserPending) return <p>사용자 인증 확인 중...</p>
   if (isProductPending) return <p>상품 정보 로딩 중...</p>
-  if (isProductError) return <p>{productError.message}</p>
+  if (isProductError) return <p>상품을 불러오지 못했습니다: {productError.message}</p>
   
   return (
     <div className={styles.wrapper}>
       <section className={styles.productSection}>
         <Image
           className={styles.productImg}
-          src={defaultImg}
+          src={product.images?.[0] || defaultImg}
           width={484}
           height={484}
           alt={product.name}
@@ -302,14 +301,9 @@ export default function ProductDetail() {
         <textarea
           className={styles.input}
           id='content'
-          type='text'
           placeholder='개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다.'
           {...register('content', {
             required: true,
-            minLength: {
-              value: 1,
-              message: '1자 이상 입력해주세요'
-            },
             maxLength: {
               value: 100,
               message: '100자 이내로 입력해주세요'

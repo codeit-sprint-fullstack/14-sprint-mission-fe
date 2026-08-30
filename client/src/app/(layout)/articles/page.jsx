@@ -1,53 +1,68 @@
-import ArticleList from "./_components/ArticleList";
-import BestArticleList from "./_components/BestArticleList";
-import Dropdown from "@/components/Dropdown";
-import Input from "@/components/SearchInput";
-import Link from "next/link";
-import styles from "./page.module.css";
-import Pagination from "@/components/Pagination";
+'use client';
 
-export default async function Articles({ searchParams }) {
-  // 베스트 게시글 가져오기
-  const bestRes = await fetch(
-    `${process.env.API_BASE_URL}/articles?limit=3&sort=recent`,
-    { cache: "no-store" }
-  );
-  if (!bestRes.ok) {
-    throw new Error("게시글을 불러오는 데 실패했습니다");
-  }
-  const bestData = await bestRes.json();
-  const bestArticles = bestData.list;
+import Dropdown from '@/components/Dropdown';
+import Pagination from '@/components/Pagination';
+import Input from '@/components/SearchInput';
+import { useGetArticles } from '@/queries/articles';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import ArticleList from './_components/ArticleList';
+import BestArticleList from './_components/BestArticleList';
+import styles from './page.module.css';
 
-  // searchParams로 url의 쿼리스트링 꺼내기
-  const params = await searchParams;
-  const keyword = params.keyword ?? "";
-  const sort = params.orderBy ?? "recent";
-  const page = Number(params.page ?? 1);
+export default function Articles() {
   const pageSize = 4;
-  const offset = (page - 1) * pageSize;
+  // searchParams로 url의 쿼리스트링 꺼내기
+  const params = useSearchParams();
+   const page = Number(params.get('page') ?? 1);
+  const keyword = params.get('keyword') ?? '';
+  const orderBy = params.get('orderBy') ?? 'recent';
+
+  // 베스트 게시글 가져오기
+  const { 
+    data: bestData, 
+    isPending: isBestPending,
+    isError: isBestError,
+    error: bestError,
+  } = useGetArticles({ 
+    page: 1,
+    pageSize: 3, 
+    orderBy:'like', 
+    keyword: '', 
+  });
 
   // 일반 게시글 가져오기
-  const res = await fetch(
-    `${process.env.API_BASE_URL}/articles?offset=${offset}&limit=${pageSize}&keyword=${keyword}&sort=${sort}`,
-    { cache: "no-store" }
-  );
-  if (!res.ok) {
-    throw new Error("게시글을 불러오는 데 실패했습니다");
-  }
-  const data = await res.json();
-  const articles = data.list;
-  const totalCount = data.totalCount;
+  const { 
+    data, 
+    isPending, 
+    isError, 
+    error 
+  } = useGetArticles({
+    page,
+    pageSize,
+    orderBy,
+    keyword,
+  });
 
+  if (isPending || isBestPending) return <p>로딩 중...</p>;
+  if (isError || isBestError) return <p>게시글을 불러오지 못했습니다: {error?.message ?? bestError?.message}</p>;
+
+  const articles = data.articles;
+  const bestArticles = bestData.articles;
+  const totalCount = data.totalCount;
+  
   // 페이지네이션
   const totalPages = Math.ceil(totalCount / pageSize); // 필요한 총 페이지 수 구하기
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1); // 페이지 배열 만들기 (1, 2... N)
 
   return (
     <div className={styles.pageWrapper}>
+
       <header className={styles.section}>
         <h1 className={styles.bestSectionTitle}>베스트 게시글</h1>
         <BestArticleList articles={bestArticles} />
       </header>
+
       <section className={styles.section}>
         <div className={styles.articleSectionHeader}>
           <h2 className={styles.articleSectionTitle}>게시글</h2>
@@ -69,6 +84,7 @@ export default async function Articles({ searchParams }) {
           />
         </div>
       </section>
+
     </div>
   );
 }

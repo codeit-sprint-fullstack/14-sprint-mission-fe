@@ -7,7 +7,7 @@ import Textarea from "@/components/form/Textarea";
 import styles from "./ArticleForm.module.css";
 
 export default function ArticleForm({
-  action,
+  onSubmit,
   initialTitle = "",
   initialContent = "",
   submitText = "등록",
@@ -15,11 +15,23 @@ export default function ArticleForm({
   const [title, setTitle] = useState(initialTitle);
   const [content, setContent] = useState(initialContent);
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onSubmit({
+      title,
+      content,
+    })
+  }
+
   // 인풋에 모든 값이 입력되었을 때만 등록 버튼 활성화
   const isFormEmpty = title.trim() === "" || content.trim() === "";
 
   return (
-    <form action={action} className={styles.wrapper}>
+    <form 
+      onSubmit={handleSubmit} 
+      className={styles.wrapper}
+    >
       <div className={styles.header}>
         <h1 className={styles.title}>게시글 쓰기</h1>
         <SubmitButton disabled={isFormEmpty}>{submitText}</SubmitButton>

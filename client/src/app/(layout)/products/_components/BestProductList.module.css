@@ -1,0 +1,11 @@
+.productList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  list-style: none;
+}
+
+.productCard {
+  text-decoration: none;
+}

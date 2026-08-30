@@ -1,33 +1,76 @@
-import { updateArticle } from "@/actions/articleActions";
+'use client';
+
+import { useGetArticle, useUpdateArticle } from "@/queries/articles";
+import { useUser } from "@/queries/auth";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import ArticleForm from "../../_components/ArticleForm";
 import styles from "./page.module.css";
 
-export default async function EditArticle({ params }) {
-  const { id } = await params;
+export default function EditArticle() {
+  const { id } = useParams();
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
-  const res = await fetch(`${process.env.API_BASE_URL}/articles/${id}`, {
-    cache: "no-store",
-  });
+  // 인증
+  const {
+    data: user,
+    isPending: isUserPending
+  } = useUser();
 
-  if (!res.ok) {
-    throw new Error("게시글을 불러오지 못했습니다.");
+  // 게시글 상세 가져오기
+  const {
+    data: article,
+    isPending: isArticlePending,
+    isError: isArticleError,
+    error: articleError,
+  } = useGetArticle(id, Boolean(user));
+
+  // 게시글 수정하기
+  const updateArticleMutation = useUpdateArticle();
+  function handleUpdateArticle(data) {
+    updateArticleMutation.mutate(
+      { 
+        articleId: id, 
+        data 
+      }, 
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['article', id] });
+          queryClient.invalidateQueries({ queryKey: ['articles'] });
+          router.push(`/articles/${id}`);
+        },
+        onError: (error) => {
+          console.error('게시글 수정 실패: ', error.response?.data?.message);
+          alert('게시글 수정에 실패했습니다');
+        },
+      }
+    );
   }
 
-  const article = await res.json();
+  useEffect(() => {
+    if (!isUserPending && !user) {
+      router.push('/signin');
+    }
+  }, [isUserPending, user, router]);
 
-  // AI로 문제 해결
-  // 문제: 게시글 수정 함수는 articleId, formData 두 가지 값이 필요
-  //      formData는 form이 자동적으로 전달, articleId는 미리 연결해야 함
-  // 해결: Server Action에 articleId를 미리 전달하도록 bind 사용
-  const updateArticleWithId = updateArticle.bind(null, id);
+  if (isUserPending) return <p>사용자 인증 확인 중...</p>
+  if (isArticlePending) return <p>게시글 불러오는 중...</p>
+  if (isArticleError) return <p>게시글을 불러오는데 실패했습니다: {articleError.message}</p>
+  if (user?.id !== article.writer.id) return <p>게시글 수정 권한이 없습니다</p>
 
   return (
     <div className={styles.wrapper}>
       <ArticleForm
-        action={updateArticleWithId}
+        onSubmit={handleUpdateArticle}
         initialTitle={article.title}
         initialContent={article.content}
-        submitText="수정"
+        submitText={
+          updateArticleMutation.isPending
+          ? '수정 중...'
+          : '수정'
+        }
       />
     </div>
   );

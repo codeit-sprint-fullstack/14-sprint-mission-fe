@@ -55,7 +55,11 @@ export default function Dropdown({ route }) {
             </button>
           </li>
           <li>
-            <button className={styles.menuBtn} type="button" disabled>
+            <button 
+            className={styles.menuBtn} 
+            type="button" 
+            onClick={() => handleSort('favorite')}
+            >
               좋아요순
             </button>
           </li>

@@ -33,7 +33,7 @@ export default function BestArticleCard({ article }) {
       </div>
       <div className={styles.info}>
         <div className={styles.infoLeft}>
-          <p className={styles.nickname}>{article.nickname || "총명한 판다"}</p>
+          <p className={styles.nickname}>{article.writer.nickname}</p>
           <div className={styles.heart}>
             <Image
               src={heart}

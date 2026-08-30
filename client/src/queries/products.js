@@ -18,6 +18,13 @@ export function useGetProduct(productId, isUser) {
   });
 }
 
+// 상품 생성하기
+export function useCreateProduct() {
+  return useMutation({
+    mutationFn: (data) => api.createProduct(data),
+  });
+}
+
 // 상품 수정하기
 export function useUpdateProduct() {
   return useMutation({
