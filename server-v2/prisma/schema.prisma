@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                Int      @id @default(autoincrement())
+  email             String   @unique
+  nickname          String
+  image             String?
+  encryptedPassword String?
+  refreshToken      String?
+  provider          String   @default("local") // google oauth
+  providerId        String?  @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  products          Product[]
+  articles          Article[]
+  comments          Comment[]
+  favorites         ProductFavorite[]
+  likes             ArticleLike[]
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  price       Int
+  tags        String[]
+  images      String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  
+  comments    Comment[]
+  favorites   ProductFavorite[]
+}
+
+model Article {
+  id         Int       @id @default(autoincrement())
+  title      String
+  content    String
+  image      String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int
+  
+  comments   Comment[]
+  likes      ArticleLike[]
+}
+
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  
+  product   Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int?
+
+  article   Article?  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId Int?
+}
+
+model ProductFavorite {
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+
+  @@id([userId, productId]) // 중복 좋아요 방지
+}
+
+model ArticleLike {
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade) 
+  articleId Int
+
+  @@id([userId, articleId]) // 중복 좋아요 방지
+}

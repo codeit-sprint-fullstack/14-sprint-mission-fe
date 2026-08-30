@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.arrow {
+  color: var(--secondary-600)
+}
+
+.number {
+  color: var(--secondary-500);
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  font-weight: 600;
+  border: 1px solid var(--secondary-200);
+  border-radius: 40px;
+  background: #FFF;
+}
+
+.button:not(:disabled):hover {
+  color: #FFF;
+  background: var(--primary-100);
+}
+
+.active {
+  color: #FFF;
+  background-color: var(--primary-100);
+}

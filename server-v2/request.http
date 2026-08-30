@@ -1,0 +1,200 @@
+############################ auth ############################
+
+### 회원가입
+POST http://localhost:3001/auth/signUp
+Content-Type: application/json
+
+{
+  "email": "choicoding@gmail.com",
+  "password": "12341234",
+  "passwordConfirmation": "12341234",
+  "nickname": "최코딩"
+}
+
+### 로그인
+POST http://localhost:3001/auth/signIn
+Content-Type: application/json
+
+{
+  "email": "kimcoding@gmail.com",
+  "password": "12341234"
+}
+
+### 토큰 refresh
+POST http://localhost:3001/auth/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzYzNTYyOSwiZXhwIjoxNzg4ODQ1MjI5fQ.9091Tac83mAOJAt8NOJ135sdV0iAZ5eSAsLD6PzVCSI"
+}
+
+############################ user ############################
+
+### 유저 가져오기
+GET http://localhost:3001/users/me 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzgwODc1OCwiZXhwIjoxNzg3ODEyMzU4fQ.7FWDdE9VyI-8jPm1ConxUtvSXg5dQUqNATdkhYaY3YY
+
+### 유저 이미지 수정하기
+PATCH http://localhost:3001/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzgxMDAxOSwiZXhwIjoxNzg3ODEzNjE5fQ.ip9k7Ujk8NPS4rE0_1C0M5nTXjsBsbweNvgCdje2Igo
+
+{
+  "image": "http://localhost:3001/uploads/1787796510010.jpeg"
+}
+
+### 유저 비밀번호 수정하기
+PATCH http://localhost:3001/users/me/password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTc4NzgxMjU4OCwiZXhwIjoxNzg3ODE2MTg4fQ.ZW2fNapCSNAyPgNYFA8oylTBc78O6JK4AEWV5kSsPi4
+
+{
+  "currentPassword": "123412344",
+  "password": "12341234",
+  "passwordConfirmation": "12341234"
+}
+
+### 유저가 올린 상품 가져오기
+GET http://localhost:3001/users/me/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzgxNTkzMywiZXhwIjoxNzg3ODE5NTMzfQ.OpsFXBDq53rH7IigxiPqcJAeRMLgK7zWNtONxyD851o
+
+### 유저가 좋아요 누른 상품 가져오기
+GET http://localhost:3001/users/me/favorites?keyword=아이폰
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzgxOTk3OCwiZXhwIjoxNzg3ODIzNTc4fQ.gGi_x6JFEfOKj5J5p52ozc034pP_FXYJ_c9F8ZUS1hs
+
+############################ product ############################
+
+### 상품 생성하기
+POST http://localhost:3001/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc4NzgwMzMxNiwiZXhwIjoxNzg3ODA2OTE2fQ.2swJFNluAi0eC0AwY5el3XFNULWhOlOyWyyMeK9lbUg
+
+{
+  "name": "아이폰 미니13",
+  "description": "약 3년 정도 사용했어요! 사용감 있지만 작동엔 문제 없습니다",
+  "price": 300000,
+  "tags": ["아이폰", "애플", "중고"],
+   "images": ["http://localhost:3001/uploads/1787802829520.jpeg"]
+}
+
+### 상품 목록 가져오기
+GET http://localhost:3001/products
+
+### 상품 가져오기
+GET http://localhost:3001/products/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzY1MTEyMiwiZXhwIjoxNzg3NjU0NzIyfQ.coPN2x0T1niwG9LoBF3G7nSbG4jXc_Bn49kxeCJCHt0
+
+### 상품 수정하기
+PATCH http://localhost:3001/products/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+
+{
+  "price": 60000
+}
+
+### 상품 삭제하기
+DELETE http://localhost:3001/products/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzY1NTAwMywiZXhwIjoxNzg3NjU4NjAzfQ.3lieC_A8P46or5IeOrRWdjQG6MpUq9c5akcrgQV4gxI
+
+### 상품 좋아요 생성하기
+POST http://localhost:3001/products/7/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+
+### 상품 좋아요 삭제하기
+DELETE http://localhost:3001/products/1/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcwOTg5OSwiZXhwIjoxNzg3NzEzNDk5fQ.jcQZLH9TJP2gFHoO2-SoxNY4nutjEcQ8_hRR_VIRw6Q
+
+############################ article ############################
+
+### 게시글 생성하기
+POST http://localhost:3001/articles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4ODEwMzE3NSwiZXhwIjoxNzg4MTA2Nzc1fQ.aMZMPz8gZeA8u-rCnKrkMW4XwzNdf5fKn877hfZodK8
+
+{
+  "title": "거래 약속 후 구매자가 연락이 없으면 어떻게 하시나요?",
+  "content": "오늘 저녁에 직거래하기로 했는데 구매자가 몇 시간째 메시지를 확인하지 않고 있습니다. 다른 구매 희망자도 있는 상황인데 언제까지 기다리는 것이 적당할까요?",
+  "image": "http://localhost:3001/uploads/1787803694833.jpeg"
+}
+
+### 게시글 목록 가져오기
+GET http://localhost:3001/articles
+
+### 게시글 가져오기
+GET http://localhost:3001/articles/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+### 게시글 수정하기
+PATCH http://localhost:3001/articles/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+{
+  "content": "이번에 처음 중고거래를 하는데요! 보통 어디서 거래 하시나요?"
+}
+
+### 게시글 삭제하기
+DELETE http://localhost:3001/articles/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcxOTQ3NywiZXhwIjoxNzg3NzIzMDc3fQ.wVWrqBv4MDi9KoAN-XynN5PY1KNWWAvE0GHmXeX9ALQ
+
+### 게시글 좋아요 생성하기
+POST http://localhost:3001/articles/4/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+### 게시글 좋아요 삭제하기
+DELETE http://localhost:3001/articles/2/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyMjkwMiwiZXhwIjoxNzg3NzI2NTAyfQ.zbMew96ZL4KIe1mQMuxXGmQwD5h74mZ9hZ_DD45Ef_s
+
+############################ comment ############################
+
+### 상품 댓글 생성하기
+POST http://localhost:3001/products/1/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTc4NzcyNzAwNSwiZXhwIjoxNzg3NzMwNjA1fQ.4xg9w4ZMhQLvQBrk8Tzhrq7xN4un4WCtFViSZez2Rw0
+
+{
+  "content": "거래 가능할까요?"
+}
+
+### 상품 댓글 가져오기
+GET http://localhost:3001/products/1/comments
+
+### 게시글 댓글 생성하기
+POST http://localhost:3001/articles/4/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzczMjAyNywiZXhwIjoxNzg3NzM1NjI3fQ.dgg3kEtuq4VtfcBYlAIafukI42uHXASZm89f0a6Z2v4
+
+{
+  "content": "반갑습니다!"
+}
+
+### 게시글 댓글 가져오기
+GET http://localhost:3001/articles/4/comments?cursor=11
+
+### 댓글 수정하기
+PATCH http://localhost:3001/comments/8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzczNDg2NiwiZXhwIjoxNzg3NzM4NDY2fQ.Dbx7Tz0JFAxx2bjxIGX3E7UswydsollyxIH_29EzmfI
+
+{
+  "content": "반가워용"
+}
+
+### 댓글 삭제하기
+DELETE http://localhost:3001/comments/14
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzczNDg2NiwiZXhwIjoxNzg3NzM4NDY2fQ.Dbx7Tz0JFAxx2bjxIGX3E7UswydsollyxIH_29EzmfI
+
+############################ uploads ############################
+
+### 이미지 업로드
+POST http://localhost:3001/images/upload
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc4NzgxMDAxOSwiZXhwIjoxNzg3ODEzNjE5fQ.ip9k7Ujk8NPS4rE0_1C0M5nTXjsBsbweNvgCdje2Igo
+Content-Type: multipart/form-data; boundary=Boundary01234567890123456789
+
+--Boundary01234567890123456789
+Content-Disposition: form-data; name="image"; filename="profile.png"
+Content-Type: image/png
+
+< ./test.png
+--Boundary01234567890123456789--

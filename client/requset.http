@@ -1,0 +1,40 @@
+GET https://panda-market-api.vercel.app/articles/1/comments?limit=4
+
+###
+POST https://panda-market-api.vercel.app/auth/signIn
+Content-Type: application/json
+
+{
+  "email": "kimcoding@gmail.com",
+  "password": "12341234"
+}
+
+###
+POST https://panda-market-api.vercel.app/products/1026/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyMywic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3ODY2MTgyMzksImV4cCI6MTc4NjYyMDAzOSwiaXNzIjoic3AtcGFuZGEtbWFya2V0In0.CcROgSA4fRVy_1b9Qtl6OLhIOD5ynKM9wOErIqWZ704
+
+{
+  "content": "상태 어떤가요?"
+}
+
+###
+POST https://panda-market-api.vercel.app/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyMywic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3ODY2ODAwNjQsImV4cCI6MTc4NjY4MTg2NCwiaXNzIjoic3AtcGFuZGEtbWFya2V0In0._fL8z5lRf7H5Ra7bGVrs_GVJRFQ1vUWgcUM_yydEbmk
+
+{
+  "images":
+    "https://example.com/..."
+,
+  "tags": [
+    "애플", "중고폰", "미니13"
+  ],
+  "price": 0,
+  "description": "아이폰 미니 13 팔아요. 사용감 있습니다!",
+  "name": "아이폰 미니 13"
+}
+
+###
+POST http://panda-market-api.vercel.app/products/1046/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyMywic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3ODY3NTg0MTUsImV4cCI6MTc4Njc2MDIxNSwiaXNzIjoic3AtcGFuZGEtbWFya2V0In0.DRC5taZMARGypj0Zqu_0O2TBNDSrnYFF8UbpIgjP8Ug

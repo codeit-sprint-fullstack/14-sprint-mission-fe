@@ -36,6 +36,7 @@ coverage
 
 # Prisma
 server/generated/prisma/
+server-v2/src/generated/prisma/
 
 # vercel
 .vercel

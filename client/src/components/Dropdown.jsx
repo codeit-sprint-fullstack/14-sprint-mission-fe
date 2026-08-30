@@ -10,13 +10,14 @@ export default function Dropdown({ route }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const currentSort = searchParams.get("sort") ?? "recent";
+  const currentSort = searchParams.get("orderBy") ?? "recent";
   const [isOpen, setIsOpen] = useState(false);
 
   function handleSort(sort) {
     // 기존 검색 조건을 유지하면서 정렬 조건만 변경
     const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", sort);
+    params.set("orderBy", sort);
+    params.set('page', '1');
     router.push(`${route}?${params.toString()}`);
 
     // 드롭다운 닫기
@@ -54,7 +55,11 @@ export default function Dropdown({ route }) {
             </button>
           </li>
           <li>
-            <button className={styles.menuBtn} type="button" disabled>
+            <button 
+            className={styles.menuBtn} 
+            type="button" 
+            onClick={() => handleSort('favorite')}
+            >
               좋아요순
             </button>
           </li>
