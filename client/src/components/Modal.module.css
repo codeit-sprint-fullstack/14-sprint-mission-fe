@@ -1,0 +1,45 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.70);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  width: 540px;
+  height: 250px;
+  border-radius: 8px;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.message {
+  color: var(--secondary-800);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.closeBtn {
+  width: 165px;
+  height: 48px;
+  padding: 12px 23px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-100);
+  color: var(--secondary-100);
+  font-size: 16px;
+  font-weight: 600;
+}

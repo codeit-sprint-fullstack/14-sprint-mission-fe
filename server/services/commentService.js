@@ -32,9 +32,10 @@ export async function getProductComments(productId, query = {}) {
 }
 
 export async function getArticleComments(articleId, query = {}) {
-  const { limit = 3, cursor } = query
+  const { limit = 3, cursor } = query;
+  const parsedLimit = parseInt(limit);
 
-  return await prisma.comment.findMany({
+  const comments = await prisma.comment.findMany({
     where: { articleId },
     select: {
       id: true,
@@ -46,6 +47,17 @@ export async function getArticleComments(articleId, query = {}) {
     cursor: cursor ? { id: cursor } : undefined,
     orderBy: { createdAt: 'desc' }
   })
+
+  const hasNextPage = comments.length > parsedLimit;
+
+  if (hasNextPage) {
+    comments.pop();
+  }
+
+  return {
+    list: comments,
+    nextCursor: hasNextPage ? comments[comments.length - 1].id : null,
+  };
 }
 
 export async function createProductComment(productId, data) {

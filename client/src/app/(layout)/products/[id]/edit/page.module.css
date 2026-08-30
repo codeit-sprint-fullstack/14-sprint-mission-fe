@@ -1,0 +1,42 @@
+.wrapper {
+  width: 1200px;
+  height: 1018px;
+  padding-top: 26px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  color: var(--secondary-800);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btns {
+  display: flex;
+  gap: 8px;
+}
+
+.cancelBtn {
+  padding: 14px 20px 7px 20px;
+  border: none;
+  background: transparent;
+  color: var(--secondary-500);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}

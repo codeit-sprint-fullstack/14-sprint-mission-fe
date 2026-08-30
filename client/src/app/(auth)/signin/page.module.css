@@ -1,0 +1,130 @@
+.wrapper {
+  width: 640px;
+  height: 1080px;
+  padding-top: 60px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+
+.title {
+  color: var(--primary-100);
+  font-family: "ROKAF Sans";
+  font-size: 66px;
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  color: var(--secondary-800);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.input {
+  width: 100%;
+  height: 56px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--secondary-100);
+}
+
+.input::placeholder {
+  color: var(--secondary-400);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--primary-100);
+}
+
+.pwdInput {
+  position: relative;
+}
+
+.visibility {
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform:translateY(-50%);
+}
+
+.errorText {
+  margin-top: -8px;
+  padding-left: 16px;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.submitBtn {
+  height: 56px;
+  padding: 16px 124px;
+  border: none;
+  border-radius: 40px;
+  background: var(--primary-100);
+
+  color: var(--secondary-100);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.submitBtn:disabled {
+  background: var(--secondary-400);
+}
+
+.simpleLogin {
+  height: 74px;
+  padding: 16px 23px;
+  border-radius: 8px;
+  background: #E6F2FF;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+}
+
+.signup {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.signupLink {
+  color: var(--primary-100);
+}
