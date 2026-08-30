@@ -1,0 +1,84 @@
+### 로그인
+POST http://localhost:3001/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "12345678"
+}
+
+###상품 등록
+POST http://localhost:3001/api/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMzVlNGM4MC1jNGY0LTQxMzMtYTBlZC01MDQyZmNkZGVjOTkiLCJpYXQiOjE3ODc3OTg3MDZ9.7DzBYJa_1JoFNOV2UXGy4Ga-bOPEuJ4RNUgJQjCRUco
+           
+{
+  "name": "영화",
+  "price": 500,
+  "description" : "재밌어요"
+}
+
+### 상품 가져오기
+GET http://localhost:3001/api/products
+
+### 상품 상세
+GET http://localhost:3001/api/products/65c498cd-2b1f-4676-b30a-b299bfe68449
+
+### 상품 수정
+PATCH http://localhost:3001/api/products/65c498cd-2b1f-4676-b30a-b299bfe68449
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMzVlNGM4MC1jNGY0LTQxMzMtYTBlZC01MDQyZmNkZGVjOTkiLCJpYXQiOjE3ODc3OTg3MDZ9.7DzBYJa_1JoFNOV2UXGy4Ga-bOPEuJ4RNUgJQjCRUco
+
+{
+  "name": "수정된 상품",
+  "description": "수정했습니다",
+  "price": 30000
+}
+
+### 상품 삭제
+DELETE http://localhost:3001/api/products/65c498cd-2b1f-4676-b30a-b299bfe68449
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMzVlNGM4MC1jNGY0LTQxMzMtYTBlZC01MDQyZmNkZGVjOTkiLCJpYXQiOjE3ODc3OTg3MDZ9.7DzBYJa_1JoFNOV2UXGy4Ga-bOPEuJ4RNUgJQjCRUco
+
+### 상품 검색 + 좋아요순
+GET http://localhost:3001/api/products?keyword=헨드폰&orderBy=like
+
+### 상품 검색 + 페이지네이션
+GET http://localhost:3001/api/products?keyword=상품&page=1&pageSize=2
+
+### 상품 좋아요
+POST http://localhost:3001/api/products/0c13021a-a8e9-43f2-aaa6-91d815d822e1/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMzVlNGM4MC1jNGY0LTQxMzMtYTBlZC01MDQyZmNkZGVjOTkiLCJpYXQiOjE3ODc3OTg3MDZ9.7DzBYJa_1JoFNOV2UXGy4Ga-bOPEuJ4RNUgJQjCRUco
+
+### 상품 좋아요 취소
+DELETE http://localhost:3001/api/products/0c13021a-a8e9-43f2-aaa6-91d815d822e1/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMzVlNGM4MC1jNGY0LTQxMzMtYTBlZC01MDQyZmNkZGVjOTkiLCJpYXQiOjE3ODc3OTg3MDZ9.7DzBYJa_1JoFNOV2UXGy4Ga-bOPEuJ4RNUgJQjCRUco
+
+### 베스트 상품 조회
+GET http://localhost:3001/api/products/best
+
+### 상품 댓글 작성
+POST http://localhost:3001/api/products/96915459-f074-4e4a-854d-861ea5918fd2/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMzVlNGM4MC1jNGY0LTQxMzMtYTBlZC01MDQyZmNkZGVjOTkiLCJpYXQiOjE3ODc3OTg3MDZ9.7DzBYJa_1JoFNOV2UXGy4Ga-bOPEuJ4RNUgJQjCRUco
+Content-Type: application/json
+
+{
+  "content": "상품 댓글 테스트입니다."
+}
+
+### 상품 댓글 목록 조회
+GET http://localhost:3001/api/products/상품ID/comments
+
+
+### 상품 댓글 수정
+PATCH http://localhost:3001/api/products/상품ID/comments/댓글ID
+Authorization: Bearer 토큰
+Content-Type: application/json
+
+{
+  "content": "수정된 댓글입니다."
+}
+
+
+### 상품 댓글 삭제
+DELETE http://localhost:3001/api/products/상품ID/comments/댓글ID
+Authorization: Bearer 토큰

@@ -31,7 +31,7 @@ export default function LoginPage() {
         email,
         password, 
       });
-      router.push("/products");
+      router.push("/items");
     } catch (error) {
       setModalMessage("로그인에 실패했습니다.")
     }

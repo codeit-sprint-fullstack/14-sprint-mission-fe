@@ -1,8 +1,16 @@
 import api from "./axios";
 
-export async function signup({ email, password, nickname,passwordConfirmation }) {
-  const response =  await api.post("/auth/signUp",{
-    email,password, nickname, passwordConfirmation,
-  })
+// 회원가입 API
+export async function signup({
+  email,
+  password,
+  nickname,
+}) {
+  const response = await api.post("/auth/signup", {
+    email,
+    password,
+    nickname,
+  });
+
   return response.data;
 }

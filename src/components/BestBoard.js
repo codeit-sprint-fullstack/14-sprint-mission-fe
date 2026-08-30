@@ -32,7 +32,6 @@ export default function BestBoard() {
             <div className={styles.bestMark}>
               <img
                 src="/assets/ic_medal.png"
-                alt=""
               />
               <p>Best</p>
             </div>

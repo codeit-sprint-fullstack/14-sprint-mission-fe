@@ -4,16 +4,20 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .itemsTopWrap .subTitle {
   margin-bottom: 0;
 }
+
 .itemsTopRight {
   display: flex;
   align-items: center;
 }
+
 .itemsSearch {
   margin-right: 12px;
 }
+
 .itemsSearch input {
   padding-left: 44px;
   padding-right: 16px;
@@ -34,16 +38,20 @@
   flex-wrap: wrap;
   margin-top: 24px;
 }
+
 .itemContents {
   width: calc((100% - 96px)/5);
   margin-right: 24px;
 }
+
 .itemContents:nth-child(5n) {
   margin-right: 0;
 }
+
 .itemContents:nth-child(n + 6) {
   margin-top: 40px;
 }
+
 .itemContents .itemImgWrap {
   position: relative;
   width: 100%;
@@ -67,12 +75,14 @@
   object-position: center;
 }
 
-.itemTextWrap{
+.itemTextWrap {
   margin-top: 16px;
 }
+
 .itemTit {
   font-size: 14px;
 }
+
 .itemPrice {
   font-weight: 700;
   font-size: 16px;
@@ -87,6 +97,7 @@
   align-items: center;
   font-size: 16px;
 }
+
 .itemFavWrap img {
   width: 16px;
   margin-right: 8px;
@@ -98,10 +109,98 @@
   flex-wrap: wrap;
   margin-top: 24px;
 }
+
 .bestItemContentsWrap .itemContents {
   width: calc((100% - 72px)/4);
   margin-right: 24px;
 }
+
 .bestItemContentsWrap .itemContents:nth-child(4n) {
   margin-right: 0;
+}
+
+/* 상품 등록하기 */
+.hidden {
+  display: none;
+  font-size: 0;
+}
+.registerTit {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.itemRegistWrap .registerImgWrap {
+  display: flex;
+  gap: 24px;
+}
+
+.imgRegisterBtnWrap {
+  /* 4개 배치 + gap 24px */
+  width: calc((100% - 72px) / 4);
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+
+}
+
+.imgRegisterBtn {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.imgRegisterTxt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #9CA3AF;
+}
+
+.imgRegisterTxt img {
+  margin-bottom: 5px;
+  width: 36px;
+}
+
+.registedImgWrap {
+  position: relative;
+  width: calc((100% - 72px)/4);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.registedImgWrap img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.registedImgWrap .btnDelete {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #9CA3AF;
+  border-radius: 99px;
+  background-image: url("../assets/ic_img_delete.png");
+  display: block;
+  z-index: 99;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  top: 10px;
+  right: 10px;
+}
+
+
+.registerInputWrap {
+  margin-top: 32px;
+}
+.registerInput {
+  width: 100%;
+  height:56px;
+  box-sizing: border-box;
+  padding: 0 24px;
 }
