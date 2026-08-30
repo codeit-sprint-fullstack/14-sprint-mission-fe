@@ -6,7 +6,7 @@ import { getProduct, updateProduct } from "@/lib/productApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import ProductEditForm from "../ProductEditForm/ProductEditForm";
+import ProductForm from "../ProductForm/ProductForm";
 
 export default function ProductEdit({ itemId }) {
   const { data: currentUser, isCheckingAuth } = useCurrentUser();
@@ -75,10 +75,11 @@ export default function ProductEdit({ itemId }) {
   return (
     <>
       <h1>상품 수정하기 - {product.name}</h1>
-      <ProductEditForm
+      <ProductForm
         product={product}
         onSubmit={editProduct}
-        isUpdating={isUpdating}
+        isSubmitting={isUpdating}
+        submitLabel="수정하기"
       />
 
       <AlertModal
