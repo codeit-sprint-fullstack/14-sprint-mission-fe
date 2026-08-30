@@ -1,0 +1,38 @@
+.dim {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.modalWrap {
+  position: fixed;
+  text-align: center;
+  width: 80%;
+  max-width: 540px;
+  padding: 70px 24px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 65;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.modalWrap .modalTxt {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.modalWrap .btnModal {
+  width: 165px;
+  height: 48px;
+  color: #fff;
+  font-weight: 600;
+  background-color:#3692FF ;
+  border-radius: 8px;
+  box-sizing: border-box;
+}

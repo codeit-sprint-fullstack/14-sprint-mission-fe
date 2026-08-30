@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+// ========================
+// 게시글
+// ========================
+
+model Article {
+  id        String           @id @default(uuid())
+  title     String
+  content   String
+  image     String?
+  likeCount Int              @default(0)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  comments  ArticleComment[]
+}
+
+
+// ========================
+// 게시글 댓글
+// ========================
+
+model ArticleComment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 어떤 게시글의 댓글인지
+  articleId String
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+}
+
+
+// ========================
+// 사용자
+// ========================
+
+model User {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  nickname          String
+  image             String?
+  encryptedPassword String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // 사용자가 등록한 상품
+  products Product[]
+
+  // 사용자가 누른 상품 좋아요
+  productLike ProductLike[]
+
+  // 사용자가 작성한 상품 댓글
+  productComments ProductComment[]
+}
+
+
+// ========================
+// 상품
+// ========================
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Int
+  likeCount   Int      @default(0)
+  images      String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 상품 등록자
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  // 상품 댓글
+  comments ProductComment[]
+
+  // 상품 좋아요
+  productLike ProductLike[]
+}
+
+
+// ========================
+// 상품 댓글
+// ========================
+
+model ProductComment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 어떤 상품의 댓글인지
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  // 댓글 작성자
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+}
+
+
+// ========================
+// 상품 좋아요
+// ========================
+
+model ProductLike {
+  // 누가 좋아요를 눌렀는지
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 어떤 상품에 좋아요를 눌렀는지
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  // 같은 사용자가 같은 상품에 중복 좋아요를 누르지 못하게 함
+  @@id([userId, productId])
+}
