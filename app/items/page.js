@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { getProducts } from "../../lib/api/products";
 import ItemCard from "./_components/ItemCard";
 
 const PAGE_SIZE = 10;
@@ -13,13 +15,51 @@ export default function ItemsPage() {
   const [orderBy, setOrderBy] = useState("recent");
   const [page, setPage] = useState(1);
 
-  // 다음 단계에서 React Query가 반환한 값으로 교체합니다.
-  const items = [];
-  const totalCount = 0;
+  // 판매 중인 상품 목록
+  const { data, isPending, isError } = useQuery({
+    queryKey: ["products", page, orderBy, keyword],
+    queryFn: () =>
+      getProducts({
+        page,
+        pageSize: PAGE_SIZE,
+        orderBy,
+        keyword,
+      }),
+  });
+
+  // 좋아요가 많은 베스트 상품 4개
+  const {
+    data: bestData,
+    isPending: isBestPending,
+    isError: isBestError,
+  } = useQuery({
+    queryKey: ["products", "best"],
+    queryFn: () =>
+      getProducts({
+        page: 1,
+        pageSize: 4,
+        orderBy: "favorite",
+        keyword: "",
+      }),
+  });
+
+  const items = data?.list ?? [];
+  const bestItems = bestData?.list ?? [];
+
+  const totalCount = data?.totalCount ?? 0;
   const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
+
+  if (isPending || isBestPending) {
+    return <main>상품을 불러오는 중입니다.</main>;
+  }
+
+  if (isError || isBestError) {
+    return <main>상품 목록을 불러오지 못했습니다.</main>;
+  }
 
   function handleSearch(event) {
     event.preventDefault();
+
     setKeyword(searchInput.trim());
     setPage(1);
   }
@@ -37,6 +77,23 @@ export default function ItemsPage() {
 
   return (
     <main>
+      <section>
+        <h1>베스트 상품</h1>
+
+        <div className="best-items">
+          {bestItems.map((item) => (
+            <ItemCard
+              type="best"
+              key={item.id}
+              images={item.images}
+              name={item.name}
+              price={item.price}
+              favoriteCount={item.favoriteCount}
+            />
+          ))}
+        </div>
+      </section>
+
       <section className="selling-line">
         <h1 className="title">판매중인 상품</h1>
 
@@ -47,6 +104,7 @@ export default function ItemsPage() {
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}
           />
+
           <button type="submit">검색</button>
         </form>
 

@@ -1,0 +1,92 @@
+model User {
+  id                String        @id @default(uuid())
+  email             String        @unique
+  nickname          String
+  image             String?
+  encryptedPassword String
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  products          Product[]
+  productLikes      ProductLike[]
+  articles          Article[]
+  articleLikes      ArticleLike[]
+  comments          Comment[]
+}
+
+model Product {
+  id            String         @id @default(uuid())
+  name          String
+  description   String
+  price         Int
+  tags          String[]
+  images        ProductImage[]
+  favoriteCount Int            @default(0)
+  likes         ProductLike[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String
+  comments      Comment[]
+}
+
+model ProductLike {
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  createdAt DateTime @default(now())
+
+  @@id([userId, productId])
+}
+
+model ProductImage {
+  id        String   @id @default(uuid())
+  path      String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  createdAt DateTime @default(now())
+}
+
+model Article {
+  id            String        @id @default(uuid())
+  title         String
+  content       String
+  favoriteCount Int           @default(0)
+  likes         ArticleLike[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String
+  comments      Comment[]
+}
+
+model ArticleLike {
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId String
+  createdAt DateTime @default(now())
+
+  @@id([userId, articleId])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  article   Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String?
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}

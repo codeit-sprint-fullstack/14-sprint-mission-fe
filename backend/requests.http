@@ -1,0 +1,156 @@
+@baseUrl = http://localhost:3001
+
+// 회원가입
+###
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "nickname": "테스트",
+  "password": "password1234"
+}
+
+
+// 로그인
+###
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password1234"
+}
+
+// 상품 등록
+###
+POST {{baseUrl}}/products
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "name": "삭제 테스트용",
+  "description": "본문",
+  "price": 1000,
+  "tags": ["애플"],
+  "images": []
+}
+
+###
+GET {{baseUrl}}/products
+
+###
+GET {{baseUrl}}/products?page=1&pageSize=10&orderBy=favorite
+
+
+### 상품 목록 조회
+GET {{baseUrl}}/products?page=1&pageSize=10&orderBy=recent&keyword=맥북
+
+### 
+GET {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318
+
+
+###
+PATCH {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "price": 790000
+}
+
+### 상품 삭제
+DELETE {{baseUrl}}/products/3b3251ca-2a4a-4a82-81aa-f7fee03bb94e
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+
+### 상품 좋아요 추가
+POST {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318/likes
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+### 상품 좋아요 취소
+DELETE {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318/likes
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+### 상품 이미지 업로드
+POST {{baseUrl}}/uploads/images
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: multipart/form-data; boundary=UploadBoundary
+
+--UploadBoundary
+Content-Disposition: form-data; name="images"; filename="ic_heart.png"
+Content-Type: image/png
+
+< ../public/images/ic_heart.png
+--UploadBoundary--
+
+### 이미지가 포함된 상품 등록
+POST {{baseUrl}}/products
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "name": "이미지 테스트 상품",
+  "description": "업로드 이미지가 연결된 상품입니다.",
+  "price": 10000,
+  "tags": ["테스트"],
+  "images": [
+    "/uploads/5f8847fd-1b88-4faf-adbf-d67a53f3bda9.png"
+  ]
+}
+
+
+# 댓글
+### 상품 댓글 등록
+POST {{baseUrl}}/products/bc8005a0-61ff-43a7-97f0-76ef09603318/comments
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "content": "상품 댓글 등록 테스트입니다2."
+}
+
+### 상품 댓글 수정
+PATCH {{baseUrl}}/comments/4
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "content": "수정된 상품 댓글입니다."
+}
+
+### 상품 댓글 삭제
+DELETE {{baseUrl}}/comments/3
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+
+
+// ARTICLES
+###
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "title": "글 테스트입니다",
+  "content": "글 테스트입니다.",
+  "userId": "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317"
+}
+
+###
+GET {{baseUrl}}/articles
+
+###
+GET {{baseUrl}}/articles?sort=recent&count=10
+
+###
+PATCH {{baseUrl}}/articles/87350587-f132-4342-a4da-48a107801085
+Content-Type: application/json
+
+{
+  "title": "PATCH 게시글 제목입니다",
+  "content": "PATCH 테스트 본문입니다."
+}
+
+###
+DELETE {{baseUrl}}/articles/5ab3b753-5545-4a44-a990-28d8bfa9d11f
