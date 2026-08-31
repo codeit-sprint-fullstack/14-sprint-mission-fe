@@ -1,0 +1,49 @@
+/* ====================================================================== */
+/* 간편 로그인 */
+/* ====================================================================== */
+
+.easyLogin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 74px;
+  padding: 0 24px;
+  margin-bottom: 24px;
+
+  background-color: var(--Light-blue);
+}
+
+.easyLoginText {
+  margin: 0;
+
+  color: var(--Secondary-800);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.easyLoginIcons {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+}
+
+.easyLoginLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+}
+
+.easyLoginIcon {
+  display: block;
+
+  width: 42px;
+  height: 42px;
+}

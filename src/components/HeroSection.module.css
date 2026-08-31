@@ -1,0 +1,154 @@
+/* ==================================================== */
+/* 메인 페이지 상단 상품 구경 영역 */
+/* ==================================================== */
+.hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 540px;
+
+  background-color: var(--Powder-Blue);
+}
+
+/* ==================================================== */
+/* Hero 문구와 버튼 영역 */
+/* ==================================================== */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 110px 0 0;
+}
+
+/* ==================================================== */
+/* Hero 메인 문구 */
+/* ==================================================== */
+.title {
+  margin: 0 0 32px;
+
+  color: var(--Secondary-700);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+/* ==================================================== */
+/* 상품 구경 버튼 영역 */
+/* ==================================================== */
+.buttonGroup {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  gap: 8px;
+}
+
+/* ==================================================== */
+/* 중고마켓으로 이동하는 버튼 */
+/* ==================================================== */
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 357px;
+  height: 56px;
+
+  border: none;
+  border-radius: 40px;
+
+  color: var(--Cool-Gray-100);
+  background-color: var(--brand-blue);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  text-decoration: none;
+}
+
+/* ==================================================== */
+/* Hero 판다 이미지 */
+/* ==================================================== */
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 746px;
+  height: 340px;
+
+  margin: 200px 0 0;
+}
+
+/* ==================================================== */
+/* 태블릿 */
+/* ==================================================== */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .hero {
+    height: auto;
+    padding: 48px 24px;
+  }
+
+  .image {
+    width: 344px;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ==================================================== */
+/* 모바일 */
+/* ==================================================== */
+@media (max-width: 743px) {
+  .hero {
+    flex-direction: column;
+
+    height: auto;
+    padding: 100px 16px 48px;
+
+    gap: 24px;
+    box-sizing: border-box;
+  }
+
+  .content {
+    align-items: center;
+
+    width: 100%;
+    padding: 0;
+
+    text-align: center;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .buttonGroup {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 357px;
+  }
+
+  .image {
+    width: calc(100vw - 32px);
+    max-width: 100%;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+  }
+}

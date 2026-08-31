@@ -1,40 +1,164 @@
-/* 모든 페이지의 위쪽에 표시되는 공통 Header. */
-.header {
-  width: 100%;
-
-  /* 공통 팔레트의 회색 테두리 색상을 사용 */
-  border-bottom: 1px solid var(--Secondary-200);
-
-  /* 공통 팔레트의 흰색 배경을 사용 */
-  background-color: var(--White-color);
+/* Header에서 사용할 로고 폰트 */
+@font-face {
+  font-family: "ROKAF_M";
+  src: url("/font/ROKAF_M.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
 }
 
-/* Header 안의 콘텐츠 너비와 정렬을 담당 */
+/* 모든 페이지 위쪽에 표시되는 공통 Header */
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--border-line);
+  background-color: var(--WhiteGray-color);
+}
+
+/* Header 내부 콘텐츠 정렬 */
 .inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   width: min(calc(100% - 48px), 1200px);
   height: 70px;
   margin: 0 auto;
 }
 
-/* 메인 페이지로 이동하는 판다마켓 로고 영역 */
+/* 로고와 메뉴를 묶는 왼쪽 영역 */
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* 판다마켓 로고 영역 */
 .logo {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+}
+
+/* 판다 얼굴 이미지 */
+.pandaFace {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+
+/* 판다마켓 로고 글자 */
+.logoText {
   color: var(--brand-blue);
-  font-size: 24px;
+
+  font-family: "ROKAF_M", Pretendard, Arial, sans-serif;
+  font-size: 26px;
   font-weight: 700;
 }
 
-/* 자유게시판으로 이동하는 메뉴 링크 */
-.navigationLink {
-  color: var(--Secondary-600);
-  font-size: 16px;
-  font-weight: 600;
+/* 자유게시판과 중고마켓 메뉴 영역 */
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
-/* 키보드 또는 마우스로 링크를 가리켰을 때 강조 */
+/* Header 메뉴 공통 스타일 */
+.navigationLink {
+  color: var(--Secondary-600);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* 현재 보고 있는 메뉴 강조 */
+.activeNavigationLink {
+  color: var(--brand-blue);
+}
+
+/* 링크에 마우스 또는 키보드 포커스 적용 */
 .navigationLink:hover,
 .navigationLink:focus-visible {
   color: var(--brand-blue);
+}
+
+/* 로그인 버튼 영역 */
+.loginArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+/* 로그인 버튼 */
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 128px;
+  height: 48px;
+
+  border-radius: 8px;
+
+  color: var(--Cool-Gray-100);
+  background-color: var(--brand-blue);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* 태블릿: 744px부터 1199px까지 */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .inner {
+    width: calc(100% - 48px);
+  }
+
+  .headerLeft {
+    gap: 24px;
+  }
+
+  .navigation {
+    gap: 16px;
+  }
+}
+
+
+/* 모바일: 743px 이하 */
+@media (max-width: 743px) {
+  .inner {
+    width: calc(100% - 32px);
+  }
+
+  .headerLeft {
+    gap: 16px;
+  }
+
+  .navigation {
+    gap: 12px;
+  }
+
+  .navigationLink {
+    font-size: 13px;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+
+  .pandaFace {
+    width: 32px;
+    height: 32px;
+  }
+
+  .loginButton {
+    width: 80px;
+    height: 40px;
+
+    font-size: 14px;
+  }
 }

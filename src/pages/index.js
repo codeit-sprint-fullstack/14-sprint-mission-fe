@@ -1,5 +1,12 @@
 import Head from "next/head";
 
+import HeroSection from "@/components/HeroSection";
+import HotItem from "@/components/HotItem";
+import SearchSection from "@/components/SearchSection";
+import SalesSection from "@/components/SalesSection";
+import BottomBanner from "@/components/BottomBanner";
+import Footer from "@/components/Footer";
+
 // "/" 주소로 접속했을 때 보여주는 메인 페이지 컴포넌트
 export default function Home() {
   return (
@@ -9,14 +16,17 @@ export default function Home() {
         <title>판다마켓</title>
         <meta
           name="description"
-          content="판다마켓 자유게시판 미션 페이지"
+          content="판다마켓"
         />
       </Head>
 
-      {/* 임시 메인페이지 */}
       <main>
-        <h1>판다마켓</h1>
-        <p>판다마켓 임시 메인페이지</p>
+        <HeroSection />
+        <HotItem />
+        <SearchSection />
+        <SalesSection />
+        <BottomBanner />
+        <Footer />
       </main>
     </>
   );

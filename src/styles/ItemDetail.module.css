@@ -1,0 +1,595 @@
+.itemDetail {
+  min-height: calc(100vh - 231px);
+  padding: 32px 24px 80px;
+  background-color: var(--White-color);
+}
+
+.itemDetailContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.itemDetailCard {
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+/* ====================================================================== */
+/* 상품 상세 상단 */
+/* ====================================================================== */
+
+.itemDetailTop {
+  display: grid;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--Cool-Gray-200);
+  grid-template-columns: 486px minmax(0, 1fr);
+  gap: 24px;
+}
+
+.itemDetailInfo {
+  position: relative;
+  min-width: 0;
+}
+
+/* ====================================================================== */
+/* 상품 수정/삭제 메뉴 */
+/* ====================================================================== */
+
+.productMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.productMenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  border: none;
+
+  color: var(--Secondary-400);
+  background-color: transparent;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+
+  cursor: pointer;
+}
+
+.productMenuDropdown {
+  position: absolute;
+  top: 32px;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 140px;
+
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 8px;
+
+  background-color: var(--White-color);
+
+  overflow: hidden;
+  z-index: 10;
+}
+
+.productMenuDropdown button {
+  width: 100%;
+  padding: 12px 16px;
+
+  border: none;
+
+  color: var(--Secondary-700);
+  background-color: var(--White-color);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.productMenuDropdown button:hover {
+  background-color: var(--Cool-Gray-50);
+}
+
+.itemDetailImage {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 0;
+
+  border-radius: 16px;
+
+  background-color: var(--Cool-Gray-50);
+
+  object-fit: cover;
+}
+
+.itemDetailTitle {
+  margin: 0 0 12px;
+
+  color: var(--Secondary-900);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.itemDetailPrice {
+  margin: 0 0 24px;
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid var(--Cool-Gray-200);
+
+  color: var(--Secondary-900);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.itemDetailSection {
+  margin-top: 24px;
+}
+
+.itemDetailSectionTitle {
+  margin: 0 0 8px;
+
+  color: var(--Secondary-900);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.itemDetailDescription {
+  margin: 0;
+
+  color: var(--Secondary-700);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.itemDetailTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.itemDetailTag {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 36px;
+  padding: 6px 16px;
+
+  border-radius: 18px;
+
+  background-color: var(--Cool-Gray-100);
+  color: var(--Secondary-600);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.itemDetailMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 40px;
+}
+
+.itemDetailOwner {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.itemDetailOwnerImage {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  background-color: var(--Cool-Gray-100);
+
+  object-fit: cover;
+}
+
+.itemDetailOwnerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemDetailOwnerNickname {
+  margin: 0;
+
+  color: var(--Secondary-600);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.itemDetailFavoriteCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 12px;
+
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 18px;
+
+  color: var(--Secondary-600);
+  background-color: var(--White-color);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+
+  gap: 4px;
+
+  cursor: pointer;
+}
+
+.itemDetailFavoriteIcon {
+  width: 18px;
+  height: 18px;
+
+  object-fit: contain;
+}
+
+.itemDetailFavoriteCount:disabled {
+  cursor: not-allowed;
+}
+
+.itemDetailFavoriteCount:disabled {
+  cursor: not-allowed;
+}
+
+.itemDetailStatus {
+  margin: 80px 0;
+
+  color: var(--Secondary-600);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+.itemDetailError {
+  color: var(--error-red);
+}
+
+/* ====================================================================== */
+/* 상품 문의 영역 */
+/* ====================================================================== */
+
+.commentSection {
+  margin-top: 48px;
+}
+
+.commentSectionTitle {
+  margin: 0 0 16px;
+
+  color: var(--Secondary-900);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.commentTextarea {
+  display: block;
+
+  width: 100%;
+  min-height: 112px;
+  padding: 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: var(--Cool-Gray-50);
+  color: var(--Secondary-800);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+
+  resize: none;
+}
+
+.commentTextarea::placeholder {
+  color: var(--Secondary-400);
+}
+
+/* 상품 문의 등록 버튼 */
+.commentSubmitButton {
+  display: block;
+
+  width: 80px;
+  height: 48px;
+  margin: 16px 0 0 auto;
+  padding: 0;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--brand-blue);
+  color: var(--White-color);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+
+  cursor: pointer;
+}
+
+/* 문의 내용이 없거나 등록 요청 중일 때 비활성화 상태 표시 */
+.commentSubmitButton:disabled {
+  background-color: var(--Secondary-400);
+
+  cursor: not-allowed;
+}
+
+/* ====================================================================== */
+/* 상품 문의 없음 상태 */
+/* ====================================================================== */
+
+.commentEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 40px;
+}
+
+.commentEmptyImage {
+  display: block;
+
+  width: 196px;
+  height: auto;
+
+  object-fit: contain;
+}
+
+.commentEmptyMessage {
+  margin: 16px 0 0;
+
+  color: var(--Secondary-400);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+}
+
+
+/* ====================================================================== */
+/* 상품 문의 작성자 */
+/* ====================================================================== */
+
+.commentWriter {
+  display: flex;
+  align-items: center;
+
+  margin-top: 24px;
+
+  gap: 8px;
+}
+
+.commentWriterImage {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  background-color: var(--Cool-Gray-100);
+
+  object-fit: cover;
+}
+
+.commentWriterNickname {
+  margin: 0;
+
+  color: var(--Secondary-600);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.commentWriterInfo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.commentCreatedAt {
+  margin: 0;
+
+  color: var(--Secondary-400);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+/* ====================================================================== */
+/* 상품 문의 한 개 */
+/* ====================================================================== */
+
+.commentItem {
+  position: relative;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--Cool-Gray-200);
+}
+
+.commentContent {
+  margin: 0;
+
+  padding-right: 40px;
+
+  color: var(--Secondary-800);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.commentMenuButton {
+  position: absolute;
+  top: 24px;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  border: none;
+
+  color: var(--Secondary-400);
+  background-color: transparent;
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+
+  cursor: pointer;
+}
+
+.commentMenuDropdown {
+  position: absolute;
+  top: 56px;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 140px;
+
+  border: 1px solid var(--Cool-Gray-200);
+  border-radius: 8px;
+
+  background-color: var(--White-color);
+
+  overflow: hidden;
+  z-index: 10;
+}
+
+.commentMenuDropdown button {
+  width: 100%;
+  padding: 12px 16px;
+
+  border: none;
+
+  color: var(--Secondary-700);
+  background-color: var(--White-color);
+
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.commentMenuDropdown button:hover {
+  background-color: var(--Cool-Gray-50);
+}
+
+.commentMenuDropdown button:disabled {
+  cursor: not-allowed;
+}
+
+/* ====================================================================== */
+/* 상품 목록으로 돌아가기 */
+/* ====================================================================== */
+
+.backToListButton {
+  display: block;
+
+  margin: 40px auto 0;
+  padding: 0;
+
+  border: none;
+
+  background-color: transparent;
+
+  cursor: pointer;
+}
+
+.backToListButtonImage {
+  display: block;
+
+  width: 240px;
+  height: 48px;
+}
+
+/* 모바일 */
+@media (max-width: 743px) {
+  .itemDetail {
+    padding: 32px 16px 64px;
+  }
+
+  .itemDetailCard {
+    padding: 24px;
+
+    border-radius: 16px;
+  }
+
+  .itemDetailTitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .itemDetailPrice {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
