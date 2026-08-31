@@ -3,7 +3,7 @@ import MainLogo from "@/public/logo_main_2x.png";
 import styles from "./Header.module.css";
 import Image from "next/image";
 import Nav from "./Nav.jsx";
-// import MainlogoM from "../assets/logo_main_m.png";
+import Login from "./Login";
 
 function Header() {
   return (
@@ -19,9 +19,7 @@ function Header() {
           </h1>
           <Nav />
         </div>
-        <button type="button" className="btStyle">
-          로그인
-        </button>
+        <Login />
       </nav>
     </header>
   );

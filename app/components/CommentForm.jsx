@@ -35,19 +35,11 @@ export default function CommentForm({ comment, onClose, postId }) {
         </div>
         <div className={styles.btnsArea}>
           {onClose && (
-            <button
-              className="btStyle inActive"
-              type="button"
-              onClick={() => onClose()}
-            >
+            <button className="btStyle" type="button" onClick={() => onClose()}>
               취소
             </button>
           )}
-          <button
-            type="submit"
-            className={`btStyle ${!isValid && `inActive`}`}
-            disabled={!isValid}
-          >
+          <button type="submit" className="btStyle" disabled={!isValid}>
             등록
           </button>
         </div>

@@ -1,0 +1,112 @@
+.productsList {
+  max-width: 1200px;
+  margin-bottom: 4rem;
+}
+.productsList .sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 3.2rem;
+}
+
+.sectionTitleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.productsFilter {
+  flex-grow: 1;
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.sectionTitleHeader form {
+  display: flex;
+  justify-content: end;
+  align-items: stretch;
+}
+.searchBox {
+  width: 28.9rem;
+  height: 24px;
+  padding: 0.9rem 2rem 0.9rem 1.6rem;
+  background-color: #f3f4f6;
+  color: #000;
+  border-radius: 1.2rem;
+  font-weight: 400;
+  line-height: 2.6rem;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  box-sizing: content-box;
+}
+.searchBox svg {
+  vertical-align: middle;
+}
+.searchBox input {
+  background-color: transparent;
+  width: 100%;
+}
+.searchBox input:focus {
+  outline: none;
+}
+.searchBox input::placeholder {
+  color: #9ca3af;
+}
+.btSearch {
+  background-color: var(--color-text-base);
+}
+
+/* @media (max-width:1024px) {
+  .productsList.all{
+    min-width: 100%;
+  }
+  .productsList.all .grid{
+    gap: 1rem;
+    grid-template-columns: repeat(3, 2fr);
+    row-gap: 4rem;
+  }
+  .sectionTitleHeader{
+    align-items:start;
+  }
+  .sectionTitleHeader .sectionTitle{
+    padding-top: 6px;
+    flex-basis: 205px;
+  }
+  .productsFilter .searchBox{
+    max-width: 20.6rem;
+  }
+}
+
+@media (max-width:480px) {
+  .productsList.all{
+    min-width: 100%;
+  }
+  .productsList.all .grid{
+    grid-template-columns: repeat(2, 2fr);
+    row-gap: 3.2rem;
+  }
+  .sectionTitleHeader {
+    flex-wrap: wrap;
+    gap: .8rem;
+  }
+  .sectionTitleHeader .sectionTitle{
+    flex-shrink: 1;
+  }
+  .productsSearchM{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.2rem;
+    width: 100%;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  .productsSearchM form{
+    flex-grow: 1;
+  }
+  .searchBox{
+    width: 100%;
+  }
+  .btSearch{
+    flex-shrink: 0;
+  }
+} */

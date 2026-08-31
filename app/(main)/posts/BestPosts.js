@@ -2,12 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import defaultImg from "@/public/default_image.png";
 import badgeIc from "@/public/icon_badge.png";
+import { formatDate } from "@/app/utils/formatDate";
 
 export default async function BestPosts({ className }) {
   const res = await fetch(
-    `${process.env.API_URL}/articles?limit=3&orderBy=recent`,
+    `${process.env.NEXT_PUBLIC_API_URL}/articles?page=1&pageSize=3&orderBy=recent`,
   );
-  const bestPostList = await res.json();
+  const { list: bestPostList } = await res.json();
   return (
     <section className={className}>
       <h2>베스트 게시글</h2>
@@ -38,7 +39,7 @@ export default async function BestPosts({ className }) {
                   <span>말랑판다</span>
                   <span>♡ 9999+</span>
                   <time dateTime={post.createdAt}>
-                    {post.createdAt.slice(0, 10).replaceAll("-", ". ")}
+                    {formatDate(post.createdAt)}
                   </time>
                 </footer>
               </article>

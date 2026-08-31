@@ -13,6 +13,8 @@
   --color-text-footer: #e5e7eb;
   --color-text-inactive: #9ca3af;
   --color-text-button: #f3f4f6;
+
+  --color-error: #f74747;
 }
 
 html,
@@ -188,6 +190,6 @@ main {
   font-weight: 600;
   color: #ffffff;
 }
-.btStyle.inActive {
+.btStyle:disabled {
   background-color: #9ca3af;
 }

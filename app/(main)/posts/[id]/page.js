@@ -7,6 +7,7 @@ import Link from "next/link";
 import profileIc from "@/public/icon_profile.png";
 import backIc from "@/public/ic_back.png";
 import Image from "next/image";
+import { formatDate } from "@/app/utils/formatDate";
 
 export default async function postDetailPage({ params }) {
   const { id } = await params;
@@ -31,7 +32,7 @@ export default async function postDetailPage({ params }) {
               말랑판다
             </span>
             <time dateTime={createdAt}>
-              {createdAt.slice(0, 10).replaceAll("-", ". ")}
+              {formatDate(createdAt)}
             </time>
             <span>♡ 9999+</span>
           </footer>

@@ -1,26 +1,28 @@
 import Link from "next/link";
-import SearchBar from "../components/SearchBar";
-import FilterList from "../components/FilterList";
+import SearchBar from "@/app/components/SearchBar";
+import FilterList from "@/app/components/FilterList";
 import BestPosts from "./BestPosts";
 import defaultImg from "@/public/default_image.png";
 import profileIc from "@/public/icon_profile.png";
 import styles from "./Posts.module.css";
 import Image from "next/image";
+import { formatDate } from "@/app/utils/formatDate";
+import { Suspense } from "react";
 
-export default async function postListPage({ searchParams }) {
+export default async function PostListPage({ searchParams }) {
   const { q, orderBy } = await searchParams;
   const params = new URLSearchParams();
   if (q) params.set("keyword", q);
   if (orderBy) params.set("orderBy", orderBy);
 
   const res = await fetch(
-    `${process.env.API_URL}/articles?${params.toString()}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/articles?${params.toString()}`,
     { cache: "no-store" },
   );
 
   if (!res.ok) throw new Error("결과를 불러오는데 실패했습니다.");
 
-  const postList = await res.json();
+  const { list: postList } = await res.json();
 
   return (
     <div className={styles.posts}>
@@ -35,8 +37,10 @@ export default async function postListPage({ searchParams }) {
           </Link>
         </div>
         <div className={styles.filter}>
-          <SearchBar />
-          <FilterList />
+          <Suspense fallback={<p>불러오는 중...</p>}>
+            <SearchBar />
+            <FilterList />
+          </Suspense>
         </div>
         <ul className={styles.lists}>
           {postList.map((post) => (
@@ -62,7 +66,7 @@ export default async function postListPage({ searchParams }) {
                     말랑판다
                   </span>
                   <time dateTime={post.createdAt}>
-                    {post.createdAt.slice(0, 10).replaceAll("-", ". ")}
+                    {formatDate(post.createdAt)}
                   </time>
                   <span>♡ 9999+</span>
                 </footer>

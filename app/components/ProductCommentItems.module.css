@@ -1,0 +1,44 @@
+.eachCommentArea article {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.eachCommentArea article div:first-child {
+  display: flex;
+  gap: 24px;
+}
+.eachCommentArea article div p {
+  margin-right: auto;
+}
+.eachCommentArea article div p {
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: #1f2937;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: calc(1.5em * 2);
+}
+.profile {
+  display: flex;
+  gap: 8px;
+}
+.profile div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.profile div span {
+  color: #4b5563;
+  font-size: 12px;
+}
+.profile div time {
+  color: #9ca3af;
+  font-size: 12px;
+}

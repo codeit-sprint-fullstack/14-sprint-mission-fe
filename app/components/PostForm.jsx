@@ -23,11 +23,7 @@ export default function PostForm({ post }) {
       <form action={action} className={styles.form}>
         <div className={styles.head}>
           <h2>게시글 쓰기</h2>
-          <button
-            type="submit"
-            className={`btStyle ${!isValid && `inActive`}`}
-            disabled={!isValid}
-          >
+          <button type="submit" className="btStyle" disabled={!isValid}>
             등록
           </button>
         </div>
