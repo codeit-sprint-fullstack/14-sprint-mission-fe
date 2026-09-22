@@ -1,8 +1,7 @@
 import ArticleActionMenu from "@/components/boards/ArticleActionMenu/ArticleActionMenu";
 import ArticleCommentForm from "@/components/boards/ArticleCommentForm/ArticleCommentForm";
-import ArticleCommentItem from "@/components/boards/ArticleCommentItem/ArticleCommentItem";
+import ArticleCommentList from "@/components/boards/ArticleCommentList/ArticleCommentList";
 import Button from "@/components/Button/Button";
-import { DEFAULT_LIKE_COUNT, DEFAULT_NICKNAME } from "@/constants/board";
 import { getArticle } from "@/lib/articleApi";
 import { getArticleComments } from "@/lib/commentApi";
 import { formatDate } from "@/lib/dateUtils";
@@ -27,7 +26,7 @@ export default async function BoardDetailPage({ params }) {
           <div className={styles.titleRow}>
             <h1 className={styles.title}>{article.title}</h1>
 
-            <ArticleActionMenu articleId={id} />
+            <ArticleActionMenu articleId={id} ownerId={article.owner.id} />
           </div>
 
           <div className={styles.meta}>
@@ -39,14 +38,14 @@ export default async function BoardDetailPage({ params }) {
               className={styles.profileImage}
             />
 
-            <span className={styles.nickname}>{DEFAULT_NICKNAME}</span>
+            <span className={styles.nickname}>{article.owner.nickname}</span>
             <time className={styles.date}>{formatDate(article.createdAt)}</time>
 
             <div className={styles.divider} />
 
             <button type="button" className={styles.likes} aria-label="좋아요">
               <Image src="/images/ic_heart.svg" alt="" width={24} height={24} />
-              <span>{DEFAULT_LIKE_COUNT}</span>
+              <span>{article.likeCount}</span>
             </button>
           </div>
         </div>
@@ -58,9 +57,7 @@ export default async function BoardDetailPage({ params }) {
 
       {comments.length > 0 ? (
         <div className={styles.commentList}>
-          {comments.map((comment) => (
-            <ArticleCommentItem key={comment.id} comment={comment} />
-          ))}
+          <ArticleCommentList comments={comments} />
         </div>
       ) : (
         <div className={styles.emptyComments}>

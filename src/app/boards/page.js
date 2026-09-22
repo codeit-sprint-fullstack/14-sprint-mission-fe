@@ -3,7 +3,6 @@ import BestArticleCard from "@/components/boards/BestArticleCard/BestArticleCard
 import BoardSearchForm from "@/components/boards/BoardSearchForm/BoardSearchForm";
 import BoardSortDropdown from "@/components/boards/BoardSortDropdown/BoardSortDropdown";
 import Button from "@/components/Button/Button";
-import { DEFAULT_LIKE_COUNT, DEFAULT_NICKNAME } from "@/constants/board";
 import { getArticles } from "@/lib/articleApi";
 import { formatDate } from "@/lib/dateUtils";
 import styles from "./page.module.css";
@@ -13,7 +12,7 @@ export default async function BoardsPage({ searchParams }) {
 
   const [{ list: articleList }, { list: bestArticleList }] = await Promise.all([
     getArticles({ keyword }),
-    getArticles({ limit: 3 }),
+    getArticles({ pageSize: 3 }),
   ]);
 
   const sortedArticleList =
@@ -26,15 +25,13 @@ export default async function BoardsPage({ searchParams }) {
 
   const articles = sortedArticleList.map((article) => ({
     ...article,
-    nickname: DEFAULT_NICKNAME,
-    likeCount: DEFAULT_LIKE_COUNT,
+    nickname: article.owner.nickname,
     createdAt: formatDate(article.createdAt),
   }));
 
   const bestArticles = bestArticleList.map((article) => ({
     ...article,
-    nickname: DEFAULT_NICKNAME,
-    likeCount: DEFAULT_LIKE_COUNT,
+    nickname: article.owner.nickname,
     createdAt: formatDate(article.createdAt),
   }));
 

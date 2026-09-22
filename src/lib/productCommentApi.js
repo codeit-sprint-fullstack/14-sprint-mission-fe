@@ -33,7 +33,5 @@ export async function updateProductComment(commentId, content) {
 }
 
 export async function deleteProductComment(commentId) {
-  const response = await apiClient.delete(`/comments/${commentId}`);
-
-  return response.data;
+  await apiClient.delete(`/comments/${commentId}`);
 }

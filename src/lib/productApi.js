@@ -85,9 +85,7 @@ export async function updateProduct(productId, productData) {
 }
 
 export async function deleteProduct(productId) {
-  const response = await apiClient.delete(`/products/${productId}`);
-
-  return response.data;
+  await apiClient.delete(`/products/${productId}`);
 }
 
 export async function likeProduct(productId) {

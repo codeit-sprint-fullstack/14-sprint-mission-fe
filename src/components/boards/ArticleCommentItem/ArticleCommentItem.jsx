@@ -1,12 +1,11 @@
 "use client";
 
 import CommentItem from "@/components/comments/CommentItem/CommentItem";
-import { DEFAULT_NICKNAME } from "@/constants/board";
 import useAsyncAction from "@/hooks/useAsyncAction";
 import { deleteArticleComment, updateArticleComment } from "@/lib/commentApi";
 import { useRouter } from "next/navigation";
 
-export default function ArticleCommentItem({ comment }) {
+export default function ArticleCommentItem({ comment, currentUserId }) {
   const router = useRouter();
 
   const {
@@ -54,12 +53,15 @@ export default function ArticleCommentItem({ comment }) {
     router.refresh();
   };
 
+  const canManage = comment.owner.id === currentUserId;
+
   return (
     <CommentItem
       content={comment.content}
       createdAt={comment.createdAt}
-      nickname={DEFAULT_NICKNAME}
-      canManage
+      nickname={comment.owner.nickname}
+      profileImageSrc={comment.owner.image}
+      canManage={canManage}
       onUpdate={handleUpdate}
       onDelete={handleDelete}
       onEditStart={handleEditStart}

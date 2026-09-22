@@ -1,3 +1,5 @@
+import apiClient from "./apiClient";
+
 const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
 
 export async function getArticleComments(articleId) {
@@ -13,43 +15,21 @@ export async function getArticleComments(articleId) {
 }
 
 export async function createArticleComment(articleId, content) {
-  const res = await fetch(`${API_BASE_URL}/articles/${articleId}/comments`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ content }),
+  const response = await apiClient.post(`/articles/${articleId}/comments`, {
+    content,
   });
 
-  if (!res.ok) {
-    throw new Error("댓글을 등록하지 못했습니다.");
-  }
-
-  return res.json();
+  return response.data;
 }
 
 export async function updateArticleComment(commentId, content) {
-  const res = await fetch(`${API_BASE_URL}/comments/${commentId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ content }),
+  const response = await apiClient.patch(`/comments/${commentId}`, {
+    content,
   });
 
-  if (!res.ok) {
-    throw new Error("댓글을 수정하지 못했습니다.");
-  }
-
-  return res.json();
+  return response.data;
 }
 
 export async function deleteArticleComment(commentId) {
-  const res = await fetch(`${API_BASE_URL}/comments/${commentId}`, {
-    method: "DELETE",
-  });
-
-  if (!res.ok) {
-    throw new Error("댓글을 삭제하지 못했습니다.");
-  }
+  await apiClient.delete(`/comments/${commentId}`);
 }
