@@ -182,7 +182,7 @@ async function removeLike(productId, userId) {
   });
 }
 
-export default {
+const productRepository = {
   findAll,
   countAll,
   create,
@@ -193,3 +193,5 @@ export default {
   addLike,
   removeLike,
 };
+
+export default productRepository;

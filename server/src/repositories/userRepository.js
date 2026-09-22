@@ -38,9 +38,11 @@ async function findUserById(userId) {
   });
 }
 
-export default {
+const userRepository = {
   findUserByEmail,
   findExistingUser,
   createUser,
   findUserById,
 };
+
+export default userRepository;

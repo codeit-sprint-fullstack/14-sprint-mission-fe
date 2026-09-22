@@ -185,7 +185,7 @@ async function removeLike(articleId, userId) {
   });
 }
 
-export default {
+const articleRepository = {
   findAll,
   countAll,
   create,
@@ -196,3 +196,5 @@ export default {
   addLike,
   removeLike,
 };
+
+export default articleRepository;

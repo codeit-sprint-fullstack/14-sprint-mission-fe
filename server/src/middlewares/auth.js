@@ -13,4 +13,9 @@ const optionalAccessToken = expressjwt({
   credentialsRequired: false,
 });
 
-export default { verifyAccessToken, optionalAccessToken };
+const auth = {
+  verifyAccessToken,
+  optionalAccessToken,
+};
+
+export default auth;

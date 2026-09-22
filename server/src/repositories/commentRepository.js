@@ -64,10 +64,12 @@ async function deleteById(id) {
   });
 }
 
-export default {
+const commentRepository = {
   createComment,
   findComments,
   findOwnerById,
   updateById,
   deleteById,
 };
+
+export default commentRepository;
