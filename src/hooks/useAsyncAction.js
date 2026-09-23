@@ -1,3 +1,6 @@
+"use client";
+
+import { getApiErrorMessage } from "@/lib/apiError";
 import { useState } from "react";
 
 export default function useAsyncAction(defaultErrorMessage) {
@@ -17,12 +20,15 @@ export default function useAsyncAction(defaultErrorMessage) {
       };
     } catch (error) {
       console.error(error);
-      setErrorMessage(defaultErrorMessage);
+
+      const message = getApiErrorMessage(error, defaultErrorMessage);
+
+      setErrorMessage(message);
 
       return {
         success: false,
         data: null,
-        errorMessage: defaultErrorMessage,
+        errorMessage: message,
       };
     } finally {
       setIsLoading(false);

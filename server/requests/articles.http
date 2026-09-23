@@ -1,0 +1,82 @@
+@baseUrl = http://localhost:3001
+@accessToken = 
+@otherAccessToken = 
+@articleId = 9d48bddb-2aec-453d-8365-dc0acfbada8a
+@deleteArticleId = 
+
+### 게시글 목록 조회
+GET {{baseUrl}}/articles?page=1&pageSize=10
+Authorization: Bearer {{accessToken}}
+
+### 게시글 상세 조회
+GET {{baseUrl}}/articles/{{articleId}}
+Authorization: Bearer {{accessToken}}
+
+### 게시글 등록 - 로그인 사용자
+POST {{baseUrl}}/articles
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "title": "폭풍 저그 콩진호가 간다!",
+  "content": "이번엔 1등이다!"
+}
+
+### 게시글 수정 - 작성자
+PATCH {{baseUrl}}/articles/{{articleId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "title": "수정해 봅시다!",
+  "content": "수정이 됐나요?"
+}
+
+### 게시글 수정 실패 - 다른 사용자
+PATCH {{baseUrl}}/articles/{{articleId}}
+Authorization: Bearer {{otherAccessToken}}
+Content-Type: application/json
+
+{
+  "title": "남의 게시글 수정 시도"
+}
+
+### 게시글 등록 실패 - 비로그인
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "title": "비로그인 게시글",
+  "content": "등록되면 안 됩니다."
+}
+
+### 게시글 삭제 실패 - 다른 사용자
+DELETE {{baseUrl}}/articles/{{articleId}}
+Authorization: Bearer {{otherAccessToken}}
+
+### 게시글 삭제 - 작성자
+DELETE {{baseUrl}}/articles/{{articleId}}
+Authorization: Bearer {{accessToken}}
+
+### 게시글 좋아요
+POST {{baseUrl}}/articles/{{articleId}}/likes
+Authorization: Bearer {{accessToken}}
+
+### 게시글 좋아요 취소
+DELETE {{baseUrl}}/articles/{{articleId}}/likes
+Authorization: Bearer {{accessToken}}
+
+### 게시글 좋아요 실패 - 비로그인
+POST {{baseUrl}}/articles/{{articleId}}/likes
+
+### 게시글 댓글 등록
+POST {{baseUrl}}/articles/{{articleId}}/comments
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "content": "댓글 1등도 나다!"
+}
+
+### 게시글 댓글 목록 조회
+GET {{baseUrl}}/articles/{{articleId}}/comments?limit=10

@@ -1,0 +1,38 @@
+import cors from "cors";
+import "dotenv/config";
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
+import errorHandler from "./middlewares/errorHandler.js";
+import notFoundHandler from "./middlewares/notFoundHandler.js";
+import articlesRouter from "./routes/articles.js";
+import authRouter from "./routes/auth.js";
+import commentsRouter from "./routes/comments.js";
+import productsRouter from "./routes/products.js";
+import usersRouter from "./routes/users.js";
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use("/uploads", express.static("uploads"));
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.get("/", (req, res) => {
+  res.send("Panda Market API server is running.");
+});
+
+app.use("/products", productsRouter);
+app.use("/articles", articlesRouter);
+app.use("/comments", commentsRouter);
+app.use("/auth", authRouter);
+app.use("/users", usersRouter);
+
+app.use(notFoundHandler);
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

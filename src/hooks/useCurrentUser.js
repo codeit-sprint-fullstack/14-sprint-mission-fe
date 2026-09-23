@@ -26,10 +26,13 @@ export default function useCurrentUser() {
   });
 
   const isUnauthorized = query.error?.response?.status === 401;
+  const hasAuthError = query.isError && !isUnauthorized;
 
   return {
     ...query,
     data: isUnauthorized ? null : query.data,
+    isUnauthorized,
+    hasAuthError,
     isCheckingAuth: query.isPending || (query.isFetching && query.data == null),
   };
 }

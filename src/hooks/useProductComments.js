@@ -11,7 +11,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 const COMMENT_LIMIT = 10;
 
 export default function useProductComments(productId) {
-  const { data, isPending, isError } = useQuery({
+  const {
+    data,
+    isPending,
+    isError,
+    error: commentsError,
+  } = useQuery({
     queryKey: ["productComments", productId, { limit: COMMENT_LIMIT }],
     queryFn: () =>
       getProductComments({
@@ -29,6 +34,7 @@ export default function useProductComments(productId) {
     mutateAsync: createComment,
     isPending: isCreating,
     isError: isCreateError,
+    error: createError,
   } = useMutation({
     mutationFn: (content) => createProductComment(productId, content),
     onSuccess: async () => {
@@ -42,6 +48,7 @@ export default function useProductComments(productId) {
     mutateAsync: updateComment,
     isPending: isUpdating,
     isError: isUpdateError,
+    error: updateError,
     variables: updatingComment,
   } = useMutation({
     mutationFn: ({ commentId, content }) =>
@@ -57,6 +64,7 @@ export default function useProductComments(productId) {
     mutateAsync: deleteComment,
     isPending: isDeleting,
     isError: isDeleteError,
+    error: deleteError,
     variables: deletingCommentId,
   } = useMutation({
     mutationFn: (commentId) => deleteProductComment(commentId),
@@ -102,16 +110,23 @@ export default function useProductComments(productId) {
     comments,
     isPending,
     isError,
+    commentsError,
+
     handleCreateComment,
     isCreating,
     isCreateError,
+    createError,
+
     handleUpdateComment,
     isUpdating,
     isUpdateError,
+    updateError,
     updatingComment,
+
     handleDeleteComment,
     isDeleting,
     isDeleteError,
+    deleteError,
     deletingCommentId,
   };
 }

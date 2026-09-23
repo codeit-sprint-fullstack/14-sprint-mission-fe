@@ -1,0 +1,63 @@
+@baseUrl = http://localhost:3001
+@accessToken = 
+@otherAccessToken = 
+@commentId = f54715e6-a3b8-4271-a88d-a23cba2260d9
+
+### 댓글 수정 - 비로그인
+PATCH {{baseUrl}}/comments/{{commentId}}
+Content-Type: application/json
+
+{
+  "content": "진짜 뉴질랜드 공기 맞음?"
+}
+
+### 댓글 수정 - 빈 내용
+PATCH {{baseUrl}}/comments/{{commentId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "content": "   "
+}
+
+### 댓글 수정 - 존재하지 않는 댓글
+PATCH {{baseUrl}}/comments/11111
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "content": "진짜 뉴질랜드 공기 맞음?"
+}
+
+### 댓글 수정 - 작성자 본인
+PATCH {{baseUrl}}/comments/{{commentId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "content": "진짜 뉴질랜드 공기 맞음?"
+}
+
+### 댓글 수정 - 다른 사용자
+PATCH {{baseUrl}}/comments/{{commentId}}
+Authorization: Bearer {{otherAccessToken}}
+Content-Type: application/json
+
+{
+  "content": "남의 댓글 수정 도전!"
+}
+
+### 댓글 삭제 - 비로그인
+DELETE {{baseUrl}}/comments/{{commentId}}
+
+### 댓글 삭제 - 다른 사용자
+DELETE {{baseUrl}}/comments/{{commentId}}
+Authorization: Bearer {{otherAccessToken}}
+
+### 댓글 삭제 - 존재하지 않는 댓글
+DELETE {{baseUrl}}/comments/11111
+Authorization: Bearer {{accessToken}}
+
+### 댓글 삭제 - 작성자 본인
+DELETE {{baseUrl}}/comments/{{commentId}}
+Authorization: Bearer {{accessToken}}

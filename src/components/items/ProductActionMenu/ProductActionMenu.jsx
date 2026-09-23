@@ -3,6 +3,7 @@
 import AlertModal from "@/components/AlertModal/AlertModal";
 import ConfirmModal from "@/components/ConfirmModal/ConfirmModal";
 import Dropdown from "@/components/Dropdown/Dropdown";
+import { getApiErrorMessage } from "@/lib/apiError";
 import { deleteProduct } from "@/lib/productApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -60,7 +61,10 @@ export default function ProductActionMenu({ productId }) {
     }
   };
 
-  const deleteErrorMessage = deleteError?.response?.data?.message;
+  const deleteErrorMessage = getApiErrorMessage(
+    deleteError,
+    "상품을 삭제하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
 
   return (
     <>
@@ -80,11 +84,7 @@ export default function ProductActionMenu({ productId }) {
 
       <AlertModal
         isOpen={isDeleteError}
-        message={
-          typeof deleteErrorMessage === "string"
-            ? deleteErrorMessage
-            : "상품을 삭제하지 못했습니다. 잠시 후 다시 시도해 주세요."
-        }
+        message={deleteErrorMessage}
         onClose={resetDelete}
       />
     </>

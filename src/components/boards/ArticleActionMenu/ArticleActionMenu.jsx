@@ -2,10 +2,12 @@
 
 import Dropdown from "@/components/Dropdown/Dropdown";
 import useAsyncAction from "@/hooks/useAsyncAction";
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { deleteArticle } from "@/lib/articleApi";
 import { useRouter } from "next/navigation";
 
-export default function ArticleActionMenu({ articleId }) {
+export default function ArticleActionMenu({ articleId, ownerId }) {
+  const { data: currentUser } = useCurrentUser();
   const router = useRouter();
 
   const { execute: executeDelete, isLoading: isDeleting } = useAsyncAction(
@@ -43,6 +45,12 @@ export default function ArticleActionMenu({ articleId }) {
       handleDelete();
     }
   };
+
+  const canManage = currentUser?.id === ownerId;
+
+  if (!canManage) {
+    return null;
+  }
 
   return (
     <Dropdown

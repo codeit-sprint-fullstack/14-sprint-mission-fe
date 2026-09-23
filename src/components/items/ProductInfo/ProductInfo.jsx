@@ -1,11 +1,12 @@
 import { formatDate } from "@/lib/dateUtils";
+import { getProductImageUrl } from "@/lib/productImageUtils";
 import Image from "next/image";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import ProductActionMenu from "../ProductActionMenu/ProductActionMenu";
 import styles from "./ProductInfo.module.css";
 
 export default function ProductInfo({ product, isOwner }) {
-  const imageUrl = product.images?.[0] || "/images/img_default.png";
+  const imageUrl = getProductImageUrl(product.images?.[0]);
 
   return (
     <section className={styles.productInfo}>
@@ -58,7 +59,7 @@ export default function ProductInfo({ product, isOwner }) {
             <Image src="/images/ic_profile.svg" alt="" width={40} height={40} />
 
             <div className={styles.sellerText}>
-              <span className={styles.nickname}>{product.ownerNickname}</span>
+              <span className={styles.nickname}>{product.owner.nickname}</span>
               <time className={styles.date}>
                 {formatDate(product.createdAt)}
               </time>
@@ -68,8 +69,8 @@ export default function ProductInfo({ product, isOwner }) {
           <div className={styles.favoriteArea}>
             <FavoriteButton
               productId={product.id}
-              isFavorite={product.isFavorite}
-              favoriteCount={product.favoriteCount}
+              isLiked={product.isLiked}
+              likeCount={product.likeCount}
             />
           </div>
         </div>

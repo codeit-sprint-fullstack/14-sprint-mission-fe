@@ -9,7 +9,7 @@ import styles from "./NavBar.module.css";
 
 export default function NavBar() {
   const pathname = usePathname();
-  const { data: currentUser, isCheckingAuth } = useCurrentUser();
+  const { data: currentUser, isCheckingAuth, hasAuthError } = useCurrentUser();
 
   const isBoardsActive =
     pathname === "/boards" || pathname.startsWith("/boards/");
@@ -52,6 +52,7 @@ export default function NavBar() {
 
         <div className={styles.actions}>
           {!isCheckingAuth &&
+            !hasAuthError &&
             (currentUser ? (
               <Link href="/me" className={styles.profile}>
                 <Image

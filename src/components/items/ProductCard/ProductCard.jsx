@@ -1,11 +1,12 @@
 "use client";
 
+import { getProductImageUrl } from "@/lib/productImageUtils";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./ProductCard.module.css";
 
 export default function ProductCard({ product }) {
-  const imageUrl = product.images?.[0] || "/images/img_default.png";
+  const imageUrl = getProductImageUrl(product.images?.[0]);
 
   function handleImageError(event) {
     event.currentTarget.src = "/images/img_default.png";
@@ -31,7 +32,7 @@ export default function ProductCard({ product }) {
 
         <p className={styles.favorite}>
           <Image src="/images/ic_heart.svg" alt="" width={16} height={16} />
-          {product.favoriteCount ?? 0}
+          {product.likeCount ?? 0}
         </p>
       </div>
     </Link>

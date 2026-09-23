@@ -5,6 +5,7 @@ import Dropdown from "@/components/Dropdown/Dropdown";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchInput from "@/components/SearchInput/SearchInput";
 import useResponsiveValue from "@/hooks/useResponsiveValue";
+import { getApiErrorMessage } from "@/lib/apiError";
 import { getProducts } from "@/lib/productApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,7 +15,7 @@ import styles from "./ProductList.module.css";
 
 const SORT_OPTIONS = [
   { label: "최신순", value: "recent" },
-  { label: "좋아요순", value: "favorite" },
+  { label: "좋아요순", value: "likes" },
 ];
 
 export default function ProductList({
@@ -39,7 +40,12 @@ export default function ProductList({
 
   const page = pagination.pageSize === pageSize ? pagination.page : 1;
 
-  const { data, isPending, isError } = useQuery({
+  const {
+    data,
+    isPending,
+    isError,
+    error: productsError,
+  } = useQuery({
     queryKey: [
       "products",
       "list",
@@ -108,6 +114,11 @@ export default function ProductList({
   const products = data?.list ?? [];
   const totalCount = data?.totalCount ?? 0;
 
+  const productsErrorMessage = getApiErrorMessage(
+    productsError,
+    "상품을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
+
   return (
     <section className={styles.section}>
       <div className={styles.header}>
@@ -137,7 +148,7 @@ export default function ProductList({
       {isPending ? (
         <p className={styles.status}>상품을 불러오는 중입니다...</p>
       ) : isError ? (
-        <p className={styles.status}>상품을 불러오지 못했습니다.</p>
+        <p className={styles.status}>{productsErrorMessage}</p>
       ) : products.length === 0 ? (
         <p className={styles.status}>상품이 없습니다.</p>
       ) : (

@@ -4,12 +4,18 @@
 
 import Button from "@/components/Button/Button";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { getApiErrorMessage } from "@/lib/apiError";
 import { removeAccessToken } from "@/lib/authToken";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export default function MyPage() {
-  const { data: currentUser, isCheckingAuth } = useCurrentUser();
+  const {
+    data: currentUser,
+    isCheckingAuth,
+    hasAuthError,
+    error: authError,
+  } = useCurrentUser();
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -21,6 +27,15 @@ export default function MyPage() {
 
   if (isCheckingAuth) {
     return null;
+  }
+
+  if (hasAuthError) {
+    const authErrorMessage = getApiErrorMessage(
+      authError,
+      "로그인 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    );
+
+    return <p>{authErrorMessage}</p>;
   }
 
   if (!currentUser) {
