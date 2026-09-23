@@ -1,6 +1,7 @@
 "use client";
 
 import useResponsiveValue from "@/hooks/useResponsiveValue";
+import { getApiErrorMessage } from "@/lib/apiError";
 import { getProducts } from "@/lib/productApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import ProductCard from "../ProductCard/ProductCard";
@@ -13,7 +14,12 @@ export default function BestProducts() {
     desktop: 4,
   });
 
-  const { data, isPending, isError } = useQuery({
+  const {
+    data,
+    isPending,
+    isError,
+    error: productsError,
+  } = useQuery({
     queryKey: ["products", "best", { pageSize }],
     queryFn: () =>
       getProducts({
@@ -27,6 +33,11 @@ export default function BestProducts() {
 
   const products = data?.list ?? [];
 
+  const productsErrorMessage = getApiErrorMessage(
+    productsError,
+    "베스트 상품을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
+
   return (
     <section className={styles.section}>
       <h2 className={styles.title}>베스트 상품</h2>
@@ -34,7 +45,7 @@ export default function BestProducts() {
       {isPending ? (
         <p className={styles.status}>상품을 불러오는 중입니다...</p>
       ) : isError ? (
-        <p className={styles.status}>상품을 불러오지 못했습니다.</p>
+        <p className={styles.status}>{productsErrorMessage}</p>
       ) : products.length === 0 ? (
         <p className={styles.status}>상품이 없습니다.</p>
       ) : (

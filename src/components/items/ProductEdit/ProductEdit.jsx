@@ -2,6 +2,7 @@
 
 import AlertModal from "@/components/AlertModal/AlertModal";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { getApiErrorMessage } from "@/lib/apiError";
 import { getProduct, updateProduct } from "@/lib/productApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,12 @@ import { useEffect } from "react";
 import ProductForm from "../ProductForm/ProductForm";
 
 export default function ProductEdit({ itemId }) {
-  const { data: currentUser, isCheckingAuth } = useCurrentUser();
+  const {
+    data: currentUser,
+    isCheckingAuth,
+    hasAuthError,
+    error: authError,
+  } = useCurrentUser();
   const router = useRouter();
 
   const queryClient = useQueryClient();
@@ -36,6 +42,7 @@ export default function ProductEdit({ itemId }) {
     data: product,
     isPending,
     isError,
+    error: productError,
   } = useQuery({
     queryKey: ["products", "detail", itemId],
     queryFn: () => getProduct(itemId),
@@ -43,10 +50,10 @@ export default function ProductEdit({ itemId }) {
   });
 
   useEffect(() => {
-    if (!isCheckingAuth && !currentUser) {
+    if (!isCheckingAuth && !hasAuthError && !currentUser) {
       router.replace("/signin");
     }
-  }, [currentUser, isCheckingAuth, router]);
+  }, [currentUser, isCheckingAuth, hasAuthError, router]);
 
   useEffect(() => {
     if (currentUser && product && currentUser.id !== product.owner.id) {
@@ -58,6 +65,15 @@ export default function ProductEdit({ itemId }) {
     return <p>로그인 정보를 확인하는 중입니다...</p>;
   }
 
+  if (hasAuthError) {
+    const authErrorMessage = getApiErrorMessage(
+      authError,
+      "로그인 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    );
+
+    return <p>{authErrorMessage}</p>;
+  }
+
   if (!currentUser) return null;
 
   if (isPending) {
@@ -65,12 +81,20 @@ export default function ProductEdit({ itemId }) {
   }
 
   if (isError) {
-    return <p>상품을 불러오지 못했습니다.</p>;
+    const productErrorMessage = getApiErrorMessage(
+      productError,
+      "상품을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    );
+
+    return <p>{productErrorMessage}</p>;
   }
 
   if (currentUser.id !== product.owner.id) return null;
 
-  const updateErrorMessage = updateError?.response?.data?.message;
+  const updateErrorMessage = getApiErrorMessage(
+    updateError,
+    "상품을 수정하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
 
   return (
     <>
@@ -84,11 +108,7 @@ export default function ProductEdit({ itemId }) {
 
       <AlertModal
         isOpen={isUpdateError}
-        message={
-          typeof updateErrorMessage === "string"
-            ? updateErrorMessage
-            : "상품을 수정하지 못했습니다. 잠시 후 다시 시도해 주세요."
-        }
+        message={updateErrorMessage}
         onClose={resetUpdate}
       />
     </>

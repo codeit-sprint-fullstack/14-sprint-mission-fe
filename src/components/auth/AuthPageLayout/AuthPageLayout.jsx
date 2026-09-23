@@ -1,6 +1,7 @@
 "use client";
 
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { getApiErrorMessage } from "@/lib/apiError";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,17 +15,35 @@ export default function AuthPageLayout({
   linkHref,
 }) {
   const router = useRouter();
-  const { data: currentUser, isCheckingAuth } = useCurrentUser();
+  const {
+    data: currentUser,
+    isCheckingAuth,
+    hasAuthError,
+    error: authError,
+  } = useCurrentUser();
 
   useEffect(() => {
-    if (isCheckingAuth || !currentUser) {
+    if (isCheckingAuth || hasAuthError || !currentUser) {
       return;
     }
 
     router.replace("/items");
-  }, [currentUser, isCheckingAuth, router]);
+  }, [currentUser, isCheckingAuth, hasAuthError, router]);
 
-  if (isCheckingAuth || currentUser) {
+  if (isCheckingAuth) {
+    return null;
+  }
+
+  if (hasAuthError) {
+    const authErrorMessage = getApiErrorMessage(
+      authError,
+      "로그인 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    );
+
+    return <p>{authErrorMessage}</p>;
+  }
+
+  if (currentUser) {
     return null;
   }
 

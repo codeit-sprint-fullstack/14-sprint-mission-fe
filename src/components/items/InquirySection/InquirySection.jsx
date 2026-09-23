@@ -4,6 +4,7 @@ import CommentForm from "@/components/comments/CommentForm/CommentForm";
 import CommentItem from "@/components/comments/CommentItem/CommentItem";
 import ConfirmModal from "@/components/ConfirmModal/ConfirmModal";
 import useProductComments from "@/hooks/useProductComments";
+import { getApiErrorMessage } from "@/lib/apiError";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "./InquirySection.module.css";
@@ -15,16 +16,23 @@ export default function InquirySection({ productId, currentUserId }) {
     comments,
     isPending,
     isError,
+    commentsError,
+
     handleCreateComment,
     isCreating,
     isCreateError,
+    createError,
+
     handleUpdateComment,
     isUpdating,
     isUpdateError,
+    updateError,
     updatingComment,
+
     handleDeleteComment,
     isDeleting,
     isDeleteError,
+    deleteError,
     deletingCommentId,
   } = useProductComments(productId);
 
@@ -35,6 +43,26 @@ export default function InquirySection({ productId, currentUserId }) {
     setDeleteTargetId(null);
   };
 
+  const commentsErrorMessage = getApiErrorMessage(
+    commentsError,
+    "문의 목록을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
+
+  const createErrorMessage = getApiErrorMessage(
+    createError,
+    "문의를 등록하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
+
+  const updateErrorMessage = getApiErrorMessage(
+    updateError,
+    "문의를 수정하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
+
+  const deleteErrorMessage = getApiErrorMessage(
+    deleteError,
+    "문의를 삭제하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  );
+
   return (
     <section className={styles.inquirySection}>
       <CommentForm
@@ -42,16 +70,12 @@ export default function InquirySection({ productId, currentUserId }) {
         placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
         onSubmit={handleCreateComment}
         isLoading={isCreating}
-        errorMessage={
-          isCreateError
-            ? "문의를 등록하지 못했습니다. 잠시 후 다시 시도해 주세요."
-            : ""
-        }
+        errorMessage={isCreateError ? createErrorMessage : ""}
       />
 
       {isPending && <p>문의 목록을 불러오는 중입니다.</p>}
 
-      {isError && <p>문의 목록을 불러오지 못했습니다.</p>}
+      {isError && <p>{commentsErrorMessage}</p>}
 
       {!isPending && !isError && comments.length === 0 && (
         <div className={styles.emptyState}>
@@ -85,12 +109,12 @@ export default function InquirySection({ productId, currentUserId }) {
                 }
                 updateErrorMessage={
                   isUpdateError && updatingComment?.commentId === comment.id
-                    ? "문의를 수정하지 못했습니다. 잠시 후 다시 시도해 주세요."
+                    ? updateErrorMessage
                     : ""
                 }
                 deleteErrorMessage={
                   isDeleteError && deletingCommentId === comment.id
-                    ? "문의를 삭제하지 못했습니다. 잠시 후 다시 시도해 주세요."
+                    ? deleteErrorMessage
                     : ""
                 }
               />

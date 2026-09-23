@@ -1,5 +1,6 @@
 "use client";
 
+import { getApiErrorMessage } from "@/lib/apiError";
 import { setAccessToken } from "@/lib/authToken";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -24,11 +25,9 @@ export default function useAuthMutation({ mutationFn, fallbackErrorMessage }) {
     },
 
     onError: (error) => {
-      const message = error.response?.data?.message;
+      const message = getApiErrorMessage(error, fallbackErrorMessage);
 
-      setErrorMessage(
-        typeof message === "string" ? message : fallbackErrorMessage,
-      );
+      setErrorMessage(message);
     },
   });
 
